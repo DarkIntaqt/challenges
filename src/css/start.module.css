@@ -15,7 +15,7 @@
 }
 
 .start h1 {
-    font-size: 36px;
+    font-size: 2.2rem;
     width: 100%;
     float: left;
     text-align: center;
@@ -36,21 +36,14 @@
     width: 100%;
     float: left;
     text-align: center;
-    font-size: 26px
+    font-size: 1.6rem
 }
 
 .start h1 span {
-    font-size: 50px
+    font-size: 3.3rem
 }
 
-.start .serverselector {
-    width: 60%;
-    margin: 20px 20% 0 20%;
-    flex-wrap: wrap;
-    float: left;
-    display: flex;
-    justify-content: space-between
-}
+
 
 .start .searchbar {
     width: 100%;
@@ -104,7 +97,7 @@
     border-radius: 4px;
     cursor: pointer;
     text-align: center;
-    font-size: 16px;
+    font-size: 1rem;
     padding: 5px
 }
 

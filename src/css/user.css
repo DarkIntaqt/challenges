@@ -1,0 +1,222 @@
+.user {}
+
+.profile {
+    width: 100%;
+    float: left;
+}
+
+.loading {
+    background: linear-gradient(110deg, #1b1b1b 8%, #1d1d1d 18%, #1b1b1b 33%);
+    background-size: 200% 100%;
+    animation: 1s shine linear infinite;
+}
+
+.profile>img {
+    height: 94px;
+    border: 3px solid var(--type, white);
+    width: 94px;
+    float: left;
+    margin: 20px 10px;
+    border-radius: 6px;
+    background: linear-gradient(110deg, #1b1b1b 8%, #1d1d1d 18%, #1b1b1b 33%);
+    background-size: 200% 100%;
+    animation: 1s shine linear infinite;
+}
+
+.profile>h1 {
+    color: white;
+    font-size: 2rem;
+    float: left;
+    margin: 20px 5px 5px 5px;
+    width: calc(100% - 130px);
+}
+
+.profile>h2,
+.profile>h2>span {
+    display: block;
+    color: var(--type);
+    font-size: 1rem;
+    font-weight: 500;
+    float: left;
+    cursor: help;
+    margin: 0px 5px 5px 5px;
+    width: calc(100% - 130px);
+}
+
+.profile>h2:hover>div,
+.profile>div>div:hover>div {
+    visibility: visible;
+}
+
+.profile>div {
+    float: left;
+}
+
+.profile>div>div {
+    height: 38px;
+    width: 38px;
+    margin: 0 5px;
+    background-position: center;
+    background-size: cover;
+    float: left;
+    border-radius: 50%;
+    cursor: help;
+}
+
+.profile>h2>div>b,
+.profile>div>div>div>b {
+    font-size: 0.8rem;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.profile>h2>div>i,
+.profile>div>div>div>i {
+    font-size: 0.8rem;
+}
+
+.profile>h2>div,
+.profile>div>div>div {
+    cursor: AUTO;
+    border-radius: 5px;
+    color: white;
+    border: 2px solid var(--type);
+    background-color: #1d1d1d;
+    margin-top: 22px;
+    padding: 10px;
+    margin-left: 20px;
+    visibility: hidden;
+    width: 200px;
+    font-weight: normal;
+    position: absolute;
+}
+
+.profile>div>div>div {
+    margin-top: 42px !important;
+    margin-left: 25px;
+}
+
+.challengeMain {
+    display: flex;
+    width: 100%;
+    float: left;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+.challengeMain>a.loading {
+    background: linear-gradient(110deg, #1b1b1b 8%, #1d1d1d 18%, #1b1b1b 33%);
+    background-size: 200% 100%;
+    animation: 1s shine linear infinite;
+}
+
+.challengeMain>a {
+    width: 220px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 8px 15px;
+    overflow: hidden;
+    border-radius: 5px;
+    height: 150px;
+    background-color: #1b1b1b;
+    border: 2px solid var(--type);
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.challengeMain>a>.tier {
+    display: none;
+}
+
+
+.challengeMain>a>.title {
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 1rem;
+}
+
+.challengeMain>.disclaimer {
+    color: white;
+    margin: 30px 0;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.challengeMain>a>.description {
+    color: rgb(203, 200, 200);
+    font-size: 0.8rem;
+    width: 100%;
+    margin-top: 4px;
+    max-height: 66px;
+    height: 66px;
+    overflow: hidden;
+}
+
+.challengeMain>a>.title>span {
+    color: rgb(157, 156, 156);
+    font-weight: normal;
+    display: block;
+    width: 100%;
+    font-size: 0.8rem;
+}
+
+.challengeMain>a.max {
+    box-shadow: 0 0 15px var(--type);
+}
+
+.level #level,
+.levelup #levelup,
+.timestamp #timestamp,
+.percentile #percentile,
+.levelup #levelup,
+.alphabetic-a-z #alphabetic-z-a,
+.alphabetic-z-a #alphabetic-a-z {
+    color: #fcba03
+}
+
+.filter>button {
+    border: none;
+    cursor: pointer;
+    float: left;
+    color: white;
+    font-size: 0.8rem;
+    background: none;
+    outline: none;
+    margin: 5px 10px;
+}
+
+.challengeMain>a>.progress {
+    width: 100px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: rgb(208, 208, 208);
+}
+
+.challengeMain>a>.progressText {
+    color: white;
+    display: inline-block;
+    width: 196px;
+    margin: 4px 0;
+    font-size: 0.8rem;
+
+}
+
+.challengeMain>a>.progress>.indicator {
+    max-width: 102px;
+    position: absolute;
+    height: 6px;
+    margin-left: -1px;
+    border-radius: 4px;
+    background-color: var(--type);
+}

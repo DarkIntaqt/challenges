@@ -20,10 +20,99 @@ span,
 nav,
 button {
   margin: 0;
+  line-height: 1;
   padding: 0;
 }
 
 .object1000 {
   width: 1000px;
   margin: 0 calc(50% - 500px);
+}
+
+.loader {
+  -webkit-animation: load8 1.3s cubic-bezier(.35, .72, .54, .9) infinite;
+  animation: load8 1.3s cubic-bezier(.35, .72, .54, .9) infinite;
+  border: 6px solid hsla(0, 0%, 100%, .2);
+  border-radius: 50%;
+  border-top-color: #ced2d6;
+  border-top: 6px solid #0b0c0c;
+  font-size: 10px;
+  height: 30px;
+  margin: 60px auto;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  width: 30px
+}
+
+.loader.blue {
+  border: 3px solid hsla(0, 0%, 100%, .2);
+  border-top: 3px solid transparent;
+  border-top-color: #0cbdf7;
+}
+
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg)
+  }
+
+  to {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn)
+  }
+}
+
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg)
+  }
+
+  to {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn)
+  }
+}
+
+.UNRANKED,
+.NONE {
+  --type: black
+}
+
+.IRON {
+  --type: #696969
+}
+
+.BRONZE {
+  --type: #8c5139
+}
+
+.SILVER {
+  --type: #81989c
+}
+
+.GOLD {
+  --type: #ce8639
+}
+
+.PLATINUM {
+  --type: #4f9896
+}
+
+.MASTER {
+  --type: rgb(133, 88, 169)
+}
+
+.DIAMOND {
+  --type: #576ace
+}
+
+.GRANDMASTER {
+  --type: #c87e89
+}
+
+.CHALLENGER {
+  --type: #f4c873
 }
