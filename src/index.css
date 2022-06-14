@@ -116,3 +116,29 @@ button {
 .CHALLENGER {
   --type: #f4c873
 }
+
+.faq>h1 {
+  color: white;
+  font-size: 2rem;
+  padding: 20px 0;
+}
+
+.faq>div {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid var(--type);
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+  color: white;
+  float: left;
+}
+
+.faq>div>p {
+  margin: 5px 0;
+  color: rgb(203, 200, 200);
+}
+
+.faq>div>p>a {
+  color: white;
+}
