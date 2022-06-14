@@ -34,8 +34,8 @@ button {
   animation: load8 1.3s cubic-bezier(.35, .72, .54, .9) infinite;
   border: 6px solid hsla(0, 0%, 100%, .2);
   border-radius: 50%;
-  border-top-color: #ced2d6;
   border-top: 6px solid #0b0c0c;
+  border-top-color: #ced2d6;
   font-size: 10px;
   height: 30px;
   margin: 60px auto;

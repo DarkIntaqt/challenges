@@ -1,4 +1,4 @@
-.user {}
+/* .user {} */
 
 .profile {
     width: 100%;
@@ -32,7 +32,6 @@
     box-sizing: border-box;
     color: white;
     text-align: center;
-    ;
     border-radius: 10px;
 }
 
@@ -40,7 +39,7 @@
     color: white;
     font-size: 2rem;
     float: left;
-    margin: 20px 5px 5px 5px;
+    margin: 20px 5px 5px;
     width: calc(100% - 130px);
 }
 
@@ -52,7 +51,7 @@
     font-weight: 500;
     float: left;
     cursor: help;
-    margin: 0px 5px 5px 5px;
+    margin: 0px 5px 5px;
     width: calc(100% - 130px);
 }
 
@@ -191,9 +190,7 @@
 .level #level,
 .levelup #levelup,
 .timestamp #timestamp,
-.percentile #percentile,
-.levelup #levelup,
-.alphabetic-a-z #alphabetic-z-a,
+.percentile #percentile .alphabetic-a-z #alphabetic-z-a,
 .alphabetic-z-a #alphabetic-a-z {
     color: #fcba03
 }
