@@ -82,7 +82,7 @@
 
 .start .serverselector {
     width: 60%;
-    margin: 20px 20% 0 20%;
+    margin: 20px 20% 0;
     flex-wrap: wrap;
     float: left;
     display: flex;
