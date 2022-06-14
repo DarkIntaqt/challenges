@@ -125,9 +125,9 @@ export default class Challenge extends React.Component {
         this.filter = e.target.id;
         this.setState({ filter: e.target.id, challenges: this.loadingUI });
         if (this.filter === "world") {
-            window.history.pushState("", "", "?")
+            window.history.replaceState({}, "", "?")
         } else {
-            window.history.pushState("", "", "?region=" + e.target.id)
+            window.history.replaceState({}, "", "?region=" + e.target.id)
         } this.load();
     }
 
