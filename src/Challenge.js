@@ -118,7 +118,7 @@ export default class Challenge extends React.Component {
         let loc = new URL(e.currentTarget.href);
         loc = loc["pathname"] + loc["search"];
         console.log(loc)
-        this.setState({ challenges: <Navigate to={loc} replace={false}></Navigate> })
+        this.setState({ challenges: <Navigate to={loc} replace={true}></Navigate> })
     }
 
     changeFilter(e) {

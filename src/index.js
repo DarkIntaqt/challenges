@@ -18,16 +18,13 @@ if (window.gC("_Cregion")) {
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Header />}>
-        <Route path="" element={<Start />}></Route>
-        <Route path="challenge/:id" element={<UserObject />}></Route>
-        <Route path=":server/:user" element={<UserObject />}></Route>
-        <Route path="*" element={<Error />}></Route>
-      </Route>
-    </Routes>
-  </BrowserRouter>
-
-);
+root.render(<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<Header />}>
+      <Route path="" element={<Start />}></Route>
+      <Route path="challenge/:id" element={<UserObject />}></Route>
+      <Route path=":server/:user" element={<UserObject />}></Route>
+      <Route path="*" element={<Error />}></Route>
+    </Route>
+  </Routes>
+</BrowserRouter>)
