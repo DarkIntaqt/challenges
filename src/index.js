@@ -23,7 +23,7 @@ root.render(
     <Routes>
       <Route path="/" element={<Header />}>
         <Route path="" element={<Start />}></Route>
-        <Route path="challenge/:id" element={<Start />}></Route>
+        <Route path="challenge/:id" element={<UserObject />}></Route>
         <Route path=":server/:user" element={<UserObject />}></Route>
         <Route path="*" element={<Error />}></Route>
       </Route>

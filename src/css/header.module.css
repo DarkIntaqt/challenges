@@ -3,7 +3,7 @@
     height: 60px;
     z-index: 50;
     position: fixed;
-    background-color: #1f1f1e;
+    background-color: #000000;
 }
 
 .Header .inner {
@@ -35,5 +35,5 @@
     width: 100%;
     float: left;
     min-height: calc(100vh - 60px);
-    background-color: #161616;
+    background-color: #111113;
 }

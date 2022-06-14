@@ -80,7 +80,7 @@ export default class Start extends React.Component {
           <i className={"fa-solid fa-magnifying-glass"} id="search-submit"></i>
           <input type="text" id="search" placeholder="Enter summoner name to look up challenges" />
         </div>
-        {this.state.search && (<Navigate to={this.state.to} replace={true} />)}
+        {this.state.search && (<Navigate to={this.state.to} replace={false} />)}
         <div className={StyleSheet.serverselector}>
           <div className={StyleSheet.region} onClick={changeRegion} >br</div>
           <div className={StyleSheet.region} onClick={changeRegion}>euw</div>

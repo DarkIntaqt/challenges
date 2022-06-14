@@ -16,11 +16,24 @@
     border: 3px solid var(--type, white);
     width: 94px;
     float: left;
+    box-shadow: 0 0 15px var(--type);
     margin: 20px 10px;
-    border-radius: 6px;
+    border-radius: 10px;
     background: linear-gradient(110deg, #1b1b1b 8%, #1d1d1d 18%, #1b1b1b 33%);
     background-size: 200% 100%;
     animation: 1s shine linear infinite;
+}
+
+.challengeMain>.error {
+    width: 80%;
+    margin: 40px auto;
+    border: 2px solid var(--type);
+    padding: 10px;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+    ;
+    border-radius: 10px;
 }
 
 .profile>h1 {
@@ -81,7 +94,7 @@
     border-radius: 5px;
     color: white;
     border: 2px solid var(--type);
-    background-color: #1d1d1d;
+    background-color: #111113;
     margin-top: 22px;
     padding: 10px;
     margin-left: 20px;
@@ -124,7 +137,7 @@
     overflow: hidden;
     border-radius: 5px;
     height: 150px;
-    background-color: #1b1b1b;
+    background-color: #111113;
     border: 2px solid var(--type);
     display: inline-block;
     color: white;

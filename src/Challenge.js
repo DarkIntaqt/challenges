@@ -3,11 +3,14 @@ import Error from "./Error"
 import { Navigate } from "react-router-dom"
 import "./css/user.css"
 
-export default class User extends React.Component {
+export default class Challenge extends React.Component {
     constructor(props) {
         super(props);
-        this.filter = "level"
+        this.filter = "global"
         this.params = props.params;
+        if (props.query !== "") {
+            this.filter = props.query
+        }
         this.showUser = this.showUser.bind(this);
         this.error = this.error.bind(this);
         this.goTo = this.goTo.bind(this);
@@ -40,18 +43,9 @@ export default class User extends React.Component {
         </section>;
         this.state = {
             extraStyle: { display: "block" },
-            alphabet: "a-z",
-            selections: {
-                "img1": "https://cdn.darkintaqt.com/lol/static/missing/item.png",
-                "img2": "https://cdn.darkintaqt.com/lol/static/missing/item.png",
-                "img3": "https://cdn.darkintaqt.com/lol/static/missing/item.png",
-                "statsl": { "tier": "UNRANKED", "challenge": ["...", "..."] },
-                "statsm": { "tier": "UNRANKED", "challenge": ["...", "..."] },
-                "statsr": { "tier": "UNRANKED", "challenge": ["...", "..."] }
-            },
             filter: this.filter,
             name: <div className={"loading"} style={{
-                width: props.params.user.length * 1.4 + "rem", height: "2rem"
+                width: 20 * 1.4 + "rem", height: "2rem"
             }}></div>,
             type: "UNRANKED",
             title: "",
@@ -64,21 +58,13 @@ export default class User extends React.Component {
         document.title = r.name + "'s Challenge Progress Overview"
         let djs = new window.DJS();
         let tempObject = document.createElement("div");
-        djs.render(r.challenges, tempObject, true);
+        djs.render(r.challenge, tempObject, true);
         this.setState({
             found: true,
             type: r.type,
-            title: r.title,
             name: r.name,
-            selections: {
-                "img1": "https://lolcdn.darkintaqt.com/s/C-" + r.selections["left"]["id"],
-                "img2": "https://lolcdn.darkintaqt.com/s/C-" + r.selections["middle"]["id"],
-                "img3": "https://lolcdn.darkintaqt.com/s/C-" + r.selections["right"]["id"],
-                "statsl": r.selections["left"],
-                "statsm": r.selections["middle"],
-                "statsr": r.selections["right"],
-            },
-            profileImage: "https://lolcdn.darkintaqt.com/s/p-" + r.icon,
+            title: r.title,
+            profileImage: "https://lolcdn.darkintaqt.com/s/C-" + r.icon,
             challenges:
                 <section dangerouslySetInnerHTML={{ __html: tempObject.outerHTML }} />
         });
@@ -120,8 +106,7 @@ export default class User extends React.Component {
                 errorCallback(request.status);
             }
         }
-
-        get(`https://challenges.darkintaqt.com/api/v1/summoner/?name=${this.params.user}&server=${this.params.server}&order-by=${this.filter}`, this.showUser, this.error);
+        get(`https://challenges.darkintaqt.com/api/v1/challenges/?id=${this.params.id}&region=${this.filter}`, this.showUser, this.error);
     }
     componentDidMount() {
         document.title = "Loading..."
@@ -132,16 +117,19 @@ export default class User extends React.Component {
         e.preventDefault();
         let loc = new URL(e.currentTarget.href);
         loc = loc["pathname"] + loc["search"];
+        console.log(loc)
         this.setState({ challenges: <Navigate to={loc} replace={false}></Navigate> })
     }
 
     changeFilter(e) {
         this.filter = e.target.id;
         this.setState({ filter: e.target.id, challenges: this.loadingUI });
-        this.load()
+        window.history.pushState("", "", "?region=" + e.target.id)
+        this.load();
     }
 
     render() {
+        console.log(this.params)
         if (this.filter === "alphabetic-a-z" && this.state.alphabet === "a-z") {
             this.setState({ alphabet: "z-a" })
         }
@@ -162,27 +150,22 @@ export default class User extends React.Component {
 
         return <div className="user object1000">
             <div className={this.state.type + " profile"} style={this.state.extraStyle}>
-                <img src={this.state.profileImage} alt="" />
+                <img src={this.state.profileImage} alt="" style={{ borderRadius: "50%" }} />
                 <h1>{this.state.name}</h1>
-                <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }}></span><div><b>{this.state.title["tier"]} Tier Title</b><br />{this.state.title["description"]}<br /><i>Need {this.state.title["threshold"]}</i></div></h2>
-                <div className="selections">
-                    <div style={{ backgroundImage: "url('" + this.state.selections["img1"] + "')" }}>
-                        <div className={this.state.selections["statsl"]["tier"]}><b>{this.state.selections["statsl"]["tier"]} Tier Token</b><br />{this.state.selections["statsl"]["challenge"][0]}<br /><i>Need {this.state.selections["statsl"]["challenge"][1]}.</i></div>
-                    </div>
-                    <div style={{ backgroundImage: "url('" + this.state.selections["img2"] + "')" }} >
-                        <div className={this.state.selections["statsm"]["tier"]}><b>{this.state.selections["statsm"]["tier"]} Tier Token</b><br />{this.state.selections["statsm"]["challenge"][0]}<br /><i>Need {this.state.selections["statsm"]["challenge"][1]}.</i></div>
-                    </div>
-                    <div style={{ backgroundImage: "url('" + this.state.selections["img3"] + "')" }} >
-                        <div className={this.state.selections["statsr"]["tier"]}><b>{this.state.selections["statsr"]["tier"]} Tier Token</b><br />{this.state.selections["statsr"]["challenge"][0]}<br /><i>Need {this.state.selections["statsr"]["challenge"][1]}.</i></div>
-                    </div>
-                </div>
+                <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }}></span></h2>
             </div>
             <div className={"filter " + this.state.filter} style={this.state.extraStyle}>
-                <button onClick={this.changeFilter} id="level">Rank</button>
-                <button onClick={this.changeFilter} id="timestamp">Last updated</button>
-                <button onClick={this.changeFilter} id="percentile">Leaderboard Position</button>
-                <button onClick={this.changeFilter} id="levelup">Levelup</button>
-                <button onClick={this.changeFilter} id={"alphabetic-" + this.state.alphabet}>{this.state.alphabet.toUpperCase()}</button>
+                <button onClick={this.changeFilter} id="world">Global</button>
+                <button onClick={this.changeFilter} id="br">br</button>
+                <button onClick={this.changeFilter} id="euw">euw</button>
+                <button onClick={this.changeFilter} id="eune">eune</button>
+                <button onClick={this.changeFilter} id="jp">jp</button>
+                <button onClick={this.changeFilter} id="kr">kr</button>
+                <button onClick={this.changeFilter} id="lan">lan</button>
+                <button onClick={this.changeFilter} id="las">las</button>
+                <button onClick={this.changeFilter} id="na">na</button>
+                <button onClick={this.changeFilter} id="oc">oc</button>
+                <button onClick={this.changeFilter} id="tr">tr</button>
             </div>
             {this.state.challenges}
         </div>
