@@ -12,23 +12,53 @@
     margin: 0 auto;
 }
 
+.Header .inner>a:hover {
+    color: #0cbdf7;
+}
+
 .Header .inner>a {
+    transition: 0.2s color;
     color: white;
     text-decoration: none;
     font-size: 20px;
-    margin: 20px 5px;
+    float: right;
+    margin: 20px 15px;
     line-height: 1;
-    display: inline-block;
+    display: block;
 }
 
 .Header .inner>a:first-child {
     font-weight: bold;
+    float: left;
+    margin: 20px 0;
 }
 
 .HeaderPlaceholder {
     height: 60px;
     width: 100%;
     float: left;
+}
+
+.git {
+    position: fixed;
+    z-index: 10;
+    background: #111113;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: rgb(200, 198, 198);
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: 0 0 3px rgb(62, 62, 62);
+    border: 2px solid black;
+
+    margin: calc(100vh - 60px) 0 0 calc(100% - 180px);
+}
+
+.git:hover {
+    color: white;
+    transition: 0.2s color, .2s border-color, .2s box-shadow;
+    border-color: #0cbdf7;
+    box-shadow: 0 0 5px #0cbdf7;
 }
 
 .content {
