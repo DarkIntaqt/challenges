@@ -41,6 +41,7 @@ export default class User extends React.Component {
         this.state = {
             extraStyle: { display: "block" },
             alphabet: "a-z",
+            points: ["0", "1"],
             selections: {
                 "img1": "https://cdn.darkintaqt.com/lol/static/missing/item.png",
                 "img2": "https://cdn.darkintaqt.com/lol/static/missing/item.png",
@@ -69,6 +70,7 @@ export default class User extends React.Component {
             found: true,
             type: r.type,
             title: r.title,
+            points: r.points,
             name: r.name,
             selections: {
                 "img1": "https://lolcdn.darkintaqt.com/s/C-" + r.selections["left"]["id"],
@@ -175,6 +177,12 @@ export default class User extends React.Component {
                     <div style={{ backgroundImage: "url('" + this.state.selections["img3"] + "')" }} >
                         <div className={this.state.selections["statsr"]["tier"]}><b>{this.state.selections["statsr"]["tier"]} Tier Token</b><br />{this.state.selections["statsr"]["challenge"][0]}<br /><i>Need {this.state.selections["statsr"]["challenge"][1]}.</i></div>
                     </div>
+                </div>
+            </div>
+            <div className={this.state.type + " personalProgress"} style={this.state.extraStyle}>
+                <span class={"progressText"}>{this.state.points[0]}/{this.state.points[1]}</span>
+                <div className={"progress"}>
+                    <div className={"indicator"} style={{ width: "calc(102px * " + (parseInt(this.state.points[0].replaceAll(".", ""))) / (parseInt(this.state.points[1].replaceAll(".", ""))) }}></div>
                 </div>
             </div>
             <div className={"filter " + this.state.filter} style={this.state.extraStyle}>

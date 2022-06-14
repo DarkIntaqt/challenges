@@ -10,6 +10,7 @@ import Start from './Start';
 import Header from './Header'
 import Error from './Error'
 import UserObject from './UserObject'
+import FAQ from './FAQ'
 
 
 window.region = "euw"
@@ -22,6 +23,7 @@ root.render(<BrowserRouter>
   <Routes>
     <Route path="/" element={<Header />}>
       <Route path="" element={<Start />}></Route>
+      <Route path="faq" element={<FAQ></FAQ>}></Route>
       <Route path="challenge/:id" element={<UserObject />}></Route>
       <Route path=":server/:user" element={<UserObject />}></Route>
       <Route path="*" element={<Error />}></Route>

@@ -218,14 +218,16 @@
     margin: 5px 10px;
 }
 
-.challengeMain>a>.progress {
+.challengeMain>a>.progress,
+.personalProgress>.progress {
     width: 100px;
     height: 6px;
     border-radius: 3px;
     background-color: rgb(208, 208, 208);
 }
 
-.challengeMain>a>.progressText {
+.challengeMain>a>.progressText,
+.personalProgress>.progressText {
     color: white;
     display: inline-block;
     width: 196px;
@@ -234,7 +236,22 @@
 
 }
 
-.challengeMain>a>.progress>.indicator {
+.personalProgress>.progressText {
+    margin-left: 10px;
+}
+
+.personalProgress {
+    width: 100%;
+    float: left;
+    height: 50px;
+}
+
+.personalProgress>.progress {
+    margin-left: 10px;
+}
+
+.challengeMain>a>.progress>.indicator,
+.personalProgress>.progress>.indicator {
     max-width: 102px;
     position: absolute;
     height: 6px;
