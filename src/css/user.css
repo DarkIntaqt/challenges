@@ -5,6 +5,10 @@
     float: left;
 }
 
+.selections {
+    width: calc(100% - 130px);
+}
+
 .loading {
     background: linear-gradient(110deg, #1b1b1b 8%, #1d1d1d 18%, #1b1b1b 33%);
     background-size: 200% 100%;
@@ -52,7 +56,6 @@
     float: left;
     cursor: help;
     margin: 0px 5px 5px;
-    width: calc(100% - 130px);
 }
 
 .profile>h2:hover>div,
