@@ -55,7 +55,7 @@ export default class Challenge extends React.Component {
     }
 
     showUser(r) {
-        document.title = r.name + "'s Challenge Progress Overview"
+        document.title = r.name + " Challenge Overview, Thresholds and Leaderboards"
         let djs = new window.DJS();
         let tempObject = document.createElement("div");
         djs.render(r.challenge, tempObject, true);
