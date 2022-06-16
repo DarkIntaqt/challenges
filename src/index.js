@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import {
   BrowserRouter,
   Routes,
@@ -18,7 +17,7 @@ if (window.gC("_Cregion")) {
   window.region = window.gC("_Cregion")
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById('root'));
 root.render(<BrowserRouter>
   <Routes>
     <Route path="/" element={<Header />}>

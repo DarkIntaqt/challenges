@@ -1,9 +1,9 @@
-import React from "react";
+import { Component } from "react";
 import Error from "./Error"
 import { Navigate } from "react-router-dom"
 import "./css/user.css"
 
-export default class User extends React.Component {
+export default class User extends Component {
     constructor(props) {
         super(props);
         this.filter = "level"

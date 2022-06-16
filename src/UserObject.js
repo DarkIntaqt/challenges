@@ -2,7 +2,6 @@ import {
     useParams,
     useLocation
 } from "react-router-dom";
-import React from "react"
 import User from "./User"
 import Error from "./Error"
 import Challenge from "./Challenge"

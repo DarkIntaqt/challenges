@@ -1,8 +1,8 @@
-import React from "react"
+import { Component, Fragment } from "react"
 import StyleSheet from "./css/start.module.css"
 import { Navigate } from "react-router-dom";
 
-export default class Start extends React.Component {
+export default class Start extends Component {
   constructor(props) {
     super(props)
     this.state = { search: false, to: "/" };
@@ -71,7 +71,7 @@ export default class Start extends React.Component {
       }
     }
 
-    return <React.Fragment>
+    return <Fragment>
       <div className={StyleSheet.background} style={backgroundImage}></div>
       <div className={StyleSheet.start + " object1000"}>
         <h1>League of Legends <br /><span>Challenge Progress Lookup</span></h1>
@@ -94,6 +94,6 @@ export default class Start extends React.Component {
           <div className={StyleSheet.region} onClick={changeRegion}>tr</div>
         </div>
       </div>
-    </React.Fragment>
+    </Fragment>
   }
 }

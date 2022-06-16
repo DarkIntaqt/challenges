@@ -1,9 +1,9 @@
 import { Outlet, Link } from "react-router-dom";
-import React from "react"
+import { Fragment } from "react"
 import StyleSheet from "./css/header.module.css";
 
 export default function Header() {
-    return <React.Fragment>
+    return <Fragment>
         <div className={StyleSheet.Header}>
             <div className={StyleSheet.inner}>
                 <Link to="/">League Challenges</Link>
@@ -21,5 +21,5 @@ export default function Header() {
             <Outlet></Outlet>
         </div>
 
-    </React.Fragment >
+    </Fragment >
 }
