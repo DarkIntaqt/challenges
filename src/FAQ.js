@@ -23,7 +23,7 @@ export default function FAQ() {
         ],
         [
             "This is ugly, I want to change the design",
-            "Oh cool. I hate your opinion, but you can build your own version of this on <a href=\"https://github.com/DarkIntaqt/challenges\">GitHub</a> and create a PR with a different (and better) design."
+            "Oh cool. I hate your opinion, but you can build your own version of this on <a href=\"https://github.com/DarkIntaqt/challenges\">GitHub</a> and create a PR with a different (and better) design. <!--<br><br><a rel=\"noreferrer\" href=\"https://github.com/DarkIntaqt/challenges\" target=\"_blank\"><img src='https://opengraph.githubassets.com/challenge-darkintaqt-com/DarkIntaqt/challenges'/ style='width:100%;border-radius:5px;' alt=''></a>-->"
         ]
     ]
 
@@ -31,7 +31,7 @@ export default function FAQ() {
 
     for (let i = 0; i < faqs.length; i++) {
         const element = faqs[i];
-        content.push(<div>
+        content.push(<div key={i}>
             <h2>{element[0]}</h2>
             <p dangerouslySetInnerHTML={{ __html: element[1] }}></p>
         </div>)
