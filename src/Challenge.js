@@ -157,7 +157,7 @@ export default class Challenge extends Component {
             <div className={this.state.type + " profile"} style={this.state.extraStyle}>
                 <img src={this.state.profileImage} alt="" style={{ borderRadius: "50%" }} />
                 <h1>{this.state.name}</h1>
-                <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }}></span></h2>
+                <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }} style={{ cursor: "pointer" }}></span></h2>
                 <div className={"thresholds"}>
                     <div className={"IRON"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[1]}</div>
                     <div className={"BRONZE"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[2]}</div>
