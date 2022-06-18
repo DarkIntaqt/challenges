@@ -53,11 +53,15 @@
     color: var(--type);
     font-size: 1rem;
     font-weight: 500;
-    max-width: calc(100% - 130px);
     float: left;
     cursor: help;
     margin: 0px 5px 5px;
 }
+
+.profile.c>h2 {
+    width: calc(100% - 130px);
+}
+
 
 .profile>h2:hover>div,
 .profile>div>div:hover>div {
