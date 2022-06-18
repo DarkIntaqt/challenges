@@ -6,7 +6,7 @@ import "./css/user.css"
 export default class Challenge extends Component {
     constructor(props) {
         super(props);
-        this.filter = "global"
+        this.filter = "world"
         this.params = props.params;
         if (props.query !== "") {
             this.filter = props.query
