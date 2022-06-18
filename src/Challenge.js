@@ -47,6 +47,7 @@ export default class Challenge extends Component {
             name: <div className={"loading"} style={{
                 width: 20 * 1.4 + "rem", height: "2rem"
             }}></div>,
+            thresholds: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             type: "UNRANKED",
             title: "",
             profileImage: "https://cdn.darkintaqt.com/lol/static/missing/item.png",
@@ -63,6 +64,7 @@ export default class Challenge extends Component {
             found: true,
             type: r.type,
             name: r.name,
+            thresholds: r.thresholds,
             title: r.title,
             profileImage: "https://lolcdn.darkintaqt.com/s/C-" + r.icon,
             challenges:
@@ -156,6 +158,17 @@ export default class Challenge extends Component {
                 <img src={this.state.profileImage} alt="" style={{ borderRadius: "50%" }} />
                 <h1>{this.state.name}</h1>
                 <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }}></span></h2>
+                <div className={"thresholds"}>
+                    <div className={"IRON"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[1]}</div>
+                    <div className={"BRONZE"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[2]}</div>
+                    <div className={"SILVER"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[3]}</div>
+                    <div className={"GOLD"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[4]}</div>
+                    <div className={"PLATINUM"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[5]}</div>
+                    <div className={"DIAMOND"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[6]}</div>
+                    <div className={"MASTER"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[7]}</div>
+                    <div className={"GRANDMASTER"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[8]}</div>
+                    <div className={"CHALLENGER"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[9]}</div>
+                </div>
             </div>
             <div className={"filter " + this.state.filter} style={this.state.extraStyle}>
                 <button onClick={this.changeFilter} id="world">Global</button>

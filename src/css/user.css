@@ -67,7 +67,25 @@
     float: left;
 }
 
-.profile>div>div {
+.profile>.thresholds {
+    width: calc(100% - 140px);
+    margin-left: 3px
+}
+
+.profile>.thresholds>div {
+    float: left;
+    min-width: 10px;
+    color: white;
+    margin: 0 3px;
+    font-size: 0.7rem;
+}
+
+.profile>.thresholds>div>i {
+    color: var(--type);
+    margin: 0 3px 0 7px;
+}
+
+.profile>div:not(.thresholds)>div {
     height: 38px;
     width: 38px;
     margin: 0 5px;
