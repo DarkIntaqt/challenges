@@ -28,6 +28,26 @@
     animation: 1s shine linear infinite;
 }
 
+.profile.c>img {
+    border-radius: 50%;
+    box-shadow: 0 0 0 transparent;
+    position: relative;
+    background: none;
+    border: 3px solid transparent;
+
+}
+
+.profile.c::before {
+    height: 80px;
+    width: 80px;
+    margin: 30px 20px;
+    content: '';
+    z-index: 0;
+    box-shadow: 0 0 20px 5px var(--type);
+    position: absolute;
+    border-radius: 50%;
+}
+
 .challengeMain>.error {
     width: 80%;
     margin: 40px auto;
