@@ -8,6 +8,7 @@ export default function Header() {
             <div className={StyleSheet.inner}>
                 <Link to="/">League Challenges</Link>
                 <Link to="/faq">FAQ</Link>
+                <Link to="/titles">Titles</Link>
             </div>
         </div>
 

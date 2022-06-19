@@ -1,0 +1,83 @@
+.heading {
+    padding: 20px 0;
+    font-size: 2rem;
+    color: white;
+}
+
+.title {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid var(--type);
+    padding: 10px;
+    margin: 20px 0;
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.title>img {
+    position: absolute;
+    height: 45px;
+    width: 45px;
+    margin: -20px 0 0 -20px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.title>span {
+    position: absolute;
+    font-size: 0.8rem;
+    color: whitesmoke;
+    margin-top: 70px;
+}
+
+.titles .loading {
+    font-size: 1rem;
+    margin: 40px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+}
+
+.title::before {
+    height: 35px;
+    width: 35px;
+    margin: -15px 0 0 -15px;
+    content: '';
+    z-index: 0;
+    box-shadow: 0 0 15px 5px var(--type);
+    position: absolute;
+    border-radius: 50%;
+}
+
+.title>h2 {
+    color: white;
+    font-size: 1.2rem;
+    width: 40%;
+    float: left;
+    padding: 30px 0;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.title>p>span {
+    font-weight: bold;
+}
+
+.title>p {
+    color: white;
+    font-size: 0.8rem;
+    width: 60%;
+    min-height: 80px;
+    border-left: 1px solid var(--type);
+    box-sizing: border-box;
+    padding: 10px;
+    float: left;
+}
+
+.disclaimer {
+    color: white;
+    font-size: 0.8rem;
+    margin: 20px 0;
+}
