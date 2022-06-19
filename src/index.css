@@ -142,3 +142,13 @@ button {
 .faq>div>p>a {
   color: white;
 }
+
+.clearfix {
+  overflow: auto
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table
+}
