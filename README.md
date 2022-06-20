@@ -9,3 +9,4 @@ It contains:
 * Searchbar on start page
 * Overview for challenges of a user
 * Overview of a challenge
+* Title overview
