@@ -27,6 +27,7 @@
 
 .title>span {
     position: absolute;
+    display: block;
     font-size: 0.8rem;
     color: whitesmoke;
     margin-top: 70px;
