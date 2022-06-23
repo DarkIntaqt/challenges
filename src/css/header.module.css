@@ -30,7 +30,14 @@
 .Header .inner>a:first-child {
     font-weight: bold;
     float: left;
-    margin: 20px 0;
+    margin: 20px 0 20px 30px;
+}
+
+.Header .inner>a img {
+    height: 30px;
+    width: 30px;
+    margin: -5px 0 0 -30px;
+    position: absolute;
 }
 
 .HeaderPlaceholder {

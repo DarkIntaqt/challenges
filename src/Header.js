@@ -1,12 +1,13 @@
 import { Outlet, Link } from "react-router-dom";
 import { Fragment } from "react"
 import StyleSheet from "./css/header.module.css";
+import logo from "./img/logo.png";
 
 export default function Header() {
     return <Fragment>
         <div className={StyleSheet.Header}>
             <div className={StyleSheet.inner}>
-                <Link to="/">League Challenges</Link>
+                <Link to="/"><img src={logo} alt="League Challenges Logo" />League Challenges</Link>
                 <Link to="/faq">FAQ</Link>
                 <Link to="/titles">Titles</Link>
             </div>
