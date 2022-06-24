@@ -68,16 +68,16 @@
 
 
     $regions = array(
-        "euw" =>json_decode(@file_get_contents("/var/www/ff15/cache/CC.".$c["id"].".euw1.json") ?: $list,true),
-        "eune"=>json_decode(@file_get_contents("/var/www/ff15/cache/CC.".$c["id"].".eun1.json") ?: $list,true),
-        "kr"=>json_decode(@file_get_contents("/var/www/ff15/cache/CC.".$c["id"].".kr.json") ?: $list,true),
-        "jp"=>json_decode(@file_get_contents("/var/www/ff15/cache/CC.".$c["id"].".jp1.json") ?: $list,true),
-        "na"=>json_decode(@file_get_contents("/var/www/ff15/cache/CC.".$c["id"].".na1.json") ?: $list,true),
-        "oc"=>json_decode(@file_get_contents("/var/www/ff15/cache/CC.".$c["id"].".oc1.json") ?: $list,true),
-        "br"=>json_decode(@file_get_contents("/var/www/ff15/cache/CC.".$c["id"].".br1.json") ?: $list,true),
-        "lan"=>json_decode(@file_get_contents("/var/www/ff15/cache/CC.".$c["id"].".la1.json") ?: $list,true),
-        "las"=>json_decode(@file_get_contents("/var/www/ff15/cache/CC.".$c["id"].".la2.json") ?: $list,true),
-        "tr"=>json_decode(@file_get_contents("/var/www/ff15/cache/CC.".$c["id"].".tr1.json") ?: $list,true),
+        "euw" =>json_decode(@file_get_contents($_SERVER["HOME"]."/ff15/cache/CC.".$c["id"].".euw1.json") ?: $list,true),
+        "eune"=>json_decode(@file_get_contents($_SERVER["HOME"]."ff15/cache/CC.".$c["id"].".eun1.json") ?: $list,true),
+        "kr"=>json_decode(@file_get_contents($_SERVER["HOME"]."ff15/cache/CC.".$c["id"].".kr.json") ?: $list,true),
+        "jp"=>json_decode(@file_get_contents($_SERVER["HOME"]."ff15/cache/CC.".$c["id"].".jp1.json") ?: $list,true),
+        "na"=>json_decode(@file_get_contents($_SERVER["HOME"]."ff15/cache/CC.".$c["id"].".na1.json") ?: $list,true),
+        "oc"=>json_decode(@file_get_contents($_SERVER["HOME"]."ff15/cache/CC.".$c["id"].".oc1.json") ?: $list,true),
+        "br"=>json_decode(@file_get_contents($_SERVER["HOME"]."ff15/cache/CC.".$c["id"].".br1.json") ?: $list,true),
+        "lan"=>json_decode(@file_get_contents($_SERVER["HOME"]."ff15/cache/CC.".$c["id"].".la1.json") ?: $list,true),
+        "las"=>json_decode(@file_get_contents($_SERVER["HOME"]."ff15/cache/CC.".$c["id"].".la2.json") ?: $list,true),
+        "tr"=>json_decode(@file_get_contents($_SERVER["HOME"]."ff15/cache/CC.".$c["id"].".tr1.json") ?: $list,true),
         "world"=>array("div", array(
             "class"=> "challengeMain"
         ),
