@@ -2,6 +2,7 @@ import { Component } from "react";
 import Error from "./Error"
 import { Navigate } from "react-router-dom"
 import "./css/user.css"
+import get from "./get"
 
 export default class User extends Component {
     constructor(props) {
@@ -12,32 +13,7 @@ export default class User extends Component {
         this.error = this.error.bind(this);
         this.goTo = this.goTo.bind(this);
         this.changeFilter = this.changeFilter.bind(this);
-        this.loadingUI = <section>
-            <div>
-                <div className="challengeMain">
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                    <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-                </div>
-            </div>
-        </section>;
+        this.loadingUI = window.loadingUI;
         this.state = {
             extraStyle: { display: "block" },
             alphabet: "a-z",
@@ -94,35 +70,6 @@ export default class User extends Component {
         })
     }
     load() {
-        const get = async function (url = "/", callback = function (r) {
-            console.log(r)
-        }, errorCallback = function (e) {
-            console.warn(e)
-        }, debug = false) {
-            let request = await fetch(url)
-            if (debug) {
-                console.log(request);
-            }
-            if (request.status === 200) {
-                let result = await request.text();
-                try {
-                    result = JSON.parse(result);
-                } catch (e) {
-                    if (debug) {
-                        console.warn(e + " in get(" + url + ")");
-                    }
-                } finally {
-                    if (debug) {
-                        console.log(result);
-                    }
-                    callback(result);
-                }
-
-            } else {
-                errorCallback(request.status);
-            }
-        }
-
         get(`https://challenges.darkintaqt.com/api/v1/summoner/?name=${this.params.user}&server=${this.params.server}&order-by=${this.filter}`, this.showUser, this.error);
     }
     componentDidMount() {

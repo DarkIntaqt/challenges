@@ -18,6 +18,33 @@ if (window.gC("_Cregion")) {
   window.region = window.gC("_Cregion")
 }
 
+window.loadingUI = <section>
+  <div>
+    <div className="challengeMain">
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
+    </div>
+  </div>
+</section>
+
 const root = createRoot(document.getElementById('root'));
 root.render(<BrowserRouter>
   <Routes>
