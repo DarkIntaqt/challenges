@@ -163,6 +163,14 @@
     justify-content: space-around;
 }
 
+.cc .challengeMain>a>p.values {
+    text-align: center;
+    margin-top: 36px;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2rem;
+}
+
 @keyframes shine {
     to {
         background-position-x: -200%;
