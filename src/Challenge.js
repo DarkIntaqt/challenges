@@ -26,7 +26,7 @@ export default class Challenge extends Component {
             thresholds: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             type: "UNRANKED",
             title: "",
-            profileImage: "https://cdn.darkintaqt.com/lol/static/missing/item.png",
+            icon: "https://cdn.darkintaqt.com/lol/static/missing/item.png",
             challenges: this.loadingUI
         }
     }
@@ -42,7 +42,7 @@ export default class Challenge extends Component {
             name: r.name,
             thresholds: r.thresholds,
             title: r.title,
-            profileImage: "https://lolcdn.darkintaqt.com/s/C-" + r.icon,
+            icon: "https://lolcdn.darkintaqt.com/s/C-" + r.icon,
             challenges:
                 <section dangerouslySetInnerHTML={{ __html: tempObject.outerHTML }} />
         });
@@ -55,20 +55,16 @@ export default class Challenge extends Component {
             extraStyle: { display: "none" }
         })
     }
-    load() {
-        get(`https://challenges.darkintaqt.com/api/v1/challenges/?id=${this.params.id}&region=${this.filter}`, this.showUser, this.error);
-    }
+
     componentDidMount() {
         document.title = "Loading..."
-        this.load()
+        get(`https://challenges.darkintaqt.com/api/v1/challenges/?id=${this.params.id}&region=${this.filter}`, this.showUser, this.error);
     }
 
     goTo(e) {
         e.preventDefault();
         let loc = new URL(e.currentTarget.href);
-        loc = loc["pathname"] + loc["search"];
-        console.log(loc)
-        this.setState({ challenges: <Navigate to={loc} replace={true}></Navigate> })
+        this.setState({ challenges: <Navigate to={loc["pathname"] + loc["search"]} replace={true}></Navigate> })
     }
 
     changeFilter(e) {
@@ -82,23 +78,14 @@ export default class Challenge extends Component {
     }
 
     render() {
-        console.log(this.params)
-        if (this.filter === "alphabetic-a-z" && this.state.alphabet === "a-z") {
-            this.setState({ alphabet: "z-a" })
-        }
-        if (this.filter === "alphabetic-z-a" && this.state.alphabet === "z-a") {
-            this.setState({ alphabet: "a-z" })
-        }
         if (this.state.found) {
             setTimeout(() => {
                 let links = document.querySelectorAll(".challengeMain>a");
                 for (let i = 0; i < links.length; i++) {
-                    const element = links[i];
-                    //const url = element.href;
-                    element.addEventListener("click", this.goTo)
-
+                    links[i].addEventListener("click", this.goTo)
                 }
             }, 10);
+            // Wait for render to finish before applying event listener
         }
 
         const regions = ["br", "euw", "eune", "jp", "kr", "lan", "las", "na", "oc", "tr"];
@@ -109,7 +96,7 @@ export default class Challenge extends Component {
 
         return <div className="user object1000 cc">
             <div className={this.state.type + " c profile"} style={this.state.extraStyle}>
-                <img src={this.state.profileImage} alt="" />
+                <img src={this.state.icon} alt="" />
                 <h1>{this.state.name}</h1>
                 <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }} style={{ cursor: "pointer" }}></span></h2>
                 <div className={"thresholds"}>
