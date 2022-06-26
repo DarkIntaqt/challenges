@@ -74,7 +74,8 @@ export default class Challenge extends Component {
             window.history.replaceState({}, "", "?")
         } else {
             window.history.replaceState({}, "", "?region=" + e.target.id)
-        } this.load();
+        }
+        get(`https://challenges.darkintaqt.com/api/v1/challenges/?id=${this.params.id}&region=${this.filter}`, this.showUser, this.error);
     }
 
     render() {
