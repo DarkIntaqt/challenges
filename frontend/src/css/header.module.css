@@ -74,3 +74,9 @@
     min-height: calc(100vh - 60px);
     background-color: #111113;
 }
+
+@media only screen and (max-width:1050px) {
+    .Header .inner {
+        width: 100%;
+    }
+}

@@ -29,6 +29,13 @@ button {
   margin: 0 calc(50% - 500px);
 }
 
+@media only screen and (max-width: 1050px) {
+  .object1000 {
+    width: 100%;
+    margin: 0 0;
+  }
+}
+
 .loader {
   -webkit-animation: load8 1.3s cubic-bezier(.35, .72, .54, .9) infinite;
   animation: load8 1.3s cubic-bezier(.35, .72, .54, .9) infinite;
