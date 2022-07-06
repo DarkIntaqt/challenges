@@ -64,7 +64,7 @@ export default class Challenge extends Component {
     goTo(e) {
         e.preventDefault();
         let loc = new URL(e.currentTarget.href);
-        this.setState({ challenges: <Navigate to={loc["pathname"] + loc["search"]} replace={true}></Navigate> })
+        this.setState({ challenges: <Navigate to={loc["pathname"] + loc["search"]} replace={false}></Navigate> })
     }
 
     changeFilter(e) {
