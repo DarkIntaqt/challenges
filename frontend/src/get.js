@@ -7,23 +7,23 @@ const get = async function (url = "/", callback = function (r) {
     if (debug) {
         console.log(request);
     }
-    if (request.status === 200) {
-        let result = await request.text();
-        try {
-            result = JSON.parse(result);
-        } catch (e) {
-            if (debug) {
-                console.warn(e + " in get(" + url + ")");
-            }
-        } finally {
-            if (debug) {
-                console.log(result);
-            }
-            callback(result);
+    let result = await request.text();
+    try {
+        result = JSON.parse(result);
+    } catch (e) {
+        if (debug) {
+            console.warn(e + " in get(" + url + ")");
+        }
+    } finally {
+        if (debug) {
+            console.log(result);
         }
 
+    }
+    if (request.status === 200) {
+        callback(result);
     } else {
-        errorCallback(request.status);
+        errorCallback(result, request.status)
     }
 }
 
