@@ -1,5 +1,12 @@
 import notFound from "./img/not-found.png"
-export default function Error() {
+export default function Error(props) {
+    let message;
+    if (typeof props.message === "undefined") {
+        message = "Not found"
+    } else {
+        message = props.message.status.message
+    }
+
     document.title = "404 Not Found"
     return <div>
         <p style={{
@@ -7,7 +14,7 @@ export default function Error() {
             margin: "calc(50vh - 108px) 0 0",
             textAlign: "center",
             fontSize: "1rem"
-        }}>404 - Not Found - Go back by clicking on "League Challenges" in the header</p>
+        }}>404 - <b>{message}</b> - Go back by clicking on "League Challenges" in the header</p>
         <img alt="" src={notFound} style={{
             width: "200px",
             height: "200px",

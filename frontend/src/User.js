@@ -63,9 +63,9 @@ export default class User extends Component {
 
     }
 
-    error() {
+    error(e, c) {
         this.setState({
-            challenges: <Error></Error>,
+            challenges: <Error message={e}></Error>,
             extraStyle: { display: "none" }
         })
     }
@@ -127,7 +127,7 @@ export default class User extends Component {
                 </div>
             </div>
             <div className={this.state.type + " personalProgress"} style={this.state.extraStyle}>
-                <span class={"progressText"}>{this.state.points[0]}/{this.state.points[1]}</span>
+                <span className={"progressText"}>{this.state.points[0]}/{this.state.points[1]}</span>
                 <div className={"progress"}>
                     <div className={"indicator"} style={{ width: "calc(102px * " + (parseInt(this.state.points[0].replaceAll(".", ""))) / (parseInt(this.state.points[1].replaceAll(".", ""))) }}></div>
                 </div>
