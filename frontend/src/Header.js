@@ -4,24 +4,47 @@ import StyleSheet from "./css/header.module.css";
 import logo from "./img/logo.png";
 
 export default function Header() {
+
+    const messages = ["provide feedback", "open source"];
+    const message = messages[Math.floor(Math.random() * messages.length)]
+
     return <Fragment>
-        <div className={StyleSheet.Header}>
+        <nav className={StyleSheet.Header}>
             <div className={StyleSheet.inner}>
                 <Link to="/"><img src={logo} alt="League Challenges Logo" />League Challenges</Link>
                 <Link to="/faq">FAQ</Link>
                 <Link to="/titles">Titles</Link>
             </div>
-        </div>
+        </nav>
 
-        <a className={StyleSheet.git} href="https://github.com/DarkIntaqt/challenges" target="_blank" rel="noreferrer"><i className="fa-brands fa-github"></i> open source</a>
+        <a className={StyleSheet.git} href="https://github.com/DarkIntaqt/challenges" target="_blank" rel="noreferrer">
+            <i className="fa-brands fa-github"></i> {message}
+        </a>
 
-        <div className={StyleSheet.HeaderPlaceholder}>
+        <div className={StyleSheet.HeaderPlaceholder} id="top"></div>
 
-        </div>
         <div className={StyleSheet.content}>
-
             <Outlet></Outlet>
         </div>
+
+        <footer className={StyleSheet.footer}>
+            <div className={"object1000"}>
+                <div className={StyleSheet.leftFooter}>
+                    <Link to={"/"}>
+                        <img src={logo} alt="Logo"></img>
+                        <p>League Challenges</p>
+                    </Link>
+                </div>
+                <div className={StyleSheet.centerFooter}>
+                    <p>'Challenges.DarkIntaqt.Com' isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
+                </div>
+                <div className={StyleSheet.rightFooter}>
+                    <a href="https://darkintaqt.com/assets/impressum/" rel="noreferrer" target="_blank">- Imprint</a>
+                    <a href="https://darkintaqt.com/assets/privacypolicy/" rel="noreferrer" target="_blank">- Privacy Policy</a>
+                    <Link to={"/faq"}>- FAQ</Link>
+                </div>
+            </div>
+        </footer>
 
     </Fragment >
 }

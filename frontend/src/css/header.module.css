@@ -57,8 +57,8 @@
     text-decoration: none;
     box-shadow: 0 0 3px rgb(62, 62, 62);
     border: 2px solid black;
-
-    margin: calc(100vh - 60px) 0 0 calc(100% - 180px);
+    width: 150px;
+    margin: calc(100vh - 60px) 0 0 calc(100% - 200px);
 }
 
 .git:hover {
@@ -79,4 +79,61 @@
     .Header .inner {
         width: 100%;
     }
+}
+
+.footer {
+    width: 100%;
+    min-height: 100px;
+    float: left;
+    background-color: black;
+}
+
+.footer .leftFooter {
+    float: left;
+    color: white;
+    font-size: 0.8rem;
+    width: 20%;
+    margin: 20px 0;
+}
+
+.footer .leftFooter>a,
+.footer .rightFooter>a {
+    text-decoration: none;
+    color: white;
+}
+
+.footer .leftFooter img {
+    width: 50px;
+    margin-left: calc(50% - 25px);
+}
+
+.footer .leftFooter p {
+    text-align: center;
+}
+
+.footer .rightFooter {
+    width: 20%;
+    margin: 20px 0;
+    float: left;
+}
+
+.footer .rightFooter>a {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    margin: 0 0 10px;
+    float: left;
+}
+
+.footer .rightFooter>a:last-of-type {
+    margin: 0;
+}
+
+.footer .centerFooter {
+    width: 40%;
+    margin: 20px 20% 20px 0;
+    float: left;
+    color: white;
+    font-size: 0.8rem;
+    text-align: justify;
 }
