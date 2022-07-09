@@ -116,6 +116,7 @@
     display: flex;
     width: 100%;
     margin-top: 5px;
+    margin-bottom: 10px;
     float: left;
     flex-wrap: wrap;
     justify-content: space-around;
