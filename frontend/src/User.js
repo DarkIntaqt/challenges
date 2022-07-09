@@ -171,10 +171,53 @@ export default class User extends Component {
     sortChallenges(challenges) {
         const filter = this.filter;
 
-        // TIER
+        function tierToInt(tier) {
+            switch (tier) {
+                case "UNRANKED":
+                case "NONE":
+                    return 0
+                case "IRON":
+                    return 1
+                case "BRONZE":
+                    return 2
+                case "SILVER":
+                    return 3
+                case "GOLD":
+                    return 4
+                case "PLATINUM":
+                    return 5
+                case "DIAMOND":
+                    return 6
+                case "MASTER":
+                    return 7
+                case "GRANDMASTER":
+                    return 8
+                case "CHALLENGER":
+                    return 9
+                default:
+                    return 0
+            }
+        }
+
+        // TIER = tier -> percentile -> position if exists
         if (filter === "level") {
             challenges.sort(function (a, b) {
-                return a["tier"] < b["tier"] ? -1 : +(a["tier"] > b["tier"])
+                if (tierToInt(a["tier"]) === tierToInt(b["tier"])) {
+                    if (a["percentile"] === b["percentile"]) {
+                        if (typeof a["position"] === "undefined") {
+                            return 1;
+                        } else {
+                            if (typeof b["position"] === "undefined") {
+                                return -1
+                            } else {
+                                return a["position"] < b["position"] ? -1 : 1
+                            }
+                        }
+                    } else {
+                        return a["percentile"] < b["percentile"] ? -1 : 1
+                    }
+                }
+                return tierToInt(a["tier"]) > tierToInt(b["tier"]) ? -1 : 1
             })
         }
 
