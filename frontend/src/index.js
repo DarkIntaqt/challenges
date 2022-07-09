@@ -13,39 +13,33 @@ import Error from './Error'
 import UserObject from './UserObject'
 import FAQ from './FAQ'
 import Title from './title'
+import css from "./css/user.module.css";
 
 
 window.region = "euw"
+window.challenges = {}
 if (window.gC("_Cregion")) {
   window.region = window.gC("_Cregion")
 }
 
-window.loadingUI = <section>
-  <div>
-    <div className="challengeMain">
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-      <a className="challenge UNRANKED loading" href="#loading"><p className="title">Loading<span>Loading</span></p><p className="description">Loading</p></a>
-    </div>
-  </div>
-</section>
+window.loadingUI = [
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
+  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>
+];
 
 const Wrapper = ({ children }) => {
   const location = useLocation();
