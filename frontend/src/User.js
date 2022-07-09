@@ -10,10 +10,12 @@ import TimeAgo from 'react-timeago';
 export default class User extends Component {
     constructor(props) {
         super(props);
-        this.server = "";
+        this.server = ""; this.summonerJSON = "";
+        this.loaded = 0;
         this.filter = "level"
         this.params = props.params;
         this.challengeJSON = {};
+        this.addLoad = this.addLoad.bind(this);
         this.showUser = this.showUser.bind(this);
         this.error = this.error.bind(this);
         this.goTo = this.goTo.bind(this);
@@ -349,7 +351,10 @@ export default class User extends Component {
     addRegionChallenges(e) {
         window.challenges[this.server] = e
         window.JSONPREQUEST = window.challenges[this.server]
-        this.setState({ title: " " })
+        this.loaded++;
+        if (this.loaded === 2) {
+            this.showUser(this.summonerJSON)
+        }
     }
 
     load() {
@@ -390,15 +395,28 @@ export default class User extends Component {
         this.server = server
 
         if ("undefined" === typeof window.challenges[server]) {
-            get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.addRegionChallenges)
+            get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.addRegionChallenges, function (e) {
+                get('https://challenges.darkintaqt.com/api/?error=notloaded');
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1000);
+            })
         } else {
             window.JSONPREQUEST = window.challenges[server]
         }
 
         if (this.state.challenges === this.loadingUI) {
-            get(`https://challenges.darkintaqt.com/api/v2/u/?name=${this.params.user}&server=${this.params.server}&order-by=${this.filter}`, this.showUser, this.error);
+            get(`https://challenges.darkintaqt.com/api/v2/u/?name=${this.params.user}&server=${this.params.server}&order-by=${this.filter}`, this.addLoad, this.error);
         } else {
             this.showUser(this.challengeJSON)
+        }
+    }
+
+    addLoad(e) {
+        this.summonerJSON = e;
+        this.loaded++;
+        if (this.loaded === 2) {
+            this.showUser(e)
         }
     }
 
