@@ -1,0 +1,171 @@
+.profile {
+    width: 100%;
+    float: left;
+}
+
+.profile>img {
+    height: 94px;
+    border: 3px solid var(--type, white);
+    width: 94px;
+    float: left;
+    box-shadow: 0 0 15px var(--type);
+    margin: 20px 10px;
+    border-radius: 10px;
+    background: linear-gradient(110deg, #1b1b1b 8%, #1d1d1d 18%, #1b1b1b 33%);
+    background-size: 200% 100%;
+    animation: 1s shine linear infinite;
+}
+
+.profile>h1 {
+    color: white;
+    font-size: 2rem;
+    float: left;
+    margin: 20px 5px 5px;
+    width: calc(100% - 130px);
+}
+
+.profile>h2,
+.profile>h2>span {
+    display: block;
+    color: var(--type);
+    font-size: 1rem;
+    font-weight: 500;
+    float: left;
+    cursor: help;
+    margin: 0px 5px 5px;
+}
+
+
+.profile>h2:hover>div,
+.profile>div>div:hover>div {
+    visibility: visible;
+}
+
+.profile>div {
+    float: left;
+}
+
+.profile>div:not(.thresholds)>div {
+    height: 38px;
+    width: 38px;
+    margin: 0 5px;
+    background-position: center;
+    background-size: cover;
+    float: left;
+    border-radius: 50%;
+    cursor: help;
+}
+
+.profile>h2>div>b,
+.profile>div>div>div>b {
+    font-size: 0.8rem;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.profile>h2>div>i,
+.profile>div>div>div>i {
+    font-size: 0.8rem;
+}
+
+.profile>h2>div,
+.profile>div>div>div {
+    cursor: AUTO;
+    border-radius: 5px;
+    color: white;
+    border: 2px solid var(--type);
+    background-color: #111113;
+    margin-top: 22px;
+    padding: 10px;
+    margin-left: 20px;
+    visibility: hidden;
+    width: 200px;
+    font-weight: normal;
+    position: absolute;
+}
+
+.profile>div>div>div {
+    margin-top: 42px !important;
+    margin-left: 25px;
+}
+
+
+.selections {
+    width: calc(100% - 130px);
+}
+
+.challenge {
+    width: 220px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 8px 15px;
+    overflow: hidden;
+    border-radius: 5px;
+    height: 150px;
+    background-color: #111113;
+    border: 2px solid var(--type);
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.parent {
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+    float: left;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.title {
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 1rem;
+}
+
+.title>span {
+    color: rgb(157, 156, 156);
+    font-weight: normal;
+    display: block;
+    width: 100%;
+    font-size: 0.8rem;
+}
+
+.description {
+    color: rgb(203, 200, 200);
+    font-size: 0.8rem;
+    width: 100%;
+    margin-top: 4px;
+    max-height: 66px;
+    height: 66px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 120px;
+    height: 6px;
+    border-radius: 3px;
+    margin: 22px 0;
+    background-color: rgb(208, 208, 208);
+}
+
+.progress .text {
+    position: absolute;
+    font-size: 0.8rem;
+    color: white;
+    margin-top: -15px;
+}
+
+.indicator {
+    max-width: 122px;
+    position: absolute;
+    margin-left: -1px;
+    height: 6px;
+    border-radius: 4px;
+    background-color: var(--type);
+}
