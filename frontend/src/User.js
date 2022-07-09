@@ -6,7 +6,6 @@ import get from "./get"
 import css from "./css/user.module.css";
 import getChallenge from "./getChallenge";
 import TimeAgo from 'react-timeago';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default class User extends Component {
     constructor(props) {
