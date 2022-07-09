@@ -10,6 +10,7 @@ import TimeAgo from 'react-timeago';
 export default class User extends Component {
     constructor(props) {
         super(props);
+        this.server = "";
         this.filter = "level"
         this.params = props.params;
         this.challengeJSON = {};
@@ -19,6 +20,7 @@ export default class User extends Component {
         this.sortChallenges = this.sortChallenges.bind(this);
         this.changeFilter = this.changeFilter.bind(this);
         this.loadingUI = window.loadingUI;
+        this.addRegionChallenges = this.addRegionChallenges.bind(this)
         this.state = {
             extraStyle: { display: "block" },
             alphabet: "a-z",
@@ -44,6 +46,10 @@ export default class User extends Component {
 
 
     showUser(r) {
+
+        if (typeof window.challenges[this.server] === "undefined") {
+            return
+        }
 
         this.challengeJSON = r
 
@@ -340,7 +346,55 @@ export default class User extends Component {
         })
     }
 
+    addRegionChallenges(e) {
+        window.challenges[this.server] = e
+        window.JSONPREQUEST = window.challenges[this.server]
+        this.setState({ title: " " })
+    }
+
     load() {
+        let server = this.params.server
+        switch (server) {
+            case "br":
+                server = "br1"
+                break;
+            case "euw":
+                server = "euw1"
+                break;
+            case "eune":
+                server = "eun1"
+                break;
+            case "jp":
+                server = "jp1"
+                break;
+            case "kr":
+                break;
+            case "lan":
+                server = "la1"
+                break;
+            case "las":
+                server = "la2"
+                break;
+            case "na":
+                server = "na1"
+                break;
+            case "oc":
+                server = "oc1"
+                break;
+            case "tr":
+                server = "tr1"
+                break;
+            default:
+                break;
+        }
+        this.server = server
+
+        if ("undefined" === typeof window.challenges[server]) {
+            get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.addRegionChallenges)
+        } else {
+            window.JSONPREQUEST = window.challenges[server]
+        }
+
         if (this.state.challenges === this.loadingUI) {
             get(`https://challenges.darkintaqt.com/api/v2/u/?name=${this.params.user}&server=${this.params.server}&order-by=${this.filter}`, this.showUser, this.error);
         } else {
