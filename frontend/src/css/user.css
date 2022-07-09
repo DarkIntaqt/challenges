@@ -154,6 +154,10 @@
     margin-left: 25px;
 }
 
+.profile.c>div>div>div {
+    margin-top: 10px !important
+}
+
 .challengeMain {
     display: flex;
     width: 100%;

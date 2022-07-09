@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import Error from "./Error"
 import { Navigate } from "react-router-dom"
 import "./css/user.css"
@@ -95,6 +95,22 @@ export default class Challenge extends Component {
             filters.push(<button key={i} onClick={this.changeFilter} id={regions[i]}>{regions[i]}</button>)
         }
 
+
+        let dynamic = {
+            "gm": "", "c": "", "placeholder": <React.Fragment>
+                <span> <i class="fa-solid fa-circle-info"></i></span>
+                <div>
+                    <p>This is a dynamic threshold. This means that this value adjusts itself automatically to the lowest value in the tier. To reach this tier, you need at least as many points or better. </p>
+                </div>
+            </React.Fragment>
+        }
+        if (this.state.thresholds[9] !== "-") {
+            dynamic["c"] = dynamic["placeholder"]
+        }
+        if (this.state.thresholds[8] !== "-") {
+            dynamic["gm"] = dynamic["placeholder"]
+        }
+
         return <div className="user object1000 cc">
             <div className={this.state.type + " c profile"} style={this.state.extraStyle}>
                 <img src={this.state.icon} alt="" />
@@ -108,8 +124,8 @@ export default class Challenge extends Component {
                     <div className={"PLATINUM"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[5]}</div>
                     <div className={"DIAMOND"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[6]}</div>
                     <div className={"MASTER"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[7]}</div>
-                    <div className={"GRANDMASTER"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[8]}</div>
-                    <div className={"CHALLENGER"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[9]}</div>
+                    <div className={"GRANDMASTER"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[8]}{dynamic["gm"]}</div>
+                    <div className={"CHALLENGER"}><i className="fa-solid fa-circle"></i>{this.state.thresholds[9]}{dynamic["c"]}</div>
                 </div>
             </div>
             <div className={"filter " + this.state.filter} style={this.state.extraStyle}>
