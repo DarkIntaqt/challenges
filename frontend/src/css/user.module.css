@@ -98,6 +98,8 @@
     width: 220px;
     box-sizing: border-box;
     padding: 10px;
+    background-position: 10% right;
+    background-size: 360%;
     margin: 8px 15px;
     overflow: hidden;
     border-radius: 5px;
@@ -162,10 +164,20 @@
 }
 
 .indicator {
+    min-width: 5px;
     max-width: 122px;
     position: absolute;
     margin-left: -1px;
     height: 6px;
     border-radius: 4px;
     background-color: var(--type);
+}
+
+.FIRST {
+    box-shadow: 0 0 20px 0 var(--type);
+}
+
+.CROWN,
+.MAXED {
+    box-shadow: 0 0 15px -2px var(--type)
 }

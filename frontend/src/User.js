@@ -5,6 +5,7 @@ import "./css/user.css"
 import get from "./get"
 import css from "./css/user.module.css";
 import getChallenge from "./getChallenge";
+import TimeAgo from 'react-timeago';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default class User extends Component {
@@ -42,6 +43,7 @@ export default class User extends Component {
         }
     }
 
+
     showUser(r) {
 
         this.challengeJSON = r
@@ -66,9 +68,13 @@ export default class User extends Component {
             return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
         }
 
-        let ranks = ["UNRANKED", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"]
+        document.title = r.name + "'s Challenge Progress Overview"
+        let djs = new window.DJS();
+        let tempObject = document.createElement("div");
+        let challenges = [];
 
         function getNextLevel(current) {
+            let ranks = ["UNRANKED", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"]
             for (let i = 0; i < ranks.length; i++) {
                 if (current === ranks[i]) {
                     if (ranks[i] === "CHALLENGER") { return "CHALLENGER" }
@@ -77,11 +83,6 @@ export default class User extends Component {
 
             }
         }
-
-        document.title = r.name + "'s Challenge Progress Overview"
-        let djs = new window.DJS();
-        let tempObject = document.createElement("div");
-        let challenges = [];
 
         r.challenges = this.sortChallenges(r.challenges)
 
@@ -106,8 +107,9 @@ export default class User extends Component {
                 position = "#" + beautifyNum(p + challenge.position) + " - ";
             }
 
-            let next;
             let info = "";
+
+            let next;
             let nexttier = getNextLevel(challenge.tier)
             if (typeof c["thresholds"][nexttier] !== "undefined") {
                 next = c["thresholds"][nexttier]
@@ -129,12 +131,24 @@ export default class User extends Component {
                     info = "";
                 }
             }
+            let leaderboardposition = ""
+            if (this.filter === "timestamp") {
+                leaderboardposition = <span><TimeAgo date={challenge.achievedTimestamp}></TimeAgo></span>
+            } else {
+                leaderboardposition = <span>{position}Top {(Math.round(challenge.percentile * 10000) / 100)}%</span>
+            }
 
+            let type = challenge.tier.toLowerCase();
+            if (type === "undefined" || type === "unranked") {
+                type = "none";
+            }
 
-            challenges.push(<a className={challenge.tier + " " + css.challenge} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={this.goTo} key={challenge.id}>
+            challenges.push(<a className={challenge.tier + " " + css.challenge + " " + css[nexttier]} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={this.goTo} key={challenge.id} style={{
+                backgroundImage: "url(https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/challenges-shared/challenge-card-background-" + type + ".png)"
+            }}>
                 <p className={css.title}>
                     {c.translation.name}
-                    <span>{position}Top {(Math.round(challenge.percentile * 10000) / 100)}%</span>
+                    {leaderboardposition}
                 </p>
                 <p className={css.description}>{c.translation.description}</p>
 
@@ -218,6 +232,59 @@ export default class User extends Component {
                     }
                 }
                 return tierToInt(a["tier"]) > tierToInt(b["tier"]) ? -1 : 1
+            })
+        }
+
+        // LEVELUP
+        if (filter === "levelup") {
+            challenges.sort(function (a, b) {
+                function getNextLevel(current) {
+                    let ranks = ["UNRANKED", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"]
+                    for (let i = 0; i < ranks.length; i++) {
+                        if (current === ranks[i]) {
+                            if (ranks[i] === "CHALLENGER") { return "CHALLENGER" }
+                            return ranks[i + 1];
+                        }
+
+                    }
+                }
+                let nextLevelA = 1;
+
+                let challenge = getChallenge(a["id"]);
+                if (typeof challenge["thresholds"][getNextLevel(a["tier"])] !== "undefined") {
+                    nextLevelA = challenge["thresholds"][getNextLevel(a["tier"])]
+                } else {
+                    nextLevelA = challenge["thresholds"][a["tier"]] ? challenge["thresholds"][a["tier"]] : 1;
+                }
+                if (challenge.tier === "CHALLENGER" && challenge.leaderboard === true) {
+                    nextLevelA = challenge["leaderboardThresholds"][0] ?? 0
+                }
+
+                nextLevelA = a["value"] / nextLevelA;
+
+
+                let nextLevelB = 1;
+                challenge = getChallenge(b["id"]);
+
+                if (typeof challenge["thresholds"][getNextLevel(b["tier"])] !== "undefined") {
+                    nextLevelB = challenge["thresholds"][getNextLevel(b["tier"])]
+                } else {
+                    nextLevelB = challenge["thresholds"][b["tier"]] ? challenge["thresholds"][b["tier"]] : 1;
+                }
+                if (challenge.tier === "CHALLENGER" && challenge.leaderboard === true) {
+                    nextLevelB = challenge["leaderboardThresholds"][0] ?? 0
+                }
+                nextLevelB = b["value"] / nextLevelB;
+
+                if (nextLevelA >= 1) {
+                    return 5
+                }
+                if (nextLevelB >= 1) {
+                    return -5
+                }
+
+                return Math.round(nextLevelA * 50) > Math.round(nextLevelB * 50) ? -1 : 1
+
             })
         }
 
