@@ -17,7 +17,12 @@ import css from "./css/user.module.css";
 
 
 window.region = "euw"
-window.challenges = {}
+if (typeof window.challenges === "undefined") {
+  window.challenges = {}
+} else {
+  console.info(window.challenges)
+}
+
 if (window.gC("_Cregion")) {
   window.region = window.gC("_Cregion")
 }

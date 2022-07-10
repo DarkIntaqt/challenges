@@ -394,7 +394,7 @@ export default class User extends Component {
         }
         this.server = server
 
-        if ("undefined" === typeof window.challenges[server]) {
+        if ("undefined" === typeof window.challenges[server] || (typeof window.challenges[server] !== "undefined" && window.challenges[server] === "")) {
             get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.addRegionChallenges, function (e) {
                 get('https://challenges.darkintaqt.com/api/?error=notloaded');
                 setTimeout(() => {
@@ -402,6 +402,7 @@ export default class User extends Component {
                 }, 1000);
             })
         } else {
+            this.loaded++;
             window.JSONPREQUEST = window.challenges[server]
         }
 
