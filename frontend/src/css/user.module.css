@@ -139,6 +139,15 @@
     font-size: 0.8rem;
 }
 
+.challenge img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    margin-left: 130px;
+    margin-top: 12px;
+    filter: brightness(0.6)
+}
+
 .description {
     color: rgb(203, 200, 200);
     font-size: 0.8rem;

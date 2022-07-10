@@ -101,7 +101,8 @@ export default class User extends Component {
             const challenge = r["challenges"][i];
             const c = getChallenge(challenge.id)
 
-            let position = "";
+            let queueIds = []; // available gameModes
+            let position;
             let p = 0; // current position when leaderboards are enabled
             let next; // threshold of next tier
             let nexttier = getNextLevel(challenge.tier); // next tier (e.g. iron => bronze)
@@ -158,6 +159,39 @@ export default class User extends Component {
                 type = "none";
             }
 
+            if (c.queueIds.length > 0) {
+                let enabled = {
+                    isAram: false,
+                    isSR: false,
+                    isBot: false
+                }
+
+                for (let i = 0; i < c.queueIds.length; i++) {
+                    const queue = c.queueIds[i];
+                    if ([450, 930, 860].includes(queue)) {
+                        enabled["isAram"] = true;
+                    }
+
+                    if ([400, 420, 430, 440].includes(queue)) {
+                        enabled["isSR"] = true;
+                    }
+
+                    if ([830, 840, 850].includes(queue)) {
+                        enabled["isBot"] = true;
+                    }
+                }
+
+                if (enabled["isAram"] && enabled["isSR"]) {
+                    queueIds.push(<img key={0} src="https://cdn.darkintaqt.com/lol/static/lanes/FILL.png" alt="All modes" />)
+                } else if (enabled["isAram"] && !enabled["isSR"]) {
+                    queueIds.push(<img key={1} src="https://lolcdn.darkintaqt.com/cdn/ha.svg" alt="Aram games only" />)
+                } else if (!enabled["isAram"] && enabled["isSR"]) {
+                    queueIds.push(<img key={2} src="https://lolcdn.darkintaqt.com/cdn/sr.svg" alt="Summoners Rift games only" />)
+                } else {
+                    queueIds.push(<img key={3} src="https://lolcdn.darkintaqt.com/cdn/bot.png" alt="Bot games only" />)
+                }
+            }
+
             // push challenge to list
             challenges.push(<a className={challenge.tier + " " + css.challenge + " " + css[nexttier]} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={this.goTo} key={challenge.id} style={
                 {
@@ -169,11 +203,11 @@ export default class User extends Component {
                 </p>
                 <p className={css.description}>{c.translation.description}</p>
 
+                {queueIds}
                 <div className={css.progress}>
                     <p className={css.text}>{beautifyNum(challenge.value)} / {beautifyNum(next)}</p>
                     <div className={css.indicator} style={{ width: "calc(122px * " + (challenge.value / next) + ")" }}></div>
                 </div>
-
             </a>)
 
         }
