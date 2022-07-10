@@ -58,7 +58,13 @@ export default class Start extends Component {
 
     function changeRegion(e) {
       window.region = e.target.innerText;
-      document.cookie = "_Cregion=" + window.region + ";Secure"
+
+      let date = new Date();
+      date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
+      const expires = date.toUTCString();
+
+      document.cookie = "_Cregion=" + window.region + ";expires=" + expires + ";path=/;Secure"
+
       let selected = document.querySelectorAll("." + StyleSheet.region + "." + StyleSheet.selected);
       for (let i = 0; i < selected.length; i++) {
         selected[i].classList.remove(StyleSheet.selected)
