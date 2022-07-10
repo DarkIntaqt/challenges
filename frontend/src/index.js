@@ -15,17 +15,27 @@ import FAQ from './FAQ'
 import Title from './title'
 import css from "./css/user.module.css";
 
+function checkFor(variable) {
+  if (typeof variable === "undefined") {
+    return false
+  }
+  return true
+}
 
-window.region = "euw"
-if (typeof window.challenges === "undefined") {
+if (!checkFor(window.challenges)) {
   window.challenges = {}
 } else {
   console.info(window.challenges)
 }
 
+if (!checkFor(window.region)) {
+  window.region = "na"
+}
+
 if (window.gC("_Cregion")) {
   window.region = window.gC("_Cregion")
 }
+
 
 window.loadingUI = [
   <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
