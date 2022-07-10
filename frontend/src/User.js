@@ -49,12 +49,16 @@ export default class User extends Component {
 
     showUser(r) {
 
+        // Cancel if the challenge config hasn't been loaded (yet)
         if (typeof window.challenges[this.server] === "undefined") {
             return
         }
 
+        // save json to global json object to prevent requesting another ressource from the server
         this.challengeJSON = r
 
+
+        // beautify numbers - add dots to < 1M and shortend larger numbers
         function beautifyNum(num) {
             if (typeof num === "undefined") {
                 return "0"
@@ -76,8 +80,7 @@ export default class User extends Component {
         }
 
         document.title = r.name + "'s Challenge Progress Overview"
-        let djs = new window.DJS();
-        let tempObject = document.createElement("div");
+
         let challenges = [];
 
         function getNextLevel(current) {
@@ -93,12 +96,19 @@ export default class User extends Component {
 
         r.challenges = this.sortChallenges(r.challenges)
 
+        // Loop through the challenges
         for (let i = 0; i < r.challenges.length; i++) {
             const challenge = r["challenges"][i];
             const c = getChallenge(challenge.id)
 
             let position = "";
-            let p = 0;
+            let p = 0; // current position when leaderboards are enabled
+            let next; // threshold of next tier
+            let nexttier = getNextLevel(challenge.tier); // next tier (e.g. iron => bronze)
+            let leaderboardposition = ""; // set when player has a position and not just a percentile
+            let type = challenge.tier.toLowerCase(); // for background
+
+            // get threshold for dynamic leaderboards
             if (c.leaderboard === true && typeof challenge.position !== "undefined") {
                 switch (challenge.tier) {
                     case "GRANDMASTER":
@@ -114,45 +124,45 @@ export default class User extends Component {
                 position = "#" + beautifyNum(p + challenge.position) + " - ";
             }
 
-            let info = "";
-
-            let next;
-            let nexttier = getNextLevel(challenge.tier)
             if (typeof c["thresholds"][nexttier] !== "undefined") {
                 next = c["thresholds"][nexttier]
             } else {
                 next = c["thresholds"][challenge.tier]
             }
 
+            // add for leaderboard and rank if challenge is challenger
             if (challenge.tier === "CHALLENGER") {
-
                 if (c.leaderboard === true) {
+                    // leaderboards, not #1
                     next = c["leaderboardThresholds"][0] ?? 0
                     nexttier = "CROWN";
-                    info = "(#1)"
                 } else {
+                    // No leaderboards, so maxed
                     nexttier = "MAXED"
                 }
                 if (p + challenge.position === 1) {
+                    // leaderboards, #1
                     nexttier = "FIRST";
-                    info = "";
                 }
             }
-            let leaderboardposition = ""
+
+            // set xxx time ago instead of position when the timestamp filter is set
             if (this.filter === "timestamp") {
                 leaderboardposition = <span><TimeAgo date={challenge.achievedTimestamp}></TimeAgo></span>
             } else {
                 leaderboardposition = <span>{position}Top {(Math.round(challenge.percentile * 10000) / 100)}%</span>
             }
 
-            let type = challenge.tier.toLowerCase();
+            // set type to none to use images
             if (type === "undefined" || type === "unranked") {
                 type = "none";
             }
 
-            challenges.push(<a className={challenge.tier + " " + css.challenge + " " + css[nexttier]} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={this.goTo} key={challenge.id} style={{
-                backgroundImage: "url(https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/challenges-shared/challenge-card-background-" + type + ".png)"
-            }}>
+            // push challenge to list
+            challenges.push(<a className={challenge.tier + " " + css.challenge + " " + css[nexttier]} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={this.goTo} key={challenge.id} style={
+                {
+                    backgroundImage: "url(https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/challenges-shared/challenge-card-background-" + type + ".png)"
+                }}>
                 <p className={css.title}>
                     {c.translation.name}
                     {leaderboardposition}
@@ -160,7 +170,7 @@ export default class User extends Component {
                 <p className={css.description}>{c.translation.description}</p>
 
                 <div className={css.progress}>
-                    <p className={css.text}>{beautifyNum(challenge.value)} / {beautifyNum(next)} {info}</p>
+                    <p className={css.text}>{beautifyNum(challenge.value)} / {beautifyNum(next)}</p>
                     <div className={css.indicator} style={{ width: "calc(122px * " + (challenge.value / next) + ")" }}></div>
                 </div>
 
@@ -168,7 +178,6 @@ export default class User extends Component {
 
         }
 
-        djs.render(r.challenges, tempObject, true);
         this.setState({
             found: true,
             type: r.type,
