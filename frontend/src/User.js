@@ -176,7 +176,7 @@ export default class User extends Component {
             // push challenge to list
             challenges.push(<a className={challenge.tier + " " + css.challenge + " " + css[nexttier]} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={this.goTo} key={challenge.id} style={
                 {
-                    backgroundImage: "url(https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/images/challenges-shared/challenge-card-background-" + type + ".png)"
+                    backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-" + type + ")"
                 }}>
                 <p className={css.title}>
                     {c.translation.name}
