@@ -6,6 +6,8 @@ import get from "./get"
 import css from "./css/user.module.css";
 import getChallenge from "./getChallenge";
 import TimeAgo from 'react-timeago';
+import getServer from "./server"
+import { beautifyNum } from "./beautify"
 
 export default class User extends Component {
     constructor(props) {
@@ -57,27 +59,6 @@ export default class User extends Component {
         // save json to global json object to prevent requesting another ressource from the server
         this.challengeJSON = r
 
-
-        // beautify numbers - add dots to < 1M and shortend larger numbers
-        function beautifyNum(num) {
-            if (typeof num === "undefined") {
-                return "0"
-            }
-
-            if (num >= 1000000) {
-                var unitlist = ["", "K", "M", "G"];
-                let sign = Math.sign(num);
-                let unit = 0;
-
-                while (Math.abs(num) > 1000) {
-                    unit = unit + 1;
-                    num = Math.floor(Math.abs(num) / 10) / 100;
-                }
-                return sign * Math.abs(num) + unitlist[unit];
-            }
-
-            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
-        }
 
         document.title = r.name + "'s Challenge Progress Overview"
 
@@ -401,40 +382,8 @@ export default class User extends Component {
     }
 
     load() {
-        let server = this.params.server
-        switch (server) {
-            case "br":
-                server = "br1"
-                break;
-            case "euw":
-                server = "euw1"
-                break;
-            case "eune":
-                server = "eun1"
-                break;
-            case "jp":
-                server = "jp1"
-                break;
-            case "kr":
-                break;
-            case "lan":
-                server = "la1"
-                break;
-            case "las":
-                server = "la2"
-                break;
-            case "na":
-                server = "na1"
-                break;
-            case "oc":
-                server = "oc1"
-                break;
-            case "tr":
-                server = "tr1"
-                break;
-            default:
-                break;
-        }
+        let server = getServer(this.params.server)
+
         this.server = server
 
         if ("undefined" === typeof window.challenges[server] || (typeof window.challenges[server] !== "undefined" && window.challenges[server] === "")) {
@@ -504,16 +453,16 @@ export default class User extends Component {
             <div className={this.state.type + " " + css.profile} style={this.state.extraStyle}>
                 <img src={this.state.profileImage} alt="" />
                 <h1>{this.state.name}</h1>
-                <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }}></span><div><b>{this.state.title["tier"]} Tier Title</b><br />{this.state.title["description"]}<br /><i>Need {this.state.title["threshold"]}</i></div></h2>
+                <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }}></span><div><b>{this.state.title["tier"]} Tier Title</b><br />{this.state.title["description"]}<br /><i>Need {beautifyNum(this.state.title["threshold"])}</i></div></h2>
                 <div className={css.selections}>
                     <div style={{ backgroundImage: "url('" + this.state.selections["img1"] + "')" }}>
-                        <div className={this.state.selections["statsl"]["tier"]}><b>{this.state.selections["statsl"]["tier"]} Tier Token</b><br />{this.state.selections["statsl"]["challenge"][0]}<br /><i>Need {this.state.selections["statsl"]["challenge"][1]}.</i></div>
+                        <div className={this.state.selections["statsl"]["tier"]}><b>{this.state.selections["statsl"]["tier"]} Tier Token</b><br />{this.state.selections["statsl"]["challenge"][0]}<br /><i>Need {beautifyNum(this.state.selections["statsl"]["challenge"][1])}</i></div>
                     </div>
                     <div style={{ backgroundImage: "url('" + this.state.selections["img2"] + "')" }} >
-                        <div className={this.state.selections["statsm"]["tier"]}><b>{this.state.selections["statsm"]["tier"]} Tier Token</b><br />{this.state.selections["statsm"]["challenge"][0]}<br /><i>Need {this.state.selections["statsm"]["challenge"][1]}.</i></div>
+                        <div className={this.state.selections["statsm"]["tier"]}><b>{this.state.selections["statsm"]["tier"]} Tier Token</b><br />{this.state.selections["statsm"]["challenge"][0]}<br /><i>Need {beautifyNum(this.state.selections["statsm"]["challenge"][1])}</i></div>
                     </div>
                     <div style={{ backgroundImage: "url('" + this.state.selections["img3"] + "')" }} >
-                        <div className={this.state.selections["statsr"]["tier"]}><b>{this.state.selections["statsr"]["tier"]} Tier Token</b><br />{this.state.selections["statsr"]["challenge"][0]}<br /><i>Need {this.state.selections["statsr"]["challenge"][1]}.</i></div>
+                        <div className={this.state.selections["statsr"]["tier"]}><b>{this.state.selections["statsr"]["tier"]} Tier Token</b><br />{this.state.selections["statsr"]["challenge"][0]}<br /><i>Need {beautifyNum(this.state.selections["statsr"]["challenge"][1])}</i></div>
                     </div>
                 </div>
             </div>
