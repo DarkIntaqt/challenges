@@ -251,6 +251,7 @@ export default class Challenges extends Component {
     componentDidMount() {
         document.title = "Loading..."
         this.load()
+        get("https://challenges.darkintaqt.com/api/v1/challenges/?id=1&region=world")
     }
 
     changeFilter(e) {
@@ -324,7 +325,7 @@ export default class Challenges extends Component {
                         </button>
                         <button onClick={this.changeFilter}>
                             <img src={"https://cdn.darkintaqt.com/lol/static/challenges/veterancy.webp"} alt="" />
-                            Veterany
+                            Veterancy
                         </button>
                         <button onClick={this.changeFilter}>
                             <img src={"https://cdn.darkintaqt.com/lol/static/challenges/collection.webp"} alt="" />
