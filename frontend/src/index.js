@@ -14,6 +14,7 @@ import UserObject from './UserObject'
 import FAQ from './FAQ'
 import Title from './title'
 import css from "./css/user.module.css";
+import Challenges from "./challenges"
 
 function checkFor(variable) {
   if (typeof variable === "undefined") {
@@ -43,25 +44,8 @@ if (window.gC("_Cregion")) {
   document.cookie = "_Cregion=" + window.region + ";expires=" + expires + ";path=/;Secure"
 }
 
-
-window.loadingUI = [
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>,
-  <a className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>
-];
+window.loadingUI = [];
+for (let i = 0; i < 16; i++) { window.loadingUI.push(<a key={i} className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>) }
 
 const Wrapper = ({ children }) => {
   const location = useLocation();
@@ -79,6 +63,7 @@ root.render(<BrowserRouter>
         <Route path="" element={<Start />}></Route>
         <Route path="faq" element={<FAQ></FAQ>}></Route>
         <Route path="titles" element={<Title />}></Route>
+        <Route path="challenges" element={<Challenges />}></Route>
         <Route path="challenge/:id" element={<UserObject />}></Route>
         <Route path=":server/:user" element={<UserObject />}></Route>
         <Route path="*" element={<Error />}></Route>

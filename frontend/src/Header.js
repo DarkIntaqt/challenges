@@ -12,7 +12,7 @@ export default function Header() {
         <nav className={StyleSheet.Header}>
             <div className={StyleSheet.inner}>
                 <Link to="/"><img src={logo} alt="League Challenges Logo" />League Challenges</Link>
-                <Link to="/faq">FAQ</Link>
+                <Link to="/challenges">Challenges</Link>
                 <Link to="/titles">Titles</Link>
             </div>
         </nav>
