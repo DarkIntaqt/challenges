@@ -5,7 +5,7 @@ import logo from "./img/logo.png";
 
 export default function Header() {
 
-    const messages = ["provide feedback", "open source"];
+    const messages = ["provide feedback", "open source", "report bugs"];
     const message = messages[Math.floor(Math.random() * messages.length)]
 
     return <Fragment>
