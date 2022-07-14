@@ -25,8 +25,6 @@ function checkFor(variable) {
 
 if (!checkFor(window.challenges)) {
   window.challenges = {}
-} else {
-  console.info(window.challenges)
 }
 
 if (!checkFor(window.region)) {
