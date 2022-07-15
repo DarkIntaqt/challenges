@@ -1,10 +1,10 @@
 import { Component } from "react"
-import get from "./get"
-import getServer from "./server"
-import css from "./css/user.module.css"
-import challengeCSS from "./css/challenges.module.css"
+import get from "../func/get"
+import getServer from "../func/server"
+import css from "../css/user.module.css"
+import challengeCSS from "../css/challenges.module.css"
 import { Navigate } from "react-router-dom"
-import getChallenge from "./getChallenge"
+import getChallenge from "../func/getChallenge"
 
 export default class Challenges extends Component {
     constructor(props) {

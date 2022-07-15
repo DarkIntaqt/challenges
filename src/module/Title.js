@@ -1,8 +1,8 @@
 import { Component } from "react";
-import css from "./css/titles.module.css"
+import css from "../css/titles.module.css"
 import Error from "./Error"
 import { Navigate } from "react-router-dom"
-import get from "./get"
+import get from "../func/get"
 
 export default class Title extends Component {
     constructor(props) {
