@@ -7,14 +7,16 @@ import {
 } from "react-router-dom";
 import { useLayoutEffect } from 'react';
 import './index.css';
-import Start from './Start';
-import Header from './Header'
-import Error from './Error'
-import UserObject from './UserObject'
-import FAQ from './FAQ'
-import Title from './title'
+import Start from './module/Start';
+import Header from './module/Header'
+import Error from './module/Error'
+import UserObject from './module/UserObject'
+import FAQ from './module/FAQ'
+import Title from './module/Title'
 import css from "./css/user.module.css";
-import Challenges from "./challenges"
+import Challenges from "./module/Challenges"
+
+import get from "./func/get";
 
 function checkFor(variable) {
   if (typeof variable === "undefined") {
@@ -69,3 +71,13 @@ root.render(<BrowserRouter>
     </Routes>
   </Wrapper>
 </BrowserRouter>)
+
+
+// Reload window when changes are detected
+setInterval(() => {
+  get("https://challenges.darkintaqt.com/api/v2/v/?t=" + new Date().getTime(), function (e) {
+    if (e[0] !== window.versionHash) {
+      document.location.reload()
+    }
+  }, function () { document.location.reload() });
+}, 3600000);

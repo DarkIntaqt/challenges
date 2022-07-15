@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Error from "./Error"
 import { Navigate } from "react-router-dom"
-import "./css/user.css"
-import get from "./get"
+import "./../css/user.css"
+import get from "../func/get"
 
 export default class Challenge extends Component {
     constructor(props) {

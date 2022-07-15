@@ -1,5 +1,5 @@
 import { Component, Fragment } from "react"
-import StyleSheet from "./css/start.module.css"
+import StyleSheet from "../css/start.module.css"
 import { Navigate } from "react-router-dom";
 
 export default class Start extends Component {

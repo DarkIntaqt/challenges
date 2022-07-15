@@ -1,7 +1,7 @@
 import { Outlet, Link } from "react-router-dom";
 import { Fragment } from "react"
-import StyleSheet from "./css/header.module.css";
-import logo from "./img/logo.png";
+import StyleSheet from "../css/header.module.css";
+import logo from "../img/logo.png";
 
 export default function Header() {
 

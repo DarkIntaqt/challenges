@@ -1,4 +1,4 @@
-import notFound from "./img/not-found.png"
+import notFound from "./../img/not-found.png"
 export default function Error(props) {
     let message;
     if (typeof props.message === "undefined") {

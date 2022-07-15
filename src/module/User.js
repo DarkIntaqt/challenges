@@ -1,13 +1,13 @@
 import { Component } from "react";
 import Error from "./Error"
 import { Navigate } from "react-router-dom"
-import "./css/user.css"
-import get from "./get"
-import css from "./css/user.module.css";
-import getChallenge from "./getChallenge";
+import "../css/user.css"
+import get from "../func/get"
+import css from "../css/user.module.css";
+import getChallenge from "../func/getChallenge";
 import TimeAgo from 'react-timeago';
-import getServer from "./server"
-import { beautifyNum } from "./beautify"
+import getServer from "../func/server"
+import { beautifyNum } from "../func/beautify"
 
 export default class User extends Component {
     constructor(props) {
