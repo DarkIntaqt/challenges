@@ -16,6 +16,8 @@ import Title from './module/Title'
 import css from "./css/user.module.css";
 import Challenges from "./module/Challenges"
 
+import get from "./func/get";
+
 function checkFor(variable) {
   if (typeof variable === "undefined") {
     return false
@@ -69,3 +71,13 @@ root.render(<BrowserRouter>
     </Routes>
   </Wrapper>
 </BrowserRouter>)
+
+
+// Reload window when changes are detected
+setInterval(() => {
+  get("https://challenges.darkintaqt.com/api/v2/v/?t=" + new Date().getTime(), function (e) {
+    if (e[0] !== window.versionHash) {
+      document.location.reload()
+    }
+  }, function () { document.location.reload() });
+}, 3600000);
