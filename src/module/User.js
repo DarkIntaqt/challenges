@@ -478,6 +478,7 @@ export default class User extends Component {
                 <button onClick={this.changeFilter} id="percentile">Leaderboard Position</button>
                 <button onClick={this.changeFilter} id="levelup">Levelup</button>
                 <button onClick={this.changeFilter} id={"alphabetic-" + this.state.alphabet}>{this.state.alphabet.toUpperCase()}</button>
+                <button onClick={this.changeFilter} id="titles">Titles</button>
             </div>
             <div className={css.parent}>
                 {this.state.challenges}
