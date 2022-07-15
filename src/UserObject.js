@@ -1,3 +1,5 @@
+// This file is sort of a proxy to reduce calls to the server
+
 import {
     useParams,
     useLocation
