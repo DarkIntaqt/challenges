@@ -16,16 +16,17 @@
     border-radius: 5px;
 }
 
-.title>img {
+.title>span {
     position: absolute;
     height: 45px;
     width: 45px;
+    display: block;
     margin: -20px 0 0 -20px;
     border-radius: 50%;
     z-index: 1;
 }
 
-.title>span {
+.title>p:first-of-type {
     position: absolute;
     display: block;
     font-size: 0.8rem;
@@ -62,11 +63,11 @@
     box-sizing: border-box;
 }
 
-.title>p>span {
+.title>p:last-of-type>span {
     font-weight: bold;
 }
 
-.title>p {
+.title>p:last-of-type {
     color: white;
     font-size: 0.8rem;
     width: 60%;
