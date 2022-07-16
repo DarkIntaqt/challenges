@@ -9,8 +9,5 @@
 #                                                 |_|
 # Robots.txt for challenges.DARKINTAQT.COM
 User-Agent: *
-Allow: /*
-Disallow: /*?region=*
-Disallow: /*?order-by=*
-
+Disallow: *
 Sitemap: https://challenges.darkintaqt.com/sitemap.xml
