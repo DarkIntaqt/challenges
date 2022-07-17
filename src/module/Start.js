@@ -80,7 +80,7 @@ export default class Start extends Component {
     return <Fragment>
       <div className={StyleSheet.background} style={backgroundImage}></div>
       <div className={StyleSheet.start + " object1000"}>
-        <h1>League of Legends <br /><span>Challenge Progress Lookup</span></h1>
+        <h1>League of Legends <br /><span>Challenge Progress Tracker</span></h1>
         <h2>By <a href="https://darkintaqt.com/blog/c-en/leagueoflegendsapi/" target="_blank" rel="noreferrer">DarkIntaqt.com</a></h2>
         <div className={StyleSheet.searchbar}>
           <i className={"fa-solid fa-magnifying-glass"} id="search-submit"></i>
