@@ -122,7 +122,7 @@ export default class User extends Component {
                     const tier = intToTier(parseInt(titleid.substring(titleid.length - 2)))
                     challenges.push(<a className={css.challenge + " " + tier} href={"/titles"} onClick={this.goTo} key={titleid} style={
                         {
-                            backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-none)"
+                            backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-" + tier.toLowerCase() + ")"
                         }}>
                         <p className={css.title}>
                             {title}
