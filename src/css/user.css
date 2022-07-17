@@ -259,12 +259,6 @@
     box-shadow: 0 0 15px var(--type);
 }
 
-.level #level,
-.levelup #levelup,
-.timestamp #timestamp,
-.percentile #percentile,
-.alphabetic-a-z #alphabetic-z-a,
-.alphabetic-z-a #alphabetic-a-z,
 .world #world,
 .br #br,
 .euw #euw,

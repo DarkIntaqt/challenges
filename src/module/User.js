@@ -194,7 +194,6 @@ export default class User extends Component {
         }
 
         this.setState({
-            found: true,
             type: r.type,
             title: r.title,
             points: r.points,
@@ -279,7 +278,7 @@ export default class User extends Component {
 
                     }
                 }
-                let nextLevelA = 1;
+                let nextLevelA, nextLevelB
 
                 let challenge = getChallenge(a["id"]);
                 if (typeof challenge["thresholds"][getNextLevel(a["tier"])] !== "undefined") {
@@ -293,8 +292,6 @@ export default class User extends Component {
 
                 nextLevelA = a["value"] / nextLevelA;
 
-
-                let nextLevelB = 1;
                 challenge = getChallenge(b["id"]);
 
                 if (typeof challenge["thresholds"][getNextLevel(b["tier"])] !== "undefined") {
@@ -320,7 +317,7 @@ export default class User extends Component {
         }
 
         // ALPHABETIC
-        if (filter === "alphabetic-a-z") {
+        if (filter === "alphabetic-a-z" || filter === "titles") {
             challenges.sort(function (a, b) {
                 const challenge = [getChallenge(a["id"]), getChallenge(b["id"])]
                 return challenge[0]["translation"]["name"] < challenge[1]["translation"]["name"] ? -1 : +(challenge[0]["translation"]["name"] > challenge[1]["translation"]["name"])
@@ -466,19 +463,19 @@ export default class User extends Component {
                     </div>
                 </div>
             </div>
-            <div className={this.state.type + " personalProgress"} style={this.state.extraStyle}>
-                <span className={"progressText"}>{this.state.points[0]}/{this.state.points[1]}</span>
-                <div className={"progress"}>
-                    <div className={"indicator"} style={{ width: "calc(102px * " + (parseInt(this.state.points[0].replaceAll(".", ""))) / (parseInt(this.state.points[1].replaceAll(".", ""))) }}></div>
+            <div className={this.state.type + " " + css.personalProgress} style={this.state.extraStyle}>
+                <div className={css.progress}>
+                    <p className={css.text}>{this.state.points[0]}/{this.state.points[1]}</p>
+                    <div className={css.indicator} style={{ width: "calc(102px * " + (parseInt(this.state.points[0].replaceAll(".", ""))) / (parseInt(this.state.points[1].replaceAll(".", ""))) }}></div>
                 </div>
             </div>
-            <div className={"filter " + this.state.filter} style={this.state.extraStyle}>
-                <button onClick={this.changeFilter} id="level">Rank</button>
-                <button onClick={this.changeFilter} id="timestamp">Last updated</button>
-                <button onClick={this.changeFilter} id="percentile">Leaderboard Position</button>
-                <button onClick={this.changeFilter} id="levelup">Levelup</button>
-                <button onClick={this.changeFilter} id={"alphabetic-" + this.state.alphabet}>{this.state.alphabet.toUpperCase()}</button>
-                <button onClick={this.changeFilter} id="titles" style={{ display: "none" }}>Titles</button>
+            <div className={css.filter + " " + css[this.state.filter]} style={this.state.extraStyle}>
+                <button className={css.level} onClick={this.changeFilter} id="level">Rank</button>
+                <button className={css.timestamp} onClick={this.changeFilter} id="timestamp">Last updated</button>
+                <button className={css.percentile} onClick={this.changeFilter} id="percentile">Leaderboard Position</button>
+                <button className={css.levelup} onClick={this.changeFilter} id="levelup">Levelup</button>
+                <button className={css["alphabetic-" + this.state.alphabet]} onClick={this.changeFilter} id={"alphabetic-" + this.state.alphabet}>{this.state.alphabet.toUpperCase()}</button>
+                <button className={css.titles} onClick={this.changeFilter} id="titles" style={{ display: "none" }}>Titles</button>
             </div>
             <div className={css.parent}>
                 {this.state.challenges}
