@@ -1,6 +1,5 @@
 import { Component } from "react";
 import css from "../css/titles.module.css"
-import Error from "./Error"
 import { Navigate } from "react-router-dom"
 import get from "../func/get"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -37,10 +36,7 @@ export default class Title extends Component {
     }
 
     error() {
-        this.setState({
-            challenges: <Error></Error>,
-            extraStyle: { display: "none" }
-        })
+        console.error("Error");
     }
 
     goTo(e) {

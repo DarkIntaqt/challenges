@@ -221,12 +221,23 @@
     overflow: hidden;
 }
 
+.personalProgress {
+    width: calc(100% - 10px);
+    margin-left: 10px;
+    float: left;
+    height: 50px;
+}
+
 .progress {
     width: 120px;
     height: 6px;
     border-radius: 3px;
     margin: 22px 0;
     background-color: rgb(208, 208, 208);
+}
+
+.personalProgress .progress {
+    width: 100px;
 }
 
 .progress .text {
@@ -253,4 +264,25 @@
 .CROWN,
 .MAXED {
     box-shadow: 0 0 15px -2px var(--type)
+}
+
+.filter>button {
+    border: none;
+    cursor: pointer;
+    float: left;
+    color: white;
+    font-size: 0.8rem;
+    background: none;
+    outline: none;
+    margin: 5px 10px;
+}
+
+.level>.level,
+.levelup>.levelup,
+.timestamp>.timestamp,
+.percentile>.percentile,
+.alphabetic-a-z>.alphabetic-z-a,
+.alphabetic-z-a>.alphabetic-a-z,
+.titles>.titles {
+    color: #fcba03;
 }
