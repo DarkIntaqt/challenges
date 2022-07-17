@@ -75,122 +75,179 @@ export default class User extends Component {
             }
         }
 
-        r.challenges = this.sortChallenges(r.challenges)
+        function intToTier(inttier) {
+            switch (inttier) {
+                case 0:
+                    return "IRON"
+                case 1:
+                    return "BRONZE"
+                case 2:
+                    return "SILVER"
+                case 3:
+                    return "GOLD"
+                case 4:
+                    return "PLATINUM"
+                case 5:
+                    return "DIAMOND"
+                case 6:
+                    return "MASTER"
+                case 7:
+                    return "GRANDMASTER"
+                case 8:
+                    return "CHALLENGER"
+                default:
+                    return "NONE"
 
-        // Loop through the challenges
-        for (let i = 0; i < r.challenges.length; i++) {
-            const challenge = r["challenges"][i];
-            const c = getChallenge(challenge.id)
+            }
+        }
 
-            let queueIds = []; // available gameModes
-            let position;
-            let p = 0; // current position when leaderboards are enabled
-            let next; // threshold of next tier
-            let nexttier = getNextLevel(challenge.tier); // next tier (e.g. iron => bronze)
-            let leaderboardposition = ""; // set when player has a position and not just a percentile
-            let type = challenge.tier.toLowerCase(); // for background
-
-            // get threshold for dynamic leaderboards
-            if (c.leaderboard === true && typeof challenge.position !== "undefined") {
-                switch (challenge.tier) {
-                    case "GRANDMASTER":
-                        p = c["leaderboardThresholds"][3] ?? 0
-                        break;
-                    case "MASTER":
-                        p = c["leaderboardThresholds"][5] ?? 0
-                        break;
-                    default:
-                        p = 0
-                        break;
+        if (this.filter === "titles") {
+            const titles = r.titles;
+            for (const titleid in titles) {
+                if (Object.hasOwnProperty.call(titles, titleid)) {
+                    const title = titles[titleid];
+                    if (titleid === "1") {
+                        challenges.push(<a className={"NONE " + css.challenge + " "} href={"/titles"} onClick={this.goTo} key={titleid} style={
+                            {
+                                backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-none)"
+                            }}>
+                            <p className={css.title}>
+                                {title}
+                            </p>
+                            <p className={css.description}>This is a default title. Everyone owns it. Actually it is not even rare, as everyone has unlocked it, so please don't be proud of this one</p>
+                        </a>)
+                        continue;
+                    }
+                    const challenge = getChallenge(parseInt(titleid.substring(0, titleid.length - 2)))
+                    const tier = intToTier(parseInt(titleid.substring(titleid.length - 2)))
+                    challenges.push(<a className={css.challenge + " " + tier} href={"/titles"} onClick={this.goTo} key={titleid} style={
+                        {
+                            backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-none)"
+                        }}>
+                        <p className={css.title}>
+                            {title}
+                        </p>
+                        <p className={css.description}>{challenge.translation.description}</p>
+                    </a>)
                 }
-                position = "#" + beautifyNum(p + challenge.position) + " - ";
             }
+        } else {
+            r.challenges = this.sortChallenges(r.challenges)
+            // Loop through the challenges
+            for (let i = 0; i < r.challenges.length; i++) {
+                const challenge = r["challenges"][i];
+                const c = getChallenge(challenge.id)
 
-            if (typeof c["thresholds"][nexttier] !== "undefined") {
-                next = c["thresholds"][nexttier]
-            } else {
-                next = c["thresholds"][challenge.tier]
-            }
+                let queueIds = []; // available gameModes
+                let position;
+                let p = 0; // current position when leaderboards are enabled
+                let next; // threshold of next tier
+                let nexttier = getNextLevel(challenge.tier); // next tier (e.g. iron => bronze)
+                let leaderboardposition = ""; // set when player has a position and not just a percentile
+                let type = challenge.tier.toLowerCase(); // for background
 
-            // add for leaderboard and rank if challenge is challenger
-            if (challenge.tier === "CHALLENGER") {
-                if (c.leaderboard === true) {
-                    // leaderboards, not #1
-                    next = c["leaderboardThresholds"][0] ?? 0
-                    nexttier = "CROWN";
+                // get threshold for dynamic leaderboards
+                if (c.leaderboard === true && typeof challenge.position !== "undefined") {
+                    switch (challenge.tier) {
+                        case "GRANDMASTER":
+                            p = c["leaderboardThresholds"][3] ?? 0
+                            break;
+                        case "MASTER":
+                            p = c["leaderboardThresholds"][5] ?? 0
+                            break;
+                        default:
+                            p = 0
+                            break;
+                    }
+                    position = "#" + beautifyNum(p + challenge.position) + " - ";
+                }
+
+                if (typeof c["thresholds"][nexttier] !== "undefined") {
+                    next = c["thresholds"][nexttier]
                 } else {
-                    // No leaderboards, so maxed
-                    nexttier = "MAXED"
-                }
-                if (p + challenge.position === 1) {
-                    // leaderboards, #1
-                    nexttier = "FIRST";
-                }
-            }
-
-            // set xxx time ago instead of position when the timestamp filter is set
-            if (this.filter === "timestamp") {
-                leaderboardposition = <span><TimeAgo date={challenge.achievedTimestamp}></TimeAgo></span>
-            } else {
-                leaderboardposition = <span>{position}Top {(Math.round(challenge.percentile * 10000) / 100)}%</span>
-            }
-
-            // set type to none to use images
-            if (type === "undefined" || type === "unranked") {
-                type = "none";
-            }
-
-            if (c.queueIds.length > 0) {
-                let enabled = {
-                    isAram: false,
-                    isSR: false,
-                    isBot: false
+                    next = c["thresholds"][challenge.tier]
                 }
 
-                for (let i = 0; i < c.queueIds.length; i++) {
-                    const queue = c.queueIds[i];
-                    if ([450, 930, 860].includes(queue)) {
-                        enabled["isAram"] = true;
+                // add for leaderboard and rank if challenge is challenger
+                if (challenge.tier === "CHALLENGER") {
+                    if (c.leaderboard === true) {
+                        // leaderboards, not #1
+                        next = c["leaderboardThresholds"][0] ?? 0
+                        nexttier = "CROWN";
+                    } else {
+                        // No leaderboards, so maxed
+                        nexttier = "MAXED"
                     }
-
-                    if ([400, 420, 430, 440].includes(queue)) {
-                        enabled["isSR"] = true;
-                    }
-
-                    if ([830, 840, 850].includes(queue)) {
-                        enabled["isBot"] = true;
+                    if (p + challenge.position === 1) {
+                        // leaderboards, #1
+                        nexttier = "FIRST";
                     }
                 }
 
-                if (enabled["isAram"] && enabled["isSR"]) {
-                    queueIds.push(<img key={0} src="https://cdn.darkintaqt.com/lol/static/lanes/FILL.png" alt="All modes" />)
-                } else if (enabled["isAram"] && !enabled["isSR"]) {
-                    queueIds.push(<img key={1} src="https://lolcdn.darkintaqt.com/cdn/ha.svg" alt="Aram games only" />)
-                } else if (!enabled["isAram"] && enabled["isSR"]) {
-                    queueIds.push(<img key={2} src="https://lolcdn.darkintaqt.com/cdn/sr.svg" alt="Summoners Rift games only" />)
+                // set xxx time ago instead of position when the timestamp filter is set
+                if (this.filter === "timestamp") {
+                    leaderboardposition = <span><TimeAgo date={challenge.achievedTimestamp}></TimeAgo></span>
                 } else {
-                    queueIds.push(<img key={3} src="https://lolcdn.darkintaqt.com/cdn/bot.png" alt="Bot games only" />)
+                    leaderboardposition = <span>{position}Top {(Math.round(challenge.percentile * 10000) / 100)}%</span>
                 }
+
+                // set type to none to use images
+                if (type === "undefined" || type === "unranked") {
+                    type = "none";
+                }
+
+                if (c.queueIds.length > 0) {
+                    let enabled = {
+                        isAram: false,
+                        isSR: false,
+                        isBot: false
+                    }
+
+                    for (let i = 0; i < c.queueIds.length; i++) {
+                        const queue = c.queueIds[i];
+                        if ([450, 930, 860].includes(queue)) {
+                            enabled["isAram"] = true;
+                        }
+
+                        if ([400, 420, 430, 440].includes(queue)) {
+                            enabled["isSR"] = true;
+                        }
+
+                        if ([830, 840, 850].includes(queue)) {
+                            enabled["isBot"] = true;
+                        }
+                    }
+
+                    if (enabled["isAram"] && enabled["isSR"]) {
+                        queueIds.push(<img key={0} src="https://cdn.darkintaqt.com/lol/static/lanes/FILL.png" alt="All modes" />)
+                    } else if (enabled["isAram"] && !enabled["isSR"]) {
+                        queueIds.push(<img key={1} src="https://lolcdn.darkintaqt.com/cdn/ha.svg" alt="Aram games only" />)
+                    } else if (!enabled["isAram"] && enabled["isSR"]) {
+                        queueIds.push(<img key={2} src="https://lolcdn.darkintaqt.com/cdn/sr.svg" alt="Summoners Rift games only" />)
+                    } else {
+                        queueIds.push(<img key={3} src="https://lolcdn.darkintaqt.com/cdn/bot.png" alt="Bot games only" />)
+                    }
+                }
+
+                // push challenge to list
+                challenges.push(<a className={challenge.tier + " " + css.challenge + " " + css[nexttier]} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={this.goTo} key={challenge.id} style={
+                    {
+                        backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-" + type + ")"
+                    }}>
+                    <p className={css.title}>
+                        {c.translation.name}
+                        {leaderboardposition}
+                    </p>
+                    <p className={css.description}>{c.translation.description}</p>
+
+                    {queueIds}
+                    <div className={css.progress}>
+                        <p className={css.text}>{beautifyNum(challenge.value)} / {beautifyNum(next)}</p>
+                        <div className={css.indicator} style={{ width: "calc(122px * " + (challenge.value / next) + ")" }}></div>
+                    </div>
+                </a>)
+
             }
-
-            // push challenge to list
-            challenges.push(<a className={challenge.tier + " " + css.challenge + " " + css[nexttier]} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={this.goTo} key={challenge.id} style={
-                {
-                    backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-" + type + ")"
-                }}>
-                <p className={css.title}>
-                    {c.translation.name}
-                    {leaderboardposition}
-                </p>
-                <p className={css.description}>{c.translation.description}</p>
-
-                {queueIds}
-                <div className={css.progress}>
-                    <p className={css.text}>{beautifyNum(challenge.value)} / {beautifyNum(next)}</p>
-                    <div className={css.indicator} style={{ width: "calc(122px * " + (challenge.value / next) + ")" }}></div>
-                </div>
-            </a>)
-
         }
 
         this.setState({
@@ -475,7 +532,7 @@ export default class User extends Component {
                 <button className={css.percentile} onClick={this.changeFilter} id="percentile">Leaderboard Position</button>
                 <button className={css.levelup} onClick={this.changeFilter} id="levelup">Levelup</button>
                 <button className={css["alphabetic-" + this.state.alphabet]} onClick={this.changeFilter} id={"alphabetic-" + this.state.alphabet}>{this.state.alphabet.toUpperCase()}</button>
-                <button className={css.titles} onClick={this.changeFilter} id="titles" style={{ display: "none" }}>Titles</button>
+                <button className={css.titles} onClick={this.changeFilter} id="titles">Titles</button>
             </div>
             <div className={css.parent}>
                 {this.state.challenges}
