@@ -15,7 +15,6 @@ import FAQ from './module/FAQ'
 import Title from './module/Title'
 import css from "./css/user.module.css";
 import Challenges from "./module/Challenges"
-
 import get from "./func/get";
 
 function checkFor(variable) {
