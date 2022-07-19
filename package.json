@@ -9,7 +9,7 @@
     "async": "^3.2.4",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-lazy-load-image-component": "^1.5.4",
+    "react-lazy-load-image-component": "^1.5.5",
     "react-router-dom": "^6.3.0",
     "react-timeago": "^7.1.0",
     "web-vitals": "^2.1.4"
