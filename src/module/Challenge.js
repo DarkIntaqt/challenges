@@ -62,7 +62,7 @@ export default class Challenge extends Component {
     }
 
     changeFilter(e) {
-        if (this.filter === "world") {
+        if (e.target.id === "world") {
             window.history.replaceState({}, "", "?")
         } else {
             window.history.replaceState({}, "", "?region=" + e.target.id)
