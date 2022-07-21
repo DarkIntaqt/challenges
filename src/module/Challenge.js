@@ -148,7 +148,10 @@ export default class Challenge extends Component {
                     summoners.sort((a, b) => {
                         // Order by name if same value
                         if (a[1] === b[1]) {
-                            return a[0] < b[0] ? -1 : +(a[0] > b[0])
+                            if (b[4] === a[4]) {
+                                return a[0] < b[0] ? -1 : +(a[0] > b[0])
+                            }
+                            return b[4] - a[1]
                         }
                         return b[1] - a[1]
                     })

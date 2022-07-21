@@ -39,7 +39,6 @@
 .profile>h2,
 .profile>h2>span {
     display: block;
-    max-width: calc(100% - 150px);
     color: var(--type);
     font-size: 1rem;
     font-weight: 500;
@@ -48,6 +47,9 @@
     margin: 0px 5px 5px;
 }
 
+.c.profile>h2 {
+    max-width: calc(100% - 150px);
+}
 
 .profile>h2:hover>div,
 .profile>div>div:hover>div {
