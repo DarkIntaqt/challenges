@@ -45,7 +45,7 @@ if (window.gC("_Cregion")) {
 }
 
 window.loadingUI = [];
-for (let i = 0; i < 16; i++) { window.loadingUI.push(<a key={i} className={css.challenge + " UNRANKED loading"} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>) }
+for (let i = 0; i < 16; i++) { window.loadingUI.push(<a key={i} className={css.challenge + " UNRANKED " + css.loading} href="#loading"><p className={css.title}>Loading<span>Loading</span></p><p className={css.description}>Loading</p></a>) }
 
 const Wrapper = ({ children }) => {
   const location = useLocation();
