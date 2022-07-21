@@ -3,8 +3,14 @@ export function beautifyNum(num, minify = true) {
     if (typeof num === "undefined") {
         return "0"
     }
+    if (typeof num === "string") {
+        num = parseInt(num)
+        if (isNaN(num)) {
+            return "0"
+        }
+    }
 
-    if (num >= 1000000 && minify === true) {
+    if (num >= 100000 && minify === true) {
         var unitlist = ["", "K", "M", "G"];
         let sign = Math.sign(num);
         let unit = 0;
