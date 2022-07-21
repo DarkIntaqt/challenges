@@ -190,11 +190,13 @@ export default class Challenge extends Component {
                 summoner = <div className={css.disabledMessage + " GRANDMASTER"}>Leaderboards aren't enabled for this challenge<br /><br /><span className={css.details}>Why? Because it is not possible to "scale" in this challenge, as it has a static highest achievable score</span></div>
             }
         }
-
         let content = <Fragment>
             <div className={"MASTER " + css.c + " " + css.profile}>
                 <img src={icon} alt="" />
-                <h1>{challenge.challenge.translation.name} <span>(Updated <TimeAgo date={challenge.timestamp * 1000} />)</span></h1>
+                <h1>{challenge.challenge.translation.name} {challenge.timestamp
+                    ? <span>(Updated <TimeAgo date={challenge.timestamp * 1000} />)</span>
+                    : <span></span>
+                }</h1>
                 <h2 className={"SILVER"} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}</h2>
                 <div className={css.thresholds}>
                     <div className={"IRON"}><i className="fa-solid fa-circle"></i>{thresholds[1]}</div>
