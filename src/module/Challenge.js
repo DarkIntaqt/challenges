@@ -64,7 +64,9 @@ export default class Challenge extends Component {
 
     changeFilter(e) {
         if (e.target.id === "world") {
-            window.history.replaceState({}, "", "?")
+            let url = new URL(window.location)
+            url.search = "";
+            window.history.replaceState({}, "", url)
         } else {
             window.history.replaceState({}, "", "?region=" + e.target.id)
         }
