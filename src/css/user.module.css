@@ -390,6 +390,7 @@
 .parent>a.challenge>.position {
     font-size: 0.7rem;
     color: white;
+    z-index: 1;
     text-align: center;
     overflow: hidden;
     position: absolute;
