@@ -412,3 +412,7 @@
 .parent>a.challenge.top100>.position {
     font-size: 0.85rem;
 }
+
+.disabledMessage a {
+    color: white;
+}
