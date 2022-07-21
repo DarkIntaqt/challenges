@@ -85,6 +85,7 @@
     cursor: AUTO;
     border-radius: 5px;
     color: white;
+    z-index: 5;
     border: 2px solid var(--type);
     background-color: #111113;
     margin-top: 22px;
@@ -390,7 +391,7 @@
 .parent>a.challenge>.position {
     font-size: 0.7rem;
     color: white;
-    z-index: 1;
+    z-index: 0;
     text-align: center;
     overflow: hidden;
     position: absolute;

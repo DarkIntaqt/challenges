@@ -200,6 +200,7 @@ export default class Challenge extends Component {
                 }</h1>
                 <h2 className={"SILVER"} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}</h2>
                 <div className={css.thresholds}>
+                    <div>Thresholds:</div>
                     <div className={"IRON"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[1])}</div>
                     <div className={"BRONZE"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[2])}</div>
                     <div className={"SILVER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[3])}</div>
