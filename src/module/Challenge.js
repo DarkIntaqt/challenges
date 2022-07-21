@@ -47,7 +47,7 @@ export default class Challenge extends Component {
     }
 
     showChallenge(r) {
-        document.title = r.challenge.translation.name + " Challenge Overview"
+        document.title = "'" + r.challenge.translation.name + "' Challenge Overview, Thresholds and Leaderboards"
         this.setState({ challenge: r })
     }
 
@@ -200,15 +200,15 @@ export default class Challenge extends Component {
                 }</h1>
                 <h2 className={"SILVER"} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}</h2>
                 <div className={css.thresholds}>
-                    <div className={"IRON"}><i className="fa-solid fa-circle"></i>{thresholds[1]}</div>
-                    <div className={"BRONZE"}><i className="fa-solid fa-circle"></i>{thresholds[2]}</div>
-                    <div className={"SILVER"}><i className="fa-solid fa-circle"></i>{thresholds[3]}</div>
-                    <div className={"GOLD"}><i className="fa-solid fa-circle"></i>{thresholds[4]}</div>
-                    <div className={"PLATINUM"}><i className="fa-solid fa-circle"></i>{thresholds[5]}</div>
-                    <div className={"DIAMOND"}><i className="fa-solid fa-circle"></i>{thresholds[6]}</div>
-                    <div className={"MASTER"}><i className="fa-solid fa-circle"></i>{thresholds[7]}</div>
-                    <div className={"GRANDMASTER"}><i className="fa-solid fa-circle"></i>{thresholds[8]}{dynamic["gm"]}</div>
-                    <div className={"CHALLENGER"}><i className="fa-solid fa-circle"></i>{thresholds[9]}{dynamic["c"]}</div>
+                    <div className={"IRON"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[1])}</div>
+                    <div className={"BRONZE"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[2])}</div>
+                    <div className={"SILVER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[3])}</div>
+                    <div className={"GOLD"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[4])}</div>
+                    <div className={"PLATINUM"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[5])}</div>
+                    <div className={"DIAMOND"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[6])}</div>
+                    <div className={"MASTER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[7])}</div>
+                    <div className={"GRANDMASTER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[8])}{dynamic["gm"]}</div>
+                    <div className={"CHALLENGER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[9])}{dynamic["c"]}</div>
                 </div>
             </div>
             <div className={css.filter + " " + css[this.state.filter]}>
