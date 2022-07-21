@@ -221,7 +221,7 @@ export default class Challenges extends Component {
 
             // getChallenge(parseInt(challenge.parentCategory))
 
-            if (this.searchFor !== "" && challenge.translation.name.toLowerCase().search(this.searchFor.toLowerCase()) === -1) {
+            if (this.searchFor !== "" && (challenge.translation.name.toLowerCase().search(this.searchFor.toLowerCase()) === -1 && challenge.translation.description.toLowerCase().search(this.searchFor.toLowerCase()) === -1)) {
                 continue
             }
 
