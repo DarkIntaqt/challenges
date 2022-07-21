@@ -39,6 +39,7 @@
 .profile>h2,
 .profile>h2>span {
     display: block;
+    max-width: calc(100% - 150px);
     color: var(--type);
     font-size: 1rem;
     font-weight: 500;
