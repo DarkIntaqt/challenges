@@ -1,7 +1,6 @@
 import { Component } from "react";
 import Error from "./Error"
 import { Navigate } from "react-router-dom"
-import "../css/user.css"
 import get from "../func/get"
 import css from "../css/user.module.css";
 import getChallenge from "../func/getChallenge";
@@ -436,7 +435,7 @@ export default class User extends Component {
     }
 
     load() {
-        let server = getServer(this.params.server)
+        let server = getServer("machine", this.params.server)
 
         this.server = server
 

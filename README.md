@@ -11,3 +11,7 @@ It contains:
 * Overview for challenges of a user
 * Overview of a challenge
 * Title overview
+
+<a href="https://github.com/darkintaqt/challenges/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=darkintaqt/challenges" />
+</a>

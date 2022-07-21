@@ -38,18 +38,18 @@ export default class Start extends Component {
   render() {
     document.title = "League of Legends Challenge Progress Lookup & Tracker"
     const img = [
-      131, 4, 2,
-      254, 4, 29,
-      38, 4, 14,
-      43, 4, 7,
-      2, 4, 25,
-      432, 4, 8,
-      104, 4, 5,
-      53, 6, 6,
-      55, 4, 10,
-      60, 4, 6,
-      99, 4, 29,
-      150, 4, 3
+      150, 4, 3, /*winter gnar */
+      254, 4, 29, /* arcane vi */
+      38, 4, 14, /* arcane kassadin */
+      43, 4, 7, /* red eye karma */
+      2, 4, 25, /* olaf */
+      432, 4, 8, /* astronaut bard */
+      104, 4, 5, /* pool party graves */
+      114, 4, 1, /* fiora */
+      21, 4, 18, /* halloween miss fortune */
+      60, 4, 6, /* halloween elise */
+      99, 4, 29, /* lux */
+      78, 4, 14 /* xmas poppy */
     ];
     const backgroundImage = {
       background: 'center no-repeat url("https://lolcdn.darkintaqt.com/s/e-' + ((img[new Date().getMonth() * 3]) * 7).toString(16) + "-" + (img[new Date().getMonth() * 3] * (img[new Date().getMonth() * 3 + 1])).toString(16) + "-" + img[new Date().getMonth() * 3 + 2] + '")',

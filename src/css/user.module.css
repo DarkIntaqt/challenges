@@ -1,3 +1,9 @@
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}
+
 .profile {
     width: 100%;
     float: left;
@@ -22,6 +28,12 @@
     float: left;
     margin: 20px 5px 5px;
     width: calc(100% - 130px);
+}
+
+.profile>h1>span {
+    font-size: 0.8rem;
+    color: rgb(157, 156, 156);
+    font-weight: normal;
 }
 
 .profile>h2,
@@ -92,6 +104,12 @@
 
 .selections {
     width: calc(100% - 130px);
+}
+
+.challenge.loading {
+    background: linear-gradient(110deg, #1b1b1b 8%, #1d1d1d 18%, #1b1b1b 33%);
+    background-size: 200% 100%;
+    animation: 1s shine linear infinite;
 }
 
 .challenge {
@@ -257,7 +275,8 @@
     background-color: var(--type);
 }
 
-.FIRST {
+.FIRST,
+.pos1 {
     box-shadow: 0 0 20px 0 var(--type);
 }
 
@@ -283,6 +302,111 @@
 .percentile>.percentile,
 .alphabetic-a-z>.alphabetic-z-a,
 .alphabetic-z-a>.alphabetic-a-z,
-.titles>.titles {
+.titles>.titles,
+.world>.world,
+.br>.br,
+.euw>.euw,
+.eune>.eune,
+.jp>.jp,
+.kr>.kr,
+.lan>.lan,
+.las>.las,
+.na>.na,
+.oc>.oc,
+.tr>.tr {
     color: #fcba03;
+}
+
+
+
+/* CHALLENGE OVERVIEW */
+.profile.c>img {
+    border-radius: 50%;
+    box-shadow: 0 0 0 transparent;
+    position: relative;
+    background: none;
+    border: 3px solid transparent;
+
+}
+
+.profile.c::before {
+    height: 80px;
+    width: 80px;
+    margin: 30px 20px;
+    content: '';
+    z-index: 0;
+    box-shadow: 0 0 20px 5px var(--type);
+    position: absolute;
+    border-radius: 50%;
+}
+
+.profile>.thresholds {
+    width: calc(100% - 140px);
+    margin-left: 3px;
+    margin-top: 5px;
+}
+
+.profile>.thresholds>div {
+    float: left;
+    min-width: 10px;
+    color: white;
+    margin: 0 3px;
+    font-size: 0.7rem;
+}
+
+.profile>.thresholds>div>i {
+    color: var(--type);
+    margin: 0 3px 0 7px;
+}
+
+.profile.c>div>div>div {
+    margin-top: 10px !important
+}
+
+.parent .disabledMessage {
+    width: 80%;
+    box-sizing: border-box;
+    margin: 50px 10%;
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+    border: 2px solid var(--type);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.parent .disabledMessage .details {
+    font-size: 0.8rem;
+}
+
+.parent>a.challenge>p.values {
+    text-align: center;
+    margin-top: 36px;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.parent>a.challenge>.position {
+    font-size: 0.7rem;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+    position: absolute;
+    width: 45px;
+    line-height: 1;
+    margin: -20px 0 0 165px;
+    border-radius: 5px;
+    border: 2px solid var(--type);
+    background: #111113;
+    padding: 8px 0;
+}
+
+.parent>a.challenge.top10>.position,
+.parent>a.challenge.pos1>.position {
+    font-size: 1rem;
+}
+
+.parent>a.challenge.top100>.position {
+    font-size: 0.85rem;
 }
