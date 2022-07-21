@@ -34,8 +34,7 @@ export default class Challenge extends Component {
                         description: "Loading"
                     }
                 }
-            },
-            extraStyle: ""
+            }
         }
     }
 
