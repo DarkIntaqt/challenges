@@ -22,7 +22,7 @@ export default class Challenges extends Component {
     }
 
     load() {
-        let server = getServer(window.region)
+        let server = getServer("machine", window.region)
         this.server = server
         if ("undefined" === typeof window.challenges[server] || (typeof window.challenges[server] !== "undefined" && window.challenges[server] === "")) {
             get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.showChallenges)
@@ -133,7 +133,7 @@ export default class Challenges extends Component {
                     }
                     obtainable.push(<div>
                         <p>Obtainable by leveling up your profile</p>
-                        <i class="fa-solid fa-user"></i>
+                        <i className="fa-solid fa-user"></i>
                     </div>)
                 }
                 if (challenge.tags["source"] === "ETERNALS") {
