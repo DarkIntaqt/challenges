@@ -5,6 +5,7 @@ import get from "../func/get"
 import css from "../css/user.module.css"
 import server from "../func/server"
 import TimeAgo from 'react-timeago';
+import { beautifyNum } from "../func/beautify"
 
 export default class Challenge extends Component {
     constructor(props) {
@@ -177,7 +178,7 @@ export default class Challenge extends Component {
                                     #{player[4]} in {server("long", player[3])}
                                 </span>
                             </p>
-                            <p className={css.values}>{player[1]}</p>
+                            <p className={css.values}>{beautifyNum(player[1], false)}</p>
                         </a>)
                     }
                 }
