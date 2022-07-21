@@ -79,6 +79,16 @@ export default class Challenge extends Component {
             region = window.region ?? "na"
         }
 
+        function checkThresholds(thresholds) {
+            let noThresholds = true;
+            for (let index = 0; index < thresholds.length; index++) {
+                if (thresholds[index] !== "-") {
+                    noThresholds = false;
+                }
+            }
+            return noThresholds
+        }
+
         let filters = [<button key={"world"} onClick={this.changeFilter} className={css.world} id="world">Global</button>];
         for (let i = 0; i < regions.length; i++) {
             filters.push(<button key={i} onClick={this.changeFilter} className={css[regions[i]]} id={regions[i]}>{regions[i]}</button>)
@@ -106,69 +116,79 @@ export default class Challenge extends Component {
         } else if (challenge.challenge.leaderboard === true) {
             thresholds = challenge.stats[server("machine", region)]
 
-            if (thresholds[9] !== "-") {
-                dynamic["c"] = dynamic["placeholder"]
-            }
-            if (thresholds[8] !== "-") {
-                dynamic["gm"] = dynamic["placeholder"]
-            }
-
-            // create list with summoners
-            let summoners = []
-            if (absoluteRegion === "world") {
-                let counters = {};
-                for (let i = 0; i < regions.length; i++) {
-                    for (let ii = 0; ii < challenge.summoner[regions[i]].length; ii++) {
-                        if (typeof counters[regions[i]] === "undefined") {
-                            counters[regions[i]] = 1
-                        }
-                        challenge.summoner[regions[i]][ii].push(regions[i])
-                        challenge.summoner[regions[i]][ii].push(counters[regions[i]])
-                        summoners.push(challenge.summoner[regions[i]][ii])
-                        counters[regions[i]]++
-                    }
-
-                }
-                summoners.sort((a, b) => {
-                    // Order by name if same value
-                    if (a[1] === b[1]) {
-                        return a[0] < b[0] ? -1 : +(a[0] > b[0])
-                    }
-                    return b[1] - a[1]
-                })
+            if (checkThresholds(thresholds)) {
+                summoner = <div className={css.disabledMessage + " GRANDMASTER"}>This challenge is not enabled in #{absoluteRegion}</div>
             } else {
-                summoners = challenge.summoner[absoluteRegion]
-                for (let i = 0; i < summoners.length; i++) {
-                    summoners[i].push(absoluteRegion)
-                    summoners[i].push(i + 1)
+                if (thresholds[9] !== "-") {
+                    dynamic["c"] = dynamic["placeholder"]
+                }
+                if (thresholds[8] !== "-") {
+                    dynamic["gm"] = dynamic["placeholder"]
+                }
 
+                // create list with summoners
+                let summoners = []
+                if (absoluteRegion === "world") {
+                    let counters = {};
+                    for (let i = 0; i < regions.length; i++) {
+                        for (let ii = 0; ii < challenge.summoner[regions[i]].length; ii++) {
+                            if (typeof counters[regions[i]] === "undefined") {
+                                counters[regions[i]] = 1
+                            }
+                            challenge.summoner[regions[i]][ii].push(regions[i])
+                            challenge.summoner[regions[i]][ii].push(counters[regions[i]])
+                            summoners.push(challenge.summoner[regions[i]][ii])
+                            counters[regions[i]]++
+                        }
+
+                    }
+                    summoners.sort((a, b) => {
+                        // Order by name if same value
+                        if (a[1] === b[1]) {
+                            return a[0] < b[0] ? -1 : +(a[0] > b[0])
+                        }
+                        return b[1] - a[1]
+                    })
+                } else {
+                    summoners = challenge.summoner[absoluteRegion]
+                    for (let i = 0; i < summoners.length; i++) {
+                        summoners[i].push(absoluteRegion)
+                        summoners[i].push(i + 1)
+
+                    }
+                }
+                if (summoners.length === 0) {
+                    summoner = <div className={css.disabledMessage + " GRANDMASTER"}>No high-ranked summoners yet<br /><br /><span className={css.details}>Due to API limitations we can only show players ranked MASTER+</span></div>
+                } else {
+                    for (let i = 0; i < summoners.length; i++) {
+                        const player = summoners[i];
+                        let pos = css.normal;
+                        if (i === 0) {
+                            pos = css.pos1
+                        } else if (i < 10) {
+                            pos = css.top10
+                        } else if (i < 100) {
+                            pos = css.top100
+                        }
+                        summoner.push(<a className={player[2] + " " + css.challenge + " " + pos} href={"/" + player[3] + "/" + player[0]} key={player[0] + player[3]} onClick={this.goTo}>
+                            <div className={css.position}>#{i + 1}</div>
+                            <p className={css.title}>{player[0]}
+                                <span>
+                                    #{player[4]} in {server("long", player[3])}
+                                </span>
+                            </p>
+                            <p className={css.values}>{player[1]}</p>
+                        </a>)
+                    }
                 }
             }
-            for (let i = 0; i < summoners.length; i++) {
-                const player = summoners[i];
-                let pos = css.normal;
-                if (i === 0) {
-                    pos = css.pos1
-                } else if (i < 10) {
-                    pos = css.top10
-                } else if (i < 100) {
-                    pos = css.top100
-                }
-                summoner.push(<a className={player[2] + " " + css.challenge + " " + pos} href={"/" + player[3] + "/" + player[0]} key={player[0] + player[3]} onClick={this.goTo}>
-                    <div className={css.position}>#{i + 1}</div>
-                    <p className={css.title}>{player[0]}
-                        <span>
-                            #{player[4]} in {server("long", player[3])}
-                        </span>
-                    </p>
-                    <p className={css.values}>{player[1]}</p>
-                </a>)
-
-            }
-
         } else {
             thresholds = challenge.challenge.thresholds
-            summoner = <div className={css.disabledMessage + " GRANDMASTER"}>Leaderboards aren't enabled for this challenge<br /><br /><span className={css.details}>Why? Because it is not possible to "scale" in this challenge, as it has a static highest achievable score</span></div>
+            if (checkThresholds(thresholds)) {
+                summoner = <div className={css.disabledMessage + " GRANDMASTER"}>This challenge is not enabled in #{absoluteRegion}</div>
+            } else {
+                summoner = <div className={css.disabledMessage + " GRANDMASTER"}>Leaderboards aren't enabled for this challenge<br /><br /><span className={css.details}>Why? Because it is not possible to "scale" in this challenge, as it has a static highest achievable score</span></div>
+            }
         }
 
         let content = <Fragment>
