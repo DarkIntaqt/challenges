@@ -130,10 +130,14 @@
 }
 
 .footer .centerFooter {
-    width: 40%;
-    margin: 20px 20% 20px 0;
+    width: 50%;
+    margin: 20px 10% 20px 0;
     float: left;
     color: white;
     font-size: 0.8rem;
     text-align: justify;
+}
+
+.footer .centerFooter a {
+    color: white;
 }

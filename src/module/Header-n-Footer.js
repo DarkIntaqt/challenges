@@ -3,7 +3,7 @@ import { Fragment } from "react"
 import StyleSheet from "../css/header.module.css";
 import logo from "../img/logo.png";
 
-export default function Header() {
+export default function HeaderNFooter() {
 
     const messages = ["provide feedback", "open source", "request feature"];
     const message = messages[Math.floor(Math.random() * messages.length)]
@@ -36,7 +36,7 @@ export default function Header() {
                     </Link>
                 </div>
                 <div className={StyleSheet.centerFooter}>
-                    <p>'Challenges.DarkIntaqt.Com' isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
+                    <p>'Challenges.DarkIntaqt.Com' isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.<br /><br />Huge thanks to <a href="https://www.communitydragon.org" target="_blank" rel="noreferrer">CommunityDragon</a> for hosting the assets. </p>
                 </div>
                 <div className={StyleSheet.rightFooter}>
                     <a href="https://darkintaqt.com/assets/impressum/" rel="noreferrer" target="_blank">- Imprint</a>

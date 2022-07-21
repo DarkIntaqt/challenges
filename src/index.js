@@ -8,7 +8,7 @@ import {
 import { useLayoutEffect } from 'react';
 import './index.css';
 import Start from './module/Start';
-import Header from './module/Header'
+import HeaderNFooter from './module/Header-n-Footer'
 import Error from './module/Error'
 import UserObject from './module/UserObject'
 import FAQ from './module/FAQ'
@@ -58,7 +58,7 @@ const root = createRoot(document.getElementById('root'));
 root.render(<BrowserRouter>
   <Wrapper>
     <Routes>
-      <Route path="/" element={<Header />}>
+      <Route path="/" element={<HeaderNFooter />}>
         <Route path="" element={<Start />}></Route>
         <Route path="faq" element={<FAQ></FAQ>}></Route>
         <Route path="titles" element={<Title />}></Route>
