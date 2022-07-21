@@ -251,7 +251,7 @@ export default class Challenges extends Component {
     componentDidMount() {
         document.title = "Loading..."
         this.load()
-        get("https://challenges.darkintaqt.com/api/v1/challenges/?id=1&region=world")
+        get("https://challenges.darkintaqt.com/api/v1/challenges/?id=1&region=world", function () { })
     }
 
     changeFilter(e) {

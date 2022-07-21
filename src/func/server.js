@@ -35,7 +35,7 @@ export default function server(method, server) {
         }
         return server
     }
-    else if (method === "machine") {
+    if (method === "machine") {
         switch (server) {
             case "br":
                 server = "br1"
@@ -70,5 +70,52 @@ export default function server(method, server) {
                 break;
         }
         return server
-    } return ""
+    }
+    if (method === "long") {
+        switch (server) {
+            case "br":
+            case "br1":
+                server = "Brazil"
+                break;
+            case "euw":
+            case "euw1":
+                server = "Europe West"
+                break;
+            case "eune":
+            case "eun1":
+                server = "Europe Nordic & East"
+                break;
+            case "jp":
+            case "jp1":
+                server = "Japan"
+                break;
+            case "kr":
+                server = "Korea"
+                break;
+            case "lan":
+            case "la1":
+                server = "Latin America North"
+                break;
+            case "las":
+            case "la2":
+                server = "Latin America South"
+                break;
+            case "na":
+            case "na1":
+                server = "North America"
+                break;
+            case "oc":
+            case "oc1":
+                server = "Oceania"
+                break;
+            case "tr":
+            case "tr1":
+                server = "Turkey"
+                break;
+            default:
+                break;
+        }
+        return server
+    }
+    return "unknown"
 }
