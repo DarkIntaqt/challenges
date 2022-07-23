@@ -37,6 +37,8 @@ export default function FAQ() {
         </div>)
     }
 
+    document.title = "Frequently Asked Questions | League of Legends Challenge Tracker"
+
 
 
     return <div className={"object1000 faq CHALLENGER"}>
