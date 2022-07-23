@@ -110,8 +110,10 @@ export default class User extends Component {
                             {
                                 backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-none)"
                             }}>
+
                             <p className={css.title}>
                                 {title}
+                                <span>Unlocked by 100%</span>
                             </p>
                             <p className={css.description}>This is a default title. Everyone owns it. Actually it is not even rare, as everyone has unlocked it, so please don't be proud of this one</p>
                         </a>)
@@ -119,12 +121,19 @@ export default class User extends Component {
                     }
                     const challenge = getChallenge(parseInt(titleid.substring(0, titleid.length - 2)))
                     const tier = intToTier(parseInt(titleid.substring(titleid.length - 2)))
+                    let percentage = "..."
+                    try {
+                        percentage = challenge.percentiles[tier]
+                    } catch (error) {
+                        percentage = "ERROR"
+                    }
                     challenges.push(<a className={css.challenge + " " + tier} href={"/titles"} onClick={this.goTo} key={titleid} style={
                         {
                             backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-" + tier.toLowerCase() + ")"
                         }}>
                         <p className={css.title}>
                             {title}
+                            <span>Unlocked by {percentage}%</span>
                         </p>
                         <p className={css.description}>{challenge.translation.description}</p>
                     </a>)
