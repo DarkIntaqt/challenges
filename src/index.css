@@ -124,6 +124,10 @@ button {
   --type: #f4c873
 }
 
+.WHITEMESSAGE {
+  --type: #fff;
+}
+
 .faq>h1 {
   color: white;
   font-size: 2rem;

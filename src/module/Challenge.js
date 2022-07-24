@@ -195,6 +195,10 @@ export default class Challenge extends Component {
                 summoner = <div className={css.disabledMessage + " GRANDMASTER"}>Leaderboards aren't enabled for this challenge<br /><br /><span className={css.details}>Why? Because it is not possible to "scale" in this challenge, as it has a static highest achievable score. <br />If you think this challenge should have a leaderboard, please create an issue on <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">GitHub</a>.</span></div >
             }
         }
+        let warnings = [];
+        if (challenge.challenge.reversed) {
+            warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"} style={{ margin: "5px 10%" }}>This challenge is reversed. The less your points the better your placement</div>)
+        }
         let content = <Fragment>
             <div className={"MASTER " + css.c + " " + css.profile}>
                 <img src={icon} alt="" />
@@ -220,6 +224,7 @@ export default class Challenge extends Component {
                 {filters}
             </div>
             <div className={css.parent}>
+                {warnings}
                 {summoner}
             </div>
         </Fragment>;
