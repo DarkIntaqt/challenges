@@ -119,6 +119,9 @@ export default class User extends Component {
             // Loop through the challenges
             for (let i = 0; i < r.challenges.length; i++) {
                 const challenge = r["challenges"][i];
+                if (challenge.id < 10) {
+                    continue
+                }
                 const c = getChallenge(challenge.id)
 
                 let queueIds = []; // available gameModes
