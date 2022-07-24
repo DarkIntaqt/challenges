@@ -113,7 +113,7 @@ export default class User extends Component {
 
                             <p className={css.title}>
                                 {title}
-                                <span>Unlocked by 100%</span>
+                                <span>Achieved by 100%</span>
                             </p>
                             <p className={css.description}>This is a default title. Everyone owns it. Actually it is not even rare, as everyone has unlocked it, so please don't be proud of this one</p>
                         </a>)
@@ -125,7 +125,7 @@ export default class User extends Component {
                     try {
                         percentage = Math.round(challenge.percentiles[tier] * 1000) / 10
                     } catch (error) {
-                        percentage = "ERROR"
+                        percentage = "0"
                     }
                     challenges.push(<a className={css.challenge + " " + tier} href={"/titles"} onClick={this.goTo} key={titleid} style={
                         {
@@ -133,7 +133,7 @@ export default class User extends Component {
                         }}>
                         <p className={css.title}>
                             {title}
-                            <span>Unlocked by {percentage}%</span>
+                            <span>Achieved by {percentage}%</span>
                         </p>
                         <p className={css.description}>{challenge.translation.description}</p>
                     </a>)
@@ -167,7 +167,7 @@ export default class User extends Component {
                             p = 0
                             break;
                     }
-                    position = "#" + beautifyNum(p + challenge.position) + " - ";
+                    position = "#" + beautifyNum(p + challenge.position, false) + " - ";
                 }
 
                 if (typeof c["thresholds"][nexttier] !== "undefined") {
