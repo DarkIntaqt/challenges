@@ -129,7 +129,7 @@ export default class Challenge extends Component {
             summoner = window.loadingUI
 
             icon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-        } else if (challenge.challenge.leaderboard === true) {
+        } else if (challenge.challenge.leaderboard === true || typeof challenge.challenge.tags["leaderboardManuallyEnabled"] !== "undefined") {
             thresholds = challenge.stats[server("machine", region)]
             percentiles = challenge.stats["percentiles-" + server("machine", region)]
 
@@ -160,12 +160,12 @@ export default class Challenge extends Component {
 
                     }
                     summoners.sort((a, b) => {
-                        // Order by name if same value
+                        // Order by name if same value and position
                         if (a[1] === b[1]) {
                             if (b[4] === a[4]) {
                                 return a[0] < b[0] ? -1 : +(a[0] > b[0])
                             }
-                            return b[4] - a[1]
+                            return a[4] - b[4]
                         }
                         return b[1] - a[1]
                     })
@@ -212,6 +212,11 @@ export default class Challenge extends Component {
             }
         }
         let warnings = [];
+        try {
+            if (typeof challenge.challenge.tags["leaderboardManuallyEnabled"] !== "undefined") {
+                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"} style={{ margin: "5px 10%" }}>Experimental leaderboards<br /><br />The API don't provide any data about this challenge, so the summoners on this leaderboard are collected by a machine. If you know someone with a higher score, just look them up</div>)
+            }
+        } catch { }
         if (challenge.challenge.reversed) {
             warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"} style={{ margin: "5px 10%" }}>This challenge is reversed. The less your points the better your placement</div>)
         }
