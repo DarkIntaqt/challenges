@@ -6,12 +6,14 @@ import css from "../css/user.module.css"
 import server from "../func/server"
 import TimeAgo from 'react-timeago';
 import { beautifyNum } from "../func/beautify"
+import { intToTier, tierToInt } from "../func/tierFunctions";
 
 export default class Challenge extends Component {
     constructor(props) {
         super(props)
         this.params = props.params
         this.regions = ["br", "euw", "eune", "jp", "kr", "lan", "las", "na", "oc", "tr"];
+        this.tiers = ["NONE", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"]
 
         let tempRegion = props.query.toLowerCase();
         if (!this.regions.includes(tempRegion)) {
@@ -81,6 +83,13 @@ export default class Challenge extends Component {
             region = window.region ?? "na"
         }
 
+        function nameToURL(name) {
+            if (typeof name !== "string") {
+                return "error"
+            }
+            return name.toLowerCase().replaceAll(" ", "")
+        }
+
         function checkThresholds(thresholds) {
             let noThresholds = true;
             for (let index = 0; index < thresholds.length; index++) {
@@ -107,6 +116,11 @@ export default class Challenge extends Component {
 
         let summoner = []
         let thresholds = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"]
+        let percentiles = {}
+        for (let i = 0; i < this.tiers.length; i++) {
+            percentiles[server("machine", this.tiers[i])] = 1 - ((i + 1) / 10)
+
+        }
 
         let icon = "https://lolcdn.darkintaqt.com/s/C-" + challenge.icon + "-master"
 
@@ -117,6 +131,7 @@ export default class Challenge extends Component {
             icon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
         } else if (challenge.challenge.leaderboard === true) {
             thresholds = challenge.stats[server("machine", region)]
+            percentiles = challenge.stats["percentiles-" + server("machine", region)]
 
             if (checkThresholds(thresholds)) {
                 summoner = <div className={css.disabledMessage + " GRANDMASTER"}>This challenge is not enabled in #{absoluteRegion}</div>
@@ -175,7 +190,7 @@ export default class Challenge extends Component {
                         } else if (i < 100) {
                             pos = css.top100
                         }
-                        summoner.push(<a className={player[2] + " " + css.challenge + " " + pos} href={"/" + player[3] + "/" + player[0]} key={player[0] + player[3]} onClick={this.goTo}>
+                        summoner.push(<a className={player[2] + " " + css.challenge + " " + pos} href={"/" + player[3] + "/" + nameToURL(player[0])} key={player[0] + player[3]} onClick={this.goTo}>
                             <div className={css.position}>#{i + 1}</div>
                             <p className={css.title}>{player[0]}
                                 <span>
@@ -192,6 +207,7 @@ export default class Challenge extends Component {
             if (checkThresholds(thresholds)) {
                 summoner = <div className={css.disabledMessage + " GRANDMASTER"}>This challenge is not enabled in #{absoluteRegion}</div>
             } else {
+                percentiles = challenge.stats["percentiles-" + server("machine", region)]
                 summoner = <div className={css.disabledMessage + " GRANDMASTER"}>Leaderboards aren't enabled for this challenge<br /><br /><span className={css.details}>Why? Because it is not possible to "scale" in this challenge, as it has a static highest achievable score. <br />If you think this challenge should have a leaderboard, please create an issue on <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">GitHub</a>.</span></div >
             }
         }
@@ -199,6 +215,29 @@ export default class Challenge extends Component {
         if (challenge.challenge.reversed) {
             warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"} style={{ margin: "5px 10%" }}>This challenge is reversed. The less your points the better your placement</div>)
         }
+
+        let perc = []
+
+        percentiles = (Object.fromEntries(Object.entries(percentiles).sort(function (a, b) {
+            if (tierToInt(a[0]) < tierToInt(b[0])) {
+                return 1
+            } else {
+                return -1
+            }
+        })))
+
+        for (const percentile in percentiles) {
+            if (Object.hasOwnProperty.call(percentiles, percentile) && percentile !== "NONE") {
+                let nextTier = intToTier(tierToInt(percentile))
+                if (nextTier === "NONE" && percentile === "CHALLENGER") {
+                    percentiles["MAXED"] = 0
+                    nextTier = "MAXED"
+                }
+
+                perc.push(<div key={percentile} className={css.percent + " " + percentile} style={{ "--width": (percentiles[percentile] - percentiles[nextTier]) }}></div>)
+            }
+        }
+
         let content = <Fragment>
             <div className={"MASTER " + css.c + " " + css.profile}>
                 <img src={icon} alt="" />
@@ -218,6 +257,22 @@ export default class Challenge extends Component {
                     <div className={"MASTER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[7])}</div>
                     <div className={"GRANDMASTER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[8])}{dynamic["gm"]}</div>
                     <div className={"CHALLENGER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[9])}{dynamic["c"]}</div>
+                </div>
+            </div>
+            <div className={css.percentiles} style={this.state.extraStyle}>
+                <div className={css.challengePercentile}>
+                    <div className={css.percentileHover}>
+                        <div className={"IRON"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["IRON"] * 1000) / 10}%</div>
+                        <div className={"BRONZE"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["BRONZE"] * 1000) / 10}%</div>
+                        <div className={"SILVER"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["SILVER"] * 1000) / 10}%</div>
+                        <div className={"GOLD"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["GOLD"] * 1000) / 10}%</div>
+                        <div className={"PLATINUM"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["PLATINUM"] * 1000) / 10}%</div>
+                        <div className={"DIAMOND"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["DIAMOND"] * 1000) / 10}%</div>
+                        <div className={"MASTER"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["MASTER"] * 1000) / 10}%</div>
+                        <div className={"GRANDMASTER"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["GRANDMASTER"] * 1000) / 10}%</div>
+                        <div className={"CHALLENGER"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["CHALLENGER"] * 1000) / 10}%</div>
+                    </div>
+                    {perc}
                 </div>
             </div>
             <div className={css.filter + " " + css[this.state.filter]}>

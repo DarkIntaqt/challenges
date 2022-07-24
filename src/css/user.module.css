@@ -243,8 +243,9 @@
     overflow: hidden;
 }
 
-.personalProgress {
-    width: calc(100% - 10px);
+.personalProgress,
+.percentiles {
+    width: calc(100% - 20px);
     margin-left: 10px;
     float: left;
     height: 50px;
@@ -423,4 +424,57 @@
 
 .disabledMessage a {
     color: white;
+}
+
+.percentiles {
+    height: 8px;
+    margin-bottom: 10px;
+}
+
+.challengePercentile {
+    height: 8px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: black;
+    position: static;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.challengePercentile .percent {
+    float: right;
+    width: calc(var(--width) * 100%);
+    height: 8px;
+    transition: 0.25s width;
+    background-color: var(--type);
+}
+
+.challengePercentile .percentileHover {
+    position: absolute;
+    background-color: #111113;
+    padding: 3px;
+    border: 2px solid black;
+    color: white;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    visibility: hidden;
+    z-index: 10;
+    max-width: 50%;
+    margin-top: -50px;
+    box-shadow: 0 0 3px #3e3e3e;
+}
+
+.challengePercentile:hover .percentileHover {
+    visibility: visible;
+}
+
+.challengePercentile .percentileHover>div {
+    float: left;
+    margin: 10px;
+}
+
+.challengePercentile .percentileHover>div>i {
+    color: var(--type);
+    margin-right: 10px;
 }
