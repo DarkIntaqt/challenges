@@ -7,6 +7,7 @@ import server from "../func/server"
 import TimeAgo from 'react-timeago';
 import { beautifyNum } from "../func/beautify"
 import { intToTier, tierToInt } from "../func/tierFunctions";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default class Challenge extends Component {
     constructor(props) {
@@ -54,7 +55,7 @@ export default class Challenge extends Component {
 
     componentDidMount() {
         document.title = "Loading..."
-        get(`https://challenges.darkintaqt.com/api/v2/c/?id=${this.params.id}`, this.showChallenge, this.error);
+        get(`https://challenges.darkintaqt.com/api/v3/c/?id=${this.params.id}`, this.showChallenge, this.error);
     }
 
     goTo(e) {
@@ -190,15 +191,16 @@ export default class Challenge extends Component {
                         } else if (i < 100) {
                             pos = css.top100
                         }
-                        summoner.push(<a className={player[2] + " " + css.challenge + " " + pos} href={"/" + player[3] + "/" + nameToURL(player[0])} key={player[0] + player[3]} onClick={this.goTo}>
-                            <div className={css.position}>#{i + 1}</div>
-                            <p className={css.title}>{player[0]}
-                                <span>
-                                    #{player[4]} in {server("long", player[3])}
-                                </span>
-                            </p>
-                            <p className={css.values}>{beautifyNum(player[1], false)}</p>
-                        </a>)
+                        summoner.push(<a className={player[2] + " " + css.row} href={"/" + player[4] + "/" + nameToURL(player[0])} key={player[0] + player[3]} onClick={this.goTo}>
+                            <p className={css.rowPosition}>#{i + 1}</p>
+                            <p className={css.rowTitle}>
+                                <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/s/p-" + (player[3] * 7).toString(16)} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"}></LazyLoadImage>
+
+                                {player[0]}<span className={css.region}>#{server("human", player[4])}</span></p>
+                            <p className={css.tierImage}>{player[2].toLowerCase()}</p>
+                            <p className={css.rowElement}>{beautifyNum(player[1], false)}</p>
+                            <p className={css.rowPosition}>#{player[5]} in {server("human", player[4])}</p>
+                        </a >)
                     }
                 }
             }
@@ -214,11 +216,11 @@ export default class Challenge extends Component {
         let warnings = [];
         try {
             if (typeof challenge.challenge.tags["leaderboardManuallyEnabled"] !== "undefined") {
-                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"} style={{ margin: "5px 10%" }}>Experimental leaderboards<br /><br />The API don't provide any data about this challenge, so the summoners on this leaderboard are collected by a machine. If you know someone with a higher score, just look them up</div>)
+                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"}>Experimental leaderboards<br /><br />The API don't provide any data about this challenge, so the summoners on this leaderboard are collected by a machine. If you know someone with a higher score, just look them up</div>)
             }
         } catch { }
         if (challenge.challenge.reversed) {
-            warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"} style={{ margin: "5px 10%" }}>This challenge is reversed. The less your points the better your placement</div>)
+            warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"}>This challenge is reversed. The less your points the better your placement</div>)
         }
 
         let perc = []
@@ -283,8 +285,15 @@ export default class Challenge extends Component {
             <div className={css.filter + " " + css[this.state.filter]}>
                 {filters}
             </div>
-            <div className={css.parent}>
+            <div className={css.rowParent}>
                 {warnings}
+                <div className={css.rowDescriptions}>
+                    <p className={css.rowPosition}>Position</p>
+                    <p className={css.rowTitle}>Summonername</p>
+                    <p className={css.tierImage}>Tier</p>
+                    <p className={css.rowElement}>Value</p>
+                    <p className={css.rowPosition}>Position in server</p>
+                </div>
                 {summoner}
             </div>
         </Fragment>;
