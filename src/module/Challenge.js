@@ -264,7 +264,7 @@ export default class Challenge extends Component {
                     <div className={"CHALLENGER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[9])}{dynamic["c"]}</div>
                 </div>
             </div>
-            <div className={css.percentiles} style={this.state.extraStyle}>
+            <div className={css.percentiles}>
                 <div className={css.challengePercentile}>
                     <div className={css.percentileHover}>
                         <div className={"IRON"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["IRON"] * 1000) / 10}%</div>

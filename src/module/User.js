@@ -96,7 +96,7 @@ export default class User extends Component {
                     }
                     const challenge = getChallenge(parseInt(titleid.substring(0, titleid.length - 2)))
                     const tier = intToTier(parseInt(titleid.substring(titleid.length - 2)))
-                    let percentage = "..."
+                    let percentage
                     try {
                         percentage = Math.round(challenge.percentiles[tier] * 1000) / 10
                     } catch (error) {
