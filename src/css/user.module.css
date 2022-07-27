@@ -290,7 +290,7 @@
     box-shadow: 0 0 15px -2px var(--type)
 }
 
-.filter>button {
+.filter button {
     border: none;
     cursor: pointer;
     float: left;
@@ -318,11 +318,15 @@
 .las>.las,
 .na>.na,
 .oc>.oc,
-.tr>.tr {
+.tr>.tr,
+.newLine>.selected {
     color: #fcba03;
 }
 
-
+.newLine {
+    float: left;
+    width: 100%;
+}
 
 /* CHALLENGE OVERVIEW */
 .profile.c>img {

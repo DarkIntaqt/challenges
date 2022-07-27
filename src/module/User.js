@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, Fragment } from "react";
 import Error from "./Error"
 import { Navigate } from "react-router-dom"
 import get from "../func/get"
@@ -8,6 +8,7 @@ import TimeAgo from 'react-timeago';
 import getServer from "../func/server"
 import { beautifyNum } from "../func/beautify"
 import { intToTier, tierToInt } from "../func/tierFunctions";
+import { toggleValue } from "../func/arrayManipulationFunctions.ts";
 
 export default class User extends Component {
     constructor(props) {
@@ -21,12 +22,18 @@ export default class User extends Component {
         this.showUser = this.showUser.bind(this);
         this.error = this.error.bind(this);
         this.goTo = this.goTo.bind(this);
+        this.toggleFilters = this.toggleFilters.bind(this);
+        this.changeExtraFilter = this.changeExtraFilter.bind(this)
         this.sortChallenges = this.sortChallenges.bind(this);
         this.changeFilter = this.changeFilter.bind(this);
         this.loadingUI = window.loadingUI;
-        this.addRegionChallenges = this.addRegionChallenges.bind(this)
+        this.addRegionChallenges = this.addRegionChallenges.bind(this);
+        this.filters = {
+            "category": [], "type": [], "gamemode": []
+        };
         this.state = {
             extraStyle: { display: "block" },
+            expandFilterOptions: false,
             alphabet: "a-z",
             points: ["0", "1"],
             selections: {
@@ -122,7 +129,18 @@ export default class User extends Component {
                 if (challenge.id < 10) {
                     continue
                 }
+
                 const c = getChallenge(challenge.id)
+
+                if (
+                    (c.tags["source"] === "CHALLENGES" && this.filters.type.length > 0 && !this.filters.type.includes("progression"))
+                    || (c.tags["source"] === "EOGD" && this.filters.type.length > 0 && !this.filters.type.includes("ingame"))
+                    || (c.tags["source"] === "CAP_INVENTORY" && this.filters.type.length > 0 && !this.filters.type.includes("collect"))
+                    || (c.tags["source"] === "CLASH" && this.filters.type.length > 0 && !this.filters.type.includes("clash"))
+                    || (c.tags["source"] === "SUMMONER" && this.filters.type.length > 0 && !this.filters.type.includes("profile"))
+                    || (c.tags["source"] === "ETERNALS" && this.filters.type.length > 0 && !this.filters.type.includes("eternals"))
+                    || (c.tags["source"] === "RANKED" && this.filters.type.length > 0 && !this.filters.type.includes("ranked"))
+                ) { continue }
 
                 let queueIds = []; // available gameModes
                 let position;
@@ -182,6 +200,8 @@ export default class User extends Component {
                     type = "none";
                 }
 
+                let skip = false
+
                 if (c.queueIds.length > 0) {
                     let enabled = {
                         isAram: false,
@@ -193,14 +213,23 @@ export default class User extends Component {
                         const queue = c.queueIds[i];
                         if ([450, 930, 860].includes(queue)) {
                             enabled["isAram"] = true;
+                            if (this.filters.gamemode.length > 0 && !this.filters.gamemode.includes("aram")) {
+                                skip = true
+                            }
                         }
 
                         if ([400, 420, 430, 440].includes(queue)) {
                             enabled["isSR"] = true;
+                            if (this.filters.gamemode.length > 0 && !this.filters.gamemode.includes("summonersrift")) {
+                                skip = true
+                            }
                         }
 
                         if ([830, 840, 850].includes(queue)) {
                             enabled["isBot"] = true;
+                            if (this.filters.gamemode.length > 0 && !this.filters.gamemode.includes("bot")) {
+                                skip = true
+                            }
                         }
                     }
 
@@ -213,6 +242,14 @@ export default class User extends Component {
                     } else {
                         queueIds.push(<img key={3} src="https://lolcdn.darkintaqt.com/cdn/bot.png" alt="Bot games only" />)
                     }
+                } else if (this.filters.gamemode.length > 0) {
+                    if (![101000, 101300, 101200, 101100].includes(c.id)) {
+                        skip = true
+                    }
+                }
+
+                if (skip === true) {
+                    continue;
                 }
 
                 // push challenge to list
@@ -437,6 +474,17 @@ export default class User extends Component {
         this.setState({ challenges: <Navigate to={loc} replace={false}></Navigate> })
     }
 
+    changeExtraFilter(e) {
+        const toggle = toggleValue(this.filters[e.target.getAttribute("type")], e.target.id)
+        this.filters[e.target.getAttribute("type")] = toggle.result
+        if (toggle.method === true) {
+            e.target.classList.add(css.selected)
+        } else {
+            e.target.classList.remove(css.selected)
+        }
+        this.load()
+    }
+
     changeFilter(e) {
         this.filter = e.target.id;
         if (this.filter === "alphabetic-a-z" && this.state.alphabet === "a-z") {
@@ -457,6 +505,14 @@ export default class User extends Component {
         }
         this.setState({ filter: e.target.id });
         this.load()
+    }
+
+    toggleFilters() {
+        if (this.state.expandFilterOptions) {
+            this.setState({ expandFilterOptions: false })
+        } else {
+            this.setState({ expandFilterOptions: true })
+        }
     }
 
     render() {
@@ -491,6 +547,25 @@ export default class User extends Component {
                 <button className={css.levelup} onClick={this.changeFilter} id="levelup">Levelup</button>
                 <button className={css["alphabetic-" + this.state.alphabet]} onClick={this.changeFilter} id={"alphabetic-" + this.state.alphabet}>{this.state.alphabet.toUpperCase()}</button>
                 <button className={css.titles} onClick={this.changeFilter} id="titles">Titles</button>
+                <button className={css.moreFilter} onClick={this.toggleFilters} id="morefilter">{!this.state.expandFilterOptions ? 'Expand' : 'Collapse'} more filters {(this.filters.gamemode.length + this.filters.category.length + this.filters.type.length) > 0 ? "(" + (this.filters.gamemode.length + this.filters.category.length + this.filters.type.length) + " applied)" : ''}</button>
+                {this.state.expandFilterOptions ?
+                    <Fragment>
+                        <div className={css.newLine}>
+                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="progression">Progression</button>
+                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="ingame">Ingame</button>
+                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="eternals">Eternals</button>
+                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="clash">Clash</button>
+                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="collect">Collect</button>
+                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="ranked">Ranked</button>
+                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="profile">Profile</button>
+                        </div>
+                        <div className={css.newLine}>
+                            <button className={css.timestamp} type="gamemode" onClick={this.changeExtraFilter} id="summonersrift">Summoners Rift</button>
+                            <button className={css.timestamp} type="gamemode" onClick={this.changeExtraFilter} id="aram">ARAM</button>
+                            <button className={css.timestamp} type="gamemode" onClick={this.changeExtraFilter} id="bot">Coop vs AI</button>
+                        </div>
+                    </Fragment>
+                    : ''}
             </div>
             <div className={css.parent}>
                 {this.state.challenges}
