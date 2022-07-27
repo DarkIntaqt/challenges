@@ -127,7 +127,19 @@ export default class Challenge extends Component {
 
         // Not loaded yet
         if (challenge.icon === 1) {
-            summoner = window.loadingUI
+            let i = 0;
+            while (i < 20) {
+                i++;
+                summoner.push(<a className={css.row + " " + css.loading} href="#loading">
+                    <p className={css.rowPosition}>#</p>
+                    <p className={css.rowTitle}>
+                        <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/s/p-cb"} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"}></LazyLoadImage>
+                        Loading</p>
+                    <p className={css.tierImage}>...</p>
+                    <p className={css.rowElement}>139</p>
+                    <p className={css.rowPosition}>#</p>
+                </a>)
+            }
 
             icon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
         } else if (challenge.challenge.leaderboard === true || typeof challenge.challenge.tags["leaderboardManuallyEnabled"] !== "undefined") {
