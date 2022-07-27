@@ -17,7 +17,7 @@
     box-shadow: 0 0 15px var(--type);
     margin: 20px 10px;
     border-radius: 10px;
-    background: linear-gradient(110deg, #1b1b1b 8%, #1d1d1d 18%, #1b1b1b 33%);
+    background: linear-gradient(110deg, var(--side) 8%, var(--dark) 18%, var(--side) 33%);
     background-size: 200% 100%;
     animation: 1s shine linear infinite;
 }
@@ -110,12 +110,6 @@
     width: calc(100% - 130px);
 }
 
-.challenge.loading {
-    background: linear-gradient(110deg, #1b1b1b 8%, #1d1d1d 18%, #1b1b1b 33%);
-    background-size: 200% 100%;
-    animation: 1s shine linear infinite;
-}
-
 .challenge {
     width: 220px;
     box-sizing: border-box;
@@ -126,7 +120,7 @@
     overflow: hidden;
     border-radius: 5px;
     height: 150px;
-    background-color: #111113;
+    background-color: var(--side);
     border: 2px solid var(--type);
     display: inline-block;
     color: white;
@@ -591,6 +585,7 @@
     color: white;
 }
 
+.challenge.loading,
 .row.loading {
     background: linear-gradient(110deg, var(--side) 8%, var(--dark) 18%, var(--side) 33%);
     background-size: 200% 100%;
