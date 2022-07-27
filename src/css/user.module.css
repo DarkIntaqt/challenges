@@ -17,7 +17,7 @@
     box-shadow: 0 0 15px var(--type);
     margin: 20px 10px;
     border-radius: 10px;
-    background: linear-gradient(110deg, #1b1b1b 8%, #1d1d1d 18%, #1b1b1b 33%);
+    background: linear-gradient(110deg, var(--side) 8%, var(--dark) 18%, var(--side) 33%);
     background-size: 200% 100%;
     animation: 1s shine linear infinite;
 }
@@ -110,12 +110,6 @@
     width: calc(100% - 130px);
 }
 
-.challenge.loading {
-    background: linear-gradient(110deg, #1b1b1b 8%, #1d1d1d 18%, #1b1b1b 33%);
-    background-size: 200% 100%;
-    animation: 1s shine linear infinite;
-}
-
 .challenge {
     width: 220px;
     box-sizing: border-box;
@@ -126,7 +120,7 @@
     overflow: hidden;
     border-radius: 5px;
     height: 150px;
-    background-color: #111113;
+    background-color: var(--side);
     border: 2px solid var(--type);
     display: inline-block;
     color: white;
@@ -481,4 +475,123 @@
 .challengePercentile .percentileHover>div>i {
     color: var(--type);
     margin-right: 10px;
+}
+
+.rowParent {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    float: left;
+    background-color: var(--side);
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.row,
+.rowDescriptions {
+    width: 100%;
+    background: var(--dark);
+    float: left;
+    text-decoration: none;
+    padding: 10px;
+    line-height: 1;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.rowDescriptions {
+    background: var(--side) !important;
+    padding: 8px 10px 2px
+}
+
+.rowDescriptions p,
+.rowDescriptions span {
+    font-size: 0.6rem !important;
+    color: white !important;
+    font-weight: normal !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left;
+}
+
+.rowDescriptions .tierImage,
+.rowDescriptions .rowElement {
+    text-align: center;
+}
+
+.row:nth-child(2n) {
+    background-color: var(--side);
+    border-radius: 5px;
+}
+
+.rowTitle>span:not(.region) {
+    height: 30px;
+    width: 30px;
+    float: left;
+    margin: calc(calc(1rem - 30px) * 0.5) 10px 0 0;
+}
+
+.rowTitle>span:not(.region)>img {
+    border-radius: 5px;
+}
+
+.rowPosition {
+    width: 10%;
+    color: white;
+    float: left;
+    font-size: 0.8rem;
+    text-align: left;
+    margin: 0.2rem 0 0
+}
+
+.rowTitle {
+    font-size: 1rem;
+    color: white;
+    white-space: nowrap;
+    width: 30%;
+    float: left;
+}
+
+.rowTitle>span.region {
+    font-size: 0.8rem;
+    color: rgb(203, 200, 200)
+}
+
+.rowElement {
+    float: left;
+    color: white;
+    font-size: 1rem;
+    width: 30%;
+    text-align: left;
+    text-align: center;
+
+}
+
+.tierImage {
+    color: var(--type, white);
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+    float: left;
+    width: 20%;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.rowParent .disabledMessage {
+    border: 2px solid var(--type);
+    width: 80%;
+    margin: 20px 10%;
+    border-radius: 10px;
+    float: left;
+    padding: 10px;
+    box-sizing: border-box;
+    color: white;
+}
+
+.challenge.loading,
+.row.loading {
+    background: linear-gradient(110deg, var(--side) 8%, var(--dark) 18%, var(--side) 33%);
+    background-size: 200% 100%;
+    animation: 1s shine linear infinite;
 }

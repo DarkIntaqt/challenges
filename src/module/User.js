@@ -523,7 +523,7 @@ export default class User extends Component {
             <div className={this.state.type + " " + css.profile} style={this.state.extraStyle}>
                 <img src={this.state.profileImage} alt="" />
                 <h1>{this.state.name}</h1>
-                <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }}></span><div><b>{this.state.title["tier"]} Tier Title</b><br />{this.state.title["description"]}<br /><i>Need {beautifyNum(this.state.title["threshold"])}</i></div></h2>
+                {this.state.title["title"] !== "<span style='opacity:0;'>No title</span>" ? <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }}></span><div><b>{this.state.title["tier"]} Tier Title</b><br />{this.state.title["description"]}<br /><i>Need {beautifyNum(this.state.title["threshold"])}</i></div></h2> : ''}
                 <div className={css.selections}>
                     <div style={{ backgroundImage: "url('" + this.state.selections["img1"] + "')" }}>
                         <div className={this.state.selections["statsl"]["tier"]}><b>{this.state.selections["statsl"]["tier"]} Tier Token</b><br />{this.state.selections["statsl"]["challenge"][0]}<br /><i>Need {beautifyNum(this.state.selections["statsl"]["challenge"][1])}</i></div>

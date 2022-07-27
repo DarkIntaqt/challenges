@@ -3,7 +3,7 @@
     height: 60px;
     z-index: 50;
     position: fixed;
-    background-color: #000000;
+    background-color: var(--side);
 }
 
 .Header .inner {
@@ -13,7 +13,7 @@
 }
 
 .Header .inner>a:hover {
-    color: #0cbdf7;
+    color: var(--element);
 }
 
 .Header .inner>a {
@@ -49,13 +49,13 @@
 .git {
     position: fixed;
     z-index: 10;
-    background: #111113;
+    background: var(--side);
     padding: 10px 20px;
     border-radius: 20px;
     color: rgb(200, 198, 198);
     display: inline-block;
     text-decoration: none;
-    box-shadow: 0 0 3px rgb(62, 62, 62);
+    box-shadow: 0 0 3px var(--border);
     border: 2px solid black;
     width: 150px;
     margin: calc(100vh - 60px) 0 0 calc(100% - 200px);
@@ -64,15 +64,15 @@
 .git:hover {
     color: white;
     transition: 0.2s color, .2s border-color, .2s box-shadow;
-    border-color: #0cbdf7;
-    box-shadow: 0 0 5px #0cbdf7;
+    border-color: var(--element);
+    box-shadow: 0 0 5px var(--element);
 }
 
 .content {
     width: 100%;
     float: left;
     min-height: calc(100vh - 60px);
-    background-color: #111113;
+    background-color: var(--dark);
 }
 
 @media only screen and (max-width:1050px) {
@@ -85,7 +85,7 @@
     width: 100%;
     min-height: 100px;
     float: left;
-    background-color: black;
+    background-color: var(--side);
 }
 
 .footer .leftFooter {
