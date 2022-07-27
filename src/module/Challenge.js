@@ -195,14 +195,14 @@ export default class Challenge extends Component {
                 } else {
                     for (let i = 0; i < summoners.length; i++) {
                         const player = summoners[i];
-                        let pos = css.normal;
-                        if (i === 0) {
-                            pos = css.pos1
-                        } else if (i < 10) {
-                            pos = css.top10
-                        } else if (i < 100) {
-                            pos = css.top100
-                        }
+                        // let pos = css.normal;
+                        // if (i === 0) {
+                        //     pos = css.pos1
+                        // } else if (i < 10) {
+                        //     pos = css.top10
+                        // } else if (i < 100) {
+                        //     pos = css.top100
+                        // }
                         summoner.push(<a className={player[2] + " " + css.row} href={"/" + player[4] + "/" + nameToURL(player[0])} key={player[0] + player[3]} onClick={this.goTo}>
                             <p className={css.rowPosition}>#{i + 1}</p>
                             <p className={css.rowTitle}>
