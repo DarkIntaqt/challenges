@@ -243,7 +243,9 @@ export default class User extends Component {
                         queueIds.push(<img key={3} src="https://lolcdn.darkintaqt.com/cdn/bot.png" alt="Bot games only" />)
                     }
                 } else if (this.filters.gamemode.length > 0) {
-                    if (![101000, 101300, 101200, 101100].includes(c.id)) {
+                    if (this.filters.gamemode.includes("aram") && [101000, 101300, 101200, 101100].includes(c.id)) {
+                        // Pass
+                    } else {
                         skip = true
                     }
                 }
