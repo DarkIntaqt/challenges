@@ -136,7 +136,7 @@ export default class Challenge extends Component {
                         <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/s/p-cb"} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"}></LazyLoadImage>
                         Loading</p>
                     <p className={css.tierImage}>...</p>
-                    <p className={css.rowElement}>139</p>
+                    <p className={css.rowElement}>0</p>
                     <p className={css.rowPosition}>#</p>
                 </a>)
             }
