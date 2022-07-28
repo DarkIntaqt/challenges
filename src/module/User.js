@@ -288,7 +288,7 @@ export default class User extends Component {
                 "statsm": r.selections["middle"],
                 "statsr": r.selections["right"],
             },
-            profileImage: "https://lolcdn.darkintaqt.com/s/p-" + r.icon,
+            profileImage: "https://lolcdn.darkintaqt.com/cdn/profileicon/" + Math.round(parseInt(r.icon, 16) / 7),
             challenges: challenges
         });
 

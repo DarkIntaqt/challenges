@@ -175,10 +175,10 @@ export default class Challenge extends Component {
                     summoners.sort((a, b) => {
                         // Order by name if same value and position
                         if (a[1] === b[1]) {
-                            if (b[4] === a[4]) {
+                            if (b[5] === a[5]) {
                                 return a[0] < b[0] ? -1 : +(a[0] > b[0])
                             }
-                            return a[4] - b[4]
+                            return a[5] - b[5]
                         }
                         return b[1] - a[1]
                     })
@@ -206,8 +206,7 @@ export default class Challenge extends Component {
                         summoner.push(<a className={player[2] + " " + css.row} href={"/" + player[4] + "/" + nameToURL(player[0])} key={player[0] + player[3]} onClick={this.goTo}>
                             <p className={css.rowPosition}>#{i + 1}</p>
                             <p className={css.rowTitle}>
-                                <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/s/p-" + (player[3] * 7).toString(16)} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"}></LazyLoadImage>
-
+                                <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"}></LazyLoadImage>
                                 {player[0]}<span className={css.region}>#{server("human", player[4])}</span></p>
                             <p className={css.tierImage}>{player[2].toLowerCase()}</p>
                             <p className={css.rowElement}>{beautifyNum(player[1], false)}</p>
