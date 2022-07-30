@@ -130,7 +130,7 @@ export default class Challenge extends Component {
             let i = 0;
             while (i < 20) {
                 i++;
-                summoner.push(<a className={css.row + " " + css.loading} href="#loading">
+                summoner.push(<a className={css.row + " " + css.loading} href="#loading" key={i}>
                     <p className={css.rowPosition}>#</p>
                     <p className={css.rowTitle}>
                         <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/s/p-cb"} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"}></LazyLoadImage>

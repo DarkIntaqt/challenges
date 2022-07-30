@@ -371,6 +371,12 @@
     margin-top: 10px !important
 }
 
+@media only screen and (max-width:1050px) {
+    .profile.c>div>div>div {
+        margin-left: -180px
+    }
+}
+
 .parent .disabledMessage {
     width: 80%;
     box-sizing: border-box;
@@ -495,6 +501,7 @@
     float: left;
     text-decoration: none;
     padding: 10px;
+    padding-top: calc(calc(30px - 1rem) * 0.5 + 10px);
     line-height: 1;
     box-sizing: border-box;
     position: relative;
@@ -594,4 +601,32 @@
     background: linear-gradient(110deg, var(--side) 8%, var(--dark) 18%, var(--side) 33%);
     background-size: 200% 100%;
     animation: 1s shine linear infinite;
+}
+
+@media only screen and (max-width: 1050px) {
+    .rowParent {
+        background: transparent;
+        display: inline-block;
+    }
+
+    .rowPosition:last-child {
+        display: none;
+    }
+
+    .row {
+        width: 94%;
+        margin: 3px 3%;
+        display: inline-block;
+        border-radius: 10px;
+        background-color: var(--side);
+    }
+
+    .rowTitle {
+        width: 40%
+    }
+
+    .rowDescriptions {
+        display: none;
+    }
+
 }
