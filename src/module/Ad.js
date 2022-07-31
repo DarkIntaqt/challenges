@@ -3,9 +3,9 @@ import styles from "../css/ad.module.css"
 
 export default function Ad(props) {
 
-    let adcount = 3;
+    let adcount = 2;
 
-    if (window.innerWidth < 1400) {
+    if (window.innerWidth < 1700) {
         adcount = 1;
     }
 

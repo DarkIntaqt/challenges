@@ -8,10 +8,9 @@ export default function Error(props) {
     }
 
     document.title = "404 Not Found"
-    return <div>
+    return <div className={"object1000"}>
         <p style={{
             color: "white",
-            margin: "calc(50vh - 108px) 0 0",
             textAlign: "center",
             fontSize: "1rem"
         }}>404 - <b>{message}</b> - Go back by clicking on "League Challenges" in the header</p>

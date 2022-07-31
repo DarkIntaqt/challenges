@@ -13,16 +13,12 @@
 
 @media only screen and (max-width:1700px) {
     .adArea.filled {
-        margin-left: 1050px
-    }
-}
-
-@media only screen and (max-width:1370px) {
-    .adArea.filled {
         margin: 0 5%;
         width: 90%;
         position: relative;
         float: left;
+        display: flex;
+        justify-content: center;
     }
 }
 
@@ -30,7 +26,7 @@
     z-index: 99;
     float: left;
     min-height: 20px;
-    width: 100%;
+    width: 300px;
     border-radius: 10px;
     margin: 10px 0;
     max-height: 300px;

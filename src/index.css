@@ -42,18 +42,7 @@ button {
   margin: 0 calc(50% - 500px);
 }
 
-@media only screen and (max-width:1700px) {
-  .object1000 {
-    margin: 0 100px 0 20px;
-  }
-}
 
-@media only screen and (max-width:1370px) {
-  .object1000 {
-    margin: 0 calc(50% - 500px);
-  }
-
-}
 
 @media only screen and (max-width: 1050px) {
   .object1000 {
