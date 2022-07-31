@@ -25,8 +25,8 @@ export default function HeaderNFooter() {
         <div className={StyleSheet.HeaderPlaceholder} id="top"></div>
 
         <div className={StyleSheet.content}>
-            <Ad placeholder="false"></Ad>
             <Outlet></Outlet>
+            <Ad placeholder="false"></Ad>
         </div>
 
 

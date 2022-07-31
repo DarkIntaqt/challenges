@@ -2,7 +2,7 @@
     height: calc(100vh - 60px);
     filter: brightness(0.4);
     width: 100%;
-    position: fixed;
+    position: absolute;
     z-index: 0;
 }
 
@@ -11,6 +11,7 @@
     margin-bottom: 0;
     color: #fff;
     z-index: 1;
+    position: absolute;
     position: relative;
 }
 
@@ -19,7 +20,7 @@
     width: 100%;
     float: left;
     text-align: center;
-    padding-top: calc(50vh - 450px)
+    padding-top: calc(50vh - 150px)
 }
 
 .start h2 a:hover {

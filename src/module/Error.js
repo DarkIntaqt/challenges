@@ -10,6 +10,7 @@ export default function Error(props) {
     document.title = "404 Not Found"
     return <div className={"object1000"}>
         <p style={{
+            marginTop: "calc(50vh - 150px)",
             color: "white",
             textAlign: "center",
             fontSize: "1rem"
