@@ -22,12 +22,9 @@ export default function Ad(props) {
                 <p>Advertisement</p>
                 <div className={styles.adContent}>
                     <ins className="adsbygoogle"
-                        style={{ display: "block" }}
+                        style={{ display: "inline-block", width: "290px", height: "290px", margin: "0 auto" }}
                         data-ad-client="ca-pub-6052444447665495"
-                        data-ad-slot="2200253704"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true">
-                    </ins>
+                        data-ad-slot="2200253704"></ins>
                 </div>
             </div>)
         }
