@@ -1,0 +1,51 @@
+.adArea {
+    width: 300px;
+    max-height: 80vh;
+    position: absolute;
+    z-index: 45;
+    min-height: 50px;
+    margin: 0;
+}
+
+.adArea.filled {
+    margin-left: calc(50% + 520px);
+}
+
+@media only screen and (max-width:1700px) {
+    .adArea.filled {
+        margin-left: 1050px
+    }
+}
+
+@media only screen and (max-width:1370px) {
+    .adArea.filled {
+        margin: 0 5%;
+        width: 90%;
+        position: relative;
+        float: left;
+    }
+}
+
+.ad {
+    z-index: 99;
+    float: left;
+    min-height: 20px;
+    width: 100%;
+    background: var(--side);
+    border-radius: 10px;
+    margin: 10px 0;
+    max-height: 300px;
+    padding: 0 0 5px 0;
+}
+
+.ad p {
+    font-size: 12px;
+    color: var(--dborder);
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.adContent {
+    width: 290px;
+    margin: 0 5px;
+}

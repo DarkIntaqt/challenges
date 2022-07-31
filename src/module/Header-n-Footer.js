@@ -2,6 +2,7 @@ import { Outlet, Link } from "react-router-dom";
 import { Fragment } from "react"
 import StyleSheet from "../css/header.module.css";
 import logo from "../img/logo.png";
+import Ad from "./Ad"
 
 export default function HeaderNFooter() {
 
@@ -24,8 +25,10 @@ export default function HeaderNFooter() {
         <div className={StyleSheet.HeaderPlaceholder} id="top"></div>
 
         <div className={StyleSheet.content}>
+            <Ad placeholder="false"></Ad>
             <Outlet></Outlet>
         </div>
+
 
         <footer className={StyleSheet.footer}>
             <div className={"object1000"}>
