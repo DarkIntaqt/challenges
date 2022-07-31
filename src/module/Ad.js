@@ -19,7 +19,6 @@ export default function Ad(props) {
         style += " " + styles.filled
         for (var i = 0; i < adcount; i++) {
             ads.push(<div className={styles.ad} key={i}>
-                <p>Advertisement</p>
                 <div className={styles.adContent}>
                     <ins className="adsbygoogle"
                         style={{ display: "inline-block", width: "290px", height: "290px", margin: "0 auto" }}
