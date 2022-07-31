@@ -26,8 +26,7 @@ export default function Ad(props) {
                         data-ad-client="ca-pub-6052444447665495"
                         data-ad-slot="2200253704"
                         data-ad-format="auto"
-                        data-full-width-responsive="true"
-                        data-ad-status="unfilled">
+                        data-full-width-responsive="true">
                     </ins>
                 </div>
             </div>)
