@@ -2,7 +2,7 @@
     height: calc(100vh - 60px);
     filter: brightness(0.4);
     width: 100%;
-    position: absolute;
+    position: fixed;
     z-index: 0;
 }
 
