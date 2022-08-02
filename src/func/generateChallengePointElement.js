@@ -49,7 +49,7 @@ export default function generateChallengePointElement(challenge, click, leaderbo
             {topPlayer}
         </div>
         <div className={css.text}>
-            This is the leaderboard for all challenges. Whenever you level up a challenge, you achieve "challenge points". The more challenge points, the better your position in this leaderboard.<br /><br />Just click here to get to the <b>leaderboards</b>.
+            This is the leaderboard for all challenges. Whenever you level up a challenge, you gain "challenge points". The more challenge points, the better your position in this leaderboard.<br /><br />Just click here to get to the <b>leaderboards</b>.
         </div>
     </a>
 }
