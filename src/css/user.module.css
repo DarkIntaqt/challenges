@@ -551,15 +551,25 @@
     background: var(--dark);
 }
 
+.rowParent table tr td:nth-child(1),
+.rowParent table tr th:nth-child(1) {
+    border-radius: 5px 0 0 5px;
+}
+
+.rowParent table tr td:nth-child(5),
+.rowParent table tr th:nth-child(5) {
+    border-radius: 0 5px 5px 0;
+}
 
 .rowParent table tr td:nth-child(1) {
-    border-radius: 5px 0 0 5px;
+
     color: var(--dborder)
 }
 
 .rowParent table tr td:nth-child(2) {
     color: white;
     font-size: 0.8;
+    overflow: hidden;
 }
 
 
@@ -604,7 +614,7 @@
 .rowParent table tr td:nth-child(5) {
     font-size: 0.8rem;
     color: var(--dborder);
-    border-radius: 0 5px 5px 0;
+
 }
 
 .rowParent .disabledMessage {
@@ -619,7 +629,7 @@
 }
 
 .challenge.loading,
-.rowParent table {
+.rowParent table.loading {
     background: linear-gradient(110deg, var(--side) 8%, var(--dark) 18%, var(--side) 33%);
     background-size: 200% 100%;
     animation: 1s shine linear infinite;
@@ -629,4 +639,23 @@
     background-color: transparent !important;
 }
 
-@media only screen and (max-width: 1050px) {}
+@media only screen and (max-width: 1050px) {
+    .rowParent {
+        background: transparent;
+    }
+
+    .rowParent table tr td:nth-child(5),
+    .rowParent table tr th:nth-child(5) {
+        display: none
+    }
+
+    .rowParent table tr td:nth-child(2),
+    .rowParent table tr th:nth-child(2) {
+        width: 40%;
+    }
+
+    .rowParent table tr td:nth-child(4),
+    .rowParent table tr th:nth-child(4) {
+        width: 35%;
+    }
+}

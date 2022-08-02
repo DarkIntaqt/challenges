@@ -124,9 +124,10 @@ export default class Challenge extends Component {
         }
 
         let icon = "https://lolcdn.darkintaqt.com/s/C-" + challenge.icon + "-master"
-
+        let isLoading = ""
         // Not loaded yet
         if (challenge.icon === 1) {
+            isLoading = css.loading;
             let i = 0;
             while (i < 20) {
                 i++;
@@ -304,7 +305,7 @@ export default class Challenge extends Component {
             </div>
             <div className={css.rowParent}>
                 {warnings}
-                <table>
+                <table className={isLoading}>
                     <tbody>
                         <tr>
                             <th>Position</th>
