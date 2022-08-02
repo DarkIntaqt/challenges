@@ -45,8 +45,8 @@ export default class User extends Component {
                 "statsr": { "tier": "UNRANKED", "challenge": ["...", "..."] }
             },
             filter: this.filter,
-            name: <div className={"loading"} style={{
-                width: props.params.user.length * 1.4 + "rem", height: "2rem"
+            name: <div className={css.loadinganimation} style={{
+                width: props.params.user.length * 1.4 + "rem", height: "2rem", borderRadius: "5px"
             }}></div>,
             type: "UNRANKED",
             title: "",
@@ -88,10 +88,7 @@ export default class User extends Component {
                 if (Object.hasOwnProperty.call(titles, titleid)) {
                     const title = titles[titleid];
                     if (titleid === "1") {
-                        challenges.push(<a className={"NONE " + css.challenge + " "} href={"/titles"} onClick={this.goTo} key={titleid} style={
-                            {
-                                backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-none)"
-                            }}>
+                        challenges.push(<a className={"NONE " + css.challenge + " "} href={"/titles"} onClick={this.goTo} key={titleid}>
 
                             <p className={css.title}>
                                 {title}
@@ -109,10 +106,7 @@ export default class User extends Component {
                     } catch (error) {
                         percentage = "0"
                     }
-                    challenges.push(<a className={css.challenge + " " + tier} href={"/titles"} onClick={this.goTo} key={titleid} style={
-                        {
-                            backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-" + tier.toLowerCase() + ")"
-                        }}>
+                    challenges.push(<a className={css.challenge + " " + tier} href={"/titles"} onClick={this.goTo} key={titleid}>
                         <p className={css.title}>
                             {title}
                             <span>Achieved by {percentage}%</span>
@@ -255,10 +249,7 @@ export default class User extends Component {
                 }
 
                 // push challenge to list
-                challenges.push(<a className={challenge.tier + " " + css.challenge + " " + css[nexttier]} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={this.goTo} key={challenge.id} style={
-                    {
-                        backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-" + type + ")"
-                    }}>
+                challenges.push(<a className={challenge.tier + " " + css.challenge + " " + css[nexttier]} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={this.goTo} key={challenge.id}>
                     <p className={css.title}>
                         {c.translation.name}
                         {leaderboardposition}

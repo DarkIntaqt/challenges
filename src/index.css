@@ -100,43 +100,53 @@ button {
 
 .UNRANKED,
 .NONE {
-  --type: black
+  --type: black;
+  --url: url('https://lolcdn.darkintaqt.com/s/_-none')
 }
 
 .IRON {
-  --type: #696969
+  --type: #696969;
+  --url: url('https://lolcdn.darkintaqt.com/s/_-iron')
 }
 
 .BRONZE {
-  --type: #8c5139
+  --type: #8c5139;
+  --url: url('https://lolcdn.darkintaqt.com/s/_-bronze')
 }
 
 .SILVER {
-  --type: #81989c
+  --type: #81989c;
+  --url: url('https://lolcdn.darkintaqt.com/s/_-silver')
 }
 
 .GOLD {
-  --type: #ce8639
+  --type: #ce8639;
+  --url: url('https://lolcdn.darkintaqt.com/s/_-gold')
 }
 
 .PLATINUM {
-  --type: #4f9896
+  --type: #4f9896;
+  --url: url('https://lolcdn.darkintaqt.com/s/_-platinum')
 }
 
 .MASTER {
-  --type: rgb(133, 88, 169)
+  --type: rgb(133, 88, 169);
+  --url: url('https://lolcdn.darkintaqt.com/s/_-master')
 }
 
 .DIAMOND {
-  --type: #576ace
+  --type: #576ace;
+  --url: url('https://lolcdn.darkintaqt.com/s/_-diamond')
 }
 
 .GRANDMASTER {
-  --type: #c87e89
+  --type: #c87e89;
+  --url: url('https://lolcdn.darkintaqt.com/s/_-grandmaster')
 }
 
 .CHALLENGER {
-  --type: #f4c873
+  --type: #f4c873;
+  --url: url('https://lolcdn.darkintaqt.com/s/_-challenger')
 }
 
 .WHITEMESSAGE {
