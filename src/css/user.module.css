@@ -494,95 +494,117 @@
     border-radius: 10px;
 }
 
-.row,
-.rowDescriptions {
+.rowParent table {
     width: 100%;
-    background: var(--dark);
-    float: left;
-    text-decoration: none;
-    padding: 10px;
-    padding-top: calc(calc(30px - 1rem) * 0.5 + 10px);
-    line-height: 1;
-    box-sizing: border-box;
-    position: relative;
+    table-layout: auto;
+    border-collapse: collapse;
 }
 
-.rowDescriptions {
-    background: var(--side) !important;
-    padding: 8px 10px 2px
+.rowParent table th {
+    font-weight: normal;
+    font-size: 0.8rem;
+    padding: 15px 0 5px
 }
 
-.rowDescriptions p,
-.rowDescriptions span {
-    font-size: 0.6rem !important;
-    color: white !important;
-    font-weight: normal !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    text-align: left;
+.rowParent table td {
+    padding: 8px 10px;
 }
 
-.rowDescriptions .tierImage,
-.rowDescriptions .rowElement {
-    text-align: center;
-}
-
-.row:nth-child(2n) {
-    background-color: var(--side);
-    border-radius: 5px;
-}
-
-.rowTitle>span:not(.region) {
-    height: 30px;
-    width: 30px;
-    float: left;
-    margin: calc(calc(1rem - 30px) * 0.5) 10px 0 0;
-}
-
-.rowTitle>span:not(.region)>img {
-    border-radius: 5px;
-}
-
-.rowPosition {
+.rowParent table tr td:nth-child(1),
+.rowParent table tr th:nth-child(1) {
     width: 10%;
-    color: white;
-    float: left;
-    font-size: 0.8rem;
-    text-align: left;
-    margin: 0.2rem 0 0
 }
 
-.rowTitle {
-    font-size: 1rem;
-    color: white;
-    white-space: nowrap;
+.rowParent table tr td:nth-child(2),
+.rowParent table tr th:nth-child(2) {
     width: 30%;
-    float: left;
 }
 
-.rowTitle>span.region {
-    font-size: 0.8rem;
-    color: rgb(203, 200, 200)
+.rowParent table tr td:nth-child(3),
+.rowParent table tr th:nth-child(3) {
+    width: 15%;
 }
 
-.rowElement {
-    float: left;
-    color: white;
-    font-size: 1rem;
+.rowParent table tr td:nth-child(4),
+.rowParent table tr th:nth-child(4) {
     width: 30%;
-    text-align: left;
-    text-align: center;
-
 }
 
-.tierImage {
-    color: var(--type, white);
+.rowParent table tr td:nth-child(5),
+.rowParent table tr th:nth-child(5) {
+    width: 15%;
+}
+
+.rowParent table tr th:nth-child(5) {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.rowParent table tr {
+    background: var(--side);
+    color: white;
+    width: 100%;
     font-size: 0.8rem;
-    margin-top: 0.2rem;
+}
+
+.rowParent table tr:nth-child(even) {
+    background: var(--dark);
+}
+
+
+.rowParent table tr td:nth-child(1) {
+    border-radius: 5px 0 0 5px;
+    color: var(--dborder)
+}
+
+.rowParent table tr td:nth-child(2) {
+    color: white;
+    font-size: 0.8;
+}
+
+
+.rowParent table tr td:nth-child(2)>a {
+    text-decoration: none;
+    color: white;
+}
+
+.rowParent table tr td:nth-child(2)>a:hover>p {
+    text-decoration: underline;
+}
+
+.rowParent table tr td:nth-child(2)>a>span {
     float: left;
-    width: 20%;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.rowParent table tr td:nth-child(2)>a>p {
+    float: left;
+    font-size: 1rem;
+    padding: calc(calc(30px - 1rem) * 0.5)
+}
+
+.rowParent table tr td:nth-child(2)>a>p>span {
+    color: var(--dborder);
+    font-size: 0.8rem;
+}
+
+.rowParent table tr td:nth-child(3) {
     text-align: center;
+    font-size: .8rem;
     text-transform: capitalize;
+    color: var(--type)
+}
+
+.rowParent table tr td:nth-child(4) {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.rowParent table tr td:nth-child(5) {
+    font-size: 0.8rem;
+    color: var(--dborder);
+    border-radius: 0 5px 5px 0;
 }
 
 .rowParent .disabledMessage {
@@ -597,36 +619,14 @@
 }
 
 .challenge.loading,
-.row.loading {
+.rowParent table {
     background: linear-gradient(110deg, var(--side) 8%, var(--dark) 18%, var(--side) 33%);
     background-size: 200% 100%;
     animation: 1s shine linear infinite;
 }
 
-@media only screen and (max-width: 1050px) {
-    .rowParent {
-        background: transparent;
-        display: inline-block;
-    }
-
-    .rowPosition:last-child {
-        display: none;
-    }
-
-    .row {
-        width: 94%;
-        margin: 3px 3%;
-        display: inline-block;
-        border-radius: 10px;
-        background-color: var(--side);
-    }
-
-    .rowTitle {
-        width: 40%
-    }
-
-    .rowDescriptions {
-        display: none;
-    }
-
+.rowParent table tr.loading {
+    background-color: transparent !important;
 }
+
+@media only screen and (max-width: 1050px) {}

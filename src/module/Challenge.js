@@ -130,15 +130,18 @@ export default class Challenge extends Component {
             let i = 0;
             while (i < 20) {
                 i++;
-                summoner.push(<a className={css.row + " " + css.loading} href="#loading" key={i}>
-                    <p className={css.rowPosition}>#</p>
-                    <p className={css.rowTitle}>
-                        <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/s/p-cb"} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"}></LazyLoadImage>
-                        Loading</p>
-                    <p className={css.tierImage}>...</p>
-                    <p className={css.rowElement}>0</p>
-                    <p className={css.rowPosition}>#</p>
-                </a>)
+                summoner.push(<tr className={css.loading + " IRON"} key={i}>
+                    <td>#</td>
+                    <td>
+                        <a href={"/loading"} onClick={this.goTo}>
+                            <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/29"} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={""}></LazyLoadImage>
+                            <p>Loading<span className={css.region}>#</span></p>
+                        </a>
+                    </td>
+                    <td>...</td>
+                    <td>-</td>
+                    <td>#</td>
+                </tr>)
             }
 
             icon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
@@ -203,15 +206,18 @@ export default class Challenge extends Component {
                         // } else if (i < 100) {
                         //     pos = css.top100
                         // }
-                        summoner.push(<a className={player[2] + " " + css.row} href={"/" + player[4] + "/" + nameToURL(player[0])} key={player[0] + player[3]} onClick={this.goTo}>
-                            <p className={css.rowPosition}>#{i + 1}</p>
-                            <p className={css.rowTitle}>
-                                <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"}></LazyLoadImage>
-                                {player[0]}<span className={css.region}>#{server("human", player[4])}</span></p>
-                            <p className={css.tierImage}>{player[2].toLowerCase()}</p>
-                            <p className={css.rowElement}>{beautifyNum(player[1], false)}</p>
-                            <p className={css.rowPosition}>#{player[5]} in {server("human", player[4])}</p>
-                        </a >)
+                        summoner.push(<tr key={player[0] + player[3]} className={player[2]}>
+                            <td>#{i + 1}</td>
+                            <td>
+                                <a href={"/" + player[4] + "/" + nameToURL(player[0])} onClick={this.goTo}>
+                                    <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={player[0] + "'s profile image"}></LazyLoadImage>
+                                    <p>{player[0]}<span className={css.region}>#{server("human", player[4])}</span></p>
+                                </a>
+                            </td>
+                            <td>{player[2].toLowerCase()}</td>
+                            <td>{beautifyNum(player[1], false)}</td>
+                            <td>#{player[5]} in {server("human", player[4])}</td>
+                        </tr>)
                     }
                 }
             }
@@ -298,16 +304,20 @@ export default class Challenge extends Component {
             </div>
             <div className={css.rowParent}>
                 {warnings}
-                <div className={css.rowDescriptions}>
-                    <p className={css.rowPosition}>Position</p>
-                    <p className={css.rowTitle}>Summonername</p>
-                    <p className={css.tierImage}>Tier</p>
-                    <p className={css.rowElement}>Value</p>
-                    <p className={css.rowPosition}>Position in server</p>
-                </div>
-                {summoner}
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Position</th>
+                            <th>Summonername</th>
+                            <th>Tier</th>
+                            <th>Value</th>
+                            <th>Position in server</th>
+                        </tr>
+                        {summoner}
+                    </tbody>
+                </table>
             </div>
-        </Fragment>;
+        </Fragment >;
         if (this.state.message !== -1) {
             content = this.state.message
         }
