@@ -5,11 +5,16 @@ import css from "../css/user.module.css"
 import challengeCSS from "../css/challenges.module.css"
 import { Navigate } from "react-router-dom"
 import getChallenge from "../func/getChallenge"
+import generateChallengePointElement from "../func/generateChallengePointElement"
 
 export default class Challenges extends Component {
     constructor(props) {
         super(props);
         this.load = this.load.bind(this)
+        this.toLoad = { "content": [], "leaderboards": [] };
+        this.loaded = this.loaded.bind(this);
+        this.loadChallenges = this.loadChallenges.bind(this)
+        this.loadLeaderboards = this.loadLeaderboards.bind(this)
         this.goTo = this.goTo.bind(this)
         this.changeFilter = this.changeFilter.bind(this)
         this.showChallenges = this.showChallenges.bind(this)
@@ -17,18 +22,42 @@ export default class Challenges extends Component {
         this.searchFor = "";
         this.search = this.search.bind(this)
         this.state = {
+            challengePoints: [],
             challenges: window.loadingUI
         }
     }
 
     load() {
         let server = getServer("machine", window.region)
-        this.server = server
-        if ("undefined" === typeof window.challenges[server] || (typeof window.challenges[server] !== "undefined" && window.challenges[server] === "")) {
-            get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.showChallenges)
+        this.server = server;
+
+        if ("undefined" === typeof window.challengeLeaderboards || (typeof window.challengeLeaderboards !== "undefined" && window.challengeLeaderboards === "")) {
+            get("https://challenges.darkintaqt.com/api/v3/c/?id=0", this.loadLeaderboards)
         } else {
-            this.showChallenges(window.challenges[server])
+            this.loadLeaderboards(window.challengeLeaderboards)
         }
+
+        if ("undefined" === typeof window.challenges[server] || (typeof window.challenges[server] !== "undefined" && window.challenges[server] === "")) {
+            get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.loadChallenges)
+        } else {
+            this.loadChallenges(window.challenges[server])
+        }
+    }
+
+    loaded(type, content) {
+        this.toLoad[type] = content;
+        if (this.toLoad.content.length > 0 && Object.entries(this.toLoad.leaderboards).length > 0) {
+            this.showChallenges(this.toLoad.content)
+        }
+    }
+
+    loadChallenges(content) {
+        this.loaded("content", content)
+    }
+
+    loadLeaderboards(content) {
+        window.challengeLeaderboards = content
+        this.loaded("leaderboards", content)
     }
 
     goTo(e) {
@@ -60,6 +89,9 @@ export default class Challenges extends Component {
         for (let i = 0; i < challenges.length; i++) {
             const challenge = challenges[i];
             if (challenge.id < 10) {
+                if (challenge.id === 0 && (this.filter.category.length === 0 && this.filter.type.length === 0 && this.filter.gamemode.length === 0)) {
+                    challengeObject.unshift(generateChallengePointElement(challenge, this.goTo, this.toLoad.leaderboards))
+                }
                 continue
             }
             let highestTier = "NONE", queueIds = [], parentName = "crystal", obtainable = [];
@@ -95,7 +127,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("progression")) {
                         continue
                     }
-                    obtainable.push(<div>
+                    obtainable.push(<div key={crypto.randomUUID()}>
                         <p>Obtainable by progressing challenges</p>
                         <i className="fa-solid fa-angles-up"></i>
                     </div>)
@@ -104,7 +136,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("ingame")) {
                         continue
                     }
-                    obtainable.push(<div>
+                    obtainable.push(<div key={crypto.randomUUID()}>
                         <p>Obtainable by playing games</p>
                         <i className="fa-solid fa-play"></i>
                     </div>)
@@ -113,7 +145,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("collect")) {
                         continue
                     }
-                    obtainable.push(<div>
+                    obtainable.push(<div key={crypto.randomUUID()}>
                         <p>Obtainable by collecting items</p>
                         <i className="fa-solid fa-box-open"></i>
                     </div>)
@@ -122,7 +154,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("clash")) {
                         continue
                     }
-                    obtainable.push(<div>
+                    obtainable.push(<div key={crypto.randomUUID()}>
                         <p>Obtainable by playing clash</p>
                         <img src="https://cdn.darkintaqt.com/lol/static/challenges/clash.webp" alt="" />
                     </div>)
@@ -131,7 +163,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("profile")) {
                         continue
                     }
-                    obtainable.push(<div>
+                    obtainable.push(<div key={crypto.randomUUID()}>
                         <p>Obtainable by leveling up your profile</p>
                         <i className="fa-solid fa-user"></i>
                     </div>)
@@ -140,7 +172,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("eternals")) {
                         continue
                     }
-                    obtainable.push(<div>
+                    obtainable.push(<div key={crypto.randomUUID()}>
                         <p>Obtainable by progressing eternals</p>
                         <img src="https://cdn.darkintaqt.com/lol/static/challenges/eternals.webp" alt="" />
                     </div>)
@@ -149,7 +181,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("ranked")) {
                         continue
                     }
-                    obtainable.push(<div>
+                    obtainable.push(<div key={crypto.randomUUID()}>
                         <p>Obtainable by playing ranked</p>
                         <i className="fa-solid fa-ranking-star"></i>
                     </div>)
@@ -181,7 +213,7 @@ export default class Challenges extends Component {
                 }
 
                 if (enabled["isAram"] && enabled["isSR"]) {
-                    queueIds.push(<div>
+                    queueIds.push(<div key={crypto.randomUUID()}>
                         <p>All modes</p>
                         <img key={0} src="https://cdn.darkintaqt.com/lol/static/lanes/FILL.png" alt="All modes" />
                     </div>)
@@ -189,7 +221,7 @@ export default class Challenges extends Component {
                     if (this.filter.gamemode.length > 0 && !this.filter.gamemode.includes("aram")) {
                         continue
                     }
-                    queueIds.push(<div>
+                    queueIds.push(<div key={crypto.randomUUID()}>
                         <p>ARAM games only</p>
                         <img key={1} src="https://lolcdn.darkintaqt.com/cdn/ha.svg" alt="Aram games only" />
                     </div>)
@@ -197,7 +229,7 @@ export default class Challenges extends Component {
                     if (this.filter.gamemode.length > 0 && !this.filter.gamemode.includes("summonersrift")) {
                         continue
                     }
-                    queueIds.push(<div>
+                    queueIds.push(<div key={crypto.randomUUID()}>
                         <p>Summoners Rift only</p>
                         <img key={2} src="https://lolcdn.darkintaqt.com/cdn/sr.svg" alt="Summoners Rift games only" />
                     </div>)
@@ -205,7 +237,7 @@ export default class Challenges extends Component {
                     if (this.filter.gamemode.length > 0 && !this.filter.gamemode.includes("bot")) {
                         continue
                     }
-                    queueIds.push(<div>
+                    queueIds.push(<div key={crypto.randomUUID()}>
                         <p>Bot games only</p>
                         <img key={3} src="https://lolcdn.darkintaqt.com/cdn/bot.png" alt="Bot games only" />
                     </div>)
@@ -225,10 +257,7 @@ export default class Challenges extends Component {
                 continue
             }
 
-            challengeObject.push(<a className={highestTier + " " + css.challenge + " " + css.CROWN + " " + css.overview} href={"/challenge/" + challenge.id} onClick={this.goTo} key={challenge.id} style={
-                {
-                    backgroundImage: "url(https://lolcdn.darkintaqt.com/s/_-" + highestTier.toLowerCase() + ")"
-                }}>
+            challengeObject.push(<a className={highestTier + " " + css.challenge + " " + css.CROWN + " " + css.overview} href={"/challenge/" + challenge.id} onClick={this.goTo} key={"cid" + challenge.id}>
                 <p className={css.title}>
                     {challenge.translation.name}
                     <span>{parentName}</span>
@@ -251,7 +280,6 @@ export default class Challenges extends Component {
     componentDidMount() {
         document.title = "Loading..."
         this.load()
-        get("https://challenges.darkintaqt.com/api/v1/challenges/?id=1&region=world", function () { })
     }
 
     changeFilter(e) {
@@ -303,6 +331,7 @@ export default class Challenges extends Component {
 
     render() {
 
+        let challengePoints = this.state.challengePoints
 
         return <div className={"object1000"}>
             <div className={challengeCSS.heading}>
@@ -395,6 +424,7 @@ export default class Challenges extends Component {
                 </div>
             </div>
             <div className={css.parent}>
+                {challengePoints}
                 {this.state.challenges}
             </div>
         </div>

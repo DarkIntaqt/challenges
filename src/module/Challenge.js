@@ -32,6 +32,7 @@ export default class Challenge extends Component {
                 icon: 1,
                 timestamp: Date.now() / 1000,
                 challenge: {
+                    id: 0,
                     translation: {
                         name: "Loading",
                         description: "Loading"
@@ -264,7 +265,7 @@ export default class Challenge extends Component {
         }
 
         let content = <Fragment>
-            <div className={"MASTER " + css.c + " " + css.profile}>
+            <div className={"MASTER " + css.c + " " + css.profile + " " + css["cid" + challenge.challenge.id]}>
                 <img src={icon} alt="" />
                 <h1>{challenge.challenge.translation.name} {challenge.timestamp
                     ? <span>(Updated <TimeAgo date={challenge.timestamp * 1000} />)</span>
