@@ -513,6 +513,7 @@
 .rowParent table tr td:nth-child(1),
 .rowParent table tr th:nth-child(1) {
     width: 10%;
+    border-radius: 5px 0 0 5px;
 }
 
 .rowParent table tr td:nth-child(2),
@@ -533,6 +534,7 @@
 .rowParent table tr td:nth-child(5),
 .rowParent table tr th:nth-child(5) {
     width: 15%;
+    border-radius: 0 5px 5px 0;
 }
 
 .rowParent table tr th:nth-child(5) {
@@ -549,16 +551,6 @@
 
 .rowParent table tr:nth-child(even) {
     background: var(--dark);
-}
-
-.rowParent table tr td:nth-child(1),
-.rowParent table tr th:nth-child(1) {
-    border-radius: 5px 0 0 5px;
-}
-
-.rowParent table tr td:nth-child(5),
-.rowParent table tr th:nth-child(5) {
-    border-radius: 0 5px 5px 0;
 }
 
 .rowParent table tr td:nth-child(1) {
@@ -657,5 +649,9 @@
     .rowParent table tr td:nth-child(4),
     .rowParent table tr th:nth-child(4) {
         width: 35%;
+    }
+
+    .rowParent table th {
+        padding: 8px 0;
     }
 }
