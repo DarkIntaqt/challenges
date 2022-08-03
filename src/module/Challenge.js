@@ -284,7 +284,7 @@ export default class Challenge extends Component {
                     ? <span>(Updated <TimeAgo date={challenge.timestamp * 1000} />)</span>
                     : <span></span>
                 }</h1>
-                <h2 className={"SILVER"} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}</h2>
+                <p className={"SILVER " + css.challengeDescription} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}</p>
                 <div className={css.thresholds}>
                     <div>Thresholds:</div>
                     <div className={"IRON"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[1])}</div>
@@ -318,6 +318,10 @@ export default class Challenge extends Component {
                 {filters}
             </div>
             <div className={css.rowParent}>
+                <div class={css.seoArea}>
+                    <h2>Leaderboards</h2>
+                    <span> Leaderboards for every region. Top 100 players per region. </span>
+                </div>
                 {warnings}
                 <table className={isLoading}>
                     <tbody>

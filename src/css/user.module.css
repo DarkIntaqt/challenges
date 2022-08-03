@@ -37,6 +37,7 @@
 }
 
 .profile>h2,
+.profile>p.challengeDescription,
 .profile>h2>span {
     display: block;
     color: var(--type);
@@ -47,7 +48,8 @@
     margin: 0px 5px 5px;
 }
 
-.c.profile>h2 {
+.c.profile>h2,
+.profile>p.challengeDescription {
     max-width: calc(100% - 150px);
 }
 
@@ -492,7 +494,7 @@
     margin-bottom: 10px;
     float: left;
     background-color: var(--side);
-    padding: 5px;
+    padding: 10px;
     box-sizing: border-box;
     border-radius: 10px;
 }
@@ -506,6 +508,7 @@
 .rowParent table th {
     font-weight: normal;
     font-size: 0.8rem;
+    color: var(--dborder);
     padding: 15px 0 5px
 }
 
@@ -665,4 +668,27 @@
     .rowParent table th {
         padding: 8px 0;
     }
+}
+
+.rowParent .seoArea {
+    width: 100%;
+    padding: 5px 0 10px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.rowParent .seoArea h2 {
+    font-size: 1rem;
+    color: white;
+    white-space: nowrap;
+    float: left;
+    font-weight: 400;
+}
+
+.rowParent .seoArea span {
+    display: block;
+    float: left;
+    margin: .2rem 0 0 10px;
+    font-size: 0.8rem;
+    color: var(--dborder)
 }
