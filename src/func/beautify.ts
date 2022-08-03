@@ -1,5 +1,5 @@
 // beautify numbers - add dots to < 1M and shortend larger numbers
-export function beautifyNum(num, minify = true) {
+export function beautifyNum(num: number, minify: boolean = true) {
     if (typeof num === "undefined") {
         return "0"
     }

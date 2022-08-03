@@ -6,7 +6,7 @@ import css from "../css/user.module.css";
 import getChallenge from "../func/getChallenge";
 import TimeAgo from 'react-timeago';
 import getServer from "../func/server"
-import { beautifyNum } from "../func/beautify"
+import { beautifyNum } from "../func/beautify.ts"
 import { intToTier, tierToInt } from "../func/tierFunctions";
 import { toggleValue } from "../func/arrayManipulationFunctions.ts";
 

@@ -5,7 +5,7 @@ import get from "../func/get"
 import css from "../css/user.module.css"
 import server from "../func/server"
 import TimeAgo from 'react-timeago';
-import { beautifyNum } from "../func/beautify"
+import { beautifyNum } from "../func/beautify.ts"
 import { intToTier, tierToInt } from "../func/tierFunctions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
