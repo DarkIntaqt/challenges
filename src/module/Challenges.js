@@ -89,10 +89,13 @@ export default class Challenges extends Component {
         for (let i = 0; i < challenges.length; i++) {
             const challenge = challenges[i];
             if (challenge.id < 10) {
-                if (challenge.id === 0 && (this.filter.category.length === 0 && this.filter.type.length === 0 && this.filter.gamemode.length === 0)) {
-                    challengeObject.unshift(generateChallengePointElement(challenge, this.goTo, this.toLoad.leaderboards))
+                if (challenge.id === 0) {
+                    if (this.filter.category.length === 0 && this.filter.type.length === 0 && this.filter.gamemode.length === 0 && this.searchFor.length === 0) {
+                        challengeObject.unshift(generateChallengePointElement(challenge, this.goTo, this.toLoad.leaderboards))
+                    }
+                } else {
+                    continue
                 }
-                continue
             }
             let highestTier = "NONE", queueIds = [], parentName = "crystal", obtainable = [];
             let ranks = ["NONE", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"];
@@ -116,7 +119,7 @@ export default class Challenges extends Component {
                         }
                     }
                     parentName = getChallenge(parentChallengeId)["translation"]["name"]
-                } else if ([600006, 600010, 600011].includes(challenge.id)) {
+                } else if ([600006, 600010, 600011, 0].includes(challenge.id)) {
                     parentName = "legacy"
                 } else if (checkFor(challenge.tags["isCapstone"])) {
                     parentName = challenge.translation.name

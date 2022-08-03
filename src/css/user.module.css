@@ -643,6 +643,7 @@
 @media only screen and (max-width: 1050px) {
     .rowParent {
         background: transparent;
+        overflow: auto;
     }
 
     .rowParent table tr td:nth-child(5),
@@ -653,6 +654,7 @@
     .rowParent table tr td:nth-child(2),
     .rowParent table tr th:nth-child(2) {
         width: 40%;
+        white-space: nowrap;
     }
 
     .rowParent table tr td:nth-child(4),
