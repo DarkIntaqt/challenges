@@ -189,11 +189,6 @@ export default class User extends Component {
                     leaderboardposition = <span>{position}Top {(Math.round(challenge.percentile * 10000) / 100)}%</span>
                 }
 
-                // set type to none to use images
-                if (type === "undefined" || type === "unranked") {
-                    type = "none";
-                }
-
                 let skip = false
 
                 if (c.queueIds.length > 0) {
