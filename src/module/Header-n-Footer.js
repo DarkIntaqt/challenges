@@ -14,6 +14,7 @@ export default function HeaderNFooter() {
             <div className={StyleSheet.inner}>
                 <Link to="/"><img src={logo} alt="League Challenges Logo" />League Challenges</Link>
                 <Link to="/challenges">Challenges</Link>
+                <Link to="/challenge/0" className={StyleSheet.hideOnMobile}>Leaderboards</Link>
                 <Link to="/titles">Titles</Link>
             </div>
         </nav>
