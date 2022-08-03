@@ -177,16 +177,29 @@ export default class Challenge extends Component {
                         }
 
                     }
-                    summoners.sort((a, b) => {
-                        // Order by name if same value and position
-                        if (a[1] === b[1]) {
-                            if (b[5] === a[5]) {
-                                return a[0] < b[0] ? -1 : +(a[0] > b[0])
+                    if (challenge.challenge.reversed === true) {
+                        summoners.sort((a, b) => {
+                            // Order by name if same value and position
+                            if (a[1] === b[1]) {
+                                if (b[5] === a[5]) {
+                                    return a[0] < b[0] ? -1 : +(a[0] > b[0])
+                                }
+                                return a[5] - b[5]
                             }
-                            return a[5] - b[5]
-                        }
-                        return b[1] - a[1]
-                    })
+                            return a[1] - b[1]
+                        })
+                    } else {
+                        summoners.sort((a, b) => {
+                            // Order by name if same value and position
+                            if (a[1] === b[1]) {
+                                if (b[5] === a[5]) {
+                                    return a[0] < b[0] ? -1 : +(a[0] > b[0])
+                                }
+                                return a[5] - b[5]
+                            }
+                            return b[1] - a[1]
+                        })
+                    }
                 } else {
                     summoners = challenge.summoner[absoluteRegion]
                     for (let i = 0; i < summoners.length; i++) {
