@@ -142,7 +142,6 @@ export default class User extends Component {
                 let next; // threshold of next tier
                 let nexttier = getNextLevel(challenge.tier); // next tier (e.g. iron => bronze)
                 let leaderboardposition = ""; // set when player has a position and not just a percentile
-                let type = challenge.tier.toLowerCase(); // for background
 
                 // get threshold for dynamic leaderboards
                 if (c.leaderboard === true && typeof challenge.position !== "undefined") {
