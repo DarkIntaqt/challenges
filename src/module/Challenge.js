@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom"
 import get from "../func/get"
 import css from "../css/user.module.css"
 import server from "../func/server"
-import TimeAgo from 'react-timeago';
+import Timestamp from "react-timestamps"
 import { beautifyNum } from "../func/beautify.ts"
 import { intToTier, tierToInt } from "../func/tierFunctions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -248,11 +248,11 @@ export default class Challenge extends Component {
         let warnings = [];
         try {
             if (typeof challenge.challenge.tags["leaderboardManuallyEnabled"] !== "undefined") {
-                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"}>Experimental leaderboards<br /><br />The API don't provide any data about this challenge, so the summoners on this leaderboard are collected by a machine. If you know someone with a higher score, just look them up</div>)
+                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"} key={"exp"}>Experimental leaderboards<br /><br />The API don't provide any data about this challenge, so the summoners on this leaderboard are collected by a machine. If you know someone with a higher score, just look them up</div>)
             }
         } catch { }
         if (challenge.challenge.reversed) {
-            warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"}>This challenge is reversed. The less your points the better your placement</div>)
+            warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"} key={"reverse"}>This challenge is reversed. The less your points the better your placement</div>)
         }
 
         let perc = []
@@ -281,7 +281,7 @@ export default class Challenge extends Component {
             <div className={"MASTER " + css.c + " " + css.profile + " " + css["cid" + challenge.challenge.id]}>
                 <img src={icon} alt="" />
                 <h1>{challenge.challenge.translation.name} {challenge.timestamp
-                    ? <span>(Updated <TimeAgo date={challenge.timestamp * 1000} />)</span>
+                    ? <span>(Updated <Timestamp date={challenge.timestamp * 1000} />)</span>
                     : <span></span>
                 }</h1>
                 <p className={"SILVER " + css.challengeDescription} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}</p>
@@ -318,7 +318,7 @@ export default class Challenge extends Component {
                 {filters}
             </div>
             <div className={css.rowParent}>
-                <div class={css.seoArea}>
+                <div className={css.seoArea}>
                     <h2>Leaderboards</h2>
                     <span> Leaderboards for every region. Top 100 players per region. </span>
                 </div>
