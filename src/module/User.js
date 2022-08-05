@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom"
 import get from "../func/get"
 import css from "../css/user.module.css";
 import getChallenge from "../func/getChallenge";
-import TimeAgo from 'react-timeago';
+import Timestamp from "react-timestamps"
 import getServer from "../func/server"
 import { beautifyNum } from "../func/beautify.ts"
 import { intToTier, tierToInt } from "../func/tierFunctions";
@@ -183,7 +183,7 @@ export default class User extends Component {
 
                 // set xxx time ago instead of position when the timestamp filter is set
                 if (this.filter === "timestamp") {
-                    leaderboardposition = <span><TimeAgo date={challenge.achievedTimestamp}></TimeAgo></span>
+                    leaderboardposition = <span><Timestamp date={challenge.achievedTimestamp} /></span>
                 } else {
                     leaderboardposition = <span>{position}Top {(Math.round(challenge.percentile * 10000) / 100)}%</span>
                 }
