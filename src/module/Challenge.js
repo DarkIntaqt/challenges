@@ -1,6 +1,5 @@
 import { Component, Fragment } from "react";
 import Error from "./Error"
-import { Navigate } from "react-router-dom"
 import get from "../func/get"
 import css from "../css/user.module.css"
 import server from "../func/server"

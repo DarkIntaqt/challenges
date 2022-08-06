@@ -9,9 +9,9 @@ export default function goTo(e, replace = false) {
     let url = new URL(e.currentTarget.href);
     url = url["pathname"] + url["search"];
     if (replace) {
-        window.reactNavigate(url)
+        window.reactNavigate(url, { replace: true })
         return true;
     }
-    window.reactNavigate(url)
+    window.reactNavigate(url, { replace: false })
     return true
 }

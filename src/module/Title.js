@@ -1,6 +1,5 @@
 import { Component } from "react";
 import css from "../css/titles.module.css"
-import { Navigate } from "react-router-dom"
 import get from "../func/get"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import goTo from "../func/goTo.js";

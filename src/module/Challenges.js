@@ -3,7 +3,6 @@ import get from "../func/get"
 import getServer from "../func/server"
 import css from "../css/user.module.css"
 import challengeCSS from "../css/challenges.module.css"
-import { Navigate } from "react-router-dom"
 import getChallenge from "../func/getChallenge"
 import generateChallengePointElement from "../func/generateChallengePointElement"
 import goTo from "../func/goTo.js";
