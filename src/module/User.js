@@ -9,6 +9,7 @@ import getServer from "../func/server"
 import { beautifyNum } from "../func/beautify.ts"
 import { intToTier, tierToInt } from "../func/tierFunctions";
 import { toggleValue } from "../func/arrayManipulationFunctions.ts";
+import goTo from "../func/goTo.js";
 
 export default class User extends Component {
     constructor(props) {
@@ -21,7 +22,6 @@ export default class User extends Component {
         this.addLoad = this.addLoad.bind(this);
         this.showUser = this.showUser.bind(this);
         this.error = this.error.bind(this);
-        this.goTo = this.goTo.bind(this);
         this.toggleFilters = this.toggleFilters.bind(this);
         this.changeExtraFilter = this.changeExtraFilter.bind(this)
         this.sortChallenges = this.sortChallenges.bind(this);
@@ -88,7 +88,7 @@ export default class User extends Component {
                 if (Object.hasOwnProperty.call(titles, titleid)) {
                     const title = titles[titleid];
                     if (titleid === "1") {
-                        challenges.push(<a className={"NONE " + css.challenge + " "} href={"/titles"} onClick={this.goTo} key={titleid}>
+                        challenges.push(<a className={"NONE " + css.challenge + " "} href={"/titles"} onClick={goTo} key={titleid}>
 
                             <p className={css.title}>
                                 {title}
@@ -106,7 +106,7 @@ export default class User extends Component {
                     } catch (error) {
                         percentage = "0"
                     }
-                    challenges.push(<a className={css.challenge + " " + tier} href={"/titles"} onClick={this.goTo} key={titleid}>
+                    challenges.push(<a className={css.challenge + " " + tier} href={"/titles"} onClick={goTo} key={titleid}>
                         <p className={css.title}>
                             {title}
                             <span>Achieved by {percentage}%</span>
@@ -243,7 +243,7 @@ export default class User extends Component {
                 }
 
                 // push challenge to list
-                challenges.push(<a className={challenge.tier + " " + css.challenge + " " + css[nexttier]} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={this.goTo} key={challenge.id}>
+                challenges.push(<a className={challenge.tier + " " + css.challenge + " " + css[nexttier]} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={goTo} key={challenge.id}>
                     <p className={css.title}>
                         {c.translation.name}
                         {leaderboardposition}
@@ -454,12 +454,6 @@ export default class User extends Component {
         this.load()
     }
 
-    goTo(e) {
-        e.preventDefault();
-        let loc = new URL(e.currentTarget.href);
-        loc = loc["pathname"] + loc["search"];
-        this.setState({ challenges: <Navigate to={loc} replace={false}></Navigate> })
-    }
 
     changeExtraFilter(e) {
         if (this.state.challenges !== window.loadingUI) {

@@ -8,6 +8,7 @@ import Timestamp from "react-timestamps"
 import { beautifyNum } from "../func/beautify.ts"
 import { intToTier, tierToInt } from "../func/tierFunctions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import goTo from "../func/goTo.js";
 
 export default class Challenge extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ export default class Challenge extends Component {
         }
 
         this.error = this.error.bind(this)
-        this.goTo = this.goTo.bind(this)
+
         this.changeFilter = this.changeFilter.bind(this)
         this.showChallenge = this.showChallenge.bind(this)
         this.state = {
@@ -57,12 +58,6 @@ export default class Challenge extends Component {
     componentDidMount() {
         document.title = "Loading..."
         get(`https://challenges.darkintaqt.com/api/v3/c/?id=${this.params.id}`, this.showChallenge, this.error);
-    }
-
-    goTo(e) {
-        e.preventDefault();
-        let loc = new URL(e.currentTarget.href);
-        this.setState({ message: <Navigate to={loc["pathname"] + loc["search"]} replace={false}></Navigate> })
     }
 
     changeFilter(e) {
@@ -135,7 +130,7 @@ export default class Challenge extends Component {
                 summoner.push(<tr className={css.loading + " IRON"} key={i}>
                     <td>#</td>
                     <td>
-                        <a href={"/loading"} onClick={this.goTo}>
+                        <a href={"/loading"} onClick={goTo}>
                             <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/29"} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={""}></LazyLoadImage>
                             <p>Loading<span className={css.region}>#</span></p>
                         </a>
@@ -224,7 +219,7 @@ export default class Challenge extends Component {
                         summoner.push(<tr key={player[0] + player[3]} className={player[2]}>
                             <td>#{i + 1}</td>
                             <td>
-                                <a href={"/" + player[4] + "/" + nameToURL(player[0])} onClick={this.goTo}>
+                                <a href={"/" + player[4] + "/" + nameToURL(player[0])} onClick={goTo}>
                                     <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={player[0] + "'s profile image"}></LazyLoadImage>
                                     <p>{player[0]}<span className={css.region}>#{server("human", player[4])}</span></p>
                                 </a>

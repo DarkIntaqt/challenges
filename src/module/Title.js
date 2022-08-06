@@ -3,13 +3,13 @@ import css from "../css/titles.module.css"
 import { Navigate } from "react-router-dom"
 import get from "../func/get"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import goTo from "../func/goTo.js";
 
 export default class Title extends Component {
     constructor(props) {
         super(props);
         this.showUser = this.showUser.bind(this);
         this.error = this.error.bind(this);
-        this.goTo = this.goTo.bind(this)
         this.state = {
             heading: "All titles",
             titles: [
@@ -39,12 +39,6 @@ export default class Title extends Component {
         console.error("Error");
     }
 
-    goTo(e) {
-        e.preventDefault();
-
-        this.setState({ location: <Navigate to={"/challenge/" + e.currentTarget.getAttribute("challengeid")} replace={false} /> })
-    }
-
     render() {
 
         let titles = [];
@@ -52,7 +46,7 @@ export default class Title extends Component {
         for (let i = 0; i < this.state.titles.length; i++) {
             const element = this.state.titles[i];
 
-            titles.push(<a href={"/challenge/" + element.cid} className={css.title + " " + element.type + " clearfix"} key={element.cid} challengeid={element.cid} onClick={this.goTo}>
+            titles.push(<a href={"/challenge/" + element.cid} className={css.title + " " + element.type + " clearfix"} key={element.cid} challengeid={element.cid} onClick={goTo}>
                 <LazyLoadImage height={45} width={45} src={"https://lolcdn.darkintaqt.com/s/C-" + element.icon + "-" + element.type.toLowerCase()} placeholderSrc={"https://cdn.darkintaqt.com/lol/static/missing/item.png"} alt="" />
                 <p>Achieved by {element.percentile}% of all players</p>
                 <h2>{element.title}</h2>

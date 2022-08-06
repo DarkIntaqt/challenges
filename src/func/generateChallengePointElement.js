@@ -1,8 +1,9 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import css from "./../css/challenges.module.css"
+import goTo from "../func/goTo.js";
 
 
-export default function generateChallengePointElement(challenge, click, leaderboards) {
+export default function generateChallengePointElement(challenge, leaderboards) {
     let regions = ["br", "euw", "eune", "jp", "kr", "lan", "las", "na", "oc", "tr"];
     let summoner = []
     let counters = {};
@@ -33,7 +34,7 @@ export default function generateChallengePointElement(challenge, click, leaderbo
 
     for (let i = 0; i < 3; i++) {
         const player = summoner[i];
-        topPlayer.push(<div key={"s" + i} onClick={click}>
+        topPlayer.push(<div key={"s" + i} onClick={goTo}>
             <p className={css.position}>#{i + 1}</p>
             <LazyLoadImage height={30} width={30} placeholderSrc={"https://lolcdn.darkintaqt.com/cdn/profileicon/29"} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} alt={""}></LazyLoadImage>
             <p className={css.name}>
@@ -43,7 +44,7 @@ export default function generateChallengePointElement(challenge, click, leaderbo
         </div>);
     }
 
-    return <a href="/challenge/0" className={css.crystal + " CHALLENGER"} onClick={click} key="banner">
+    return <a href="/challenge/0" className={css.crystal + " CHALLENGER"} onClick={goTo} key="banner">
         <p className={css.crystalHead}>Total Challenge Points Leaderboards</p>
         <div className={css.miniLeaderboard}>
             {topPlayer}

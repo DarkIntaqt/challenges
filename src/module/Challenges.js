@@ -6,6 +6,7 @@ import challengeCSS from "../css/challenges.module.css"
 import { Navigate } from "react-router-dom"
 import getChallenge from "../func/getChallenge"
 import generateChallengePointElement from "../func/generateChallengePointElement"
+import goTo from "../func/goTo.js";
 
 export default class Challenges extends Component {
     constructor(props) {
@@ -15,7 +16,6 @@ export default class Challenges extends Component {
         this.loaded = this.loaded.bind(this);
         this.loadChallenges = this.loadChallenges.bind(this)
         this.loadLeaderboards = this.loadLeaderboards.bind(this)
-        this.goTo = this.goTo.bind(this)
         this.changeFilter = this.changeFilter.bind(this)
         this.showChallenges = this.showChallenges.bind(this)
         this.filter = { "category": [], "type": [], "gamemode": [] }
@@ -60,13 +60,6 @@ export default class Challenges extends Component {
         this.loaded("leaderboards", content)
     }
 
-    goTo(e) {
-        e.preventDefault();
-        let loc = new URL(e.currentTarget.href);
-        loc = loc["pathname"] + loc["search"];
-        this.setState({ challenges: <Navigate to={loc} replace={false}></Navigate> })
-    }
-
     showChallenges(challengeData) {
         document.title = "All League of Legends Challenges Overview"
         window.challenges[this.server] = challengeData
@@ -91,7 +84,7 @@ export default class Challenges extends Component {
             if (challenge.id < 10) {
                 if (challenge.id === 0) {
                     if (this.filter.category.length === 0 && this.filter.type.length === 0 && this.filter.gamemode.length === 0 && this.searchFor.length === 0) {
-                        challengeObject.unshift(generateChallengePointElement(challenge, this.goTo, this.toLoad.leaderboards))
+                        challengeObject.unshift(generateChallengePointElement(challenge, this.toLoad.leaderboards))
                     }
                 } else {
                     continue
@@ -260,7 +253,7 @@ export default class Challenges extends Component {
                 continue
             }
 
-            challengeObject.push(<a className={highestTier + " " + css.challenge + " " + css.CROWN + " " + css.overview} href={"/challenge/" + challenge.id} onClick={this.goTo} key={"cid" + challenge.id}>
+            challengeObject.push(<a className={highestTier + " " + css.challenge + " " + css.CROWN + " " + css.overview} href={"/challenge/" + challenge.id} onClick={goTo} key={"cid" + challenge.id}>
                 <p className={css.title}>
                     {challenge.translation.name}
                     <span>{parentName}</span>
