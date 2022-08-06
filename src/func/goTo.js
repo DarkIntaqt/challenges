@@ -6,7 +6,12 @@ export default function goTo(e, replace = false) {
         return
     }
     e.preventDefault();
-    let loc = new URL(e.currentTarget.href);
-    loc = loc["pathname"] + loc["search"];
-
+    let url = new URL(e.currentTarget.href);
+    url = url["pathname"] + url["search"];
+    if (replace) {
+        window.reactNavigate(url)
+        return true;
+    }
+    window.reactNavigate(url)
+    return true
 }
