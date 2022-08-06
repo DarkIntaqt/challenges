@@ -1,17 +1,8 @@
 import { Component, Fragment } from "react"
 import StyleSheet from "../css/start.module.css"
-import { Navigate } from "react-router-dom";
+import goTo from "../func/goTo.js";
 
 export default class Start extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { search: false, to: "/" };
-    this.goTo = this.goTo.bind(this);
-  }
-
-  goTo(loc) {
-    this.setState({ to: loc, search: true });
-  }
 
   componentDidMount() {
     let elements = document.querySelectorAll("." + StyleSheet.region);
@@ -21,7 +12,6 @@ export default class Start extends Component {
       }
     }
 
-    let goTo = this.goTo;
 
     let searchbar = document.getElementById("search");
     searchbar.addEventListener("keyup", function (e) {
@@ -86,7 +76,6 @@ export default class Start extends Component {
           <i className={"fa-solid fa-magnifying-glass"} id="search-submit"></i>
           <input type="text" id="search" placeholder="Enter summoner name to look up challenges" />
         </div>
-        {this.state.search && (<Navigate to={this.state.to} replace={false} />)}
         <div className={StyleSheet.serverselector}>
           <div className={StyleSheet.region} onClick={changeRegion} >br</div>
           <div className={StyleSheet.region} onClick={changeRegion}>euw</div>
