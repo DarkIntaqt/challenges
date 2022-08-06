@@ -1,6 +1,5 @@
 import { Component, Fragment } from "react"
 import StyleSheet from "../css/start.module.css"
-import goTo from "../func/goTo.js";
 
 export default class Start extends Component {
 
@@ -16,12 +15,12 @@ export default class Start extends Component {
     let searchbar = document.getElementById("search");
     searchbar.addEventListener("keyup", function (e) {
       if (e.code === "Enter") {
-        goTo("/" + window.region + "/" + e.target.value.replaceAll(" ", "").toLowerCase())
+        window.reactNavigate("/" + window.region + "/" + e.target.value.replaceAll(" ", "").toLowerCase())
       }
     })
     let enter = document.getElementById("search-submit");
     enter.addEventListener("click", function () {
-      goTo("/" + window.region + "/" + searchbar.value.replaceAll(" ", "").toLowerCase())
+      window.reactNavigate("/" + window.region + "/" + searchbar.value.replaceAll(" ", "").toLowerCase())
     })
 
   }
