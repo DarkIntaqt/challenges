@@ -462,36 +462,40 @@ export default class User extends Component {
     }
 
     changeExtraFilter(e) {
-        const toggle = toggleValue(this.filters[e.target.getAttribute("type")], e.target.id)
-        this.filters[e.target.getAttribute("type")] = toggle.result
-        if (toggle.method === true) {
-            e.target.classList.add(css.selected)
-        } else {
-            e.target.classList.remove(css.selected)
+        if (this.state.challenges !== window.loadingUI) {
+            const toggle = toggleValue(this.filters[e.target.getAttribute("type")], e.target.id)
+            this.filters[e.target.getAttribute("type")] = toggle.result
+            if (toggle.method === true) {
+                e.target.classList.add(css.selected)
+            } else {
+                e.target.classList.remove(css.selected)
+            }
+            this.load()
         }
-        this.load()
     }
 
     changeFilter(e) {
-        this.filter = e.target.id;
-        if (this.filter === "alphabetic-a-z" && this.state.alphabet === "a-z") {
-            this.setState({
-                alphabet: "z-a",
-                filter: e.target.id
-            })
+        if (this.state.challenges !== window.loadingUI) {
+            this.filter = e.target.id;
+            if (this.filter === "alphabetic-a-z" && this.state.alphabet === "a-z") {
+                this.setState({
+                    alphabet: "z-a",
+                    filter: e.target.id
+                })
+                this.load()
+                return
+            }
+            if (this.filter === "alphabetic-z-a" && this.state.alphabet === "z-a") {
+                this.setState({
+                    alphabet: "a-z",
+                    filter: e.target.id
+                })
+                this.load()
+                return
+            }
+            this.setState({ filter: e.target.id });
             this.load()
-            return
         }
-        if (this.filter === "alphabetic-z-a" && this.state.alphabet === "z-a") {
-            this.setState({
-                alphabet: "a-z",
-                filter: e.target.id
-            })
-            this.load()
-            return
-        }
-        this.setState({ filter: e.target.id });
-        this.load()
     }
 
     toggleFilters() {
