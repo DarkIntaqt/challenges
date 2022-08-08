@@ -156,7 +156,11 @@ export default class User extends Component {
                             p = 0
                             break;
                     }
-                    position = "#" + beautifyNum(p + challenge.position, false) + " - ";
+                    position = "#" + beautifyNum(p + challenge.position, false);
+                    if (challenge.position <= 100 && typeof challenge["globalPosition"] !== "undefined") {
+                        position = position + " (#" + challenge.globalPosition + " World)";
+                    }
+                    position += " - ";
                 }
 
                 if (typeof c["thresholds"][nexttier] !== "undefined") {
@@ -429,7 +433,7 @@ export default class User extends Component {
         })
 
         if (this.state.challenges === this.loadingUI) {
-            get(`https://challenges.darkintaqt.com/api/v2/u/?name=${this.params.user}&server=${this.params.server}&t=${new Date().getTime()}`, this.addLoad, this.error);
+            get(`https://challenges.darkintaqt.com/api/v3/u/?name=${this.params.user}&server=${this.params.server}`, this.addLoad, this.error);
         } else {
             this.showUser(this.challengeJSON)
         }

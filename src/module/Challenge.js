@@ -56,7 +56,7 @@ export default class Challenge extends Component {
 
     componentDidMount() {
         document.title = "Loading..."
-        get(`https://challenges.darkintaqt.com/api/v3/c/?id=${this.params.id}`, this.showChallenge, this.error);
+        get(`https://challenges.darkintaqt.com/api/v4/c/?id=${this.params.id}`, this.showChallenge, this.error);
     }
 
     changeFilter(e) {
