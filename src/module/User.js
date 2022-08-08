@@ -13,7 +13,8 @@ import goTo from "../func/goTo.js";
 export default class User extends Component {
     constructor(props) {
         super(props);
-        this.server = ""; this.summonerJSON = "";
+        this.server = ""; 
+        this.summonerJSON = "";
         this.loaded = 0;
         this.filter = "level"
         this.params = props.params;
@@ -526,9 +527,9 @@ export default class User extends Component {
             </div>
             <div className={css.filter + " " + css[this.state.filter]} style={this.state.extraStyle}>
                 <button className={css.level} onClick={this.changeFilter} id="level">Rank</button>
-                <button className={css.timestamp} onClick={this.changeFilter} id="timestamp">Last updated</button>
+                <button className={css.timestamp} onClick={this.changeFilter} id="timestamp">Last upgraded</button>
                 <button className={css.percentile} onClick={this.changeFilter} id="percentile">Leaderboard Position</button>
-                <button className={css.levelup} onClick={this.changeFilter} id="levelup">Levelup</button>
+                <button className={css.levelup} onClick={this.changeFilter} id="levelup">Next Levelup</button>
                 <button className={css["alphabetic-" + this.state.alphabet]} onClick={this.changeFilter} id={"alphabetic-" + this.state.alphabet}>{this.state.alphabet.toUpperCase()}</button>
                 <button className={css.titles} onClick={this.changeFilter} id="titles">Titles</button>
                 <button className={css.moreFilter} onClick={this.toggleFilters} id="morefilter">{!this.state.expandFilterOptions ? 'Expand' : 'Collapse'} more filters {(this.filters.gamemode.length + this.filters.category.length + this.filters.type.length) > 0 ? "(" + (this.filters.gamemode.length + this.filters.category.length + this.filters.type.length) + " applied)" : ''}</button>
