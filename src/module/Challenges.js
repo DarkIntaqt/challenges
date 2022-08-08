@@ -36,11 +36,9 @@ export default class Challenges extends Component {
             this.loadLeaderboards(window.challengeLeaderboards)
         }
 
-        if ("undefined" === typeof window.challenges[server] || (typeof window.challenges[server] !== "undefined" && window.challenges[server] === "")) {
-            get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.loadChallenges)
-        } else {
-            this.loadChallenges(window.challenges[server])
-        }
+
+        get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.loadChallenges)
+
     }
 
     loaded(type, content) {
@@ -61,8 +59,7 @@ export default class Challenges extends Component {
 
     showChallenges(challengeData) {
         document.title = "All League of Legends Challenges Overview"
-        window.challenges[this.server] = challengeData
-        window.JSONPREQUEST = window.challenges[this.server]
+        window.JSONPREQUEST = challengeData
 
         let challenges = challengeData;
 

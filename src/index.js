@@ -24,12 +24,12 @@ function checkFor(variable) {
   return true
 }
 
-if (!checkFor(window.challenges)) {
-  window.challenges = {}
-}
-
 if (!checkFor(window.region)) {
   window.region = "na"
+}
+
+if (!checkFor(window.requestCache)) {
+  window.requestCache = {}
 }
 
 if (window.gC("_Cregion")) {

@@ -13,7 +13,7 @@ import goTo from "../func/goTo.js";
 export default class User extends Component {
     constructor(props) {
         super(props);
-        this.server = ""; 
+        this.server = "";
         this.summonerJSON = "";
         this.loaded = 0;
         this.filter = "level"
@@ -59,7 +59,7 @@ export default class User extends Component {
     showUser(r) {
 
         // Cancel if the challenge config hasn't been loaded (yet)
-        if (typeof window.challenges[this.server] === "undefined") {
+        if (typeof window.JSONPREQUEST === "undefined") {
             return
         }
 
@@ -409,8 +409,7 @@ export default class User extends Component {
     }
 
     addRegionChallenges(e) {
-        window.challenges[this.server] = e
-        window.JSONPREQUEST = window.challenges[this.server]
+        window.JSONPREQUEST = e
         this.loaded++;
         if (this.loaded === 2) {
             this.showUser(this.summonerJSON)
@@ -422,17 +421,12 @@ export default class User extends Component {
 
         this.server = server
 
-        if ("undefined" === typeof window.challenges[server] || (typeof window.challenges[server] !== "undefined" && window.challenges[server] === "")) {
-            get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.addRegionChallenges, function (e) {
-                get('https://challenges.darkintaqt.com/api/?error=notloaded');
-                setTimeout(() => {
-                    window.location.reload()
-                }, 1000);
-            })
-        } else {
-            this.loaded++;
-            window.JSONPREQUEST = window.challenges[server]
-        }
+        get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.addRegionChallenges, function (e) {
+            get('https://challenges.darkintaqt.com/api/?error=notloaded');
+            setTimeout(() => {
+                window.location.reload()
+            }, 1000);
+        })
 
         if (this.state.challenges === this.loadingUI) {
             get(`https://challenges.darkintaqt.com/api/v2/u/?name=${this.params.user}&server=${this.params.server}&t=${new Date().getTime()}`, this.addLoad, this.error);
