@@ -275,8 +275,8 @@ export default class Challenge extends Component {
             <div className={"MASTER " + css.c + " " + css.profile + " " + css["cid" + challenge.challenge.id]}>
                 <img src={icon} alt="" />
                 <h1>{challenge.challenge.translation.name} {challenge.timestamp
-                    ? <span>(Updated <Timestamp date={challenge.timestamp * 1000} />)</span>
-                    : <span></span>
+                    ? <span data-nosnippet>(Updated <Timestamp date={challenge.timestamp * 1000} />)</span>
+                    : <span data-nosnippet></span>
                 }</h1>
                 <p className={"SILVER " + css.challengeDescription} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}</p>
                 <div className={css.thresholds}>
