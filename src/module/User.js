@@ -425,7 +425,7 @@ export default class User extends Component {
 
         this.server = server
 
-        get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.addRegionChallenges, function (e) {
+        get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0) + (1000 * 60 * 60 * window.timezoneoffset)}`, this.addRegionChallenges, function (e) {
             get('https://challenges.darkintaqt.com/api/?error=notloaded');
             setTimeout(() => {
                 window.location.reload()

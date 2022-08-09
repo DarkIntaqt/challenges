@@ -32,6 +32,8 @@ if (!checkFor(window.requestCache)) {
   window.requestCache = {}
 }
 
+window.timezoneoffset = new Date().getTimezoneOffset() / 60
+
 if (window.gC("_Cregion")) {
   window.region = window.gC("_Cregion")
 } else {

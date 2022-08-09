@@ -5,7 +5,7 @@ const get = async function (url = "/", callback = function (r) {
 }, debug = false) {
 
     if (typeof window.requestCache[url] !== "undefined") {
-        if (window.requestCache[url]["timestamp"] > Date.now() - (1000 * 60 * 15)) {
+        if (window.requestCache[url]["timestamp"] > Date.now() - (1000 * 60 * 15) + (1000 * 60 * 60 * window.timezoneoffset)) {
             if (window.requestCache[url]["code"] === 200) {
                 callback(window.requestCache[url]["body"]);
             } else {
@@ -37,8 +37,9 @@ const get = async function (url = "/", callback = function (r) {
     }
 
     let timestamp = Date.now();
+
     if (request.status !== 200) {
-        timestamp -= 1000 * 60 * 13;
+        timestamp = (timestamp - 1000 * 60 * 13) + (1000 * 60 * 60 * window.timezoneoffset);
     }
 
     window.requestCache[url] = {

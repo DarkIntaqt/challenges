@@ -36,8 +36,7 @@ export default class Challenges extends Component {
             this.loadLeaderboards(window.challengeLeaderboards)
         }
 
-
-        get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0)}`, this.loadChallenges)
+        get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${new Date().setHours(0, 0, 0, 0) + (1000 * 60 * 60 * window.timezoneoffset)}`, this.loadChallenges)
 
     }
 

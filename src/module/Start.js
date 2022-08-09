@@ -66,6 +66,14 @@ export default class Start extends Component {
       }
     }
 
+    setTimeout(() => {
+      try {
+        document.getElementById("search").focus()
+      } catch (error) {
+        console.error(error)
+      }
+    }, 50);
+
     return <Fragment>
       <div className={StyleSheet.background} style={backgroundImage}></div>
       <div className={StyleSheet.start + " object1000"}>
