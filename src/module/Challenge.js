@@ -5,9 +5,10 @@ import css from "../css/user.module.css"
 import server from "../func/server"
 import Timestamp from "react-timestamps"
 import { beautifyNum } from "../func/beautify.ts"
-import { intToTier, tierToInt } from "../func/tierFunctions";
+import { intToTier } from "../func/tierFunctions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import goTo from "../func/goTo.js";
+import start from "../css/start.module.css"
 
 export default class Challenge extends Component {
     constructor(props) {
@@ -109,9 +110,9 @@ export default class Challenge extends Component {
             return noThresholds
         }
 
-        let filters = [<button key={"world"} onClick={this.changeFilter} className={css.world} id="world">Global</button>];
+        let filters = [<button key={"world"} onClick={this.changeFilter} className={start.filterOption + " " + start["world"]} id="world">Global</button>];
         for (let i = 0; i < regions.length; i++) {
-            filters.push(<button key={i} onClick={this.changeFilter} className={css[regions[i]]} id={regions[i]}>{regions[i]}</button>)
+            filters.push(<button key={i} onClick={this.changeFilter} className={start.filterOption + " " + start[regions[i]]} id={regions[i]}>{regions[i]}</button>)
         }
 
         let dynamic = {
@@ -262,27 +263,16 @@ export default class Challenge extends Component {
             warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"} key={"reverse"}>This challenge is reversed. The less your points the better your placement</div>)
         }
 
-        let perc = []
-
-        percentiles = (Object.fromEntries(Object.entries(percentiles).sort(function (a, b) {
-            if (tierToInt(a[0]) < tierToInt(b[0])) {
-                return 1
-            } else {
-                return -1
-            }
-        })))
-
-        for (const percentile in percentiles) {
-            if (Object.hasOwnProperty.call(percentiles, percentile) && percentile !== "NONE") {
-                let nextTier = intToTier(tierToInt(percentile))
-                if (nextTier === "NONE" && percentile === "CHALLENGER") {
-                    percentiles["MAXED"] = 0
-                    nextTier = "MAXED"
-                }
-
-                perc.push(<div key={percentile} className={css.percent + " " + percentile} style={{ "--width": (percentiles[percentile] - percentiles[nextTier]) }}></div>)
-            }
+        let thresholdTable = []
+        for (let i = 1; i < thresholds.length; i++) {
+            thresholdTable.push(<tr>
+                <td className={intToTier(i - 1)} style={{ color: "var(--type)", textAlign: "center" }}>{intToTier(i - 1)}</td>
+                <td style={{ textAlign: "center" }}>{beautifyNum(thresholds[i])}</td>
+                <td>{Math.round(percentiles[intToTier(i - 1)] * 1000) / 10}%</td>
+            </tr>)
         }
+
+
 
         let content = <Fragment>
             <div className={"MASTER " + css.c + " " + css.profile + " " + css["cid" + challenge.challenge.id]}>
@@ -292,39 +282,35 @@ export default class Challenge extends Component {
                     : <span data-nosnippet></span>
                 }</h1>
                 <p className={"SILVER " + css.challengeDescription} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}</p>
-                <div className={css.thresholds}>
-                    <div>Thresholds:</div>
-                    <div className={"IRON"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[1])}</div>
-                    <div className={"BRONZE"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[2])}</div>
-                    <div className={"SILVER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[3])}</div>
-                    <div className={"GOLD"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[4])}</div>
-                    <div className={"PLATINUM"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[5])}</div>
-                    <div className={"DIAMOND"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[6])}</div>
-                    <div className={"MASTER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[7])}</div>
-                    <div className={"GRANDMASTER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[8])}{dynamic["gm"]}</div>
-                    <div className={"CHALLENGER"}><i className="fa-solid fa-circle"></i>{beautifyNum(thresholds[9])}{dynamic["c"]}</div>
-                </div>
             </div>
-            <div className={css.percentiles}>
-                <div className={css.challengePercentile}>
-                    <div className={css.percentileHover}>
-                        <div className={"IRON"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["IRON"] * 1000) / 10}%</div>
-                        <div className={"BRONZE"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["BRONZE"] * 1000) / 10}%</div>
-                        <div className={"SILVER"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["SILVER"] * 1000) / 10}%</div>
-                        <div className={"GOLD"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["GOLD"] * 1000) / 10}%</div>
-                        <div className={"PLATINUM"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["PLATINUM"] * 1000) / 10}%</div>
-                        <div className={"DIAMOND"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["DIAMOND"] * 1000) / 10}%</div>
-                        <div className={"MASTER"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["MASTER"] * 1000) / 10}%</div>
-                        <div className={"GRANDMASTER"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["GRANDMASTER"] * 1000) / 10}%</div>
-                        <div className={"CHALLENGER"}><i className="fa-solid fa-circle"></i>{Math.round(percentiles["CHALLENGER"] * 1000) / 10}%</div>
-                    </div>
-                    {perc}
-                </div>
-            </div>
-            <div className={css.filter + " " + css[this.state.filter]}>
+
+            <div className={start.filter + " " + start[this.state.filter]}>
                 {filters}
             </div>
-            <div className={css.rowParent}>
+
+            <div class={css.doubleObject}>
+                <div className={css.rowParent}>
+
+                </div>
+                <div className={css.rowParent}>
+                    <div className={css.seoArea}>
+                        <h2>Thresholds</h2>
+                        <span> How many players have reached a tier</span>
+                    </div>
+                    <table className={isLoading}>
+                        <tbody>
+                            <tr>
+                                <th>Tier</th>
+                                <th>Points</th>
+                                <th>%</th>
+                            </tr>
+                            {thresholdTable}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div className={css.rowParent + " " + css.zebra}>
                 <div className={css.seoArea}>
                     <h2>Leaderboards</h2>
                     <span> Leaderboards for every region. Top 100 players per region. </span>
@@ -344,8 +330,9 @@ export default class Challenge extends Component {
                 </table>
             </div>
         </Fragment >;
+
         if (this.state.message !== -1) {
-            content = this.state.message
+            content = this.state.message;
         }
 
         return <div className={"object1000 " + css.cc}>

@@ -28,6 +28,8 @@ export function tierToInt(tier) {
 
 export function intToTier(inttier) {
     switch (inttier) {
+        case -1:
+            return "UNRANKED"
         case 0:
             return "IRON"
         case 1:

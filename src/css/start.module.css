@@ -81,7 +81,8 @@
     box-shadow: 0 0 8px 2px #0cbdf7
 }
 
-.start .serverselector {
+.start .serverselector,
+.filter {
     width: 60%;
     margin: 20px 20% 0;
     flex-wrap: wrap;
@@ -90,7 +91,12 @@
     justify-content: space-between
 }
 
-.start .serverselector .region {
+.filter {
+    margin: 5px 20%;
+}
+
+.start .serverselector .region,
+.filterOption {
     background: #161617;
     width: 40px;
     box-shadow: 0 0 8px 0 #161617;
@@ -98,10 +104,29 @@
     border-radius: 4px;
     cursor: pointer;
     text-align: center;
+    border: none;
     font-size: 1rem;
     padding: 5px
 }
 
+.filterOption {
+    min-width: 40px;
+    width: auto;
+    padding: 5px 10px;
+    background: var(--side);
+}
+
+.world>.world,
+.br>.br,
+.euw>.euw,
+.eune>.eune,
+.jp>.jp,
+.kr>.kr,
+.lan>.lan,
+.las>.las,
+.na>.na,
+.oc>.oc,
+.tr>.tr,
 .start .serverselector .region.selected {
     background: #0cbdf7;
     color: #fff;

@@ -563,8 +563,12 @@
     font-size: 0.8rem;
 }
 
-.rowParent table tr:nth-child(even) {
+.rowParent.zebra table tr:nth-child(even) {
     background: var(--dark);
+}
+
+.rowParent:not(.zebra) table tr:not(:first-child) {
+    border-top: 1px solid var(--border);
 }
 
 .rowParent table tr td:nth-child(1) {
@@ -699,4 +703,19 @@
     margin: .2rem 0 0 10px;
     font-size: 0.8rem;
     color: var(--dborder)
+}
+
+.doubleObject {
+    width: 100%;
+    float: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+.doubleObject>div {
+    width: 48%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: var(--side);
 }
