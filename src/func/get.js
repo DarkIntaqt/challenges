@@ -3,7 +3,6 @@ const get = async function (url = "/", callback = function (r) {
 }, errorCallback = function (e) {
     console.warn(e)
 }, debug = false) {
-
     if (typeof window.requestCache[url] !== "undefined") {
         if (window.requestCache[url]["timestamp"] > Date.now() - (1000 * 60 * 15) + (1000 * 60 * 60 * window.timezoneoffset) && window.requestCache[url]["body"] !== "") {
             if (window.requestCache[url]["code"] === 200) {
@@ -12,10 +11,6 @@ const get = async function (url = "/", callback = function (r) {
                 errorCallback(window.requestCache[url]["body"], window.requestCache[url]["code"])
             }
             return true
-        } else {
-            console.log("differnce");
-            console.log(window.requestCache[url]["timestamp"]);
-            console.log(Date.now() - (1000 * 60 * 15) + (1000 * 60 * 60 * window.timezoneoffset));
         }
     }
 
