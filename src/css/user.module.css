@@ -380,6 +380,14 @@
     .profile.c>div>div>div {
         margin-left: -180px
     }
+
+    .profile:not(.c)>div>div>div {
+        display: none;
+    }
+
+    .profile:not(.c)>div>div {
+        cursor: auto;
+    }
 }
 
 .parent .disabledMessage {
