@@ -12,7 +12,7 @@ import goTo from "../func/goTo.js";
 export default class Challenge extends Component {
     constructor(props) {
         super(props)
-        this.params = props.params
+        this.params = this.props.params
         this.regions = ["br", "euw", "eune", "jp", "kr", "lan", "las", "na", "oc", "tr"];
         this.tiers = ["NONE", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"]
 
@@ -21,6 +21,8 @@ export default class Challenge extends Component {
             tempRegion = "world"
         }
 
+
+        this.load = this.load.bind(this)
         this.error = this.error.bind(this)
 
         this.changeFilter = this.changeFilter.bind(this)
@@ -54,7 +56,18 @@ export default class Challenge extends Component {
         this.setState({ challenge: r })
     }
 
+    componentDidUpdate() {
+        if (this.props.params !== this.params) {
+            this.params = this.props;
+            window.location.reload()
+        }
+    }
+
     componentDidMount() {
+        this.load();
+    }
+
+    load() {
         document.title = "Loading..."
         get(`https://challenges.darkintaqt.com/api/v4/c/?id=${this.params.id}`, this.showChallenge, this.error);
     }
