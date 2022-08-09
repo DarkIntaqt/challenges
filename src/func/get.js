@@ -5,13 +5,17 @@ const get = async function (url = "/", callback = function (r) {
 }, debug = false) {
 
     if (typeof window.requestCache[url] !== "undefined") {
-        if (window.requestCache[url]["timestamp"] > Date.now() - (1000 * 60 * 15) + (1000 * 60 * 60 * window.timezoneoffset)) {
+        if (window.requestCache[url]["timestamp"] > Date.now() - (1000 * 60 * 15) + (1000 * 60 * 60 * window.timezoneoffset) && window.requestCache[url]["body"] !== "") {
             if (window.requestCache[url]["code"] === 200) {
                 callback(window.requestCache[url]["body"]);
             } else {
                 errorCallback(window.requestCache[url]["body"], window.requestCache[url]["code"])
             }
             return true
+        } else {
+            console.log("differnce");
+            console.log(window.requestCache[url]["timestamp"]);
+            console.log(Date.now() - (1000 * 60 * 15) + (1000 * 60 * 60 * window.timezoneoffset));
         }
     }
 
