@@ -256,7 +256,7 @@ export default class Challenge extends Component {
         let warnings = [];
         try {
             if (typeof challenge.challenge.tags["leaderboardManuallyEnabled"] !== "undefined") {
-                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"} key={"exp"}>Experimental leaderboards<br /><br />The API don't provide any data about this challenge, so the summoners on this leaderboard are collected by a machine. If you know someone with a higher score, just look them up</div>)
+                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"} key={"exp"}>Leaderboards might be incorrect due to a missing API to challenges without a leaderboard. We will update every summoner in our system, if you want to add a new summoner, just look them up. </div>)
             }
         } catch { }
         if (challenge.challenge.reversed) {
