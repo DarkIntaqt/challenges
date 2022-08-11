@@ -9,6 +9,7 @@ import { intToTier } from "../func/tierFunctions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import goTo from "../func/goTo.js";
 import start from "../css/start.module.css"
+import showChallengePath from "../func/showChallengePath.js"
 
 export default class Challenge extends Component {
     constructor(props) {
@@ -26,6 +27,9 @@ export default class Challenge extends Component {
         this.load = this.load.bind(this)
         this.error = this.error.bind(this)
 
+        this.loadChallenge = this.loadChallenge.bind(this)
+        this.loadChallenges = this.loadChallenges.bind(this)
+
         this.changeFilter = this.changeFilter.bind(this)
         this.showChallenge = this.showChallenge.bind(this)
         this.state = {
@@ -36,6 +40,7 @@ export default class Challenge extends Component {
                 timestamp: Date.now() / 1000,
                 challenge: {
                     id: 0,
+                    parent: 0,
                     translation: {
                         name: "Loading",
                         description: "Loading"
@@ -43,6 +48,8 @@ export default class Challenge extends Component {
                 }
             }
         }
+        this.challenge = "null"
+        this.challenges = "null"
     }
 
 
@@ -70,7 +77,22 @@ export default class Challenge extends Component {
 
     load() {
         document.title = "Loading..."
-        get(`https://challenges.darkintaqt.com/api/v4/c/?id=${this.params.id}`, this.showChallenge, this.error);
+        get(`https://challenges.darkintaqt.com/api/v4/c/?id=${this.params.id}`, this.loadChallenge, this.error);
+        get(`https://cdn.darkintaqt.com/lol/static/challenges-na1.json?t=${(new Date().getMonth() + 1).toString() + (new Date().getDate()).toString() + new Date().getFullYear().toString()}`, this.loadChallenges, this.error);
+    }
+
+    loadChallenge(challenge) {
+        this.challenge = challenge;
+        if (this.challenge !== "null" && this.challenges !== "null") {
+            this.showChallenge(this.challenge)
+        }
+    }
+
+    loadChallenges(challenges) {
+        this.challenges = challenges;
+        if (this.challenge !== "null" && this.challenges !== "null") {
+            this.showChallenge(this.challenge)
+        }
     }
 
     changeFilter(e) {
@@ -229,7 +251,7 @@ export default class Challenge extends Component {
                         // } else if (i < 100) {
                         //     pos = css.top100
                         // }
-                        summoner.push(<tr key={player[0] + player[3]} className={player[2]}>
+                        summoner.push(<tr key={player[0] + player[4] + i} className={player[2]}>
                             <td>#{i + 1}</td>
                             <td>
                                 <a href={"/" + player[4] + "/" + nameToURL(player[0])} onClick={goTo}>
@@ -256,16 +278,18 @@ export default class Challenge extends Component {
         let warnings = [];
         try {
             if (typeof challenge.challenge.tags["leaderboardManuallyEnabled"] !== "undefined") {
-                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"} key={"exp"}>Leaderboards might be incorrect due to a missing API to challenges without a leaderboard. We will update every summoner in our system, if you want to add a new summoner, just look them up. </div>)
+                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"} key={"exp"}>Leaderboards might be incorrect due to a missing API-leaderboard about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.  </div>)
             }
-        } catch { }
+        } catch (error) {
+            console.warn(error);
+        }
         if (challenge.challenge.reversed) {
             warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"} key={"reverse"}>This challenge is reversed. The less your points the better your placement</div>)
         }
 
         let thresholdTable = []
         for (let i = 1; i < thresholds.length; i++) {
-            thresholdTable.push(<tr>
+            thresholdTable.push(<tr key={"threshold" + i}>
                 <td className={intToTier(i - 1)} style={{ color: "var(--type)", textAlign: "center" }}>{intToTier(i - 1)}</td>
                 <td style={{ textAlign: "center" }}>{beautifyNum(thresholds[i])}</td>
                 <td>{Math.round(percentiles[intToTier(i - 1)] * 1000) / 10}%</td>
@@ -288,9 +312,16 @@ export default class Challenge extends Component {
                 {filters}
             </div>
 
-            <div class={css.doubleObject}>
+            <div className={css.doubleObject}>
                 <div className={css.rowParent}>
-
+                    <div className={css.seoArea}>
+                        <h2>About the challenge</h2>
+                        <span> Capstones, Titles and Subchallenges</span>
+                    </div>
+                    {this.challenges !== "null" && this.challenge !== "null"
+                        ? showChallengePath(this.challenges, this.challenge.challenge)
+                        : ""
+                    }
                 </div>
                 <div className={css.rowParent}>
                     <div className={css.seoArea}>

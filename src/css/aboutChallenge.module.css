@@ -1,0 +1,52 @@
+.pathArea {
+    width: 250px;
+}
+
+.category {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    margin: 3px auto;
+    width: 250px;
+    display: block;
+    float: left;
+    border: 2px solid var(--border);
+    background: var(--dark);
+    padding: 10px;
+    box-sizing: border-box;
+    height: 72px;
+    border-radius: 5px;
+}
+
+.category>img {
+    margin: 0 98px;
+}
+
+.line {
+    width: 0;
+    margin: 0 124px;
+    float: left;
+    height: 15px;
+    border-left: 2px dashed var(--border);
+}
+
+.category>p {
+    margin-top: 2px;
+    text-align: center;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.category.this {
+    border: 2px solid var(--element)
+}
+
+.category img.capstone {
+    height: 20px;
+    width: 20px;
+    left: -10px;
+    margin: 0;
+    top: -10px;
+    filter: brightness(.3);
+    position: absolute;
+}

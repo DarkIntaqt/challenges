@@ -719,3 +719,8 @@
     border-radius: 8px;
     background-color: var(--side);
 }
+
+.doubleObject>.rowParent {
+    max-height: 370px;
+    overflow: scroll;
+}
