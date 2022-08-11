@@ -5,9 +5,11 @@ export default function FAQ() {
             "My challenges are not updating",
             "That's bad. Usually, challenges update arround every 15 minutes, leaderboards around every 6 hours (maybe longer due to caching at Riot Games server). If your challenges don't update at all, you may contact me on twitter: @darkintaqt"
         ],
+        ["The leaderboard positions are wrong",
+            "That is our fault. Our leaderboard positions, escpecially the top leaderboards positions are more up to date than the Riot ones. We will keep it that way to serve more accurate leaderboards, sorry about your rankings :/"]
         [
-            "My challenge doesn't update even though I'm over the threshold",
-            "I am aware of this problem and I could just show the higher rank, but since this is not displayed in the client either we should just wait for Riot Games to upgrade your challenge rank."
+        "My challenge doesn't update even though I'm over the threshold",
+        "I am aware of this problem and I could just show the higher rank, but since this is not displayed in the client either we should just wait for Riot Games to upgrade your challenge rank."
         ],
         [
             "I don't want to appear here.",
