@@ -42,7 +42,7 @@ export default function HeaderNFooter() {
                         <p>League Challenges</p>
                     </Link>
                 </div>
-                <div className={StyleSheet.centerFooter}>
+                <div className={StyleSheet.centerFooter} data-nosnippet>
                     <p>'Challenges.DarkIntaqt.Com' isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.<br /><br />Huge thanks to <a href="https://www.communitydragon.org" target="_blank" rel="noreferrer">CommunityDragon</a> for hosting the assets. </p>
                 </div>
                 <div className={StyleSheet.rightFooter}>
