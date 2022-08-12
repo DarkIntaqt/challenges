@@ -38,7 +38,7 @@ export default function HeaderNFooter() {
             <div className={"object1000"}>
                 <div className={StyleSheet.leftFooter}>
                     <Link to={"/"}>
-                        <img src={logo} alt="Logo"></img>
+                        <img src={logo} alt="Logo" width={50} height={50}></img>
                         <p>League Challenges</p>
                     </Link>
                 </div>
