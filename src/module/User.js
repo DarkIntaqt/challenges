@@ -9,6 +9,7 @@ import { beautifyNum } from "../func/beautify.ts"
 import { intToTier, tierToInt } from "../func/tierFunctions";
 import { toggleValue } from "../func/arrayManipulationFunctions.ts";
 import goTo from "../func/goTo.js";
+import { strtolower } from "../func/stringManipulation.js"
 
 export default class User extends Component {
     constructor(props) {
@@ -500,10 +501,14 @@ export default class User extends Component {
 
     render() {
 
+        const profiletext = "view " + this.state.name + "'s profile on u.gg";
+
         return <div className="object1000">
             <div className={this.state.type + " " + css.profile} style={this.state.extraStyle}>
                 <img src={this.state.profileImage} alt="" />
-                <h1>{this.state.name}</h1>
+                <h1>{this.state.name}
+                    {typeof this.state.name === "object" ? null : <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(this.state.name)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profiletext} title={profiletext}></img></a>}
+                </h1>
                 {this.state.title["title"] !== "<span style='opacity:0;'>No title</span>" ? <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }}></span><div><b>{this.state.title["tier"]} Tier Title</b><br />{this.state.title["description"]}<br /><i>Need {beautifyNum(this.state.title["threshold"])}</i></div></h2> : ''}
                 <div className={css.selections}>
                     <div style={{ backgroundImage: "url('" + this.state.selections["img1"] + "')" }}>
@@ -553,6 +558,7 @@ export default class User extends Component {
             <div className={css.parent}>
                 {this.state.challenges}
             </div>
+            {typeof this.state.name === "object" ? null : <p className={css.legal}><span data-nosnippet>The U.GG logo belongs to U.GG. Read more <a href="/faq#h4" onClick={goTo}>here</a>. <br />Click <a href="/faq" onClick={goTo}>here</a> to get any open questions aobut this page answered. </span></p>}
         </div>
     }
 }

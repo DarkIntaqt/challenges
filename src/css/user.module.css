@@ -4,9 +4,33 @@
     }
 }
 
+a.uggarea {
+    display: inline-block;
+}
+
+img.ugglogo {
+    border-left: 2px solid var(--dborder);
+    padding: 0 0 0 10px;
+    margin: 0 0 0 10px;
+    height: 1.2rem;
+    width: 3.6rem;
+}
+
 .profile {
     width: 100%;
     float: left;
+}
+
+.legal {
+    font-size: .8rem;
+    color: var(--dborder);
+    width: calc(100% - 30px);
+    float: left;
+    margin: 10px 15px;
+}
+
+.legal a {
+    color: white;
 }
 
 .profile>img {
@@ -718,9 +742,4 @@
     box-sizing: border-box;
     border-radius: 8px;
     background-color: var(--side);
-}
-
-.doubleObject>.rowParent {
-    max-height: 370px;
-    overflow: scroll;
 }

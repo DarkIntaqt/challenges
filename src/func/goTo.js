@@ -7,7 +7,7 @@ export default function goTo(e, replace = false) {
     }
     e.preventDefault();
     let url = new URL(e.currentTarget.href);
-    url = url["pathname"] + url["search"];
+    url = url["pathname"] + url["search"] + url["hash"];
     if (replace) {
         window.reactNavigate(url, { replace: true })
         return true;
