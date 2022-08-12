@@ -5,15 +5,21 @@ export default function FAQ() {
             "My challenges are not updating",
             "That's bad. Usually, challenges update arround every 15 minutes, leaderboards around every 6 hours (maybe longer due to caching at Riot Games server). If your challenges don't update at all, you may contact me on twitter: @darkintaqt"
         ],
-        ["The leaderboard positions are wrong",
-            "That is our fault. Our leaderboard positions, escpecially the top leaderboards positions are more up to date than the Riot ones. We will keep it that way to serve more accurate leaderboards, sorry about your rankings :/"]
         [
-        "My challenge doesn't update even though I'm over the threshold",
-        "I am aware of this problem and I could just show the higher rank, but since this is not displayed in the client either we should just wait for Riot Games to upgrade your challenge rank."
+            "The leaderboard positions are wrong",
+            "That is our fault. Our leaderboard positions, escpecially the top leaderboards positions are more up to date than the Riot ones. We will keep it that way to serve more accurate leaderboards, sorry about your rankings :/"
+        ],
+        [
+            "My challenge doesn't update even though I'm over the threshold",
+            "I am aware of this problem and I could just show the higher rank, but since this is not displayed in the client either we should just wait for Riot Games to upgrade your challenge rank."
         ],
         [
             "I don't want to appear here.",
             "That's sad but ok, so just send me a direct message on twitter: @darkintaqt, and I'll try to remove oyu within the next 1-2 days. However, this will not prevent you from being lookup up by users who know your name and your username could be displayed longer (1-4 weeks) in search engines."
+        ],
+        [
+            "What about to U.GG logo on a users profile page?",
+            "This website is allowed to use the U.GG logo, but is not affiliated with U.GG. You can visit U.GG <a href=\"https://u.gg\">here</a>"
         ],
         [
             "What about my privacy and the data you collect about me?",
@@ -33,7 +39,7 @@ export default function FAQ() {
 
     for (let i = 0; i < faqs.length; i++) {
         const element = faqs[i];
-        content.push(<div key={i}>
+        content.push(<div key={i} id={"h" + i}>
             <h2>{element[0]}</h2>
             <p dangerouslySetInnerHTML={{ __html: element[1] }}></p>
         </div>)
@@ -41,7 +47,14 @@ export default function FAQ() {
 
     document.title = "Frequently Asked Questions | League of Legends Challenge Tracker"
 
-
+    if (window.location.hash !== "") {
+        setTimeout(() => {
+            if (document.getElementById(window.location.hash.substring(1))) {
+                document.getElementById(window.location.hash.substring(1)).scrollIntoView({ behavior: "smooth", block: "center" })
+                document.getElementById(window.location.hash.substring(1)).style.borderColor = "white"
+            }
+        }, 50)
+    }
 
     return <div className={"object1000 faq CHALLENGER"}>
         <h1>Frequently Asked questions</h1>
