@@ -331,17 +331,6 @@ img.ugglogo {
 .alphabetic-a-z>.alphabetic-z-a,
 .alphabetic-z-a>.alphabetic-a-z,
 .titles>.titles,
-.world>.world,
-.br>.br,
-.euw>.euw,
-.eune>.eune,
-.jp>.jp,
-.kr>.kr,
-.lan>.lan,
-.las>.las,
-.na>.na,
-.oc>.oc,
-.tr>.tr,
 .newLine>.selected {
     color: #fcba03;
 }
