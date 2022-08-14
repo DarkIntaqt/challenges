@@ -158,6 +158,13 @@ export default class Challenge extends Component {
         }
 
         let icon = "https://lolcdn.darkintaqt.com/s/C-" + challenge.icon + "-master"
+
+        if (challenge.challenge.id < 10 || challenge.challenge.id === 2022000) {
+            if (challenge.challenge.id !== 0) {
+                icon = "https://cdn.darkintaqt.com/lol/static/challenges/" + challenge.challenge.translation.name.toLowerCase().replace(" ", "") + ".svg"
+            }
+        }
+
         let isLoading = ""
         // Not loaded yet
         if (challenge.icon === 1) {

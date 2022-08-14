@@ -70,7 +70,7 @@ export default function showChallengePath(challenges, challenge) {
                     ? <img src={capstone} alt="" className={aboutChallenge.capstone} />
                     : null}
 
-                <LazyLoadImage height={28} width={28} src={"https://cdn.darkintaqt.com/lol/static/challenges/" + category.translation.name.toLowerCase().replace(" ", "") + ".webp"} alt={""} />
+                <LazyLoadImage height={28} width={28} src={"https://cdn.darkintaqt.com/lol/static/challenges/" + category.translation.name.toLowerCase().replace(" ", "") + ".svg"} alt={""} />
 
                 <p>
                     {category.translation.name}
@@ -127,7 +127,7 @@ export default function showChallengePath(challenges, challenge) {
                 <img src={capstone} alt="" className={aboutChallenge.capstone} />
                 : null}
 
-            <LazyLoadImage height={28} width={28} src={"https://cdn.darkintaqt.com/lol/static/challenges/" + category.translation.name.toLowerCase().replace(" ", "") + ".webp"} alt={""} />
+            <LazyLoadImage height={28} width={28} src={"https://cdn.darkintaqt.com/lol/static/challenges/" + category.translation.name.toLowerCase().replace(" ", "") + ".svg"} alt={""} />
 
             <p>
                 {category.translation.name}

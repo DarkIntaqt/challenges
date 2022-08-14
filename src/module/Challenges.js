@@ -257,7 +257,7 @@ export default class Challenges extends Component {
                 <div className={css.tags}>
                     <div>
                         <p>{parentName.charAt(0).toUpperCase() + parentName.slice(1)} Category</p>
-                        <img src={"https://cdn.darkintaqt.com/lol/static/challenges/" + parentName.toLowerCase().replaceAll(" ", "") + ".webp"} alt="" />
+                        <img src={"https://cdn.darkintaqt.com/lol/static/challenges/" + parentName.toLowerCase().replaceAll(" ", "") + ".svg"} alt="" />
                     </div>
                     {queueIds}
                     {obtainable}
@@ -336,31 +336,31 @@ export default class Challenges extends Component {
                     <div className={challengeCSS.category} category="category">
                         <p className={challengeCSS.cheading}>Category</p>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/teamwork.webp"} alt="" />
+                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/teamwork.svg"} alt="" />
                             Teamwork
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/imagination.webp"} alt="" />
+                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/imagination.svg"} alt="" />
                             Imagination
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/veterancy.webp"} alt="" />
+                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/veterancy.svg"} alt="" />
                             Veterancy
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/collection.webp"} alt="" />
+                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/collection.svg"} alt="" />
                             Collection
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/expertise.webp"} alt="" />
+                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/expertise.svg"} alt="" />
                             Expertise
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/legacy.webp"} alt="" />
+                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/legacy.svg"} alt="" />
                             Legacy
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/2022seasonal.webp"} alt="" />
+                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/2022seasonal.svg"} alt="" />
                             2022 Seasonal
                         </button>
                     </div>
