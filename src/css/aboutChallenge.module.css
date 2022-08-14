@@ -1,9 +1,14 @@
 .pathArea {
     width: 200px;
-    float: right;
+    float: left;
 }
 
-.category {
+.area>.category {
+    margin: 3px 10px;
+}
+
+.category,
+.showMore {
     position: relative;
     color: white;
     text-decoration: none;
@@ -32,6 +37,7 @@ p.faqcapstone {
     font-size: .8rem;
 }
 
+
 .line {
     width: 0;
     margin: 0 99px;
@@ -40,7 +46,8 @@ p.faqcapstone {
     border-left: 2px dashed var(--border);
 }
 
-.category>p {
+.category>p,
+.showMore>p {
     margin-top: 4px;
     text-align: center;
     font-size: .8rem;
@@ -66,7 +73,29 @@ p.faqcapstone {
     filter: unset
 }
 
-.category:hover {
+.category:hover,
+.showMore:hover {
     transition: .3s;
     border: 2px solid var(--element);
+}
+
+.showMore {
+    width: 160px;
+    height: 36px;
+    margin: 3px 30px;
+    cursor: pointer;
+}
+
+.area {
+    max-height: 320px;
+    height: 320px;
+}
+
+.area>p,
+.pathArea>p {
+    color: var(--dborder);
+    font-size: .8rem;
+    color: white;
+    font-weight: normal;
+    text-align: center;
 }

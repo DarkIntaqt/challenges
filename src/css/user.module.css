@@ -732,3 +732,8 @@ img.ugglogo {
     border-radius: 8px;
     background-color: var(--side);
 }
+
+.rightSection {
+    width: 220px;
+    float: right;
+}

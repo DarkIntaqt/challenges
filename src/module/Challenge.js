@@ -10,6 +10,9 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import goTo from "../func/goTo.js";
 import start from "../css/start.module.css"
 import showChallengePath from "../func/showChallengePath.js"
+import ShowChildChallenges from "../func/getChildChallenges";
+
+//import excss from "../css/aboutChallenge.module.css"
 
 export default class Challenge extends Component {
     constructor(props) {
@@ -289,7 +292,7 @@ export default class Challenge extends Component {
 
         let thresholdTable = []
         for (let i = 1; i < thresholds.length; i++) {
-            thresholdTable.push(<tr key={"threshold" + i}>
+            thresholdTable.unshift(<tr key={"threshold" + i}>
                 <td className={intToTier(i - 1)} style={{ color: "var(--type)", textAlign: "center" }}>{intToTier(i - 1)}</td>
                 <td style={{ textAlign: "center" }}>{beautifyNum(thresholds[i])}</td>
                 <td>{Math.round(percentiles[intToTier(i - 1)] * 1000) / 10}%</td>
@@ -316,10 +319,18 @@ export default class Challenge extends Component {
                 <div className={css.rowParent}>
                     <div className={css.seoArea}>
                         <h2>About the challenge</h2>
-                        <span> Capstones, Titles and Subchallenges</span>
+                        <span> Capstones and Subchallenges</span>
+                    </div>
+                    <div>
+
                     </div>
                     {this.challenges !== "null" && this.challenge !== "null"
-                        ? showChallengePath(this.challenges, this.challenge.challenge)
+                        ? <Fragment>
+                            {showChallengePath(this.challenges, this.challenge.challenge)}
+                            <div className={css.rightSection}>
+                                <ShowChildChallenges challenges={this.challenges} challengeid={this.challenge.challenge.id} />
+                            </div>
+                        </Fragment>
                         : ""
                     }
                 </div>

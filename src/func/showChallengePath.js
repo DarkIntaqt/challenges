@@ -4,6 +4,7 @@ import aboutChallenge from "../css/aboutChallenge.module.css"
 import { Fragment } from "react";
 import capstone from "../img/capstone.svg"
 import goTo from "../func/goTo.js";
+import generateObject from "./generateChallengeBlock"
 
 export default function showChallengePath(challenges, challenge) {
     // getChallenge
@@ -34,19 +35,34 @@ export default function showChallengePath(challenges, challenge) {
             // returns only the challenges, as it is the key-capstone
             return <div className={aboutChallenge.pathArea}>
 
-                {generateObject(challenge, false)}
+                <p>Capstones</p>
 
-                <div className={aboutChallenge.line}></div>
+                {typeof challenge.tags.isCapstone === "undefined"
+                    ?
+                    <div className={aboutChallenge.line}></div>
 
-                <p className={aboutChallenge.faqcapstone}>
-                    {capstonetext}
-                </p>
+                    : null}
+
+                {generateObject(challenge, false, challenge.id)}
+
+                {typeof challenge.tags.isCapstone !== "undefined"
+                    ? <Fragment>
+                        <div className={aboutChallenge.line}></div>
+
+                        <p className={aboutChallenge.faqcapstone}>
+                            {capstonetext}
+                        </p>
+                    </Fragment>
+                    : null}
+
             </div>
 
         }
 
         // else return challenge and parent (key-capstone)
         return <div className={aboutChallenge.pathArea}>
+
+            <p>Capstones</p>
 
             <a href={"/challenge/" + category.id} className={aboutChallenge.category} onClick={goTo}>
 
@@ -61,13 +77,17 @@ export default function showChallengePath(challenges, challenge) {
                 </p>
             </a>
 
-            {generateObject(challenge)}
+            {generateObject(challenge, true, challenge.id)}
 
-            <div className={aboutChallenge.line}></div>
+            {typeof challenge.tags.isCapstone !== "undefined"
+                ? <Fragment>
+                    <div className={aboutChallenge.line}></div>
 
-            <p className={aboutChallenge.faqcapstone}>
-                {capstonetext}
-            </p>
+                    <p className={aboutChallenge.faqcapstone}>
+                        {capstonetext}
+                    </p>
+                </Fragment>
+                : null}
         </div>
     }
 
@@ -98,54 +118,9 @@ export default function showChallengePath(challenges, challenge) {
     }
 
 
-    /**
-     * Function to generate a react object which shows a challenge
-     * @param {object} content 
-     * @param {boolean} genLine 
-     * @returns React object containing the name and the image of a challenge
-     */
-    function generateObject(content, genLine = true) {
-
-        // Additional stylesheet might be needed, as the challenge will be colored blue if it is the current one
-        let additionalStylesheet = ""
-
-        if (content.id === challenge.id) {
-
-            additionalStylesheet = " " + aboutChallenge.this
-
-        }
-
-        return <Fragment key={content.id}>
-
-            {genLine ?
-                <div className={aboutChallenge.line}></div>
-                : null}
-
-            <a href={"/challenge/" + content.id} className={aboutChallenge.category + additionalStylesheet} onClick={goTo}>
-
-                {typeof content.tags.isCapstone !== "undefined"
-                    ? <img src={capstone} alt="" className={aboutChallenge.capstone} /> :
-                    null}
-
-                <LazyLoadImage height={28} width={28} src={
-                    "https://lolcdn.darkintaqt.com/s/C-" + (content.id * 3).toString(16) + "-master"
-                } alt={""} />
-
-                <p>
-
-                    {content.translation.name}
-
-                </p>
-
-            </a>
-
-        </Fragment>
-    }
-
-
     // Returns the right section of the challenge page, containing all the paths the current challenge has
     return <div className={aboutChallenge.pathArea}>
-
+        <p>Capstones</p>
         <a href={"/challenge/" + category.id} className={aboutChallenge.category} onClick={goTo}>
 
             {typeof category.tags.isCapstone !== "undefined" ?
@@ -163,7 +138,7 @@ export default function showChallengePath(challenges, challenge) {
 
         {generateObject(parent)}
 
-        {generateObject(challenge)}
+        {generateObject(challenge, true, challenge.id)}
 
         {typeof challenge.tags.isCapstone !== "undefined" ?
             <p className={aboutChallenge.faqcapstone}>{capstonetext}</p>
