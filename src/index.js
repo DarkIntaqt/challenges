@@ -77,13 +77,15 @@ root.render(<BrowserRouter>
 // Reload window when changes are detected
 let lastCheckedTimestamp = new Date().getTime()
 
+window.reloadLocation = false
+
 setInterval(() => {
   let now = new Date().getTime()
   if ((now - lastCheckedTimestamp) > 60000) {
     lastCheckedTimestamp = now
     get("https://challenges.darkintaqt.com/api/v2/v/?t=" + now, function (e) {
       if (e[0] !== window.versionHash) {
-        document.location.reload()
+        window.reloadLocation = true
       }
     }, function () { document.location.reload() });
   }
