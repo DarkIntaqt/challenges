@@ -332,18 +332,17 @@ export default class Challenge extends Component {
                         <h2>About the challenge</h2>
                         <span> Capstones and Subchallenges</span>
                     </div>
-                    <div>
-
+                    <div className={css.miniFlex}>
+                        {this.challenges !== "null" && this.challenge !== "null"
+                            ? <Fragment>
+                                {showChallengePath(this.challenges, this.challenge.challenge)}
+                                <div className={css.rightSection}>
+                                    <ShowChildChallenges challenges={this.challenges} challengeid={this.challenge.challenge.id} />
+                                </div>
+                            </Fragment>
+                            : <div className={css.placeholder + " " + css.loading} />
+                        }
                     </div>
-                    {this.challenges !== "null" && this.challenge !== "null"
-                        ? <Fragment>
-                            {showChallengePath(this.challenges, this.challenge.challenge)}
-                            <div className={css.rightSection}>
-                                <ShowChildChallenges challenges={this.challenges} challengeid={this.challenge.challenge.id} />
-                            </div>
-                        </Fragment>
-                        : ""
-                    }
                 </div>
                 <div className={css.rowParent}>
                     <div className={css.seoArea}>
