@@ -242,7 +242,7 @@ export default class Challenge extends Component {
                     }
                 }
                 if (summoners.length === 0) {
-                    summoner = <div className={css.disabledMessage + " GRANDMASTER"}>No high-ranked summoners yet<br /><br /><span className={css.details}>Due to API limitations we can only show players ranked MASTER+</span></div>
+                    summoner = []
                 } else {
                     for (let i = 0; i < summoners.length; i++) {
                         const player = summoners[i];
@@ -290,12 +290,23 @@ export default class Challenge extends Component {
             warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"} key={"reverse"}>This challenge is reversed. The less your points the better your placement</div>)
         }
 
+        if (summoner.length === 0) {
+            warnings.push(<div className={css.disabledMessage + " GRANDMASTER"}>No high-ranked summoners yet<br /><br /><span className={css.details}>Due to API limitations we can only show players ranked MASTER+</span></div>)
+        }
+
         let thresholdTable = []
         for (let i = 1; i < thresholds.length; i++) {
+
+            let lineThrough = { textDecoration: "none", fontStyle: "normal", textAlign: "center" };
+            if (thresholds[i] === "-" && percentiles[intToTier(i - 1)] === 0) {
+                lineThrough.textDecoration = "line-through";
+                lineThrough.fontStyle = "italic";
+            }
+
             thresholdTable.unshift(<tr key={"threshold" + i}>
-                <td className={intToTier(i - 1)} style={{ color: "var(--type)", textAlign: "center" }}>{intToTier(i - 1)}</td>
-                <td style={{ textAlign: "center" }}>{beautifyNum(thresholds[i])}</td>
-                <td>{Math.round(percentiles[intToTier(i - 1)] * 1000) / 10}%</td>
+                <td className={intToTier(i - 1)} style={{ color: "var(--type)", textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{intToTier(i - 1)}</td>
+                <td style={lineThrough}>{beautifyNum(thresholds[i])}</td>
+                <td style={lineThrough}>{Math.round(percentiles[intToTier(i - 1)] * 1000) / 10}%</td>
             </tr>)
         }
 
