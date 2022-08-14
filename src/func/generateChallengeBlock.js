@@ -22,6 +22,13 @@ export default function generateObject(content, genLine = true, challengeId = -1
 
     }
 
+    let imageurl = "https://lolcdn.darkintaqt.com/s/C-" + (content.id * 3).toString(16) + "-master"
+    if (content.id < 10) {
+        if (content.id !== 0) {
+            imageurl = "https://cdn.darkintaqt.com/lol/static/challenges/" + content.translation.name.toLowerCase().replace(" ", "") + ".webp"
+        }
+    }
+
     return <Fragment key={content.id}>
 
         {genLine ?
@@ -33,14 +40,8 @@ export default function generateObject(content, genLine = true, challengeId = -1
             {typeof content.tags.isCapstone !== "undefined"
                 ? <img src={capstone} alt="" className={aboutChallenge.capstone} /> :
                 null}
-            {challengeId < 10 && challengeId !== 0
-                ? <LazyLoadImage height={28} width={28} src={
-                    "https://cdn.darkintaqt.com/lol/static/challenges/" + content.translation.name.toLowerCase().replace(" ", "") + ".webp"
-                } alt={""} />
-                : <LazyLoadImage height={28} width={28} src={
-                    "https://lolcdn.darkintaqt.com/s/C-" + (content.id * 3).toString(16) + "-master"
-                } alt={""} />
-            }
+
+            <LazyLoadImage height={28} width={28} src={imageurl} alt={""} />
 
             <p>
 
