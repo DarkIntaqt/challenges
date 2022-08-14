@@ -44,6 +44,16 @@ export default class ShowChildChallenges extends Component {
 
             let childChallenges = challenges.map((challenge) => {
 
+                if (challengeId === 0) {
+
+                    if ([600006, 600010, 600011].includes(challenge.id)) {
+
+                        return []
+
+                    }
+
+                }
+
                 if (parseInt(challenge.parent) === challengeId && challenge.id !== challengeId) {
 
                     counter++;
