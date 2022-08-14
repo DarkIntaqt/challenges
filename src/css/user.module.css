@@ -668,33 +668,6 @@ img.ugglogo {
     background-color: transparent !important;
 }
 
-@media only screen and (max-width: 1050px) {
-    .rowParent {
-        background: transparent;
-        overflow: auto;
-    }
-
-    .rowParent table tr td:nth-child(5),
-    .rowParent table tr th:nth-child(5) {
-        display: none
-    }
-
-    .rowParent table tr td:nth-child(2),
-    .rowParent table tr th:nth-child(2) {
-        width: 40%;
-        white-space: nowrap;
-    }
-
-    .rowParent table tr td:nth-child(4),
-    .rowParent table tr th:nth-child(4) {
-        width: 35%;
-    }
-
-    .rowParent table th {
-        padding: 8px 0;
-    }
-}
-
 .rowParent .seoArea {
     width: 100%;
     padding: 5px 0 10px;
@@ -736,4 +709,63 @@ img.ugglogo {
 .rightSection {
     width: 220px;
     float: right;
+}
+
+@media only screen and (max-width: 1050px) {
+    .rowParent {
+        background: transparent;
+        overflow: auto;
+    }
+
+    .rowParent table tr td:nth-child(5),
+    .rowParent table tr th:nth-child(5) {
+        display: none
+    }
+
+    .rowParent table tr td:nth-child(2),
+    .rowParent table tr th:nth-child(2) {
+        width: 40%;
+        white-space: nowrap;
+    }
+
+    .rowParent table tr td:nth-child(4),
+    .rowParent table tr th:nth-child(4) {
+        width: 35%;
+    }
+
+    .rowParent table th {
+        padding: 8px 0;
+    }
+}
+
+.placeholder {
+    width: 100%;
+    height: 320px;
+    border-radius: 5px;
+    float: left;
+}
+
+.placeholder.loading {
+    background: linear-gradient(110deg, var(--side) 8%, var(--dark) 18%, var(--side) 33%);
+    background-size: 200% 100%;
+    animation: 1s shine linear infinite;
+}
+
+@media only screen and (max-width:970px) {
+    .doubleObject {
+        display: block;
+    }
+
+    .doubleObject>div {
+        width: calc(100% - 20px);
+        margin: 10px;
+    }
+
+    .miniFlex {
+        height: 320px;
+        width: 100%;
+        float: left;
+        justify-content: center;
+        display: flex;
+    }
 }
