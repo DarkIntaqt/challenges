@@ -380,7 +380,7 @@ export default class Challenges extends Component {
                             Eternals
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src="https://cdn.darkintaqt.com/lol/static/challenges/clash.webp?v2" alt="" />
+                            <img src="https://cdn.darkintaqt.com/lol/static/challenges/clash.webp" alt="" />
                             Clash
                         </button>
                         <button onClick={this.changeFilter}>
