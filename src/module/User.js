@@ -34,7 +34,7 @@ export default class User extends Component {
         };
         this.state = {
             extraStyle: { display: "block" },
-            expandFilterOptions: false,
+            expandFilterOptions: { display: "none" },
             alphabet: "a-z",
             points: ["0", "1"],
             selections: {
@@ -492,10 +492,10 @@ export default class User extends Component {
     }
 
     toggleFilters() {
-        if (this.state.expandFilterOptions) {
-            this.setState({ expandFilterOptions: false })
+        if (this.state.expandFilterOptions.display === "none") {
+            this.setState({ expandFilterOptions: { display: "block" } })
         } else {
-            this.setState({ expandFilterOptions: true })
+            this.setState({ expandFilterOptions: { display: "none" } })
         }
     }
 
@@ -535,25 +535,23 @@ export default class User extends Component {
                 <button className={css.levelup} onClick={this.changeFilter} id="levelup">Next Levelup</button>
                 <button className={css["alphabetic-" + this.state.alphabet]} onClick={this.changeFilter} id={"alphabetic-" + this.state.alphabet}>{this.state.alphabet.toUpperCase()}</button>
                 <button className={css.titles} onClick={this.changeFilter} id="titles">Titles</button>
-                <button className={css.moreFilter} onClick={this.toggleFilters} id="morefilter">{!this.state.expandFilterOptions ? 'Expand' : 'Collapse'} more filters {(this.filters.gamemode.length + this.filters.category.length + this.filters.type.length) > 0 ? "(" + (this.filters.gamemode.length + this.filters.category.length + this.filters.type.length) + " applied)" : ''}</button>
-                {this.state.expandFilterOptions ?
-                    <Fragment>
-                        <div className={css.newLine}>
-                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="progression">Progression</button>
-                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="ingame">Ingame</button>
-                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="eternals">Eternals</button>
-                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="clash">Clash</button>
-                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="collect">Collect</button>
-                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="ranked">Ranked</button>
-                            <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="profile">Profile</button>
-                        </div>
-                        <div className={css.newLine}>
-                            <button className={css.timestamp} type="gamemode" onClick={this.changeExtraFilter} id="summonersrift">Summoners Rift</button>
-                            <button className={css.timestamp} type="gamemode" onClick={this.changeExtraFilter} id="aram">ARAM</button>
-                            <button className={css.timestamp} type="gamemode" onClick={this.changeExtraFilter} id="bot">Coop vs AI</button>
-                        </div>
-                    </Fragment>
-                    : ''}
+                <button className={css.moreFilter} onClick={this.toggleFilters} id="morefilter">{this.state.expandFilterOptions.display === "none" ? 'Expand' : 'Collapse'} more filters {(this.filters.gamemode.length + this.filters.category.length + this.filters.type.length) > 0 ? "(" + (this.filters.gamemode.length + this.filters.category.length + this.filters.type.length) + " applied)" : ''}</button>
+
+                <div className={css.newLine} style={this.state.expandFilterOptions}>
+                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="progression">Progression</button>
+                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="ingame">Ingame</button>
+                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="eternals">Eternals</button>
+                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="clash">Clash</button>
+                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="collect">Collect</button>
+                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="ranked">Ranked</button>
+                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="profile">Profile</button>
+                </div>
+                <div className={css.newLine} style={this.state.expandFilterOptions}>
+                    <button className={css.timestamp} type="gamemode" onClick={this.changeExtraFilter} id="summonersrift">Summoners Rift</button>
+                    <button className={css.timestamp} type="gamemode" onClick={this.changeExtraFilter} id="aram">ARAM</button>
+                    <button className={css.timestamp} type="gamemode" onClick={this.changeExtraFilter} id="bot">Coop vs AI</button>
+                </div>
+
             </div>
             <div className={css.parent}>
                 {this.state.challenges}
