@@ -394,7 +394,7 @@ export default class Challenge extends Component {
             content = this.state.message;
         }
 
-        return <div className={"object1000 " + css.cc}>
+        return <div className={"object1000"}>
             {content}
         </div>
     }
