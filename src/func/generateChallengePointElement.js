@@ -1,6 +1,8 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import css from "./../css/challenges.module.css"
 import goTo from "../func/goTo.js";
+import { checkExists } from "./arrayManipulationFunctions.ts";
+
 
 
 export default function generateChallengePointElement(challenge, leaderboards) {
@@ -10,7 +12,7 @@ export default function generateChallengePointElement(challenge, leaderboards) {
 
     for (let i = 0; i < regions.length; i++) {
         for (let ii = 0; ii < leaderboards.summoner[regions[i]].length; ii++) {
-            if (typeof counters[regions[i]] === "undefined") {
+            if (!checkExists(counters[regions[i]])) {
                 counters[regions[i]] = 1
             }
             leaderboards.summoner[regions[i]][ii].push(regions[i])

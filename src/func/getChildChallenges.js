@@ -1,6 +1,8 @@
 import css from "../css/aboutChallenge.module.css"
 import generateObject from "./generateChallengeBlock";
 import { Component } from "react";
+import { checkExists } from "./arrayManipulationFunctions.ts";
+
 
 /**
  * 
@@ -13,7 +15,7 @@ export default class ShowChildChallenges extends Component {
 
         super(props)
 
-        if (typeof this.props.challenges === "undefined" || typeof this.props.challengeid === "undefined") {
+        if (!checkExists(this.props.challenges) || !checkExists(this.props.challengeid)) {
 
             this.challenges = []
             this.challengeId = -1;

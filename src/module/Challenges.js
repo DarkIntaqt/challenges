@@ -6,6 +6,7 @@ import challengeCSS from "../css/challenges.module.css"
 import getChallenge from "../func/getChallenge"
 import generateChallengePointElement from "../func/generateChallengePointElement"
 import goTo from "../func/goTo.js";
+import { checkExists } from "../func/arrayManipulationFunctions.ts"
 
 export default class Challenges extends Component {
     constructor(props) {
@@ -30,7 +31,7 @@ export default class Challenges extends Component {
         let server = getServer("machine", window.region)
         this.server = server;
 
-        if ("undefined" === typeof window.challengeLeaderboards || (typeof window.challengeLeaderboards !== "undefined" && window.challengeLeaderboards === "")) {
+        if (!checkExists(window.challengeLeaderboards) || (checkExists(window.challengeLeaderboards) && window.challengeLeaderboards === "")) {
             get("https://challenges.darkintaqt.com/api/v3/c/?id=0", this.loadLeaderboards)
         } else {
             this.loadLeaderboards(window.challengeLeaderboards)
@@ -68,12 +69,7 @@ export default class Challenges extends Component {
 
         let challengeObject = [];
 
-        function checkFor(variable) {
-            if (typeof variable === "undefined") {
-                return false
-            }
-            return true
-        }
+
         for (let i = 0; i < challenges.length; i++) {
             const challenge = challenges[i];
             if (challenge.id < 10) {
@@ -89,18 +85,18 @@ export default class Challenges extends Component {
             let ranks = ["NONE", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"];
             for (let i2 = 1; i2 < ranks.length; i2++) {
                 const rank = ranks[i2];
-                if (typeof challenge.thresholds[rank] !== "undefined") {
+                if (checkExists(challenge.thresholds[rank])) {
                     highestTier = ranks[i2]
                 }
             }
 
             try {
-                if (checkFor(challenge.tags["parent"])) {
+                if (checkExists(challenge.tags["parent"])) {
                     let c = 0;
                     let parentChallengeId = parseInt(challenge.tags["parent"])
                     while (c < 10) {
                         let currentChallenge = getChallenge(parentChallengeId)
-                        if (checkFor(currentChallenge["tags"]["parent"]) && currentChallenge.id > 10) {
+                        if (checkExists(currentChallenge["tags"]["parent"]) && currentChallenge.id > 10) {
                             parentChallengeId = parseInt(getChallenge(parentChallengeId)["tags"]["parent"])
                         } else {
                             c = 10;
@@ -109,7 +105,7 @@ export default class Challenges extends Component {
                     parentName = getChallenge(parentChallengeId)["translation"]["name"]
                 } else if ([600006, 600010, 600011, 0].includes(challenge.id)) {
                     parentName = "legacy"
-                } else if (checkFor(challenge.tags["isCapstone"])) {
+                } else if (checkExists(challenge.tags["isCapstone"])) {
                     parentName = challenge.translation.name
                 } else {
                     parentName = "Error LL77"

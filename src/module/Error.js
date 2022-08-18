@@ -1,7 +1,9 @@
 import notFound from "./../img/not-found.png"
+import { checkExists } from "../func/arrayManipulationFunctions.ts";
+
 export default function Error(props) {
     let message;
-    if (typeof props.message === "undefined") {
+    if (!checkExists(props.message)) {
         message = "Not found"
     } else {
         message = props.message.status.message
