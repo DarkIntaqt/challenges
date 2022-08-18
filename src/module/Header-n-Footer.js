@@ -3,11 +3,8 @@ import { Fragment } from "react"
 import StyleSheet from "../css/header.module.css";
 import logo from "../img/logo.png";
 import Ad from "./Ad"
-import { useNavigate } from "react-router-dom";
 
 export default function HeaderNFooter() {
-
-    window.reactNavigate = useNavigate()
 
     const messages = ["provide feedback", "open source", "request feature"];
     const message = messages[Math.floor(Math.random() * messages.length)]
