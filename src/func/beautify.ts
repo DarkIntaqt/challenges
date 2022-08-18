@@ -1,6 +1,9 @@
+// @ts-ignore
+import { checkExists } from "./arrayManipulationFunctions.ts";
+
 // beautify numbers - add dots to < 1M and shortend larger numbers
 export function beautifyNum(num: number, minify: boolean = true) {
-    if (typeof num === "undefined") {
+    if (!checkExists(num)) {
         return "0"
     }
     if (typeof num === "string") {

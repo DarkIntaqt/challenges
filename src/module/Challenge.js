@@ -11,6 +11,7 @@ import goTo from "../func/goTo.js";
 import start from "../css/start.module.css"
 import showChallengePath from "../func/showChallengePath.js"
 import ShowChildChallenges from "../func/getChildChallenges";
+import { checkExists } from "../func/arrayManipulationFunctions.ts";
 
 //import excss from "../css/aboutChallenge.module.css"
 
@@ -187,7 +188,7 @@ export default class Challenge extends Component {
             }
 
             icon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-        } else if (challenge.challenge.leaderboard === true || typeof challenge.challenge.tags["leaderboardManuallyEnabled"] !== "undefined") {
+        } else if (challenge.challenge.leaderboard === true || checkExists(challenge.challenge.tags["leaderboardManuallyEnabled"])) {
             thresholds = challenge.stats[server("machine", region)]
             percentiles = challenge.stats["percentiles-" + server("machine", region)]
 
@@ -207,7 +208,7 @@ export default class Challenge extends Component {
                     let counters = {};
                     for (let i = 0; i < regions.length; i++) {
                         for (let ii = 0; ii < challenge.summoner[regions[i]].length; ii++) {
-                            if (typeof counters[regions[i]] === "undefined") {
+                            if (!checkExists(counters[regions[i]])) {
                                 counters[regions[i]] = 1
                             }
                             challenge.summoner[regions[i]][ii].push(regions[i])
@@ -287,7 +288,7 @@ export default class Challenge extends Component {
         }
         let warnings = [];
         try {
-            if (typeof challenge.challenge.tags["leaderboardManuallyEnabled"] !== "undefined") {
+            if (checkExists(challenge.challenge.tags["leaderboardManuallyEnabled"])) {
                 warnings.push(<div className={css.disabledMessage + " GRANDMASTER"} key={"exp"}>Leaderboards might be incorrect due to a missing API-leaderboard about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.  </div>)
             }
         } catch (error) {

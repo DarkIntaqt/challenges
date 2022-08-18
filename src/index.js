@@ -15,15 +15,9 @@ import FAQ from './module/FAQ'
 import Title from './module/Title'
 import Challenges from "./module/Challenges"
 import get from "./func/get";
+import { checkExists as checkFor } from './func/arrayManipulationFunctions.ts';
 import config from './config';
 import VariableProxy from './module/VariableProxy';
-
-function checkFor(variable) {
-  if (typeof variable === "undefined") {
-    return false
-  }
-  return true
-}
 
 
 function main() {
@@ -35,6 +29,7 @@ function main() {
       window[key] = windowVariables[key]
     }
   });
+  
 
   if (window.gC("_Cregion")) {
     window.region = window.gC("_Cregion")
@@ -46,6 +41,7 @@ function main() {
 
     document.cookie = "_Cregion=" + window.region + ";expires=" + expires + ";path=/;Secure"
   }
+  
 
   const ScrollToTop = ({ children }) => {
     const location = useLocation();
@@ -77,6 +73,7 @@ function main() {
   // Reload window when changes are detected
   let lastCheckedTimestamp = new Date().getTime()
 
+
   setInterval(() => {
     let now = new Date().getTime()
     if ((now - lastCheckedTimestamp) > 60000) {
@@ -89,6 +86,9 @@ function main() {
     }
   }, config.config.reloadAfter);
 
+
 }
 
+
+// launch app
 main();

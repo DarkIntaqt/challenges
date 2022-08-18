@@ -1,7 +1,7 @@
 // toggles a value of an array, removes or add it as called
 export function toggleValue(toggleObject: object, toAdd: string | boolean | number) {
     // Check if all arguments are set
-    if (typeof toggleObject === "undefined" || typeof toAdd === "undefined") {
+    if (!checkExists(toggleObject) || !checkExists(toAdd)) {
         throw new Error("Not all parameters provided, but required");
     }
 
@@ -29,4 +29,15 @@ export function toggleValue(toggleObject: object, toAdd: string | boolean | numb
     }
 
     return { method: method, result: toggleObject }
+}
+
+export function checkExists(exists: any) {
+    try {
+        if (typeof exists === "undefined") {
+            return false
+        }
+    } catch (error) {
+        return false
+    }
+    return true
 }

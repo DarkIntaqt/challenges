@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import capstone from "../img/capstone.svg"
 import goTo from "../func/goTo.js";
 import generateObject from "./generateChallengeBlock"
+import { checkExists } from "./arrayManipulationFunctions.ts";
 
 export default function showChallengePath(challenges, challenge) {
     // getChallenge
@@ -37,7 +38,7 @@ export default function showChallengePath(challenges, challenge) {
 
                 <p>Capstones</p>
 
-                {typeof challenge.tags.isCapstone === "undefined"
+                {!checkExists(challenge.tags.isCapstone)
                     ?
                     <div className={aboutChallenge.line}></div>
 
@@ -45,7 +46,7 @@ export default function showChallengePath(challenges, challenge) {
 
                 {generateObject(challenge, false, challenge.id)}
 
-                {typeof challenge.tags.isCapstone !== "undefined"
+                {checkExists(challenge.tags.isCapstone)
                     ? <Fragment>
                         <div className={aboutChallenge.line}></div>
 
@@ -66,7 +67,7 @@ export default function showChallengePath(challenges, challenge) {
 
             <a href={"/challenge/" + category.id} className={aboutChallenge.category} onClick={goTo}>
 
-                {typeof category.tags.isCapstone !== "undefined"
+                {checkExists(category.tags.isCapstone)
                     ? <img src={capstone} alt="" className={aboutChallenge.capstone} />
                     : null}
 
@@ -79,7 +80,7 @@ export default function showChallengePath(challenges, challenge) {
 
             {generateObject(challenge, true, challenge.id)}
 
-            {typeof challenge.tags.isCapstone !== "undefined"
+            {checkExists(challenge.tags.isCapstone)
                 ? <Fragment>
                     <div className={aboutChallenge.line}></div>
 
@@ -123,7 +124,7 @@ export default function showChallengePath(challenges, challenge) {
         <p>Capstones</p>
         <a href={"/challenge/" + category.id} className={aboutChallenge.category} onClick={goTo}>
 
-            {typeof category.tags.isCapstone !== "undefined" ?
+            {checkExists(category.tags.isCapstone) ?
                 <img src={capstone} alt="" className={aboutChallenge.capstone} />
                 : null}
 
@@ -140,7 +141,7 @@ export default function showChallengePath(challenges, challenge) {
 
         {generateObject(challenge, true, challenge.id)}
 
-        {typeof challenge.tags.isCapstone !== "undefined" ?
+        {checkExists(challenge.tags.isCapstone) ?
             <p className={aboutChallenge.faqcapstone}>{capstonetext}</p>
             : null}
     </div>

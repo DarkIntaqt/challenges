@@ -3,6 +3,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component"
 import aboutChallenge from "../css/aboutChallenge.module.css"
 import goTo from "./goTo"
 import capstone from "../img/capstone.svg"
+import { checkExists } from "./arrayManipulationFunctions.ts"
 
 
 /**
@@ -37,7 +38,7 @@ export default function generateObject(content, genLine = true, challengeId = -1
 
         <a href={"/challenge/" + content.id} className={aboutChallenge.category + additionalStylesheet} onClick={goTo}>
 
-            {typeof content.tags.isCapstone !== "undefined"
+            {checkExists(content.tags.isCapstone)
                 ? <img src={capstone} alt="" className={aboutChallenge.capstone} /> :
                 null}
 

@@ -10,6 +10,7 @@ import { intToTier, tierToInt } from "../func/tierFunctions";
 import { toggleValue } from "../func/arrayManipulationFunctions.ts";
 import goTo from "../func/goTo.js";
 import { strtolower } from "../func/stringManipulation.js"
+import { checkExists } from "../func/arrayManipulationFunctions.ts"
 
 export default class User extends Component {
     constructor(props) {
@@ -60,7 +61,7 @@ export default class User extends Component {
     showUser(r) {
 
         // Cancel if the challenge config hasn't been loaded (yet)
-        if (typeof window.JSONPREQUEST === "undefined") {
+        if (!checkExists(window.JSONPREQUEST)) {
             return
         }
 
@@ -145,7 +146,7 @@ export default class User extends Component {
                 let leaderboardposition = ""; // set when player has a position and not just a percentile
 
                 // get threshold for dynamic leaderboards
-                if (c.leaderboard === true && typeof challenge.position !== "undefined") {
+                if (c.leaderboard === true && checkExists(challenge.position)) {
                     switch (challenge.tier) {
                         case "GRANDMASTER":
                             p = c["leaderboardThresholds"][3] ?? 0
@@ -158,13 +159,13 @@ export default class User extends Component {
                             break;
                     }
                     position = "#" + beautifyNum(p + challenge.position, false);
-                    if (challenge.position <= 100 && typeof challenge["globalPosition"] !== "undefined") {
+                    if (challenge.position <= 100 && checkExists(challenge["globalPosition"])) {
                         position = position + " (#" + challenge.globalPosition + " World)";
                     }
                     position += " - ";
                 }
 
-                if (typeof c["thresholds"][nexttier] !== "undefined") {
+                if (checkExists(c["thresholds"][nexttier])) {
                     next = c["thresholds"][nexttier]
                 } else {
                     next = c["thresholds"][challenge.tier]
@@ -292,10 +293,10 @@ export default class User extends Component {
             challenges.sort(function (a, b) {
                 if (tierToInt(a["tier"]) === tierToInt(b["tier"])) {
                     if (a["percentile"] === b["percentile"]) {
-                        if (typeof a["position"] === "undefined") {
+                        if (!checkExists(a["position"])) {
                             return 1;
                         } else {
-                            if (typeof b["position"] === "undefined") {
+                            if (!checkExists(b["position"])) {
                                 return -1
                             } else {
                                 return a["position"] < b["position"] ? -1 : 1
@@ -325,7 +326,7 @@ export default class User extends Component {
                 let nextLevelA, nextLevelB
 
                 let challenge = getChallenge(a["id"]);
-                if (typeof challenge["thresholds"][getNextLevel(a["tier"])] !== "undefined") {
+                if (checkExists(challenge["thresholds"][getNextLevel(a["tier"])])) {
                     nextLevelA = challenge["thresholds"][getNextLevel(a["tier"])]
                 } else {
                     nextLevelA = challenge["thresholds"][a["tier"]] ? challenge["thresholds"][a["tier"]] : 1;
@@ -338,7 +339,7 @@ export default class User extends Component {
 
                 challenge = getChallenge(b["id"]);
 
-                if (typeof challenge["thresholds"][getNextLevel(b["tier"])] !== "undefined") {
+                if (checkExists(challenge["thresholds"][getNextLevel(b["tier"])])) {
                     nextLevelB = challenge["thresholds"][getNextLevel(b["tier"])]
                 } else {
                     nextLevelB = challenge["thresholds"][b["tier"]] ? challenge["thresholds"][b["tier"]] : 1;
@@ -378,10 +379,10 @@ export default class User extends Component {
         if (filter === "percentile") {
             challenges.sort(function (a, b) {
                 if (a["percentile"] === b["percentile"]) {
-                    if (typeof a["position"] === "undefined") {
+                    if (!checkExists(a["position"])) {
                         return 1;
                     } else {
-                        if (typeof b["position"] === "undefined") {
+                        if (!checkExists(b["position"])) {
                             return -1
                         } else {
                             return a["position"] < b["position"] ? -1 : 1
