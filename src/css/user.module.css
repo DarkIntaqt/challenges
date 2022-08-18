@@ -184,6 +184,18 @@ img.ugglogo {
     font-size: 0.8rem;
 }
 
+.challenge:hover>.title>span>.hideOnHover {
+    display: none;
+}
+
+.showOnHover {
+    display: none;
+}
+
+.challenge:hover>.title>span>.showOnHover {
+    display: inherit;
+}
+
 .challenge img {
     width: 20px;
     height: 20px;

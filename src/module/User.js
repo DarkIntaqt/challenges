@@ -188,7 +188,7 @@ export default class User extends Component {
 
                 // set xxx time ago instead of position when the timestamp filter is set
                 if (this.filter === "timestamp") {
-                    leaderboardposition = <span><Timestamp date={challenge.achievedTimestamp} /></span>
+                    leaderboardposition = <span><span className={css.hideOnHover}><Timestamp date={challenge.achievedTimestamp} /></span><span className={css.showOnHover}><Timestamp date={challenge.achievedTimestamp} type="static" /></span></span>
                 } else {
                     leaderboardposition = <span>{position}Top {(Math.round(challenge.percentile * 10000) / 100)}%</span>
                 }
