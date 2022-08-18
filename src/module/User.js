@@ -1,4 +1,4 @@
-import { Component, Fragment } from "react";
+import { Component } from "react";
 import Error from "./Error"
 import get from "../func/get"
 import css from "../css/user.module.css";
