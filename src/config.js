@@ -27,7 +27,19 @@ const config = {
     },
     "config": {
         "reloadAfter": 3600000
-    }
+    },
+    "regions": [
+        "br",
+        "euw",
+        "eune",
+        "jp",
+        "kr",
+        "lan",
+        "las",
+        "na",
+        "oc",
+        "tr"
+    ]
 }
 
 

@@ -2,11 +2,11 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import css from "./../css/challenges.module.css"
 import goTo from "../func/goTo.js";
 import { checkExists } from "./arrayManipulationFunctions.ts";
-
+import config from "../config";
 
 
 export default function generateChallengePointElement(challenge, leaderboards) {
-    let regions = ["br", "euw", "eune", "jp", "kr", "lan", "las", "na", "oc", "tr"];
+    let regions = config.regions
     let summoner = []
     let counters = {};
 

@@ -12,6 +12,7 @@ import start from "../css/start.module.css"
 import showChallengePath from "../func/showChallengePath.js"
 import ShowChildChallenges from "../func/getChildChallenges";
 import { checkExists } from "../func/arrayManipulationFunctions.ts";
+import config from "../config";
 
 //import excss from "../css/aboutChallenge.module.css"
 
@@ -19,7 +20,7 @@ export default class Challenge extends Component {
     constructor(props) {
         super(props)
         this.params = this.props.params
-        this.regions = ["br", "euw", "eune", "jp", "kr", "lan", "las", "na", "oc", "tr"];
+        this.regions = config.regions
         this.tiers = ["NONE", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"]
 
         let tempRegion = props.query.toLowerCase();
