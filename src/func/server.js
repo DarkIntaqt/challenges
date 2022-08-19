@@ -1,34 +1,35 @@
 function serverToHumanReadable(server) {
     switch (server) {
         case "br1":
-            server = "br"
-            break;
+            return "br"
+
         case "euw1":
-            server = "euw"
-            break;
+            return "euw"
+
         case "eun1":
-            server = "eune"
-            break;
+            return "eune"
+
         case "jp1":
-            server = "jp"
-            break;
+            return "jp"
+
         case "kr":
             break;
+
         case "la1":
-            server = "lan"
-            break;
+            return "lan"
+
         case "la2":
-            server = "las"
-            break;
+            return "las"
+
         case "na1":
-            server = "na"
-            break;
+            return "na"
+
         case "oc1":
-            server = "oc"
-            break;
+            return "oc"
+
         case "tr1":
-            server = "tr"
-            break;
+            return "tr"
+
         default:
             break;
     }
@@ -38,34 +39,35 @@ function serverToHumanReadable(server) {
 function serverToMachineReadable(server) {
     switch (server) {
         case "br":
-            server = "br1"
-            break;
+            return "br1"
+
         case "euw":
-            server = "euw1"
-            break;
+            return "euw1"
+
         case "eune":
-            server = "eun1"
-            break;
+            return "eun1"
+
         case "jp":
-            server = "jp1"
-            break;
+            return "jp1"
+
         case "kr":
             break;
+
         case "lan":
-            server = "la1"
-            break;
+            return "la1"
+
         case "las":
-            server = "la2"
-            break;
+            return "la2"
+
         case "na":
-            server = "na1"
-            break;
+            return "na1"
+
         case "oc":
-            server = "oc1"
-            break;
+            return "oc1"
+
         case "tr":
-            server = "tr1"
-            break;
+            return "tr1"
+
         default:
             break;
     }
@@ -76,43 +78,43 @@ function serverToRegionString(server) {
     switch (server) {
         case "br":
         case "br1":
-            server = "Brazil"
-            break;
+            return "Brazil"
+
         case "euw":
         case "euw1":
-            server = "Europe West"
-            break;
+            return "Europe West"
+
         case "eune":
         case "eun1":
-            server = "Europe Nordic & East"
-            break;
+            return "Europe Nordic & East"
+
         case "jp":
         case "jp1":
-            server = "Japan"
-            break;
+            return "Japan"
+
         case "kr":
-            server = "Korea"
-            break;
+            return "Korea"
+
         case "lan":
         case "la1":
-            server = "Latin America North"
-            break;
+            return "Latin America North"
+
         case "las":
         case "la2":
-            server = "Latin America South"
-            break;
+            return "Latin America South"
+
         case "na":
         case "na1":
-            server = "North America"
-            break;
+            return "North America"
+
         case "oc":
         case "oc1":
-            server = "Oceania"
-            break;
+            return "Oceania"
+
         case "tr":
         case "tr1":
-            server = "Turkey"
-            break;
+            return "Turkey"
+
         default:
             break;
     }
