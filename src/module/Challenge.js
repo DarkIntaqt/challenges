@@ -21,7 +21,7 @@ export default class Challenge extends Component {
         super(props)
         this.params = this.props.params
         this.regions = config.regions
-        this.tiers = ["NONE", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"]
+        this.tiers = config.tiers
 
         let tempRegion = props.query.toLowerCase();
         if (!this.regions.includes(tempRegion)) {

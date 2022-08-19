@@ -39,6 +39,18 @@ const config = {
         "na",
         "oc",
         "tr"
+    ],
+    "tiers": [
+        "NONE",
+        "IRON",
+        "BRONZE",
+        "SILVER",
+        "GOLD",
+        "PLATINUM",
+        "DIAMOND",
+        "MASTER",
+        "GRANDMASTER",
+        "CHALLENGER"
     ]
 }
 

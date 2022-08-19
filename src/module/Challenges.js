@@ -7,6 +7,7 @@ import getChallenge from "../func/getChallenge"
 import generateChallengePointElement from "../func/generateChallengePointElement"
 import goTo from "../func/goTo.js";
 import { checkExists } from "../func/arrayManipulationFunctions.ts"
+import config from "../config"
 
 export default class Challenges extends Component {
     constructor(props) {
@@ -82,7 +83,7 @@ export default class Challenges extends Component {
                 }
             }
             let highestTier = "NONE", queueIds = [], parentName = "crystal", obtainable = [];
-            let ranks = ["NONE", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"];
+            let ranks = config.tiers
             for (let i2 = 1; i2 < ranks.length; i2++) {
                 const rank = ranks[i2];
                 if (checkExists(challenge.thresholds[rank])) {
