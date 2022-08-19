@@ -1,6 +1,6 @@
 import { Component } from "react"
 import get from "../func/get"
-import getServer from "../func/server"
+import { serverToMachineReadable } from "../func/server"
 import css from "../css/user.module.css"
 import challengeCSS from "../css/challenges.module.css"
 import getChallenge from "../func/getChallenge"
@@ -28,7 +28,7 @@ export default class Challenges extends Component {
     }
 
     load() {
-        let server = getServer("machine", window.region)
+        let server = serverToMachineReadable(window.region)
         this.server = server;
 
         if (!checkExists(window.challengeLeaderboards) || (checkExists(window.challengeLeaderboards) && window.challengeLeaderboards === "")) {

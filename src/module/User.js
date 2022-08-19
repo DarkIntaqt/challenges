@@ -4,7 +4,7 @@ import get from "../func/get"
 import css from "../css/user.module.css";
 import getChallenge from "../func/getChallenge";
 import Timestamp from "react-timestamps"
-import getServer from "../func/server"
+import { serverToMachineReadable } from "../func/server"
 import { beautifyNum } from "../func/beautify.ts"
 import { intToTier, tierToInt } from "../func/tierFunctions";
 import { toggleValue } from "../func/arrayManipulationFunctions.ts";
@@ -423,7 +423,7 @@ export default class User extends Component {
     }
 
     load() {
-        let server = getServer("machine", this.params.server)
+        let server = serverToMachineReadable(this.params.server)
 
         this.server = server
 
