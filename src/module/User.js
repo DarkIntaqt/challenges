@@ -73,6 +73,52 @@ export default class User extends Component {
 
         let challenges = [];
 
+
+        const searchedBefore = localStorage.getItem("_search")
+
+        if (searchedBefore !== null) {
+
+            let parsedList = false
+
+            try {
+
+                parsedList = JSON.parse(searchedBefore)
+
+            } catch (error) {
+
+                console.error(error);
+
+            } finally {
+
+                let skip = false
+
+                for (let i = 0; i < parsedList.length; i++) {
+
+                    if (parsedList[i][1] === r.name) { skip = true }
+
+                }
+
+                if (skip === false) {
+                    parsedList.splice(0, 0, [this.params.server, r.name, Math.round(parseInt(r.icon, 16) / 7)])
+
+                    if (parsedList.length > 5) {
+
+                        parsedList = parsedList.slice(0, 5)
+
+                    }
+
+                    localStorage.setItem("_search", JSON.stringify(parsedList))
+
+                }
+            }
+        } else {
+
+            localStorage.setItem("_search", JSON.stringify([[this.params.server, r.name, Math.round(parseInt(r.icon, 16) / 7)]]))
+
+        }
+
+
+
         function getNextLevel(current) {
             let ranks = ["UNRANKED", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"]
             for (let i = 0; i < ranks.length; i++) {
