@@ -137,7 +137,7 @@
 
 .recentlySearched {
     width: 560px;
-    margin: 0 220px 0;
+    margin: 0 220px;
     position: absolute;
     box-sizing: border-box;
     z-index: 999999;
