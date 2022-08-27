@@ -773,6 +773,7 @@ p.availableTitle {
 p.availableTitle img {
     width: 1rem;
     float: left;
+    margin-right: 3px;
     height: 1rem;
 }
 
