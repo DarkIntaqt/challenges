@@ -40,6 +40,7 @@ export default class Challenge extends Component {
             message: -1,
             filter: tempRegion,
             challenge: {
+                title: [],
                 icon: 1,
                 timestamp: Date.now() / 1000,
                 challenge: {
@@ -318,8 +319,6 @@ export default class Challenge extends Component {
             </tr>)
         }
 
-
-
         let content = <Fragment>
             <div className={"MASTER " + css.c + " " + css.profile + " " + css["cid" + challenge.challenge.id]}>
                 <img src={icon} alt="" />
@@ -327,7 +326,15 @@ export default class Challenge extends Component {
                     ? <span data-nosnippet>(Updated <Timestamp date={challenge.timestamp * 1000} />)</span>
                     : <span data-nosnippet></span>
                 }</h1>
-                <p className={"SILVER " + css.challengeDescription} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}</p>
+                <p className={"SILVER " + css.challengeDescription} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}
+
+                    {challenge.title.length > 0
+                        ? <Fragment><br />
+                            <p className={css.availableTitle + " " + challenge.title[0][0]}><img src={"https://cdn.darkintaqt.com/lol/static/challenges/title.svg"} alt="Title" />{challenge.title[0][1]}</p>
+                        </Fragment>
+                        : null}
+
+                </p>
             </div>
 
             <div className={start.filter + " " + start[this.state.filter]}>

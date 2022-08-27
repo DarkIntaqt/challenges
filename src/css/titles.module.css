@@ -10,6 +10,7 @@
     border: 2px solid var(--type);
     padding: 10px;
     margin: 20px 0;
+    background: var(--side);
     display: block;
     text-decoration: none;
     cursor: pointer;
