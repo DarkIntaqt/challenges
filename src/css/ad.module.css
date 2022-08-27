@@ -25,6 +25,7 @@
 .ad {
     z-index: 99;
     float: left;
+    position: relative;
     min-height: 20px;
     width: 300px;
     border-radius: 10px;

@@ -165,7 +165,7 @@ export default class Start extends Component {
 
         <div className={StyleSheet.searchbar}>
           <i className={"fa-solid fa-magnifying-glass"} id="search-submit"></i>
-          <input type="text" id="search" placeholder="Enter summoner name to look up challenges" onFocus={this.toggleRecent} onBlur={this.toggleRecent} />
+          <input type="text" id="search" placeholder="Enter summoner name to look up challenges" onFocus={this.toggleRecent} onBlur={this.toggleRecent} autoComplete="off" />
           <div className={StyleSheet.recentlySearched} id={StyleSheet.recentlySearched} style={{ display: this.state.display }}>
             {recentlySearchedFor}
           </div>

@@ -140,7 +140,7 @@
     margin: 0 220px 0;
     position: absolute;
     box-sizing: border-box;
-    z-index: 150;
+    z-index: 999999;
     border-radius: 0 0 10px 10px;
 }
 
