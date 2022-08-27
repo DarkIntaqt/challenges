@@ -227,3 +227,9 @@ a.searchedUser>span {
         display: none !important;
     }
 }
+
+@media only screen and (max-width:1700px) {
+    .start .serverselector {
+        margin-bottom: 170px !important
+    }
+}
