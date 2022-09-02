@@ -37,7 +37,7 @@ const config = {
         432, 4, 8, /* astronaut bard */
         104, 4, 5, /* pool party graves */
         114, 4, 1, /* fiora */
-        21, 4, 18, /* halloween miss fortune */
+        131, 4, 26, /* divine diana */
         60, 4, 6, /* halloween elise */
         99, 4, 29, /* lux */
         78, 4, 14 /* xmas poppy */
