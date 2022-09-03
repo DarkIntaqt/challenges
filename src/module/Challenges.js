@@ -1,3 +1,4 @@
+import challengeModuleCSS from "../css/challengeObject.module.css"
 import { Component } from "react"
 import get from "../func/get"
 import getServer from "../func/server"
@@ -5,8 +6,8 @@ import css from "../css/user.module.css"
 import challengeCSS from "../css/challenges.module.css"
 import getChallenge from "../func/getChallenge"
 import generateChallengePointElement from "../func/generateChallengePointElement"
-import goTo from "../func/goTo.js";
 import { checkExists } from "../func/arrayManipulationFunctions.ts"
+import ChallengeObject from "../ChallengeObject"
 
 export default class Challenges extends Component {
     constructor(props) {
@@ -244,22 +245,23 @@ export default class Challenges extends Component {
                 continue
             }
 
-            challengeObject.push(<a className={highestTier + " " + css.challenge + " " + css.CROWN + " " + css.overview} href={"/challenge/" + challenge.id} onClick={goTo} key={"cid" + challenge.id}>
-                <p className={css.title}>
-                    {challenge.translation.name}
-                    <span>{parentName}</span>
-                </p>
-                <p className={css.description}>{challenge.translation.description}</p>
-                <div className={css.tags}>
+            challengeObject.push(<ChallengeObject
+                key={challenge.id + crypto.randomUUID()}
+                href={"/challenge/" + challenge.id}
+                tier={highestTier}
+                nexttier={["CROWN", "overview"]}
+                title={challenge.translation.name}
+                subtitle={<span>{parentName}</span>}
+                description={challenge.translation.description}
+                queueIds={<div className={challengeModuleCSS.tags}>
                     <div>
                         <p>{parentName.charAt(0).toUpperCase() + parentName.slice(1)} Category</p>
                         <img src={"https://cdn.darkintaqt.com/lol/static/challenges/" + parentName.toLowerCase().replaceAll(" ", "") + ".svg"} alt="" />
                     </div>
                     {queueIds}
                     {obtainable}
-                </div>
-
-            </a>)
+                </div>}
+            />)
         }
         this.setState({ challenges: challengeObject })
     }

@@ -1,16 +1,17 @@
-import userCss from "./css/user.module.css";
-
+import ChallengeObject from "./ChallengeObject";
+import challengeCSS from "./css/challengeObject.module.css"
 
 function fillLoadingUI() {
     let loadingUIObject = []
     for (let i = 0; i < 16; i++) {
         loadingUIObject.push(
-            <a key={i} className={userCss.challenge + " UNRANKED " + userCss.loading} href="#loading">
-                <p className={userCss.title}>Loading
-                    <span>Loading</span>
-                </p>
-                <p className={userCss.description}>Loading</p>
-            </a>
+            <ChallengeObject
+                title="Loading"
+                tier={challengeCSS["loading"]}
+                subtitle={<span>#</span>}
+                description="..."
+                key={i}
+                href={"#"} />
         )
     }
     return loadingUIObject;
