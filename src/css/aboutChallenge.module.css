@@ -17,7 +17,7 @@
     display: block;
     float: left;
     border: 2px solid var(--border);
-    background: var(--dark);
+    background: var(--inner);
     padding: 5px 10px;
     box-sizing: border-box;
     height: 60px;

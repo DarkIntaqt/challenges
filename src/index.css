@@ -8,9 +8,10 @@ body {
 }
 
 :root {
-  --side: rgb(14, 13, 13);
+  --side: rgb(28, 28, 32);
   --border: rgba(255, 255, 255, 0.1);
-  --dark: #151517;
+  --inner: rgb(36, 36, 40);
+  --dark: rgb(21, 21, 25);
   --element: #0cbdf7;
   --dborder: #ced2d6;
   --win: #4287f5;
