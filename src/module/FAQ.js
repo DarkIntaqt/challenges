@@ -39,7 +39,9 @@ export default function FAQ() {
 
     for (let i = 0; i < faqs.length; i++) {
         const element = faqs[i];
-        content.push(<div key={i} id={"h" + i}>
+        content.push(<div key={i} id={"h" + i} style={{
+            "background": "var(--dark1)"
+        }}>
             <h2>{element[0]}</h2>
             <p dangerouslySetInnerHTML={{ __html: element[1] }}></p>
         </div>)
