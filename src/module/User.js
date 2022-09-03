@@ -300,7 +300,7 @@ export default class User extends Component {
                 // push challenge to list
                 challenges.push(<ChallengeObject
                     tier={challenge.tier}
-                    nexttier={css[nexttier]}
+                    nexttier={nexttier}
                     title={c.translation.name}
                     subtitle={leaderboardposition}
                     description={c.translation.description}

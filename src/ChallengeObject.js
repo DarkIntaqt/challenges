@@ -34,9 +34,11 @@ export default function ChallengeObject(params) {
     let extraTags = challenge[1];
     if (challenge[0] !== "") {
         if (typeof challenge[1] === "object") {
-            extraTags = challenge[1].map(function (tag) {
-                return " " + css[tag]
-            })
+            extraTags = " " + challenge[1].map(function (tag) {
+                return css[tag]
+            }).join(" ")
+        } else {
+            extraTags = " " + css[challenge[1]]
         }
     }
 
