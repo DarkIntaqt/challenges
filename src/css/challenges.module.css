@@ -26,7 +26,7 @@
 .filter>input {
     width: 80%;
     margin: 10px 10%;
-    background: var(--inner);
+    background: var(--dark2);
     color: white;
     padding: 8px 20px;
     box-sizing: border-box;
@@ -37,8 +37,8 @@
 }
 
 .filter>input:focus {
-    border-color: var(--element);
-    box-shadow: 0 0 5px var(--element);
+    border-color: var(--selected);
+    box-shadow: 0 0 5px var(--selected);
 }
 
 .filter p.info {
@@ -73,7 +73,7 @@
 .filter .selectors .category>button {
     font-size: 1rem;
     color: rgb(200, 200, 200);
-    background: var(--inner);
+    background: var(--dark2);
     margin: 5px 0;
     border-radius: 15px;
     border: none;
@@ -108,7 +108,7 @@
 }
 
 .filter .selectors .category>button.selected {
-    color: var(--element);
+    color: var(--selected);
     padding-left: 20px;
 }
 
@@ -183,7 +183,7 @@
     font-size: 0.8rem;
     padding: calc(10px + 0.2rem) 10px 10px 5px;
     border-radius: 5px 0 0 5px;
-    color: var(--dborder)
+    color: var(--light2)
 }
 
 .miniLeaderboard>div>p.name {
@@ -196,7 +196,7 @@
     font-size: 0.8rem;
     padding: calc(10px + 0.2rem) 5px 10px 0px;
     border-radius: 0 5px 5px 0;
-    color: var(--dborder)
+    color: var(--light2)
 }
 
 @media only screen and (max-width:1050px) {

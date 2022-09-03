@@ -98,9 +98,9 @@
 
 .start .serverselector .region,
 .filterOption {
-    background: var(--dark);
+    background: var(--dark0);
     width: 40px;
-    box-shadow: 0 0 8px 0 var(--dark);
+    box-shadow: 0 0 8px 0 var(--dark0);
     color: #bbb;
     border-radius: 4px;
     cursor: pointer;
@@ -114,7 +114,7 @@
     min-width: 40px;
     width: auto;
     padding: 5px 10px;
-    background: var(--side);
+    background: var(--dark1);
 }
 
 .world>.world,
@@ -129,9 +129,9 @@
 .oc>.oc,
 .tr>.tr,
 .start .serverselector .region.selected {
-    background: var(--element);
+    background: var(--selected);
     color: #fff;
-    box-shadow: 0 0 8px 2px var(--element)
+    box-shadow: 0 0 8px 2px var(--selected)
 }
 
 
@@ -157,27 +157,27 @@ a.searchedUser {
     text-decoration: none;
     background-color: white;
     padding: 13px 10px;
-    border-bottom: 1px solid var(--dborder);
-    border-left: 2px solid var(--element);
-    border-right: 2px solid var(--element);
+    border-bottom: 1px solid var(--light2);
+    border-left: 2px solid var(--selected);
+    border-right: 2px solid var(--selected);
 }
 
 a.searchedUser:hover {
-    background: var(--dborder);
+    background: var(--light2);
 }
 
 a.searchedUser span.userRegion {
     font-size: .6rem;
-    color: var(--inner);
+    color: var(--dark2);
     margin-left: 2px;
 }
 
 a.searchedUser:first-child {
-    border-top: 2px solid var(--element);
+    border-top: 2px solid var(--selected);
 }
 
 a.searchedUser:last-child {
-    border-bottom: 2px solid var(--element);
+    border-bottom: 2px solid var(--selected);
     border-radius: 0 0 8px 8px;
 }
 

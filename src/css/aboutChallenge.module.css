@@ -16,8 +16,8 @@
     width: 200px;
     display: block;
     float: left;
-    border: 2px solid var(--border);
-    background: var(--inner);
+    border: 2px solid var(--dark3);
+    background: var(--dark2);
     padding: 5px 10px;
     box-sizing: border-box;
     height: 60px;
@@ -33,7 +33,7 @@ p.faqcapstone {
     float: left;
     text-align: justify;
     margin: 10px 0;
-    color: var(--dborder);
+    color: var(--light2);
     font-size: .8rem;
 }
 
@@ -43,7 +43,7 @@ p.faqcapstone {
     margin: 0 99px;
     float: left;
     height: 12px;
-    border-left: 2px dashed var(--border);
+    border-left: 2px dashed var(--dark3);
 }
 
 .category>p,
@@ -56,7 +56,7 @@ p.faqcapstone {
 }
 
 .category.this {
-    border: 2px solid var(--element)
+    border: 2px solid var(--selected)
 }
 
 .category img.capstone {
@@ -76,7 +76,7 @@ p.faqcapstone {
 .category:hover,
 .showMore:hover {
     transition: .3s;
-    border: 2px solid var(--element);
+    border: 2px solid var(--selected);
 }
 
 .showMore {
@@ -93,7 +93,7 @@ p.faqcapstone {
 
 .area>p,
 .pathArea>p {
-    color: var(--dborder);
+    color: var(--light2);
     font-size: .8rem;
     font-weight: normal;
     text-align: center;

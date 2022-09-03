@@ -9,7 +9,7 @@ a.uggarea {
 }
 
 img.ugglogo {
-    border-left: 2px solid var(--dborder);
+    border-left: 2px solid var(--light2);
     padding: 0 0 0 10px;
     margin: 0 0 0 10px;
     height: 1.2rem;
@@ -23,7 +23,7 @@ img.ugglogo {
 
 .legal {
     font-size: .8rem;
-    color: var(--dborder);
+    color: var(--light2);
     width: calc(100% - 30px);
     float: left;
     margin: 10px 15px;
@@ -41,7 +41,7 @@ img.ugglogo {
     box-shadow: 0 0 15px var(--type);
     margin: 20px 10px;
     border-radius: 10px;
-    background: linear-gradient(110deg, var(--side) 8%, var(--inner) 18%, var(--side) 33%);
+    background: linear-gradient(110deg, var(--dark1) 8%, var(--dark2) 18%, var(--dark1) 33%);
     background-size: 200% 100%;
     animation: 1s shine linear infinite;
 }
@@ -146,7 +146,7 @@ img.ugglogo {
     overflow: hidden;
     border-radius: 5px;
     height: 150px;
-    background-color: var(--side);
+    background-color: var(--dark1);
     border: 2px solid var(--type);
     display: inline-block;
     color: white;
@@ -526,7 +526,7 @@ img.ugglogo {
     margin-top: 5px;
     margin-bottom: 10px;
     float: left;
-    background-color: var(--side);
+    background-color: var(--dark1);
     padding: 10px;
     box-sizing: border-box;
     border-radius: 10px;
@@ -541,7 +541,7 @@ img.ugglogo {
 .rowParent table th {
     font-weight: normal;
     font-size: 0.8rem;
-    color: var(--dborder);
+    color: var(--light2);
     padding: 15px 0 5px
 }
 
@@ -582,23 +582,23 @@ img.ugglogo {
 }
 
 .rowParent table tr {
-    background: var(--side);
+    background: var(--dark1);
     color: white;
     width: 100%;
     font-size: 0.8rem;
 }
 
 .rowParent.zebra table tr:nth-child(even) {
-    background: var(--dark);
+    background: var(--dark0);
 }
 
 .rowParent:not(.zebra) table tr:not(:first-child) {
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--dark3);
 }
 
 .rowParent table tr td:nth-child(1) {
 
-    color: var(--dborder)
+    color: var(--light2)
 }
 
 .rowParent table tr td:nth-child(2) {
@@ -630,7 +630,7 @@ img.ugglogo {
 }
 
 .rowParent table tr td:nth-child(2)>a>p>span {
-    color: var(--dborder);
+    color: var(--light2);
     font-size: 0.8rem;
 }
 
@@ -648,7 +648,7 @@ img.ugglogo {
 
 .rowParent table tr td:nth-child(5) {
     font-size: 0.8rem;
-    color: var(--dborder);
+    color: var(--light2);
 
 }
 
@@ -665,13 +665,13 @@ img.ugglogo {
 
 .challenge.loading,
 .rowParent table.loading {
-    background: linear-gradient(110deg, var(--side) 8%, var(--inner) 18%, var(--side) 33%);
+    background: linear-gradient(110deg, var(--dark1) 8%, var(--dark2) 18%, var(--dark1) 33%);
     background-size: 200% 100%;
     animation: 1s shine linear infinite;
 }
 
 .loadinganimation {
-    background: linear-gradient(110deg, var(--side) 8%, var(--inner) 18%, var(--side) 33%);
+    background: linear-gradient(110deg, var(--dark1) 8%, var(--dark2) 18%, var(--dark1) 33%);
     background-size: 200% 100%;
     animation: 1s shine linear infinite;
 }
@@ -700,7 +700,7 @@ img.ugglogo {
     float: left;
     margin: .2rem 0 0 10px;
     font-size: 0.8rem;
-    color: var(--dborder)
+    color: var(--light2)
 }
 
 .doubleObject {
@@ -715,7 +715,7 @@ img.ugglogo {
     padding: 10px;
     box-sizing: border-box;
     border-radius: 8px;
-    background-color: var(--side);
+    background-color: var(--dark1);
 }
 
 .rightSection {
@@ -758,7 +758,7 @@ img.ugglogo {
 }
 
 .placeholder.loading {
-    background: linear-gradient(110deg, var(--side) 8%, var(--inner) 18%, var(--side) 33%);
+    background: linear-gradient(110deg, var(--dark1) 8%, var(--dark2) 18%, var(--dark1) 33%);
     background-size: 200% 100%;
     animation: 1s shine linear infinite;
 }
