@@ -8,12 +8,18 @@ body {
 }
 
 :root {
-  --side: rgb(28, 28, 32);
-  --border: rgba(255, 255, 255, 0.1);
-  --inner: rgb(36, 36, 40);
-  --dark: rgb(21, 21, 25);
-  --element: #0cbdf7;
-  --dborder: #ced2d6;
+  /* UI colors */
+  /* rgb is minified to hex on build */
+  --dark0: rgb(21, 21, 25);
+  --dark1: rgb(28, 28, 32);
+  --dark2: rgb(36, 36, 40);
+  --dark3: rgba(255, 255, 255, 0.1);
+  --selected: #0cbdf7;
+  --light0: #fff;
+  --light1: #fff;
+  --light2: #ced2d6;
+
+  /* color variables */
   --win: #4287f5;
   --loss: #eb4034;
   --good: #2abf52;
@@ -52,6 +58,8 @@ button {
   }
 }
 
+/* not used */
+/* 
 .loader {
   -webkit-animation: load8 1.3s cubic-bezier(.35, .72, .54, .9) infinite;
   animation: load8 1.3s cubic-bezier(.35, .72, .54, .9) infinite;
@@ -97,7 +105,7 @@ button {
     -webkit-transform: rotate(1turn);
     transform: rotate(1turn)
   }
-}
+}*/
 
 .UNRANKED,
 .NONE {
