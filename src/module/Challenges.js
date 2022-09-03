@@ -7,7 +7,7 @@ import challengeCSS from "../css/challenges.module.css"
 import getChallenge from "../func/getChallenge"
 import generateChallengePointElement from "../func/generateChallengePointElement"
 import { checkExists } from "../func/arrayManipulationFunctions.ts"
-import ChallengeObject from "../ChallengeObject"
+import ChallengeObject from "./ChallengeObject"
 
 export default class Challenges extends Component {
     constructor(props) {

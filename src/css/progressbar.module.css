@@ -1,0 +1,24 @@
+.progress {
+    height: 6px;
+    border-radius: 3px;
+    margin: 22px 0;
+    float: left;
+    background-color: rgb(208, 208, 208);
+}
+
+.progress .text {
+    position: absolute;
+    font-size: 0.8rem;
+    color: white;
+    margin-top: -15px;
+}
+
+.progress .indicator {
+    min-width: 5px;
+    max-width: 122px;
+    position: absolute;
+    margin-left: -1px;
+    height: 6px;
+    border-radius: 4px;
+    background-color: var(--type);
+}

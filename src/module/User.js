@@ -12,7 +12,8 @@ import { toggleValue } from "../func/arrayManipulationFunctions.ts";
 import goTo from "../func/goTo.js";
 import { strtolower } from "../func/stringManipulation.js"
 import { checkExists } from "../func/arrayManipulationFunctions.ts"
-import ChallengeObject from "../ChallengeObject";
+import ChallengeObject from "./ChallengeObject";
+import ProgressBar from "./ProgressBar";
 
 export default class User extends Component {
     constructor(props) {
@@ -549,7 +550,6 @@ export default class User extends Component {
     }
 
     render() {
-
         const profiletext = "view " + this.state.name + "'s profile on u.gg";
 
         return <div className="object1000">
@@ -571,12 +571,22 @@ export default class User extends Component {
                     </div>
                 </div>
             </div>
-            <div className={this.state.type + " " + css.personalProgress} style={this.state.extraStyle}>
-                <div className={css.progress}>
-                    <p className={css.text}>{this.state.points[0]}/{this.state.points[1]}</p>
-                    <div className={css.indicator} style={{ width: "calc(102px * " + (parseInt(this.state.points[0].replaceAll(".", ""))) / (parseInt(this.state.points[1].replaceAll(".", ""))) }}></div>
-                </div>
+
+            <div style={{
+                width: " calc(100% - 20px)",
+                marginLeft: "10px",
+                float: "left",
+                height: "50px"
+            }} className={this.state.type}>
+
+                <ProgressBar
+                    width={100}
+                    progress={parseInt(this.state.points[0].replaceAll(".", ""))}
+                    max={parseInt(this.state.points[1].replaceAll(".", ""))}
+                />
+
             </div>
+
             <div className={css.filter + " " + css[this.state.filter]} style={this.state.extraStyle}>
                 <button className={css.level} onClick={this.changeFilter} id="level">Rank</button>
                 <button className={css.timestamp} onClick={this.changeFilter} id="timestamp">Last upgraded</button>

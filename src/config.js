@@ -1,4 +1,4 @@
-import ChallengeObject from "./ChallengeObject";
+import ChallengeObject from "./module/ChallengeObject";
 import challengeCSS from "./css/challengeObject.module.css"
 
 function fillLoadingUI() {

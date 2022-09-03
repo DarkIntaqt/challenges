@@ -1,7 +1,7 @@
-import css from "./css/challengeObject.module.css"
-import { beautifyNum } from "./func/beautify.ts"
-import { checkExists } from "./func/arrayManipulationFunctions.ts"
-import goTo from "./func/goTo";
+import css from "../css/challengeObject.module.css"
+import { checkExists } from "../func/arrayManipulationFunctions.ts"
+import goTo from "../func/goTo";
+import ProgressBar from "./ProgressBar";
 
 export default function ChallengeObject(params) {
 
@@ -59,10 +59,11 @@ export default function ChallengeObject(params) {
         {challenge[6]}
         {
             challenge[7] !== false ?
-                <div className={css.progress}>
-                    <p className={css.text}>{beautifyNum(challenge[7])} / {beautifyNum(challenge[8])}</p>
-                    <div className={css.indicator} style={{ width: "calc(122px * " + (challenge[7] / challenge[8]) + ")" }}></div>
-                </div>
+                <ProgressBar
+                    progress={challenge[7]}
+                    max={challenge[8]}
+                    width={120}
+                />
                 : null
         }
     </a>

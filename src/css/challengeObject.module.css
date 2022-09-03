@@ -132,10 +132,6 @@
     transition: .25s linear filter;
 }
 
-.challenge img:hover,
-.challenge.overview .tags>div:hover i {
-    filter: brightness(1);
-}
 
 .description {
     color: rgb(203, 200, 200);
