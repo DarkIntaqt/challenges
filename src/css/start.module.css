@@ -98,9 +98,9 @@
 
 .start .serverselector .region,
 .filterOption {
-    background: #161617;
+    background: var(--dark);
     width: 40px;
-    box-shadow: 0 0 8px 0 #161617;
+    box-shadow: 0 0 8px 0 var(--dark);
     color: #bbb;
     border-radius: 4px;
     cursor: pointer;
@@ -129,9 +129,9 @@
 .oc>.oc,
 .tr>.tr,
 .start .serverselector .region.selected {
-    background: #0cbdf7;
+    background: var(--element);
     color: #fff;
-    box-shadow: 0 0 8px 2px #0cbdf7
+    box-shadow: 0 0 8px 2px var(--element)
 }
 
 
@@ -168,7 +168,7 @@ a.searchedUser:hover {
 
 a.searchedUser span.userRegion {
     font-size: .6rem;
-    color: #161617;
+    color: var(--inner);
     margin-left: 2px;
 }
 
