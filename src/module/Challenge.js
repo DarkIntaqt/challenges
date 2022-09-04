@@ -40,6 +40,7 @@ export default class Challenge extends Component {
             message: -1,
             filter: tempRegion,
             challenge: {
+                text: false,
                 title: [],
                 icon: 1,
                 timestamp: Date.now() / 1000,
@@ -265,8 +266,6 @@ export default class Challenge extends Component {
                         // }
                         let userlink = "/" + player[4] + "/" + nameToURL(player[0])
 
-                        console.log(player[0]);
-
                         if (player[0] === "%") {
                             userlink = "/faq#h3"
                         }
@@ -384,6 +383,15 @@ export default class Challenge extends Component {
                     </table>
                 </div>
             </div>
+
+            {challenge.text !== false ? <div className={css.rowParent + " object1000 " + css.field}>
+                <div className={css.seoArea}>
+                    <h2>Info</h2>
+                    <span> All you need to know about this challenge </span>
+                </div>
+                <p dangerouslySetInnerHTML={{ __html: "\"" + challenge.text.replaceAll("\n", "<br />") + "\"" }}></p>
+            </div> : null
+            }
 
             <div className={css.rowParent + " " + css.zebra}>
                 <div className={css.seoArea}>

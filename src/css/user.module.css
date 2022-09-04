@@ -617,3 +617,12 @@ p.availableTitle img {
         display: flex;
     }
 }
+
+.field>p {
+    font-size: 1rem;
+    color: var(--light2);
+    padding: 0 10px;
+    line-height: 1.2;
+    text-align: justify;
+    font-style: italic;
+}
