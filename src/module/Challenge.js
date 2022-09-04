@@ -263,10 +263,18 @@ export default class Challenge extends Component {
                         // } else if (i < 100) {
                         //     pos = css.top100
                         // }
+                        let userlink = "/" + player[4] + "/" + nameToURL(player[0])
+
+                        console.log(player[0]);
+
+                        if (player[0] === "%") {
+                            userlink = "/faq#h3"
+                        }
+
                         summoner.push(<tr key={player[0] + player[4] + i} className={player[2]}>
                             <td>#{i + 1}</td>
                             <td>
-                                <a href={"/" + player[4] + "/" + nameToURL(player[0])} onClick={goTo}>
+                                <a href={userlink} onClick={goTo}>
                                     <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={player[0] + "'s profile image"}></LazyLoadImage>
                                     <p>{player[0]}<span className={css.region}>#{server("human", player[4])}</span></p>
                                 </a>
