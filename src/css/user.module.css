@@ -373,13 +373,13 @@ img.ugglogo {
 
 .rowParent table tr td:nth-child(1),
 .rowParent table tr th:nth-child(1) {
-    width: 10%;
+    width: 8%;
     border-radius: 5px 0 0 5px;
 }
 
 .rowParent table tr td:nth-child(2),
 .rowParent table tr th:nth-child(2) {
-    width: 30%;
+    width: 32%;
 }
 
 .rowParent table tr td:nth-child(3),
