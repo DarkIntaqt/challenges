@@ -576,7 +576,8 @@ export default class User extends Component {
                 width: " calc(100% - 20px)",
                 marginLeft: "10px",
                 float: "left",
-                height: "50px"
+                height: "50px",
+                display: this.state.extraStyle.display
             }} className={this.state.type}>
 
                 <ProgressBar
