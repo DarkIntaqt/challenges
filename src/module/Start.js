@@ -52,7 +52,7 @@ export default class Start extends Component {
 
       if (clickEvent.code === "Enter") {
 
-        search(clickEvent.target.value.replaceAll(" ", "").toLowerCase())
+        search(clickEvent.target.value.replaceAll(" ", ""))
 
       }
 
@@ -63,7 +63,7 @@ export default class Start extends Component {
     let enter = document.getElementById("search-submit");
     enter.addEventListener("click", function () {
 
-      search(searchbar.value.replaceAll(" ", "").toLowerCase())
+      search(searchbar.value.replaceAll(" ", ""))
 
     })
 
