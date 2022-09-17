@@ -29,6 +29,30 @@ const config = {
     "config": {
         "reloadAfter": 3600000
     },
+    "regions": [
+        "br",
+        "euw",
+        "eune",
+        "jp",
+        "kr",
+        "lan",
+        "las",
+        "na",
+        "oc",
+        "tr"
+    ],
+    "tiers": [
+        "NONE",
+        "IRON",
+        "BRONZE",
+        "SILVER",
+        "GOLD",
+        "PLATINUM",
+        "DIAMOND",
+        "MASTER",
+        "GRANDMASTER",
+        "CHALLENGER"
+    ],
     "startScreenImages": [
         150, 4, 3, /*winter gnar */
         254, 4, 29, /* arcane vi */

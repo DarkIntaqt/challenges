@@ -7,6 +7,7 @@ import {
 import User from "./User"
 import Error from "./Error"
 import Challenge from "./Challenge"
+import config from "../config";
 
 function useQuery() {
     const { search } = useLocation();
@@ -16,7 +17,7 @@ function useQuery() {
 export default function UserObject() {
     let params = useParams();
     let thisquery = useQuery();
-    const server = ["br", "euw", "eune", "jp", "kr", "lan", "las", "na", "oc", "tr"];
+    const server = config.regions;
     if (!params.server) {
         return <Challenge params={params} query={thisquery}></Challenge>
     }

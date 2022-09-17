@@ -1,121 +1,125 @@
-export default function server(method, server) {
-    if (method === "human") {
-        switch (server) {
-            case "br1":
-                server = "br"
-                break;
-            case "euw1":
-                server = "euw"
-                break;
-            case "eun1":
-                server = "eune"
-                break;
-            case "jp1":
-                server = "jp"
-                break;
-            case "kr":
-                break;
-            case "la1":
-                server = "lan"
-                break;
-            case "la2":
-                server = "las"
-                break;
-            case "na1":
-                server = "na"
-                break;
-            case "oc1":
-                server = "oc"
-                break;
-            case "tr1":
-                server = "tr"
-                break;
-            default:
-                break;
-        }
-        return server
+function serverToHumanReadable(server) {
+    switch (server) {
+        case "br1":
+            return "br"
+
+        case "euw1":
+            return "euw"
+
+        case "eun1":
+            return "eune"
+
+        case "jp1":
+            return "jp"
+
+        case "kr":
+            break;
+
+        case "la1":
+            return "lan"
+
+        case "la2":
+            return "las"
+
+        case "na1":
+            return "na"
+
+        case "oc1":
+            return "oc"
+
+        case "tr1":
+            return "tr"
+
+        default:
+            break;
     }
-    if (method === "machine") {
-        switch (server) {
-            case "br":
-                server = "br1"
-                break;
-            case "euw":
-                server = "euw1"
-                break;
-            case "eune":
-                server = "eun1"
-                break;
-            case "jp":
-                server = "jp1"
-                break;
-            case "kr":
-                break;
-            case "lan":
-                server = "la1"
-                break;
-            case "las":
-                server = "la2"
-                break;
-            case "na":
-                server = "na1"
-                break;
-            case "oc":
-                server = "oc1"
-                break;
-            case "tr":
-                server = "tr1"
-                break;
-            default:
-                break;
-        }
-        return server
-    }
-    if (method === "long") {
-        switch (server) {
-            case "br":
-            case "br1":
-                server = "Brazil"
-                break;
-            case "euw":
-            case "euw1":
-                server = "Europe West"
-                break;
-            case "eune":
-            case "eun1":
-                server = "Europe Nordic & East"
-                break;
-            case "jp":
-            case "jp1":
-                server = "Japan"
-                break;
-            case "kr":
-                server = "Korea"
-                break;
-            case "lan":
-            case "la1":
-                server = "Latin America North"
-                break;
-            case "las":
-            case "la2":
-                server = "Latin America South"
-                break;
-            case "na":
-            case "na1":
-                server = "North America"
-                break;
-            case "oc":
-            case "oc1":
-                server = "Oceania"
-                break;
-            case "tr":
-            case "tr1":
-                server = "Turkey"
-                break;
-            default:
-                break;
-        }
-        return server
-    }
-    return "unknown"
+    return server
 }
+
+function serverToMachineReadable(server) {
+    switch (server) {
+        case "br":
+            return "br1"
+
+        case "euw":
+            return "euw1"
+
+        case "eune":
+            return "eun1"
+
+        case "jp":
+            return "jp1"
+
+        case "kr":
+            break;
+
+        case "lan":
+            return "la1"
+
+        case "las":
+            return "la2"
+
+        case "na":
+            return "na1"
+
+        case "oc":
+            return "oc1"
+
+        case "tr":
+            return "tr1"
+
+        default:
+            break;
+    }
+    return server
+}
+
+function serverToRegionString(server) {
+    switch (server) {
+        case "br":
+        case "br1":
+            return "Brazil"
+
+        case "euw":
+        case "euw1":
+            return "Europe West"
+
+        case "eune":
+        case "eun1":
+            return "Europe Nordic & East"
+
+        case "jp":
+        case "jp1":
+            return "Japan"
+
+        case "kr":
+            return "Korea"
+
+        case "lan":
+        case "la1":
+            return "Latin America North"
+
+        case "las":
+        case "la2":
+            return "Latin America South"
+
+        case "na":
+        case "na1":
+            return "North America"
+
+        case "oc":
+        case "oc1":
+            return "Oceania"
+
+        case "tr":
+        case "tr1":
+            return "Turkey"
+
+        default:
+            break;
+    }
+    return server
+}
+
+
+export { serverToHumanReadable, serverToMachineReadable, serverToRegionString }

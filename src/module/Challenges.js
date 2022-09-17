@@ -1,12 +1,13 @@
 import challengeModuleCSS from "../css/challengeObject.module.css"
 import { Component } from "react"
 import get from "../func/get"
-import getServer from "../func/server"
+import { serverToMachineReadable } from "../func/server"
 import css from "../css/user.module.css"
 import challengeCSS from "../css/challenges.module.css"
 import getChallenge from "../func/getChallenge"
 import generateChallengePointElement from "../func/generateChallengePointElement"
 import { checkExists } from "../func/arrayManipulationFunctions.ts"
+import config from "../config"
 import ChallengeObject from "./ChallengeObject"
 
 export default class Challenges extends Component {
@@ -29,7 +30,7 @@ export default class Challenges extends Component {
     }
 
     load() {
-        let server = getServer("machine", window.region)
+        let server = serverToMachineReadable(window.region)
         this.server = server;
 
         if (!checkExists(window.challengeLeaderboards) || (checkExists(window.challengeLeaderboards) && window.challengeLeaderboards === "")) {
@@ -83,7 +84,7 @@ export default class Challenges extends Component {
                 }
             }
             let highestTier = "NONE", queueIds = [], parentName = "crystal", obtainable = [];
-            let ranks = ["NONE", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"];
+            let ranks = config.tiers
             for (let i2 = 1; i2 < ranks.length; i2++) {
                 const rank = ranks[i2];
                 if (checkExists(challenge.thresholds[rank])) {

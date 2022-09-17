@@ -2,7 +2,7 @@ import { Component, Fragment } from "react";
 import Error from "./Error"
 import get from "../func/get"
 import css from "../css/user.module.css"
-import server from "../func/server"
+import { serverToHumanReadable, serverToMachineReadable } from "../func/server"
 import Timestamp from "react-timestamps"
 import { beautifyNum } from "../func/beautify.ts"
 import { intToTier } from "../func/tierFunctions";
@@ -12,6 +12,7 @@ import start from "../css/start.module.css"
 import showChallengePath from "../func/showChallengePath.js"
 import ShowChildChallenges from "../func/getChildChallenges";
 import { checkExists } from "../func/arrayManipulationFunctions.ts";
+import config from "../config";
 
 //import excss from "../css/aboutChallenge.module.css"
 
@@ -19,8 +20,8 @@ export default class Challenge extends Component {
     constructor(props) {
         super(props)
         this.params = this.props.params
-        this.regions = ["br", "euw", "eune", "jp", "kr", "lan", "las", "na", "oc", "tr"];
-        this.tiers = ["NONE", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"]
+        this.regions = config.regions
+        this.tiers = config.tiers
 
         let tempRegion = props.query.toLowerCase();
         if (!this.regions.includes(tempRegion)) {
@@ -156,7 +157,7 @@ export default class Challenge extends Component {
         let thresholds = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"]
         let percentiles = {}
         for (let i = 0; i < this.tiers.length; i++) {
-            percentiles[server("machine", this.tiers[i])] = 1 - ((i + 1) / 10)
+            percentiles[serverToMachineReadable(this.tiers[i])] = 1 - ((i + 1) / 10)
 
         }
 
@@ -191,8 +192,8 @@ export default class Challenge extends Component {
 
             icon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
         } else if (challenge.challenge.leaderboard === true || checkExists(challenge.challenge.tags["leaderboardManuallyEnabled"])) {
-            thresholds = challenge.stats[server("machine", region)]
-            percentiles = challenge.stats["percentiles-" + server("machine", region)]
+            thresholds = challenge.stats[serverToMachineReadable(region)]
+            percentiles = challenge.stats["percentiles-" + serverToMachineReadable(region)]
 
             if (checkThresholds(thresholds)) {
                 summoner = <div className={css.disabledMessage + " GRANDMASTER"}>This challenge is not enabled in #{absoluteRegion}</div>
@@ -275,12 +276,12 @@ export default class Challenge extends Component {
                             <td>
                                 <a href={userlink} onClick={goTo}>
                                     <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={player[0] + "'s profile image"}></LazyLoadImage>
-                                    <p>{player[0]}<span className={css.region}>#{server("human", player[4])}</span></p>
+                                    <p>{player[0]}<span className={css.region}>#{serverToHumanReadable(player[4])}</span></p>
                                 </a>
                             </td>
                             <td>{player[2].toLowerCase()}</td>
                             <td>{beautifyNum(player[1], false)}</td>
-                            <td>#{player[5]} in {server("human", player[4])}</td>
+                            <td>#{player[5]} in {serverToHumanReadable(player[4])}</td>
                         </tr>)
                     }
                 }
@@ -290,7 +291,7 @@ export default class Challenge extends Component {
             if (checkThresholds(thresholds)) {
                 summoner = <div className={css.disabledMessage + " GRANDMASTER"}>This challenge is not enabled in #{absoluteRegion}</div>
             } else {
-                percentiles = challenge.stats["percentiles-" + server("machine", region)]
+                percentiles = challenge.stats["percentiles-" + serverToMachineReadable(region)]
                 summoner = <div className={css.disabledMessage + " GRANDMASTER"}>Leaderboards aren't enabled for this challenge<br /><br /><span className={css.details}>Why? Because it is not possible to "scale" in this challenge, as it has a static highest achievable score. <br />If you think this challenge should have a leaderboard, please create an issue on <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">GitHub</a>.</span></div >
             }
         }
