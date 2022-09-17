@@ -125,7 +125,7 @@ export default class Challenge extends Component {
             if (typeof name !== "string") {
                 return "error"
             }
-            return name.replaceAll(" ", "")
+            return name
         }
 
         function checkThresholds(thresholds) {

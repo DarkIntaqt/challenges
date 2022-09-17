@@ -142,7 +142,7 @@ export default class Start extends Component {
         if (parsedList !== false) {
 
           recentlySearchedFor = parsedList.map((val) => {
-            return <a key={JSON.stringify(val)} href={"/" + val[0] + "/" + val[1].replaceAll(" ", "").toLowerCase()} className={StyleSheet.searchedUser} onClick={goTo}>
+            return <a key={JSON.stringify(val)} href={"/" + val[0] + "/" + val[1]} className={StyleSheet.searchedUser} onClick={goTo}>
               <LazyLoadImage src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + val[2]} placeholderSrc={"https://lolcdn.darkintaqt.com/cdn/profileicon/29"} width={26} height={26} />
               <p>
                 {val[1]}
