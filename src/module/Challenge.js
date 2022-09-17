@@ -41,6 +41,8 @@ export default class Challenge extends Component {
             message: -1,
             filter: tempRegion,
             challenge: {
+                text: false,
+                title: [],
                 icon: 1,
                 timestamp: Date.now() / 1000,
                 challenge: {
@@ -124,7 +126,7 @@ export default class Challenge extends Component {
             if (typeof name !== "string") {
                 return "error"
             }
-            return name.toLowerCase().replaceAll(" ", "")
+            return name
         }
 
         function checkThresholds(thresholds) {
@@ -263,10 +265,16 @@ export default class Challenge extends Component {
                         // } else if (i < 100) {
                         //     pos = css.top100
                         // }
+                        let userlink = "/" + player[4] + "/" + nameToURL(player[0])
+
+                        if (player[0] === "%") {
+                            userlink = "/faq#h3"
+                        }
+
                         summoner.push(<tr key={player[0] + player[4] + i} className={player[2]}>
                             <td>#{i + 1}</td>
                             <td>
-                                <a href={"/" + player[4] + "/" + nameToURL(player[0])} onClick={goTo}>
+                                <a href={userlink} onClick={goTo}>
                                     <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={player[0] + "'s profile image"}></LazyLoadImage>
                                     <p>{player[0]}<span className={css.region}>#{serverToHumanReadable(player[4])}</span></p>
                                 </a>
@@ -319,8 +327,6 @@ export default class Challenge extends Component {
             </tr>)
         }
 
-
-
         let content = <Fragment>
             <div className={"MASTER " + css.c + " " + css.profile + " " + css["cid" + challenge.challenge.id]}>
                 <img src={icon} alt="" />
@@ -328,7 +334,15 @@ export default class Challenge extends Component {
                     ? <span data-nosnippet>(Updated <Timestamp date={challenge.timestamp * 1000} />)</span>
                     : <span data-nosnippet></span>
                 }</h1>
-                <p className={"SILVER " + css.challengeDescription} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}</p>
+                <p className={"SILVER " + css.challengeDescription} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}
+
+                    {challenge.title.length > 0
+                        ? <Fragment><br />
+                            <p className={css.availableTitle + " " + challenge.title[0][0]}><img src={"https://cdn.darkintaqt.com/lol/static/challenges/title.svg"} alt="Title" />{challenge.title[0][1]}</p>
+                        </Fragment>
+                        : null}
+
+                </p>
             </div>
 
             <div className={start.filter + " " + start[this.state.filter]}>
@@ -370,6 +384,15 @@ export default class Challenge extends Component {
                     </table>
                 </div>
             </div>
+
+            {challenge.text !== false ? <div className={css.rowParent + " object1000 " + css.field}>
+                <div className={css.seoArea}>
+                    <h2>Info</h2>
+                    <span> All you need to know about this challenge </span>
+                </div>
+                <p dangerouslySetInnerHTML={{ __html: "\"" + challenge.text.replaceAll("\n", "<br />") + "\"" }}></p>
+            </div> : null
+            }
 
             <div className={css.rowParent + " " + css.zebra}>
                 <div className={css.seoArea}>

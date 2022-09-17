@@ -48,8 +48,9 @@
 
 .start .searchbar {
     width: 100%;
+    position: relative;
     margin-top: 40px;
-    float: left
+    float: left;
 }
 
 .start .searchbar i {
@@ -97,9 +98,9 @@
 
 .start .serverselector .region,
 .filterOption {
-    background: #161617;
+    background: var(--dark0);
     width: 40px;
-    box-shadow: 0 0 8px 0 #161617;
+    box-shadow: 0 0 8px 0 var(--dark0);
     color: #bbb;
     border-radius: 4px;
     cursor: pointer;
@@ -113,7 +114,7 @@
     min-width: 40px;
     width: auto;
     padding: 5px 10px;
-    background: var(--side);
+    background: var(--dark1);
 }
 
 .world>.world,
@@ -128,15 +129,85 @@
 .oc>.oc,
 .tr>.tr,
 .start .serverselector .region.selected {
-    background: #0cbdf7;
+    background: var(--selected);
     color: #fff;
-    box-shadow: 0 0 8px 2px #0cbdf7
+    box-shadow: 0 0 8px 2px var(--selected)
 }
+
+
+.recentlySearched {
+    width: 560px;
+    margin: 0 220px;
+    position: absolute;
+    box-sizing: border-box;
+    z-index: 999999;
+    border-radius: 0 0 10px 10px;
+}
+
+.recentlySearched:hover {
+    display: block !important;
+}
+
+a.searchedUser {
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+    display: block;
+    color: black;
+    text-decoration: none;
+    background-color: white;
+    padding: 13px 10px;
+    border-bottom: 1px solid var(--light2);
+    border-left: 2px solid var(--selected);
+    border-right: 2px solid var(--selected);
+}
+
+a.searchedUser:hover {
+    background: var(--light2);
+}
+
+a.searchedUser span.userRegion {
+    font-size: .6rem;
+    color: var(--dark2);
+    margin-left: 2px;
+}
+
+a.searchedUser:first-child {
+    border-top: 2px solid var(--selected);
+}
+
+a.searchedUser:last-child {
+    border-bottom: 2px solid var(--selected);
+    border-radius: 0 0 8px 8px;
+}
+
+a.searchedUser p {
+    padding-left: 30px;
+    font-size: .8rem;
+}
+
+a.searchedUser img {
+    height: 26px;
+
+    border-radius: 5px;
+    width: 26px;
+    margin-top: calc(.4rem - 13px)
+}
+
+a.searchedUser>span {
+    position: absolute;
+}
+
 
 @media only screen and (max-width:1100px) {
     .start .searchbar input {
         width: calc(90% - 40px);
         margin: 0 5%;
+    }
+
+    .recentlySearched {
+        width: 80%;
+        margin: 0 10%;
     }
 
     .start .searchbar i {
@@ -148,5 +219,17 @@
     .start .serverselector {
         width: 90%;
         margin: 20px 5% 0
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .recentlySearched {
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width:1700px) {
+    .start .serverselector {
+        margin-bottom: 170px !important
     }
 }

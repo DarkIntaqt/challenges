@@ -1,0 +1,155 @@
+.challenge {
+    width: 220px;
+    box-sizing: border-box;
+    padding: 10px;
+    background-position: 10% right;
+    background-size: 360%;
+    margin: 8px 15px;
+    overflow: hidden;
+    border-radius: 5px;
+    height: 150px;
+    background-color: var(--dark0);
+    border: 2px solid var(--type, transparent);
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    background-image: var(--url);
+}
+
+.challenge img:hover,
+.challenge.overview .tags>div:hover i {
+    filter: brightness(1);
+}
+
+.challenge.overview .title>span {
+    text-transform: capitalize;
+}
+
+.challenge.overview .tags {
+    position: absolute;
+    margin-top: 5px;
+}
+
+.challenge.overview .tags>div>img {
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    position: relative;
+}
+
+.challenge.overview .tags>div>i {
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    text-align: center;
+    padding-top: 3px;
+    font-size: 20px;
+    position: relative;
+    color: white;
+    filter: brightness(0.6);
+    transition: .25s linear filter;
+}
+
+.challenge.overview .tags>div {
+    float: left;
+    width: 25px;
+    height: 25px;
+    margin: 0 5px;
+}
+
+.challenge.overview .tags>div>p {
+    width: 160px;
+    background-color: #111113;
+    padding: 3px;
+    border: 2px solid black;
+    visibility: hidden;
+    margin-top: 28px;
+    line-height: 1rem;
+    margin-left: -70px;
+    box-shadow: 0 0 3px rgb(62, 62, 62);
+    position: absolute;
+    z-index: 5;
+    font-size: 0.8rem;
+    color: white;
+    border-radius: 5px;
+}
+
+.challenge.overview .tags>div:hover>p {
+    visibility: visible;
+}
+
+
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+
+.challenge.loading {
+    background: linear-gradient(110deg, var(--dark1) 8%, var(--dark2) 18%, var(--dark1) 33%);
+    background-size: 200% 100%;
+    animation: 1s shine linear infinite;
+}
+
+.title {
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 1rem;
+}
+
+.title>span {
+    color: rgb(157, 156, 156);
+    font-weight: normal;
+    display: block;
+    width: 100%;
+    font-size: 0.8rem;
+}
+
+.challenge:hover>.title>span>.hideOnHover {
+    display: none;
+}
+
+.showOnHover {
+    display: none;
+}
+
+.challenge:hover>.title>span>.showOnHover {
+    display: inherit;
+}
+
+.challenge img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    margin-left: 130px;
+    margin-top: 12px;
+    filter: brightness(0.6);
+    transition: .25s linear filter;
+}
+
+
+.description {
+    color: rgb(203, 200, 200);
+    font-size: 0.8rem;
+    width: 100%;
+    margin-top: 4px;
+    max-height: 66px;
+    height: 66px;
+    overflow: hidden;
+}
+
+
+.FIRST,
+.pos1 {
+    box-shadow: 0 0 20px 0 var(--type);
+}
+
+.CROWN,
+.MAXED {
+    box-shadow: 0 0 15px -2px var(--type)
+}

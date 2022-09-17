@@ -2,6 +2,7 @@ import { Component } from "react";
 import Error from "./Error"
 import get from "../func/get"
 import css from "../css/user.module.css";
+import challengeCSS from "../css/challengeObject.module.css"
 import getChallenge from "../func/getChallenge";
 import Timestamp from "react-timestamps"
 import { serverToMachineReadable } from "../func/server"
@@ -11,6 +12,8 @@ import { toggleValue } from "../func/arrayManipulationFunctions.ts";
 import goTo from "../func/goTo.js";
 import { strtolower } from "../func/stringManipulation.js"
 import { checkExists } from "../func/arrayManipulationFunctions.ts"
+import ChallengeObject from "./ChallengeObject";
+import ProgressBar from "./ProgressBar";
 
 export default class User extends Component {
     constructor(props) {
@@ -73,6 +76,52 @@ export default class User extends Component {
 
         let challenges = [];
 
+
+        const searchedBefore = localStorage.getItem("_search")
+
+        if (searchedBefore !== null) {
+
+            let parsedList = false
+
+            try {
+
+                parsedList = JSON.parse(searchedBefore)
+
+            } catch (error) {
+
+                console.error(error);
+
+            } finally {
+
+                let skip = false
+
+                for (let i = 0; i < parsedList.length; i++) {
+
+                    if (parsedList[i][1] === r.name) { skip = true }
+
+                }
+
+                if (skip === false) {
+                    parsedList.splice(0, 0, [this.params.server, r.name, Math.round(parseInt(r.icon, 16) / 7)])
+
+                    if (parsedList.length > 5) {
+
+                        parsedList = parsedList.slice(0, 5)
+
+                    }
+
+                    localStorage.setItem("_search", JSON.stringify(parsedList))
+
+                }
+            }
+        } else {
+
+            localStorage.setItem("_search", JSON.stringify([[this.params.server, r.name, Math.round(parseInt(r.icon, 16) / 7)]]))
+
+        }
+
+
+
         function getNextLevel(current) {
             let ranks = ["UNRANKED", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"]
             for (let i = 0; i < ranks.length; i++) {
@@ -90,14 +139,14 @@ export default class User extends Component {
                 if (Object.hasOwnProperty.call(titles, titleid)) {
                     const title = titles[titleid];
                     if (titleid === "1") {
-                        challenges.push(<a className={"NONE " + css.challenge + " "} href={"/titles"} onClick={goTo} key={titleid}>
-
-                            <p className={css.title}>
-                                {title}
-                                <span>Achieved by 100%</span>
-                            </p>
-                            <p className={css.description}>This is a default title. Everyone owns it. Actually it is not even rare, as everyone has unlocked it, so please don't be proud of this one</p>
-                        </a>)
+                        challenges.push(<ChallengeObject
+                            tier="NONE"
+                            href={"/titles"}
+                            title={title}
+                            subtitle={<span>Achieved by 100%</span>}
+                            description={"This is a default title. Everyone owns it. Actually it is not even rare, as everyone has unlocked it, so please don't be proud of this one"}
+                            key={titleid}
+                        />)
                         continue;
                     }
                     const challenge = getChallenge(parseInt(titleid.substring(0, titleid.length - 2)))
@@ -108,13 +157,14 @@ export default class User extends Component {
                     } catch (error) {
                         percentage = "0"
                     }
-                    challenges.push(<a className={css.challenge + " " + tier} href={"/titles"} onClick={goTo} key={titleid}>
-                        <p className={css.title}>
-                            {title}
-                            <span>Achieved by {percentage}%</span>
-                        </p>
-                        <p className={css.description}>{challenge.translation.description}</p>
-                    </a>)
+                    challenges.push(<ChallengeObject
+                        tier={tier}
+                        href={"/titles"}
+                        title={title}
+                        subtitle={<span>Achieved by {percentage}%</span>}
+                        description={challenge.translation.description}
+                        key={titleid}
+                    />)
                 }
             }
         } else {
@@ -189,7 +239,7 @@ export default class User extends Component {
 
                 // set xxx time ago instead of position when the timestamp filter is set
                 if (this.filter === "timestamp") {
-                    leaderboardposition = <span><span className={css.hideOnHover}><Timestamp date={challenge.achievedTimestamp} /></span><span className={css.showOnHover}><Timestamp date={challenge.achievedTimestamp} type="static" /></span></span>
+                    leaderboardposition = <span><span className={challengeCSS.hideOnHover}><Timestamp date={challenge.achievedTimestamp} /></span><span className={challengeCSS.showOnHover}><Timestamp date={challenge.achievedTimestamp} type="static" /></span></span>
                 } else {
                     leaderboardposition = <span>{position}Top {(Math.round(challenge.percentile * 10000) / 100)}%</span>
                 }
@@ -249,19 +299,18 @@ export default class User extends Component {
                 }
 
                 // push challenge to list
-                challenges.push(<a className={challenge.tier + " " + css.challenge + " " + css[nexttier]} href={"/challenge/" + challenge.id + "?region=" + this.params.server} onClick={goTo} key={challenge.id}>
-                    <p className={css.title}>
-                        {c.translation.name}
-                        {leaderboardposition}
-                    </p>
-                    <p className={css.description}>{c.translation.description}</p>
-
-                    {queueIds}
-                    <div className={css.progress}>
-                        <p className={css.text}>{beautifyNum(challenge.value)} / {beautifyNum(next)}</p>
-                        <div className={css.indicator} style={{ width: "calc(122px * " + (challenge.value / next) + ")" }}></div>
-                    </div>
-                </a>)
+                challenges.push(<ChallengeObject
+                    tier={challenge.tier}
+                    nexttier={nexttier}
+                    title={c.translation.name}
+                    subtitle={leaderboardposition}
+                    description={c.translation.description}
+                    href={"/challenge/" + challenge.id + "?region=" + this.params.server}
+                    queueIds={queueIds}
+                    progressCurrent={challenge.value}
+                    progressNext={next}
+                    key={challenge.id}
+                ></ChallengeObject>)
 
             }
         }
@@ -501,7 +550,6 @@ export default class User extends Component {
     }
 
     render() {
-
         const profiletext = "view " + this.state.name + "'s profile on u.gg";
 
         return <div className="object1000">
@@ -523,12 +571,23 @@ export default class User extends Component {
                     </div>
                 </div>
             </div>
-            <div className={this.state.type + " " + css.personalProgress} style={this.state.extraStyle}>
-                <div className={css.progress}>
-                    <p className={css.text}>{this.state.points[0]}/{this.state.points[1]}</p>
-                    <div className={css.indicator} style={{ width: "calc(102px * " + (parseInt(this.state.points[0].replaceAll(".", ""))) / (parseInt(this.state.points[1].replaceAll(".", ""))) }}></div>
-                </div>
+
+            <div style={{
+                width: " calc(100% - 20px)",
+                marginLeft: "10px",
+                float: "left",
+                height: "50px",
+                display: this.state.extraStyle.display
+            }} className={this.state.type}>
+
+                <ProgressBar
+                    width={100}
+                    progress={parseInt(this.state.points[0].replaceAll(".", ""))}
+                    max={parseInt(this.state.points[1].replaceAll(".", ""))}
+                />
+
             </div>
+
             <div className={css.filter + " " + css[this.state.filter]} style={this.state.extraStyle}>
                 <button className={css.level} onClick={this.changeFilter} id="level">Rank</button>
                 <button className={css.timestamp} onClick={this.changeFilter} id="timestamp">Last upgraded</button>

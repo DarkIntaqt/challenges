@@ -15,7 +15,7 @@ export default function FAQ() {
         ],
         [
             "I don't want to appear here.",
-            "That's sad but ok, so just send me a direct message on twitter: @darkintaqt, and I'll try to remove oyu within the next 1-2 days. However, this will not prevent you from being lookup up by users who know your name and your username could be displayed longer (1-4 weeks) in search engines."
+            "That's sad but ok, so just send me a direct message on twitter: @darkintaqt, and I'll try to remove oyu within the next 1-2 days. However, this will not prevent you from being lookup up by users who know your name and your username could be displayed longer (1-4 weeks) in search engines. This will also not remove your scores from the leaderboards, only your name and profileIcon. This is because the leaderboards must not be falsified."
         ],
         [
             "What about to U.GG logo on a users profile page?",
@@ -39,7 +39,9 @@ export default function FAQ() {
 
     for (let i = 0; i < faqs.length; i++) {
         const element = faqs[i];
-        content.push(<div key={i} id={"h" + i}>
+        content.push(<div key={i} id={"h" + i} style={{
+            "background": "var(--dark1)"
+        }}>
             <h2>{element[0]}</h2>
             <p dangerouslySetInnerHTML={{ __html: element[1] }}></p>
         </div>)
