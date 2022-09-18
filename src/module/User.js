@@ -190,7 +190,7 @@ export default class User extends Component {
 
                 let queueIds = []; // available gameModes
                 let position;
-                let p = 0; // current position when leaderboards are enabled
+                let previousPositions = 1; // current position when leaderboards are enabled
                 let next; // threshold of next tier
                 let nexttier = getNextLevel(challenge.tier); // next tier (e.g. iron => bronze)
                 let leaderboardposition = ""; // set when player has a position and not just a percentile
@@ -199,16 +199,16 @@ export default class User extends Component {
                 if (c.leaderboard === true && checkExists(challenge.position)) {
                     switch (challenge.tier) {
                         case "GRANDMASTER":
-                            p = c["leaderboardThresholds"][3] ?? 0
+                            previousPositions = c["leaderboardThresholds"][3] ?? 1
                             break;
                         case "MASTER":
-                            p = c["leaderboardThresholds"][5] ?? 0
+                            previousPositions = c["leaderboardThresholds"][5] ?? 1
                             break;
                         default:
-                            p = 0
+                            previousPositions = 1
                             break;
                     }
-                    position = "#" + beautifyNum(p + challenge.position, false);
+                    position = "#" + beautifyNum((previousPositions - 1) + challenge.position, false);
                     if (challenge.position <= 100 && checkExists(challenge["globalPosition"])) {
                         position = position + " (#" + challenge.globalPosition + " World)";
                     }
@@ -231,7 +231,7 @@ export default class User extends Component {
                         // No leaderboards, so maxed
                         nexttier = "MAXED"
                     }
-                    if (p + challenge.position === 1) {
+                    if ((previousPositions - 1) + challenge.position === 1) {
                         // leaderboards, #1
                         nexttier = "FIRST";
                     }
