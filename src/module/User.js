@@ -179,13 +179,14 @@ export default class User extends Component {
                 const c = getChallenge(challenge.id)
 
                 if (
-                    (c.tags["source"] === "CHALLENGES" && this.filters.type.length > 0 && !this.filters.type.includes("progression"))
-                    || (c.tags["source"] === "EOGD" && this.filters.type.length > 0 && !this.filters.type.includes("ingame"))
-                    || (c.tags["source"] === "CAP_INVENTORY" && this.filters.type.length > 0 && !this.filters.type.includes("collect"))
-                    || (c.tags["source"] === "CLASH" && this.filters.type.length > 0 && !this.filters.type.includes("clash"))
-                    || (c.tags["source"] === "SUMMONER" && this.filters.type.length > 0 && !this.filters.type.includes("profile"))
-                    || (c.tags["source"] === "ETERNALS" && this.filters.type.length > 0 && !this.filters.type.includes("eternals"))
-                    || (c.tags["source"] === "RANKED" && this.filters.type.length > 0 && !this.filters.type.includes("ranked"))
+                    checkExists(c.tags["source"]) && (
+                        (c.tags["source"] === "CHALLENGES" && this.filters.type.length > 0 && !this.filters.type.includes("progression"))
+                        || (c.tags["source"] === "EOGD" && this.filters.type.length > 0 && !this.filters.type.includes("ingame"))
+                        || (c.tags["source"] === "CAP_INVENTORY" && this.filters.type.length > 0 && !this.filters.type.includes("collect"))
+                        || (c.tags["source"] === "CLASH" && this.filters.type.length > 0 && !this.filters.type.includes("clash"))
+                        || (c.tags["source"] === "SUMMONER" && this.filters.type.length > 0 && !this.filters.type.includes("profile"))
+                        || (c.tags["source"] === "ETERNALS" && this.filters.type.length > 0 && !this.filters.type.includes("eternals"))
+                        || (c.tags["source"] === "RANKED" && this.filters.type.length > 0 && !this.filters.type.includes("ranked")))
                 ) { continue }
 
                 let queueIds = []; // available gameModes
