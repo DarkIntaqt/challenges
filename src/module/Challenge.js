@@ -308,9 +308,9 @@ export default class Challenge extends Component {
             warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"} key={"reverse"}>This challenge is reversed. The less your points the better your placement</div>)
         }
 
-        if (summoner.length === 0) {
-            warnings.push(<div className={css.disabledMessage + " GRANDMASTER"}>No high-ranked summoners yet<br /><br /><span className={css.details}>Due to API limitations we can only show players ranked MASTER+</span></div>)
-        }
+        // if (summoner.length === 0) {
+        //     warnings.push(<div className={css.disabledMessage + " GRANDMASTER"}>No high-ranked summoners yet<br /><br /><span className={css.details}>Due to API limitations we can only show players ranked MASTER+</span></div>)
+        // }
 
         let thresholdTable = []
         for (let i = 1; i < thresholds.length; i++) {
