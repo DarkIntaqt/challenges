@@ -313,7 +313,7 @@ export default class User extends Component {
                         key={challenge.id}
                     ></ChallengeObject>)
                 } catch (e) {
-                    console.warn("Challenge not found");
+                    console.warn(`Challenge not found ${challenge.id}`);
                     console.warn(e)
                 }
             }
