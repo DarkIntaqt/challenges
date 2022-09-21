@@ -154,6 +154,7 @@ export default class Challenge extends Component {
         }
 
         let summoner = []
+        let warnings = [];
         let thresholds = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"]
         let percentiles = {}
         for (let i = 0; i < this.tiers.length; i++) {
@@ -196,7 +197,7 @@ export default class Challenge extends Component {
             percentiles = challenge.stats["percentiles-" + serverToMachineReadable(region)]
 
             if (checkThresholds(thresholds)) {
-                summoner = <div className={css.disabledMessage + " GRANDMASTER"}>This challenge is not enabled in #{absoluteRegion}</div>
+                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"}>This challenge is not enabled in #{absoluteRegion}</div>)
             } else {
                 if (thresholds[9] !== "-") {
                     dynamic["c"] = dynamic["placeholder"]
@@ -291,11 +292,11 @@ export default class Challenge extends Component {
             if (checkThresholds(thresholds)) {
                 summoner = <div className={css.disabledMessage + " GRANDMASTER"}>This challenge is not enabled in #{absoluteRegion}</div>
             } else {
-                percentiles = challenge.stats["percentiles-" + serverToMachineReadable(region)]
-                summoner = <div className={css.disabledMessage + " GRANDMASTER"}>Leaderboards aren't enabled for this challenge<br /><br /><span className={css.details}>Why? Because it is not possible to "scale" in this challenge, as it has a static highest achievable score. <br />If you think this challenge should have a leaderboard, please create an issue on <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">GitHub</a>.</span></div >
+                warnings.push(challenge.stats["percentiles-" + serverToMachineReadable(region)])
+                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"}>Leaderboards aren't enabled for this challenge<br /><br /><span className={css.details}>Why? Because it is not possible to "scale" in this challenge, as it has a static highest achievable score. <br />If you think this challenge should have a leaderboard, please create an issue on <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">GitHub</a>.</span></div >)
             }
         }
-        let warnings = [];
+
         try {
             if (checkExists(challenge.challenge.tags["leaderboardManuallyEnabled"])) {
                 warnings.push(<div className={css.disabledMessage + " GRANDMASTER"} key={"exp"}>Leaderboards might be incorrect due to a missing API-leaderboard about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.  </div>)
