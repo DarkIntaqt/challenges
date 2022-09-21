@@ -175,144 +175,147 @@ export default class User extends Component {
                 if (challenge.id < 10) {
                     continue
                 }
+                try {
+                    const c = getChallenge(challenge.id)
 
-                const c = getChallenge(challenge.id)
+                    if (
+                        checkExists(c.tags["source"]) && (
+                            (c.tags["source"] === "CHALLENGES" && this.filters.type.length > 0 && !this.filters.type.includes("progression"))
+                            || (c.tags["source"] === "EOGD" && this.filters.type.length > 0 && !this.filters.type.includes("ingame"))
+                            || (c.tags["source"] === "CAP_INVENTORY" && this.filters.type.length > 0 && !this.filters.type.includes("collect"))
+                            || (c.tags["source"] === "CLASH" && this.filters.type.length > 0 && !this.filters.type.includes("clash"))
+                            || (c.tags["source"] === "SUMMONER" && this.filters.type.length > 0 && !this.filters.type.includes("profile"))
+                            || (c.tags["source"] === "ETERNALS" && this.filters.type.length > 0 && !this.filters.type.includes("eternals"))
+                            || (c.tags["source"] === "RANKED" && this.filters.type.length > 0 && !this.filters.type.includes("ranked")))
+                    ) { continue }
 
-                if (
-                    checkExists(c.tags["source"]) && (
-                        (c.tags["source"] === "CHALLENGES" && this.filters.type.length > 0 && !this.filters.type.includes("progression"))
-                        || (c.tags["source"] === "EOGD" && this.filters.type.length > 0 && !this.filters.type.includes("ingame"))
-                        || (c.tags["source"] === "CAP_INVENTORY" && this.filters.type.length > 0 && !this.filters.type.includes("collect"))
-                        || (c.tags["source"] === "CLASH" && this.filters.type.length > 0 && !this.filters.type.includes("clash"))
-                        || (c.tags["source"] === "SUMMONER" && this.filters.type.length > 0 && !this.filters.type.includes("profile"))
-                        || (c.tags["source"] === "ETERNALS" && this.filters.type.length > 0 && !this.filters.type.includes("eternals"))
-                        || (c.tags["source"] === "RANKED" && this.filters.type.length > 0 && !this.filters.type.includes("ranked")))
-                ) { continue }
+                    let queueIds = []; // available gameModes
+                    let position;
+                    let previousPositions = 1; // current position when leaderboards are enabled
+                    let next; // threshold of next tier
+                    let nexttier = getNextLevel(challenge.tier); // next tier (e.g. iron => bronze)
+                    let leaderboardposition = ""; // set when player has a position and not just a percentile
 
-                let queueIds = []; // available gameModes
-                let position;
-                let previousPositions = 1; // current position when leaderboards are enabled
-                let next; // threshold of next tier
-                let nexttier = getNextLevel(challenge.tier); // next tier (e.g. iron => bronze)
-                let leaderboardposition = ""; // set when player has a position and not just a percentile
-
-                // get threshold for dynamic leaderboards
-                if (c.leaderboard === true && checkExists(challenge.position)) {
-                    switch (challenge.tier) {
-                        case "GRANDMASTER":
-                            previousPositions = c["leaderboardThresholds"][3] ?? 1
-                            break;
-                        case "MASTER":
-                            previousPositions = c["leaderboardThresholds"][5] ?? 1
-                            break;
-                        default:
-                            previousPositions = 1
-                            break;
+                    // get threshold for dynamic leaderboards
+                    if (c.leaderboard === true && checkExists(challenge.position)) {
+                        switch (challenge.tier) {
+                            case "GRANDMASTER":
+                                previousPositions = c["leaderboardThresholds"][3] ?? 1
+                                break;
+                            case "MASTER":
+                                previousPositions = c["leaderboardThresholds"][5] ?? 1
+                                break;
+                            default:
+                                previousPositions = 1
+                                break;
+                        }
+                        position = "#" + beautifyNum((previousPositions - 1) + challenge.position, false);
+                        if (challenge.position <= 100 && checkExists(challenge["globalPosition"])) {
+                            position = position + " (#" + challenge.globalPosition + " World)";
+                        }
+                        position += " - ";
                     }
-                    position = "#" + beautifyNum((previousPositions - 1) + challenge.position, false);
-                    if (challenge.position <= 100 && checkExists(challenge["globalPosition"])) {
-                        position = position + " (#" + challenge.globalPosition + " World)";
-                    }
-                    position += " - ";
-                }
 
-                if (checkExists(c["thresholds"][nexttier])) {
-                    next = c["thresholds"][nexttier]
-                } else {
-                    next = c["thresholds"][challenge.tier]
-                }
-
-                // add for leaderboard and rank if challenge is challenger
-                if (challenge.tier === "CHALLENGER") {
-                    if (c.leaderboard === true) {
-                        // leaderboards, not #1
-                        next = c["leaderboardThresholds"][0] ?? 0
-                        nexttier = "CROWN";
+                    if (checkExists(c["thresholds"][nexttier])) {
+                        next = c["thresholds"][nexttier]
                     } else {
-                        // No leaderboards, so maxed
-                        nexttier = "MAXED"
-                    }
-                    if ((previousPositions - 1) + challenge.position === 1) {
-                        // leaderboards, #1
-                        nexttier = "FIRST";
-                    }
-                }
-
-                // set xxx time ago instead of position when the timestamp filter is set
-                if (this.filter === "timestamp") {
-                    leaderboardposition = <span><span className={challengeCSS.hideOnHover}><Timestamp date={challenge.achievedTimestamp} /></span><span className={challengeCSS.showOnHover}><Timestamp date={challenge.achievedTimestamp} type="static" /></span></span>
-                } else {
-                    leaderboardposition = <span>{position}Top {(Math.round(challenge.percentile * 10000) / 100)}%</span>
-                }
-
-                let skip = false
-
-                if (c.queueIds.length > 0) {
-                    let enabled = {
-                        isAram: false,
-                        isSR: false,
-                        isBot: false
+                        next = c["thresholds"][challenge.tier]
                     }
 
-                    for (let i = 0; i < c.queueIds.length; i++) {
-                        const queue = c.queueIds[i];
-                        if ([450, 930, 860].includes(queue)) {
-                            enabled["isAram"] = true;
-                            if (this.filters.gamemode.length > 0 && !this.filters.gamemode.includes("aram")) {
-                                skip = true
-                            }
+                    // add for leaderboard and rank if challenge is challenger
+                    if (challenge.tier === "CHALLENGER") {
+                        if (c.leaderboard === true) {
+                            // leaderboards, not #1
+                            next = c["leaderboardThresholds"][0] ?? 0
+                            nexttier = "CROWN";
+                        } else {
+                            // No leaderboards, so maxed
+                            nexttier = "MAXED"
                         }
-
-                        if ([400, 420, 430, 440].includes(queue)) {
-                            enabled["isSR"] = true;
-                            if (this.filters.gamemode.length > 0 && !this.filters.gamemode.includes("summonersrift")) {
-                                skip = true
-                            }
-                        }
-
-                        if ([830, 840, 850].includes(queue)) {
-                            enabled["isBot"] = true;
-                            if (this.filters.gamemode.length > 0 && !this.filters.gamemode.includes("bot")) {
-                                skip = true
-                            }
+                        if ((previousPositions - 1) + challenge.position === 1) {
+                            // leaderboards, #1
+                            nexttier = "FIRST";
                         }
                     }
 
-                    if (enabled["isAram"] && enabled["isSR"]) {
-                        queueIds.push(<img key={0} src="https://cdn.darkintaqt.com/lol/static/lanes/FILL.png" alt="All modes" />)
-                    } else if (enabled["isAram"] && !enabled["isSR"]) {
-                        queueIds.push(<img key={1} src="https://lolcdn.darkintaqt.com/cdn/ha.svg" alt="Aram games only" />)
-                    } else if (!enabled["isAram"] && enabled["isSR"]) {
-                        queueIds.push(<img key={2} src="https://lolcdn.darkintaqt.com/cdn/sr.svg" alt="Summoners Rift games only" />)
+                    // set xxx time ago instead of position when the timestamp filter is set
+                    if (this.filter === "timestamp") {
+                        leaderboardposition = <span><span className={challengeCSS.hideOnHover}><Timestamp date={challenge.achievedTimestamp} /></span><span className={challengeCSS.showOnHover}><Timestamp date={challenge.achievedTimestamp} type="static" /></span></span>
                     } else {
-                        queueIds.push(<img key={3} src="https://lolcdn.darkintaqt.com/cdn/bot.png" alt="Bot games only" />)
+                        leaderboardposition = <span>{position}Top {(Math.round(challenge.percentile * 10000) / 100)}%</span>
                     }
-                } else if (this.filters.gamemode.length > 0) {
-                    if (this.filters.gamemode.includes("aram") && [101000, 101300, 101200, 101100].includes(c.id)) {
-                        // Pass
-                    } else {
-                        skip = true
+
+                    let skip = false
+
+                    if (c.queueIds.length > 0) {
+                        let enabled = {
+                            isAram: false,
+                            isSR: false,
+                            isBot: false
+                        }
+
+                        for (let i = 0; i < c.queueIds.length; i++) {
+                            const queue = c.queueIds[i];
+                            if ([450, 930, 860].includes(queue)) {
+                                enabled["isAram"] = true;
+                                if (this.filters.gamemode.length > 0 && !this.filters.gamemode.includes("aram")) {
+                                    skip = true
+                                }
+                            }
+
+                            if ([400, 420, 430, 440].includes(queue)) {
+                                enabled["isSR"] = true;
+                                if (this.filters.gamemode.length > 0 && !this.filters.gamemode.includes("summonersrift")) {
+                                    skip = true
+                                }
+                            }
+
+                            if ([830, 840, 850].includes(queue)) {
+                                enabled["isBot"] = true;
+                                if (this.filters.gamemode.length > 0 && !this.filters.gamemode.includes("bot")) {
+                                    skip = true
+                                }
+                            }
+                        }
+
+                        if (enabled["isAram"] && enabled["isSR"]) {
+                            queueIds.push(<img key={0} src="https://cdn.darkintaqt.com/lol/static/lanes/FILL.png" alt="All modes" />)
+                        } else if (enabled["isAram"] && !enabled["isSR"]) {
+                            queueIds.push(<img key={1} src="https://lolcdn.darkintaqt.com/cdn/ha.svg" alt="Aram games only" />)
+                        } else if (!enabled["isAram"] && enabled["isSR"]) {
+                            queueIds.push(<img key={2} src="https://lolcdn.darkintaqt.com/cdn/sr.svg" alt="Summoners Rift games only" />)
+                        } else {
+                            queueIds.push(<img key={3} src="https://lolcdn.darkintaqt.com/cdn/bot.png" alt="Bot games only" />)
+                        }
+                    } else if (this.filters.gamemode.length > 0) {
+                        if (this.filters.gamemode.includes("aram") && [101000, 101300, 101200, 101100].includes(c.id)) {
+                            // Pass
+                        } else {
+                            skip = true
+                        }
                     }
+
+                    if (skip === true) {
+                        continue;
+                    }
+
+                    // push challenge to list
+                    challenges.push(<ChallengeObject
+                        tier={challenge.tier}
+                        nexttier={nexttier}
+                        title={c.translation.name}
+                        subtitle={leaderboardposition}
+                        description={c.translation.description}
+                        href={"/challenge/" + challenge.id + "?region=" + this.params.server}
+                        queueIds={queueIds}
+                        progressCurrent={challenge.value}
+                        progressNext={next}
+                        key={challenge.id}
+                    ></ChallengeObject>)
+                } catch (e) {
+                    console.warn("Challenge not found");
+                    console.warn(e)
                 }
-
-                if (skip === true) {
-                    continue;
-                }
-
-                // push challenge to list
-                challenges.push(<ChallengeObject
-                    tier={challenge.tier}
-                    nexttier={nexttier}
-                    title={c.translation.name}
-                    subtitle={leaderboardposition}
-                    description={c.translation.description}
-                    href={"/challenge/" + challenge.id + "?region=" + this.params.server}
-                    queueIds={queueIds}
-                    progressCurrent={challenge.value}
-                    progressNext={next}
-                    key={challenge.id}
-                ></ChallengeObject>)
-
             }
         }
 
