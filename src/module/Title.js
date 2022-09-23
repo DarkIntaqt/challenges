@@ -10,11 +10,9 @@ export default class Title extends Component {
         this.showUser = this.showUser.bind(this);
         this.error = this.error.bind(this);
         this.state = {
-            heading: "All titles",
             titles: [
 
-            ],
-            location: ""
+            ]
         }
     }
 
@@ -59,12 +57,13 @@ export default class Title extends Component {
         }
 
         return <div className={"object1000"}>
-            <h1 className={css.heading}>{this.state.heading}</h1>
+
+            <h1 className={css.heading}>All titles</h1>
+            <p className={css.subheading}>A list of all League of Legends Titles and how to achieve them. </p>
+
             <div className={css.titles}>
                 {titles}
             </div>
-            {this.state.location}
-            <p className={css.disclaimer}>'Challenges.DarkIntaqt.Com' isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
         </div>
     }
 }

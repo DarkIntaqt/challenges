@@ -1,7 +1,13 @@
 .heading {
-    padding: 20px 0;
+    padding: 20px 0 10px;
     font-size: 2rem;
     color: white;
+}
+
+.subheading {
+    font-size: 1rem;
+    color: var(--light2);
+    padding-bottom: 10px;
 }
 
 .title {
