@@ -60,6 +60,7 @@
 
 .challenge.overview .tags>div>p {
     width: 160px;
+    text-align: center;
     background-color: #111113;
     padding: 3px;
     border: 2px solid black;

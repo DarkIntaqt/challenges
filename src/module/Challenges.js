@@ -105,12 +105,12 @@ export default class Challenges extends Component {
                         }
                     }
                     parentName = getChallenge(parentChallengeId)["translation"]["name"]
-                } else if ([600006, 600010, 600011, 0].includes(challenge.id)) {
+                } else if ([600006, 600010, 600011, 600012, 0].includes(challenge.id)) {
                     parentName = "legacy"
                 } else if (checkExists(challenge.tags["isCapstone"])) {
                     parentName = challenge.translation.name
                 } else {
-                    parentName = "Error LL77"
+                    parentName = "NO CATEGORY"
                 }
                 if (challenge.tags["source"] === "CHALLENGES") {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("progression")) {
