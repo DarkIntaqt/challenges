@@ -379,7 +379,7 @@ img.ugglogo {
 
 .rowParent table {
     width: 100%;
-    table-layout: auto;
+    table-layout: fixed;
     border-collapse: collapse;
 }
 
