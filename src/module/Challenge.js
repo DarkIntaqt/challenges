@@ -177,7 +177,7 @@ export default class Challenge extends Component {
                     <td>
                         <a href={"/loading"} onClick={goTo}>
                             <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/29"} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={""}></LazyLoadImage>
-                            <p>Loading<span className={css.region}>#</span></p>
+                            <p>Loading<span className={css.region}>-</span></p>
                         </a>
                     </td>
                     <td>...</td>
