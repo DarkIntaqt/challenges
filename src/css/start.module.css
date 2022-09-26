@@ -191,10 +191,10 @@ a.searchedUser img {
 
     border-radius: 5px;
     width: 26px;
-    margin-top: calc(.4rem - 13px)
 }
 
 a.searchedUser>span {
+    margin-top: calc(.4rem - 13px);
     position: absolute;
 }
 
