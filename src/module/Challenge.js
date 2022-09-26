@@ -9,8 +9,8 @@ import { intToTier } from "../func/tierFunctions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import goTo from "../func/goTo.js";
 import start from "../css/start.module.css"
-import showChallengePath from "../func/showChallengePath.js"
-import ShowChildChallenges from "../func/getChildChallenges";
+// import showChallengePath from "../func/showChallengePath.js"
+// import ShowChildChallenges from "../func/getChildChallenges";
 import { checkExists } from "../func/arrayManipulationFunctions.ts";
 import config from "../config";
 
@@ -38,6 +38,7 @@ export default class Challenge extends Component {
         this.changeFilter = this.changeFilter.bind(this)
         this.showChallenge = this.showChallenge.bind(this)
         this.state = {
+            totalLength: 250,
             message: -1,
             filter: tempRegion,
             challenge: {
@@ -144,14 +145,6 @@ export default class Challenge extends Component {
             filters.push(<button key={i} onClick={this.changeFilter} className={start.filterOption + " " + start[regions[i]]} id={regions[i]}>{regions[i]}</button>)
         }
 
-        let dynamic = {
-            "gm": "", "c": "", "placeholder": <Fragment>
-                <span> <i className="fa-solid fa-circle-info"></i></span>
-                <div>
-                    <p>This is a dynamic threshold. This means that this value adjusts itself automatically to the lowest value in the tier. To reach this tier, you need at least as many points or better. </p>
-                </div>
-            </Fragment>
-        }
 
         let summoner = []
         let warnings = [];
@@ -170,6 +163,8 @@ export default class Challenge extends Component {
             }
         }
 
+        let totalLength = this.state.totalLength
+
         let isLoading = ""
         // Not loaded yet
         if (challenge.icon === 1) {
@@ -178,7 +173,7 @@ export default class Challenge extends Component {
             while (i < 20) {
                 i++;
                 summoner.push(<tr className={css.loading + " IRON"} key={i}>
-                    <td>#</td>
+                    <td>{i}.</td>
                     <td>
                         <a href={"/loading"} onClick={goTo}>
                             <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/29"} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={""}></LazyLoadImage>
@@ -187,7 +182,6 @@ export default class Challenge extends Component {
                     </td>
                     <td>...</td>
                     <td>-</td>
-                    <td>#</td>
                 </tr>)
             }
 
@@ -197,14 +191,8 @@ export default class Challenge extends Component {
             percentiles = challenge.stats["percentiles-" + serverToMachineReadable(region)]
 
             if (checkThresholds(thresholds)) {
-                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"}>This challenge is not enabled in #{absoluteRegion}</div>)
+                warnings.push(<div className={css.disabledMessage}>This challenge is not enabled in #{absoluteRegion}</div>)
             } else {
-                if (thresholds[9] !== "-") {
-                    dynamic["c"] = dynamic["placeholder"]
-                }
-                if (thresholds[8] !== "-") {
-                    dynamic["gm"] = dynamic["placeholder"]
-                }
 
                 // create list with summoners
                 let summoners = []
@@ -257,6 +245,9 @@ export default class Challenge extends Component {
                     summoner = []
                 } else {
                     for (let i = 0; i < summoners.length; i++) {
+                        if (i >= totalLength) {
+                            break;
+                        }
                         const player = summoners[i];
                         // let pos = css.normal;
                         // if (i === 0) {
@@ -273,16 +264,15 @@ export default class Challenge extends Component {
                         }
 
                         summoner.push(<tr key={player[0] + player[4] + i} className={player[2]}>
-                            <td>#{i + 1}</td>
+                            <td>{i + 1}.</td>
                             <td>
                                 <a href={userlink} onClick={goTo}>
                                     <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={player[0] + "'s profile image"}></LazyLoadImage>
-                                    <p>{player[0]}<span className={css.region}>#{serverToHumanReadable(player[4])}</span></p>
+                                    <p>{player[0]}<span className={css.region}>{serverToHumanReadable(player[4])}</span></p>
                                 </a>
                             </td>
                             <td>{player[2].toLowerCase()}</td>
                             <td>{beautifyNum(player[1], false)}</td>
-                            <td>#{player[5]} in {serverToHumanReadable(player[4])}</td>
                         </tr>)
                     }
                 }
@@ -290,16 +280,16 @@ export default class Challenge extends Component {
         } else {
             thresholds = challenge.challenge.thresholds
             if (checkThresholds(thresholds)) {
-                summoner = <div className={css.disabledMessage + " GRANDMASTER"}>This challenge is not enabled in #{absoluteRegion}</div>
+                summoner = <div className={css.disabledMessage}>This challenge is not enabled in #{absoluteRegion}</div>
             } else {
                 warnings.push(challenge.stats["percentiles-" + serverToMachineReadable(region)])
-                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"}>Leaderboards aren't enabled for this challenge<br /><br /><span className={css.details}>Why? Because it is not possible to "scale" in this challenge, as it has a static highest achievable score. <br />If you think this challenge should have a leaderboard, please create an issue on <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">GitHub</a>.</span></div >)
+                warnings.push(<div className={css.disabledMessage}>Leaderboards aren't enabled for this challenge<br /><br /><span className={css.details}>Why? Because it is not possible to "scale" in this challenge, as it has a static highest achievable score. <br />If you think this challenge should have a leaderboard, please create an issue on <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">GitHub</a>.</span></div >)
             }
         }
 
         try {
             if (checkExists(challenge.challenge.tags["leaderboardManuallyEnabled"])) {
-                warnings.push(<div className={css.disabledMessage + " GRANDMASTER"} key={"exp"}>Leaderboards might be incorrect due to a missing API-leaderboard about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.  </div>)
+                warnings.push(<div className={css.disabledMessage} key={"exp"}>Leaderboards might be incorrect due to a missing API-leaderboard about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.  </div>)
             }
         } catch (error) {
             console.warn(error);
@@ -350,25 +340,9 @@ export default class Challenge extends Component {
                 {filters}
             </div>
 
-            <div className={css.doubleObject}>
-                <div className={css.rowParent}>
-                    <div className={css.seoArea}>
-                        <h2>About the challenge</h2>
-                        <span> Capstones and Subchallenges</span>
-                    </div>
-                    <div className={css.miniFlex}>
-                        {this.challenges !== "null" && this.challenge !== "null"
-                            ? <Fragment>
-                                {showChallengePath(this.challenges, this.challenge.challenge)}
-                                <div className={css.rightSection}>
-                                    <ShowChildChallenges challenges={this.challenges} challengeid={this.challenge.challenge.id} />
-                                </div>
-                            </Fragment>
-                            : <div className={css.placeholder + " " + css.loading} />
-                        }
-                    </div>
-                </div>
-                <div className={css.rowParent}>
+            <section className={css.leaderboardsLeft}>
+
+                <div className={css.rowParent + " " + css.thresholdTable}>
                     <div className={css.seoArea}>
                         <h2>Thresholds</h2>
                         <span> How many players have reached a tier</span>
@@ -384,23 +358,25 @@ export default class Challenge extends Component {
                         </tbody>
                     </table>
                 </div>
-            </div>
 
-            {challenge.text !== false ? <div className={css.rowParent + " object1000 " + css.field}>
-                <div className={css.seoArea}>
-                    <h2>Info</h2>
-                    <span> All you need to know about this challenge </span>
-                </div>
-                <p dangerouslySetInnerHTML={{ __html: "\"" + challenge.text.replaceAll("\n", "<br />") + "\"" }}></p>
-            </div> : null
-            }
+                {warnings}
+
+                {challenge.text !== false ? <div className={css.rowParent + " object1000 " + css.field}>
+                    <div className={css.seoArea}>
+                        <h2>Info</h2>
+                        <span> All you need to know about this challenge </span>
+                    </div>
+                    <p dangerouslySetInnerHTML={{ __html: "\"" + challenge.text.replaceAll("\n", "<br />") + "\"" }}></p>
+                </div> : null
+                }
+
+            </section>
 
             <div className={css.rowParent + " " + css.zebra}>
                 <div className={css.seoArea}>
-                    <h2>Leaderboards</h2>
-                    <span> Leaderboards for every region. Top 100 players per region. </span>
+                    <h2>"{challenge.challenge.translation.name}" Leaderboard</h2>
+                    <span> {this.state.filter === "world" ? "Global Ranking" : "Regional Ranking"} </span>
                 </div>
-                {warnings}
                 <table className={isLoading}>
                     <tbody>
                         <tr>
@@ -408,7 +384,6 @@ export default class Challenge extends Component {
                             <th>Summonername</th>
                             <th>Tier</th>
                             <th>Value</th>
-                            <th>Position in server</th>
                         </tr>
                         {summoner}
                     </tbody>

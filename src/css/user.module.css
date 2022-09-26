@@ -237,19 +237,22 @@ img.ugglogo {
     }
 }
 
-.parent .disabledMessage {
+.disabledMessage {
     width: 80%;
     box-sizing: border-box;
-    margin: 50px 10%;
+    margin: 20px 10%;
     text-align: center;
-    color: white;
-    font-size: 1rem;
-    border: 2px solid var(--type);
+    color: var(--light2);
+    font-size: .8rem;
+    background: var(--dark1);
+    border: 2px solid var(--type, #d9463c);
     border-radius: 10px;
-    padding: 20px;
+    padding: 15px;
+    float: left;
 }
 
-.parent .disabledMessage .details {
+
+.disabledMessage .details {
     font-size: 0.8rem;
 }
 
@@ -344,14 +347,35 @@ img.ugglogo {
 }
 
 .rowParent {
-    width: 100%;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    width: 600px;
+    margin: 10px;
     float: left;
     background-color: var(--dark1);
     padding: 10px;
+    float: left;
     box-sizing: border-box;
     border-radius: 10px;
+}
+
+.rowParent.thresholdTable {
+    background-color: var(--dark1);
+    width: calc(100% - 20px);
+    margin: 10px;
+}
+
+.rowParent.thresholdTable table tr td:nth-child(1),
+.rowParent.thresholdTable table tr th:nth-child(1) {
+    width: 40%
+}
+
+.rowParent.thresholdTable table tr td:nth-child(2),
+.rowParent.thresholdTable table tr th:nth-child(2) {
+    width: 40%
+}
+
+.rowParent.thresholdTable table tr td:nth-child(3),
+.rowParent.thresholdTable table tr th:nth-child(3) {
+    width: 20%
 }
 
 .rowParent table {
@@ -361,10 +385,10 @@ img.ugglogo {
 }
 
 .rowParent table th {
-    font-weight: normal;
-    font-size: 0.8rem;
-    color: var(--light2);
-    padding: 15px 0 5px
+    font-weight: bold;
+    font-size: 0.7rem;
+    color: var(--light3);
+    padding: 5px 0
 }
 
 .rowParent table td {
@@ -373,30 +397,26 @@ img.ugglogo {
 
 .rowParent table tr td:nth-child(1),
 .rowParent table tr th:nth-child(1) {
-    width: 8%;
+    width: 10%;
     border-radius: 5px 0 0 5px;
 }
 
 .rowParent table tr td:nth-child(2),
 .rowParent table tr th:nth-child(2) {
-    width: 32%;
+    width: 42%;
 }
 
 .rowParent table tr td:nth-child(3),
 .rowParent table tr th:nth-child(3) {
-    width: 15%;
+    width: 13%;
 }
 
 .rowParent table tr td:nth-child(4),
 .rowParent table tr th:nth-child(4) {
-    width: 30%;
-}
-
-.rowParent table tr td:nth-child(5),
-.rowParent table tr th:nth-child(5) {
-    width: 15%;
+    width: 35%;
     border-radius: 0 5px 5px 0;
 }
+
 
 .rowParent table tr th:nth-child(5) {
     text-align: left;
@@ -446,13 +466,15 @@ img.ugglogo {
 }
 
 .rowParent table tr td:nth-child(2)>a>p {
-    float: left;
+    white-space: nowrap;
+    overflow: hidden;
     font-size: 1rem;
     padding: calc(calc(30px - 1rem) * 0.5)
 }
 
 .rowParent table tr td:nth-child(2)>a>p>span {
     color: var(--light2);
+    margin-left: 3px;
     font-size: 0.8rem;
 }
 
@@ -474,16 +496,6 @@ img.ugglogo {
 
 }
 
-.rowParent .disabledMessage {
-    border: 2px solid var(--type);
-    width: 80%;
-    margin: 20px 10%;
-    border-radius: 10px;
-    float: left;
-    padding: 10px;
-    box-sizing: border-box;
-    color: white;
-}
 
 
 .rowParent table.loading {
@@ -505,6 +517,8 @@ img.ugglogo {
 .rowParent .seoArea {
     width: 100%;
     padding: 5px 0 10px;
+    border-bottom: 2px solid var(--dark0);
+    margin: 0 0 10px 0;
     box-sizing: border-box;
     float: left;
 }
@@ -523,53 +537,6 @@ img.ugglogo {
     margin: .2rem 0 0 10px;
     font-size: 0.8rem;
     color: var(--light2)
-}
-
-.doubleObject {
-    width: 100%;
-    float: left;
-    display: flex;
-    justify-content: space-between;
-}
-
-.doubleObject>div {
-    width: 48%;
-    padding: 10px;
-    box-sizing: border-box;
-    border-radius: 8px;
-    background-color: var(--dark1);
-}
-
-.rightSection {
-    width: 220px;
-    float: right;
-}
-
-@media only screen and (max-width: 1050px) {
-    .rowParent {
-        background: transparent;
-        overflow: auto;
-    }
-
-    .rowParent table tr td:nth-child(5),
-    .rowParent table tr th:nth-child(5) {
-        display: none
-    }
-
-    .rowParent table tr td:nth-child(2),
-    .rowParent table tr th:nth-child(2) {
-        width: 40%;
-        white-space: nowrap;
-    }
-
-    .rowParent table tr td:nth-child(4),
-    .rowParent table tr th:nth-child(4) {
-        width: 35%;
-    }
-
-    .rowParent table th {
-        padding: 8px 0;
-    }
 }
 
 .placeholder {
@@ -599,16 +566,52 @@ p.availableTitle img {
     height: 1rem;
 }
 
+
+.rowParent.field {
+    width: 360px;
+}
+
+.leaderboardsLeft {
+    width: 380px;
+    float: left;
+}
+
+.field>p {
+    font-size: .9rem;
+    color: var(--light2);
+    padding: 0 10px;
+    line-height: 1.2;
+}
+
+@media only screen and (max-width: 1050px) {
+    .rowParent {
+        width: 100%;
+        background: transparent;
+        overflow: auto;
+        margin: 10px 0;
+    }
+
+    .leaderboardsLeft {
+        width: 100%;
+    }
+
+    .rowParent table tr td:nth-child(2),
+    .rowParent table tr th:nth-child(2) {
+        width: 40%;
+        white-space: nowrap;
+    }
+
+    .rowParent table tr td:nth-child(4),
+    .rowParent table tr th:nth-child(4) {
+        width: 35%;
+    }
+
+    .rowParent table th {
+        padding: 8px 0;
+    }
+}
+
 @media only screen and (max-width:970px) {
-    .doubleObject {
-        display: block;
-    }
-
-    .doubleObject>div {
-        width: calc(100% - 20px);
-        margin: 10px;
-    }
-
     .miniFlex {
         height: 320px;
         width: 100%;
@@ -616,13 +619,4 @@ p.availableTitle img {
         justify-content: center;
         display: flex;
     }
-}
-
-.field>p {
-    font-size: 1rem;
-    color: var(--light2);
-    padding: 0 10px;
-    line-height: 1.2;
-    text-align: justify;
-    font-style: italic;
 }
