@@ -392,6 +392,10 @@ img.ugglogo {
     padding: 8px 10px;
 }
 
+.rowParentTableRow:last-child {
+    border-bottom: 1px solid transparent;
+}
+
 .rowParentTableRow p {
     float: left;
     color: white;
