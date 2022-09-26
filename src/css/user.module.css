@@ -349,7 +349,6 @@ img.ugglogo {
 .rowParent {
     width: 600px;
     margin: 10px;
-    float: left;
     background-color: var(--dark1);
     padding: 10px;
     float: left;
