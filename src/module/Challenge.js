@@ -311,11 +311,11 @@ export default class Challenge extends Component {
                 lineThrough.fontStyle = "italic";
             }
 
-            thresholdTable.unshift(<tr key={"threshold" + i}>
-                <td className={intToTier(i - 1)} style={{ color: "var(--type)", textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{intToTier(i - 1)}</td>
-                <td style={lineThrough}>{beautifyNum(thresholds[i])}</td>
-                <td style={lineThrough}>{Math.round(percentiles[intToTier(i - 1)] * 1000) / 10}%</td>
-            </tr>)
+            thresholdTable.unshift(<div key={"threshold" + i} className={css.rowParentTableRow}>
+                <p className={intToTier(i - 1)} style={{ color: "var(--type)", textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{intToTier(i - 1)}</p>
+                <p style={lineThrough}>{beautifyNum(thresholds[i])}</p>
+                <p style={lineThrough}>{Math.round(percentiles[intToTier(i - 1)] * 1000) / 10}%</p>
+            </div>)
         }
 
         let content = <Fragment>
@@ -347,16 +347,16 @@ export default class Challenge extends Component {
                         <h2>Thresholds</h2>
                         <span> How many players have reached a tier</span>
                     </div>
-                    <table className={isLoading}>
-                        <tbody>
-                            <tr>
-                                <th>Tier</th>
-                                <th>Points</th>
-                                <th>%</th>
-                            </tr>
-                            {thresholdTable}
-                        </tbody>
-                    </table>
+                    <div className={isLoading + " " + css.rowParentTable}>
+
+                        <div className={css.rowParentTableRow + " " + css.rowParentTableRowHeading}>
+                            <p>Tier</p>
+                            <p>Points</p>
+                            <p>%</p>
+                        </div>
+
+                        {thresholdTable}
+                    </div>
                 </div>
 
                 {warnings}

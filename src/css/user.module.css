@@ -362,18 +362,15 @@ img.ugglogo {
     margin: 10px;
 }
 
-.rowParent.thresholdTable table tr td:nth-child(1),
-.rowParent.thresholdTable table tr th:nth-child(1) {
+.rowParentTableRow p {
     width: 40%
 }
 
-.rowParent.thresholdTable table tr td:nth-child(2),
-.rowParent.thresholdTable table tr th:nth-child(2) {
+.rowParentTableRow p {
     width: 40%
 }
 
-.rowParent.thresholdTable table tr td:nth-child(3),
-.rowParent.thresholdTable table tr th:nth-child(3) {
+.rowParentTableRow p:nth-child(3) {
     width: 20%
 }
 
@@ -383,7 +380,32 @@ img.ugglogo {
     border-collapse: collapse;
 }
 
-.rowParent table th {
+.rowParentTable {
+    width: 100%;
+}
+
+.rowParentTableRow {
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--dark3);
+    padding: 8px 10px;
+}
+
+.rowParentTableRow p {
+    float: left;
+    color: white;
+    font-size: .8rem;
+    text-align: center;
+    display: block;
+}
+
+.rowParentTableRowHeading {
+    padding: 0 10px;
+}
+
+.rowParent table th,
+.rowParentTableRowHeading p {
     font-weight: bold;
     font-size: 0.7rem;
     color: var(--light3);
