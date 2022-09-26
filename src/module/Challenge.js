@@ -366,7 +366,7 @@ export default class Challenge extends Component {
                         <h2>Info</h2>
                         <span> All you need to know about this challenge </span>
                     </div>
-                    <p dangerouslySetInnerHTML={{ __html: "\"" + challenge.text.replaceAll("\n", "<br />") + "\"" }}></p>
+                    <p dangerouslySetInnerHTML={{ __html: challenge.text.replaceAll("\n", "<br />") }}></p>
                 </div> : null
                 }
 
