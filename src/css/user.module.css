@@ -523,13 +523,8 @@ img.ugglogo {
 
 
 
+.loadinganimation,
 .rowParent table.loading {
-    background: linear-gradient(110deg, var(--dark1) 8%, var(--dark2) 18%, var(--dark1) 33%);
-    background-size: 200% 100%;
-    animation: 1s shine linear infinite;
-}
-
-.loadinganimation {
     background: linear-gradient(110deg, var(--dark1) 8%, var(--dark2) 18%, var(--dark1) 33%);
     background-size: 200% 100%;
     animation: 1s shine linear infinite;

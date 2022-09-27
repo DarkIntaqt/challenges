@@ -115,88 +115,22 @@
 .crystal {
     width: calc(100% - 30px);
     margin: 8px 15px;
+    height: 218px;
     border: 2px solid var(--type);
     border-radius: 8px;
     box-sizing: border-box;
     padding: 10px;
-    color: white;
     text-decoration: none;
     overflow: hidden;
-    transition: .25s box-shadow;
     min-height: 100px;
-    background-size: cover;
+    transition: .25s box-shadow;
     box-shadow: 0 0 20px var(--type);
-    background-image: url(https://lolcdn.darkintaqt.com/s/ad.webp);
+    background-color: var(--dark1);
+    /* background-image: url(https://lolcdn.darkintaqt.com/s/ad.webp); */
 }
 
 .crystal:hover {
     box-shadow: 0 0 30px var(--type);
-}
-
-.crystalHead {
-    font-size: 1.4rem;
-    padding: 20px 10px;
-    font-weight: bold;
-}
-
-.miniLeaderboard {
-    width: calc(50% - 20px);
-    margin-left: 20px;
-    float: left;
-}
-
-.miniLeaderboard>div {
-    float: left;
-    width: 100%;
-    margin: 2px 0;
-}
-
-.crystal .text {
-    float: left;
-    padding: 10px;
-    box-sizing: border-box;
-    width: calc(50% - 50px);
-    margin: 0 25px;
-    background-color: rgba(0, 0, 0, .7);
-    border-radius: 5px;
-}
-
-.miniLeaderboard>div>p {
-    float: left;
-    padding: 10px 5px;
-    box-sizing: border-box;
-    height: 40px;
-    background-color: rgba(0, 0, 0, .5);
-}
-
-.miniLeaderboard>div>span {
-    float: left;
-    background-color: rgba(0, 0, 0, .5);
-    padding: 5px 2px;
-}
-
-.miniLeaderboard>div>span>img {
-    border-radius: 5px;
-}
-
-.miniLeaderboard>div>p.position {
-    font-size: 0.8rem;
-    padding: calc(10px + 0.2rem) 10px 10px 5px;
-    border-radius: 5px 0 0 5px;
-    color: var(--light2)
-}
-
-.miniLeaderboard>div>p.name {
-    color: white;
-    font-size: 1rem;
-    padding: 10px 0 10px 5px;
-}
-
-.miniLeaderboard>div>p.region {
-    font-size: 0.8rem;
-    padding: calc(10px + 0.2rem) 5px 10px 0px;
-    border-radius: 0 5px 5px 0;
-    color: var(--light2)
 }
 
 @media only screen and (max-width:1050px) {

@@ -5,26 +5,30 @@ import { serverToMachineReadable } from "../func/server"
 import css from "../css/user.module.css"
 import challengeCSS from "../css/challenges.module.css"
 import getChallenge from "../func/getChallenge"
-import generateChallengePointElement from "../func/generateChallengePointElement"
+//import generateChallengePointElement from "../func/generateChallengePointElement"
 import { checkExists } from "../func/arrayManipulationFunctions.ts"
 import config from "../config"
 import ChallengeObject from "./ChallengeObject"
+
+import Loadable from "react-loadable";
 
 export default class Challenges extends Component {
     constructor(props) {
         super(props);
         this.load = this.load.bind(this)
         this.toLoad = { "content": [], "leaderboards": [] };
-        this.loaded = this.loaded.bind(this);
         this.loadChallenges = this.loadChallenges.bind(this)
-        this.loadLeaderboards = this.loadLeaderboards.bind(this)
         this.changeFilter = this.changeFilter.bind(this)
         this.showChallenges = this.showChallenges.bind(this)
         this.filter = { "category": [], "type": [], "gamemode": [] }
         this.searchFor = "";
+
+
+        this.event = <div className={challengeCSS.crystal + " NONE"}></div>;
+
+
         this.search = this.search.bind(this)
         this.state = {
-            challengePoints: [],
             challenges: window.loadingUI
         }
     }
@@ -33,30 +37,23 @@ export default class Challenges extends Component {
         let server = serverToMachineReadable(window.region)
         this.server = server;
 
-        if (!checkExists(window.challengeLeaderboards) || (checkExists(window.challengeLeaderboards) && window.challengeLeaderboards === "")) {
-            get("https://challenges.darkintaqt.com/api/v3/c/?id=0", this.loadLeaderboards)
-        } else {
-            this.loadLeaderboards(window.challengeLeaderboards)
-        }
 
         get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${(new Date().getMonth() + 1).toString() + (new Date().getDate()).toString() + new Date().getFullYear().toString()}`, this.loadChallenges)
 
     }
 
-    loaded(type, content) {
-        this.toLoad[type] = content;
-        if (this.toLoad.content.length > 0 && Object.entries(this.toLoad.leaderboards).length > 0) {
-            this.showChallenges(this.toLoad.content)
-        }
-    }
-
     loadChallenges(content) {
-        this.loaded("content", content)
-    }
+        let event = this.event
+        this.showChallenges(content)
 
-    loadLeaderboards(content) {
-        window.challengeLeaderboards = content
-        this.loaded("leaderboards", content)
+        const LoadEvent = Loadable({
+            loader: (content) => import('./../func/event.js'),
+            loading: function () {
+                return event
+            },
+        });
+
+        this.event = <LoadEvent content={content} server={this.server} />
     }
 
     showChallenges(challengeData) {
@@ -75,11 +72,7 @@ export default class Challenges extends Component {
         for (let i = 0; i < challenges.length; i++) {
             const challenge = challenges[i];
             if (challenge.id < 10) {
-                if (challenge.id === 0) {
-                    if (this.filter.category.length === 0 && this.filter.type.length === 0 && this.filter.gamemode.length === 0 && this.searchFor.length === 0) {
-                        challengeObject.unshift(generateChallengePointElement(challenge, this.toLoad.leaderboards))
-                    }
-                } else {
+                if (challenge.id !== 0) {
                     continue
                 }
             }
@@ -321,13 +314,16 @@ export default class Challenges extends Component {
 
     render() {
 
-        let challengePoints = this.state.challengePoints
-
         return <div className={"object1000"}>
+
             <div className={challengeCSS.heading}>
                 <h1>List of all Challenges</h1>
                 <h2>Overview and how to obtain them</h2>
             </div>
+
+            <section className={css.parent}>
+                {this.event}
+            </section>
             <div className={challengeCSS.filter}>
                 <input type="text" placeholder="Search for challenge" onKeyUp={this.search} />
                 <div className={challengeCSS.selectors + " clearfix"}>
@@ -414,7 +410,6 @@ export default class Challenges extends Component {
                 </div>
             </div>
             <div className={css.parent}>
-                {challengePoints}
                 {this.state.challenges}
             </div>
         </div>
