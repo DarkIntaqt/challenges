@@ -27,9 +27,9 @@ export default class generateChallengePointElement extends Component {
 
     updateCompontent(leaderboards) {
 
-        console.log(leaderboards);
+        // console.log(leaderboards);
 
-        let challenges = this.challenges
+        // let challenges = this.challenges
 
         let regions = config.regions
         let summoner = []

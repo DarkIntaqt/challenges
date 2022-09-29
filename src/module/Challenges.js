@@ -314,7 +314,7 @@ export default class Challenges extends Component {
 
     render() {
 
-        return <div className={"object1000"}>
+        return <div className={"object1000 " + challengeCSS.challenges}>
 
             <div className={challengeCSS.heading}>
                 <h1>List of all Challenges</h1>
@@ -324,8 +324,10 @@ export default class Challenges extends Component {
             <section className={css.parent}>
                 {this.event}
             </section>
+
+            <input type="text" placeholder="Search for a challenge" onKeyUp={this.search} className={challengeCSS.input} />
             <div className={challengeCSS.filter}>
-                <input type="text" placeholder="Search for challenge" onKeyUp={this.search} />
+
                 <div className={challengeCSS.selectors + " clearfix"}>
                     <p className={challengeCSS.info}>Filter (multiple choices)</p>
                     <div className={challengeCSS.category} category="category">
@@ -409,7 +411,7 @@ export default class Challenges extends Component {
                     </div>
                 </div>
             </div>
-            <div className={css.parent}>
+            <div className={css.parent + " " + challengeCSS.flexWidth}>
                 {this.state.challenges}
             </div>
         </div>
