@@ -41,21 +41,12 @@ export default class Challenges extends Component {
     }
 
     loadChallenges(content) {
-        let event = this.state.event
+
         this.showChallenges(content)
 
-        const LoadEvent = Loadable({
-            loader: (content) => import('./../func/event.js'),
-            loading: function () {
-                return event
-            },
-        });
-
-        this.setState({ event: <LoadEvent content={content} server={this.server} /> })
     }
 
     showChallenges(challengeData) {
-        document.title = "All League of Legends Challenges Overview"
         window.JSONPREQUEST = challengeData
 
         let challenges = challengeData;
@@ -255,7 +246,22 @@ export default class Challenges extends Component {
                 </div>}
             />)
         }
-        this.setState({ challenges: challengeObject })
+
+        document.title = "All League of Legends Challenges Overview"
+
+        let event = this.state.event
+
+        const LoadEvent = Loadable({
+            loader: (content) => import('./../func/event.js'),
+            loading: function () {
+                return event
+            },
+        });
+
+        this.setState({
+            challenges: challengeObject,
+            event: <LoadEvent content={challengeData} server={this.server} />
+        })
     }
 
     componentDidMount() {
