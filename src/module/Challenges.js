@@ -24,12 +24,10 @@ export default class Challenges extends Component {
         this.searchFor = "";
 
 
-        this.event = <div className={challengeCSS.crystal + " NONE"}></div>;
-
-
         this.search = this.search.bind(this)
         this.state = {
-            challenges: window.loadingUI
+            challenges: window.loadingUI,
+            event: <div className={challengeCSS.crystal + " NONE"}></div>
         }
     }
 
@@ -43,7 +41,7 @@ export default class Challenges extends Component {
     }
 
     loadChallenges(content) {
-        let event = this.event
+        let event = this.state.event
         this.showChallenges(content)
 
         const LoadEvent = Loadable({
@@ -53,7 +51,7 @@ export default class Challenges extends Component {
             },
         });
 
-        this.event = <LoadEvent content={content} server={this.server} />
+        this.setState({ event: <LoadEvent content={content} server={this.server} /> })
     }
 
     showChallenges(challengeData) {
@@ -322,7 +320,7 @@ export default class Challenges extends Component {
             </div>
 
             <section className={css.parent}>
-                {this.event}
+                {this.state.event}
             </section>
 
             <input type="text" placeholder="Search for a challenge" onKeyUp={this.search} className={challengeCSS.input} />
