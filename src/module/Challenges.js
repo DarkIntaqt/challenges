@@ -23,11 +23,17 @@ export default class Challenges extends Component {
         this.filter = { "category": [], "type": [], "gamemode": [] }
         this.searchFor = "";
 
+        const LoadEvent = Loadable({
+            loader: (content) => import('./../func/event.js'),
+            loading: function () {
+                return <div className={challengeCSS.crystal + " NONE"}></div>
+            },
+        });
 
         this.search = this.search.bind(this)
         this.state = {
             challenges: window.loadingUI,
-            event: <div className={challengeCSS.crystal + " NONE"}></div>
+            event: <LoadEvent content="" />
         }
     }
 
@@ -249,18 +255,9 @@ export default class Challenges extends Component {
 
         document.title = "All League of Legends Challenges Overview"
 
-        let event = this.state.event
-
-        const LoadEvent = Loadable({
-            loader: (content) => import('./../func/event.js'),
-            loading: function () {
-                return event
-            },
-        });
 
         this.setState({
             challenges: challengeObject,
-            event: <LoadEvent content={challengeData} server={this.server} />
         })
     }
 
