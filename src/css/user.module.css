@@ -572,14 +572,15 @@ img.ugglogo {
     animation: 1s shine linear infinite;
 }
 
-p.availableTitle {
+span.availableTitle {
     width: 100%;
+    display: block;
     font-size: 1rem;
     color: var(--type);
     margin: 5px 0 0 5px;
 }
 
-p.availableTitle img {
+span.availableTitle img {
     width: 1rem;
     float: left;
     margin-right: 3px;

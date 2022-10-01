@@ -337,7 +337,7 @@ export default class Challenge extends Component {
         }
 
         let content = <Fragment>
-            <div className={"MASTER " + css.c + " " + css.profile + " " + css["cid" + challenge.challenge.id]}>
+            <section className={"MASTER " + css.c + " " + css.profile + " " + css["cid" + challenge.challenge.id]}>
                 <img src={icon} alt="" />
                 <h1>{challenge.challenge.translation.name} {challenge.timestamp
                     ? <span data-nosnippet>(Updated <Timestamp date={challenge.timestamp * 1000} />)</span>
@@ -347,16 +347,16 @@ export default class Challenge extends Component {
 
                     {challenge.title.length > 0
                         ? <Fragment><br />
-                            <p className={css.availableTitle + " " + challenge.title[0][0]}><img src={"https://cdn.darkintaqt.com/lol/static/challenges/title.svg"} alt="Title" />{challenge.title[0][1]}</p>
+                            <span className={css.availableTitle + " " + challenge.title[0][0]}><img src={"https://cdn.darkintaqt.com/lol/static/challenges/title.svg"} alt="Title" />{challenge.title[0][1]}</span>
                         </Fragment>
                         : null}
 
                 </p>
-            </div>
+            </section>
 
-            <div className={start.filter + " " + start[this.state.filter]}>
+            <section className={start.filter + " " + start[this.state.filter]}>
                 {filters}
-            </div>
+            </section>
 
             <section className={css.leaderboardsLeft}>
 
@@ -390,7 +390,7 @@ export default class Challenge extends Component {
 
             </section>
 
-            <div className={css.rowParent + " " + css.zebra}>
+            <section className={css.rowParent + " " + css.zebra}>
                 <div className={css.seoArea}>
                     <h2>"{challenge.challenge.translation.name}" Leaderboard</h2>
                     <span> {this.state.filter === "world" ? "Global Ranking" : "Regional Ranking"} </span>
@@ -406,7 +406,7 @@ export default class Challenge extends Component {
                         {summoner}
                     </tbody>
                 </table>
-            </div>
+            </section>
         </Fragment >;
 
         if (this.state.message !== -1) {
