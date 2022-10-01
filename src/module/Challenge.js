@@ -1,6 +1,7 @@
 import { Component, Fragment } from "react";
 import Error from "./Error"
 import get from "../func/get"
+import { getCache } from "../func/getCheckCache"
 import css from "../css/user.module.css"
 import { serverToHumanReadable, serverToMachineReadable } from "../func/server"
 import Timestamp from "react-timestamps"
@@ -28,6 +29,8 @@ export default class Challenge extends Component {
             tempRegion = "world"
         }
 
+        this.challenge = "null"
+        this.challenges = "null"
 
         this.load = this.load.bind(this)
         this.error = this.error.bind(this)
@@ -37,27 +40,40 @@ export default class Challenge extends Component {
 
         this.changeFilter = this.changeFilter.bind(this)
         this.showChallenge = this.showChallenge.bind(this)
+
+        let challengePlaceholder = {
+            text: false,
+            title: [],
+            icon: 1,
+            timestamp: Date.now() / 1000,
+            challenge: {
+                id: 0,
+                parent: 0,
+                translation: {
+                    name: "Loading",
+                    description: "Loading"
+                }
+            }
+        }
+
+        const tempChallenge = getCache(`https://challenges.darkintaqt.com/api/v4/c/?id=${this.params.id}`)
+        const tempChallenges = getCache(`https://cdn.darkintaqt.com/lol/static/challenges-na1.json?t=${(new Date().getMonth() + 1).toString() + (new Date().getDate()).toString() + new Date().getFullYear().toString()}`)
+
+        if (tempChallenge !== false && tempChallenges !== false) {
+            this.challenges = tempChallenges
+            this.challenge = tempChallenge
+            challengePlaceholder = tempChallenge
+            document.title = "'" + tempChallenge.challenge.translation.name + "' Challenge Overview, Thresholds and Leaderboards"
+        }
+
+
         this.state = {
             totalLength: 250,
             message: -1,
             filter: tempRegion,
-            challenge: {
-                text: false,
-                title: [],
-                icon: 1,
-                timestamp: Date.now() / 1000,
-                challenge: {
-                    id: 0,
-                    parent: 0,
-                    translation: {
-                        name: "Loading",
-                        description: "Loading"
-                    }
-                }
-            }
+            challenge: challengePlaceholder
         }
-        this.challenge = "null"
-        this.challenges = "null"
+
     }
 
 
@@ -80,7 +96,8 @@ export default class Challenge extends Component {
     }
 
     componentDidMount() {
-        this.load();
+        if (this.challenge === "null" || this.challenges === "null")
+            this.load();
     }
 
     load() {
@@ -115,6 +132,7 @@ export default class Challenge extends Component {
     }
 
     render() {
+
         const challenge = this.state.challenge
         const regions = this.regions
         const absoluteRegion = this.state.filter

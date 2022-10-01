@@ -62,12 +62,12 @@ export default class generateChallengePointElement extends Component {
         for (let i = 0; i < 3; i++) {
             const player = summoner[i];
             topPlayer.push(<div key={"s" + i} onClick={goTo}>
-                <p className={css.position}>#{i + 1}</p>
+                <p className={css.position}>{i + 1}.</p>
                 <LazyLoadImage height={30} width={30} placeholderSrc={"https://lolcdn.darkintaqt.com/cdn/profileicon/29"} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} alt={""}></LazyLoadImage>
                 <p className={css.name}>
                     {player[0]}
                 </p>
-                <p className={css.region}>#{player[4]}</p>
+                <p className={css.region}>{player[4]}</p>
             </div>);
         }
 

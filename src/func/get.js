@@ -1,19 +1,14 @@
-import { checkExists } from "./arrayManipulationFunctions.ts";
+import { checkCache } from "./getCheckCache";
+
+
 
 const get = async function (url = "/", callback = function (r) {
     console.log(r)
 }, errorCallback = function (e) {
     console.warn(e)
 }, debug = false) {
-    if (checkExists(window.requestCache[url])) {
-        if (window.requestCache[url]["timestamp"] > Date.now() - (1000 * 60 * 15) + (1000 * 60 * 60 * window.timezoneoffset) && window.requestCache[url]["body"] !== "") {
-            if (window.requestCache[url]["code"] === 200) {
-                callback(window.requestCache[url]["body"]);
-            } else {
-                errorCallback(window.requestCache[url]["body"], window.requestCache[url]["code"])
-            }
-            return true
-        }
+    if (checkCache(url)) {
+        callback(window.requestCache[url]["body"]);
     }
 
     let request = await fetch(url)
