@@ -9,6 +9,7 @@ const get = async function (url = "/", callback = function (r) {
 }, debug = false) {
     if (checkCache(url)) {
         callback(window.requestCache[url]["body"]);
+        return true
     }
 
     let request = await fetch(url)
