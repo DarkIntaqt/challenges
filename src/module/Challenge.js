@@ -333,7 +333,7 @@ export default class Challenge extends Component {
                 <p className={intToTier(i - 1)} style={{ color: "var(--type)", textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{intToTier(i - 1)}</p>
                 <p style={lineThrough}>{beautifyNum(thresholds[i])}</p>
                 <p style={lineThrough}>{Math.round(percentiles[intToTier(i - 1)] * 1000) / 10}%</p>
-            </div>)
+            </ div>)
         }
 
         let content = <Fragment>
