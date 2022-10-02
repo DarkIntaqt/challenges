@@ -58,17 +58,19 @@
     margin: 0 5px;
 }
 
+
+/* hover effect object */
 .challenge.overview .tags>div>p {
     width: 160px;
     text-align: center;
-    background-color: #111113;
+    background-color: var(--dark1);
     padding: 3px;
-    border: 2px solid black;
+    border: 2px solid var(--type, --selected);
     visibility: hidden;
     margin-top: 28px;
     line-height: 1rem;
     margin-left: -70px;
-    box-shadow: 0 0 3px rgb(62, 62, 62);
+    box-shadow: 0 0 3px var(--type, --selected);
     position: absolute;
     z-index: 5;
     font-size: 0.8rem;
