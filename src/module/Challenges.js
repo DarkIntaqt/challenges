@@ -101,7 +101,7 @@ export default class Challenges extends Component {
                     parentName = "NO CATEGORY"
                 }
                 if (challenge.tags["source"] === "CHALLENGES") {
-                    if (this.filter.type.length > 0 && !this.filter.type.includes("progression")) {
+                    if (this.filter.type.length > 0 && !this.filter.type.includes("progress")) {
                         continue
                     }
                     obtainable.push(<div key={crypto.randomUUID()}>
@@ -119,7 +119,7 @@ export default class Challenges extends Component {
                     </div>)
                 }
                 if (challenge.tags["source"] === "CAP_INVENTORY") {
-                    if (this.filter.type.length > 0 && !this.filter.type.includes("collect")) {
+                    if (this.filter.type.length > 0 && !this.filter.type.includes("inventory")) {
                         continue
                     }
                     obtainable.push(<div key={crypto.randomUUID()}>
@@ -367,7 +367,7 @@ export default class Challenges extends Component {
                         <p className={challengeCSS.cheading}>Type</p>
                         <button onClick={this.changeFilter}>
                             <i className="fa-solid fa-angles-up"></i>
-                            Progression
+                            Progress
                         </button>
                         <button onClick={this.changeFilter}>
                             <i className="fa-solid fa-play"></i>
@@ -383,7 +383,7 @@ export default class Challenges extends Component {
                         </button>
                         <button onClick={this.changeFilter}>
                             <i className="fa-solid fa-box-open"></i>
-                            Collect
+                            Inventory
                         </button>
                         <button onClick={this.changeFilter}>
                             <i className="fa-solid fa-ranking-star"></i>
