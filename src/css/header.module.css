@@ -20,9 +20,10 @@
     transition: 0.2s color;
     color: white;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 1rem;
     float: right;
-    margin: 20px 15px;
+    padding: 5px;
+    margin: calc(25px - .5rem) 10px;
     line-height: 1;
     display: block;
 }
@@ -30,14 +31,14 @@
 .Header .inner>a:first-child {
     font-weight: bold;
     float: left;
-    margin: 20px 0 20px 30px;
+
 }
 
 .Header .inner>a img {
-    height: 30px;
-    width: 30px;
-    margin: -5px 0 0 -30px;
-    position: absolute;
+    height: 2rem;
+    width: 2rem;
+    margin: -.5rem 0 0 0;
+    float: left;
 }
 
 .HeaderPlaceholder {
