@@ -244,7 +244,7 @@ export default class Challenges extends Component {
                 description={challenge.translation.description}
                 queueIds={<div className={challengeModuleCSS.tags}>
                     <div>
-                        <p>{parentName.charAt(0).toUpperCase() + parentName.slice(1)} Category</p>
+                        <p>{parentName.charAt(0).toUpperCase() + parentName.slice(1).toLowerCase()} Category</p>
                         <img src={"https://cdn.darkintaqt.com/lol/static/challenges/" + parentName.toLowerCase().replaceAll(" ", "") + ".svg"} alt="" />
                     </div>
                     {queueIds}
