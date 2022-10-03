@@ -37,7 +37,7 @@
 .Header .inner>a img {
     height: 2rem;
     width: 2rem;
-    margin: -.5rem 0 0;
+    margin: -.5rem 5px 0 0;
     float: left;
 }
 
@@ -45,28 +45,6 @@
     height: 60px;
     width: 100%;
     float: left;
-}
-
-.git {
-    position: fixed;
-    z-index: 55;
-    background: var(--dark1);
-    padding: 10px 20px;
-    border-radius: 20px;
-    color: rgb(200, 198, 198);
-    display: inline-block;
-    text-decoration: none;
-    box-shadow: 0 0 3px var(--dark3);
-    border: 2px solid black;
-    width: 150px;
-    margin: calc(100vh - 60px) 0 0 calc(100% - 200px);
-}
-
-.git:hover {
-    color: white;
-    transition: 0.2s color, .2s border-color, .2s box-shadow;
-    border-color: var(--selected);
-    box-shadow: 0 0 5px var(--selected);
 }
 
 .content {
@@ -121,9 +99,8 @@
 }
 
 .footer .rightFooter>a {
-    display: block;
     width: 100%;
-    font-size: 1rem;
+    font-size: .8rem;
     margin: 0 0 10px;
     float: left;
 }
@@ -146,8 +123,6 @@
 }
 
 @media only screen and (max-width:1050px) {
-
-    .git,
     .hideOnMobile {
         display: none !important;
     }
