@@ -66,7 +66,14 @@ const config = {
         60, 4, 6, /* halloween elise */
         99, 4, 29, /* lux */
         78, 4, 14 /* xmas poppy */
-    ]
+    ],
+    "images": {
+        "expertise": "https://cdn.darkintaqt.com/lol/static/challenges/expertise.svg",
+        "collection": "https://cdn.darkintaqt.com/lol/static/challenges/collection.svg",
+        "imagination": "https://cdn.darkintaqt.com/lol/static/challenges/imagination.svg",
+        "veterancy": "https://cdn.darkintaqt.com/lol/static/challenges/veterancy.svg",
+        "teamwork": "https://cdn.darkintaqt.com/lol/static/challenges/teamwork.svg"
+    }
 }
 
 

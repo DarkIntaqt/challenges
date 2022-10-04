@@ -14,6 +14,7 @@ import { strtolower } from "../func/stringManipulation.js"
 import { checkExists } from "../func/arrayManipulationFunctions.ts"
 import ChallengeObject from "./ChallengeObject";
 import ProgressBar from "./ProgressBar";
+import config from "../config";
 
 export default class User extends Component {
     constructor(props) {
@@ -55,6 +56,33 @@ export default class User extends Component {
             }}></div>,
             type: "UNRANKED",
             title: "",
+            categories: {
+                "COLLECTION": {
+                    "level": "NONE",
+                    "current": 0,
+                    "max": 1
+                },
+                "EXPERTISE": {
+                    "level": "NONE",
+                    "current": 0,
+                    "max": 1
+                },
+                "VETERANCY": {
+                    "level": "NONE",
+                    "current": 0,
+                    "max": 1
+                },
+                "IMAGINATION": {
+                    "level": "NONE",
+                    "current": 0,
+                    "max": 1
+                },
+                "TEAMWORK": {
+                    "level": "NONE",
+                    "current": 0,
+                    "max": 1
+                }
+            },
             profileImage: "https://cdn.darkintaqt.com/lol/static/missing/item.png",
             challenges: this.loadingUI
         }
@@ -324,6 +352,7 @@ export default class User extends Component {
             title: r.title,
             points: r.points,
             name: r.name,
+            categories: r.categoryPoints,
             selections: {
                 "img1": "https://lolcdn.darkintaqt.com/s/C-" + r.selections["left"]["id"],
                 "img2": "https://lolcdn.darkintaqt.com/s/C-" + r.selections["middle"]["id"],
@@ -576,19 +605,85 @@ export default class User extends Component {
                 </div>
             </div>
 
-            <div style={{
-                width: " calc(100% - 20px)",
-                marginLeft: "10px",
-                float: "left",
-                height: "50px",
-                display: this.state.extraStyle.display
-            }} className={this.state.type}>
 
-                <ProgressBar
-                    width={100}
-                    progress={parseInt(this.state.points[0].replaceAll(".", ""))}
-                    max={parseInt(this.state.points[1].replaceAll(".", ""))}
-                />
+            <div className={css.categories}>
+
+                <div className={css.category + " " + this.state.type}>
+
+                    <p>
+                        <img src={"https://cdn.darkintaqt.com/lol/static/challenges/crystal.svg"} alt="crystal" />
+                        Crystal
+                    </p>
+                    <ProgressBar
+                        width={100}
+                        progress={parseInt(this.state.points[0].replaceAll(".", ""))}
+                        max={parseInt(this.state.points[1].replaceAll(".", ""))}
+                    />
+                </div>
+
+                <div className={css.category + " " + this.state.categories.COLLECTION.level}>
+
+                    <p>
+                        <img src={config.images.collection} alt="collection" />
+                        Collection
+                    </p>
+                    <ProgressBar
+                        width={100}
+                        progress={this.state.categories.COLLECTION.current}
+                        max={this.state.categories.COLLECTION.max}
+                    />
+                </div>
+
+                <div className={css.category + " " + this.state.categories.EXPERTISE.level}>
+                    <p>
+                        <img src={config.images.expertise} alt="expertise" />
+                        Expertise
+                    </p>
+                    <ProgressBar
+                        width={100}
+                        progress={this.state.categories.EXPERTISE.current}
+                        max={this.state.categories.EXPERTISE.max}
+                    />
+                </div>
+
+                <div className={css.category + " " + this.state.categories.VETERANCY.level}>
+
+                    <p>
+                        <img src={config.images.veterancy} alt="Veterancy" />
+                        Veterancy
+                    </p>
+                    <ProgressBar
+                        width={100}
+                        progress={this.state.categories.VETERANCY.current}
+                        max={this.state.categories.VETERANCY.max}
+                    />
+                </div>
+
+                <div className={css.category + " " + this.state.categories.IMAGINATION.level}>
+
+                    <p>
+                        <img src={config.images.imagination} alt="Imagination" />
+                        Imagination
+                    </p>
+                    <ProgressBar
+                        width={100}
+                        progress={this.state.categories.IMAGINATION.current}
+                        max={this.state.categories.IMAGINATION.max}
+                    />
+                </div>
+
+                <div className={css.category + " " + this.state.categories.TEAMWORK.level}>
+
+                    <p>
+                        <img src={config.images.teamwork} alt="Teamwork" />
+                        Teamwork
+                    </p>
+                    <ProgressBar
+                        width={100}
+                        progress={this.state.categories.TEAMWORK.current}
+                        max={this.state.categories.TEAMWORK.max}
+                    />
+                </div>
 
             </div>
 
