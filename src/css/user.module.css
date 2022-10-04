@@ -647,9 +647,9 @@ span.availableTitle img {
     justify-content: space-around;
 }
 
-.category:first-of-type {
-    box-shadow: 0 0 5px 2px var(--type);
-}
+/* .category:first-of-type {
+    box-shadow: 0 0 5px 2px var(--dark2);
+} */
 
 
 .category {
