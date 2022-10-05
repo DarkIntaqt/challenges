@@ -644,6 +644,7 @@ span.availableTitle img {
     margin-bottom: 10px;
     display: flex;
     float: left;
+    flex-wrap: wrap;
     justify-content: space-around;
 }
 
@@ -653,6 +654,7 @@ span.availableTitle img {
 
 
 .category {
+    margin: 2px 0;
     box-sizing: border-box;
     background: var(--dark1);
     padding: 10px;
