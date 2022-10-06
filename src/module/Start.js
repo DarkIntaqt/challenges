@@ -94,7 +94,7 @@ export default class Start extends Component {
 
   render() {
 
-    document.title = "League of Legends Challenge Progress Lookup & Tracker"
+    document.title = "League of Legends Challenge Tracker and Progress Lookup"
 
 
     const img = config.startScreenImages
