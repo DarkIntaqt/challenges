@@ -54,12 +54,6 @@
     background-color: var(--dark0);
 }
 
-@media only screen and (max-width:1050px) {
-    .Header .inner {
-        width: 100%;
-    }
-}
-
 .footer {
     position: relative;
     z-index: 25;
@@ -123,6 +117,14 @@
 }
 
 @media only screen and (max-width:1050px) {
+    .Header .inner {
+        width: 100%;
+    }
+
+    .Header .inner>a>i {
+        display: none;
+    }
+
     .hideOnMobile {
         display: none !important;
     }
