@@ -25,6 +25,18 @@ body {
   --loss: #eb4034;
   --good: #2abf52;
   --perfect: #fcba03;
+
+
+
+  /* cookie banner */
+  --cookie-banner-background: var(--dark1);
+  --cookie-banner-text: var(--light1);
+  --cookie-banner-border: var(--dark3);
+  --cookie-banner-button-border: var(--selected);
+  --cookie-banner-button-text: var(--selected);
+  --cookie-banner-button-background: var(--dark0);
+  --cookie-banner-button-accept-background: var(--selected);
+  --cookie-banner-button-accept-text: var(--light1);
 }
 
 div,
