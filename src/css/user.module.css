@@ -99,9 +99,11 @@ img.ugglogo {
 
 .profile>h2>div>b,
 .profile>div>div>div>b {
-    font-size: 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
     display: inline-block;
     padding-bottom: 5px;
+    color: var(--light0)
 }
 
 .profile>h2>div>i,
@@ -113,10 +115,11 @@ img.ugglogo {
 .profile>div>div>div {
     cursor: AUTO;
     border-radius: 5px;
-    color: white;
+    color: var(--light2);
+    font-size: .8rem;
     z-index: 5;
     border: 2px solid var(--type);
-    background-color: #111113;
+    background-color: var(--dark1);
     margin-top: 22px;
     padding: 10px;
     margin-left: 20px;
@@ -683,4 +686,14 @@ span.availableTitle img {
     color: white;
     text-align: center;
     width: 100%;
+}
+
+.flexWidth {
+    width: 750px
+}
+
+@media only screen and (max-width:1050px) {
+    .flexWidth {
+        width: 100%;
+    }
 }

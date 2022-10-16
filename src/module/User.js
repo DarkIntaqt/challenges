@@ -10,11 +10,13 @@ import { beautifyNum } from "../func/beautify.ts"
 import { intToTier, tierToInt } from "../func/tierFunctions";
 import { toggleValue } from "../func/arrayManipulationFunctions.ts";
 import goTo from "../func/goTo.js";
-import { strtolower } from "../func/stringManipulation.js"
+import { strtolower, capitalize } from "../func/stringManipulation.js"
 import { checkExists } from "../func/arrayManipulationFunctions.ts"
 import ChallengeObject from "./ChallengeObject";
 import ProgressBar from "./ProgressBar";
 import config from "../config";
+
+import filterCSS from "../css/filter.module.css"
 
 export default class User extends Component {
     constructor(props) {
@@ -37,18 +39,22 @@ export default class User extends Component {
         this.filters = {
             "category": [], "type": [], "gamemode": []
         };
+
+        const loadingImage = "https://cdn.darkintaqt.com/lol/static/missing/item.png"
+        const loadingSelection = { "tier": "UNRANKED", "challenge": ["...", "..."] }
+
         this.state = {
             extraStyle: { display: "block" },
             expandFilterOptions: { display: "none" },
             alphabet: "a-z",
             points: ["0", "1"],
             selections: {
-                "img1": "https://cdn.darkintaqt.com/lol/static/missing/item.png",
-                "img2": "https://cdn.darkintaqt.com/lol/static/missing/item.png",
-                "img3": "https://cdn.darkintaqt.com/lol/static/missing/item.png",
-                "statsl": { "tier": "UNRANKED", "challenge": ["...", "..."] },
-                "statsm": { "tier": "UNRANKED", "challenge": ["...", "..."] },
-                "statsr": { "tier": "UNRANKED", "challenge": ["...", "..."] }
+                "img1": loadingImage,
+                "img2": loadingImage,
+                "img3": loadingImage,
+                "statsl": loadingSelection,
+                "statsm": loadingSelection,
+                "statsr": loadingSelection
             },
             filter: this.filter,
             name: <div className={css.loadinganimation} style={{
@@ -83,7 +89,7 @@ export default class User extends Component {
                     "max": 1
                 }
             },
-            profileImage: "https://cdn.darkintaqt.com/lol/static/missing/item.png",
+            profileImage: loadingImage,
             challenges: this.loadingUI
         }
     }
@@ -552,11 +558,32 @@ export default class User extends Component {
 
     changeFilter(e) {
         if (this.state.challenges !== window.loadingUI) {
-            this.filter = e.target.id;
+            const button = e.currentTarget
+
+            if (this.filter === button.id) {
+                return
+            }
+
+            if (this.filter === "alphabetic-a-z") {
+                document.getElementById("alphabetic-z-a").classList.remove(filterCSS["selected"])
+            } else if (this.filter === "alphabetic-z-a") {
+                document.getElementById("alphabetic-a-z").classList.remove(filterCSS["selected"])
+            } else {
+                document.getElementById(this.filter).classList.remove(filterCSS["selected"])
+            }
+
+            button.classList.add(filterCSS["selected"])
+
+
+
+            this.filter = button.id
+
+
+
             if (this.filter === "alphabetic-a-z" && this.state.alphabet === "a-z") {
                 this.setState({
                     alphabet: "z-a",
-                    filter: e.target.id
+                    filter: e.currentTarget.id
                 })
                 this.load()
                 return
@@ -564,12 +591,13 @@ export default class User extends Component {
             if (this.filter === "alphabetic-z-a" && this.state.alphabet === "z-a") {
                 this.setState({
                     alphabet: "a-z",
-                    filter: e.target.id
+                    filter: e.currentTarget.id
                 })
                 this.load()
                 return
             }
-            this.setState({ filter: e.target.id });
+
+            this.setState({ filter: e.currentTarget.id });
             this.load()
         }
     }
@@ -591,16 +619,16 @@ export default class User extends Component {
                 <h1>{this.state.name}
                     {typeof this.state.name === "object" ? null : <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(this.state.name)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profiletext} title={profiletext}></img></a>}
                 </h1>
-                {this.state.title["title"] !== "<span style='opacity:0;'>No title</span>" ? <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }}></span><div><b>{this.state.title["tier"]} Tier Title</b><br />{this.state.title["description"]}<br /><i>Need {beautifyNum(this.state.title["threshold"])}</i></div></h2> : ''}
+                {this.state.title["title"] !== "<span style='opacity:0;'>No title</span>" ? <h2 className={this.state.title["tier"]}><span dangerouslySetInnerHTML={{ __html: this.state.title["title"] }}></span><div><b>{capitalize(this.state.title["tier"])} Title</b><br />{this.state.title["description"]}<br /><br /><i>Need {beautifyNum(this.state.title["threshold"])}</i></div></h2> : ''}
                 <div className={css.selections}>
                     <div style={{ backgroundImage: "url('" + this.state.selections["img1"] + "')" }}>
-                        <div className={this.state.selections["statsl"]["tier"]}><b>{this.state.selections["statsl"]["tier"]} Tier Token</b><br />{this.state.selections["statsl"]["challenge"][0]}<br /><i>Need {beautifyNum(this.state.selections["statsl"]["challenge"][1])}</i></div>
+                        <div className={this.state.selections["statsl"]["tier"]}><b>{capitalize(this.state.selections["statsl"]["tier"])} Token</b><br />{this.state.selections["statsl"]["challenge"][0]}<br /><br /><i>Need {beautifyNum(this.state.selections["statsl"]["challenge"][1])}</i></div>
                     </div>
                     <div style={{ backgroundImage: "url('" + this.state.selections["img2"] + "')" }} >
-                        <div className={this.state.selections["statsm"]["tier"]}><b>{this.state.selections["statsm"]["tier"]} Tier Token</b><br />{this.state.selections["statsm"]["challenge"][0]}<br /><i>Need {beautifyNum(this.state.selections["statsm"]["challenge"][1])}</i></div>
+                        <div className={this.state.selections["statsm"]["tier"]}><b>{capitalize(this.state.selections["statsm"]["tier"])} Token</b><br />{this.state.selections["statsm"]["challenge"][0]}<br /><br /><i>Need {beautifyNum(this.state.selections["statsm"]["challenge"][1])}</i></div>
                     </div>
                     <div style={{ backgroundImage: "url('" + this.state.selections["img3"] + "')" }} >
-                        <div className={this.state.selections["statsr"]["tier"]}><b>{this.state.selections["statsr"]["tier"]} Tier Token</b><br />{this.state.selections["statsr"]["challenge"][0]}<br /><i>Need {beautifyNum(this.state.selections["statsr"]["challenge"][1])}</i></div>
+                        <div className={this.state.selections["statsr"]["tier"]}><b>{capitalize(this.state.selections["statsr"]["tier"])} Token</b><br />{this.state.selections["statsr"]["challenge"][0]}<br /><br /><i>Need {beautifyNum(this.state.selections["statsr"]["challenge"][1])}</i></div>
                     </div>
                 </div>
             </div>
@@ -687,32 +715,42 @@ export default class User extends Component {
 
             </div>
 
-            <div className={css.filter + " " + css[this.state.filter]} style={this.state.extraStyle}>
-                <button className={css.level} onClick={this.changeFilter} id="level">Rank</button>
-                <button className={css.timestamp} onClick={this.changeFilter} id="timestamp">Last upgraded</button>
-                <button className={css.percentile} onClick={this.changeFilter} id="percentile">Leaderboard Position</button>
-                <button className={css.levelup} onClick={this.changeFilter} id="levelup">Next Levelup</button>
-                <button className={css["alphabetic-" + this.state.alphabet]} onClick={this.changeFilter} id={"alphabetic-" + this.state.alphabet}>{this.state.alphabet.toUpperCase()}</button>
-                <button className={css.titles} onClick={this.changeFilter} id="titles">Titles</button>
-                <button className={css.moreFilter} onClick={this.toggleFilters} id="morefilter">{this.state.expandFilterOptions.display === "none" ? 'Expand' : 'Collapse'} more filters {(this.filters.gamemode.length + this.filters.category.length + this.filters.type.length) > 0 ? "(" + (this.filters.gamemode.length + this.filters.category.length + this.filters.type.length) + " applied)" : ''}</button>
+            <div className={filterCSS.filter}>
+                <div className={filterCSS.selectors + " clearfix"}>
+                    <p className={filterCSS.info}>Filter</p>
+                    <div className={filterCSS.category} category="category">
+                        <p className={filterCSS.cheading}>Order by</p>
 
-                <div className={css.newLine} style={this.state.expandFilterOptions}>
-                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="progression">Progression</button>
-                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="ingame">Ingame</button>
-                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="eternals">Eternals</button>
-                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="clash">Clash</button>
-                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="collect">Collect</button>
-                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="ranked">Ranked</button>
-                    <button className={css.timestamp} type="type" onClick={this.changeExtraFilter} id="profile">Profile</button>
-                </div>
-                <div className={css.newLine} style={this.state.expandFilterOptions}>
-                    <button className={css.timestamp} type="gamemode" onClick={this.changeExtraFilter} id="summonersrift">Summoners Rift</button>
-                    <button className={css.timestamp} type="gamemode" onClick={this.changeExtraFilter} id="aram">ARAM</button>
-                    <button className={css.timestamp} type="gamemode" onClick={this.changeExtraFilter} id="bot">Coop vs AI</button>
-                </div>
+                        <button onClick={this.changeFilter} id="level" className={filterCSS["selected"]}>
+                            <i className="fa-solid fa-ranking-star"></i>
+                            Rank
+                        </button>
 
+                        <button onClick={this.changeFilter} id="timestamp">
+                            <i className="fa-regular fa-clock"></i>
+                            Last upgraded
+                        </button>
+
+                        <button onClick={this.changeFilter} id="percentile">
+                            <i className="fa-solid fa-hashtag"></i>
+                            Leaderboard Position
+                        </button>
+
+                        <button onClick={this.changeFilter} id="levelup">
+                            <i className="fa-solid fa-arrow-up-right-dots"></i>
+                            Closest Levelup
+                        </button>
+
+                        <button onClick={this.changeFilter} id={"alphabetic-" + this.state.alphabet}>
+                            <i className={"fa-solid fa-arrow-down-" + this.state.alphabet}></i>
+                            {this.state.alphabet.toUpperCase()}
+                        </button>
+
+                    </div>
+                </div>
             </div>
-            <div className={css.parent}>
+
+            <div className={css.parent + " " + css.flexWidth}>
                 {this.state.challenges}
             </div>
             {typeof this.state.name === "object" ? null : <p className={css.legal}><span data-nosnippet>The U.GG logo belongs to U.GG. Read more <a href="/faq#h4" onClick={goTo}>here</a>. <br />Click <a href="/faq" onClick={goTo}>here</a> to get any questions aobut this page answered. </span></p>}
