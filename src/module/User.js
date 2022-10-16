@@ -315,11 +315,11 @@ export default class User extends Component {
                         if (enabled["isAram"] && enabled["isSR"]) {
                             queueIds.push(<img key={0} src="https://cdn.darkintaqt.com/lol/static/lanes/FILL.png" alt="All modes" />)
                         } else if (enabled["isAram"] && !enabled["isSR"]) {
-                            queueIds.push(<img key={1} src="https://lolcdn.darkintaqt.com/cdn/ha.svg" alt="Aram games only" />)
+                            queueIds.push(<img key={1} src={config.images.aram} alt="Aram games only" />)
                         } else if (!enabled["isAram"] && enabled["isSR"]) {
-                            queueIds.push(<img key={2} src="https://lolcdn.darkintaqt.com/cdn/sr.svg" alt="Summoners Rift games only" />)
+                            queueIds.push(<img key={2} src={config.images.summonersrift} alt="Summoners Rift games only" />)
                         } else {
-                            queueIds.push(<img key={3} src="https://lolcdn.darkintaqt.com/cdn/bot.png" alt="Bot games only" />)
+                            queueIds.push(<img key={3} src={config.images.bot} alt="Bot games only" />)
                         }
                     } else if (this.filters.gamemode.length > 0) {
                         if (this.filters.gamemode.includes("aram") && [101000, 101300, 101200, 101100].includes(c.id)) {
@@ -546,12 +546,18 @@ export default class User extends Component {
     changeExtraFilter(e) {
         if (this.state.challenges !== window.loadingUI) {
             const toggle = toggleValue(this.filters[e.target.getAttribute("type")], e.target.id)
-            this.filters[e.target.getAttribute("type")] = toggle.result
+
             if (toggle.method === true) {
-                e.target.classList.add(css.selected)
+
+                e.target.classList.add(filterCSS["selected"])
+
             } else {
-                e.target.classList.remove(css.selected)
+
+                e.target.classList.remove(filterCSS["selected"])
+
             }
+
+            // re-render the challenges displayed
             this.load()
         }
     }
@@ -747,8 +753,33 @@ export default class User extends Component {
                         </button>
 
                     </div>
+
+
+                    <div className={filterCSS.category} category="category">
+                        <p className={filterCSS.cheading}>Gamemode</p>
+
+                        <button onClick={this.changeExtraFilter} id="summonersrift" type="gamemode">
+                            <img src={config.images.summonersrift} alt="" />
+                            Summoners Rift
+                        </button>
+
+                        <button onClick={this.changeExtraFilter} id="aram" type="gamemode">
+                            <img src={config.images.aram} alt="" />
+                            ARAM
+                        </button>
+
+                        <button onClick={this.changeExtraFilter} id="bot" type="gamemode">
+                            <img src={config.images.bot} alt="" />
+                            Coop vs. AI
+                        </button>
+
+                    </div>
+
                 </div>
             </div>
+
+
+
 
             <div className={css.parent + " " + css.flexWidth}>
                 {this.state.challenges}

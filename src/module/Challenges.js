@@ -202,7 +202,7 @@ export default class Challenges extends Component {
                     }
                     queueIds.push(<div key={crypto.randomUUID()}>
                         <p>ARAM games only</p>
-                        <img key={1} src="https://lolcdn.darkintaqt.com/cdn/ha.svg" alt="Aram games only" />
+                        <img key={1} src={config.images.aram} alt="Aram games only" />
                     </div>)
                 } else if (!enabled["isAram"] && enabled["isSR"]) {
                     if (this.filter.gamemode.length > 0 && !this.filter.gamemode.includes("summonersrift")) {
@@ -210,7 +210,7 @@ export default class Challenges extends Component {
                     }
                     queueIds.push(<div key={crypto.randomUUID()}>
                         <p>Summoners Rift only</p>
-                        <img key={2} src="https://lolcdn.darkintaqt.com/cdn/sr.svg" alt="Summoners Rift games only" />
+                        <img key={2} src={config.images.summonersrift} alt="Summoners Rift games only" />
                     </div>)
                 } else {
                     if (this.filter.gamemode.length > 0 && !this.filter.gamemode.includes("bot")) {
@@ -218,7 +218,7 @@ export default class Challenges extends Component {
                     }
                     queueIds.push(<div key={crypto.randomUUID()}>
                         <p>Bot games only</p>
-                        <img key={3} src="https://lolcdn.darkintaqt.com/cdn/bot.png" alt="Bot games only" />
+                        <img key={3} src={config.images.bot} alt="Bot games only" />
                     </div>)
                 }
             } else if (this.filter.gamemode.length > 0) {
@@ -336,31 +336,31 @@ export default class Challenges extends Component {
                     <div className={filterCSS.category} category="category">
                         <p className={filterCSS.cheading}>Category</p>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/teamwork.svg"} alt="" />
+                            <img src={config.images.teamwork} alt="" />
                             Teamwork
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/imagination.svg"} alt="" />
+                            <img src={config.images.imagination} alt="" />
                             Imagination
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/veterancy.svg"} alt="" />
+                            <img src={config.images.veterancy} alt="" />
                             Veterancy
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/collection.svg"} alt="" />
+                            <img src={config.images.collection} alt="" />
                             Collection
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/expertise.svg"} alt="" />
+                            <img src={config.images.expertise} alt="" />
                             Expertise
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/legacy.svg"} alt="" />
+                            <img src={config.images.legacy} alt="" />
                             Legacy
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://cdn.darkintaqt.com/lol/static/challenges/2022seasonal.svg"} alt="" />
+                            <img src={config.images.seasonal2022} alt="" />
                             2022 Seasonal
                         </button>
                     </div>
@@ -400,15 +400,15 @@ export default class Challenges extends Component {
                     <div className={filterCSS.category} category="gamemode">
                         <p className={filterCSS.cheading}>Gamemode</p>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://lolcdn.darkintaqt.com/cdn/sr.svg"} alt="" />
+                            <img src={config.images.summonersrift} alt="" />
                             Summoners Rift
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://lolcdn.darkintaqt.com/cdn/ha.svg"} alt="" />
+                            <img src={config.images.aram} alt="" />
                             ARAM
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={"https://lolcdn.darkintaqt.com/cdn/bot.png"} alt="" />
+                            <img src={config.images.bot} alt="" />
                             Bot
                         </button>
                     </div>
