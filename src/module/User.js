@@ -53,7 +53,8 @@ export default class User extends Component {
 
         this.state = {
             topLevelFilter: "challenges",
-            extraStyle: { display: "block" },
+            extraStyle: {},
+            extraStyleNormal: {},
             expandFilterOptions: { display: "none" },
             points: ["0", "1"],
             selections: {
@@ -506,7 +507,8 @@ export default class User extends Component {
     error(e, c) {
         this.setState({
             challenges: <Error message={e}></Error>,
-            extraStyle: { display: "none" }
+            extraStyle: { display: "none" },
+            extraStyleNormal: { width: "100%" }
         })
     }
 
@@ -662,19 +664,19 @@ export default class User extends Component {
                 </div>
             </div>
 
-            <div className={css.topLevelFilter + " " + css["filter" + this.state.topLevelFilter]}>
+            <div className={css.topLevelFilter + " " + css["filter" + this.state.topLevelFilter]} style={this.state.extraStyle}>
                 <button className={css.filterChallenges} onClick={this.changeTopLevelFilter} id="challenges">Challenges</button>
                 <button className={css.filterTitle} onClick={this.changeTopLevelFilter} id="title">Titles</button>
             </div>
 
 
 
-            {this.state.topLevelFilter === "title" ? <div className={css.parent}>
+            {this.state.topLevelFilter === "title" ? <div className={css.parent} style={this.state.extraStyle}>
                 {this.state.challenges}
             </div> :
                 <Fragment>
 
-                    <div className={css.categories}>
+                    <div className={css.categories} style={this.state.extraStyle}>
 
                         <div className={css.category + " " + this.state.type}>
 
@@ -755,7 +757,7 @@ export default class User extends Component {
 
                     </div>
 
-                    <div className={filterCSS.filter}>
+                    <div className={filterCSS.filter} style={this.state.extraStyle}>
                         <div className={filterCSS.selectors + " clearfix"}>
                             <p className={filterCSS.info}>Filter</p>
                             <div className={filterCSS.category} category="category">
@@ -822,7 +824,7 @@ export default class User extends Component {
 
 
 
-                    <div className={css.parent + " " + css.flexWidth}>
+                    <div className={css.parent + " " + css.flexWidth} style={this.state.extraStyleNormal}>
                         {this.state.challenges}
                     </div>
                 </Fragment>}
