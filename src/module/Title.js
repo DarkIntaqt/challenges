@@ -1,8 +1,12 @@
 import { Component } from "react";
-import css from "../css/titles.module.css"
-import get from "../func/get"
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import get from "../func/get"
 import goTo from "../func/goTo.js";
+
+import css from "../css/titles.module.css"
+
+
 
 export default class Title extends Component {
     constructor(props) {
@@ -23,7 +27,9 @@ export default class Title extends Component {
     load() {
 
         get(`https://challenges.darkintaqt.com/api/v1/titles/`, this.showUser, this.error);
+
     }
+
     showUser(r) {
         document.title = "All Challenge Titles - Overview"
         this.setState({
@@ -45,9 +51,9 @@ export default class Title extends Component {
 
             titles.push(<a href={"/challenge/" + element.cid} className={css.title + " " + element.type + " clearfix"} key={element.cid} challengeid={element.cid} onClick={goTo}>
                 <LazyLoadImage height={45} width={45} src={"https://lolcdn.darkintaqt.com/s/C-" + element.icon + "-" + element.type.toLowerCase()} placeholderSrc={"https://cdn.darkintaqt.com/lol/static/missing/item.png"} alt="" />
-                <p>Achieved by {element.percentile}% of all players</p>
-                <h2>{element.title}</h2>
+                <h2>{element.title}<br /><span data-nosnippet>{element.percentile}%</span></h2>
                 <p>Reach <span>{element.type} tier</span> in <span>"{element.challenge}"</span>. <br></br>{element.description}<br /><br /><i>Need {element.threshold}.</i></p>
+
             </a>)
         }
 
@@ -59,7 +65,7 @@ export default class Title extends Component {
         return <div className={"object1000"}>
 
             <h1 className={css.heading}>All titles</h1>
-            <p className={css.subheading}>A list of all League of Legends Titles and how to achieve them. </p>
+            <p className={css.subheading}>A list of all League of Legends Titles Challenge and how to achieve them. </p>
 
             <div className={css.titles}>
                 {titles}
