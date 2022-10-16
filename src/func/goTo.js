@@ -1,3 +1,9 @@
+/**
+ * 
+ * @param {Event} e 
+ * @param {boolean} replace 
+ * @returns nothing; changes page location
+ */
 export default function goTo(e, replace = false) {
     if (!e) {
         throw new Error("Missing arguments")

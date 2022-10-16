@@ -4,6 +4,11 @@ export function strtolower(value) {
 }
 
 
+/**
+ * Capitilize a string
+ * @param {string} input 
+ * @returns capitilized string
+ */
 export function capitalize(input) {
 
     if (typeof input === "string") {

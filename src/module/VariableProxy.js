@@ -1,4 +1,4 @@
-
+// implements the goTo function
 import { useNavigate } from "react-router-dom";
 
 export default function VariableProxy() {

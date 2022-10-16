@@ -10,7 +10,7 @@ import './index.css';
 import Start from './module/Start';
 import HeaderNFooter from './module/Header-n-Footer'
 import Error from './module/Error'
-import UserObject from './module/UserObject'
+import PathProxy from './module/PathProxy'
 import FAQ from './module/FAQ'
 import Title from './module/Title'
 import Challenges from "./module/Challenges"
@@ -29,7 +29,7 @@ function main() {
       window[key] = windowVariables[key]
     }
   });
-  
+
 
   if (window.gC("_Cregion")) {
     window.region = window.gC("_Cregion")
@@ -41,7 +41,7 @@ function main() {
 
     document.cookie = "_Cregion=" + window.region + ";expires=" + expires + ";path=/;Secure"
   }
-  
+
 
   const ScrollToTop = ({ children }) => {
     const location = useLocation();
@@ -61,8 +61,8 @@ function main() {
           <Route path="faq" element={<FAQ></FAQ>}></Route>
           <Route path="titles" element={<Title />}></Route>
           <Route path="challenges" element={<Challenges />}></Route>
-          <Route path="challenge/:id" element={<UserObject />}></Route>
-          <Route path=":server/:user" element={<UserObject />}></Route>
+          <Route path="challenge/:id" element={<PathProxy />}></Route>
+          <Route path=":server/:user" element={<PathProxy />}></Route>
           <Route path="*" element={<Error />}></Route>
         </Route>
       </Routes>

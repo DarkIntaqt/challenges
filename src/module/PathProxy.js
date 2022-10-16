@@ -1,12 +1,14 @@
 // This file is sort of a proxy to reduce calls to the server
-
 import {
     useParams,
     useLocation
 } from "react-router-dom";
+
 import User from "./User"
 import Error from "./Error"
+
 import Challenge from "./Challenge"
+
 import config from "../config";
 
 function useQuery() {
@@ -14,7 +16,7 @@ function useQuery() {
     return search.replace("?region=", "");
 }
 
-export default function UserObject() {
+export default function PathProxy() {
     let params = useParams();
     let thisquery = useQuery();
     const server = config.regions;
