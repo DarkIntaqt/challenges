@@ -307,7 +307,7 @@ export default class Challenge extends Component {
 
         try {
             if (checkExists(challenge.challenge.tags["leaderboardManuallyEnabled"])) {
-                warnings.push(<div className={css.disabledMessage} key={"exp"}>Leaderboards might be incorrect due to a missing API-leaderboard about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.  </div>)
+                warnings.push(<div className={css.disabledMessage} key={"exp"}>Leaderboards might be incorrect due to a missing API-endpoint about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.  </div>)
             }
         } catch (error) {
             console.warn(error);
