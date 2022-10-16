@@ -40,7 +40,7 @@ img.ugglogo {
     width: 94px;
     float: left;
     box-shadow: 0 0 15px var(--type);
-    margin: 20px 10px;
+    margin: 20px 10px 10px;
     border-radius: 10px;
     background: linear-gradient(110deg, var(--dark1) 8%, var(--dark2) 18%, var(--dark1) 33%);
     background-size: 200% 100%;
@@ -150,27 +150,28 @@ img.ugglogo {
     justify-content: space-around;
 }
 
+.topLevelFilter {
+    width: 100%;
+    float: left;
+    padding: 5px 0 25px;
+}
 
-.filter button {
+.topLevelFilter button {
     border: none;
     cursor: pointer;
     float: left;
+    padding: 2px;
     color: white;
-    font-size: 0.8rem;
+    font-size: 1rem;
     background: none;
     outline: none;
     margin: 5px 10px;
 }
 
-.level>.level,
-.levelup>.levelup,
-.timestamp>.timestamp,
-.percentile>.percentile,
-.alphabetic-a-z>.alphabetic-z-a,
-.alphabetic-z-a>.alphabetic-a-z,
-.titles>.titles,
-.newLine>.selected {
-    color: #fcba03;
+.filterchallenges>.filterChallenges,
+.filtertitle>.filterTitle {
+    color: var(--selected);
+    border-bottom: 2px solid var(--selected)
 }
 
 .newLine {

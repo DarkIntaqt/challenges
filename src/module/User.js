@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, Fragment } from "react";
 import Error from "./Error"
 import get from "../func/get"
 import css from "../css/user.module.css";
@@ -21,32 +21,40 @@ import filterCSS from "../css/filter.module.css"
 export default class User extends Component {
     constructor(props) {
         super(props);
+
+        this.filterCache = []
+
         this.server = "";
         this.summonerJSON = "";
         this.loaded = 0;
+
+
         this.filter = "level"
+        this.alphabet = "a-z"
+        this.filters = {
+            "category": [], "type": [], "gamemode": []
+        }
+
         this.params = props.params;
         this.challengeJSON = {};
         this.addLoad = this.addLoad.bind(this);
         this.showUser = this.showUser.bind(this);
         this.error = this.error.bind(this);
-        this.toggleFilters = this.toggleFilters.bind(this);
+        this.changeTopLevelFilter = this.changeTopLevelFilter.bind(this)
         this.changeExtraFilter = this.changeExtraFilter.bind(this)
         this.sortChallenges = this.sortChallenges.bind(this);
         this.changeFilter = this.changeFilter.bind(this);
         this.loadingUI = window.loadingUI;
         this.addRegionChallenges = this.addRegionChallenges.bind(this);
-        this.filters = {
-            "category": [], "type": [], "gamemode": []
-        };
+
 
         const loadingImage = "https://cdn.darkintaqt.com/lol/static/missing/item.png"
         const loadingSelection = { "tier": "UNRANKED", "challenge": ["...", "..."] }
 
         this.state = {
+            topLevelFilter: "challenges",
             extraStyle: { display: "block" },
             expandFilterOptions: { display: "none" },
-            alphabet: "a-z",
             points: ["0", "1"],
             selections: {
                 "img1": loadingImage,
@@ -543,17 +551,43 @@ export default class User extends Component {
     }
 
 
+    changeTopLevelFilter(e) {
+        if (this.state.challenges !== window.loadingUI) {
+            const titles = "titles"
+
+            const id = e.currentTarget.id
+            if (id === this.state.topLevelFilter) { return }
+
+            let filter = titles
+
+            if (id !== "title") {
+                filter = "level"
+            }
+
+            this.filter = filter
+            this.filters = {
+                "category": [], "type": [], "gamemode": []
+            };
+
+            this.setState({
+                topLevelFilter: id,
+            })
+
+            this.load()
+        }
+    }
+
     changeExtraFilter(e) {
         if (this.state.challenges !== window.loadingUI) {
-            const toggle = toggleValue(this.filters[e.target.getAttribute("type")], e.target.id)
+            const toggle = toggleValue(this.filters[e.currentTarget.getAttribute("type")], e.currentTarget.id)
 
             if (toggle.method === true) {
 
-                e.target.classList.add(filterCSS["selected"])
+                e.currentTarget.classList.add(filterCSS["selected"])
 
             } else {
 
-                e.target.classList.remove(filterCSS["selected"])
+                e.currentTarget.classList.remove(filterCSS["selected"])
 
             }
 
@@ -585,38 +619,27 @@ export default class User extends Component {
             this.filter = button.id
 
 
+            if (this.filter === "alphabetic-a-z" && this.alphabet === "a-z") {
+                this.alphabet = "z-a"
 
-            if (this.filter === "alphabetic-a-z" && this.state.alphabet === "a-z") {
-                this.setState({
-                    alphabet: "z-a",
-                    filter: e.currentTarget.id
-                })
                 this.load()
                 return
             }
-            if (this.filter === "alphabetic-z-a" && this.state.alphabet === "z-a") {
-                this.setState({
-                    alphabet: "a-z",
-                    filter: e.currentTarget.id
-                })
+            if (this.filter === "alphabetic-z-a" && this.alphabet === "z-a") {
+                this.alphabet = "a-z"
                 this.load()
                 return
             }
 
-            this.setState({ filter: e.currentTarget.id });
+
             this.load()
         }
     }
 
-    toggleFilters() {
-        if (this.state.expandFilterOptions.display === "none") {
-            this.setState({ expandFilterOptions: { display: "block" } })
-        } else {
-            this.setState({ expandFilterOptions: { display: "none" } })
-        }
-    }
+
 
     render() {
+        console.log("render");
         const profiletext = "view " + this.state.name + "'s profile on u.gg";
 
         return <div className="object1000">
@@ -639,158 +662,172 @@ export default class User extends Component {
                 </div>
             </div>
 
-
-            <div className={css.categories}>
-
-                <div className={css.category + " " + this.state.type}>
-
-                    <p>
-                        <img src={"https://cdn.darkintaqt.com/lol/static/challenges/crystal.svg"} alt="crystal" />
-                        Crystal
-                    </p>
-                    <ProgressBar
-                        width={100}
-                        progress={parseInt(this.state.points[0].replaceAll(".", ""))}
-                        max={parseInt(this.state.points[1].replaceAll(".", ""))}
-                    />
-                </div>
-
-                <div className={css.category + " " + this.state.categories.COLLECTION.level}>
-
-                    <p>
-                        <img src={config.images.collection} alt="collection" />
-                        Collection
-                    </p>
-                    <ProgressBar
-                        width={100}
-                        progress={this.state.categories.COLLECTION.current}
-                        max={this.state.categories.COLLECTION.max}
-                    />
-                </div>
-
-                <div className={css.category + " " + this.state.categories.EXPERTISE.level}>
-                    <p>
-                        <img src={config.images.expertise} alt="expertise" />
-                        Expertise
-                    </p>
-                    <ProgressBar
-                        width={100}
-                        progress={this.state.categories.EXPERTISE.current}
-                        max={this.state.categories.EXPERTISE.max}
-                    />
-                </div>
-
-                <div className={css.category + " " + this.state.categories.VETERANCY.level}>
-
-                    <p>
-                        <img src={config.images.veterancy} alt="Veterancy" />
-                        Veterancy
-                    </p>
-                    <ProgressBar
-                        width={100}
-                        progress={this.state.categories.VETERANCY.current}
-                        max={this.state.categories.VETERANCY.max}
-                    />
-                </div>
-
-                <div className={css.category + " " + this.state.categories.IMAGINATION.level}>
-
-                    <p>
-                        <img src={config.images.imagination} alt="Imagination" />
-                        Imagination
-                    </p>
-                    <ProgressBar
-                        width={100}
-                        progress={this.state.categories.IMAGINATION.current}
-                        max={this.state.categories.IMAGINATION.max}
-                    />
-                </div>
-
-                <div className={css.category + " " + this.state.categories.TEAMWORK.level}>
-
-                    <p>
-                        <img src={config.images.teamwork} alt="Teamwork" />
-                        Teamwork
-                    </p>
-                    <ProgressBar
-                        width={100}
-                        progress={this.state.categories.TEAMWORK.current}
-                        max={this.state.categories.TEAMWORK.max}
-                    />
-                </div>
-
-            </div>
-
-            <div className={filterCSS.filter}>
-                <div className={filterCSS.selectors + " clearfix"}>
-                    <p className={filterCSS.info}>Filter</p>
-                    <div className={filterCSS.category} category="category">
-                        <p className={filterCSS.cheading}>Order by</p>
-
-                        <button onClick={this.changeFilter} id="level" className={filterCSS["selected"]}>
-                            <i className="fa-solid fa-ranking-star"></i>
-                            Rank
-                        </button>
-
-                        <button onClick={this.changeFilter} id="timestamp">
-                            <i className="fa-regular fa-clock"></i>
-                            Last upgraded
-                        </button>
-
-                        <button onClick={this.changeFilter} id="percentile">
-                            <i className="fa-solid fa-hashtag"></i>
-                            Leaderboard Position
-                        </button>
-
-                        <button onClick={this.changeFilter} id="levelup">
-                            <i className="fa-solid fa-arrow-up-right-dots"></i>
-                            Closest Levelup
-                        </button>
-
-                        <button onClick={this.changeFilter} id={"alphabetic-" + this.state.alphabet}>
-                            <i className={"fa-solid fa-arrow-down-" + this.state.alphabet}></i>
-                            {this.state.alphabet.toUpperCase()}
-                        </button>
-
-                    </div>
-
-
-                    <div className={filterCSS.category} category="category">
-                        <p className={filterCSS.cheading}>Gamemode</p>
-
-                        <button onClick={this.changeExtraFilter} id="summonersrift" type="gamemode">
-                            <img src={config.images.summonersrift} alt="" />
-                            Summoners Rift
-                        </button>
-
-                        <button onClick={this.changeExtraFilter} id="aram" type="gamemode">
-                            <img src={config.images.aram} alt="" />
-                            ARAM
-                        </button>
-
-                        <button onClick={this.changeExtraFilter} id="bot" type="gamemode">
-                            <img src={config.images.bot} alt="" />
-                            Coop vs. AI
-                        </button>
-
-                    </div>
-
-                </div>
-                {typeof this.state.name === "object" ? null :
-                    <p className={css.legal}>
-                        <span data-nosnippet>
-                            The U.GG logo belongs to U.GG. Read more <a href="/faq#h4" onClick={goTo}>here</a>.
-                            <br /><br />Click <a href="/faq" onClick={goTo}>here</a> to get any questions aobut this page answered.
-                        </span>
-                    </p>}
+            <div className={css.topLevelFilter + " " + css["filter" + this.state.topLevelFilter]}>
+                <button className={css.filterChallenges} onClick={this.changeTopLevelFilter} id="challenges">Challenges</button>
+                <button className={css.filterTitle} onClick={this.changeTopLevelFilter} id="title">Titles</button>
             </div>
 
 
 
-
-            <div className={css.parent + " " + css.flexWidth}>
+            {this.state.topLevelFilter === "title" ? <div className={css.parent}>
                 {this.state.challenges}
-            </div>
+            </div> :
+                <Fragment>
+
+                    <div className={css.categories}>
+
+                        <div className={css.category + " " + this.state.type}>
+
+                            <p>
+                                <img src={"https://cdn.darkintaqt.com/lol/static/challenges/crystal.svg"} alt="crystal" />
+                                Crystal
+                            </p>
+                            <ProgressBar
+                                width={100}
+                                progress={parseInt(this.state.points[0].replaceAll(".", ""))}
+                                max={parseInt(this.state.points[1].replaceAll(".", ""))}
+                            />
+                        </div>
+
+                        <div className={css.category + " " + this.state.categories.COLLECTION.level}>
+
+                            <p>
+                                <img src={config.images.collection} alt="collection" />
+                                Collection
+                            </p>
+                            <ProgressBar
+                                width={100}
+                                progress={this.state.categories.COLLECTION.current}
+                                max={this.state.categories.COLLECTION.max}
+                            />
+                        </div>
+
+                        <div className={css.category + " " + this.state.categories.EXPERTISE.level}>
+                            <p>
+                                <img src={config.images.expertise} alt="expertise" />
+                                Expertise
+                            </p>
+                            <ProgressBar
+                                width={100}
+                                progress={this.state.categories.EXPERTISE.current}
+                                max={this.state.categories.EXPERTISE.max}
+                            />
+                        </div>
+
+                        <div className={css.category + " " + this.state.categories.VETERANCY.level}>
+
+                            <p>
+                                <img src={config.images.veterancy} alt="Veterancy" />
+                                Veterancy
+                            </p>
+                            <ProgressBar
+                                width={100}
+                                progress={this.state.categories.VETERANCY.current}
+                                max={this.state.categories.VETERANCY.max}
+                            />
+                        </div>
+
+                        <div className={css.category + " " + this.state.categories.IMAGINATION.level}>
+
+                            <p>
+                                <img src={config.images.imagination} alt="Imagination" />
+                                Imagination
+                            </p>
+                            <ProgressBar
+                                width={100}
+                                progress={this.state.categories.IMAGINATION.current}
+                                max={this.state.categories.IMAGINATION.max}
+                            />
+                        </div>
+
+                        <div className={css.category + " " + this.state.categories.TEAMWORK.level}>
+
+                            <p>
+                                <img src={config.images.teamwork} alt="Teamwork" />
+                                Teamwork
+                            </p>
+                            <ProgressBar
+                                width={100}
+                                progress={this.state.categories.TEAMWORK.current}
+                                max={this.state.categories.TEAMWORK.max}
+                            />
+                        </div>
+
+                    </div>
+
+                    <div className={filterCSS.filter}>
+                        <div className={filterCSS.selectors + " clearfix"}>
+                            <p className={filterCSS.info}>Filter</p>
+                            <div className={filterCSS.category} category="category">
+                                <p className={filterCSS.cheading}>Order by</p>
+
+                                <button onClick={this.changeFilter} id="level" className={filterCSS["selected"]}>
+                                    <i className="fa-solid fa-ranking-star"></i>
+                                    Rank
+                                </button>
+
+                                <button onClick={this.changeFilter} id="timestamp">
+                                    <i className="fa-regular fa-clock"></i>
+                                    Last upgraded
+                                </button>
+
+                                <button onClick={this.changeFilter} id="percentile">
+                                    <i className="fa-solid fa-hashtag"></i>
+                                    Leaderboard Position
+                                </button>
+
+                                <button onClick={this.changeFilter} id="levelup">
+                                    <i className="fa-solid fa-arrow-up-right-dots"></i>
+                                    Closest Levelup
+                                </button>
+
+                                <button onClick={this.changeFilter} id={"alphabetic-" + this.alphabet}>
+                                    <i className={"fa-solid fa-arrow-down-" + this.alphabet}></i>
+                                    {this.alphabet.toUpperCase()}
+                                </button>
+
+                            </div>
+
+
+                            <div className={filterCSS.category} category="category">
+                                <p className={filterCSS.cheading}>Gamemode</p>
+
+                                <button onClick={this.changeExtraFilter} id="summonersrift" type="gamemode">
+                                    <img src={config.images.summonersrift} alt="" />
+                                    Summoners Rift
+                                </button>
+
+                                <button onClick={this.changeExtraFilter} id="aram" type="gamemode">
+                                    <img src={config.images.aram} alt="" />
+                                    ARAM
+                                </button>
+
+                                <button onClick={this.changeExtraFilter} id="bot" type="gamemode">
+                                    <img src={config.images.bot} alt="" />
+                                    Coop vs. AI
+                                </button>
+
+                            </div>
+
+                        </div>
+                        {typeof this.state.name === "object" ? null :
+                            <p className={css.legal}>
+                                <span data-nosnippet>
+                                    The U.GG logo belongs to U.GG. Read more <a href="/faq#h4" onClick={goTo}>here</a>.
+                                    <br /><br />Click <a href="/faq" onClick={goTo}>here</a> to get any questions aobut this page answered.
+                                </span>
+                            </p>}
+                    </div>
+
+
+
+
+                    <div className={css.parent + " " + css.flexWidth}>
+                        {this.state.challenges}
+                    </div>
+                </Fragment>}
+
         </div>
+
     }
 }
