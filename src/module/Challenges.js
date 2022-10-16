@@ -10,6 +10,8 @@ import { checkExists } from "../func/arrayManipulationFunctions.ts"
 import config from "../config"
 import ChallengeObject from "./ChallengeObject"
 
+import filterCSS from "../css/filter.module.css"
+
 import Loadable from "react-loadable";
 
 export default class Challenges extends Component {
@@ -272,10 +274,10 @@ export default class Challenges extends Component {
 
         let category = this.filter[button.parentNode.getAttribute("category")];
         if (button.classList.length > 0) {
-            button.classList.remove(challengeCSS["selected"])
+            button.classList.remove(filterCSS["selected"])
             category = category.filter(x => x !== c);
         } else {
-            button.classList.add(challengeCSS["selected"])
+            button.classList.add(filterCSS["selected"])
             category.push(c)
         }
 
@@ -326,13 +328,13 @@ export default class Challenges extends Component {
                 {this.state.event}
             </section>
 
-            <input type="text" placeholder="Search for a challenge" onKeyUp={this.search} className={challengeCSS.input} />
-            <div className={challengeCSS.filter}>
+            <input type="text" placeholder="Search for a challenge" onKeyUp={this.search} className={filterCSS.input} />
+            <div className={filterCSS.filter}>
 
-                <div className={challengeCSS.selectors + " clearfix"}>
-                    <p className={challengeCSS.info}>Filter (multiple choices)</p>
-                    <div className={challengeCSS.category} category="category">
-                        <p className={challengeCSS.cheading}>Category</p>
+                <div className={filterCSS.selectors + " clearfix"}>
+                    <p className={filterCSS.info}>Filter (multiple choices)</p>
+                    <div className={filterCSS.category} category="category">
+                        <p className={filterCSS.cheading}>Category</p>
                         <button onClick={this.changeFilter}>
                             <img src={"https://cdn.darkintaqt.com/lol/static/challenges/teamwork.svg"} alt="" />
                             Teamwork
@@ -363,8 +365,8 @@ export default class Challenges extends Component {
                         </button>
                     </div>
 
-                    <div className={challengeCSS.category} category="type">
-                        <p className={challengeCSS.cheading}>Type</p>
+                    <div className={filterCSS.category} category="type">
+                        <p className={filterCSS.cheading}>Type</p>
                         <button onClick={this.changeFilter}>
                             <i className="fa-solid fa-angles-up"></i>
                             Progress
@@ -395,8 +397,8 @@ export default class Challenges extends Component {
                         </button>
                     </div>
 
-                    <div className={challengeCSS.category} category="gamemode">
-                        <p className={challengeCSS.cheading}>Gamemode</p>
+                    <div className={filterCSS.category} category="gamemode">
+                        <p className={filterCSS.cheading}>Gamemode</p>
                         <button onClick={this.changeFilter}>
                             <img src={"https://lolcdn.darkintaqt.com/cdn/sr.svg"} alt="" />
                             Summoners Rift
@@ -412,7 +414,7 @@ export default class Challenges extends Component {
                     </div>
                 </div>
             </div>
-            <div className={css.parent + " " + challengeCSS.flexWidth}>
+            <div className={css.parent + " " + css.flexWidth}>
                 {this.state.challenges}
             </div>
         </div>
