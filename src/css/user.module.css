@@ -22,9 +22,10 @@ img.ugglogo {
 }
 
 .legal {
-    font-size: .8rem;
+    font-size: .75rem;
     color: var(--light2);
     width: calc(100% - 30px);
+    text-align: justify;
     float: left;
     margin: 10px 15px;
 }

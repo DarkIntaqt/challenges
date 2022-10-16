@@ -776,6 +776,13 @@ export default class User extends Component {
                     </div>
 
                 </div>
+                {typeof this.state.name === "object" ? null :
+                    <p className={css.legal}>
+                        <span data-nosnippet>
+                            The U.GG logo belongs to U.GG. Read more <a href="/faq#h4" onClick={goTo}>here</a>.
+                            <br /><br />Click <a href="/faq" onClick={goTo}>here</a> to get any questions aobut this page answered.
+                        </span>
+                    </p>}
             </div>
 
 
@@ -784,7 +791,6 @@ export default class User extends Component {
             <div className={css.parent + " " + css.flexWidth}>
                 {this.state.challenges}
             </div>
-            {typeof this.state.name === "object" ? null : <p className={css.legal}><span data-nosnippet>The U.GG logo belongs to U.GG. Read more <a href="/faq#h4" onClick={goTo}>here</a>. <br />Click <a href="/faq" onClick={goTo}>here</a> to get any questions aobut this page answered. </span></p>}
         </div>
     }
 }
