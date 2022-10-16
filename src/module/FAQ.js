@@ -3,7 +3,7 @@ export default function FAQ() {
     let faqs = [
         [
             "My challenges are not updating",
-            "That's bad. Usually, challenges update arround every 15 minutes, leaderboards around every 6 hours (maybe longer due to caching at Riot Games server). If your challenges don't update at all, you may contact me on twitter: @darkintaqt"
+            "That's bad. Usually, challenges update around every 15 minutes, leaderboards around every 30 minutes (maybe longer due to caching). If your challenges don't update at all, you may contact me on twitter: @darkintaqt"
         ],
         [
             "The leaderboard positions are wrong",
@@ -11,7 +11,7 @@ export default function FAQ() {
         ],
         [
             "My challenge doesn't update even though I'm over the threshold",
-            "I am aware of this problem and I could just show the higher rank, but since this is not displayed in the client either we should just wait for Riot Games to upgrade your challenge rank."
+            "You will most likely be promoted in the next 24 hours as the Master+ leaderboards do not update immediately. "
         ],
         [
             "I don't want to appear here.",
@@ -23,11 +23,11 @@ export default function FAQ() {
         ],
         [
             "What about my privacy and the data you collect about me?",
-            "League of Legends related data about your summoner profile be stored exactly 15 minutes on our servers. Leaderboard data will be kept updating (almost) forever, as long as you stay in the top ranks. If you don't want to appear on the leaderboards, read the answer above. <br><br>To technical data we collect, such as your IP or browser logs, read this: <a href=\"https://darkintaqt.com/assets/privacypolicy/\">privacy policy</a> and this: <a href=\"https://darkintaqt.com/assets/imprint/\">imprint</a>"
+            "League of Legends related data about your summoner profile is stored exactly 15 minutes on our servers. Leaderboard data will be kept updating (almost) forever, as long as you stay in the top ranks (top 250 per region). If you don't want to appear on the leaderboards, read the answer above. <br><br>Also, we collect data such as your IP or browser logs, read this fur further information: <a href=\"https://darkintaqt.com/assets/privacypolicy/\">privacy policy</a> and this: <a href=\"https://darkintaqt.com/assets/imprint/\">imprint</a>"
         ],
         [
             "Still questions?",
-            "Reach me on <a href=\"https://twitter.com/darkintaqt\">twitter</a>, <a href=\"https://github.com/DarkIntaqt\">GitHub</a> or visit my <a href=\"https://darkintaqt.com\">website</a>."
+            "Reach out to me on <a href=\"https://twitter.com/darkintaqt\">Twitter</a>, <a href=\"https://github.com/DarkIntaqt\">GitHub</a> or visit my <a href=\"https://darkintaqt.com\">website</a>."
         ],
         [
             "This is ugly, I want to change the design",
