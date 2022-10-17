@@ -41,6 +41,7 @@ const config = {
         "oc",
         "tr"
     ],
+    "cdnBasePath": "https://lolcdn.darkintaqt.com",
     "tiers": [
         "NONE",
         "IRON",

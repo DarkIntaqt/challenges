@@ -156,7 +156,8 @@ img.ugglogo {
     padding: 5px 0 25px;
 }
 
-.topLevelFilter button {
+.topLevelFilter a {
+    text-decoration: none;
     border: none;
     cursor: pointer;
     float: left;
@@ -168,8 +169,20 @@ img.ugglogo {
     margin: 5px 10px;
 }
 
-.filterchallenges>.filterChallenges,
-.filtertitle>.filterTitle {
+.topLevelFilter a>span {
+    display: block;
+    float: right;
+    font-size: .7rem;
+    font-weight: bold;
+    color: white !important;
+    padding: .15rem 5px;
+    background-color: var(--selected);
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.selectedFilteroverview>.overview,
+.selectedFiltertitles>.titles {
     color: var(--selected);
     border-bottom: 2px solid var(--selected)
 }
@@ -691,7 +704,7 @@ span.availableTitle img {
 }
 
 .flexWidth {
-    width: 750px
+    width: 750px;
 }
 
 @media only screen and (max-width:1050px) {
