@@ -1,0 +1,24 @@
+.head {
+    display: flex;
+    float: left;
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.progress {
+    width: 120px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: var(--dark1);
+}
+
+.progress>p {
+    color: white;
+    font-size: .8rem;
+    text-align: center;
+}
+
+.progress>div {
+    margin: 22px 0 10px !important;
+}

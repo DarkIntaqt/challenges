@@ -78,9 +78,17 @@ export default class UserChallenges extends Component {
 
     render() {
 
-        console.log(this.state);
-
         const user = this.props.summoner
+
+        if (user.challenges.length === 0) {
+
+            return <div style={{ width: "100%", float: "left" }}>
+                <Loader />
+                <p style={{ color: "white", fontSize: "1rem", textAlign: "center" }}>Loading Challenges...</p>
+            </div>
+
+        }
+
         const server = this.props.server
 
         const filter = this.state.filter

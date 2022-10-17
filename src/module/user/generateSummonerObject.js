@@ -7,6 +7,7 @@ export default function generateSummonerObject(summoner) {
         summonerName: summoner.name,
         selections: summoner.selections,
         titles: summoner.title,
-        challenges: summoner.challenges
+        challenges: summoner.challenges,
+        availableTitles: summoner.titles
     }
 }

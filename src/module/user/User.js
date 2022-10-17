@@ -15,14 +15,30 @@ import generateSummonerObject from "./generateSummonerObject";
 import get from "../../func/get";
 import Error from "../Error";
 
+import Loader from "../Loader";
+
+import Loadable from "react-loadable";
 
 import UserChallenges from "./UserChallenges"
+
+
+const Title = Loadable({
+    loader: (content) => import('./UserTitle'),
+    loading: function () {
+        return <div style={{ width: "100%", float: "left" }}>
+            <Loader />
+            <p style={{ color: "white", fontSize: "1rem", textAlign: "center" }}>Loading Titles...</p>
+        </div>
+    },
+});
+
 
 export default class User extends Component {
     constructor(props) {
         super(props)
 
         this.params = props.params
+
 
         const basicUserConfig = {
             tier: config.tiers[0],
@@ -33,7 +49,8 @@ export default class User extends Component {
             }}></div>,
             selections: [],
             titles: [],
-            challenges: []
+            challenges: [],
+            availableTitles: {}
         }
 
 
@@ -188,7 +205,6 @@ export default class User extends Component {
             </div>
         })
 
-
         let title = titles.map(function (title) {
 
             const tier = intToTier(title[2])
@@ -209,6 +225,9 @@ export default class User extends Component {
                 </div>
             </h2>
         })
+
+
+
 
         return <section className="object1000">
 
@@ -242,6 +261,8 @@ export default class User extends Component {
             <Routes>
 
                 <Route path="" element={<UserChallenges summoner={this.state.user} server={this.params.server} />}></Route>
+
+                <Route path="titles" element={<Title summoner={this.state.user} />}></Route>
 
             </Routes>
 
