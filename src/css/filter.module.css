@@ -62,6 +62,7 @@
 
 .filter .selectors .category>button {
     font-size: 1rem;
+    white-space: nowrap;
     color: rgb(200, 200, 200);
     background-color: var(--dark0);
     margin: 5px 0;
