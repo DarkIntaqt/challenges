@@ -90,61 +90,27 @@ export default class UserTitle extends Component {
             const challenge = getChallenge(parseInt(titleIdString.substr(0, titleIdString.length - 2)))
             const tier = intToTier(parseInt(titleIdString.substring(titleIdString.length - 2)))
 
-
-            let percentage
             try {
-                percentage = Math.round(challenge.percentiles[tier] * 1000) / 10
-            } catch (error) {
-                percentage = "0"
+                let percentage
+                try {
+                    percentage = Math.round(challenge.percentiles[tier] * 1000) / 10
+                } catch (error) {
+                    percentage = "0"
+                }
+                return <ChallengeObject
+                    tier={tier}
+                    href={"/titles"}
+                    title={content}
+                    subtitle={<span>Achieved by {percentage}%</span>}
+                    description={challenge.translation.description}
+                    key={titleid}
+                    nexttier="MAXED"
+                />
+            } catch (e) {
+                console.error(e)
+                return []
             }
-            return <ChallengeObject
-                tier={tier}
-                href={"/titles"}
-                title={content}
-                subtitle={<span>Achieved by {percentage}%</span>}
-                description={challenge.translation.description}
-                key={titleid}
-                nexttier="MAXED"
-            />
         })
-
-        console.log(titles);
-
-        // for (const titleid in titles) {
-        //     if (Object.hasOwnProperty.call(titles, titleid)) {
-        //         const title = titles[titleid];
-        //         if (titleid === "1") {
-        //             challenges.push(<ChallengeObject
-        //                 tier="NONE"
-        //                 href={"/titles"}
-        //                 title={title}
-        //                 subtitle={<span>Achieved by 100%</span>}
-        //                 description={"This is a default title. Everyone owns it. Actually it is not even rare, as everyone has unlocked it, so please don't be proud of this one"}
-        //                 key={titleid}
-        //             />)
-        //             continue;
-        //         }
-        //         const challenge = getChallenge(parseInt(titleid.substring(0, titleid.length - 2)))
-        //         const tier = intToTier(parseInt(titleid.substring(titleid.length - 2)))
-
-
-        //         let percentage
-        //         try {
-        //             percentage = Math.round(challenge.percentiles[tier] * 1000) / 10
-        //         } catch (error) {
-        //             percentage = "0"
-        //         }
-        //         challenges.push(<ChallengeObject
-        //             tier={tier}
-        //             href={"/titles"}
-        //             title={title}
-        //             subtitle={<span>Achieved by {percentage}%</span>}
-        //             description={challenge.translation.description}
-        //             key={titleid}
-        //             nexttier="MAXED"
-        //         />)
-        //     }
-        // }
 
         return <div className={`${user.tier}`}>
 
@@ -155,6 +121,7 @@ export default class UserTitle extends Component {
                         width={120}
                         max={Object.keys(this.state.titles).length}
                         progress={titles.length}
+                        percentage={true}
                     />
                     <p>Titles unlocked</p>
 
