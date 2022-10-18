@@ -14,6 +14,7 @@
     color: white;
     text-decoration: none;
     font-size: 1rem;
+    position: relative;
     background-image: var(--url);
 }
 
@@ -129,7 +130,7 @@
     width: 20px;
     height: 20px;
     position: absolute;
-    margin-left: 130px;
+    left: 140px;
     margin-top: 12px;
     filter: brightness(0.6);
     transition: .25s linear filter;
