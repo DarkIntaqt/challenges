@@ -2,6 +2,8 @@ import { Component, Fragment } from "react";
 import config from "../../config";
 import filterCSS from "../../css/filter.module.css"
 
+import { toggleValue } from "../../func/arrayManipulationFunctions.ts"
+
 import ChallengeObject from "../ChallengeObject";
 import challengeCSS from "../../css/challengeObject.module.css"
 
@@ -17,7 +19,6 @@ import css from "../../css/user.module.css"
 import orderChallenges, { getNextLevel } from "./orderChallenges";
 import goTo from "../../func/goTo";
 import Loader from "../Loader"
-import getChallenge from "../../func/getChallenge";
 
 export default class UserChallenges extends Component {
     constructor(props) {
@@ -25,13 +26,18 @@ export default class UserChallenges extends Component {
 
 
         this.changeFilter = this.changeFilter.bind(this)
-
+        this.changeExtraFilter = this.changeExtraFilter.bind(this)
 
         this.props = props
 
         this.state = {
             alphabet: "a-z",
-            filter: "level"
+            filter: "level",
+            filters: {
+                "category": [],
+                "type": [],
+                "gamemode": []
+            }
         }
 
     }
@@ -76,9 +82,36 @@ export default class UserChallenges extends Component {
     }
 
 
-    render() {
+    changeExtraFilter(e) {
+
+
 
         const user = this.props.summoner
+        if (user.challenges.length !== 0) {
+
+            let filters = this.state.filters
+
+            const toggle = toggleValue(filters[e.currentTarget.getAttribute("type")], e.currentTarget.id)
+
+            if (toggle.method === true) {
+
+                e.currentTarget.classList.add(filterCSS["selected"])
+
+            } else {
+
+                e.currentTarget.classList.remove(filterCSS["selected"])
+
+            }
+
+            this.setState({ filters: filters })
+
+        }
+    }
+
+
+    render() {
+
+        const user = JSON.parse(JSON.stringify(this.props.summoner));
 
         if (user.challenges.length === 0) {
 
@@ -93,7 +126,9 @@ export default class UserChallenges extends Component {
 
         const filter = this.state.filter
 
-        const challengesOrdered = orderChallenges(user.challenges, this.state.filter)
+
+        let challengesOrdered = orderChallenges(user.challenges, this.state.filter, this.state.filters)
+
 
         const challenges = challengesOrdered.map(function (challenge) {
 
@@ -107,7 +142,7 @@ export default class UserChallenges extends Component {
             let position, next, previousPositions = 1;
             let nexttier = getNextLevel(tier)
 
-            const c = getChallenge(challenge[0])
+            const c = challenge[6]
 
 
             if (c.leaderboard === true && challenge[5].length > 1) {
@@ -153,6 +188,11 @@ export default class UserChallenges extends Component {
                 }
             }
 
+            let queueIds = ""
+            if (challenge[7] !== "none") {
+                queueIds = <img src={config.images[challenge[7]]} alt="" />
+            }
+
 
             if (filter === "timestamp") {
                 leaderboardposition = <span><span className={challengeCSS.hideOnHover}><Timestamp date={challenge[3]} /></span><span className={challengeCSS.showOnHover}><Timestamp date={challenge[3]} type="static" /></span></span>
@@ -168,7 +208,7 @@ export default class UserChallenges extends Component {
                 subtitle={leaderboardposition}
                 description={c.translation.description}
                 href={"/challenge/" + challenge[0] + "?region=" + server}
-                queueIds={""}
+                queueIds={queueIds}
                 progressCurrent={challenge[2]}
                 progressNext={next}
                 key={challenge[0]}
