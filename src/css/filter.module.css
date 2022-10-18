@@ -34,6 +34,7 @@
     width: 100%;
     color: white;
     margin-bottom: 10px;
+    display: none;
     text-align: center;
 }
 
@@ -55,15 +56,16 @@
     font-size: 0.8rem;
     color: white;
     width: 100%;
-    text-align: center;
+    text-align: left;
+    font-weight: bold;
 }
 
 .filter .selectors .category>button {
     font-size: 1rem;
     color: rgb(200, 200, 200);
-    background: var(--dark2);
+    background-color: var(--dark0);
     margin: 5px 0;
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 5px 10px;
     border: 2px solid transparent;
     cursor: pointer;
@@ -75,7 +77,8 @@
 }
 
 .filter .selectors .category>button:hover {
-    color: white
+    color: white;
+    background-color: var(--dark1);
 }
 
 .filter .selectors .category>button>i {
@@ -96,9 +99,12 @@
 }
 
 .filter .selectors .category>button.selected {
-    color: var(--selected);
+    /* color: var(--selected);
     box-shadow: 0 0 3px var(--selected);
-    border: 2px solid var(--selected);
+    border: 2px solid var(--selected); */
+    background-color: var(--dark2);
+    color: white;
+    padding-left: 20px;
 }
 
 @media only screen and (max-width:1050px) {
@@ -111,5 +117,14 @@
         width: calc(calc(1/3) * 0.8 * 100%);
         margin: 0 calc(calc(1/3) * 0.1 * 100%);
         float: left;
+    }
+
+    .filter .selectors .category>button {
+        background-color: var(--dark1);
+    }
+
+    .filter .selectors .category>button.selected {
+        border: 2px solid var(--selected);
+        padding-left: 10px;
     }
 }
