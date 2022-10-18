@@ -16,7 +16,66 @@ export function getNextLevel(current) {
 
 
 
-export default function orderChallenges(challenges, filter) {
+function removeUnnecessaryChallenges(challenges, filters) {
+
+    return challenges.map(function (challenge) {
+
+        let challengeData = getChallenge(challenge[0])
+
+        if (challengeData === 0) {
+            return null
+        }
+
+        let pushLater = "none"
+
+        challenge.push(challengeData)
+
+        if (challengeData.queueIds.length > 0) {
+
+            for (let i = 0; i < challengeData.queueIds.length; i++) {
+
+                const queue = challengeData.queueIds[i];
+
+                if ([450, 930, 860].includes(queue)) {
+                    pushLater = "aram"
+                    if (filters.gamemode.length > 0 && !filters.gamemode.includes("aram")) {
+                        return null
+                    }
+                }
+
+                if ([400, 420, 430, 440].includes(queue)) {
+                    pushLater = "summonersrift"
+                    if (filters.gamemode.length > 0 && !filters.gamemode.includes("summonersrift")) {
+                        return null
+                    }
+                }
+
+                if ([830, 840, 850].includes(queue)) {
+                    pushLater = "bot"
+                    if (filters.gamemode.length > 0 && !filters.gamemode.includes("bot")) {
+                        return null
+                    }
+                }
+            }
+        } else if (filters.gamemode.length > 0) {
+            if (filters.gamemode.includes("aram") && [101000, 101300, 101200, 101100].includes(challengeData.id)) {
+                pushLater = "aram"
+            } else {
+                return null
+            }
+        }
+
+        challenge.push(pushLater)
+
+        return challenge
+    })?.filter(x => x !== null)
+
+}
+
+
+export default function orderChallenges(challenges, filter, extraFilter) {
+
+    challenges = removeUnnecessaryChallenges(challenges, extraFilter)
 
     let sortAlgorithm = function (a, b) {
 
@@ -36,7 +95,7 @@ export default function orderChallenges(challenges, filter) {
                     }
                 }
             } else {
-                return a[5][0] < [5][0] ? 1 : -1
+                return a[5][0] > b[5][0] ? 1 : -1
             }
         }
         return aTier > bTier ? -1 : 1
@@ -52,7 +111,7 @@ export default function orderChallenges(challenges, filter) {
                 const tierA = intToTier(a[1])
                 const tierB = intToTier(b[1])
 
-                let challenge = getChallenge(a[0]);
+                let challenge = a[6];
                 if (checkExists(challenge["thresholds"][getNextLevel(tierA)])) {
                     nextLevelA = challenge["thresholds"][getNextLevel(tierA)]
                 } else {
@@ -64,7 +123,7 @@ export default function orderChallenges(challenges, filter) {
 
                 nextLevelA = a[2] / nextLevelA;
 
-                challenge = getChallenge(b[0]);
+                challenge = b[6];
 
                 if (checkExists(challenge["thresholds"][getNextLevel(tierB)])) {
                     nextLevelB = challenge["thresholds"][getNextLevel(tierB)]
@@ -75,6 +134,10 @@ export default function orderChallenges(challenges, filter) {
                     nextLevelB = challenge["leaderboardThresholds"][0] ?? 0
                 }
                 nextLevelB = b[2] / nextLevelB;
+
+                if (nextLevelA >= 1 && nextLevelB >= 1) {
+                    return 0
+                }
 
                 if (nextLevelA >= 1) {
                     return 5
@@ -94,14 +157,14 @@ export default function orderChallenges(challenges, filter) {
 
         case "alphabetic-a-z":
             sortAlgorithm = function (a, b) {
-                const challenge = [getChallenge(a[0]), getChallenge(b[0])]
+                const challenge = [a[6], b[6]]
                 return challenge[0]["translation"]["name"] < challenge[1]["translation"]["name"] ? -1 : +(challenge[0]["translation"]["name"] > challenge[1]["translation"]["name"])
             }
             break;
 
         case "alphabetic-z-a":
             sortAlgorithm = function (a, b) {
-                const challenge = [getChallenge(a[0]), getChallenge(b[0])]
+                const challenge = [a[6], b[6]]
                 return challenge[0]["translation"]["name"] > challenge[1]["translation"]["name"] ? -1 : +(challenge[0]["translation"]["name"] > challenge[1]["translation"]["name"])
             }
             break;
@@ -109,49 +172,50 @@ export default function orderChallenges(challenges, filter) {
         case "percentile":
             sortAlgorithm = function (a, b) {
 
-                // I DON'T LIKE THE SOLUTION, BUT IT WORKS
-                const cA = getChallenge(a[0])
-
-                let positionA = 1e100, previousPositionA
-
-                if (cA.leaderboard === true && a[5].length > 1) {
-                    switch (intToTier(a[1])) {
-                        case "GRANDMASTER":
-                            previousPositionA = cA["leaderboardThresholds"][3] ?? 1
-                            break;
-                        case "MASTER":
-                            previousPositionA = cA["leaderboardThresholds"][5] ?? 1
-                            break;
-                        default:
-                            previousPositionA = 1
-                            break;
-                    }
-                    positionA = (previousPositionA - 1) + a[5][1]
-                }
-
-
-
-
-                const cB = getChallenge(b[0])
-
-                let positionB = 1e100, previousPositionB
-
-                if (cA.leaderboard === true && b[5].length > 1) {
-                    switch (intToTier(b[1])) {
-                        case "GRANDMASTER":
-                            previousPositionB = cB["leaderboardThresholds"][3] ?? 1
-                            break;
-                        case "MASTER":
-                            previousPositionB = cB["leaderboardThresholds"][5] ?? 1
-                            break;
-                        default:
-                            previousPositionB = 1
-                            break;
-                    }
-                    positionB = (previousPositionB - 1) + b[5][1]
-                }
-
                 if (a[5][0] === b[5][0]) {
+                    // I DON'T LIKE THE SOLUTION, BUT IT WORKS
+                    const cA = a[6]
+
+                    let positionA = 1e100, previousPositionA
+
+                    if (cA.leaderboard === true && a[5].length > 1) {
+                        switch (intToTier(a[1])) {
+                            case "GRANDMASTER":
+                                previousPositionA = cA["leaderboardThresholds"][3] ?? 1
+                                break;
+                            case "MASTER":
+                                previousPositionA = cA["leaderboardThresholds"][5] ?? 1
+                                break;
+                            default:
+                                previousPositionA = 1
+                                break;
+                        }
+                        positionA = (previousPositionA - 1) + a[5][1]
+                    }
+
+
+
+
+                    const cB = b[6]
+
+                    let positionB = 1e100, previousPositionB
+
+                    if (cB.leaderboard === true && b[5].length > 1) {
+                        switch (intToTier(b[1])) {
+                            case "GRANDMASTER":
+                                previousPositionB = cB["leaderboardThresholds"][3] ?? 1
+                                break;
+                            case "MASTER":
+                                previousPositionB = cB["leaderboardThresholds"][5] ?? 1
+                                break;
+                            default:
+                                previousPositionB = 1
+                                break;
+                        }
+                        positionB = (previousPositionB - 1) + b[5][1]
+                    }
+
+
                     return positionA < positionB ? -1 : 1
                 }
                 return a[5][0] < b[5][0] ? -1 : 1
