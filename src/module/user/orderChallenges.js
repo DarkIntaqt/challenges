@@ -31,7 +31,6 @@ function removeUnnecessaryChallenges(challenges, filters) {
         challenge.push(challengeData)
 
         if (challengeData.queueIds.length > 0) {
-
             for (let i = 0; i < challengeData.queueIds.length; i++) {
 
                 const queue = challengeData.queueIds[i];
@@ -65,7 +64,31 @@ function removeUnnecessaryChallenges(challenges, filters) {
             }
         }
 
+        let parentName = "crystal"
+
+        if (checkExists(challengeData.tags["parent"])) {
+            let iterationCount = 0;
+            let parentChallengeId = parseInt(challengeData.tags["parent"])
+            while (iterationCount < 10) {
+                let currentChallenge = getChallenge(parentChallengeId)
+                if (checkExists(currentChallenge["tags"]["parent"]) && currentChallenge.id > 10) {
+                    parentChallengeId = parseInt(getChallenge(parentChallengeId)["tags"]["parent"])
+                } else {
+                    iterationCount = 10;
+                }
+            }
+            parentName = getChallenge(parentChallengeId)["translation"]["name"]
+        } else if ([600006, 600010, 600011, 600012, 0].includes(challengeData.id)) {
+            parentName = "legacy"
+        } else if (checkExists(challengeData.tags["isCapstone"])) {
+            parentName = challengeData.translation.name
+        } else {
+            parentName = "crystal"
+        }
+
         challenge.push(pushLater)
+
+        challenge.push(parentName.toLowerCase().replaceAll(" ", ""))
 
         return challenge
     })?.filter(x => x !== null)

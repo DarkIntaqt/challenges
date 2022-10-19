@@ -10,6 +10,7 @@ import { checkExists } from "../func/arrayManipulationFunctions.ts"
 import config from "../config"
 import ChallengeObject from "./ChallengeObject"
 
+import { Fragment } from "react"
 import filterCSS from "../css/filter.module.css"
 
 import Loadable from "react-loadable";
@@ -244,14 +245,14 @@ export default class Challenges extends Component {
                 title={challenge.translation.name}
                 subtitle={<span>{parentName}</span>}
                 description={challenge.translation.description}
-                queueIds={<div className={challengeModuleCSS.tags}>
+                queueIds={<Fragment>
                     <div>
                         <p>{parentName.charAt(0).toUpperCase() + parentName.slice(1).toLowerCase()} Category</p>
                         <img src={"https://cdn.darkintaqt.com/lol/static/challenges/" + parentName.toLowerCase().replaceAll(" ", "") + ".svg"} alt="" />
                     </div>
                     {queueIds}
                     {obtainable}
-                </div>}
+                </Fragment>}
             />)
         }
 
@@ -360,7 +361,7 @@ export default class Challenges extends Component {
                             Legacy
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={config.images.seasonal2022} alt="" />
+                            <img src={config.images['2022seasonal']} alt="" />
                             2022 Seasonal
                         </button>
                     </div>

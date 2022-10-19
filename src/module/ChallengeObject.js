@@ -32,16 +32,21 @@ export default function ChallengeObject(params) {
     })
 
     let extraTags = challenge[1];
+
     if (challenge[0] !== "") {
         if (typeof challenge[1] === "object") {
             extraTags = " " + challenge[1].map(function (tag) {
+                if (!checkExists(css[tag])) { return "" }
                 return css[tag]
             }).join(" ")
         } else {
-            extraTags = " " + css[challenge[1]]
+            if (checkExists(css[challenge[1]])) {
+                extraTags = " " + css[challenge[1]]
+            } else {
+                extraTags = ""
+            }
         }
     }
-
 
     return <a
         className={challenge[0] + " " + css.challenge + extraTags} href={challenge[5]}

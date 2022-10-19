@@ -190,10 +190,17 @@ export default class UserChallenges extends Component {
                 }
             }
 
-            let queueIds = ""
-            if (challenge[7] !== "none") {
-                queueIds = <img src={config.images[challenge[7]]} alt="" />
+            let tags = []
+
+            if (checkExists(challenge[8])) {
+                tags.push(<img key={1} className={challenge[8]} src={config.images[challenge[8]]} alt="" />)
             }
+
+            if (checkExists(challenge[7]) && challenge[7] !== "none") {
+                tags.push(<img key={0} src={config.images[challenge[7]]} alt="" />)
+            }
+
+
 
 
             if (filter === "timestamp") {
@@ -210,7 +217,7 @@ export default class UserChallenges extends Component {
                 subtitle={leaderboardposition}
                 description={c.translation.description}
                 href={"/challenge/" + challenge[0] + "?region=" + server}
-                queueIds={queueIds}
+                queueIds={tags}
                 progressCurrent={challenge[2]}
                 progressNext={next}
                 key={challenge[0]}
