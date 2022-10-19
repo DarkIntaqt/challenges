@@ -14,7 +14,6 @@
     color: white;
     text-decoration: none;
     font-size: 1rem;
-    position: relative;
     background-image: var(--url);
 }
 
@@ -32,7 +31,7 @@
     margin-top: 5px;
 }
 
-.challenge.overview .tags>div>img {
+.challenge .tags>div>img {
     width: 25px;
     height: 25px;
     margin: 0;
@@ -129,13 +128,14 @@
 .challenge img {
     width: 20px;
     height: 20px;
-    position: absolute;
-    left: 140px;
-    margin-top: 12px;
     filter: brightness(0.6);
     transition: .25s linear filter;
 }
 
+.challenge .tags>img {
+    margin: 10px 5px;
+    float: left;
+}
 
 .description {
     color: rgb(203, 200, 200);

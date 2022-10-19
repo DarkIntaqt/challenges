@@ -56,7 +56,6 @@ export default function ChallengeObject(params) {
 
         <p className={css.description}>{challenge[4]}</p>
 
-        {challenge[6]}
         {
             challenge[7] !== false ?
                 <ProgressBar
@@ -66,5 +65,9 @@ export default function ChallengeObject(params) {
                 />
                 : null
         }
+
+        <div className={css.tags}>
+            {challenge[6]}
+        </div>
     </a>
 }
