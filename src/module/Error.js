@@ -16,7 +16,7 @@ export default function Error(props) {
             color: "white",
             textAlign: "center",
             fontSize: "1rem"
-        }}>404 - <b>{message}</b> - Go back by clicking on "League Challenges" in the header</p>
+        }}>404 - <b>{message}</b> - Go back by clicking "League Challenges" in the header</p>
         <img alt="" src={notFound} style={{
             width: "200px",
             height: "200px",
