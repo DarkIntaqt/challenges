@@ -1,4 +1,3 @@
-import challengeModuleCSS from "../css/challengeObject.module.css"
 import { Component } from "react"
 import get from "../func/get"
 import { serverToMachineReadable } from "../func/server"
