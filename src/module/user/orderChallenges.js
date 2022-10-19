@@ -16,7 +16,7 @@ export function getNextLevel(current) {
 
 
 
-function removeUnnecessaryChallenges(challenges, filters) {
+export function removeUnnecessaryChallenges(challenges, filters) {
 
     return challenges.map(function (challenge) {
 
