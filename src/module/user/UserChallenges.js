@@ -267,8 +267,47 @@ export default class UserChallenges extends Component {
 
                     </div>
 
-
                     <div className={filterCSS.category} category="category">
+                        <p className={filterCSS.cheading}>Category</p>
+
+                        <button onClick={this.changeExtraFilter} id="expertise" type="category">
+                            <img src={config.images.expertise} alt="" />
+                            Expertise
+                        </button>
+
+                        <button onClick={this.changeExtraFilter} id="teamwork" type="category">
+                            <img src={config.images.teamwork} alt="" />
+                            Teamwork
+                        </button>
+
+                        <button onClick={this.changeExtraFilter} id="imagination" type="category">
+                            <img src={config.images.imagination} alt="" />
+                            Imagination
+                        </button>
+
+                        <button onClick={this.changeExtraFilter} id="veterancy" type="category">
+                            <img src={config.images.veterancy} alt="" />
+                            Veterancy
+                        </button>
+
+                        <button onClick={this.changeExtraFilter} id="collection" type="category">
+                            <img src={config.images.collection} alt="" />
+                            Collection
+                        </button>
+
+                        <button onClick={this.changeExtraFilter} id="legacy" type="category">
+                            <img src={config.images.legacy} alt="" />
+                            Legacy
+                        </button>
+
+                        <button onClick={this.changeExtraFilter} id="2022seasonal" type="category">
+                            <img src={config.images['2022seasonal']} alt="" />
+                            2022 Seasonal
+                        </button>
+
+                    </div>
+
+                    <div className={filterCSS.category} category="gamemode">
                         <p className={filterCSS.cheading}>Gamemode</p>
 
                         <button onClick={this.changeExtraFilter} id="summonersrift" type="gamemode">
