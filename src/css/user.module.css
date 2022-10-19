@@ -699,3 +699,12 @@ span.availableTitle img {
         width: 100%;
     }
 }
+
+p.thresholdWarning {
+    padding: 0 20px 10px;
+    float: left;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: .7rem;
+    color: var(--light3)
+}

@@ -336,6 +336,8 @@ export default class Challenge extends Component {
             </ div>)
         }
 
+        console.log(absoluteRegion);
+
         let content = <Fragment>
             <section className={"MASTER " + css.c + " " + css.profile + " " + css["cid" + challenge.challenge.id]}>
                 <img src={icon} alt="" />
@@ -376,6 +378,8 @@ export default class Challenge extends Component {
                         {thresholdTable}
                     </div>
                 </div>
+
+                {absoluteRegion === "world" ? <p className={css.thresholdWarning} data-nosnipet>Please keep in mind that the global thresholds might not exactly represent the thresholds your region. </p> : []}
 
                 {warnings}
 
