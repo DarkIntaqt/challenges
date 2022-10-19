@@ -57,6 +57,7 @@ export default class UserTitle extends Component {
 
         }
 
+        document.title = `${user.summonerName}'s Title Overview`
 
 
         const titleList = this.state.titles

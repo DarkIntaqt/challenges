@@ -149,6 +149,8 @@ export default class User extends Component {
 
     componentDidMount() {
 
+        document.title = 'Loading ' + this.user + "'s profile"
+
         get(this.getChallengeURL, (e) => { this.addFileToCache(e, 0) }, this.throwError)
         get(this.getSummonerURL, (e) => { this.addFileToCache(e, 1) }, this.throwError)
 
@@ -178,9 +180,6 @@ export default class User extends Component {
         const profileText = "view " + this.state.name + "'s profile on u.gg";
 
         const { tier, summonerIcon, summonerName, selections, titles } = this.state.user
-
-        document.title = summonerName + "'s Challenge Progress Overview"
-
 
         let selected = selections.map(function (selection) {
 

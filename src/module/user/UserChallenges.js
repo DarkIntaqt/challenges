@@ -122,6 +122,8 @@ export default class UserChallenges extends Component {
 
         }
 
+        document.title = `${user.summonerName}'s Challenge Progress Overview`
+
         const server = this.props.server
 
         const filter = this.state.filter
