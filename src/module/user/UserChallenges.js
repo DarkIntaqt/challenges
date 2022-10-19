@@ -121,7 +121,6 @@ export default class UserChallenges extends Component {
             </div>
 
         }
-
         document.title = `${user.summonerName}'s Challenge Progress Overview`
 
         const server = this.props.server
@@ -132,7 +131,7 @@ export default class UserChallenges extends Component {
         let challengesOrdered = orderChallenges(user.challenges, this.state.filter, this.state.filters)
 
 
-        const challenges = challengesOrdered.map(function (challenge) {
+        let challenges = challengesOrdered.map(function (challenge) {
 
             if (challenge[0] !== 0 && challenge[0] < 10) {
                 return null
@@ -224,12 +223,9 @@ export default class UserChallenges extends Component {
             ></ChallengeObject>
         })?.filter(x => x !== null)
 
-        if (user.challenges.length === 0) {
 
-            return <div style={{ width: "100%", float: "left" }}>
-                <Loader />
-            </div>
-
+        if (challenges.length === 0) {
+            challenges = <p style={{ color: "white", fontSize: "1rem", margin: "120px 0", textAlign: "center", width: "100%", float: "left" }}><i>Is it a bug? Is it a feature?</i><br /><br />No! There are just no challenges within the current filters.</p>
         }
 
         return <Fragment>
