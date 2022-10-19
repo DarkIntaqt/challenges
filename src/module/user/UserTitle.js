@@ -132,6 +132,7 @@ export default class UserTitle extends Component {
             <div className={css.parent}>
                 {displayTitles}
             </div >
+            <p style={{ color: "var(--light3)", fontSize: ".8rem", margin: "10px 0 30px", width: "100%", float: "left" }}>Note: The "Apprentice" title does not count towards the "Entitled" challenge. </p>
 
         </div>
     }
