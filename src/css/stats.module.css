@@ -128,3 +128,34 @@
     width: 100%;
     float: left;
 }
+
+@media only screen and (max-width:1050px) {
+    .rowParent {
+        width: calc(100% - 20px);
+    }
+}
+
+.rowParent p.advertisement {
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    color: var(--light0);
+    text-align: center
+}
+
+.rowParent p.advertisement>a {
+    display: inline-block;
+    width: 200px;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    background-color: var(--dark3);
+    transition: .25s;
+}
+
+.rowParent p.advertisement>a:hover {
+    background-color: var(--selected);
+    box-shadow: 0 0 5px var(--selected);
+}

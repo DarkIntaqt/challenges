@@ -245,6 +245,13 @@ export default class UserStatistics extends Component {
                 <canvas id={css["distributionChart"]}></canvas>
             </div>
 
+            <div className={css.rowParent}>
+                <p className={css.advertisement}>
+                    Tell us which stats you want to see here<br />
+                    <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">Give Feedback</a>
+                </p>
+            </div>
+
         </section>
     }
 }
