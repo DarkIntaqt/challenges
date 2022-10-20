@@ -379,7 +379,7 @@ export default class Challenge extends Component {
                     </div>
                 </div>
 
-                {absoluteRegion === "world" ? <p className={css.thresholdWarning} data-nosnipet>Please keep in mind that the global thresholds might not exactly represent the thresholds in your region. </p> : []}
+                {absoluteRegion === "world" ? <p className={css.thresholdWarning} data-nosnippet>Please keep in mind that the global thresholds might not exactly represent the thresholds in your region. </p> : []}
 
                 {warnings}
 
