@@ -192,7 +192,7 @@ export default class User extends Component {
 
         const profileText = "view " + this.state.name + "'s profile on u.gg";
 
-        const { tier, summonerIcon, summonerName, selections, titles, points } = this.state.user
+        const { tier, summonerIcon, summonerName, selections, titles } = this.state.user
 
         let selected = selections.map(function (selection) {
 
@@ -248,7 +248,7 @@ export default class User extends Component {
             {/* STATIC PROFILE HEAD */}
             <div className={`${css.profile} ${tier}`} >
 
-                <img className={css.edge} src={`https://cdn.darkintaqt.com/lol/static/challenges/card-${tier}.webp?v2`} alt="" />
+                <img className={css.edge} src={`https://cdn.darkintaqt.com/lol/static/challenges/card-${tier}.webp`} alt="" />
 
                 <img src={`${config.cdnBasePath}/cdn/profileicon/${summonerIcon}`} alt="" />
 
