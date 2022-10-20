@@ -3,13 +3,13 @@
     border-radius: 3px;
     margin: 22px 0;
     float: left;
-    background-color: rgb(208, 208, 208);
+    background-color: var(--light3);
 }
 
 .progress .text {
     position: absolute;
     font-size: 0.8rem;
-    color: white;
+    color: var(--light2);
     margin-top: -15px;
 }
 

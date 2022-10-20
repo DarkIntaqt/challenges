@@ -112,7 +112,9 @@
     .filter {
         position: relative !important;
         width: 100%;
+        top: 0;
     }
+
 
     .filter .selectors .category {
         width: calc(calc(1/3) * 0.9 * 100%);
@@ -131,6 +133,8 @@
 }
 
 @media only screen and (max-width:650px) {
+
+
     .filter .selectors .category {
         width: 100%;
         margin: 0;

@@ -1,0 +1,130 @@
+.categories {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    float: left;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.category {
+    margin: 2px 0;
+    box-sizing: border-box;
+    background: var(--dark1);
+    padding: 10px;
+    border-radius: 10px;
+    width: 140px;
+}
+
+.category>p>img {
+    height: 1rem;
+    width: 1rem;
+    vertical-align: bottom;
+    margin-right: 5px;
+}
+
+.category>div {
+    margin: 22px 10px 0;
+}
+
+.category>div>p {
+    text-align: center;
+    width: 100px;
+}
+
+.category>p {
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+
+.rowParent {
+    width: 480px;
+    margin: 10px;
+    background-color: var(--dark1);
+    padding: 10px;
+    float: left;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.rowParent .seoArea {
+    width: 100%;
+    padding: 5px 0 10px;
+    border-bottom: 2px solid var(--dark0);
+    margin: 0 0 10px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.rowParent .seoArea h2 {
+    font-size: 1rem;
+    color: white;
+    white-space: nowrap;
+    float: left;
+    font-weight: 400;
+}
+
+.rowParent .seoArea span {
+    display: block;
+    float: left;
+    margin: .2rem 0 0 10px;
+    font-size: 0.8rem;
+    color: var(--light2)
+}
+
+.rowParentTable {
+    width: 100%;
+}
+
+.rowParentTableRow {
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--dark3);
+    padding: 8px 10px;
+}
+
+.rowParentTableRow:last-child {
+    border-bottom: 1px solid transparent;
+}
+
+.rowParentTableRow p {
+    float: left;
+    color: white;
+    font-size: .8rem;
+    text-align: center;
+    display: block;
+}
+
+.rowParentTableRowHeading {
+    padding: 0 10px;
+}
+
+.rowParentTableRow p {
+    width: 25%
+}
+
+.rowParentTableRowHeading {
+    padding: 0 10px;
+}
+
+
+.rowParentTableRowHeading p {
+    font-weight: bold;
+    font-size: 0.7rem;
+    color: var(--light3);
+    padding: 5px 0
+}
+
+.chartParent {
+    background-color: var(--dark1);
+    width: 480px;
+    float: left
+}
+
+#distributionChart {
+    width: 100%;
+    float: left;
+}

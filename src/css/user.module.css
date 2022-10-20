@@ -19,7 +19,10 @@ img.ugglogo {
 .profile {
     width: 100%;
     float: left;
+    position: relative;
+    z-index: 1;
 }
+
 
 .legal {
     font-size: .75rem;
@@ -34,13 +37,22 @@ img.ugglogo {
     color: white;
 }
 
-.profile>img {
+.profile>img.edge {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 130px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.profile>img:not(.edge) {
     height: 94px;
     border: 3px solid var(--type, white);
     width: 94px;
     float: left;
     box-shadow: 0 0 15px var(--type);
-    margin: 20px 10px 10px;
+    margin: 20px 10px 10px 20px;
     border-radius: 10px;
     background: linear-gradient(110deg, var(--dark1) 8%, var(--dark2) 18%, var(--dark1) 33%);
     background-size: 200% 100%;
@@ -52,7 +64,7 @@ img.ugglogo {
     font-size: 2rem;
     float: left;
     margin: 20px 5px 5px;
-    width: calc(100% - 130px);
+    width: calc(100% - 140px);
 }
 
 .profile>h1>span {
@@ -156,6 +168,12 @@ img.ugglogo {
     padding: 5px 0 25px;
 }
 
+.position {
+    font-size: 1rem;
+    color: var(--light3);
+    padding-right: 50px;
+}
+
 .topLevelFilter a {
     text-decoration: none;
     border: none;
@@ -176,13 +194,15 @@ img.ugglogo {
     font-weight: bold;
     color: white !important;
     padding: .15rem 5px;
+    box-shadow: 0 0 5px var(--selected);
     background-color: var(--selected);
     border-radius: 5px;
     margin-left: 5px;
 }
 
 .selectedFilteroverview>.overview,
-.selectedFiltertitles>.titles {
+.selectedFiltertitles>.titles,
+.selectedFilterstatistics>.statistics {
     color: var(--selected);
     border-bottom: 2px solid var(--selected)
 }
@@ -657,51 +677,6 @@ span.availableTitle img {
     }
 }
 
-.categories {
-    width: 100%;
-    margin-bottom: 10px;
-    display: flex;
-    float: left;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-/* .category:first-of-type {
-    box-shadow: 0 0 5px 2px var(--dark2);
-} */
-
-
-.category {
-    margin: 2px 0;
-    box-sizing: border-box;
-    background: var(--dark1);
-    padding: 10px;
-    border-radius: 10px;
-    width: 140px;
-}
-
-.category>p>img {
-    height: 1rem;
-    width: 1rem;
-    vertical-align: bottom;
-    margin-right: 5px;
-}
-
-.category>div {
-    margin: 22px 10px 0;
-}
-
-.category>div>p {
-    text-align: center;
-    width: 100px;
-}
-
-.category>p {
-    font-size: 1rem;
-    color: white;
-    text-align: center;
-    width: 100%;
-}
 
 .flexWidth {
     width: 750px;

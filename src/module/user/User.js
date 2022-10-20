@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, Fragment } from "react";
 import css from "../../css/user.module.css"
 import config from "../../config"
 import { capitalize, strtolower } from "../../func/stringManipulation"
@@ -33,6 +33,17 @@ const Title = Loadable({
 });
 
 
+const Statistics = Loadable({
+    loader: (content) => import('./UserStatistics'),
+    loading: function () {
+        return <div style={{ width: "100%", float: "left" }}>
+            <Loader />
+            <p style={{ color: "white", fontSize: "1rem", textAlign: "center" }}>Loading Statistics...</p>
+        </div>
+    },
+});
+
+
 export default class User extends Component {
     constructor(props) {
         super(props)
@@ -50,7 +61,9 @@ export default class User extends Component {
             selections: [],
             titles: [],
             challenges: [],
-            availableTitles: {}
+            availableTitles: {},
+            categories: {},
+            points: [0, 0, 0]
         }
 
 
@@ -162,7 +175,7 @@ export default class User extends Component {
 
         const currentLocation = window.location.pathname.split("/")[3] ?? "overview"
 
-        const allowedLocations = ["overview", "titles", "unnamed"]
+        const allowedLocations = ["overview", "titles", "statistics"]
 
         if (!allowedLocations.includes(currentLocation)) {
 
@@ -179,7 +192,7 @@ export default class User extends Component {
 
         const profileText = "view " + this.state.name + "'s profile on u.gg";
 
-        const { tier, summonerIcon, summonerName, selections, titles } = this.state.user
+        const { tier, summonerIcon, summonerName, selections, titles, points } = this.state.user
 
         let selected = selections.map(function (selection) {
 
@@ -230,16 +243,25 @@ export default class User extends Component {
 
         return <section className="object1000">
 
+
+
             {/* STATIC PROFILE HEAD */}
-            <div className={`${css.profile} ${tier}`}>
+            <div className={`${css.profile} ${tier}`} >
+
+                <img className={css.edge} src={`https://cdn.darkintaqt.com/lol/static/challenges/card-${tier}.webp?v2`} alt="" />
 
                 <img src={`${config.cdnBasePath}/cdn/profileicon/${summonerIcon}`} alt="" />
 
                 <h1>
-                    {summonerName}
-                    {typeof summonerName === "object" ? null : <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(this.state.name)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>}
+                    {summonerName} {typeof summonerName === "object" ? null : <Fragment>
+                        <span>(Top {Math.round(points[2] * 1000) / 10}%)</span>
+                        <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(this.state.name)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
+                    </Fragment>
+                    }
                 </h1>
+
                 {title}
+
                 <div className={css.selections}>
                     {selected}
                 </div>
@@ -254,6 +276,8 @@ export default class User extends Component {
 
                 <Link to="titles" className={css["titles"]}>Titles</Link>
 
+                <Link to="statistics" className={css["statistics"]}>Statistics <span>NEW</span></Link>
+
             </div>
 
 
@@ -262,6 +286,8 @@ export default class User extends Component {
                 <Route path="" element={<UserChallenges summoner={this.state.user} server={this.params.server} />}></Route>
 
                 <Route path="titles" element={<Title summoner={this.state.user} />}></Route>
+
+                <Route path="statistics" element={<Statistics summoner={this.state.user} />}></Route>
 
             </Routes>
 

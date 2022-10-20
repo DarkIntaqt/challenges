@@ -26,6 +26,31 @@ export function tierToInt(tier) {
     }
 }
 
+export default function tierIdToPoints(tierId) {
+    switch (tierId) {
+        case 0:
+            return 0
+        case 1:
+            return 5
+        case 2:
+            return 10
+        case 3:
+            return 15
+        case 4:
+            return 25
+        case 5:
+            return 40
+        case 6:
+            return 60
+        case 7:
+        case 8:
+        case 9:
+            return 100
+        default:
+            return 0;
+    }
+}
+
 export function intToTier(inttier) {
     switch (inttier) {
         case -1:
