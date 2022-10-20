@@ -54,19 +54,37 @@ function main() {
 
   const root = createRoot(document.getElementById('root'));
   root.render(<BrowserRouter>
+
+    {/* SCROLL TO TOP ON ROUTE CHANGE */}
     <ScrollToTop>
+
       <Routes>
-        <Route path="/" element={<Fragment><HeaderNFooter /><VariableProxy /></Fragment>}>
+
+        <Route path="/" element={<Fragment>
+          <HeaderNFooter />
+          <VariableProxy />
+        </Fragment>}>
+
           <Route path="" element={<Start />}></Route>
-          <Route path="faq" element={<FAQ></FAQ>}></Route>
+
+          <Route path="faq" element={<FAQ />}></Route>
+
           <Route path="titles" element={<Title />}></Route>
+
           <Route path="challenges" element={<Challenges />}></Route>
+
           <Route path="challenge/:id" element={<PathProxy />}></Route>
-          <Route path=":server/:user" element={<PathProxy />}></Route>
+
+          <Route path=":server/:user/*" element={<PathProxy />}></Route>
+
           <Route path="*" element={<Error />}></Route>
+
         </Route>
+
       </Routes>
+
     </ScrollToTop>
+
   </BrowserRouter>)
 
 

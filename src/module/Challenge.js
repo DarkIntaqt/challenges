@@ -324,15 +324,15 @@ export default class Challenge extends Component {
         for (let i = 1; i < thresholds.length; i++) {
 
             let lineThrough = { textDecoration: "none", fontStyle: "normal", textAlign: "center" };
-            if (thresholds[i] === "-" && percentiles[intToTier(i - 1)] === 0) {
+            if (thresholds[i] === "-" && percentiles[intToTier(i)] === 0) {
                 lineThrough.textDecoration = "line-through";
                 lineThrough.fontStyle = "italic";
             }
 
             thresholdTable.unshift(<div key={"threshold" + i} className={css.rowParentTableRow}>
-                <p className={intToTier(i - 1)} style={{ color: "var(--type)", textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{intToTier(i - 1)}</p>
+                <p className={intToTier(i)} style={{ color: "var(--type)", textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{intToTier(i)}</p>
                 <p style={lineThrough}>{beautifyNum(thresholds[i])}</p>
-                <p style={lineThrough}>{Math.round(percentiles[intToTier(i - 1)] * 1000) / 10}%</p>
+                <p style={lineThrough}>{Math.round(percentiles[intToTier(i)] * 1000) / 10}%</p>
             </ div>)
         }
 

@@ -4,7 +4,7 @@ import {
     useLocation
 } from "react-router-dom";
 
-import User from "./User"
+import User from "./user/User"
 import Error from "./Error"
 
 import Challenge from "./Challenge"

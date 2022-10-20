@@ -26,28 +26,54 @@ export function tierToInt(tier) {
     }
 }
 
+export default function tierIdToPoints(tierId) {
+    switch (tierId) {
+        case 0:
+            return 0
+        case 1:
+            return 5
+        case 2:
+            return 10
+        case 3:
+            return 15
+        case 4:
+            return 25
+        case 5:
+            return 40
+        case 6:
+            return 60
+        case 7:
+        case 8:
+        case 9:
+            return 100
+        default:
+            return 0;
+    }
+}
+
 export function intToTier(inttier) {
     switch (inttier) {
         case -1:
             return "UNRANKED"
-        case 0:
-            return "IRON"
         case 1:
-            return "BRONZE"
+            return "IRON"
         case 2:
-            return "SILVER"
+            return "BRONZE"
         case 3:
-            return "GOLD"
+            return "SILVER"
         case 4:
-            return "PLATINUM"
+            return "GOLD"
         case 5:
-            return "DIAMOND"
+            return "PLATINUM"
         case 6:
-            return "MASTER"
+            return "DIAMOND"
         case 7:
-            return "GRANDMASTER"
+            return "MASTER"
         case 8:
+            return "GRANDMASTER"
+        case 9:
             return "CHALLENGER"
+        case 0:
         default:
             return "NONE"
 
