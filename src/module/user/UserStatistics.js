@@ -8,12 +8,16 @@ import tierIdToPoints, { tierToInt } from "../../func/tierFunctions";
 import Chart from "chart.js/auto";
 import { capitalize } from "../../func/stringManipulation"
 
+import { checkExists } from "../../func/arrayManipulationFunctions.ts";
+
 import { beautifyNum } from "../../func/beautify.ts"
 
 
 export default class UserStatistics extends Component {
     constructor(props) {
         super(props)
+
+        this.chart = 0
 
         this.props = props
 
@@ -25,6 +29,11 @@ export default class UserStatistics extends Component {
         if (user.challenges.length === 0) { return }
 
         console.log("rerender");
+
+        let chartStatus = Chart.getChart(css["distributionChart"]);
+        if (checkExists(chartStatus)) {
+            chartStatus.destroy();
+        }
 
         let tiers = config.tiers.map((tier) => { return capitalize(tier) })
         tiers[0] = "Unranked";
