@@ -19,6 +19,7 @@ img.ugglogo {
 .profile {
     width: 100%;
     float: left;
+    overflow: hidden;
     position: relative;
     z-index: 1;
 }

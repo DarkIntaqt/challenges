@@ -253,8 +253,7 @@ export default class User extends Component {
                 <img src={`${config.cdnBasePath}/cdn/profileicon/${summonerIcon}`} alt="" />
 
                 <h1>
-                    {summonerName} {typeof summonerName === "object" ? null : <Fragment>
-                        <span>(Top {Math.round(points[2] * 1000) / 10}%)</span>
+                    {summonerName}{typeof summonerName === "object" ? null : <Fragment>
                         <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(this.state.name)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
                     </Fragment>
                     }
