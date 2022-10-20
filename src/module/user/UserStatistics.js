@@ -96,6 +96,7 @@ export default class UserStatistics extends Component {
             </div>
 
         }
+        document.title = `${user.summonerName}'s Challenge Statistics`
 
         const tiers = statsCalculateTotalPoints(user.challenges)
 
