@@ -8,6 +8,7 @@
     width: 100%;
     min-height: calc(100vh - 650px);
     float: left;
+    height: 600px;
     background-color: var(--dark0);
 }
 

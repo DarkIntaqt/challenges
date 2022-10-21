@@ -31,6 +31,17 @@ export default class Community extends Component {
                         </p>
                     </div>
 
+
+                    <LazyLoadImage src="https://lolcdn.darkintaqt.com/s/tahmkench.png" height={240} width={240}></LazyLoadImage>
+
+                    <div className={css.floatingIsland}>
+                        <h2>Tahm-Ken.ch - Optimal Teamwork Compositions</h2>
+                        <p>Find optimal composition for teamwork challenges in League with the open source tool tahm-ken.ch.
+
+                            <span><a href="https://tahm-ken.ch/challenges_intersection" target="_blank" rel="noreferrer"><i className="fa-solid fa-arrow-up-right-from-square" /> Visit tahm-ken.ch</a></span>
+                        </p>
+                    </div>
+
                 </section>
 
 
