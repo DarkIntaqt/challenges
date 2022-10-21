@@ -88,7 +88,7 @@ export function removeUnnecessaryChallenges(challenges, filters) {
 
         challenge.push(pushLater)
 
-        parentName = parentName.toLowerCase().replace(/\ /g, "")
+        parentName = parentName.toLowerCase().replace(/ /g, "")
 
         if (filters.category.length > 0 && !filters.category.includes(parentName)) {
             return null

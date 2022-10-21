@@ -226,7 +226,7 @@ export default class Challenges extends Component {
             }
 
             // Skip to next element if filter is on and not on element
-            if (this.filter.category.length > 0 && !this.filter.category.includes(parentName.toLowerCase().replace(/\ /g, ""))) {
+            if (this.filter.category.length > 0 && !this.filter.category.includes(parentName.toLowerCase().replace(/ /g, ""))) {
                 continue
             }
 
@@ -247,7 +247,7 @@ export default class Challenges extends Component {
                 queueIds={<Fragment>
                     <div>
                         <p>{parentName.charAt(0).toUpperCase() + parentName.slice(1).toLowerCase()} Category</p>
-                        <img src={"https://cdn.darkintaqt.com/lol/static/challenges/" + parentName.toLowerCase().replace(/\ /g, "") + ".svg"} alt="" />
+                        <img src={"https://cdn.darkintaqt.com/lol/static/challenges/" + parentName.toLowerCase().replace(/ /g, "") + ".svg"} alt="" />
                     </div>
                     {queueIds}
                     {obtainable}
@@ -270,7 +270,7 @@ export default class Challenges extends Component {
 
     changeFilter(e) {
         let button = e.currentTarget;
-        let c = button.innerText.toLowerCase().replace(/\ /g, "")
+        let c = button.innerText.toLowerCase().replace(/ /g, "")
 
         let category = this.filter[button.parentNode.getAttribute("category")];
         if (button.classList.length > 0) {
