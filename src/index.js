@@ -33,17 +33,19 @@ function main() {
   });
 
 
-  if (window.gC("_Cregion")) {
-    window.region = window.gC("_Cregion")
-  } else {
-    // Set region cookie if it is not already set
-    let date = new Date();
-    date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
-    const expires = date.toUTCString();
 
-    document.cookie = "_Cregion=" + window.region + ";expires=" + expires + ";path=/;Secure"
+  if (window.gC) {
+    if (window.gC("_Cregion")) {
+      window.region = window.gC("_Cregion")
+    } else {
+      // Set region cookie if it is not already set
+      let date = new Date();
+      date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
+      const expires = date.toUTCString();
+
+      document.cookie = "_Cregion=" + window.region + ";expires=" + expires + ";path=/;Secure"
+    }
   }
-
 
   const ScrollToTop = ({ children }) => {
     const location = useLocation();
