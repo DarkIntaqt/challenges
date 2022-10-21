@@ -12,7 +12,15 @@ export default function goTo(e, replace = false) {
         return
     }
 
-    let url = new URL(e.currentTarget.href);
+
+    let url = ""
+
+    try {
+        url = new URL(e.currentTarget.href);
+    } catch (e) {
+        url = new URL("https://challenges.darkintaqt.com/")
+        window.reportError(e, 1)
+    }
 
     if (
         window.reloadLocation === true ||
