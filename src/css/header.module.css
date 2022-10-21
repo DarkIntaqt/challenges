@@ -28,10 +28,27 @@
     display: block;
 }
 
-.Header .inner>a:first-child {
+.Header .inner>a:first-child,
+.Header .inner>a:nth-of-type(2) {
     font-weight: bold;
     float: left;
+}
 
+.Header .inner>a:nth-of-type(2) {
+    font-weight: normal;
+}
+
+.Header .inner>a>span {
+    display: block;
+    float: right;
+    font-size: .7rem;
+    font-weight: bold;
+    color: white !important;
+    padding: .15rem 5px;
+    box-shadow: 0 0 5px var(--selected);
+    background-color: var(--selected);
+    border-radius: 5px;
+    margin-left: 5px;
 }
 
 .Header .inner>a img {

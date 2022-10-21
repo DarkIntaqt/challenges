@@ -1,0 +1,116 @@
+.heading {
+    color: var(--light0);
+    font-size: 4rem;
+    text-shadow: 0 0 2px var(--light0);
+}
+
+.scrollSection {
+    width: 100%;
+    min-height: calc(100vh - 650px);
+    float: left;
+    background-color: var(--dark0);
+}
+
+.bgArea {
+    width: 100%;
+    float: left;
+    min-height: calc(100vh - 60px);
+    background-position: bottom;
+    background-size: cover;
+    background-attachment: fixed;
+    background-image: url(https://lolcdn.darkintaqt.com/s/community-g2cb.webp)
+}
+
+@media only screen and (max-height: 800px) {
+    .bgArea {
+        background-position: top;
+    }
+}
+
+.topArea {
+    width: 100%;
+    float: left;
+    margin-top: 300px;
+    margin-bottom: 50px;
+    height: 300px;
+    text-align: center;
+}
+
+.floatingIsland {
+    min-height: 50px;
+    width: 600px;
+    background-color: var(--dark1);
+    float: left;
+    margin: 20px 0;
+    position: absolute;
+    border-radius: 10px;
+    box-shadow: 0 0 5px var(--dark3);
+}
+
+.floatingIsland:first-of-type {
+    top: -50px;
+}
+
+.floatingIsland:nth-of-type(2) {
+    top: 200px;
+    left: 400px;
+}
+
+.scrollSection>section>img {
+    position: absolute;
+    height: 240px;
+    z-index: 5;
+    width: 240px;
+    filter: brightness(80%);
+}
+
+.scrollSection>section>img:nth-of-type(1) {
+    left: 700px;
+    top: -100px;
+}
+
+
+.scrollSection>section>img:nth-of-type(2) {
+    left: 100px;
+    top: 180px;
+}
+
+.floatingIsland>h2 {
+    font-size: 1.5rem;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    color: var(--light0)
+}
+
+.floatingIsland>p {
+    font-size: 1rem;
+    line-height: 1.2rem;
+    color: var(--light2);
+    padding: 0 20px 20px 20px;
+}
+
+.floatingIsland>p>span {
+    width: 100%;
+    float: left;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.floatingIsland>p>span>a {
+    display: block;
+    width: 200px;
+    border-radius: 10px;
+    margin: 10px 0;
+    color: white;
+    font-weight: 600;
+    padding: 10px;
+    text-decoration: none;
+    background-color: var(--selected);
+    transition: .25s;
+}
+
+.floatingIsland>p>span>a:hover {
+    box-shadow: 0 0 5px var(--selected);
+}

@@ -14,6 +14,10 @@ export default function HeaderNFooter() {
                     Challenge Tracker
                 </Link>
 
+                <Link to="/community">
+                    <i className="fa-solid fa-user-group"></i> Community <span>NEW</span>
+                </Link>
+
                 <Link to="/challenges">
                     <i className="fa-solid fa-list"></i> Challenges
                 </Link>

@@ -19,6 +19,8 @@ import { checkExists as checkFor } from './func/arrayManipulationFunctions.ts';
 import config from './config';
 import VariableProxy from './module/VariableProxy';
 
+import Loader from './module/Loader';
+import Loadable from 'react-loadable';
 
 function main() {
 
@@ -51,6 +53,15 @@ function main() {
     return children
   }
 
+  const Community = Loadable({
+    loader: (content) => import('./module/Community'),
+    loading: function () {
+      return <div style={{ width: "100%", float: "left" }}>
+        <Loader />
+        <p style={{ color: "white", fontSize: "1rem", textAlign: "center" }}>Loading...</p>
+      </div>
+    },
+  });
 
   const root = createRoot(document.getElementById('root'));
   root.render(<BrowserRouter>
@@ -68,6 +79,8 @@ function main() {
           <Route path="" element={<Start />}></Route>
 
           <Route path="faq" element={<FAQ />}></Route>
+
+          <Route path="community" element={<Community />}></Route>
 
           <Route path="titles" element={<Title />}></Route>
 
