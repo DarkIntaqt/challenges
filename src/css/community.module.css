@@ -114,3 +114,26 @@
 .floatingIsland>p>span>a:hover {
     box-shadow: 0 0 5px var(--selected);
 }
+
+@media only screen and (max-width:1050px) {
+    .topArea {
+        margin-top: 100px;
+    }
+
+    .floatingIsland {
+        top: 0 !important;
+        position: relative;
+        left: 0 !important;
+        width: 90%;
+        margin: 20px 5%;
+        float: left;
+    }
+
+    .scrollSection>section>img {
+        display: none;
+    }
+
+    .scrollSection {
+        min-height: calc(100vh - 450px)
+    }
+}

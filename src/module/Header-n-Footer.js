@@ -14,7 +14,7 @@ export default function HeaderNFooter() {
                     Challenge Tracker
                 </Link>
 
-                <Link to="/community">
+                <Link to="/community" className={StyleSheet.hideOnMobile}>
                     <i className="fa-solid fa-user-group"></i> Community <span>NEW</span>
                 </Link>
 
