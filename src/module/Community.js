@@ -5,6 +5,9 @@ import css from "../css/community.module.css"
 
 export default class Community extends Component {
     render() {
+
+        document.title = "League of Legends Challenge Community"
+
         return <div className={css.bgArea}>
             <section className={`object1000`}>
 
