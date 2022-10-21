@@ -1,7 +1,7 @@
 .heading {
     color: var(--light0);
     font-size: 4rem;
-    text-shadow: 0 0 2px var(--light0);
+    text-shadow: 0 0 5px var(--dark2);
 }
 
 .scrollSection {
