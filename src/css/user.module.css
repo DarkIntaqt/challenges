@@ -534,14 +534,12 @@ img.ugglogo {
 
 .rowParent table tr td:nth-child(2)>a>p>span {
     color: var(--light2);
-    margin-left: 3px;
     font-size: 0.8rem;
 }
 
 .rowParent table tr td:nth-child(3) {
     text-align: center;
     font-size: .8rem;
-    text-transform: capitalize;
     color: var(--type)
 }
 

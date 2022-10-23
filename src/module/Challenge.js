@@ -15,6 +15,8 @@ import start from "../css/start.module.css"
 import { checkExists } from "../func/arrayManipulationFunctions.ts";
 import config from "../config";
 
+import { capitalize } from "../func/stringManipulation";
+
 //import excss from "../css/aboutChallenge.module.css"
 
 export default class Challenge extends Component {
@@ -286,10 +288,10 @@ export default class Challenge extends Component {
                             <td>
                                 <a href={userlink} onClick={goTo}>
                                     <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={player[0] + "'s profile image"}></LazyLoadImage>
-                                    <p>{player[0]}<span className={css.region}>{serverToHumanReadable(player[4])}</span></p>
+                                    <p>{player[0]} <span className={css.region}>#{serverToHumanReadable(player[4])}</span></p>
                                 </a>
                             </td>
-                            <td>{player[2].toLowerCase()}</td>
+                            <td>{capitalize(player[2])}</td>
                             <td>{beautifyNum(player[1], false)}</td>
                         </tr>)
                     }
