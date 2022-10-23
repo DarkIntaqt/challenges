@@ -28,8 +28,6 @@ export default class UserStatistics extends Component {
 
         if (user.challenges.length === 0) { return }
 
-        console.log("rerender");
-
         let chartStatus = Chart.getChart(css["distributionChart"]);
         if (checkExists(chartStatus)) {
             chartStatus.destroy();

@@ -57,6 +57,17 @@
     left: 400px;
 }
 
+
+.floatingIsland:nth-of-type(3) {
+    top: 400px;
+    left: 50px;
+}
+
+.floatingIsland:nth-of-type(4) {
+    top: 650px;
+    left: 350px;
+}
+
 .scrollSection>section>img {
     position: absolute;
     height: 240px;
@@ -74,6 +85,16 @@
 .scrollSection>section>img:nth-of-type(2) {
     left: 100px;
     top: 180px;
+}
+
+.scrollSection>section>img:nth-of-type(3) {
+    left: 700px;
+    top: 350px;
+}
+
+.scrollSection>section>img:nth-of-type(4) {
+    left: 20px;
+    top: 650px;
 }
 
 .floatingIsland>h2 {
