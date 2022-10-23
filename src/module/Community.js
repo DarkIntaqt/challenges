@@ -39,7 +39,9 @@ export default class Community extends Component {
 
     componentDidMount() {
 
-        get("https://challenges.darkintaqt.com/communities.json", this.loadedStats)
+        if (this.state.images.length === 0 || this.state.texts.length === 0) {
+            get("https://challenges.darkintaqt.com/communities.json", this.loadedStats)
+        }
 
     }
 
