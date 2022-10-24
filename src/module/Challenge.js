@@ -65,7 +65,7 @@ export default class Challenge extends Component {
             this.challenges = tempChallenges
             this.challenge = tempChallenge
             challengePlaceholder = tempChallenge
-            document.title = "'" + tempChallenge.challenge.translation.name + "' Challenge and Leaderboard"
+            document.title = "'" + tempChallenge.challenge.translation.name + "' Challenge Overview and Leaderboard"
         }
 
 
