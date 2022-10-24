@@ -135,7 +135,7 @@ export default class Challenges extends Component {
                     }
                     obtainable.push(<div key={challenge.tags["source"] + i}>
                         <p>Obtainable by playing clash</p>
-                        <img src="https://cdn.darkintaqt.com/lol/static/challenges/clash.webp" alt="" />
+                        <img src="https://cdn.darkintaqt.com/lol/static/challenges/clash.webp" alt="Clash" />
                     </div>)
                 }
                 if (challenge.tags["source"] === "SUMMONER") {
@@ -153,7 +153,7 @@ export default class Challenges extends Component {
                     }
                     obtainable.push(<div key={challenge.tags["source"] + i}>
                         <p>Obtainable by progressing eternals</p>
-                        <img src="https://cdn.darkintaqt.com/lol/static/challenges/eternals.webp" alt="" />
+                        <img src="https://cdn.darkintaqt.com/lol/static/challenges/eternals.webp" alt="Eternals" />
                     </div>)
                 }
                 if (challenge.tags["source"] === "RANKED") {
@@ -247,7 +247,7 @@ export default class Challenges extends Component {
                 queueIds={<Fragment>
                     <div>
                         <p>{parentName.charAt(0).toUpperCase() + parentName.slice(1).toLowerCase()} Category</p>
-                        <img src={"https://cdn.darkintaqt.com/lol/static/challenges/" + parentName.toLowerCase().replace(/ /g, "") + ".svg"} alt="" />
+                        <img src={"https://cdn.darkintaqt.com/lol/static/challenges/" + parentName.toLowerCase().replace(/ /g, "") + ".svg"} alt={parentName.toLowerCase()} />
                     </div>
                     {queueIds}
                     {obtainable}
@@ -336,31 +336,31 @@ export default class Challenges extends Component {
                     <div className={filterCSS.category} category="category">
                         <p className={filterCSS.cheading}>Category</p>
                         <button onClick={this.changeFilter}>
-                            <img src={config.images.teamwork} alt="" />
+                            <img src={config.images.teamwork} alt="teamwork" />
                             Teamwork
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={config.images.imagination} alt="" />
+                            <img src={config.images.imagination} alt="imagination" />
                             Imagination
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={config.images.veterancy} alt="" />
+                            <img src={config.images.veterancy} alt="veterancy" />
                             Veterancy
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={config.images.collection} alt="" />
+                            <img src={config.images.collection} alt="collection" />
                             Collection
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={config.images.expertise} alt="" />
+                            <img src={config.images.expertise} alt="expertise" />
                             Expertise
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={config.images.legacy} alt="" />
+                            <img src={config.images.legacy} alt="legacy" />
                             Legacy
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={config.images['2022seasonal']} alt="" />
+                            <img src={config.images['2022seasonal']} alt="2022 seasonal" />
                             2022 Seasonal
                         </button>
                     </div>
@@ -376,11 +376,11 @@ export default class Challenges extends Component {
                             Ingame
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src="https://cdn.darkintaqt.com/lol/static/challenges/eternals.webp" alt="" />
+                            <img src="https://cdn.darkintaqt.com/lol/static/challenges/eternals.webp" alt="eternals" />
                             Eternals
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src="https://cdn.darkintaqt.com/lol/static/challenges/clash.webp" alt="" />
+                            <img src="https://cdn.darkintaqt.com/lol/static/challenges/clash.webp" alt="clash" />
                             Clash
                         </button>
                         <button onClick={this.changeFilter}>
@@ -400,15 +400,15 @@ export default class Challenges extends Component {
                     <div className={filterCSS.category} category="gamemode">
                         <p className={filterCSS.cheading}>Gamemode</p>
                         <button onClick={this.changeFilter}>
-                            <img src={config.images.summonersrift} alt="" />
+                            <img src={config.images.summonersrift} alt="Summoners Rift" />
                             Summoners Rift
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={config.images.aram} alt="" />
+                            <img src={config.images.aram} alt="ARAM" />
                             ARAM
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={config.images.bot} alt="" />
+                            <img src={config.images.bot} alt="Bot Games" />
                             Bot
                         </button>
                     </div>

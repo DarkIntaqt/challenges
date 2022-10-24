@@ -65,7 +65,7 @@ export default class Challenge extends Component {
             this.challenges = tempChallenges
             this.challenge = tempChallenge
             challengePlaceholder = tempChallenge
-            document.title = "'" + tempChallenge.challenge.translation.name + "' Challenge Overview, Thresholds and Leaderboards"
+            document.title = "'" + tempChallenge.challenge.translation.name + "' Challenge and Leaderboard"
         }
 
 
@@ -338,11 +338,9 @@ export default class Challenge extends Component {
             </ div>)
         }
 
-        console.log(absoluteRegion);
-
         let content = <Fragment>
             <section className={"MASTER " + css.c + " " + css.profile + " " + css["cid" + challenge.challenge.id]}>
-                <img src={icon} alt="" />
+                <img src={icon} alt={challenge.challenge.translation.name + " challenge logo"} />
                 <h1>{challenge.challenge.translation.name} {challenge.timestamp
                     ? <span data-nosnippet>(Updated <Timestamp date={challenge.timestamp * 1000} />)</span>
                     : <span data-nosnippet></span>
