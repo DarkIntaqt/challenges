@@ -381,8 +381,6 @@ export default class Challenge extends Component {
                     </div>
                 </div>
 
-                {absoluteRegion === "world" ? <p className={css.thresholdWarning} data-nosnippet>Please keep in mind that the global thresholds might not exactly represent the thresholds in your region. </p> : []}
-
                 {warnings}
 
                 {challenge.text !== false ? <div className={css.rowParent + " object1000 " + css.field}>
