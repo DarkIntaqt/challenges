@@ -106,7 +106,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("progress")) {
                         continue
                     }
-                    obtainable.push(<div key={crypto.randomUUID()}>
+                    obtainable.push(<div key={challenge.tags["source"] + i}>
                         <p>Obtainable by progressing challenges</p>
                         <i className="fa-solid fa-angles-up"></i>
                     </div>)
@@ -115,7 +115,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("ingame")) {
                         continue
                     }
-                    obtainable.push(<div key={crypto.randomUUID()}>
+                    obtainable.push(<div key={challenge.tags["source"] + i}>
                         <p>Obtainable by playing games</p>
                         <i className="fa-solid fa-play"></i>
                     </div>)
@@ -124,7 +124,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("inventory")) {
                         continue
                     }
-                    obtainable.push(<div key={crypto.randomUUID()}>
+                    obtainable.push(<div key={challenge.tags["source"] + i}>
                         <p>Obtainable by collecting items</p>
                         <i className="fa-solid fa-box-open"></i>
                     </div>)
@@ -133,7 +133,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("clash")) {
                         continue
                     }
-                    obtainable.push(<div key={crypto.randomUUID()}>
+                    obtainable.push(<div key={challenge.tags["source"] + i}>
                         <p>Obtainable by playing clash</p>
                         <img src="https://cdn.darkintaqt.com/lol/static/challenges/clash.webp" alt="" />
                     </div>)
@@ -142,7 +142,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("profile")) {
                         continue
                     }
-                    obtainable.push(<div key={crypto.randomUUID()}>
+                    obtainable.push(<div key={challenge.tags["source"] + i}>
                         <p>Obtainable by leveling up your profile</p>
                         <i className="fa-solid fa-user"></i>
                     </div>)
@@ -151,7 +151,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("eternals")) {
                         continue
                     }
-                    obtainable.push(<div key={crypto.randomUUID()}>
+                    obtainable.push(<div key={challenge.tags["source"] + i}>
                         <p>Obtainable by progressing eternals</p>
                         <img src="https://cdn.darkintaqt.com/lol/static/challenges/eternals.webp" alt="" />
                     </div>)
@@ -160,7 +160,7 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("ranked")) {
                         continue
                     }
-                    obtainable.push(<div key={crypto.randomUUID()}>
+                    obtainable.push(<div key={challenge.tags["source"] + i}>
                         <p>Obtainable by playing ranked</p>
                         <i className="fa-solid fa-ranking-star"></i>
                     </div>)
@@ -192,7 +192,7 @@ export default class Challenges extends Component {
                 }
 
                 if (enabled["isAram"] && enabled["isSR"]) {
-                    queueIds.push(<div key={crypto.randomUUID()}>
+                    queueIds.push(<div key={"all " + i}>
                         <p>All modes</p>
                         <img key={0} src="https://cdn.darkintaqt.com/lol/static/lanes/FILL.png" alt="All modes" />
                     </div>)
@@ -200,7 +200,7 @@ export default class Challenges extends Component {
                     if (this.filter.gamemode.length > 0 && !this.filter.gamemode.includes("aram")) {
                         continue
                     }
-                    queueIds.push(<div key={crypto.randomUUID()}>
+                    queueIds.push(<div key={"aram " + i}>
                         <p>ARAM games only</p>
                         <img key={1} src={config.images.aram} alt="Aram games only" />
                     </div>)
@@ -208,7 +208,7 @@ export default class Challenges extends Component {
                     if (this.filter.gamemode.length > 0 && !this.filter.gamemode.includes("summonersrift")) {
                         continue
                     }
-                    queueIds.push(<div key={crypto.randomUUID()}>
+                    queueIds.push(<div key={"sr " + i}>
                         <p>Summoners Rift only</p>
                         <img key={2} src={config.images.summonersrift} alt="Summoners Rift games only" />
                     </div>)
@@ -216,7 +216,7 @@ export default class Challenges extends Component {
                     if (this.filter.gamemode.length > 0 && !this.filter.gamemode.includes("bot")) {
                         continue
                     }
-                    queueIds.push(<div key={crypto.randomUUID()}>
+                    queueIds.push(<div key={"bot " + i}>
                         <p>Bot games only</p>
                         <img key={3} src={config.images.bot} alt="Bot games only" />
                     </div>)
@@ -237,7 +237,7 @@ export default class Challenges extends Component {
             }
 
             challengeObject.push(<ChallengeObject
-                key={challenge.id + crypto.randomUUID()}
+                key={challenge.id}
                 href={"/challenge/" + challenge.id}
                 tier={highestTier}
                 nexttier={["CROWN", "overview"]}
