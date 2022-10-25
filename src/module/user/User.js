@@ -189,10 +189,10 @@ export default class User extends Component {
 
         }
 
-
-        const profileText = "view " + this.state.name + "'s profile on u.gg";
-
         const { tier, summonerIcon, summonerName, selections, titles } = this.state.user
+
+        const profileText = "view " + summonerName + "'s profile on u.gg";
+
 
         let selected = selections.map(function (selection) {
 
@@ -254,7 +254,7 @@ export default class User extends Component {
 
                 <h1>
                     {summonerName}{typeof summonerName === "object" ? null : <Fragment>
-                        <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(this.state.name)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
+                        <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
                     </Fragment>
                     }
                 </h1>
