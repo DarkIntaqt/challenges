@@ -72,7 +72,7 @@ export default class User extends Component {
         this.server = serverToMachineReadable(props.params.server)
 
 
-        this.getChallengeURL = `https://cdn.darkintaqt.com/lol/static/challenges-${this.server}.json?t=${(new Date().getMonth() + 1).toString() + (new Date().getDate()).toString() + new Date().getFullYear().toString()}`
+        this.getChallengeURL = `https://challenges.darkintaqt.com/api/dynamic-data/${this.server}`
         this.getSummonerURL = `https://challenges.darkintaqt.com/api/v4/u/?name=${this.user}&server=${this.server}`
 
 

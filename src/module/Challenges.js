@@ -44,7 +44,7 @@ export default class Challenges extends Component {
         this.server = server;
 
 
-        get(`https://cdn.darkintaqt.com/lol/static/challenges-${server}.json?t=${(new Date().getMonth() + 1).toString() + (new Date().getDate()).toString() + new Date().getFullYear().toString()}`, this.loadChallenges)
+        get(`https://challenges.darkintaqt.com/api/dynamic-data/${server}`, this.loadChallenges)
 
     }
 
