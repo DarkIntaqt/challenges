@@ -21,7 +21,7 @@ export default class generateChallengePointElement extends Component {
 
     componentDidMount() {
 
-        get("https://challenges.darkintaqt.com/api/v3/c/?id=0", this.updateCompontent)
+        get("https://challenges.darkintaqt.com/api/v4/c/?id=0", this.updateCompontent)
 
     }
 
