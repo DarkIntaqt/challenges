@@ -5,6 +5,7 @@ import config from "../config";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import goTo from "../func/goTo";
+import Ad from "./Ad";
 
 export default class Start extends Component {
 
@@ -182,6 +183,9 @@ export default class Start extends Component {
           <div className={StyleSheet.region} onClick={changeRegion}>na</div>
           <div className={StyleSheet.region} onClick={changeRegion}>oc</div>
           <div className={StyleSheet.region} onClick={changeRegion}>tr</div>
+        </div>
+        <div style={{ float: "left", margin: "10px 0", width: "100%", display: "flex", justifyContent: "center" }}>
+          <Ad></Ad>
         </div>
       </div>
     </Fragment>

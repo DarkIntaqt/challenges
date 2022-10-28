@@ -259,7 +259,7 @@ export default class UserStatistics extends Component {
                     <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">Give Feedback</a>
                 </p>
             </div>
-
+            <Ad></Ad>
         </section>
     }
 }

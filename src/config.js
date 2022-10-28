@@ -25,7 +25,8 @@ const config = {
         "requestCache": {},
         "reloadLocation": false,
         "timezoneoffset": new Date().getTimezoneOffset() / 60,
-        "loadingUI": fillLoadingUI()
+        "loadingUI": fillLoadingUI(),
+        "adIds": 0
     },
     "config": {
         "reloadAfter": 3600000

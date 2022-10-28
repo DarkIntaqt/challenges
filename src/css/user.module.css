@@ -228,7 +228,7 @@ img.ugglogo {
 .profile.c:not(.cid0):not(.cid1):not(.cid2):not(.cid3):not(.cid4):not(.cid5):not(.cid2022000)::before {
     height: 80px;
     width: 80px;
-    margin: 30px 30px;
+    margin: 30px;
     content: '';
     z-index: 0;
     left: 0;

@@ -2,7 +2,6 @@ import { Outlet, Link } from "react-router-dom";
 import { Fragment } from "react"
 import StyleSheet from "../css/header.module.css";
 import logo from "../img/logo.png";
-import Ad from "./Ad"
 
 export default function HeaderNFooter() {
 
@@ -36,7 +35,6 @@ export default function HeaderNFooter() {
 
         <div className={StyleSheet.content}>
             <Outlet></Outlet>
-            <Ad placeholder="false"></Ad>
         </div>
 
 
