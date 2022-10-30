@@ -41,6 +41,7 @@ const config = {
         "las",
         "na",
         "oc",
+        "ru",
         "tr"
     ],
     "cdnBasePath": "https://lolcdn.darkintaqt.com",

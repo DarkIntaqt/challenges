@@ -182,6 +182,7 @@ export default class Start extends Component {
           <div className={StyleSheet.region} onClick={changeRegion}>las</div>
           <div className={StyleSheet.region} onClick={changeRegion}>na</div>
           <div className={StyleSheet.region} onClick={changeRegion}>oc</div>
+          <div className={StyleSheet.region} onClick={changeRegion}>ru</div>
           <div className={StyleSheet.region} onClick={changeRegion}>tr</div>
         </div>
         <div style={{ float: "left", margin: "10px 0", width: "100%", display: "flex", justifyContent: "center" }}>

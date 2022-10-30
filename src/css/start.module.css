@@ -57,7 +57,7 @@
     font-size: 16px;
     color: #000;
     z-index: 1;
-    margin-left: 760px;
+    margin-left: 780px;
     margin-top: 2px;
     cursor: pointer;
     padding: 10px;
@@ -67,8 +67,8 @@
 
 .start .searchbar input {
     background: #fff;
-    width: 560px;
-    margin: 0 200px;
+    width: 600px;
+    margin: 0 180px;
     font-size: 16px;
     border-radius: 20px;
     padding: 12px 20px;
@@ -84,8 +84,8 @@
 
 .start .serverselector,
 .filter {
-    width: 60%;
-    margin: 20px 20% 0;
+    width: 64%;
+    margin: 20px 18% 0;
     flex-wrap: wrap;
     float: left;
     display: flex;
@@ -127,6 +127,7 @@
 .las>.las,
 .na>.na,
 .oc>.oc,
+.ru>.ru,
 .tr>.tr,
 .start .serverselector .region.selected {
     background: var(--selected);

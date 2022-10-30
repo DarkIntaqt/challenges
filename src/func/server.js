@@ -27,6 +27,9 @@ function serverToHumanReadable(server) {
         case "oc1":
             return "oc"
 
+        case "ru":
+            return "ru"
+
         case "tr1":
             return "tr"
 
@@ -64,6 +67,9 @@ function serverToMachineReadable(server) {
 
         case "oc":
             return "oc1"
+
+        case "ru":
+            return "ru"
 
         case "tr":
             return "tr1"
@@ -110,6 +116,9 @@ function serverToRegionString(server) {
         case "oc":
         case "oc1":
             return "Oceania"
+
+        case "ru":
+            return "Russia"
 
         case "tr":
         case "tr1":
