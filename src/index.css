@@ -10,7 +10,7 @@ body {
 :root {
   /* UI colors */
   /* rgb is minified to hex on build */
-  --dark0: rgb(21, 21, 25);
+  --dark0: rgb(14, 14, 18);
   --dark1: rgb(28, 28, 32);
   --dark2: rgb(36, 36, 40);
   --dark3: rgba(255, 255, 255, 0.1);
