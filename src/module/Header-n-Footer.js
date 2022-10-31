@@ -47,13 +47,14 @@ export default function HeaderNFooter() {
                     </Link>
                 </div>
                 <div className={StyleSheet.centerFooter} data-nosnippet>
-                    <p>'Challenges.DarkIntaqt.Com' isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.<br /><br />Huge thanks to <a href="https://www.communitydragon.org" target="_blank" rel="noreferrer">CommunityDragon</a> for hosting the assets. </p>
+                    <p>'Challenges.DarkIntaqt.Com' isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.<br /><br />&copy; 2022 - challenges.darkintaqt.com<br />Thanks to <a href="https://www.communitydragon.org" target="_blank" rel="noreferrer">CommunityDragon</a> for serving the assets. </p>
                 </div>
                 <div className={StyleSheet.rightFooter}>
                     <a href="https://darkintaqt.com/assets/impressum/" rel="noreferrer" target="_blank">Imprint</a>
                     <a href="https://darkintaqt.com/assets/privacypolicy/" rel="noreferrer" target="_blank">Privacy Policy</a>
                     <Link to={"/faq"}>FAQ</Link>
                     <a href="https://github.com/DarkIntaqt/challenges" target="_blank" rel="noreferrer">GitHub</a>
+                    <a href="https://twitter.com/darkintaqt" target="_blank" rel="noreferrer">Twitter</a>
                 </div>
             </div>
         </footer>
