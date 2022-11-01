@@ -4,6 +4,31 @@
 
 }
 
+.displayMode {
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+button.cmodefalse.modefalse,
+button.cmodetrue.modetrue {
+    background-color: var(--dark2);
+    color: white
+}
+
+.displayMode>button {
+    border: none;
+    background-color: var(--dark0);
+    color: var(--light2);
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    float: left;
+    margin-right: 10px;
+    font-size: 1rem;
+}
+
 @media only screen and (min-height:800px) {
     .filter {
         position: sticky;

@@ -13,6 +13,7 @@ import { Fragment } from "react"
 import filterCSS from "../css/filter.module.css"
 
 import Loadable from "react-loadable";
+import { setCookie } from "../func/cookiefunctions"
 
 export default class Challenges extends Component {
     constructor(props) {
@@ -33,6 +34,9 @@ export default class Challenges extends Component {
         });
 
         this.search = this.search.bind(this)
+
+        this.changeDisplayMethod = this.changeDisplayMethod.bind(this)
+
         this.state = {
             challenges: window.loadingUI,
             event: <LoadEvent content="" />
@@ -54,6 +58,19 @@ export default class Challenges extends Component {
 
     }
 
+    changeDisplayMethod(e) {
+        if (e.currentTarget.id === "full" && window.compactMode === true) {
+            window.compactMode = false
+            this.showChallenges(window.JSONPREQUEST)
+            setCookie("filter", "false");
+        }
+        if (e.currentTarget.id === "compact" && window.compactMode === false) {
+            window.compactMode = true
+            this.showChallenges(window.JSONPREQUEST)
+            setCookie("filter", "true");
+        }
+    }
+
     showChallenges(challengeData) {
         window.JSONPREQUEST = challengeData
 
@@ -73,8 +90,13 @@ export default class Challenges extends Component {
                     continue
                 }
             }
-            let highestTier = "NONE", queueIds = [], parentName = "crystal", obtainable = [];
+            let highestTier = "NONE",
+                queueIds = [],
+                parentName = "crystal",
+                obtainable = [];
+
             let ranks = config.tiers
+
             for (let i2 = 1; i2 < ranks.length; i2++) {
                 const rank = ranks[i2];
                 if (checkExists(challenge.thresholds[rank])) {
@@ -242,7 +264,7 @@ export default class Challenges extends Component {
                 tier={highestTier}
                 nexttier={["CROWN", "overview"]}
                 title={challenge.translation.name}
-                subtitle={<span>{parentName}</span>}
+                subtitle={parentName.toLowerCase()}
                 description={challenge.translation.description}
                 queueIds={<Fragment>
                     <div>
@@ -332,6 +354,14 @@ export default class Challenges extends Component {
             <div className={filterCSS.filter}>
 
                 <div className={filterCSS.selectors + " clearfix"}>
+                    <div className={filterCSS.displayMode}>
+                        <button id="full" onClick={this.changeDisplayMethod} className={filterCSS["cmode" + window.compactMode] + " " + filterCSS.modefalse}>
+                            <i className="fa-solid fa-table-cells"></i>
+                        </button>
+                        <button id="compact" onClick={this.changeDisplayMethod} className={filterCSS["cmode" + window.compactMode] + " " + filterCSS.modetrue}>
+                            <i className="fa-solid fa-list"></i>
+                        </button>
+                    </div>
                     <p className={filterCSS.info}>Filter (multiple choices)</p>
                     <div className={filterCSS.category} category="category">
                         <p className={filterCSS.cheading}>Category</p>

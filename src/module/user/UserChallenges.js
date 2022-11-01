@@ -2,6 +2,7 @@ import { Component, Fragment } from "react";
 import config from "../../config";
 import filterCSS from "../../css/filter.module.css"
 
+import { setCookie } from "../../func/cookiefunctions";
 import { toggleValue } from "../../func/arrayManipulationFunctions.ts"
 
 import ChallengeObject from "../ChallengeObject";
@@ -28,10 +29,13 @@ export default class UserChallenges extends Component {
         this.changeFilter = this.changeFilter.bind(this)
         this.changeExtraFilter = this.changeExtraFilter.bind(this)
 
+        this.changeDisplayMethod = this.changeDisplayMethod.bind(this)
+
         this.props = props
 
         this.state = {
             alphabet: "a-z",
+            placeholder: window.compactMode,
             filter: "level",
             filters: {
                 "category": [],
@@ -105,6 +109,19 @@ export default class UserChallenges extends Component {
 
             this.setState({ filters: filters })
 
+        }
+    }
+
+    changeDisplayMethod(e) {
+        if (e.currentTarget.id === "full" && window.compactMode === true) {
+            window.compactMode = false
+            this.setState({ placeholder: false })
+            setCookie("filter", "false");
+        }
+        if (e.currentTarget.id === "compact" && window.compactMode === false) {
+            window.compactMode = true
+            this.setState({ placeholder: true })
+            setCookie("filter", "false");
         }
     }
 
@@ -232,6 +249,14 @@ export default class UserChallenges extends Component {
 
             <div className={filterCSS.filter}>
                 <div className={filterCSS.selectors + " clearfix"}>
+                    <div className={filterCSS.displayMode}>
+                        <button id="full" onClick={this.changeDisplayMethod} className={filterCSS["cmode" + window.compactMode] + " " + filterCSS.modefalse}>
+                            <i className="fa-solid fa-table-cells"></i>
+                        </button>
+                        <button id="compact" onClick={this.changeDisplayMethod} className={filterCSS["cmode" + window.compactMode] + " " + filterCSS.modetrue}>
+                            <i className="fa-solid fa-list"></i>
+                        </button>
+                    </div>
                     <p className={filterCSS.info}>Filter</p>
                     <div className={filterCSS.category} category="category">
                         <p className={filterCSS.cheading}>Order by</p>

@@ -2,6 +2,9 @@ import css from "../css/challengeObject.module.css"
 import { checkExists } from "../func/arrayManipulationFunctions.ts"
 import goTo from "../func/goTo";
 import ProgressBar from "./ProgressBar";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Fragment } from "react";
+import { beautifyNum } from "./../func/beautify.ts"
 
 export default function ChallengeObject(params) {
 
@@ -48,14 +51,60 @@ export default function ChallengeObject(params) {
         }
     }
 
+    if (challenge[0].toLowerCase() === "none" || challenge[0].toLowerCase() === "unranked") {
+        extraTags += " " + css["unranked"]
+    }
+
+    if (window.compactMode === true) {
+
+        return <a
+            className={challenge[0] + " " + css.challenge + extraTags + " " + css.compact} href={challenge[5]}
+            onClick={goTo}
+        >
+            <LazyLoadImage
+                height={40}
+                width={40}
+                placeholderSrc={"https://cdn.darkintaqt.com/lol/static/missing/item.png"}
+                src={"https://lolcdn.darkintaqt.com/s/c-" + parseInt(challenge[5].split("/")[2]).toString(16) + "-" + challenge[0].toLowerCase().replace("none", "iron")}
+                alt={""}
+            >
+            </LazyLoadImage>
+            <div className={css.group}>
+                <p className={css.heading}>{challenge[2]}</p>
+                <p className={css.type}>{challenge[3]} {
+                    challenge[7] !== false ?
+                        <Fragment> | {beautifyNum(challenge[7])} / {beautifyNum(challenge[8])}</Fragment>
+                        : null
+                }</p>
+            </div>
+            <div className={css.modes}>
+                {challenge[6]}
+            </div>
+            <div className={css.description}>
+                <p >{challenge[4]}</p>
+            </div>
+            <p className={css.tier}>{challenge[0]}</p>
+            <button><i className="fa-solid fa-chevron-down"></i></button>
+            {
+                challenge[7] !== false ?
+                    <div className={css.progressBar} style={{
+                        width: "calc(calc(100% + 20px) * " + (challenge[7] / challenge[8]) + ")"
+                    }}>
+
+                    </div>
+                    : null
+            }
+        </a>
+    }
+
     return <a
-        className={challenge[0] + " " + css.challenge + extraTags} href={challenge[5]}
+        className={challenge[0] + " " + css.challenge + extraTags + " " + css.full} href={challenge[5]}
         onClick={goTo}
     >
         <p className={css.title}>
 
             {challenge[2]}
-            {challenge[3]}
+            <span>{challenge[3]}</span>
 
         </p>
 

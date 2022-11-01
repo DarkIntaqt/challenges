@@ -1,4 +1,138 @@
-.challenge {
+.compact.challenge {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    color: var(--light0);
+    border-radius: 10px;
+    background-color: var(--dark1);
+    margin: 5px 0;
+    height: 60px;
+    transition: .2s linear background-color;
+}
+
+.compact.challenge:hover {
+    background-color: var(--dark2);
+}
+
+.compact.challenge:hover>button {
+    background-color: var(--dark3);
+}
+
+.compact.challenge.unranked>span {
+    filter: brightness(.5)
+}
+
+.compact.challenge>span {
+    float: left;
+}
+
+.group {
+    width: 35%;
+    float: left;
+    height: 40px;
+}
+
+.compact.challenge>.group>p.heading {
+    font-size: 1rem;
+    float: left;
+    width: calc(100% - 10px);
+    white-space: nowrap;
+    margin: 5px 5px 0;
+}
+
+.compact.challenge>.group>p.type {
+    float: left;
+    margin: 0px 5px 0;
+    color: var(--light3);
+    text-transform: capitalize;
+    font-size: .8rem;
+}
+
+.compact.challenge>.description {
+    float: left;
+    width: 30%;
+    display: flex;
+    height: 40px;
+}
+
+.compact.challenge>.description>p {
+    color: var(--light3);
+    font-size: 12px;
+    line-height: 13px;
+    max-height: 40px;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    margin: auto;
+    width: 100%;
+    overflow: hidden;
+}
+
+.compact.challenge>p.tier {
+    font-size: .8rem;
+    float: left;
+    color: var(--type);
+    text-align: center;
+    width: calc(35% - 140px);
+    white-space: nowrap;
+    margin: calc(20px - .4rem) 10px;
+}
+
+.compact.challenge>.modes {
+    width: 20px;
+    float: left;
+    margin: 0 10px;
+    display: flex;
+    height: 40px;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.compact.challenge>.modes>div>p {
+    display: none;
+}
+
+.compact.challenge>.modes>img,
+.compact.challenge>.modes>div>img,
+.compact.challenge>.modes>div>i {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    text-align: center;
+    filter: brightness(.6);
+}
+
+.compact.challenge>button {
+    width: 30px;
+    margin: 5px 5px;
+    height: 30px;
+    border: none;
+    float: left;
+    background-color: var(--dark2);
+    border-radius: 50%;
+    color: white;
+    transform: rotate(-90deg);
+    cursor: pointer;
+    transition: .2s linear background-color;
+}
+
+.challenge:hover .hideOnHover {
+    display: none;
+}
+
+.showOnHover {
+    display: none;
+}
+
+.challenge:hover .showOnHover {
+    display: inherit;
+}
+
+.full.challenge {
     width: 220px;
     box-sizing: border-box;
     padding: 10px;
@@ -17,28 +151,28 @@
     background-image: var(--url);
 }
 
-.challenge img:hover,
-.challenge.overview .tags>div:hover i {
+.full.challenge img:hover,
+.full.challenge.overview .tags>div:hover i {
     filter: brightness(1);
 }
 
-.challenge.overview .title>span {
+.full.challenge.overview .title>span {
     text-transform: capitalize;
 }
 
-.challenge.overview .tags {
+.full.challenge.overview .tags {
     position: absolute;
     margin-top: 5px;
 }
 
-.challenge .tags>div>img {
+.full.challenge .tags>div>img {
     width: 25px;
     height: 25px;
     margin: 0;
     position: relative;
 }
 
-.challenge.overview .tags>div>i {
+.full.challenge.overview .tags>div>i {
     width: 25px;
     height: 25px;
     margin: 0;
@@ -51,7 +185,7 @@
     transition: .25s linear filter;
 }
 
-.challenge.overview .tags>div {
+.full.challenge.overview .tags>div {
     float: left;
     width: 25px;
     height: 25px;
@@ -59,8 +193,7 @@
 }
 
 
-/* hover effect object */
-.challenge.overview .tags>div>p {
+.full.challenge.overview .tags>div>p {
     width: 160px;
     text-align: center;
     background-color: var(--dark1);
@@ -78,7 +211,7 @@
     border-radius: 5px;
 }
 
-.challenge.overview .tags>div:hover>p {
+.full.challenge.overview .tags>div:hover>p {
     visibility: visible;
 }
 
@@ -90,13 +223,7 @@
 }
 
 
-.challenge.loading {
-    background: linear-gradient(110deg, var(--dark1) 8%, var(--dark2) 18%, var(--dark1) 33%);
-    background-size: 200% 100%;
-    animation: 1s shine linear infinite;
-}
-
-.title {
+.full .title {
     color: white;
     font-weight: bold;
     width: 100%;
@@ -105,7 +232,7 @@
     font-size: 1rem;
 }
 
-.title>span {
+.full .title>span {
     color: rgb(157, 156, 156);
     font-weight: normal;
     display: block;
@@ -113,31 +240,20 @@
     font-size: 0.8rem;
 }
 
-.challenge:hover>.title>span>.hideOnHover {
-    display: none;
-}
 
-.showOnHover {
-    display: none;
-}
-
-.challenge:hover>.title>span>.showOnHover {
-    display: inherit;
-}
-
-.challenge img {
+.full.challenge img {
     width: 20px;
     height: 20px;
     filter: brightness(0.6);
     transition: .25s linear filter;
 }
 
-.challenge .tags>img {
+.full.challenge .tags>img {
     margin: 8px 5px;
     float: left;
 }
 
-.description {
+.full .description {
     color: rgb(203, 200, 200);
     font-size: 0.8rem;
     width: 100%;
@@ -148,12 +264,24 @@
 }
 
 
-.FIRST,
-.pos1 {
+.full .FIRST,
+.full .pos1 {
     box-shadow: 0 0 20px 0 var(--type);
 }
 
-.CROWN,
-.MAXED {
+.full .CROWN,
+.full .MAXED {
     box-shadow: 0 0 15px -2px var(--type)
+}
+
+.compact.challenge .progressBar {
+    width: 100%;
+    background-color: var(--type);
+    height: 5px;
+    position: absolute;
+    margin-left: -10px;
+    max-width: 100%;
+    margin-top: 45px;
+    border-radius: 0 0 5px 5px;
+    ;
 }

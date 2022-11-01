@@ -1,5 +1,5 @@
 import ChallengeObject from "./module/ChallengeObject";
-import challengeCSS from "./css/challengeObject.module.css"
+
 
 function fillLoadingUI() {
     let loadingUIObject = []
@@ -7,11 +7,11 @@ function fillLoadingUI() {
         loadingUIObject.push(
             <ChallengeObject
                 title="Loading"
-                tier={challengeCSS["loading"]}
-                subtitle={<span>#</span>}
-                description="..."
+                tier={"NONE"}
+                subtitle={""}
+                description="-"
                 key={i}
-                href={"#"} />
+                href={"#//401306"} />
         )
     }
     return loadingUIObject;
@@ -26,7 +26,8 @@ const config = {
         "reloadLocation": false,
         "timezoneoffset": new Date().getTimezoneOffset() / 60,
         "loadingUI": fillLoadingUI(),
-        "adIds": 0
+        "adIds": 0,
+        "compactMode": false
     },
     "config": {
         "reloadAfter": 3600000

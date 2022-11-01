@@ -23,7 +23,7 @@ export default function FAQ() {
         ],
         [
             "What about my privacy and the data you collect about me?",
-            "League of Legends related data about your summoner profile is stored exactly 15 minutes on our servers. Leaderboard data will be kept updating (almost) forever, as long as you stay in the top ranks (top 250 per region). If you don't want to appear on the leaderboards, read the answer above. <br><br>Also, we collect data such as your IP or browser logs, read this fur further information: <a href=\"https://darkintaqt.com/assets/privacypolicy/\">privacy policy</a> and this: <a href=\"https://darkintaqt.com/assets/imprint/\">imprint</a>"
+            "League of Legends related data about your summoner profile is stored exactly 15 minutes on our servers. Leaderboard data will be kept updating (almost) forever, as long as you stay in the top ranks (top 250 per region). If you don't want to appear on the leaderboards, read the answer above. <br><br>Also, we collect data such as your IP or browser logs, read this fur further information: <a href=\"https://darkintaqt.com/assets/privacypolicy/\">privacy policy</a> and this: <a href=\"https://darkintaqt.com/assets/impressum/\">imprint</a>"
         ],
         [
             "Still questions?",
