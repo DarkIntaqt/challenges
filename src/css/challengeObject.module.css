@@ -89,6 +89,7 @@
     display: flex;
     height: 40px;
     overflow: hidden;
+    justify-content: center;
     flex-direction: column;
 }
 
