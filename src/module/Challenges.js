@@ -137,10 +137,10 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("ingame")) {
                         continue
                     }
-                    obtainable.push(<div key={challenge.tags["source"] + i}>
-                        <p>Obtainable by playing games</p>
-                        <i className="fa-solid fa-play"></i>
-                    </div>)
+                    // obtainable.push(<div key={challenge.tags["source"] + i}>
+                    //     <p>Obtainable by playing games</p>
+                    //     <i className="fa-solid fa-play"></i>
+                    // </div>)
                 }
                 if (challenge.tags["source"] === "CAP_INVENTORY") {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("inventory")) {
@@ -182,10 +182,10 @@ export default class Challenges extends Component {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("ranked")) {
                         continue
                     }
-                    obtainable.push(<div key={challenge.tags["source"] + i}>
-                        <p>Obtainable by playing ranked</p>
-                        <i className="fa-solid fa-ranking-star"></i>
-                    </div>)
+                    // obtainable.push(<div key={challenge.tags["source"] + i}>
+                    //     <p>Obtainable by playing ranked</p>
+                    //     <i className="fa-solid fa-ranking-star"></i>
+                    // </div>)
                 }
             } catch (error) {
                 console.warn(error)
