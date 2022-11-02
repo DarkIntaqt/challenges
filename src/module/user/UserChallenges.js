@@ -121,7 +121,7 @@ export default class UserChallenges extends Component {
         if (e.currentTarget.id === "compact" && window.compactMode === false) {
             window.compactMode = true
             this.setState({ placeholder: true })
-            setCookie("filter", "false");
+            setCookie("filter", "true");
         }
     }
 
