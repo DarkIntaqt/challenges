@@ -69,7 +69,7 @@ const config = {
         114, 4, 1, /* fiora */
         131, 4, 26, /* divine diana */
         60, 4, 6, /* halloween elise */
-        99, 4, 29, /* lux */
+        24, 4, 13, /* jax */
         78, 4, 14 /* xmas poppy */
     ],
     "images": {
