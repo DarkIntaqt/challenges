@@ -84,6 +84,7 @@ export default class UserTitle extends Component {
                     subtitle={<span>Achieved by 100%</span>}
                     description={"This is a default title. Everyone owns it. Actually it is not even rare, as everyone has unlocked it, so please don't be proud of this one"}
                     key={titleid}
+                    forceFullMode={true}
                 />
             }
             const titleIdString = titleid.toString()
