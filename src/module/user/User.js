@@ -73,7 +73,7 @@ export default class User extends Component {
 
 
         this.getChallengeURL = `https://challenges.darkintaqt.com/api/dynamic-data/${this.server}`
-        this.getSummonerURL = `https://challenges.darkintaqt.com/api/v4/u/?name=${this.user}&server=${this.server}`
+        this.getSummonerURL = `https://challenges.darkintaqt.com/api/edge/user/${this.server}/${this.user}`
 
 
         const tryLoadChallenges = getCache(this.getChallengeURL)
@@ -218,13 +218,25 @@ export default class User extends Component {
         })
 
         let title = titles.map(function (title) {
+            let tier, challenge, threshold, titlename;
+            if (title === 1) {
+                threshold = 0;
+                tier = "IRON";
+                titlename = "Apprentice"
+                challenge = { translation: { description: "Default title" } }
+            } else {
+                let titleTier = title.toString().slice(-2)
 
-            const tier = intToTier(title[2])
-            const challenge = getChallenge(title[0])
-            const threshold = challenge.thresholds[tier]
 
-            return <h2 key={title[0]} className={tier}>
-                <span>{title[1]}</span>
+
+                tier = intToTier(parseInt(titleTier))
+                challenge = getChallenge(parseInt(title.toString().slice(0, -2)))
+                titlename = challenge.title ?? "Unknown Title"
+
+                threshold = challenge.thresholds[tier]
+            }
+            return <h2 key={title} className={tier}>
+                <span>{titlename}</span>
                 <div>
                     <b>
                         {capitalize(tier)} Title

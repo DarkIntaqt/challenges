@@ -4,9 +4,10 @@ import css from "../../css/stats.module.css"
 import ProgressBar from "../ProgressBar";
 import config from "../../config";
 import statsCalculateTotalPoints from "./statsCalculateTotalPoints";
-import tierIdToPoints, { tierToInt } from "../../func/tierFunctions";
+import tierIdToPoints, { intToTier, tierToInt } from "../../func/tierFunctions";
 import Chart from "chart.js/auto";
 import { capitalize } from "../../func/stringManipulation"
+import orderChallenges from "./orderChallenges";
 
 import { checkExists } from "../../func/arrayManipulationFunctions.ts";
 
@@ -93,8 +94,8 @@ export default class UserStatistics extends Component {
 
     render() {
 
-        const user = this.props.summoner
-
+        let user = JSON.parse(JSON.stringify(this.props.summoner));
+        user.challenges = orderChallenges(user.challenges, "level", { gamemode: [], type: [], category: [] })
         if (user.challenges.length === 0) {
 
             return <div style={{ width: "100%", float: "left" }}>
@@ -103,6 +104,21 @@ export default class UserStatistics extends Component {
             </div>
 
         }
+        user["categories"] = {}
+        for (let i = 0; i < user.challenges.length; i++) {
+            const challenge = user.challenges[i];
+            if (challenge[0] < 10) {
+                user.categories[challenge[6].translation.name.replace("Challenge Points Ranking", "TOTAL")] = {
+                    current: challenge[2],
+                    max: challenge[6]["thresholds"][intToTier(challenge[1] + 1)] ?? challenge[6]["thresholds"][intToTier(challenge[1])],
+                    level: intToTier(challenge[1])
+                }
+            }
+
+        }
+
+        console.log(user.categories);
+
         document.title = `${user.summonerName}'s Challenge Statistics`
 
         const tiers = statsCalculateTotalPoints(user.challenges)
@@ -158,8 +174,8 @@ export default class UserStatistics extends Component {
                     </p>
                     <ProgressBar
                         width={100}
-                        progress={user.points[0]}
-                        max={user.points[1]}
+                        progress={user.categories.TOTAL.current}
+                        max={user.categories.TOTAL.max}
                     />
                 </div>
 

@@ -16,7 +16,7 @@ export default function ProgressBar(params) {
 
     return <div className={css.progress} style={{ width: params.width + "px" }}>
         <p className={css.text}>{beautifyNum(params.progress)} / {beautifyNum(params.max)}{percentage}</p>
-        <div className={css.indicator} style={{ width: "calc(" + (params.width + 2) + "px * " + (params.progress / params.max) + ")" }}></div>
+        <div className={css.indicator} style={{ width: "calc(" + (params.width + 2) + "px * " + (params.progress / params.max) + ")", maxWidth: (params.width + 2) + "px" }}></div>
     </div>
 
 }

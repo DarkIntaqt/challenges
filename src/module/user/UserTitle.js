@@ -10,7 +10,7 @@ import titleCSS from "../../css/userTitle.module.css"
 
 import Loader from "../Loader";
 import get from "../../func/get";
-
+import orderChallenges from "./orderChallenges";
 
 export default class UserTitle extends Component {
     constructor(props) {
@@ -46,7 +46,8 @@ export default class UserTitle extends Component {
 
     render() {
 
-        const user = this.props.summoner
+        let user = JSON.parse(JSON.stringify(this.props.summoner));
+        user.challenges = orderChallenges(user.challenges, "level", { gamemode: [], type: [], category: [] })
 
         if (user.challenges.length === 0 || Object.entries(this.state.titles).length === 0) {
 
@@ -59,10 +60,37 @@ export default class UserTitle extends Component {
 
         document.title = `${user.summonerName}'s Title Overview`
 
+        let userTitles = [1]
 
         const titleList = this.state.titles
+        let challengeIdList = Object.keys(titleList).map(function (id) {
+            if (id === "1") {
+                return "1"
+            }
+            return id.substring(0, id.length - 2)
+        })
 
-        const titles = user.availableTitles.map(function (titleId) {
+        for (let i = 0; i < user.challenges.length; i++) {
+            const challenge = user.challenges[i];
+            if (challengeIdList.includes(challenge[6].id.toString())) {
+                for (const key in titleList) {
+                    if (Object.hasOwnProperty.call(titleList, key)) {
+                        if (key === "1") {
+                            continue
+                        }
+                        if (key.substring(0, key.length - 2) === challenge[6].id.toString()) {
+                            if ((parseInt(key.substring(key.length - 2)) + 1) <= challenge[1]) {
+                                userTitles.push(key)
+                            }
+                        }
+
+                    }
+                }
+            }
+
+        }
+
+        const titles = userTitles.map(function (titleId) {
             return [
                 titleId,
                 titleList[titleId] ?? "Unknown"
@@ -103,7 +131,7 @@ export default class UserTitle extends Component {
                     tier={tier}
                     href={"/titles"}
                     title={content}
-                    subtitle={<span>Achieved by {percentage}%</span>}
+                    subtitle={"Achieved by " + percentage + "%"}
                     description={challenge.translation.description}
                     key={titleid}
                     nexttier="MAXED"

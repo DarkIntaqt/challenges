@@ -16,7 +16,6 @@ import { checkExists } from "../func/arrayManipulationFunctions.ts";
 import config from "../config";
 
 import { capitalize } from "../func/stringManipulation";
-import Ad from "./Ad";
 
 //import excss from "../css/aboutChallenge.module.css"
 
@@ -390,12 +389,6 @@ export default class Challenge extends Component {
                     <p dangerouslySetInnerHTML={{ __html: challenge.text.replace(/\n/g, "<br />") }}></p>
                 </div> : null
                 }
-                {challenge.challenge.translation.name !== "Loading" ?
-                    <div style={{ float: "left", flexWrap: "wrap", margin: "5px 0", width: "100%", display: "flex", justifyContent: "center" }}>
-                        <Ad style={{ margin: "5px" }}></Ad>
-                        <Ad style={{ margin: "5px" }}></Ad>
-                    </div> : null}
-
             </section>
 
             <section className={css.rowParent + " " + css.zebra}>
