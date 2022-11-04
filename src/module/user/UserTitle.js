@@ -107,6 +107,7 @@ export default class UserTitle extends Component {
                     description={challenge.translation.description}
                     key={titleid}
                     nexttier="MAXED"
+                    forceFullMode={true}
                 />
             } catch (e) {
                 console.error(e)
