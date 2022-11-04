@@ -13,7 +13,7 @@ export function beautifyNum(num: number, minify: boolean = true) {
         }
     }
 
-    if (num > 10000 && minify === true) {
+    if (num > 100000 && minify === true) {
         var unitlist = ["", "K", "M", "G"];
         let sign = Math.sign(num);
         let unit = 0;
