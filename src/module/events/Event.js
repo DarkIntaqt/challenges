@@ -1,11 +1,11 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import cCss from "./../css/challenges.module.css"
-import goTo from "./goTo.js";
-import { checkExists } from "./arrayManipulationFunctions.ts";
-import config from "../config";
+import cCss from "../../css/challenges.module.css"
+import goTo from "../../func/goTo.js";
+import { checkExists } from "../../func/arrayManipulationFunctions.ts";
+import config from "../../config";
 import { Component } from "react";
-import css from "./../css/event.module.css"
-import get from "./get";
+import css from "../../css/event.module.css"
+import get from "../../func/get";
 
 export default class generateChallengePointElement extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ export default class generateChallengePointElement extends Component {
 
     componentDidMount() {
 
-        get("https://challenges.darkintaqt.com/api/v4/c/?id=0", this.updateCompontent)
+        get("https://challenges.darkintaqt.com/api/v4/c/?id=2022000", this.updateCompontent)
 
     }
 
@@ -59,11 +59,11 @@ export default class generateChallengePointElement extends Component {
 
         let topPlayer = []
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 5; i++) {
             const player = summoner[i];
-            topPlayer.push(<div key={"s" + i} onClick={goTo}>
+            topPlayer.push(<div key={"s" + i} onClick={goTo} className={css.player}>
                 <p className={css.position}>{i + 1}.</p>
-                <LazyLoadImage height={30} width={30} placeholderSrc={"https://lolcdn.darkintaqt.com/cdn/profileicon/29"} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} alt={""}></LazyLoadImage>
+                <LazyLoadImage height={26} width={26} placeholderSrc={"https://lolcdn.darkintaqt.com/cdn/profileicon/29"} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} alt={""}></LazyLoadImage>
                 <p className={css.name}>
                     {player[0]}
                 </p>
@@ -72,14 +72,19 @@ export default class generateChallengePointElement extends Component {
         }
 
         this.setState({
-            content: <a href="/challenge/0" className={css.crystal + " CHALLENGER " + cCss.crystal} onClick={goTo} key="banner">
-                <p className={css.crystalHead}>Total Challenge Points Leaderboards</p>
+            content: <a href="/challenge/0" className={css.crystal + " DIAMOND " + cCss.crystal} onClick={goTo} key="banner">
+                <div className={css.group}>
+                    <p className={css.crystalHead}>2022 Seasonal Challenge Leaderboard</p>
+
+                    <div className={css.text}>
+                        The 2022 Seasonal Challenges are over. Check now the final leaderboards for 2022 get your position by using the lookup tool on the start page. Also, don't forget to prepare for 2023! <br /><br />Just click <b>here</b> to get to the leaderboards.
+                    </div>
+
+                </div>
                 <div className={css.miniLeaderboard}>
                     {topPlayer}
                 </div>
-                <div className={css.text}>
-                    This is the leaderboard for all challenges. Whenever you level up a challenge, you gain "challenge points". The more challenge points, the better your position in this leaderboard.<br /><br />Just click here to get to the <b>leaderboards</b>.
-                </div>
+
             </a>
         })
 

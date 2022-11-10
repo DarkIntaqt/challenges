@@ -27,7 +27,7 @@ export default class Challenges extends Component {
         this.searchFor = "";
 
         const LoadEvent = Loadable({
-            loader: (content) => import('./../func/event.js'),
+            loader: (content) => import('./events/Event.js'),
             loading: function () {
                 return <div className={challengeCSS.crystal + " NONE"}></div>
             },

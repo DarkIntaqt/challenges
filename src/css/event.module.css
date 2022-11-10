@@ -2,7 +2,12 @@
     background-size: cover;
     color: white;
     text-decoration: none;
-    background-image: url(https://lolcdn.darkintaqt.com/s/event-a4cf.webp);
+    background-image: url(https://lolcdn.darkintaqt.com/s/event-sb2d.webp?v2);
+}
+
+.group {
+    width: 50%;
+    float: left;
 }
 
 .crystalHead {
@@ -15,11 +20,16 @@
     width: calc(50% - 20px);
     margin-left: 20px;
     float: left;
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
-.miniLeaderboard>div {
-    float: left;
-    width: 100%;
+.miniLeaderboard>div.player {
+
+    border-radius: 5px;
+    background-color: rgba(14, 14, 18, .5);
     margin: 2px 0;
 }
 
@@ -27,9 +37,9 @@
     float: left;
     padding: 10px;
     box-sizing: border-box;
-    width: calc(50% - 50px);
-    margin: 0 25px;
     background-color: rgba(14, 14, 18, .5);
+    width: calc(100% - 50px);
+    margin: 0 25px;
     border-radius: 5px;
 }
 
@@ -37,13 +47,12 @@
     float: left;
     padding: 10px 5px;
     box-sizing: border-box;
-    height: 40px;
-    background-color: rgba(14, 14, 18, .5);
+    height: 36px;
+
 }
 
 .miniLeaderboard>div>span {
     float: left;
-    background-color: rgba(14, 14, 18, .5);
     padding: 5px 2px;
 }
 
@@ -53,20 +62,18 @@
 
 .miniLeaderboard>div>p.position {
     font-size: 0.8rem;
-    padding: calc(10px + 0.2rem) 10px 10px 5px;
-    border-radius: 5px 0 0 5px;
-    color: var(--light2)
+    color: var(--light2);
+
 }
 
 .miniLeaderboard>div>p.name {
     color: white;
     font-size: 1rem;
-    padding: 10px 0 10px 5px;
+    padding: 8px 0 8px 5px;
 }
 
 .miniLeaderboard>div>p.region {
     font-size: 0.8rem;
-    padding: calc(10px + 0.2rem) 5px 10px 3px;
-    border-radius: 0 5px 5px 0;
+    padding: calc(8px + 0.2rem) 5px 8px 3px;
     color: var(--light3)
 }
