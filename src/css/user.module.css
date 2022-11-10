@@ -468,12 +468,12 @@ img.ugglogo {
 
 .rowParent table tr td:nth-child(3),
 .rowParent table tr th:nth-child(3) {
-    width: 13%;
+    width: 18%;
 }
 
 .rowParent table tr td:nth-child(4),
 .rowParent table tr th:nth-child(4) {
-    width: 35%;
+    width: 30%;
     border-radius: 0 5px 5px 0;
 }
 
