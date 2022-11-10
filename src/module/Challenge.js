@@ -58,7 +58,7 @@ export default class Challenge extends Component {
             }
         }
 
-        const tempChallenge = getCache(`https://challenges.darkintaqt.com/api/v4/c/?id=${this.params.id}`)
+        const tempChallenge = getCache(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`)
         const tempChallenges = getCache(`https://challenges.darkintaqt.com/api/dynamic-data/na1`)
 
         if (tempChallenge !== false && tempChallenges !== false) {
@@ -104,7 +104,7 @@ export default class Challenge extends Component {
 
     load() {
         document.title = "Loading..."
-        get(`https://challenges.darkintaqt.com/api/v4/c/?id=${this.params.id}`, this.loadChallenge, this.error);
+        get(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`, this.loadChallenge, this.error);
         get(`https://challenges.darkintaqt.com/api/dynamic-data/na1`, this.loadChallenges, this.error);
     }
 
@@ -135,7 +135,7 @@ export default class Challenge extends Component {
 
     render() {
 
-        const challenge = this.state.challenge
+        const challenge = JSON.parse(JSON.stringify(this.state.challenge));
         const regions = this.regions
         const absoluteRegion = this.state.filter
         let region = absoluteRegion;
@@ -234,21 +234,21 @@ export default class Challenge extends Component {
                         summoners.sort((a, b) => {
                             // Order by name if same value and position
                             if (a[1] === b[1]) {
-                                if (b[5] === a[5]) {
-                                    return a[0] < b[0] ? -1 : +(a[0] > b[0])
+                                if (b[6] === a[6]) {
+                                    return a[4] - b[4]
                                 }
-                                return a[5] - b[5]
+                                return a[6] - b[6]
                             }
                             return a[1] - b[1]
                         })
                     } else {
                         summoners.sort((a, b) => {
-                            // Order by name if same value and position
+                            // Order by timestamp if same value and position
                             if (a[1] === b[1]) {
-                                if (b[5] === a[5]) {
-                                    return a[0] < b[0] ? -1 : +(a[0] > b[0])
+                                if (b[6] === a[6]) {
+                                    return a[4] - b[4]
                                 }
-                                return a[5] - b[5]
+                                return a[6] - b[6]
                             }
                             return b[1] - a[1]
                         })
@@ -277,21 +277,21 @@ export default class Challenge extends Component {
                         // } else if (i < 100) {
                         //     pos = css.top100
                         // }
-                        let userlink = "/" + player[4] + "/" + nameToURL(player[0])
+                        let userlink = "/" + player[5] + "/" + nameToURL(player[0])
 
                         if (player[0] === "%") {
                             userlink = "/faq#h3"
                         }
 
-                        summoner.push(<tr key={player[0] + player[4] + i} className={player[2]}>
+                        summoner.push(<tr key={player[0] + player[6] + i} className={intToTier(player[2])}>
                             <td>{i + 1}.</td>
                             <td>
                                 <a href={userlink} onClick={goTo}>
                                     <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={player[0] + "'s profile image"}></LazyLoadImage>
-                                    <p>{player[0]} <span className={css.region}>#{serverToHumanReadable(player[4])}</span></p>
+                                    <p>{player[0]} <span className={css.region}>#{serverToHumanReadable(player[5])}</span></p>
                                 </a>
                             </td>
-                            <td>{capitalize(player[2])}</td>
+                            <td>{capitalize(intToTier(player[2]))}</td>
                             <td>{beautifyNum(player[1], false)}</td>
                         </tr>)
                     }
