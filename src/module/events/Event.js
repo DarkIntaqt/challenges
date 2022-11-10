@@ -72,7 +72,7 @@ export default class generateChallengePointElement extends Component {
         }
 
         this.setState({
-            content: <a href="/challenge/0" className={css.crystal + " DIAMOND " + cCss.crystal} onClick={goTo} key="banner">
+            content: <a href="/challenge/2022000" className={css.crystal + " DIAMOND " + cCss.crystal} onClick={goTo} key="banner">
                 <div className={css.group}>
                     <p className={css.crystalHead}>2022 Seasonal Challenge Leaderboard</p>
 
