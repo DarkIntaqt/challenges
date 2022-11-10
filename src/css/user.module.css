@@ -708,3 +708,9 @@ p.thresholdWarning {
     font-size: .7rem;
     color: var(--light3)
 }
+
+span.updated {
+    font-size: .8rem;
+    color: #9d9c9c;
+    box-sizing: border-box;
+}

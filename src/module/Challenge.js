@@ -341,11 +341,12 @@ export default class Challenge extends Component {
         let content = <Fragment>
             <section className={"MASTER " + css.c + " " + css.profile + " " + css["cid" + challenge.challenge.id]}>
                 <img src={icon} alt={challenge.challenge.translation.name + " challenge logo"} />
-                <h1>{challenge.challenge.translation.name} {challenge.timestamp
-                    ? <span data-nosnippet>(Updated <Timestamp date={challenge.timestamp * 1000} />)</span>
-                    : <span data-nosnippet></span>
-                }</h1>
-                <p className={"SILVER " + css.challengeDescription} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>{challenge.challenge.translation.description}
+                <h1>{challenge.challenge.translation.name}</h1>
+                <p className={"SILVER " + css.challengeDescription} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>
+                    {challenge.challenge.translation.description} {challenge.timestamp
+                        ? <span data-nosnippet className={css.updated}>(Updated <Timestamp date={challenge.timestamp * 1000} />)</span>
+                        : <span data-nosnippet className={css.updated}></span>
+                    }
 
                     {challenge.title.length > 0
                         ? <Fragment><br />
@@ -354,6 +355,7 @@ export default class Challenge extends Component {
                         : null}
 
                 </p>
+
             </section>
 
             <section className={start.filter + " " + start[this.state.filter]}>
