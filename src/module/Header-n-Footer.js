@@ -18,7 +18,7 @@ export default function HeaderNFooter() {
                 </Link>
 
                 <Link to="/challenges">
-                    <i className="fa-solid fa-list"></i> Challenges
+                    <i className="fa-solid fa-compass"></i> Challenges
                 </Link>
 
                 <Link to="/challenge/0" className={StyleSheet.hideOnMobile}>
