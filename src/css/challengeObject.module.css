@@ -284,5 +284,8 @@
     max-width: 100%;
     margin-top: 45px;
     border-radius: 0 0 5px 5px;
-    ;
+}
+
+.full.challenge:hover {
+    box-shadow: 0 0 15px -2px var(--type);
 }

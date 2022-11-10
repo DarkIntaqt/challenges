@@ -427,7 +427,12 @@ img.ugglogo {
     padding: 8px 10px;
 }
 
+.rowParentTableRow:not(:first-child):hover {
+    background-color: var(--dark2);
+}
+
 .rowParentTableRow:last-child {
+    border-radius: 0 0 5px 5px;
     border-bottom: 1px solid transparent;
 }
 
@@ -493,6 +498,15 @@ img.ugglogo {
 .rowParent.zebra table tr:nth-child(even) {
     background: var(--dark0);
 }
+
+.rowParent table tr:hover {
+    background-color: var(--dark3);
+}
+
+.rowParent table tr:nth-child(even):hover {
+    background-color: var(--dark2);
+}
+
 
 .rowParent:not(.zebra) table tr:not(:first-child) {
     border-top: 1px solid var(--dark3);
