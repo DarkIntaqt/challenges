@@ -5,7 +5,6 @@ import config from "../config";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import goTo from "../func/goTo";
-import Ad from "./Ad";
 
 export default class Start extends Component {
 
@@ -166,7 +165,7 @@ export default class Start extends Component {
 
         <div className={StyleSheet.searchbar}>
           <i className={"fa-solid fa-magnifying-glass"} id="search-submit"></i>
-          <input type="text" id="search" placeholder="Enter summoner name to look up challenges" onFocus={this.toggleRecent} onBlur={this.toggleRecent} autoComplete="off" />
+          <input type="text" id="search" placeholder="Search summoner" onFocus={this.toggleRecent} onBlur={this.toggleRecent} autoComplete="off" />
           <div className={StyleSheet.recentlySearched} id={StyleSheet.recentlySearched} style={{ display: this.state.display }}>
             {recentlySearchedFor}
           </div>
@@ -186,7 +185,7 @@ export default class Start extends Component {
           <div className={StyleSheet.region} onClick={changeRegion}>tr</div>
         </div>
         <div style={{ float: "left", margin: "10px 0", width: "100%", display: "flex", justifyContent: "center" }}>
-          <Ad></Ad>
+
         </div>
       </div>
     </Fragment>
