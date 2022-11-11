@@ -21,7 +21,7 @@ export default class generateChallengePointElement extends Component {
 
     componentDidMount() {
 
-        get("https://challenges.darkintaqt.com/api/v4/c/?id=2022000", this.updateCompontent)
+        get("https://challenges.darkintaqt.com/api/v5/c/?id=2022000", this.updateCompontent)
 
     }
 
@@ -67,7 +67,7 @@ export default class generateChallengePointElement extends Component {
                 <p className={css.name}>
                     {player[0]}
                 </p>
-                <p className={css.region}>{player[4]}</p>
+                <p className={css.region}>#{player[5]}</p>
             </div>);
         }
 
