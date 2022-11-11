@@ -77,7 +77,7 @@ export default class generateChallengePointElement extends Component {
                     <p className={css.crystalHead}>2022 Seasonal Challenge Leaderboard</p>
 
                     <div className={css.text}>
-                        The 2022 Seasonal Challenges are over. Check now the final leaderboards for 2022 get your position by using the lookup tool on the start page. Also, don't forget to prepare for 2023! <br /><br />Just click <b>here</b> to get to the leaderboards.
+                        The 2022 Seasonal Challenges are ending soon. Check out the leaderboards and the fight to gain the limited "Challenjour '22" Title! <br /><br />Just click <b>here</b> to get to the leaderboards.
                     </div>
 
                 </div>
