@@ -16,6 +16,7 @@ import { checkExists } from "../func/arrayManipulationFunctions.ts";
 import config from "../config";
 
 import { capitalize } from "../func/stringManipulation";
+import VipBadge from "./VipBadge";
 
 //import excss from "../css/aboutChallenge.module.css"
 
@@ -287,6 +288,7 @@ export default class Challenge extends Component {
                             <td>{i + 1}.</td>
                             <td>
                                 <a href={userlink} onClick={goTo}>
+                                    <VipBadge size={"1.5rem"} position="absolute" margin="20px 0 0 20px"></VipBadge>
                                     <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={player[0] + "'s profile image"}></LazyLoadImage>
                                     <p>{player[0]} <span className={css.region}>#{serverToHumanReadable(player[5])}</span></p>
                                 </a>
