@@ -499,7 +499,7 @@ img.ugglogo {
     background: var(--dark0);
 }
 
-.rowParent table tr:hover {
+.rowParent table tr:not(:first-child):hover {
     background-color: var(--dark3);
 }
 
