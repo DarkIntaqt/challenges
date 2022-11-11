@@ -402,9 +402,9 @@ export default class Challenge extends Component {
                     <tbody>
                         <tr>
                             <th>Position</th>
-                            <th>Summonername</th>
+                            <th>Summoner</th>
                             <th>Tier</th>
-                            <th>Value</th>
+                            <th>Points</th>
                         </tr>
                         {summoner}
                     </tbody>
