@@ -220,7 +220,7 @@ export default class UserChallenges extends Component {
 
 
             if (filter === "timestamp") {
-                leaderboardposition = <span><span className={challengeCSS.hideOnHover}><Timestamp date={challenge[3]} /></span><span className={challengeCSS.showOnHover}><Timestamp date={challenge[3]} type="static" /></span></span>
+                leaderboardposition = <span><span className={challengeCSS.hideOnHover}><Timestamp date={challenge[4]} /></span><span className={challengeCSS.showOnHover}><Timestamp date={challenge[4]} type="static" /></span></span>
             } else {
                 leaderboardposition = <span>{position}Top {(Math.round(challenge[5][0] * 10000) / 100)}%</span>
             }
