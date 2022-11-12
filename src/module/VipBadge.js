@@ -8,7 +8,7 @@ export default function VipBadge(params) {
     const position = params.position ?? defaultPosition
     const margin = params.margin ?? defaultMargin
 
-    return <img src="https://cdn.darkintaqt.com/lol/static/challenges/verified.png?v5" style={{
+    return <img src="https://cdn.darkintaqt.com/lol/static/challenges/verified.png" style={{
         height: `calc(0.7 * ${size}`,
         width: `calc(0.7 * ${size}`,
         borderRadius: "50%",

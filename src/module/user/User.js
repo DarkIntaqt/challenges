@@ -84,7 +84,7 @@ export default class User extends Component {
         let currentUserConfig = basicUserConfig
 
         if (tryLoadChallenges !== false && tryLoadSummoner !== false) {
-            currentUserConfig = generateSummonerObject(tryLoadSummoner)
+            //currentUserConfig = generateSummonerObject(tryLoadSummoner)
 
         }
 
