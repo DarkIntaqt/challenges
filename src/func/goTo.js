@@ -32,12 +32,6 @@ export default function goTo(e, replace = false) {
     }
 
 
-    try {
-        window.clearAds()
-    } catch (e) {
-        console.log(e);
-    }
-
     url = url["pathname"] + url["search"] + url["hash"];
     if (replace) {
         window.reactNavigate(url, { replace: true })

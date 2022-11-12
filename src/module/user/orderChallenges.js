@@ -253,10 +253,10 @@ export default function orderChallenges(challenges, filter, extraFilter) {
 
         case "timestamp":
             sortAlgorithm = function (a, b) {
-                if (a[3] === b[3]) {
+                if (a[4] === b[4]) {
                     return 0
                 } else {
-                    return a[3] > b[3] ? -1 : 1
+                    return a[4] > b[4] ? -1 : 1
                 }
             }
             break;

@@ -20,6 +20,7 @@ import Loader from "../Loader";
 import Loadable from "react-loadable";
 
 import UserChallenges from "./UserChallenges"
+import VipBadge from "../VipBadge";
 
 
 const Title = Loadable({
@@ -63,7 +64,8 @@ export default class User extends Component {
             challenges: [],
             availableTitles: {},
             categories: {},
-            points: [0, 0, 0]
+            points: [0, 0, 0],
+            id: ""
         }
 
 
@@ -73,7 +75,7 @@ export default class User extends Component {
 
 
         this.getChallengeURL = `https://challenges.darkintaqt.com/api/dynamic-data/${this.server}`
-        this.getSummonerURL = `https://challenges.darkintaqt.com/api/edge/user/${this.server}/${this.user}`
+        this.getSummonerURL = `https://challenges.darkintaqt.com/api/edge/user/${this.server}/${encodeURIComponent(this.user)}`
 
 
         const tryLoadChallenges = getCache(this.getChallengeURL)
@@ -81,21 +83,29 @@ export default class User extends Component {
 
         let currentUserConfig = basicUserConfig
 
-        if (tryLoadChallenges === true && tryLoadSummoner === true) {
-
+        if (tryLoadChallenges !== false && tryLoadSummoner !== false) {
             currentUserConfig = generateSummonerObject(tryLoadSummoner)
 
         }
+
+        const verifiedCache = getCache("https://challenges.darkintaqt.com/api/v1/c-vip/?id=" + currentUserConfig.id)
+        let verified = 0
+        if (verifiedCache !== false) {
+            verified = verifiedCache[0]
+        }
+
 
         this.requestCache = [false, false]
 
         this.state = {
             error: false,
-            user: currentUserConfig
+            user: currentUserConfig,
+            verified: verified
         }
 
         this.addFileToCache = this.addFileToCache.bind(this)
         this.throwError = this.throwError.bind(this)
+        this.validateVerified = this.validateVerified.bind(this)
     }
 
     throwError() {
@@ -169,6 +179,12 @@ export default class User extends Component {
 
     }
 
+    validateVerified(e) {
+        if (e[0] === true) {
+            this.setState({ verified: true })
+        }
+    }
+
 
     render() {
         let error = this.state.error;
@@ -189,7 +205,7 @@ export default class User extends Component {
 
         }
 
-        const { tier, summonerIcon, summonerName, selections, titles } = this.state.user
+        const { tier, summonerIcon, summonerName, selections, titles, id } = this.state.user
 
         const profileText = "view " + summonerName + "'s profile on u.gg";
 
@@ -251,7 +267,9 @@ export default class User extends Component {
         })
 
 
-
+        if (typeof summonerName !== "object" && this.state.verified === 0) {
+            get("https://challenges.darkintaqt.com/api/v1/c-vip/?id=" + id, this.validateVerified)
+        }
 
         return <section className="object1000">
 
@@ -265,7 +283,7 @@ export default class User extends Component {
                 <img src={`${config.cdnBasePath}/cdn/profileicon/${summonerIcon}`} alt="" />
 
                 <h1>
-                    {summonerName}{typeof summonerName === "object" ? null : <Fragment>
+                    {summonerName}{this.state.verified === true ? <VipBadge size={"2rem"} /> : null}{typeof summonerName === "object" ? null : <Fragment>
                         <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
                     </Fragment>
                     }
@@ -287,7 +305,9 @@ export default class User extends Component {
 
                 <Link to="titles" className={css["titles"]}>Titles</Link>
 
-                <Link to="statistics" className={css["statistics"]}>Statistics <span>NEW</span></Link>
+                <Link to="statistics" className={css["statistics"]}>Statistics</Link>
+
+                {/* {this.state.verified === true ? <Link to="history" className={css["history"]}>History <span>BETA</span></Link> : null} */}
 
             </div>
 

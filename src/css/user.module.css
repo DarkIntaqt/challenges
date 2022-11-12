@@ -206,7 +206,8 @@ img.ugglogo {
 
 .selectedFilteroverview>.overview,
 .selectedFiltertitles>.titles,
-.selectedFilterstatistics>.statistics {
+.selectedFilterstatistics>.statistics,
+.selectedFilterhistory>.history {
     color: var(--selected);
     border-bottom: 2px solid var(--selected)
 }
@@ -531,6 +532,8 @@ img.ugglogo {
 
 .rowParent table tr td:nth-child(2)>a {
     text-decoration: none;
+    position: relative;
+    display: block;
     color: white;
 }
 

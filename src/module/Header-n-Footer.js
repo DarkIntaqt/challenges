@@ -14,7 +14,7 @@ export default function HeaderNFooter() {
                 </Link>
 
                 <Link to="/community" className={StyleSheet.hideOnMobile}>
-                    <i className="fa-solid fa-user-group"></i> Community <span>NEW</span>
+                    <i className="fa-solid fa-user-group"></i> Community
                 </Link>
 
                 <Link to="/challenges">

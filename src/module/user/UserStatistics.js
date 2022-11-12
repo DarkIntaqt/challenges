@@ -117,12 +117,10 @@ export default class UserStatistics extends Component {
 
         }
 
-        console.log(user.categories);
         const categories = ["IMAGINATION", "COLLECTION", "TOTAL", "TEAMWORK", "EXPERTISE"]
 
         for (let i = 0; i < categories.length; i++) {
             const category = categories[i];
-            console.log(Object.keys(user.categories));
             if (!Object.keys(user.categories).includes(category)) {
                 user.categories[category] = {
                     current: 0,
