@@ -84,8 +84,8 @@ export default class User extends Component {
         let currentUserConfig = basicUserConfig
 
         if (tryLoadChallenges !== false && tryLoadSummoner !== false) {
-            //currentUserConfig = generateSummonerObject(tryLoadSummoner)
-
+            currentUserConfig = generateSummonerObject(tryLoadSummoner)
+            window.JSONPREQUEST = tryLoadChallenges
         }
 
         const verifiedCache = getCache("https://challenges.darkintaqt.com/api/v1/c-vip/?id=" + currentUserConfig.id)
