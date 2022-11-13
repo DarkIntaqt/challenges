@@ -45,6 +45,18 @@ const Statistics = Loadable({
 });
 
 
+const History = Loadable({
+    loader: (content) => import('./UserHistory'),
+    loading: function () {
+        return <div style={{ width: "100%", float: "left" }}>
+            <Loader />
+            <p style={{ color: "white", fontSize: "1rem", textAlign: "center" }}>0%</p>
+            <p style={{ color: "white", fontSize: "1rem", textAlign: "center" }}>Loading Matches...</p>
+        </div>
+    },
+});
+
+
 export default class User extends Component {
     constructor(props) {
         super(props)
@@ -65,7 +77,8 @@ export default class User extends Component {
             availableTitles: {},
             categories: {},
             points: [0, 0, 0],
-            id: ""
+            id: "",
+            region: ""
         }
 
 
@@ -182,7 +195,9 @@ export default class User extends Component {
     validateVerified(e) {
         if (e[0] === true) {
             this.setState({ verified: true })
+            return
         }
+        this.setState({ verified: false })
     }
 
 
@@ -191,7 +206,7 @@ export default class User extends Component {
 
         const currentLocation = window.location.pathname.split("/")[3] ?? "overview"
 
-        const allowedLocations = ["overview", "titles", "statistics"]
+        const allowedLocations = ["overview", "titles", "statistics", "history"]
 
         if (!allowedLocations.includes(currentLocation)) {
 
@@ -307,7 +322,7 @@ export default class User extends Component {
 
                 <Link to="statistics" className={css["statistics"]}>Statistics</Link>
 
-                {/* {this.state.verified === true ? <Link to="history" className={css["history"]}>History <span>BETA</span></Link> : null} */}
+                {this.state.verified === true || currentLocation === "history" ? <Link to="history" className={css["history"]}>History <span>BETA</span></Link> : null}
 
             </div>
 
@@ -319,6 +334,8 @@ export default class User extends Component {
                 <Route path="titles" element={<Title summoner={this.state.user} />}></Route>
 
                 <Route path="statistics" element={<Statistics summoner={this.state.user} />}></Route>
+
+                <Route path="history" element={<History summoner={this.state.user} />}></Route>
 
             </Routes>
 
