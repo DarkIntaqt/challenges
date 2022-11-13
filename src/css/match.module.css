@@ -1,0 +1,146 @@
+.match {
+    width: calc(100% - 20px);
+    height: 80px;
+    background-color: var(--dark2);
+    float: left;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin: 5px 10px;
+}
+
+.match .matchdata {
+    width: 50%;
+    height: 80px;
+    float: left;
+    box-sizing: border-box;
+    display: flex;
+    border-radius: 10px 0 0 10px;
+    background-color: var(--dark1);
+}
+
+.match .matchdata>div[isloader] {
+    margin: 10px auto;
+}
+
+.win {
+    --wintype: var(--win)
+}
+
+.loss {
+    --wintype: var(--loss)
+}
+
+.remake {
+    --wintype: rgb(90, 90, 90)
+}
+
+.match .matchdata .left {
+    width: 8px;
+    background: var(--wintype);
+    height: 80px;
+    filter: brightness(.8);
+    border-radius: 10px 0 0 10px;
+}
+
+.match .matchdata .champion {
+    padding: 10px;
+}
+
+.match .matchdata .champion img {
+    height: 60px;
+    width: 60px;
+    border-radius: 8px;
+}
+
+.match .matchdata .text {
+    padding: 10px;
+    color: var(--light0);
+    font-size: 1rem;
+    width: 150px;
+}
+
+.match .matchdata .text p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+}
+
+.match .matchdata .text p.wintext {
+    font-weight: bold;
+    color: var(--wintype);
+    padding-bottom: 10px;
+    text-transform: capitalize;
+}
+
+.match .matchdata .text p.wintext>span {
+    font-size: .8rem;
+    color: var(--light3);
+    font-weight: normal;
+}
+
+.match .matchdata .text p.gamemode {
+    padding-bottom: 5px;
+    color: var(--light2);
+}
+
+.match .matchdata .text p.date {
+    color: var(--light3);
+    font-size: .8rem;
+}
+
+.match .matchdata .kda {
+    width: 100px;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.match .matchdata .kda>p {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    overflow: hidden;
+    font-weight: bold;
+    color: white;
+}
+
+.match .matchdata .items {
+    width: 132px;
+    padding: 10px 0;
+}
+
+.match .matchdata .items>img {
+    width: 25px;
+    margin: 2px;
+    border-radius: 5px;
+    height: 25px;
+    float: left;
+}
+
+.match .challengedata {
+    float: left;
+    width: 50%;
+    height: 80px;
+    display: flex;
+}
+
+.match .challengedata .progress {
+    padding: 10px;
+    width: 100px;
+}
+
+.match .challengedata .progress>p {
+    color: var(--light2);
+    font-size: .8rem;
+    width: 100%;
+    margin-bottom: 3px;
+}
+
+.match .challengedata .progress>p>span {
+    width: 100%;
+    float: left;
+    color: white;
+    font-size: 1rem;
+    display: block;
+}
