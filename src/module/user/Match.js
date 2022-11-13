@@ -122,16 +122,24 @@ export default class Match extends Component {
                 leveledUp.push(challenge)
             }
 
+            if (challenge.challengeId < 10) { continue }
+
             if (challenge["new"]["points"] - challenge["old"]["points"] === 0) {
                 console.log(challenge.challengeId);
                 continue
             }
 
             data.push(<div key={"challenge" + i}>
-                <img src={"https://lolcdn.darkintaqt.com/s/c-" + challenge["challengeId"].toString(16) + "-" + intToTier(challenge["new"]["tier"])} />
+                <img src={"https://lolcdn.darkintaqt.com/s/c-" + challenge["challengeId"].toString(16) + "-" + intToTier(challenge["new"]["tier"])} alt="" />
                 <p>+{beautifyNum(challenge["new"]["points"] - challenge["old"]["points"], true, 1000)}</p>
 
-            </div>)
+            </div >)
+        }
+
+        if (data.length === 0) {
+            data = <div style={{ width: "100%", display: "flex", alignItems: "center", padding: "0" }}>
+                <p>No challenges progressed during this game</p>
+            </div>
         }
 
         return <div className={css.match}>

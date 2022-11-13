@@ -66,7 +66,7 @@ export default class History extends Component {
 
     addHistory(content) {
         if (content.response.length === 0 || content.start.length === 0) {
-            this.setState({ error: "No Matches" })
+            this.setState({ error: "No Matches played since this feature got enabled" })
             return
         }
         this.setState({ matches: content.response, challenges: this.rewrap(content.start) })

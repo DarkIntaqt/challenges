@@ -153,6 +153,7 @@
     width: 100%;
     float: left;
     color: white;
+    font-weight: bold;
     font-size: .9rem;
     display: block;
 }
