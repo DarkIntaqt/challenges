@@ -126,21 +126,68 @@
 }
 
 .match .challengedata .progress {
-    padding: 10px;
-    width: 100px;
+    margin: 5px 5px 5px 10px;
+    width: 80px;
+    height: 70px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--dark1);
+    border-radius: 5px;
 }
 
 .match .challengedata .progress>p {
     color: var(--light2);
-    font-size: .8rem;
+    font-size: .7rem;
     width: 100%;
-    margin-bottom: 3px;
+
+    padding: 5px 5px;
+    box-sizing: border-box;
+
 }
+
+
 
 .match .challengedata .progress>p>span {
     width: 100%;
     float: left;
     color: white;
-    font-size: 1rem;
+    font-size: .9rem;
     display: block;
+}
+
+.match .challengedata .progressed {
+    display: flex;
+    float: left;
+    overflow: hidden;
+    width: 365px;
+}
+
+.match .challengedata .button {
+    width: 30px;
+    height: 80px;
+    border-radius: 0 10px 10px 0;
+    background-color: var(--dark1);
+}
+
+.match .challengedata .progressed>div {
+
+    height: 80px;
+    width: 50px;
+    padding: 15px 5px;
+}
+
+.match .challengedata .progressed p {
+    width: 100%;
+    font-size: .8rem;
+    color: white;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.match .challengedata .progressed img {
+    height: 30px;
+    margin: 0 10px;
+    width: 30px;
 }

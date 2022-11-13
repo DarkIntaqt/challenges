@@ -4,6 +4,8 @@ import get from "../../func/get";
 import Loader from "../Loader";
 import { checkExists } from "./../../func/arrayManipulationFunctions.ts";
 import Timestamp from "react-timestamps"
+import { intToTier } from "./../../func/tierFunctions"
+import { beautifyNum } from "../../func/beautify.ts";
 
 const secondsToMMSS = (seconds) => {
     const MM = `${Math.floor(seconds / 60) % 60}`.padStart(2, '0');
@@ -78,8 +80,11 @@ export default class Match extends Component {
                     break
             }
 
+            let c = 0
             let items = player.items.map(function (item) {
-                return <img src={"https://cdn.darkintaqt.com/lol/c-assets/items/" + item + ".png.webp"} alt="" key={item} />
+                c++;
+                return <img src={"https://cdn.darkintaqt.com/lol/c-assets/items/" + item + ".png.webp"} alt="" key={item + "" + c} />
+
             })
 
             matchdata = <Fragment>
@@ -107,17 +112,27 @@ export default class Match extends Component {
 
         let challenges = this.state.changes
 
+        let data = []
+
         for (let i = 0; i < challenges.length; i++) {
             const challenge = challenges[i];
-            if (challenge["from"]["tier"] === challenge["to"]["tier"]) {
+            if (challenge["old"]["tier"] === challenge["new"]["tier"]) {
                 same.push(challenge)
             } else {
                 leveledUp.push(challenge)
             }
-        }
 
-        console.log(same);
-        console.log(leveledUp);
+            if (challenge["new"]["points"] - challenge["old"]["points"] === 0) {
+                console.log(challenge.challengeId);
+                continue
+            }
+
+            data.push(<div key={"challenge" + i}>
+                <img src={"https://lolcdn.darkintaqt.com/s/c-" + challenge["challengeId"].toString(16) + "-" + intToTier(challenge["new"]["tier"])} />
+                <p>+{beautifyNum(challenge["new"]["points"] - challenge["old"]["points"], true, 1000)}</p>
+
+            </div>)
+        }
 
         return <div className={css.match}>
             <div className={css.matchdata}>
@@ -133,7 +148,14 @@ export default class Match extends Component {
                         <span>{same.length}<i className="fa-solid fa-angles-right"></i> </span>Progressed
                     </p>
                 </div>
+                <div className={css.progressed}>
+                    {data}
+                </div>
+                <div className={css.button}>
+
+                </div>
             </div>
+
         </div>
     }
 }

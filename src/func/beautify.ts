@@ -2,7 +2,7 @@
 import { checkExists } from "./arrayManipulationFunctions.ts";
 
 // beautify numbers - add dots to < 1M and shortend larger numbers
-export function beautifyNum(num: number, minify: boolean = true) {
+export function beautifyNum(num: number, minify: boolean = true, threshold = 100000) {
     if (!checkExists(num)) {
         return "0"
     }
@@ -13,7 +13,7 @@ export function beautifyNum(num: number, minify: boolean = true) {
         }
     }
 
-    if (num > 100000 && minify === true) {
+    if (num > threshold && minify === true) {
         var unitlist = ["", "K", "M", "G"];
         let sign = Math.sign(num);
         let unit = 0;

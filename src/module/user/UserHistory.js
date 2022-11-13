@@ -152,7 +152,7 @@ export default class History extends Component {
 
         let challenges = this.state.challenges
 
-        const allMatches = this.state.matches
+        const allMatches = JSON.parse(JSON.stringify(this.state.matches))
 
         let matches = allMatches.slice(0, 10).map(function (match) {
             let newChanges = []
@@ -161,19 +161,23 @@ export default class History extends Component {
                 const changes = match.changes[i];
                 newChanges.push({
                     challengeId: changes[0],
-                    from: {
+                    new: {
                         tier: changes[1],
                         points: changes[2]
                     },
-                    to: {
+                    old: {
                         tier: challenges[changes[0]][1],
                         points: challenges[changes[0]][2]
                     }
                 })
+
                 challenges[changes[0]] = changes
+
             }
             return <Match matchid={match.matchId} changes={newChanges} id={user.id} key={match.matchId} />
         })
+
+        matches = matches.reverse();
 
         return matches
 
