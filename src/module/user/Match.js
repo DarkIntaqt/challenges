@@ -79,7 +79,7 @@ export default class Match extends Component {
             }
 
             let items = player.items.map(function (item) {
-                return <img src={"https://cdn.darkintaqt.com/lol/c-assets/items/" + item + ".webp"} alt="" key={item} />
+                return <img src={"https://cdn.darkintaqt.com/lol/c-assets/items/" + item + ".png.webp"} alt="" key={item} />
             })
 
             matchdata = <Fragment>

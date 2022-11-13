@@ -57,6 +57,7 @@ export default class History extends Component {
 
     componentDidMount() {
         this.loadHistory()
+
     }
 
     componentDidUpdate() {
@@ -116,6 +117,7 @@ export default class History extends Component {
                 <p style={{ color: "white", fontSize: "1rem", textAlign: "center" }}>Loading Summoner...</p>
             </div>
         }
+        document.title = `${user.summonerName}'s Challenge History`
 
         if (this.state.verified === 0) {
             return <div style={{ width: "100%", float: "left" }}>
