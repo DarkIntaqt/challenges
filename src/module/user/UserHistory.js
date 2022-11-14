@@ -4,6 +4,12 @@ import get from "../../func/get";
 import { getCache } from "../../func/getCheckCache";
 import Match from "./Match";
 
+function minmax(a = 0, b = 0) {
+    if (a > b) {
+        return b
+    }
+    return a
+}
 
 export default class History extends Component {
     constructor(props) {
@@ -154,7 +160,7 @@ export default class History extends Component {
 
         const allMatches = JSON.parse(JSON.stringify(this.state.matches))
 
-        let matches = allMatches.slice(0, 10).map(function (match) {
+        let matches = allMatches.map(function (match) {
             let newChanges = []
 
             for (let i = 0; i < match.changes.length; i++) {

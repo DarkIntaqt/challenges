@@ -103,7 +103,7 @@
 .filterOption {
     background: var(--dark0);
     width: 40px;
-    box-shadow: 0 0 8px 0 var(--dark0);
+    box-shadow: 0 0 5px black;
     color: #bbb;
     border-radius: 4px;
     cursor: pointer;
