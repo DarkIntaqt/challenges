@@ -1,6 +1,6 @@
 .background {
     height: calc(100vh - 60px);
-    filter: brightness(0.4);
+    filter: brightness(0.75);
     width: 100%;
     position: fixed;
     z-index: 0;
@@ -20,6 +20,7 @@
     width: 100%;
     float: left;
     text-align: center;
+    text-shadow: 0 0 5px black;
     padding-top: calc(50vh - 150px)
 }
 
@@ -37,7 +38,8 @@
     width: 100%;
     float: left;
     text-align: center;
-    font-size: 1.6rem
+    font-size: 1.6rem;
+    text-shadow: 0 0 5px black;
 }
 
 .start h1 span {
@@ -73,7 +75,8 @@
     border-radius: 20px;
     padding: 12px 20px;
     border: none;
-    outline: 0
+    outline: 0;
+    box-shadow: 0 0 3px black;
 }
 
 .start .searchbar input:focus {
