@@ -179,6 +179,28 @@
     padding: 15px 5px;
 }
 
+.match .challengedata .progressed>div.levelUptrue {
+    height: 50px;
+    margin: 10px 5px;
+    padding: 5px 0;
+    background-color: var(--dark1);
+    border-radius: 5px;
+    position: relative;
+}
+
+.match .challengedata .progressed>div.levelUptrue::before {
+    content: 'New tier';
+    position: absolute;
+    font-weight: bold;
+    font-size: .6rem;
+    width: 50px;
+    color: var(--light2);
+    text-align: center;
+    transform: rotate(45deg);
+    margin-left: 25px;
+    z-index: 25;
+}
+
 .match .challengedata .progressed p {
     width: 100%;
     font-size: .8rem;

@@ -165,19 +165,30 @@ export default class History extends Component {
 
             for (let i = 0; i < match.changes.length; i++) {
                 const changes = match.changes[i];
-                newChanges.push({
-                    challengeId: changes[0],
-                    new: {
-                        tier: changes[1],
-                        points: changes[2]
-                    },
-                    old: {
+                let old = {
+                    tier: -1,
+                    points: 0
+                }
+                try {
+                    old = {
                         tier: challenges[changes[0]][1],
                         points: challenges[changes[0]][2]
                     }
-                })
+                } catch (e) {
+                    console.warn(`${changes[0]} does not exist`)
+                } finally {
 
-                challenges[changes[0]] = changes
+                    newChanges.push({
+                        challengeId: changes[0],
+                        new: {
+                            tier: changes[1],
+                            points: changes[2]
+                        },
+                        old: old
+                    })
+
+                    challenges[changes[0]] = changes
+                }
 
             }
             return <Match matchid={match.matchId} changes={newChanges} id={user.id} key={match.matchId} />

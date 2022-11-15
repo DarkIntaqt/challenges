@@ -116,10 +116,12 @@ export default class Match extends Component {
 
         for (let i = 0; i < challenges.length; i++) {
             const challenge = challenges[i];
+            let isNew = false
             if (challenge["old"]["tier"] === challenge["new"]["tier"]) {
                 same.push(challenge)
             } else {
                 leveledUp.push(challenge)
+                isNew = true
             }
 
             if (challenge.challengeId < 10) { continue }
@@ -129,7 +131,7 @@ export default class Match extends Component {
                 continue
             }
 
-            data.push(<div key={"challenge" + i}>
+            data.push(<div key={"challenge" + i} className={css["levelUp" + isNew]}>
                 <img src={"https://lolcdn.darkintaqt.com/s/c-" + challenge["challengeId"].toString(16) + "-" + intToTier(challenge["new"]["tier"])} alt="" />
                 <p>+{beautifyNum(challenge["new"]["points"] - challenge["old"]["points"], true, 1000)}</p>
 
