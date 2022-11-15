@@ -15,7 +15,7 @@ import start from "../css/start.module.css"
 import { checkExists } from "../func/arrayManipulationFunctions.ts";
 import config from "../config";
 
-import './Ad'
+import Ad from './Ad'
 
 import { capitalize } from "../func/stringManipulation";
 //import VipBadge from "./VipBadge";
