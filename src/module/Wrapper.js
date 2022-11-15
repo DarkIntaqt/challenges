@@ -41,19 +41,19 @@ export default class Wrapper extends Component {
 
     }
 
-    componentDidUpdate(prevProps) {
+    // componentDidUpdate(prevProps) {
 
-        if (this.state.adUnits.enabled !== prevProps.showAds ?? true) {
-            this.setState({
-                adUnits: {
-                    enabled: true,
-                    int: this.state.adUnits.int,
-                    left: this.state.adUnits.left,
-                    right: this.state.adUnits.right
-                }
-            })
-        }
-    }
+    //     if (this.state.adUnits.enabled !== prevProps.showAds ?? true) {
+    //         this.setState({
+    //             adUnits: {
+    //                 enabled: true,
+    //                 int: this.state.adUnits.int,
+    //                 left: this.state.adUnits.left,
+    //                 right: this.state.adUnits.right
+    //             }
+    //         })
+    //     }
+    // }
 
     checkAdRemount() {
         let checkAdUnits = this.state.adUnits.int
