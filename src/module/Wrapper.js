@@ -41,19 +41,35 @@ export default class Wrapper extends Component {
 
     }
 
-    // componentDidUpdate(prevProps) {
+    updateProps() {
+        this.setState({
+            adUnits: {
+                enabled: true,
+                int: this.state.adUnits.int,
+                left: this.state.adUnits.left,
+                right: this.state.adUnits.right
+            }
+        })
+    }
 
-    //     if (this.state.adUnits.enabled !== prevProps.showAds ?? true) {
-    //         this.setState({
-    //             adUnits: {
-    //                 enabled: true,
-    //                 int: this.state.adUnits.int,
-    //                 left: this.state.adUnits.left,
-    //                 right: this.state.adUnits.right
-    //             }
-    //         })
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+
+        if (this.state.adUnits.enabled !== prevProps.showAds ?? true) {
+            setTimeout(() => {
+                if (this.state.adUnits.enabled !== prevProps.showAds ?? true) {
+                    this.setState({
+                        adUnits: {
+                            enabled: true,
+                            int: this.state.adUnits.int,
+                            left: this.state.adUnits.left,
+                            right: this.state.adUnits.right
+                        }
+                    })
+                }
+            }, 500)
+
+        }
+    }
 
     checkAdRemount() {
         let checkAdUnits = this.state.adUnits.int
@@ -102,10 +118,10 @@ export default class Wrapper extends Component {
 
     render() {
         return <Fragment>
-            {this.state.adUnits.enabled === true ?
+            {/* {this.state.adUnits.enabled === true ?
                 <div className={`${css.fixed}`}>
                     {this.state.adUnits.left}
-                </div> : null}
+                </div> : null} */}
             <div className={"object1000"}>
                 {this.props.children}
             </div>
