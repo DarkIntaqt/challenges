@@ -21,6 +21,7 @@ import Loadable from "react-loadable";
 
 import UserChallenges from "./UserChallenges"
 import VipBadge from "../VipBadge";
+import Wrapper from "../Wrapper";
 
 
 const Title = Loadable({
@@ -286,7 +287,7 @@ export default class User extends Component {
             get("https://challenges.darkintaqt.com/api/v1/c-vip/?id=" + id, this.validateVerified)
         }
 
-        return <section className="object1000">
+        return <Wrapper showAds={typeof summonerName !== "object"}>
 
 
 
@@ -339,6 +340,6 @@ export default class User extends Component {
 
             </Routes>
 
-        </section>
+        </Wrapper>
     }
 }

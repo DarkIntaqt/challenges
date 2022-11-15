@@ -30,7 +30,6 @@ export default class Ad extends Component {
     }
 
     render() {
-        console.log("render");
         window.adIds++;
         this.id = "ad" + window.adIds
         return <div id={this.id} style={this.style} className={styles.ad + " _ad"}></div>
