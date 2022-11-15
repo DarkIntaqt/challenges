@@ -62,6 +62,7 @@ img.ugglogo {
 .profile>h1 {
     color: white;
     font-size: 2rem;
+    text-shadow: 0 0 5px black;
     float: left;
     margin: 20px 5px 5px;
     width: calc(100% - 140px);

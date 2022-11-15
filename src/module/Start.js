@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react"
 import StyleSheet from "../css/start.module.css"
+import Ad from "./Ad";
 
 import config from "../config";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -185,7 +186,7 @@ export default class Start extends Component {
           <div className={StyleSheet.region} onClick={changeRegion}>tr</div>
         </div>
         <div style={{ float: "left", margin: "10px 0", width: "100%", display: "flex", justifyContent: "center" }}>
-
+          <Ad></Ad>
         </div>
       </div>
     </Fragment>
