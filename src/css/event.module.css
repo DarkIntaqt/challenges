@@ -13,6 +13,7 @@
 .crystalHead {
     font-size: 1.4rem;
     padding: 20px 10px;
+    text-shadow: 0 0 5px black;
     font-weight: bold;
 }
 

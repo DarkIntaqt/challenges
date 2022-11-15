@@ -72,12 +72,12 @@ export default class generateChallengePointElement extends Component {
         }
 
         this.setState({
-            content: <a href="/challenge/2022000" className={css.crystal + " DIAMOND " + cCss.crystal} onClick={goTo} key="banner">
+            content: <a href="/challenge/2022000" className={css.crystal + " GRANDMASTER " + cCss.crystal} onClick={goTo} key="banner">
                 <div className={css.group}>
-                    <p className={css.crystalHead}>2022 Seasonal Challenge Leaderboard</p>
+                    <p className={css.crystalHead}>2022 Seasonal Challenges are retired</p>
 
                     <div className={css.text}>
-                        The 2022 Seasonal Challenges are ending soon. Check out the leaderboards and give your best to gain the limited "Challenjour '22" Title! <br /><br />Just click <b>here</b> to get to the leaderboards.
+                        Check the final Leaderboards and or check on your profile page how you performed. <br /><br />Just click <b>here</b> to get to the leaderboards.
                     </div>
 
                 </div>
