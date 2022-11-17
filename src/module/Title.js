@@ -5,6 +5,7 @@ import get from "../func/get"
 import goTo from "../func/goTo.js";
 
 import css from "../css/titles.module.css"
+import Wrapper from "./Wrapper";
 
 
 
@@ -62,7 +63,7 @@ export default class Title extends Component {
             titles = <p className={css.loading}>Loading...</p>
         }
 
-        return <div className={"object1000"}>
+        return <Wrapper className={"object1000"}>
 
             <h1 className={css.heading}>All titles</h1>
             <p className={css.subheading}>A list of all League of Legends Titles Challenge and how to achieve them. </p>
@@ -70,6 +71,6 @@ export default class Title extends Component {
             <div className={css.titles}>
                 {titles}
             </div>
-        </div>
+        </Wrapper>
     }
 }

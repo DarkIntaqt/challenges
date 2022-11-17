@@ -5,7 +5,7 @@
 }
 
 .fixed {
-    position: absolute;
+    position: fixed;
     margin-top: 20px;
     width: calc(50% - 500px);
     display: flex;

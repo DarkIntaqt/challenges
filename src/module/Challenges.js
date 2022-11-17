@@ -12,6 +12,8 @@ import ChallengeObject from "./ChallengeObject"
 import { Fragment } from "react"
 import filterCSS from "../css/filter.module.css"
 
+import Wrapper from "./Wrapper"
+
 import Loadable from "react-loadable";
 import { setCookie } from "../func/cookiefunctions"
 
@@ -339,7 +341,7 @@ export default class Challenges extends Component {
 
     render() {
 
-        return <div className={"object1000 " + challengeCSS.challenges}>
+        return <Wrapper >
 
             <div className={challengeCSS.heading}>
                 <h1>List of all Challenges</h1>
@@ -447,6 +449,6 @@ export default class Challenges extends Component {
             <div className={css.parent + " " + css.flexWidth}>
                 {this.state.challenges}
             </div>
-        </div>
+        </Wrapper>
     }
 }
