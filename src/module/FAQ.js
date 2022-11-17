@@ -15,7 +15,7 @@ export default function FAQ() {
         ],
         [
             "I don't want to appear here.",
-            "That's sad but ok, so just send me a direct message on twitter: @darkintaqt, and I'll try to remove oyu within the next 1-2 days. However, this will not prevent you from being lookup up by users who know your name and your username could be displayed longer (1-4 weeks) in search engines. This will also not remove your scores from the leaderboards, only your name and profileIcon. This is because the leaderboards must not be falsified."
+            "That's sad but ok, so just send me a direct message on twitter: @darkintaqt, and I'll try to remove you within the next 1-2 days. However, this will not prevent you from being lookup up by users who know your name and your username could be displayed longer (1-4 weeks) in search engines. This will also not remove your scores from the leaderboards, only your name and profileIcon. This is because the leaderboards must not be falsified."
         ],
         [
             "What about to U.GG logo on a users profile page?",
@@ -23,7 +23,7 @@ export default function FAQ() {
         ],
         [
             "What about my privacy and the data you collect about me?",
-            "League of Legends related data about your summoner profile is stored exactly 15 minutes on our servers. Leaderboard data will be kept updating (almost) forever, as long as you stay in the top ranks (top 250 per region). If you don't want to appear on the leaderboards, read the answer above. <br><br>Also, we collect data such as your IP or browser logs, read this fur further information: <a href=\"https://darkintaqt.com/assets/privacypolicy/\">privacy policy</a> and this: <a href=\"https://darkintaqt.com/assets/impressum/\">imprint</a>"
+            "League of Legends related data about your summoner profile is stored exactly 15 minutes on our servers. Leaderboard data will be kept updating (almost) forever, as long as you stay in the top ranks (top 250 per region). If you don't want to appear on the leaderboards, read the answer above. <br><br>Also, we collect data such as your IP and browser, read this for further information: <a href=\"https://darkintaqt.com/assets/privacypolicy/\">privacy policy</a> and this: <a href=\"https://darkintaqt.com/assets/impressum/\">imprint</a>"
         ],
         [
             "Still questions?",
