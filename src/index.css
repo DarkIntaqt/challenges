@@ -7,14 +7,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 :root {
   /* UI colors */
   /* rgb is minified to hex on build */
-  --dark0: rgb(21, 21, 25);
-  --dark1: rgb(28, 28, 32);
-  --dark2: rgb(36, 36, 40);
-  --dark3: rgba(255, 255, 255, 0.1);
-  --selected: #0cbdf7;
+  --dark0: rgb(20, 20, 30);
+  --dark1: rgb(28, 28, 38);
+  --dark2: rgb(34, 34, 44);
+  --dark3: rgb(50, 50, 60);
+  --selected: rgb(13, 189, 255);
   --light0: #fff;
   --light1: #fff;
   --light2: #ced2d6;
@@ -209,4 +210,11 @@ button {
   content: "";
   clear: both;
   display: table
+}
+
+
+@media only screen and (max-width:1050px) {
+  .m-hide {
+    display: none !important;
+  }
 }
