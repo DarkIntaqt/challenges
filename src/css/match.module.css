@@ -6,6 +6,26 @@
     border-radius: 10px;
     box-sizing: border-box;
     margin: 5px 10px;
+    overflow: hidden;
+
+}
+
+.match:hover .matchdata {
+    background-color: var(--dark2);
+    cursor: pointer;
+}
+
+.match:hover .challengedata {
+    background-color: var(--dark3);
+    cursor: pointer;
+}
+
+.match:hover .challengedata .button {
+    background-color: var(--dark2);
+}
+
+.match .challengedata .button:hover i {
+    color: white
 }
 
 .match .matchdata {
@@ -56,7 +76,7 @@
     padding: 10px;
     color: var(--light0);
     font-size: 1rem;
-    width: 150px;
+    width: 100px;
 }
 
 .match .matchdata .text p {
@@ -90,7 +110,7 @@
 }
 
 .match .matchdata .kda {
-    width: 100px;
+    width: 150px;
     padding: 10px 0;
     display: flex;
     align-items: center;
@@ -110,12 +130,15 @@
     padding: 10px 0;
 }
 
-.match .matchdata .items>img {
+.match .matchdata .items>span {
     width: 25px;
     margin: 2px;
-    border-radius: 5px;
     height: 25px;
     float: left;
+}
+
+.match .matchdata .items>span img {
+    border-radius: 5px;
 }
 
 .match .challengedata {
@@ -197,18 +220,18 @@
     position: relative;
 }
 
-/* .match .challengedata .progressed>div.levelUptrue::before {
-    content: 'New tier';
+.match .challengedata .progressed>div.levelUptrue::before {
+    content: '+';
     position: absolute;
     font-weight: bold;
-    font-size: .6rem;
+    font-size: 1.2rem;
     width: 50px;
-    color: var(--light2);
+    color: var(--light1);
     text-align: center;
-    transform: rotate(45deg);
     margin-left: 25px;
+    margin-top: -1rem;
     z-index: 25;
-} */
+}
 
 .match .challengedata .progressed p {
     width: 100%;
@@ -218,8 +241,14 @@
     padding-top: 5px;
 }
 
-.match .challengedata .progressed img {
+.match .challengedata .progressed>div>span {
     height: 30px;
     margin: 0 10px;
+    width: 30px;
+    display: block;
+}
+
+.match .challengedata .progressed img {
+    height: 30px;
     width: 30px;
 }

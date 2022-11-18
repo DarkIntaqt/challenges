@@ -6,11 +6,28 @@ import { checkExists } from "./../../func/arrayManipulationFunctions.ts";
 import Timestamp from "react-timestamps"
 import { intToTier } from "./../../func/tierFunctions"
 import { beautifyNum } from "../../func/beautify.ts";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { findDOMNode } from "react-dom";
 
 const secondsToMMSS = (seconds) => {
     const MM = `${Math.floor(seconds / 60) % 60}`.padStart(2, '0');
     const SS = `${Math.floor(seconds % 60)}`.padStart(2, '0');
     return [MM, SS].join(':')
+}
+
+
+function inViewport(element) {
+    if (!element) return false;
+    if (1 !== element.nodeType) return false;
+
+    var html = document.documentElement;
+    var rect = element.getBoundingClientRect();
+
+    return !!rect &&
+        rect.bottom >= 0 &&
+        rect.right >= 0 &&
+        rect.left <= html.clientWidth &&
+        rect.top <= html.clientHeight;
 }
 
 
@@ -29,7 +46,12 @@ export default class Match extends Component {
         super(params)
 
         this.laodedMatchData = this.laodedMatchData.bind(this)
+        this.loadData = this.loadData.bind(this)
 
+        this.loading = false
+
+
+        this.element = ""
         this.props = params
         this.state = {
             matchId: params.matchid,
@@ -43,10 +65,25 @@ export default class Match extends Component {
         this.setState({ matchData: data })
     }
 
+    loadData() {
+
+        if (!inViewport(this.element)) {
+            return
+        }
+        if (this.loading === false) {
+            this.loading = true;
+            document.removeEventListener("scroll", this.loadData)
+            get("https://challenges.darkintaqt.com/api/v1/np-match/" + this.state.matchId, this.laodedMatchData)
+        }
+    }
+
     componentDidMount() {
         // TODO: Load match using get()
         // add api endpoint in v1 first
-        get("https://challenges.darkintaqt.com/api/v1/np-match/" + this.state.matchId, this.laodedMatchData)
+        this.element = document.getElementById(this.state.matchId)
+        this.loadData()
+
+        document.addEventListener("scroll", this.loadData)
     }
 
     render() {
@@ -83,7 +120,7 @@ export default class Match extends Component {
             let c = 0
             let items = player.items.map(function (item) {
                 c++;
-                return <img src={"https://cdn.darkintaqt.com/lol/c-assets/items/" + item + ".png.webp"} alt="" key={item + "" + c} />
+                return <LazyLoadImage src={"https://cdn.darkintaqt.com/lol/c-assets/items/" + item + ".png.webp"} alt="" key={item + "" + c} placeholderSrc="https://cdn.darkintaqt.com/lol/c-assets/items/0.png.webp" height={25} width={25} />
 
             })
 
@@ -132,7 +169,7 @@ export default class Match extends Component {
             }
 
             data.push(<div key={"challenge" + i} className={css["levelUp" + isNew]}>
-                <img src={"https://lolcdn.darkintaqt.com/s/c-" + challenge["challengeId"].toString(16) + "-" + intToTier(challenge["new"]["tier"])} alt="" />
+                <LazyLoadImage src={"https://lolcdn.darkintaqt.com/s/c-" + challenge["challengeId"].toString(16) + "-" + intToTier(challenge["new"]["tier"])} alt="" placeholderSrc="https://cdn.darkintaqt.com/lol/c-assets/items/0.png.webp" height={30} width={30} />
                 <p>+{beautifyNum(challenge["new"]["points"] - challenge["old"]["points"], true, 1000)}</p>
 
             </div >)
@@ -144,7 +181,7 @@ export default class Match extends Component {
             </div>
         }
 
-        return <div className={css.match}>
+        return <div className={css.match} id={this.state.matchId}>
             <div className={css.matchdata}>
                 {matchdata}
             </div>
