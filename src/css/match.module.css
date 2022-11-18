@@ -15,6 +15,20 @@
     cursor: pointer;
 }
 
+.match.match.expanded-true {
+    min-height: 80px;
+    height: auto;
+}
+
+
+.match .overview {
+    width: 100%;
+    float: left;
+    min-height: 40px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
 .match:hover .challengedata {
     background-color: var(--dark3);
     cursor: pointer;
@@ -76,7 +90,7 @@
     padding: 10px;
     color: var(--light0);
     font-size: 1rem;
-    width: 100px;
+    width: 120px;
 }
 
 .match .matchdata .text p {
@@ -110,7 +124,7 @@
 }
 
 .match .matchdata .kda {
-    width: 150px;
+    width: 130px;
     padding: 10px 0;
     display: flex;
     align-items: center;
@@ -202,6 +216,18 @@
     transform: rotate(-90deg);
     width: 100%;
     margin: calc(75px - 1rem) 0 0;
+}
+
+.match.expanded-true .matchdata {
+    border-radius: 0 0 10px 0;
+}
+
+.match.expanded-true .challengedata .button {
+    border-radius: 0 10px 0 10px
+}
+
+.match.expanded-true .challengedata .button i {
+    transform: rotate(0);
 }
 
 .match .challengedata .progressed>div {

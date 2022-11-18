@@ -19,7 +19,8 @@ export default function ChallengeObject(params) {
         ["queueIds", false, null],
         ["progressCurrent", false, false],
         ["progressNext", false, false],
-        ["forceFullMode", false, false]
+        ["forceFullMode", false, false],
+        ["forceCompact", false, false]
     ];
 
 
@@ -56,7 +57,9 @@ export default function ChallengeObject(params) {
         extraTags += " " + css["unranked"]
     }
 
-    if (window.compactMode === true && challenge[9] === false) {
+    console.log(challenge);
+
+    if ((window.compactMode === true && challenge[9] === false) || challenge[10] === true) {
 
         return <a
             className={challenge[0] + " " + css.challenge + extraTags + " " + css.compact} href={challenge[5]}

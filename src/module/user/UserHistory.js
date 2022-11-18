@@ -28,6 +28,7 @@ export default class History extends Component {
 
         this.validateVerified = this.validateVerified.bind(this)
         this.loadHistory = this.loadHistory.bind(this)
+        this.loadChallenges = this.loadChallenges.bind(this)
         this.addHistory = this.addHistory.bind(this)
         this.addQueues = this.addQueues.bind(this)
 
@@ -36,8 +37,14 @@ export default class History extends Component {
             matches: [],
             challenges: {},
             queues: [],
-            error: false
+            error: false,
+            challengesJSON: []
         }
+    }
+
+    loadChallenges(challenges) {
+        window.JSONPRequest = challenges
+        this.setState({ challengesJSON: challenges })
     }
 
     rewrap(challenges) {
@@ -98,6 +105,11 @@ export default class History extends Component {
             return
         } else {
             window.queues = this.state.queues
+        }
+
+        if (this.state.challengesJSON.length === 0) {
+            get("https://challenges.darkintaqt.com/api/dynamic-data/na1", this.loadChallenges);
+            return
         }
 
         if (this.state.matches.length === 0) {

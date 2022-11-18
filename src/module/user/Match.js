@@ -7,7 +7,8 @@ import Timestamp from "react-timestamps"
 import { intToTier } from "./../../func/tierFunctions"
 import { beautifyNum } from "../../func/beautify.ts";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { findDOMNode } from "react-dom";
+import ChallengeObject from "./../ChallengeObject"
+import getChallenge from "../../func/getChallenge"
 
 const secondsToMMSS = (seconds) => {
     const MM = `${Math.floor(seconds / 60) % 60}`.padStart(2, '0');
@@ -47,6 +48,7 @@ export default class Match extends Component {
 
         this.laodedMatchData = this.laodedMatchData.bind(this)
         this.loadData = this.loadData.bind(this)
+        this.toggleExpand = this.toggleExpand.bind(this)
 
         this.loading = false
 
@@ -57,7 +59,8 @@ export default class Match extends Component {
             matchId: params.matchid,
             changes: params.changes,
             matchData: [],
-            id: params.id
+            id: params.id,
+            expand: false
         }
     }
 
@@ -84,6 +87,14 @@ export default class Match extends Component {
         this.loadData()
 
         document.addEventListener("scroll", this.loadData)
+    }
+
+    toggleExpand() {
+        if (this.state.expand === true) {
+            this.setState({ expand: false })
+            return
+        }
+        this.setState({ expand: true })
     }
 
     render() {
@@ -175,17 +186,43 @@ export default class Match extends Component {
             </div >)
         }
 
+        data = data.slice(0, 6)
+
         if (data.length === 0) {
             data = <div style={{ width: "100%", display: "flex", alignItems: "center", padding: "0" }}>
                 <p>No challenges progressed during this game</p>
             </div>
         }
 
-        return <div className={css.match} id={this.state.matchId}>
-            <div className={css.matchdata}>
+        let allChallenges = []
+        if (this.state.expand === true) {
+            for (let i = 0; i < challenges.length; i++) {
+                const challenge = challenges[i];
+                if (challenge.challengeId < 10) { continue }
+
+                if (challenge["new"]["points"] - challenge["old"]["points"] === 0) {
+                    console.log(challenge.challengeId);
+                    continue
+                }
+                allChallenges.push(<ChallengeObject
+                    key={parseInt(challenge["challengeId"])}
+                    tier={intToTier(challenge["new"]["tier"])}
+                    title={getChallenge(challenge["challengeId"])["translation"]["name"]}
+                    subtitle={"+" + beautifyNum(challenge["new"]["points"] - challenge["old"]["points"], true, 1000)}
+                    description={getChallenge(challenge["challengeId"])["translation"]["description"]}
+                    href={"/challenges/" + challenge["challengeId"]}
+                    forceCompact={true}
+                >
+
+                </ChallengeObject>)
+            }
+        }
+
+        return <div className={css.match + " " + css["expanded-" + this.state.expand]} id={this.state.matchId}>
+            <div className={css.matchdata} onClick={this.toggleExpand}>
                 {matchdata}
             </div>
-            <div className={css.challengedata}>
+            <div className={css.challengedata} onClick={this.toggleExpand}>
                 <div className={css.progress}>
                     <p>
                         <span>{leveledUp.length} <i className="fa-solid fa-angles-up"></i> </span>Upgraded
@@ -202,7 +239,9 @@ export default class Match extends Component {
                     <i className="fa-solid fa-caret-down"></i>
                 </div>
             </div>
-
+            {this.state.expand === true ? <div className={css.overview}>
+                {allChallenges}
+            </div> : null}
         </div>
     }
 }
