@@ -162,7 +162,7 @@ export default class Match extends Component {
                     {data}
                 </div>
                 <div className={css.button}>
-
+                    <i className="fa-solid fa-caret-down"></i>
                 </div>
             </div>
 

@@ -6,9 +6,9 @@
     position: relative;
     text-indent: -9999em;
     box-sizing: border-box;
-    border-left: 3px solid rgba(255, 255, 255, .2);
-    border-right: 3px solid rgba(255, 255, 255, .2);
-    border-bottom: 3px solid rgba(255, 255, 255, .2);
+    border-left: 3px solid var(--dark3);
+    border-right: 3px solid var(--dark3);
+    border-bottom: 3px solid var(--dark3);
     border-top: 3px solid var(--selected);
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
