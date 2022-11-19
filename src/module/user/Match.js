@@ -9,6 +9,7 @@ import { beautifyNum } from "../../func/beautify.ts";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ChallengeObject from "./../ChallengeObject"
 import getChallenge from "../../func/getChallenge"
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 const secondsToMMSS = (seconds) => {
     const MM = `${Math.floor(seconds / 60) % 60}`.padStart(2, '0');
@@ -131,15 +132,23 @@ export default class Match extends Component {
             let c = 0
             let items = player.items.map(function (item) {
                 c++;
-                return <LazyLoadImage src={"https://cdn.darkintaqt.com/lol/c-assets/items/" + item + ".png.webp"} alt="" key={item + "" + c} placeholderSrc="https://cdn.darkintaqt.com/lol/c-assets/items/0.png.webp" height={25} width={25} />
+                return <LazyLoadImage src={"https://cdn.darkintaqt.com/lol/c-assets/items/" + item + ".png.webp"} alt="" key={item + "" + c} effect="opacity" height={25} width={25} />
 
             })
+
+            if (!checkExists(player.spells)) {
+                player["spells"] = [54, 54]
+            }
 
             matchdata = <Fragment>
                 <div className={css.left + " " + css[win]}></div>
 
                 <div className={css.champion}>
                     <img src={"https://lolcdn.darkintaqt.com/cdn/champion/" + player.champion[0] + "/tile"} alt={player.champion[1]} />
+                </div>
+                <div className={css.summoners}>
+                    <img src={"https://lolcdn.darkintaqt.com/cdn/spells/" + player.spells[0]} alt={""} />
+                    <img src={"https://lolcdn.darkintaqt.com/cdn/spells/" + player.spells[1]} alt={""} />
                 </div>
                 <div className={css.text + " " + css[win]}>
                     <p className={css.gamemode}>{getQueue(match.queueId)}</p>
@@ -175,12 +184,12 @@ export default class Match extends Component {
             if (challenge.challengeId < 10) { continue }
 
             if (challenge["new"]["points"] - challenge["old"]["points"] === 0) {
-                console.log(challenge.challengeId);
+                console.warn(challenge.challengeId);
                 continue
             }
 
             data.push(<div key={"challenge" + i} className={css["levelUp" + isNew]}>
-                <LazyLoadImage src={"https://lolcdn.darkintaqt.com/s/c-" + challenge["challengeId"].toString(16) + "-" + intToTier(challenge["new"]["tier"])} alt="" placeholderSrc="https://cdn.darkintaqt.com/lol/c-assets/items/0.png.webp" height={30} width={30} />
+                <LazyLoadImage src={"https://lolcdn.darkintaqt.com/s/c-" + challenge["challengeId"].toString(16) + "-" + intToTier(challenge["new"]["tier"])} alt="" effect="opacity" height={30} width={30} />
                 <p>+{beautifyNum(challenge["new"]["points"] - challenge["old"]["points"], true, 1000)}</p>
 
             </div >)
@@ -201,7 +210,7 @@ export default class Match extends Component {
                 if (challenge.challengeId < 10) { continue }
 
                 if (challenge["new"]["points"] - challenge["old"]["points"] === 0) {
-                    console.log(challenge.challengeId);
+                    console.warn(challenge.challengeId);
                     continue
                 }
                 allChallenges.push(<ChallengeObject

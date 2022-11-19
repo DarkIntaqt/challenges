@@ -77,12 +77,13 @@
 }
 
 .match .matchdata .champion {
-    padding: 10px;
+    padding: 10px 5px 10px 10px;
 }
 
 .match .matchdata .champion img {
     height: 60px;
     width: 60px;
+    background-color: var(--dark0);
     border-radius: 8px;
 }
 
@@ -124,7 +125,7 @@
 }
 
 .match .matchdata .kda {
-    width: 130px;
+    width: 100px;
     padding: 10px 0;
     display: flex;
     align-items: center;
@@ -142,6 +143,24 @@
 .match .matchdata .items {
     width: 132px;
     padding: 10px 0;
+}
+
+
+.match .matchdata .summoners {
+    width: 30px;
+    padding: 10px 5px 10px 0
+}
+
+.match .matchdata .summoners img {
+    width: 25px;
+    margin: 2px 2px 3px;
+    height: 25px;
+    float: left;
+    border-radius: 5px;
+}
+
+.match .matchdata .summoners img:nth-last-child() {
+    margin: 3px 2px 2px
 }
 
 .match .matchdata .items>span {
