@@ -19,6 +19,7 @@ import { capitalize } from "../func/stringManipulation";
 import Wrapper from "./Wrapper";
 //import VipBadge from "./VipBadge";
 
+import VipBadge from "./VipBadge"
 import Ad from "./Ad"
 
 //import excss from "../css/aboutChallenge.module.css"
@@ -62,7 +63,7 @@ export default class Challenge extends Component {
             }
         }
 
-        const tempChallenge = getCache(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`)
+        const tempChallenge = getCache(`https://challenges.darkintaqt.com/api/v4/c/?id=${this.params.id}`)
         const tempChallenges = getCache(`https://challenges.darkintaqt.com/api/dynamic-data/na1`)
 
         if (tempChallenge !== false && tempChallenges !== false) {
@@ -108,7 +109,7 @@ export default class Challenge extends Component {
 
     load() {
         document.title = "Loading..."
-        get(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`, this.loadChallenge, this.error);
+        get(`https://challenges.darkintaqt.com/api/v4/c/?id=${this.params.id}`, this.loadChallenge, this.error);
         get(`https://challenges.darkintaqt.com/api/dynamic-data/na1`, this.loadChallenges, this.error);
     }
 
@@ -281,18 +282,19 @@ export default class Challenge extends Component {
                         // } else if (i < 100) {
                         //     pos = css.top100
                         // }
-                        let userlink = "/" + player[5] + "/" + nameToURL(player[0])
+                        let userlink = "/" + player[6] + "/" + nameToURL(player[0])
 
                         if (player[0] === "%") {
                             userlink = "/faq#h3"
                         }
 
-                        summoner.push(<tr key={player[0] + player[6] + i} className={intToTier(player[2])}>
+                        summoner.push(<tr key={player[0] + player[7] + i} className={intToTier(player[2])}>
                             <td>{i + 1}.</td>
                             <td>
                                 <a href={userlink} onClick={goTo}>
+                                    {player[5] === 1 ? <VipBadge size={"22px"} position={"absolute"} margin={"20px 0 0 20px"} /> : null}
                                     <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={player[0] + "'s profile image"}></LazyLoadImage>
-                                    <p>{player[0]} <span className={css.region}>#{serverToHumanReadable(player[5])}</span></p>
+                                    <p>{player[0]} <span className={css.region}>#{serverToHumanReadable(player[6])}</span></p>
                                 </a>
                             </td>
                             <td>{capitalize(intToTier(player[2]))}</td>

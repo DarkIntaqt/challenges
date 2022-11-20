@@ -5,6 +5,7 @@ import ProgressBar from "./ProgressBar";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Fragment } from "react";
 import { beautifyNum } from "./../func/beautify.ts"
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 export default function ChallengeObject(params) {
 
@@ -57,8 +58,6 @@ export default function ChallengeObject(params) {
         extraTags += " " + css["unranked"]
     }
 
-    console.log(challenge);
-
     if ((window.compactMode === true && challenge[9] === false) || challenge[10] === true) {
 
         return <a
@@ -68,7 +67,7 @@ export default function ChallengeObject(params) {
             <LazyLoadImage
                 height={40}
                 width={40}
-                placeholderSrc={"https://cdn.darkintaqt.com/lol/static/missing/item.png"}
+                effect="opacity"
                 src={"https://lolcdn.darkintaqt.com/s/c-" + parseInt(challenge[5].split("/")[2]).toString(16) + "-" + challenge[0].toLowerCase().replace("none", "iron")}
                 alt={""}
             >

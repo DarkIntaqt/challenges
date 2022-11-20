@@ -219,7 +219,7 @@ export default class Match extends Component {
                     title={getChallenge(challenge["challengeId"])["translation"]["name"]}
                     subtitle={"+" + beautifyNum(challenge["new"]["points"] - challenge["old"]["points"], true, 1000)}
                     description={getChallenge(challenge["challengeId"])["translation"]["description"]}
-                    href={"/challenges/" + challenge["challengeId"]}
+                    href={"/challenge/" + challenge["challengeId"]}
                     forceCompact={true}
                 >
 
