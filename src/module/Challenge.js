@@ -63,7 +63,7 @@ export default class Challenge extends Component {
             }
         }
 
-        const tempChallenge = getCache(`https://challenges.darkintaqt.com/api/v4/c/?id=${this.params.id}`)
+        const tempChallenge = getCache(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`)
         const tempChallenges = getCache(`https://challenges.darkintaqt.com/api/dynamic-data/na1`)
 
         if (tempChallenge !== false && tempChallenges !== false) {
@@ -109,7 +109,7 @@ export default class Challenge extends Component {
 
     load() {
         document.title = "Loading..."
-        get(`https://challenges.darkintaqt.com/api/v4/c/?id=${this.params.id}`, this.loadChallenge, this.error);
+        get(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`, this.loadChallenge, this.error);
         get(`https://challenges.darkintaqt.com/api/dynamic-data/na1`, this.loadChallenges, this.error);
     }
 

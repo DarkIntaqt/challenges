@@ -67,7 +67,7 @@ export default class generateChallengePointElement extends Component {
                 <p className={css.name}>
                     {player[0]}
                 </p>
-                <p className={css.region}>#{player[5]}</p>
+                <p className={css.region}>#{player[6]}</p>
             </div>);
         }
 
