@@ -1,3 +1,5 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 export default function VipBadge(params) {
 
     const defaultSize = "20px";
@@ -8,7 +10,7 @@ export default function VipBadge(params) {
     const position = params.position ?? defaultPosition
     const margin = params.margin ?? defaultMargin
 
-    return <img src="https://cdn.darkintaqt.com/lol/static/challenges/verified.png" style={{
+    return <LazyLoadImage src="https://cdn.darkintaqt.com/lol/static/challenges/verified.png" style={{
         height: `calc(0.7 * ${size}`,
         width: `calc(0.7 * ${size}`,
         borderRadius: "50%",
@@ -16,5 +18,5 @@ export default function VipBadge(params) {
         top: "0",
         left: "0",
         position: position,
-    }} alt="verified" />
+    }} alt="" />
 }
