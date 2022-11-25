@@ -36,7 +36,7 @@ const get = async function (url = "/", callback = function (r) {
     let timestamp = Date.now();
 
     if (request.status !== 200) {
-        timestamp = (timestamp - 1000 * 60 * 13) + (1000 * 60 * 60 * window.timezoneoffset);
+        timestamp = (timestamp - 1000 * 60 * 13);
     }
 
     window.requestCache[url] = {
