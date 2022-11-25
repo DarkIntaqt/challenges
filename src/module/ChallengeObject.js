@@ -71,7 +71,7 @@ export default function ChallengeObject(params) {
                 height={40}
                 width={40}
                 effect="opacity"
-                src={"https://lolcdn.darkintaqt.com/s/c-" + parseInt(challenge[5].split("/")[2]).toString(16) + "-" + challenge[0].toLowerCase().replace("none", "iron")}
+                src={"https://lolcdn.darkintaqt.com/cdn/np-token/" + challenge[5].split("/")[2].split("?")[0] + "/" + challenge[0].toLowerCase().replace("none", "iron")}
                 alt={""}
             >
             </LazyLoadImage>

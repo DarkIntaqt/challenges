@@ -27,7 +27,7 @@ export default class Title extends Component {
 
     load() {
 
-        get(`https://challenges.darkintaqt.com/api/v1/titles/`, this.showUser, this.error);
+        get(`https://challenges.darkintaqt.com/api/v2/t/`, this.showUser, this.error);
 
     }
 
@@ -51,7 +51,7 @@ export default class Title extends Component {
             const element = this.state.titles[i];
 
             titles.push(<a href={"/challenge/" + element.cid} className={css.title + " " + element.type + " clearfix"} key={element.cid} challengeid={element.cid} onClick={goTo}>
-                <LazyLoadImage height={45} width={45} src={"https://lolcdn.darkintaqt.com/s/C-" + element.icon + "-" + element.type.toLowerCase()} placeholderSrc={"https://cdn.darkintaqt.com/lol/static/missing/item.png"} alt={element.title + "'s icon"} />
+                <LazyLoadImage height={45} width={45} src={"https://lolcdn.darkintaqt.com/cdn/np-token/" + element.icon + "/" + element.type.toLowerCase()} placeholderSrc={"https://cdn.darkintaqt.com/lol/static/missing/item.png"} alt={element.title + "'s icon"} />
                 <h2>{element.title}<br /><span data-nosnippet>{element.percentile}%</span></h2>
                 <p>Reach <span>{element.type} tier</span> in <span>"{element.challenge}"</span>. <br></br>{element.description}<br /><br /><i>Need {element.threshold}.</i></p>
 

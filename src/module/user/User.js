@@ -234,7 +234,7 @@ export default class User extends Component {
             const threshold = challenge.thresholds[tier]
 
             return <div key={selection[0]} style={{
-                backgroundImage: `url(${config.cdnBasePath}/s/c-${selection[0].toString(16)}-${strtolower(tier)})`
+                backgroundImage: `url(${config.cdnBasePath}/cdn/np-token/${selection[0]}/${strtolower(tier)})`
             }}>
                 <div className={tier}>
                     <b>

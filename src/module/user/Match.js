@@ -10,6 +10,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import ChallengeObject from "./../ChallengeObject"
 import getChallenge from "../../func/getChallenge"
 import 'react-lazy-load-image-component/src/effects/opacity.css';
+import { strtolower } from "../../func/stringManipulation";
 
 const secondsToMMSS = (seconds) => {
     const MM = `${Math.floor(seconds / 60) % 60}`.padStart(2, '0');
@@ -189,7 +190,7 @@ export default class Match extends Component {
             }
 
             data.push(<div key={"challenge" + i} className={css["levelUp" + isNew]}>
-                <LazyLoadImage src={"https://lolcdn.darkintaqt.com/s/c-" + challenge["challengeId"].toString(16) + "-" + intToTier(challenge["new"]["tier"])} alt="" effect="opacity" height={30} width={30} />
+                <LazyLoadImage src={"https://lolcdn.darkintaqt.com/cdn/np-token/" + challenge["challengeId"] + "/" + strtolower(intToTier(challenge["new"]["tier"]))} alt="" effect="opacity" height={30} width={30} />
                 <p>+{beautifyNum(challenge["new"]["points"] - challenge["old"]["points"], true, 1000)}</p>
 
             </div >)
