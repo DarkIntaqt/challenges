@@ -185,12 +185,17 @@ button {
 .faq>div {
   width: 100%;
   box-sizing: border-box;
-  border: 2px solid var(--type);
-  padding: 20px;
-  margin: 20px 0;
+  padding: 20px 10px;
+  margin: 5px 0;
+  border: 2px solid transparent;
   border-radius: 10px;
   color: white;
   float: left;
+}
+
+.faq>div:hover {
+  border-color: var(--dark2);
+  background-color: var(--dark1);
 }
 
 .faq>div>p {
