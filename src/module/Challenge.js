@@ -180,7 +180,7 @@ export default class Challenge extends Component {
 
         }
 
-        let icon = "https://lolcdn.darkintaqt.com/s/C-" + challenge.icon + "-master"
+        let icon = "https://lolcdn.darkintaqt.com/cdn/np-token/" + challenge["icon_2"]
 
         if (challenge.challenge.id < 10 || challenge.challenge.id === 2022000) {
             if (challenge.challenge.id !== 0) {
@@ -210,7 +210,7 @@ export default class Challenge extends Component {
                 </tr>)
             }
 
-            icon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+            icon = "https://lolcdn.darkintaqt.com/cdn/profileicon/-1"
         } else if (challenge.challenge.leaderboard === true || checkExists(challenge.challenge.tags["leaderboardManuallyEnabled"])) {
             thresholds = challenge.stats[serverToMachineReadable(region)]
             percentiles = challenge.stats["percentiles-" + serverToMachineReadable(region)]
