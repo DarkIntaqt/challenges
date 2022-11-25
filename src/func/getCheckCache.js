@@ -1,4 +1,3 @@
-import { trackWindowScroll } from "react-lazy-load-image-component";
 import { checkExists } from "./arrayManipulationFunctions.ts"
 
 function checkCache(url) {
