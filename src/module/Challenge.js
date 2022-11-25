@@ -140,6 +140,10 @@ export default class Challenge extends Component {
 
     render() {
 
+        if (document.location.pathname.slice(-1) === "/") {
+            return <Error></Error>
+        }
+
         const challenge = JSON.parse(JSON.stringify(this.state.challenge));
         const regions = this.regions
         const absoluteRegion = this.state.filter

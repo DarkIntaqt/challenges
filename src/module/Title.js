@@ -6,7 +6,7 @@ import goTo from "../func/goTo.js";
 
 import css from "../css/titles.module.css"
 import Wrapper from "./Wrapper";
-
+import Error from "./Error";
 
 
 export default class Title extends Component {
@@ -44,6 +44,10 @@ export default class Title extends Component {
     }
 
     render() {
+
+        if (document.location.pathname.slice(-1) === "/") {
+            return <Error></Error>
+        }
 
         let titles = [];
 

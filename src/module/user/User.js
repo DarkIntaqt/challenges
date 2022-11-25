@@ -215,6 +215,15 @@ export default class User extends Component {
 
         }
 
+        if (document.location.pathname.slice(-1) === "/") {
+            error = true
+        }
+
+        if (window.location.pathname.split("/").length > 4) {
+            error = true
+        }
+
+
         if (error === true) {
 
             return <Error></Error>

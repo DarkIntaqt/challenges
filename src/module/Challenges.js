@@ -16,6 +16,7 @@ import Wrapper from "./Wrapper"
 
 import Loadable from "react-loadable";
 import { setCookie } from "../func/cookiefunctions"
+import Error from "./Error"
 
 export default class Challenges extends Component {
     constructor(props) {
@@ -340,6 +341,10 @@ export default class Challenges extends Component {
     }
 
     render() {
+
+        if (document.location.pathname.slice(-1) === "/") {
+            return <Error></Error>
+        }
 
         return <Wrapper >
 
