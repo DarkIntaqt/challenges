@@ -1,3 +1,8 @@
+/**
+ * Lowercase a string or any empty object
+ * @param {string} value 
+ * @returns {string}
+ */
 export function strtolower(value) {
 
     return ("" + value).toLowerCase();
@@ -7,7 +12,7 @@ export function strtolower(value) {
 /**
  * Capitilize a string
  * @param {string} input 
- * @returns capitilized string
+ * @returns {string}
  */
 export function capitalize(input) {
 

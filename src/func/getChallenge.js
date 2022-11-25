@@ -1,3 +1,8 @@
+/**
+ * get a challenge by id
+ * @param {number} challengeId 
+ * @returns {object} - Challenge Object or 0
+ */
 export default function getChallenge(challengeId = 0) {
     try {
         if (typeof challengeId === "string") {
@@ -15,6 +20,6 @@ export default function getChallenge(challengeId = 0) {
         return 0;
     } catch (error) {
         console.error(error);
-        return 0;
+        return {};
     }
 }

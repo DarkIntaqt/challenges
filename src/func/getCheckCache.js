@@ -1,5 +1,10 @@
 import { checkExists } from "./arrayManipulationFunctions.ts"
 
+/**
+ * check if a url exists in cache and is eligible for being used
+ * @param {string} url 
+ * @returns {boolean}
+ */
 function checkCache(url) {
 
     if (checkExists(window.requestCache[url])) {
@@ -15,6 +20,11 @@ function checkCache(url) {
     return false
 }
 
+/**
+ * returns an object of the cache, if it is valid
+ * @param {string} url 
+ * @returns {*} - cache object or false
+ */
 function getCache(url) {
     if (checkCache(url)) {
         return window.requestCache[url]["body"]

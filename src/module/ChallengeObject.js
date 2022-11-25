@@ -1,5 +1,6 @@
 import css from "../css/challengeObject.module.css"
 import { checkExists } from "../func/arrayManipulationFunctions.ts"
+import { capitalize } from "../func/stringManipulation";
 import goTo from "../func/goTo";
 import ProgressBar from "./ProgressBar";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -58,6 +59,8 @@ export default function ChallengeObject(params) {
         extraTags += " " + css["unranked"]
     }
 
+
+    // COMPACT
     if ((window.compactMode === true && challenge[9] === false) || challenge[10] === true) {
 
         return <a
@@ -84,9 +87,11 @@ export default function ChallengeObject(params) {
                 {challenge[6]}
             </div>
             <div className={css.description}>
-                <p >{challenge[4]}</p>
+                <p>{challenge[4]}</p>
             </div>
-            <p className={css.tier}>{challenge[0]}</p>
+            <p className={css.tier}>
+                {capitalize(challenge[0])}
+            </p>
             <button><i className="fa-solid fa-chevron-down"></i></button>
             {
                 challenge[7] !== false ?

@@ -1,12 +1,28 @@
 import { checkCache } from "./getCheckCache";
 
 
+/**
+ * get a specific ressource located at "url"
+ * @param {string} url 
+ * @param {function} callback 
+ * @param {function} errorCallback 
+ * @param {boolean} debug 
+ * @returns {*} - response of the request, ASYNC
+ */
+const get = async function (
+    url = "/",
 
-const get = async function (url = "/", callback = function (r) {
-    console.log(r)
-}, errorCallback = function (e) {
-    console.warn(e)
-}, debug = false) {
+    callback = function (r) {
+        console.log(r)
+    },
+
+    errorCallback = function (e) {
+        console.warn(e)
+    },
+
+    debug = false
+) {
+
     if (checkCache(url)) {
         callback(window.requestCache[url]["body"]);
         return true

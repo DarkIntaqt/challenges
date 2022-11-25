@@ -10,7 +10,7 @@ import { checkExists } from "./arrayManipulationFunctions.ts"
      * Function to generate a react object which shows a challenge
      * @param {object} content 
      * @param {boolean} genLine 
-     * @returns React object containing the name and the image of a challenge
+     * @returns {object} - React object containing the name and the image of a challenge
      */
 export default function generateObject(content, genLine = true, challengeId = -1) {
 

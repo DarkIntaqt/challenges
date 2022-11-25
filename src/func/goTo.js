@@ -1,5 +1,5 @@
 /**
- * 
+ * change document.location
  * @param {Event} e 
  * @param {boolean} replace 
  * @returns nothing; changes page location
