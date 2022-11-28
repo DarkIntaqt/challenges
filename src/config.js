@@ -27,7 +27,7 @@ const config = {
         "timezoneoffset": new Date().getTimezoneOffset() / 60,
         "loadingUI": fillLoadingUI(),
         "adIds": 0,
-        "compactMode": false
+        "compactMode": true
     },
     "config": {
         "reloadAfter": 3600000
