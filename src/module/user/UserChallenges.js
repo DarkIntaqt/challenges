@@ -352,7 +352,7 @@ export default class UserChallenges extends Component {
                 <p className={css.legal}>
                     <span data-nosnippet>
                         The U.GG logo belongs to U.GG. Read more <a href="/faq#h4" onClick={goTo}>here</a>.
-                        <br /><br />Click <a href="/faq" onClick={goTo}>here</a> to get any questions aobut this page answered.
+                        <br /><br />Click <a href="/faq" onClick={goTo}>here</a> to get any questions about this page answered.
                     </span>
                 </p>
             </div>
