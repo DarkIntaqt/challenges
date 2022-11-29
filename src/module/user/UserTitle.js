@@ -60,7 +60,7 @@ export default class UserTitle extends Component {
 
         document.title = `${user.summonerName}'s Title Overview`
 
-        let userTitles = [1]
+        let userTitles = ["1"]
 
         const titleList = this.state.titles
         let challengeIdList = Object.keys(titleList).map(function (id) {
@@ -69,6 +69,8 @@ export default class UserTitle extends Component {
             }
             return id.substring(0, id.length - 2)
         })
+
+        let notUnlocked = []
 
         for (let i = 0; i < user.challenges.length; i++) {
             const challenge = user.challenges[i];
@@ -83,14 +85,29 @@ export default class UserTitle extends Component {
                                 userTitles.push(key)
                             }
                         }
-
                     }
                 }
             }
+        }
 
+        let titleIdList = Object.keys(titleList)
+
+        for (let i = 0; i < titleIdList.length; i++) {
+            const title = titleIdList[i];
+            if (!userTitles.includes(title)) {
+                notUnlocked.push(title)
+            }
         }
 
         const titles = userTitles.map(function (titleId) {
+            return [
+                titleId,
+                titleList[titleId] ?? "Unknown"
+            ]
+
+        }).sort(function (a, b) { return a[1].localeCompare(b[1]) });
+
+        const notUnlockedList = notUnlocked.map(function (titleId) {
             return [
                 titleId,
                 titleList[titleId] ?? "Unknown"
@@ -104,9 +121,9 @@ export default class UserTitle extends Component {
             const titleid = title[0]
             const content = title[1]
 
-            if (titleid === 1) {
+            if (titleid === "1") {
                 return <ChallengeObject
-                    tier="NONE"
+                    tier="IRON"
                     href={"/titles"}
                     title={content}
                     subtitle={<span>Achieved by 100%</span>}
@@ -117,8 +134,9 @@ export default class UserTitle extends Component {
             }
             const titleIdString = titleid.toString()
 
-            const challenge = getChallenge(parseInt(titleIdString.substr(0, titleIdString.length - 2)))
-            const tier = intToTier(parseInt(titleIdString.substring(titleIdString.length - 2)))
+            let challenge = getChallenge(parseInt(titleIdString.substr(0, titleIdString.length - 2)))
+            const tier = intToTier(parseInt(titleIdString.substring(titleIdString.length - 2)) + 1)
+
 
             try {
                 let percentage
@@ -132,7 +150,7 @@ export default class UserTitle extends Component {
                     href={"/titles"}
                     title={content}
                     subtitle={"Achieved by " + percentage + "%"}
-                    description={challenge.translation.description}
+                    description={challenge.translation.description ?? "No description available. Is this title still available?"}
                     key={titleid}
                     nexttier="MAXED"
                     forceFullMode={true}
@@ -142,6 +160,70 @@ export default class UserTitle extends Component {
                 return []
             }
         })
+
+        const notUnlockedTitles = notUnlockedList.map(function (title) {
+            const titleid = title[0]
+            const content = title[1]
+            const titleIdString = titleid.toString()
+
+            let challenge = getChallenge(parseInt(titleIdString.substr(0, titleIdString.length - 2)))
+            if (challenge === 0) {
+                challenge = {
+                    "translation": {
+                        "description": "No description available. Is this title still available?"
+                    },
+                    "thresholds": {
+                        "IRON": 999,
+                        "BRONZE": 999,
+                        "SILVER": 999,
+                        "GOLD": 999,
+                        "PLATINUM": 999,
+                        "DIAMOND": 999,
+                        "MASTER": 999,
+                        "GRANDMASTER": 999,
+                        "CHALLENGER": 999,
+                    }
+                }
+            }
+
+
+            const tier = intToTier(parseInt(titleIdString.substring(titleIdString.length - 2)) + 1)
+
+            try {
+                let percentage
+                let userprogress = 0
+                try {
+                    percentage = Math.round(challenge.percentiles[tier] * 1000) / 10
+
+                    for (let i = 0; i < user.challenges.length; i++) {
+                        const element = user.challenges[i];
+                        if (element[0] === parseInt(titleIdString.substr(0, titleIdString.length - 2))) {
+                            userprogress = element[2]
+                        }
+                    }
+
+                } catch (error) {
+                    percentage = "0"
+                }
+                return <ChallengeObject
+                    tier={"UNRANKED"}
+                    href={"/titles"}
+                    title={content}
+                    subtitle={"Locked - Achieved by " + percentage + "%"}
+                    description={challenge.translation.description}
+                    key={titleid}
+                    nexttier="MAXED"
+                    progressCurrent={userprogress}
+                    progressNext={challenge["thresholds"][tier]}
+                    forceFullMode={true}
+                />
+            } catch (e) {
+                console.trace(title)
+                console.error(e)
+                return []
+            }
+        })
+
 
         return <div className={`${user.tier}`}>
 
@@ -161,7 +243,8 @@ export default class UserTitle extends Component {
 
             <div className={css.parent}>
                 {displayTitles}
-            </div >
+                {notUnlockedTitles}
+            </div>
             <p style={{ color: "var(--light3)", fontSize: ".8rem", margin: "10px 0 30px", width: "100%", float: "left" }}>Note: The "Apprentice" title does not count towards the "Entitled" challenge. </p>
 
         </div>
