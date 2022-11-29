@@ -11,6 +11,7 @@ import titleCSS from "../../css/userTitle.module.css"
 import Loader from "../Loader";
 import get from "../../func/get";
 import orderChallenges from "./orderChallenges";
+import { capitalize } from "../../func/stringManipulation";
 
 export default class UserTitle extends Component {
     constructor(props) {
@@ -209,7 +210,7 @@ export default class UserTitle extends Component {
                     tier={"UNRANKED"}
                     href={"/titles"}
                     title={content}
-                    subtitle={"Locked - Achieved by " + percentage + "%"}
+                    subtitle={"Locked - reach " + capitalize(tier) + " tier"}
                     description={challenge.translation.description}
                     key={titleid}
                     nexttier="MAXED"
