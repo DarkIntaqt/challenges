@@ -8,7 +8,9 @@ import config from "../config";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import goTo from "../func/goTo";
-import { t } from "i18next";
+import i18n from 'i18next';
+
+i18n.changeLanguage("es")
 
 class Start extends Component {
 
