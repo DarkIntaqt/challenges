@@ -2,18 +2,22 @@ import React, { Component, Fragment } from "react"
 import StyleSheet from "../css/start.module.css"
 import Ad from "./Ad";
 
+import { withTranslation } from 'react-i18next';
+
 import config from "../config";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import goTo from "../func/goTo";
+import { t } from "i18next";
 
-export default class Start extends Component {
+class Start extends Component {
 
   constructor(params) {
     super(params)
+
     this.toggleRecent = this.toggleRecent.bind(this)
 
-    this.state = { display: "none" }
+    this.state = { display: "none", translation: params.t }
   }
 
   componentDidMount() {
@@ -129,6 +133,7 @@ export default class Start extends Component {
 
 
     const recentlySearchedList = localStorage.getItem("_search")
+    const t = this.state.translation
 
     let recentlySearchedFor = []
 
@@ -161,12 +166,12 @@ export default class Start extends Component {
     return <Fragment>
       <div className={StyleSheet.background} style={backgroundImage}></div>
       <div className={StyleSheet.start + " object1000"}>
-        <h1>League of Legends <br /><span>Challenge Progress Tracker</span></h1>
-        <h2>By <a href="https://darkintaqt.com/blog/c-en/leagueoflegendsapi/" target="_blank" rel="noreferrer">DarkIntaqt.com</a></h2>
+        <h1>{t("League of Legends")} <br /><span>{t("Challenge Progress Tracker")}</span></h1>
+        <h2>{t("By")} <a href="https://darkintaqt.com/blog/c-en/leagueoflegendsapi/" target="_blank" rel="noreferrer">DarkIntaqt.com</a></h2>
 
         <div className={StyleSheet.searchbar}>
           <i className={"fa-solid fa-magnifying-glass"} id="search-submit"></i>
-          <input type="text" id="search" placeholder="Search summoner" onFocus={this.toggleRecent} onBlur={this.toggleRecent} autoComplete="off" />
+          <input type="text" id="search" placeholder={t("Search Summoner")} onFocus={this.toggleRecent} onBlur={this.toggleRecent} autoComplete="off" />
           <div className={StyleSheet.recentlySearched} id={StyleSheet.recentlySearched} style={{ display: this.state.display }}>
             {recentlySearchedFor}
           </div>
@@ -192,3 +197,5 @@ export default class Start extends Component {
     </Fragment>
   }
 }
+
+export default withTranslation()(Start);

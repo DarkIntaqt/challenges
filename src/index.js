@@ -1,3 +1,4 @@
+import "./i18nextConf";
 import { createRoot } from 'react-dom/client';
 import {
   BrowserRouter,
