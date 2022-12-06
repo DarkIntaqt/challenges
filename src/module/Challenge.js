@@ -21,10 +21,11 @@ import Wrapper from "./Wrapper";
 
 import VipBadge from "./VipBadge"
 import Ad from "./Ad"
+import { withTranslation } from "react-i18next";
 
 //import excss from "../css/aboutChallenge.module.css"
 
-export default class Challenge extends Component {
+class Challenge extends Component {
     constructor(props) {
         super(props)
         this.params = this.props.params
@@ -60,7 +61,7 @@ export default class Challenge extends Component {
                     name: "Loading",
                     description: "Loading"
                 }
-            }
+            },
         }
 
         const tempChallenge = getCache(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`)
@@ -78,7 +79,8 @@ export default class Challenge extends Component {
             totalLength: 250,
             message: -1,
             filter: tempRegion,
-            challenge: challengePlaceholder
+            challenge: challengePlaceholder,
+            translation: props.t
         }
 
     }
@@ -139,6 +141,7 @@ export default class Challenge extends Component {
     }
 
     render() {
+        const t = this.state.translation
 
         if (document.location.pathname.slice(-1) === "/") {
             return <Error></Error>
@@ -310,7 +313,7 @@ export default class Challenge extends Component {
         } else {
             thresholds = challenge.challenge.thresholds
             if (checkThresholds(thresholds)) {
-                summoner = <div className={css.disabledMessage}>This challenge is not enabled in #{absoluteRegion}</div>
+                summoner = <div className={css.disabledMessage}>{("This challenge isn't enabled in this {{region}}", { region: absoluteRegion })}</div>
             } else {
                 warnings.push(challenge.stats["percentiles-" + serverToMachineReadable(region)])
                 warnings.push(<div className={css.disabledMessage}>Leaderboards aren't enabled for this challenge<br /><br /><span className={css.details}>Why? Because it is not possible to "scale" in this challenge, as it has a static highest achievable score. <br />If you think this challenge should have a leaderboard, please create an issue on <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">GitHub</a>.</span></div >)
@@ -319,13 +322,13 @@ export default class Challenge extends Component {
 
         try {
             if (checkExists(challenge.challenge.tags["leaderboardManuallyEnabled"])) {
-                warnings.push(<div className={css.disabledMessage} key={"exp"}>Leaderboards might be incorrect due to a missing API-endpoint about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.  </div>)
+                warnings.push(<div className={css.disabledMessage} key={"exp"}>{t("Leaderboards might be incorrect due to a missing API-endpoint about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.")}</div>)
             }
         } catch (error) {
             console.warn(error);
         }
         if (challenge.challenge.reversed) {
-            warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"} key={"reverse"}>This challenge is reversed. The less your points the better your placement</div>)
+            warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"} key={"reverse"}>{t("This challenge is reversed. The less your points the better your placement")}</div>)
         }
 
         // if (summoner.length === 0) {
@@ -345,7 +348,7 @@ export default class Challenge extends Component {
                 <p className={intToTier(i)} style={{ color: "var(--type)", textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{intToTier(i)}</p>
                 <p style={lineThrough}>{beautifyNum(thresholds[i])}</p>
                 <p style={lineThrough}>{Math.round(percentiles[intToTier(i)] * 1000) / 10}%</p>
-            </ div>)
+            </div>)
         }
 
         let content = <Fragment>
@@ -354,7 +357,7 @@ export default class Challenge extends Component {
                 <h1>{challenge.challenge.translation.name}</h1>
                 <p className={"SILVER " + css.challengeDescription} style={{ margin: "0 5px 5px 10px", cursor: "auto" }}>
                     {challenge.challenge.translation.description} {challenge.timestamp
-                        ? <span data-nosnippet className={css.updated}>(Updated <Timestamp date={challenge.timestamp * 1000} />)</span>
+                        ? <span data-nosnippet className={css.updated}>({t("Updated")} <Timestamp date={challenge.timestamp * 1000} />)</span>
                         : <span data-nosnippet className={css.updated}></span>
                     }
 
@@ -376,14 +379,14 @@ export default class Challenge extends Component {
 
                 <div className={css.rowParent + " " + css.thresholdTable}>
                     <div className={css.seoArea}>
-                        <h2>Thresholds</h2>
-                        <span> How many players have reached a tier</span>
+                        <h2>{t("Thresholds")}</h2>
+                        <span> {t("How many players have reached a tier")}</span>
                     </div>
                     <div className={isLoading + " " + css.rowParentTable}>
 
                         <div className={css.rowParentTableRow + " " + css.rowParentTableRowHeading}>
-                            <p>Tier</p>
-                            <p>Points</p>
+                            <p>{t("Tier")}</p>
+                            <p>{t("Points")}</p>
                             <p>%</p>
                         </div>
 
@@ -395,8 +398,8 @@ export default class Challenge extends Component {
 
                 {challenge.text !== false ? <div className={css.rowParent + " object1000 " + css.field}>
                     <div className={css.seoArea}>
-                        <h2>Info</h2>
-                        <span> All you need to know about this challenge </span>
+                        <h2>{t("Info")}</h2>
+                        <span> {t("All you need to know about this challenge")} </span>
                     </div>
                     <p dangerouslySetInnerHTML={{ __html: challenge.text.replace(/\n/g, "<br />") }}></p>
                 </div> : null
@@ -410,16 +413,16 @@ export default class Challenge extends Component {
 
             <section className={css.rowParent + " " + css.zebra}>
                 <div className={css.seoArea}>
-                    <h2>"{challenge.challenge.translation.name}" Leaderboard</h2>
-                    <span> {this.state.filter === "world" ? "Global Ranking" : "Regional Ranking"} </span>
+                    <h2>{t("\"{{challenge}}\" Leaderboard", { challenge: challenge.challenge.translation.name })}</h2>
+                    <span> {this.state.filter === "world" ? t("Global Ranking") : t("Regional Ranking")} </span>
                 </div>
                 <table className={isLoading}>
                     <tbody>
                         <tr>
-                            <th>Position</th>
-                            <th>Summoner</th>
-                            <th>Tier</th>
-                            <th>Points</th>
+                            <th>{t("Position")}</th>
+                            <th>{t("Summoner")}</th>
+                            <th>{t("Tier")}</th>
+                            <th>{t("Points")}</th>
                         </tr>
                         {summoner}
                     </tbody>
@@ -436,3 +439,5 @@ export default class Challenge extends Component {
         </Wrapper>
     }
 }
+
+export default withTranslation()(Challenge)

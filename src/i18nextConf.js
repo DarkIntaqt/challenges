@@ -1,15 +1,15 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import Backend from 'i18next-http-backend';
-import translation from './translation.json'
+import translation from './translations/en.json'
+import translationES from './translations/es.json'
+import translationDE from './translations/de.json'
 
 const fallbackLng = ['en'];
-const availableLanguages = ['en', 'es'];
+const availableLanguages = ['en', 'es', 'de'];
 
 
 
 i18n
-   .use(Backend)
    .use(initReactI18next)
    .init({
       fallbackLng,
@@ -19,7 +19,6 @@ i18n
       },
 
       debug: true,
-
       whitelist: availableLanguages,
 
       interpolation: {
@@ -27,6 +26,17 @@ i18n
       },
       react: {
          useSuspense: false
+      },
+      resources: {
+         en: {
+            translation: translation
+         },
+         es: {
+            translation: translationES
+         },
+         de: {
+            translation: translationDE
+         }
       }
    })
    ;

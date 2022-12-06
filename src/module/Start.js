@@ -10,7 +10,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import goTo from "../func/goTo";
 import i18n from 'i18next';
 
-i18n.changeLanguage("es")
+i18n.changeLanguage("de")
 
 class Start extends Component {
 

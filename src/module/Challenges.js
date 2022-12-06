@@ -17,8 +17,9 @@ import Wrapper from "./Wrapper"
 import Loadable from "react-loadable";
 import { setCookie } from "../func/cookiefunctions"
 import Error from "./Error"
+import { withTranslation } from "react-i18next"
 
-export default class Challenges extends Component {
+class Challenges extends Component {
     constructor(props) {
         super(props);
         this.load = this.load.bind(this)
@@ -42,7 +43,8 @@ export default class Challenges extends Component {
 
         this.state = {
             challenges: window.loadingUI,
-            event: <LoadEvent content="" />
+            event: <LoadEvent content="" />,
+            translation: props.t
         }
     }
 
@@ -341,6 +343,7 @@ export default class Challenges extends Component {
     }
 
     render() {
+        const t = this.state.translation
 
         if (document.location.pathname.slice(-1) === "/") {
             return <Error></Error>
@@ -349,15 +352,15 @@ export default class Challenges extends Component {
         return <Wrapper >
 
             <div className={challengeCSS.heading}>
-                <h1>List of all Challenges</h1>
-                <h2>Overview and how to obtain them</h2>
+                <h1>{t("List of all Challenges")}</h1>
+                <h2>{t("Overview and how to obtain them")}</h2>
             </div>
 
             <section className={css.parent}>
                 {this.state.event}
             </section>
 
-            <input type="text" placeholder="Search for a challenge" onKeyUp={this.search} className={filterCSS.input} />
+            <input type="text" placeholder={t("Search for a challenge")} onKeyUp={this.search} className={filterCSS.input} />
             <div className={filterCSS.filter}>
 
                 <div className={filterCSS.selectors + " clearfix"}>
@@ -371,7 +374,7 @@ export default class Challenges extends Component {
                     </div>
                     <p className={filterCSS.info}>Filter (multiple choices)</p>
                     <div className={filterCSS.category} category="category">
-                        <p className={filterCSS.cheading}>Category</p>
+                        <p className={filterCSS.cheading}>{t("Category")}</p>
                         <button onClick={this.changeFilter}>
                             <img src={config.images.teamwork} alt="teamwork" />
                             Teamwork
@@ -403,7 +406,7 @@ export default class Challenges extends Component {
                     </div>
 
                     <div className={filterCSS.category} category="type">
-                        <p className={filterCSS.cheading}>Type</p>
+                        <p className={filterCSS.cheading}>{t("Type")}</p>
                         <button onClick={this.changeFilter}>
                             <i className="fa-solid fa-angles-up"></i>
                             Progress
@@ -435,7 +438,7 @@ export default class Challenges extends Component {
                     </div>
 
                     <div className={filterCSS.category} category="gamemode">
-                        <p className={filterCSS.cheading}>Gamemode</p>
+                        <p className={filterCSS.cheading}>{t("Gamemode")}</p>
                         <button onClick={this.changeFilter}>
                             <img src={config.images.summonersrift} alt="Summoners Rift" />
                             Summoners Rift
@@ -457,3 +460,5 @@ export default class Challenges extends Component {
         </Wrapper>
     }
 }
+
+export default withTranslation()(Challenges)

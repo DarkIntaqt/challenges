@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import { withTranslation } from "react-i18next";
+
 import get from "../func/get"
 import goTo from "../func/goTo.js";
 
@@ -9,7 +11,7 @@ import Wrapper from "./Wrapper";
 import Error from "./Error";
 
 
-export default class Title extends Component {
+class Title extends Component {
     constructor(props) {
         super(props);
         this.showUser = this.showUser.bind(this);
@@ -17,7 +19,8 @@ export default class Title extends Component {
         this.state = {
             titles: [
 
-            ]
+            ],
+            translation: props.t
         }
     }
 
@@ -44,7 +47,7 @@ export default class Title extends Component {
     }
 
     render() {
-
+        const t = this.state.translation
         if (document.location.pathname.slice(-1) === "/") {
             return <Error></Error>
         }
@@ -57,7 +60,7 @@ export default class Title extends Component {
             titles.push(<a href={"/challenge/" + element.cid} className={css.title + " " + element.type + " clearfix"} key={element.cid} challengeid={element.cid} onClick={goTo}>
                 <LazyLoadImage height={45} width={45} src={"https://lolcdn.darkintaqt.com/cdn/np-token/" + element.icon + "/" + element.type.toLowerCase()} placeholderSrc={"https://cdn.darkintaqt.com/lol/static/missing/item.png"} alt={element.title + "'s icon"} />
                 <h2>{element.title}<br /><span data-nosnippet>{element.percentile}%</span></h2>
-                <p>Reach <span>{element.type} tier</span> in <span>"{element.challenge}"</span>. <br></br>{element.description}<br /><br /><i>Need {element.threshold}.</i></p>
+                <p>{t("Reach {{tier}} tier in \"{{challenge}}\"", { tier: element.type, challenge: element.challenge })}<br></br>{element.description}<br /><br /><i>{t("Need {{p}}", { p: element.threshold })}</i></p>
 
             </a>)
         }
@@ -69,8 +72,8 @@ export default class Title extends Component {
 
         return <Wrapper className={"object1000"}>
 
-            <h1 className={css.heading}>All titles</h1>
-            <p className={css.subheading}>A list of all League of Legends Titles Challenge and how to achieve them. </p>
+            <h1 className={css.heading}>{t("All titles")}</h1>
+            <p className={css.subheading}>{t("A list of all League of Legends Title Challenges and how to achieve them")}</p>
 
             <div className={css.titles}>
                 {titles}
@@ -78,3 +81,5 @@ export default class Title extends Component {
         </Wrapper>
     }
 }
+
+export default withTranslation()(Title)

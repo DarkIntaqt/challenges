@@ -22,6 +22,8 @@ import Loadable from "react-loadable";
 import UserChallenges from "./UserChallenges"
 import VipBadge from "../VipBadge";
 import Wrapper from "../Wrapper";
+import { withTranslation } from "react-i18next";
+import { t } from "i18next";
 
 
 const Title = Loadable({
@@ -58,7 +60,7 @@ const History = Loadable({
 });
 
 
-export default class User extends Component {
+class User extends Component {
     constructor(props) {
         super(props)
 
@@ -114,7 +116,8 @@ export default class User extends Component {
         this.state = {
             error: false,
             user: currentUserConfig,
-            verified: verified
+            verified: verified,
+            translation: props.t
         }
 
         this.addFileToCache = this.addFileToCache.bind(this)
@@ -203,6 +206,7 @@ export default class User extends Component {
 
 
     render() {
+        const t = this.state.translation
         let error = this.state.error;
 
         const currentLocation = window.location.pathname.split("/")[3] ?? "overview"
@@ -247,13 +251,13 @@ export default class User extends Component {
             }}>
                 <div className={tier}>
                     <b>
-                        {capitalize(tier)} Token
+                        {t("{{token}} Token", { token: capitalize(tier) })}
                     </b>
                     <br />
                     {challenge.translation.description}
                     <br />
                     <br />
-                    <i>Need {beautifyNum(threshold)}</i>
+                    <i>{t("Need {{p}}", { p: beautifyNum(threshold) })}</i>
                 </div>
             </div>
         })
@@ -326,13 +330,13 @@ export default class User extends Component {
 
             <div className={css.topLevelFilter + " " + css["selectedFilter" + currentLocation]}>
 
-                <Link to="" className={css["overview"]}>Overview</Link>
+                <Link to="" className={css["overview"]}>{t("Overview")}</Link>
 
-                <Link to="titles" className={css["titles"]}>Titles</Link>
+                <Link to="titles" className={css["titles"]}>{t("Titles")}</Link>
 
-                <Link to="statistics" className={css["statistics"]}>Statistics</Link>
+                <Link to="statistics" className={css["statistics"]}>{t("Statistics")}</Link>
 
-                {this.state.verified === true || currentLocation === "history" ? <Link to="history" className={css["history"]}>History <span>BETA</span></Link> : null}
+                {this.state.verified === true || currentLocation === "history" ? <Link to="history" className={css["history"]}>{t("History")} <span>{t("BETA")}</span></Link> : null}
 
             </div>
 
@@ -352,3 +356,4 @@ export default class User extends Component {
         </Wrapper>
     }
 }
+export default withTranslation()(User)

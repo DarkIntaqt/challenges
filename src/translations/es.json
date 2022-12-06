@@ -18,8 +18,8 @@
 	"Overview and how to obtain them": "Vista general y como conseguirlos",
 	"All titles": "Todos los títulos",
 	"A list of all League of Legends Title Challenges and how to achieve them": "Una lista de todos los títulos de League of Legends y como conseguirlos",
-	"Need %.": "Necesita %.",
-	"Reach % tier in \"%\". ": "Alcanzar % nivel en \"%\". ",
+	"Need {{p}}": "Necesita {{p}}.",
+	"Reach {{tier}} tier in \"{{challenge}}\"": "Alcanzar nivel {{tier}} en \"{{challenge}}\". ",
 	"Updated": "Actualizado",
 	"Info": "Información",
 	"All you need to know about this challenge": "Todo lo que necesitas saber acerca de este desafio",
@@ -50,7 +50,7 @@
 	"Ranked": "Ranked",
 	"Profile": "Perfil",
 	"%s Title": "Título de %s",
-	"%s Token": "Medalla Nivel %s",
+	"{{token}} Token": "Medalla Nivel {{token}}",
 	"Overview": "Vista General",
 	"Statistics": "Estadisticas",
 	"History": "Historial",
@@ -71,5 +71,12 @@
 	"Last upgraded": "Último mejorado",
 	"Leaderboard Position": "Posición en la tabla de clasificación",
 	"Closest Levelup": "Próximo a subir de nivel",
-	"Thanks to %s for serving the assets and YOUR NAME for translating the site into LANGUAGE": "Gracias a CommunityDragon por dar los assets y a NicolasWilde por traducir este sitio al Español"
+	"Thanks to {{cdragon}} for serving the assets": "Gracias a {{cdragon}} por dar los assets y a NicolasWilde por traducir este sitio al Español",
+	"Thanks to {{cdragon}} for serving the assets. ": "Thanks to {{cdragon}} for serving the assets. ",
+	"Leaderboards might be incorrect due to a missing API-endpoint about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.": "Leaderboards might be incorrect due to a missing API-endpoint about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.",
+	"Leaderboards aren't enabled for this challenge": "Leaderboards aren't enabled for this challenge",
+	"This leaderboard isn't enabled in this {{region}}": "This leaderboard isn't enabled in this {{region}}",
+	"This challenge isn't enabled in this {{region}}": "This challenge isn't enabled in this {{region}}",
+	"This challenge is reversed. The less your points the better your placement": "This challenge is reversed. The less your points the better your placement",
+	"\"{{challenge}}\" Leaderboard": "\"{{challenge}}\" Leaderboard"
 }

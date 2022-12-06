@@ -18,8 +18,8 @@
    "Overview and how to obtain them": "Overview and how to obtain them",
    "All titles": "All titles",
    "A list of all League of Legends Title Challenges and how to achieve them": "A list of all League of Legends Title Challenges and how to achieve them",
-   "Need %.": "Need %.",
-   "Reach % tier in \"%\". ": "Reach % tier in \"%\". ",
+   "Need {{p}}": "Need {{p}}.",
+   "Reach {{tier}} tier in \"{{challenge}}\"": "Reach {{tier}} tier in \"{{challenge}}\". ",
    "Updated": "Updated",
    "Info": "Info",
    "All you need to know about this challenge": "All you need to know about this challenge",
@@ -50,7 +50,7 @@
    "Ranked": "Ranked",
    "Profile": "Profile",
    "%s Title": "%s Title",
-   "%s Token": " %s Token",
+   "{{token}} Token": " {{token}} Token",
    "Overview": "Overview",
    "Statistics": "Statistics",
    "History": "History",
@@ -71,5 +71,11 @@
    "Last upgraded": "Last upgraded",
    "Leaderboard Position": "Leaderboard Position",
    "Closest Levelup": "Closest Levelup",
-   "Thanks to %s for serving the assets. ": "Thanks to %s for serving the assets. "
+   "Thanks to {{cdragon}} for serving the assets. ": "Thanks to {{cdragon}} for serving the assets. ",
+   "Leaderboards might be incorrect due to a missing API-endpoint about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.": "Leaderboards might be incorrect due to a missing API-endpoint about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.",
+   "Leaderboards aren't enabled for this challenge": "Leaderboards aren't enabled for this challenge",
+   "This leaderboard isn't enabled in this {{region}}": "This leaderboard isn't enabled in this {{region}}",
+   "This challenge isn't enabled in this {{region}}": "This challenge isn't enabled in this {{region}}",
+   "This challenge is reversed. The less your points the better your placement": "This challenge is reversed. The less your points the better your placement",
+   "\"{{challenge}}\" Leaderboard": "\"{{challenge}}\" Leaderboard"
 }
