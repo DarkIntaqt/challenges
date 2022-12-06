@@ -300,60 +300,67 @@ class User extends Component {
             get("https://challenges.darkintaqt.com/api/v1/c-vip/?id=" + id, this.validateVerified)
         }
 
-        return <Wrapper showAds={typeof summonerName !== "object"}>
+        return <div className={css.userwrapperfull}>
+            {this.state.verified === true ? <div className={css.wrapperbg} style={{
+                backgroundImage: `url(https://cdn.darkintaqt.com/lol/static/challenges/_${strtolower(tier)}-full.webp)`
+            }}></div> : null}
+            <section className={css.innerwrapper}>
+                <Wrapper showAds={typeof summonerName !== "object"}>
 
 
 
-            {/* STATIC PROFILE HEAD */}
-            <div className={`${css.profile} ${tier}`} >
+                    {/* STATIC PROFILE HEAD */}
+                    <div className={`${css.profile} ${tier}`} >
 
-                <img className={css.edge} src={`https://cdn.darkintaqt.com/lol/static/challenges/card-${tier}.webp`} alt="" />
+                        <img className={css.edge} src={`https://cdn.darkintaqt.com/lol/static/challenges/card-${tier}.webp`} alt="" />
 
-                <img src={`${config.cdnBasePath}/cdn/profileicon/${summonerIcon}`} alt="" />
+                        <img src={`${config.cdnBasePath}/cdn/profileicon/${summonerIcon}`} alt="" />
 
-                <h1>
-                    {summonerName}{this.state.verified === true ? <VipBadge size={"2rem"} /> : null}{typeof summonerName === "object" ? null : <Fragment>
-                        <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
-                    </Fragment>
-                    }
-                </h1>
+                        <h1>
+                            {summonerName}{this.state.verified === true ? <VipBadge size={"2rem"} /> : null}{typeof summonerName === "object" ? null : <Fragment>
+                                <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
+                            </Fragment>
+                            }
+                        </h1>
 
-                {title}
+                        {title}
 
-                <div className={css.selections}>
-                    {selected}
-                </div>
+                        <div className={css.selections}>
+                            {selected}
+                        </div>
 
-            </div>
-
-
-
-            <div className={css.topLevelFilter + " " + css["selectedFilter" + currentLocation]}>
-
-                <Link to="" className={css["overview"]}>{t("Overview")}</Link>
-
-                <Link to="titles" className={css["titles"]}>{t("Titles")}</Link>
-
-                <Link to="statistics" className={css["statistics"]}>{t("Statistics")}</Link>
-
-                {this.state.verified === true || currentLocation === "history" ? <Link to="history" className={css["history"]}>{t("History")} <span>{t("BETA")}</span></Link> : null}
-
-            </div>
+                    </div>
 
 
-            <Routes>
 
-                <Route path="" element={<UserChallenges summoner={this.state.user} server={this.params.server} />}></Route>
+                    <div className={css.topLevelFilter + " " + css["selectedFilter" + currentLocation]}>
 
-                <Route path="titles" element={<Title summoner={this.state.user} />}></Route>
+                        <Link to="" className={css["overview"]}>{t("Overview")}</Link>
 
-                <Route path="statistics" element={<Statistics summoner={this.state.user} />}></Route>
+                        <Link to="titles" className={css["titles"]}>{t("Titles")}</Link>
 
-                <Route path="history" element={<History summoner={this.state.user} />}></Route>
+                        <Link to="statistics" className={css["statistics"]}>{t("Statistics")}</Link>
 
-            </Routes>
+                        {this.state.verified === true || currentLocation === "history" ? <Link to="history" className={css["history"]}>{t("History")} <span>{t("BETA")}</span></Link> : null}
 
-        </Wrapper>
+                    </div>
+
+
+                    <Routes>
+
+                        <Route path="" element={<UserChallenges summoner={this.state.user} server={this.params.server} />}></Route>
+
+                        <Route path="titles" element={<Title summoner={this.state.user} />}></Route>
+
+                        <Route path="statistics" element={<Statistics summoner={this.state.user} />}></Route>
+
+                        <Route path="history" element={<History summoner={this.state.user} />}></Route>
+
+                    </Routes>
+
+                </Wrapper>
+            </section>
+        </div>
     }
 }
 export default withTranslation()(User)
