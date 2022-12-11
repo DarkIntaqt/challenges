@@ -41,7 +41,7 @@ function getQueue(queueId) {
             return queues[i]["description"]
         }
     }
-    return "Unkown Gamemode"
+    return "Unknown Gamemode"
 }
 
 export default class Match extends Component {
