@@ -3,9 +3,10 @@ import { initReactI18next } from 'react-i18next';
 import translation from './translations/en.json'
 import translationES from './translations/es.json'
 import translationDE from './translations/de.json'
+import translationJA from './translations/ja.json'
 
 const fallbackLng = ['en'];
-const availableLanguages = ['en', 'es', 'de'];
+const availableLanguages = ['en', 'es', 'de', 'ja'];
 
 
 
@@ -36,6 +37,9 @@ i18n
          },
          de: {
             translation: translationDE
+         },
+         ja: {
+            translation: translationJA
          }
       }
    })
