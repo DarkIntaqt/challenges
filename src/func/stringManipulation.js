@@ -6,6 +6,18 @@
 export function strtolower(value) {
 
     return ("" + value).toLowerCase();
+
+}
+
+/**
+ * Uppercase a string or any empty object
+ * @param {string} value 
+ * @returns {string}
+ */
+export function strtoupper(value) {
+
+    return ("" + value).toUpperCase();
+
 }
 
 

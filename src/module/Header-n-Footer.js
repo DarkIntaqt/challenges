@@ -2,8 +2,11 @@ import { Outlet, Link } from "react-router-dom";
 import { Fragment } from "react"
 import StyleSheet from "../css/header.module.css";
 import logo from "../img/logo.png";
+import { useTranslation } from "react-i18next";
 
 export default function HeaderNFooter() {
+
+    const { t } = useTranslation()
 
     return <Fragment>
         <nav className={StyleSheet.Header}>
@@ -14,19 +17,19 @@ export default function HeaderNFooter() {
                 </Link>
 
                 <Link to="/community" className={StyleSheet.hideOnMobile}>
-                    <i className="fa-solid fa-user-group"></i> Community
+                    <i className="fa-solid fa-user-group"></i> {t("Community")}
                 </Link>
 
                 <Link to="/challenges">
-                    <i className="fa-solid fa-compass"></i> Challenges
+                    <i className="fa-solid fa-compass"></i> {t("Challenges")}
                 </Link>
 
                 <Link to="/challenge/0" className={StyleSheet.hideOnMobile}>
-                    <i className="fa-solid fa-ranking-star"></i> Leaderboards
+                    <i className="fa-solid fa-ranking-star"></i> {t("Leaderboards")}
                 </Link>
 
                 <Link to="/titles">
-                    <i className="fa-solid fa-award"></i> Titles
+                    <i className="fa-solid fa-award"></i> {t("Titles")}
                 </Link>
             </div>
         </nav>
@@ -47,7 +50,18 @@ export default function HeaderNFooter() {
                     </Link>
                 </div>
                 <div className={StyleSheet.centerFooter} data-nosnippet>
-                    <p>'Challenges.DarkIntaqt.Com' isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.<br /><br />&copy; 2022 - challenges.darkintaqt.com<br />Thanks to <a href="https://www.communitydragon.org" target="_blank" rel="noreferrer">CommunityDragon</a> for serving the assets. </p>
+                    <p>
+                        'Challenges.DarkIntaqt.Com' isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
+                        <br />
+                        <br />
+                        &copy; 2022 - challenges.darkintaqt.com
+                    </p>
+                    <p dangerouslySetInnerHTML={
+                        {
+                            __html: t("Thanks to {{cdragon}} for serving the assets", { cdragon: '<a href="https://www.communitydragon.org" target="_blank" rel="noreferrer">CommunityDragon</a>' })
+                        }
+                    }></p>
+
                 </div>
                 <div className={StyleSheet.rightFooter}>
                     <a href="https://darkintaqt.com/assets/impressum/" rel="noreferrer" target="_blank">Imprint</a>

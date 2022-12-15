@@ -23,6 +23,9 @@ import VariableProxy from './module/VariableProxy';
 import Loader from './module/Loader';
 import Loadable from 'react-loadable';
 import { setCookie } from "./func/cookiefunctions"
+import i18next from "i18next";
+
+i18next.changeLanguage("de")
 
 function main() {
 

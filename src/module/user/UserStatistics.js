@@ -6,15 +6,16 @@ import config from "../../config";
 import statsCalculateTotalPoints from "./statsCalculateTotalPoints";
 import tierIdToPoints, { intToTier, tierToInt } from "../../func/tierFunctions";
 import Chart from "chart.js/auto";
-import { capitalize } from "../../func/stringManipulation"
+import { capitalize, strtolower } from "../../func/stringManipulation"
 import orderChallenges from "./orderChallenges";
 
 import { checkExists } from "../../func/arrayManipulationFunctions.ts";
 
 import { beautifyNum } from "../../func/beautify.ts"
+import { withTranslation } from "react-i18next";
 
 
-export default class UserStatistics extends Component {
+class UserStatistics extends Component {
     constructor(props) {
         super(props)
 
@@ -22,10 +23,15 @@ export default class UserStatistics extends Component {
 
         this.props = props
 
+        this.state = {
+            translation: props.t
+        }
+
     }
 
     showGraph() {
         const user = this.props.summoner
+        const t = this.state.translation
 
         if (user.challenges.length === 0) { return }
 
@@ -34,8 +40,8 @@ export default class UserStatistics extends Component {
             chartStatus.destroy();
         }
 
-        let tiers = config.tiers.map((tier) => { return capitalize(tier) })
-        tiers[0] = "Unranked";
+        let tiers = config.tiers.map((tier) => { return capitalize(t(strtolower(tier))) })
+        tiers[0] = capitalize(t("unranked"));
 
         const labels = tiers;
 
@@ -94,6 +100,7 @@ export default class UserStatistics extends Component {
 
     render() {
 
+        const t = this.state.translation
         let user = JSON.parse(JSON.stringify(this.props.summoner));
         user.challenges = orderChallenges(user.challenges, "level", { gamemode: [], type: [], category: [] })
         if (user.challenges.length === 0) {
@@ -150,10 +157,10 @@ export default class UserStatistics extends Component {
             challenges.push(tiers[tier])
 
             thresholdTable.unshift(<div key={"threshold" + index} className={css.rowParentTableRow}>
-                <p className={tier} style={{ color: "var(--type)", textAlign: "center" }}>{tier.replace("NONE", "UNRANKED")}</p>
+                <p className={tier} style={{ color: "var(--type)", textAlign: "center" }}>{capitalize(t(strtolower(tier.replace("NONE", "UNRANKED"))))}</p>
                 <p>{tiers[tier]}</p>
-                <p>{tierIdToPoints(tierToInt(tier))} pts</p>
-                <p>{beautifyNum(tierIdToPoints(tierToInt(tier)) * tiers[tier])} pts</p>
+                <p>{tierIdToPoints(tierToInt(tier))} {t("pts")}</p>
+                <p>{beautifyNum(tierIdToPoints(tierToInt(tier)) * tiers[tier])} {t("pts")}</p>
             </div>)
 
         }
@@ -170,8 +177,8 @@ export default class UserStatistics extends Component {
         thresholdTable.push(<div key={"threshold-total"} className={css.rowParentTableRow} style={{ backgroundColor: "var(--dark2)", borderRadius: "0 0 5px 5px" }}>
             <p style={{ color: "white", textAlign: "center" }}>TOTAL</p>
             <p>{totalChallenges}</p>
-            <p>ø {pointsAverage} pts</p>
-            <p style={{ fontWeight: "bold" }}>{beautifyNum(totalPoints)} pts</p>
+            <p>ø {pointsAverage} {t("pts")}</p>
+            <p style={{ fontWeight: "bold" }}>{beautifyNum(totalPoints)} {t("pts")}</p>
         </div>)
 
 
@@ -182,7 +189,7 @@ export default class UserStatistics extends Component {
 
                     <p>
                         <img src={"https://cdn.darkintaqt.com/lol/static/challenges/crystal.svg"} alt="crystal" />
-                        Total Points
+                        {t("Total Points")}
                     </p>
                     <ProgressBar
                         width={100}
@@ -259,16 +266,16 @@ export default class UserStatistics extends Component {
 
             <div className={css.rowParent}>
                 <div className={css.seoArea}>
-                    <h2>Total Points</h2>
-                    <span> How your total points are calculated</span>
+                    <h2>{t("Total Points")}</h2>
+                    <span> {t("How your total points are calculated")}</span>
                 </div>
                 <div className={css.rowParentTable}>
 
                     <div className={css.rowParentTableRow + " " + css.rowParentTableRowHeading}>
-                        <p>Tier</p>
-                        <p>Challenges</p>
-                        <p>Points / challenge</p>
-                        <p>Total Points</p>
+                        <p>{t("Tier")}</p>
+                        <p>{t("Challenges")}</p>
+                        <p>{t("Points / Challenge")}</p>
+                        <p>{t("Total Points")}</p>
                     </div>
 
                     {thresholdTable}
@@ -276,17 +283,19 @@ export default class UserStatistics extends Component {
             </div>
             <div className={css.rowParent}>
                 <div className={css.seoArea}>
-                    <h2>Challenge Distribution</h2>
+                    <h2>{t("Challenge Distribution")}</h2>
                 </div>
                 <canvas id={css["distributionChart"]}></canvas>
             </div>
 
             <div className={css.rowParent}>
                 <p className={css.advertisement}>
-                    Tell us which stats you want to see here<br />
+                    {t("Tell us which stats you want to see here")}<br />
                     <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">Give Feedback</a>
                 </p>
             </div>
         </section>
     }
 }
+
+export default withTranslation()(UserStatistics);

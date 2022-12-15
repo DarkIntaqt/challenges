@@ -1,7 +1,7 @@
 import { Component, Fragment } from "react";
 import css from "../../css/user.module.css"
 import config from "../../config"
-import { capitalize, strtolower } from "../../func/stringManipulation"
+import { capitalize, strtolower, strtoupper } from "../../func/stringManipulation"
 import { intToTier } from "../../func/tierFunctions";
 import getChallenge from "../../func/getChallenge"
 
@@ -23,7 +23,6 @@ import UserChallenges from "./UserChallenges"
 import VipBadge from "../VipBadge";
 import Wrapper from "../Wrapper";
 import { withTranslation } from "react-i18next";
-import { t } from "i18next";
 
 
 const Title = Loadable({
@@ -341,7 +340,7 @@ class User extends Component {
 
                         <Link to="statistics" className={css["statistics"]}>{t("Statistics")}</Link>
 
-                        {this.state.verified === true || currentLocation === "history" ? <Link to="history" className={css["history"]}>{t("History")} <span>{t("BETA")}</span></Link> : null}
+                        {this.state.verified === true || currentLocation === "history" ? <Link to="history" className={css["history"]}>{t("History")} <span>{strtoupper(t("beta"))}</span></Link> : null}
 
                     </div>
 

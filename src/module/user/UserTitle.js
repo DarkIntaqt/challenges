@@ -191,11 +191,9 @@ export default class UserTitle extends Component {
             const tier = intToTier(parseInt(titleIdString.substring(titleIdString.length - 2)) + 1)
 
             try {
-                let percentage
                 let userprogress = 0
-                try {
-                    percentage = Math.round(challenge.percentiles[tier] * 1000) / 10
 
+                try {
                     for (let i = 0; i < user.challenges.length; i++) {
                         const element = user.challenges[i];
                         if (element[0] === parseInt(titleIdString.substr(0, titleIdString.length - 2))) {
@@ -204,8 +202,9 @@ export default class UserTitle extends Component {
                     }
 
                 } catch (error) {
-                    percentage = "0"
+                    console.error(error);
                 }
+
                 return <ChallengeObject
                     tier={"UNRANKED"}
                     href={"/titles"}

@@ -20,8 +20,9 @@ import css from "../../css/user.module.css"
 import orderChallenges, { getNextLevel } from "./orderChallenges";
 import goTo from "../../func/goTo";
 import Loader from "../Loader"
+import { withTranslation } from "react-i18next";
 
-export default class UserChallenges extends Component {
+class UserChallenges extends Component {
     constructor(props) {
         super(props)
 
@@ -41,7 +42,8 @@ export default class UserChallenges extends Component {
                 "category": [],
                 "type": [],
                 "gamemode": []
-            }
+            },
+            translation: props.t
         }
 
     }
@@ -128,6 +130,7 @@ export default class UserChallenges extends Component {
 
     render() {
 
+        const t = this.state.translation
         const user = JSON.parse(JSON.stringify(this.props.summoner));
 
         if (user.challenges.length === 0) {
@@ -222,7 +225,7 @@ export default class UserChallenges extends Component {
             if (filter === "timestamp") {
                 leaderboardposition = <span><span className={challengeCSS.hideOnHover}><Timestamp date={challenge[4]} /></span><span className={challengeCSS.showOnHover}><Timestamp date={challenge[4]} type="static" /></span></span>
             } else {
-                leaderboardposition = <span>{position}Top {(Math.round(challenge[5][0] * 10000) / 100)}%</span>
+                leaderboardposition = <span>{position}{t("Top {{percent}}%", { percent: (Math.round(challenge[5][0] * 10000) / 100) })}</span>
             }
 
 
@@ -259,26 +262,26 @@ export default class UserChallenges extends Component {
                     </div>
                     <p className={filterCSS.info}>Filter</p>
                     <div className={filterCSS.category} category="category">
-                        <p className={filterCSS.cheading}>Order by</p>
+                        <p className={filterCSS.cheading}>{t("Order by")}</p>
 
                         <button onClick={this.changeFilter} id="level" className={filterCSS["selected"]}>
                             <i className="fa-solid fa-ranking-star"></i>
-                            Rank
+                            {t("Rank")}
                         </button>
 
                         <button onClick={this.changeFilter} id="timestamp">
                             <i className="fa-regular fa-clock"></i>
-                            Last upgraded
+                            {t("Last upgraded")}
                         </button>
 
                         <button onClick={this.changeFilter} id="percentile">
                             <i className="fa-solid fa-hashtag"></i>
-                            Leaderboard Position
+                            {t("Leaderboard Position")}
                         </button>
 
                         <button onClick={this.changeFilter} id="levelup">
                             <i className="fa-solid fa-arrow-up-right-dots"></i>
-                            Closest Levelup
+                            {t("Closest Levelup")}
                         </button>
 
                         <button onClick={this.changeFilter} id={"alphabetic-" + this.state.alphabet}>
@@ -289,7 +292,7 @@ export default class UserChallenges extends Component {
                     </div>
 
                     <div className={filterCSS.category} category="category">
-                        <p className={filterCSS.cheading}>Category</p>
+                        <p className={filterCSS.cheading}>{t("Category")}</p>
 
                         <button onClick={this.changeExtraFilter} id="expertise" type="category">
                             <img src={config.images.expertise} alt="" />
@@ -329,7 +332,7 @@ export default class UserChallenges extends Component {
                     </div>
 
                     <div className={filterCSS.category} category="gamemode">
-                        <p className={filterCSS.cheading}>Gamemode</p>
+                        <p className={filterCSS.cheading}>{t("Gamemode")}</p>
 
                         <button onClick={this.changeExtraFilter} id="summonersrift" type="gamemode">
                             <img src={config.images.summonersrift} alt="" />
@@ -365,3 +368,5 @@ export default class UserChallenges extends Component {
         </Fragment>
     }
 }
+
+export default withTranslation()(UserChallenges)

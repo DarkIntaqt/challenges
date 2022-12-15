@@ -4,12 +4,6 @@ import get from "../../func/get";
 import { getCache } from "../../func/getCheckCache";
 import Match from "./Match";
 
-function minmax(a = 0, b = 0) {
-    if (a > b) {
-        return b
-    }
-    return a
-}
 
 export default class History extends Component {
     constructor(props) {

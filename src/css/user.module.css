@@ -13,13 +13,13 @@
 }
 
 .userwrapperfull .wrapperbg {
-    background-image: url("https://cdn.darkintaqt.com/lol/static/challenges/_gold-full.webp");
     background-position: center;
     background-size: cover;
     width: 100%;
     height: 100vh;
     position: fixed;
     z-index: 0;
+    filter: brightness(85%);
     background-attachment: fixed;
 }
 
