@@ -72,7 +72,7 @@ export default function ChallengeObject(params) {
                 width={40}
                 effect="opacity"
                 src={"https://lolcdn.darkintaqt.com/cdn/np-token/" + challenge[5].split("/")[2].split("?")[0] + "/" + challenge[0].toLowerCase().replace("none", "iron")}
-                alt={""}
+                alt={challenge[2]}
             >
             </LazyLoadImage>
             <div className={css.group}>
