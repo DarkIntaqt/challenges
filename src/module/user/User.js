@@ -7,7 +7,7 @@ import getChallenge from "../../func/getChallenge"
 
 import { Link, Route, Routes } from "react-router-dom";
 
-import { serverToMachineReadable } from "../../func/server";
+import { serverToMachineReadable, serverToRegionString } from "../../func/server";
 
 import { beautifyNum } from "../../func/beautify.ts"
 import { getCache } from "../../func/getCheckCache";
@@ -80,7 +80,8 @@ class User extends Component {
             categories: {},
             points: [0, 0, 0],
             id: "",
-            region: ""
+            percentile: 1,
+            server: ""
         }
 
 
@@ -233,7 +234,7 @@ class User extends Component {
 
         }
 
-        const { tier, summonerIcon, summonerName, selections, titles, id, points } = this.state.user
+        const { tier, summonerIcon, summonerName, selections, titles, id, points, percentile, server } = this.state.user
 
         const profileText = "view " + summonerName + "'s profile on u.gg";
 
@@ -332,6 +333,9 @@ class User extends Component {
                         <b>{capitalize(strtolower(displayTier))} {t("Tier")}</b>
                         <br />
                         This player has {beautifyNum(points)} total points.
+                        <br />
+                        <br />
+                        This player is in the top {percentile * 100}% in {serverToRegionString(server)}.
                     </div>
                 </h2>
 
