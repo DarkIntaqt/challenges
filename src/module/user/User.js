@@ -233,10 +233,14 @@ class User extends Component {
 
         }
 
-        const { tier, summonerIcon, summonerName, selections, titles, id } = this.state.user
+        const { tier, summonerIcon, summonerName, selections, titles, id, points } = this.state.user
 
         const profileText = "view " + summonerName + "'s profile on u.gg";
 
+        let displayTier = tier;
+        if (displayTier === "NONE") {
+            displayTier = "";
+        }
 
         let selected = selections.map(function (selection) {
 
@@ -279,19 +283,22 @@ class User extends Component {
 
                 threshold = challenge.thresholds[tier]
             }
-            return <h2 key={title} className={tier}>
-                <span>{titlename}</span>
-                <div>
-                    <b>
-                        {capitalize(tier)} Title
-                    </b>
-                    <br />
-                    {challenge.translation.description}
-                    <br />
-                    <br />
-                    <i>Need {beautifyNum(threshold)}</i>
-                </div>
-            </h2>
+            return <Fragment>
+                <span className={css.titlePlaceholder}> - </span>
+                <h2 key={title} className={tier}>
+                    <span>{titlename}</span>
+                    <div>
+                        <b>
+                            {capitalize(tier)} Title
+                        </b>
+                        <br />
+                        {challenge.translation.description}
+                        <br />
+                        <br />
+                        <i>Need {beautifyNum(threshold)}</i>
+                    </div>
+                </h2>
+            </Fragment>
         })
 
 
@@ -299,67 +306,71 @@ class User extends Component {
             get("https://challenges.darkintaqt.com/api/v1/c-vip/?id=" + id, this.validateVerified)
         }
 
-        return <div className={css.userwrapperfull}>
-            {this.state.verified === true ? <div className={css.wrapperbg} style={{
-                backgroundImage: `url(https://cdn.darkintaqt.com/lol/static/challenges/_${strtolower(tier)}-full.webp)`
-            }}></div> : null}
-            <section className={css.innerwrapper}>
-                <Wrapper showAds={typeof summonerName !== "object"}>
+        return <Wrapper showAds={typeof summonerName !== "object"}>
 
 
 
-                    {/* STATIC PROFILE HEAD */}
-                    <div className={`${css.profile} ${tier}`} >
+            {/* STATIC PROFILE HEAD */}
+            <div className={`${css.profile} ${tier}`} >
 
-                        <img className={css.edge} src={`https://cdn.darkintaqt.com/lol/static/challenges/card-${tier}.webp`} alt="" />
+                <img className={css.edge} src={`https://cdn.darkintaqt.com/lol/static/challenges/card-${tier}.webp`} alt="" />
 
-                        <img src={`${config.cdnBasePath}/cdn/profileicon/${summonerIcon}`} alt="" />
+                <img src={`${config.cdnBasePath}/cdn/profileicon/${summonerIcon}`} alt="" />
 
-                        <h1>
-                            {summonerName}{this.state.verified === true ? <VipBadge size={"2rem"} /> : null}{typeof summonerName === "object" ? null : <Fragment>
-                                <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
-                            </Fragment>
-                            }
-                        </h1>
+                <h1>
+                    {summonerName}{this.state.verified === true ? <VipBadge size={"2rem"} /> : null}{typeof summonerName === "object" ? null : <Fragment>
+                        <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
+                    </Fragment>
+                    }
+                </h1>
 
-                        {title}
-
-                        <div className={css.selections}>
-                            {selected}
-                        </div>
-
+                <h2>
+                    <span>
+                        {capitalize(strtolower(displayTier))}
+                    </span>
+                    <div>
+                        <b>{capitalize(strtolower(displayTier))} {t("Tier")}</b>
+                        <br />
+                        This player has {beautifyNum(points)} total points.
                     </div>
+                </h2>
+
+                {title}
+
+                <div className={css.selections}>
+                    {selected}
+                </div>
+
+            </div>
 
 
 
-                    <div className={css.topLevelFilter + " " + css["selectedFilter" + currentLocation]}>
+            <div className={css.topLevelFilter + " " + css["selectedFilter" + currentLocation]}>
 
-                        <Link to="" className={css["overview"]}>{t("Overview")}</Link>
+                <Link to="" className={css["overview"]}>{t("Overview")}</Link>
 
-                        <Link to="titles" className={css["titles"]}>{t("Titles")}</Link>
+                <Link to="titles" className={css["titles"]}>{t("Titles")}</Link>
 
-                        <Link to="statistics" className={css["statistics"]}>{t("Statistics")}</Link>
+                <Link to="statistics" className={css["statistics"]}>{t("Statistics")}</Link>
 
-                        {this.state.verified === true || currentLocation === "history" ? <Link to="history" className={css["history"]}>{t("History")} <span>{strtoupper(t("beta"))}</span></Link> : null}
+                {this.state.verified === true || currentLocation === "history" ? <Link to="history" className={css["history"]}>{t("History")} <span>{strtoupper(t("beta"))}</span></Link> : null}
 
-                    </div>
+            </div>
 
 
-                    <Routes>
+            <Routes>
 
-                        <Route path="" element={<UserChallenges summoner={this.state.user} server={this.params.server} />}></Route>
+                <Route path="" element={<UserChallenges summoner={this.state.user} server={this.params.server} />}></Route>
 
-                        <Route path="titles" element={<Title summoner={this.state.user} />}></Route>
+                <Route path="titles" element={<Title summoner={this.state.user} />}></Route>
 
-                        <Route path="statistics" element={<Statistics summoner={this.state.user} />}></Route>
+                <Route path="statistics" element={<Statistics summoner={this.state.user} />}></Route>
 
-                        <Route path="history" element={<History summoner={this.state.user} />}></Route>
+                <Route path="history" element={<History summoner={this.state.user} />}></Route>
 
-                    </Routes>
+            </Routes>
 
-                </Wrapper>
-            </section>
-        </div>
+        </Wrapper>
     }
 }
 export default withTranslation()(User)

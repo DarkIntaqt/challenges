@@ -98,6 +98,8 @@ img.ugglogo {
     font-weight: normal;
 }
 
+
+.profile>span.titlePlaceholder,
 .profile>h2,
 .profile>p.challengeDescription,
 .profile>h2>span {
@@ -108,6 +110,13 @@ img.ugglogo {
     float: left;
     cursor: help;
     margin: 0px 5px 5px;
+}
+
+.profile>span.titlePlaceholder {
+    cursor: auto;
+    color: white;
+    margin: 0 0 5px;
+    display: inline-block;
 }
 
 .c.profile>h2,
