@@ -272,7 +272,7 @@ export default class Match extends Component {
                     <div className={css.progressed}>
 
                         <div style={{ width: "100%", display: "flex", alignItems: "center", padding: "0" }}>
-                            <p>Error: {e.toString()}. <br /><b>This error has been reported to the dev</b></p>
+                            <p>Error: {e.toString()}. <br /><b>If you want this fixed, please report "{this.state.matchId}" to @darkintaqt</b></p>
                         </div>
                     </div>
                 </div>
