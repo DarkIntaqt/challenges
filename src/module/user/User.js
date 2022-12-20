@@ -284,9 +284,9 @@ class User extends Component {
 
                 threshold = challenge.thresholds[tier]
             }
-            return <Fragment>
+            return <Fragment key={title}>
                 <span className={css.titlePlaceholder}> - </span>
-                <h2 key={title} className={tier}>
+                <h2 className={tier}>
                     <span>{titlename}</span>
                     <div>
                         <b>
