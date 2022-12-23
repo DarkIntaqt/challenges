@@ -1,5 +1,5 @@
 // toggles a value of an array, removes or add it as called
-export function toggleValue(toggleObject: object, toAdd: string | boolean | number) {
+export function toggleValue(toggleObject, toAdd) {
     // Check if all arguments are set
     if (!checkExists(toggleObject) || !checkExists(toAdd)) {
         throw new Error("Not all parameters provided, but required");

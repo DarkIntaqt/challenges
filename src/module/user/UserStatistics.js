@@ -9,9 +9,9 @@ import Chart from "chart.js/auto";
 import { capitalize, strtolower } from "../../func/stringManipulation"
 import orderChallenges from "./orderChallenges";
 
-import { checkExists } from "../../func/arrayManipulationFunctions.ts";
+import { checkExists } from "../../func/arrayManipulationFunctions.js";
 
-import { beautifyNum } from "../../func/beautify.ts"
+import { beautifyNum } from "../../func/beautify.js"
 import { withTranslation } from "react-i18next";
 
 

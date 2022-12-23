@@ -3,13 +3,13 @@ import config from "../../config";
 import filterCSS from "../../css/filter.module.css"
 
 import { setCookie } from "../../func/cookiefunctions";
-import { toggleValue } from "../../func/arrayManipulationFunctions.ts"
+import { toggleValue } from "../../func/arrayManipulationFunctions.js"
 
 import ChallengeObject from "../ChallengeObject";
 import challengeCSS from "../../css/challengeObject.module.css"
 
-import { beautifyNum } from "../../func/beautify.ts"
-import { checkExists } from "../../func/arrayManipulationFunctions.ts"
+import { beautifyNum } from "../../func/beautify.js"
+import { checkExists } from "../../func/arrayManipulationFunctions.js"
 
 import { intToTier } from "../../func/tierFunctions";
 

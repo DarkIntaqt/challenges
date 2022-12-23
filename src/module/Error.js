@@ -1,5 +1,5 @@
 import notFound from "./../img/not-found.png"
-import { checkExists } from "../func/arrayManipulationFunctions.ts";
+import { checkExists } from "../func/arrayManipulationFunctions.js";
 
 export default function Error(props) {
     let message;

@@ -1,11 +1,11 @@
 import css from "../css/challengeObject.module.css"
-import { checkExists } from "../func/arrayManipulationFunctions.ts"
+import { checkExists } from "../func/arrayManipulationFunctions.js"
 import { capitalize } from "../func/stringManipulation";
 import goTo from "../func/goTo";
 import ProgressBar from "./ProgressBar";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Fragment } from "react";
-import { beautifyNum } from "./../func/beautify.ts"
+import { beautifyNum } from "./../func/beautify.js"
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 export default function ChallengeObject(params) {

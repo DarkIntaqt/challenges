@@ -5,7 +5,7 @@ import css from "../css/user.module.css"
 import challengeCSS from "../css/challenges.module.css"
 import getChallenge from "../func/getChallenge"
 //import generateChallengePointElement from "../func/generateChallengePointElement"
-import { checkExists } from "../func/arrayManipulationFunctions.ts"
+import { checkExists } from "../func/arrayManipulationFunctions.js"
 import config from "../config"
 import ChallengeObject from "./ChallengeObject"
 

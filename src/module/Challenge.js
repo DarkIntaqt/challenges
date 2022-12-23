@@ -5,14 +5,14 @@ import { getCache } from "../func/getCheckCache"
 import css from "../css/user.module.css"
 import { serverToHumanReadable, serverToMachineReadable } from "../func/server"
 import Timestamp from "react-timestamps"
-import { beautifyNum } from "../func/beautify.ts"
+import { beautifyNum } from "../func/beautify.js"
 import { intToTier } from "../func/tierFunctions";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import goTo from "../func/goTo.js";
 import start from "../css/start.module.css"
 // import showChallengePath from "../func/showChallengePath.js"
 // import ShowChildChallenges from "../func/getChildChallenges";
-import { checkExists } from "../func/arrayManipulationFunctions.ts";
+import { checkExists } from "../func/arrayManipulationFunctions.js";
 import config from "../config";
 
 import { capitalize } from "../func/stringManipulation";

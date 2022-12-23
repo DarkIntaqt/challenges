@@ -1,5 +1,5 @@
-import { checkExists } from "../func/arrayManipulationFunctions.ts"
-import { beautifyNum } from "../func/beautify.ts"
+import { checkExists } from "../func/arrayManipulationFunctions.js"
+import { beautifyNum } from "../func/beautify.js"
 import css from "../css/progressbar.module.css"
 
 export default function ProgressBar(params) {

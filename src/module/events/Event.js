@@ -1,7 +1,7 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import cCss from "../../css/challenges.module.css"
 import goTo from "../../func/goTo.js";
-import { checkExists } from "../../func/arrayManipulationFunctions.ts";
+import { checkExists } from "../../func/arrayManipulationFunctions.js";
 import config from "../../config";
 import { Component } from "react";
 import css from "../../css/event.module.css"

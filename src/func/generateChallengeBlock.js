@@ -3,7 +3,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component"
 import aboutChallenge from "../css/aboutChallenge.module.css"
 import goTo from "./goTo"
 import capstone from "../img/capstone.svg"
-import { checkExists } from "./arrayManipulationFunctions.ts"
+import { checkExists } from "./arrayManipulationFunctions.js"
 
 
 /**

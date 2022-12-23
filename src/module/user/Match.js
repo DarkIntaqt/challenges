@@ -2,10 +2,10 @@ import { Component, Fragment } from "react";
 import css from "../../css/match.module.css"
 import get from "../../func/get";
 import Loader from "../Loader";
-import { checkExists } from "./../../func/arrayManipulationFunctions.ts";
+import { checkExists } from "./../../func/arrayManipulationFunctions.js";
 import Timestamp from "react-timestamps"
 import { intToTier } from "./../../func/tierFunctions"
-import { beautifyNum } from "../../func/beautify.ts";
+import { beautifyNum } from "../../func/beautify.js";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ChallengeObject from "./../ChallengeObject"
 import getChallenge from "../../func/getChallenge"

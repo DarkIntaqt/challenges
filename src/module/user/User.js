@@ -9,7 +9,7 @@ import { Link, Route, Routes } from "react-router-dom";
 
 import { serverToMachineReadable, serverToRegionString } from "../../func/server";
 
-import { beautifyNum } from "../../func/beautify.ts"
+import { beautifyNum } from "../../func/beautify.js"
 import { getCache } from "../../func/getCheckCache";
 import generateSummonerObject from "./generateSummonerObject";
 import get from "../../func/get";

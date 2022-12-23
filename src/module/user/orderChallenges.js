@@ -1,4 +1,4 @@
-import { checkExists } from "../../func/arrayManipulationFunctions.ts"
+import { checkExists } from "../../func/arrayManipulationFunctions.js"
 import getChallenge from "../../func/getChallenge";
 import { intToTier } from "../../func/tierFunctions";
 

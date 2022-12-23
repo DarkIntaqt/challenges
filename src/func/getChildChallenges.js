@@ -1,7 +1,7 @@
 import css from "../css/aboutChallenge.module.css"
 import generateObject from "./generateChallengeBlock";
 import { Component } from "react";
-import { checkExists } from "./arrayManipulationFunctions.ts";
+import { checkExists } from "./arrayManipulationFunctions.js";
 
 
 /**

@@ -1,4 +1,4 @@
-import { checkExists } from "./arrayManipulationFunctions.ts"
+import { checkExists } from "./arrayManipulationFunctions.js"
 
 /**
  * check if a url exists in cache and is eligible for being used

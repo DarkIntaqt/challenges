@@ -16,7 +16,7 @@ import FAQ from './module/FAQ'
 import Title from './module/Title'
 import Challenges from "./module/Challenges"
 import get from "./func/get";
-import { checkExists as checkFor } from './func/arrayManipulationFunctions.ts';
+import { checkExists as checkFor } from './func/arrayManipulationFunctions.js';
 import config from './config';
 import VariableProxy from './module/VariableProxy';
 

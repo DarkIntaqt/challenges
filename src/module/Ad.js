@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "../css/ad.module.css"
-import { checkExists } from "../func/arrayManipulationFunctions.ts"
+import { checkExists } from "../func/arrayManipulationFunctions.js"
 
 export default class Ad extends Component {
     constructor(props) {

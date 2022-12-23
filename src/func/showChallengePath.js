@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import capstone from "../img/capstone.svg"
 import goTo from "../func/goTo.js";
 import generateObject from "./generateChallengeBlock"
-import { checkExists } from "./arrayManipulationFunctions.ts";
+import { checkExists } from "./arrayManipulationFunctions.js";
 
 export default function showChallengePath(challenges, challenge) {
     // getChallenge
