@@ -206,7 +206,7 @@ class UserChallenges extends Component {
                 next = c["thresholds"][tier]
             }
 
-            if (tier === "CHALLENGER") {
+            if (tier === "CHALLENGER" && this.state.orderByMaster === false) {
                 if (c.leaderboard === true) {
                     // leaderboards, not #1
                     next = c["leaderboardThresholds"][0] ?? 0
