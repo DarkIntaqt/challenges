@@ -29,6 +29,7 @@ class UserChallenges extends Component {
 
         this.changeFilter = this.changeFilter.bind(this)
         this.changeExtraFilter = this.changeExtraFilter.bind(this)
+        this.toggleMasterTierSorting = this.toggleMasterTierSorting.bind(this)
 
         this.changeDisplayMethod = this.changeDisplayMethod.bind(this)
 
@@ -36,6 +37,7 @@ class UserChallenges extends Component {
 
         this.state = {
             alphabet: "a-z",
+            orderByMaster: false,
             placeholder: window.compactMode,
             filter: "level",
             filters: {
@@ -46,6 +48,12 @@ class UserChallenges extends Component {
             translation: props.t
         }
 
+    }
+
+    toggleMasterTierSorting() {
+        this.setState({
+            orderByMaster: !this.state.orderByMaster
+        })
     }
 
     changeFilter(e) {
@@ -148,10 +156,10 @@ class UserChallenges extends Component {
         const filter = this.state.filter
 
 
-        let challengesOrdered = orderChallenges(user.challenges, this.state.filter, this.state.filters)
+        let challengesOrdered = orderChallenges(user.challenges, this.state.filter, this.state.filters, this.state.orderByMaster)
 
 
-        let challenges = challengesOrdered.map(function (challenge) {
+        let challenges = challengesOrdered.map((challenge) => {
 
             if (challenge[0] !== 0 && challenge[0] < 10) {
                 return null
@@ -186,6 +194,10 @@ class UserChallenges extends Component {
                 }
                 position += " - ";
 
+            }
+
+            if (this.state.orderByMaster === true) {
+                nexttier = "MASTER"
             }
 
             if (checkExists(c["thresholds"][nexttier])) {
@@ -253,12 +265,19 @@ class UserChallenges extends Component {
             <div className={filterCSS.filter}>
                 <div className={filterCSS.selectors + " clearfix"}>
                     <div className={filterCSS.displayMode}>
+
                         <button id="full" onClick={this.changeDisplayMethod} className={filterCSS["cmode" + window.compactMode] + " " + filterCSS.modefalse}>
                             <i className="fa-solid fa-table-cells"></i>
                         </button>
+
                         <button id="compact" onClick={this.changeDisplayMethod} className={filterCSS["cmode" + window.compactMode] + " " + filterCSS.modetrue}>
                             <i className="fa-solid fa-list"></i>
                         </button>
+
+                        <button id="mode" onClick={this.toggleMasterTierSorting} className={filterCSS["master" + this.state.orderByMaster]}>
+                            <img src="https://raw.communitydragon.org/9.12/plugins/rcp-fe-lol-league-tier-names/global/default/assets/images/ranked-mini-regalia/master.png" alt="" />
+                        </button>
+
                     </div>
                     <p className={filterCSS.info}>Filter</p>
                     <div className={filterCSS.category} category="category">

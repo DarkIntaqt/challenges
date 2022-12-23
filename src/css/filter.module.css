@@ -10,11 +10,12 @@
     margin-bottom: 10px;
 }
 
-button.cmodefalse.modefalse,
-button.cmodetrue.modetrue {
-    background-color: var(--dark2);
-    color: white
+.displayMode button img {
+    height: 24px;
+    width: 25px;
 }
+
+
 
 .displayMode>button {
     border: none;
@@ -27,6 +28,16 @@ button.cmodetrue.modetrue {
     float: left;
     margin-right: 10px;
     font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button.cmodefalse.modefalse,
+button.cmodetrue.modetrue,
+button.mastertrue {
+    background-color: var(--dark2);
+    color: white
 }
 
 @media only screen and (min-height:800px) {

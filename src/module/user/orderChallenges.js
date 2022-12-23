@@ -3,7 +3,10 @@ import getChallenge from "../../func/getChallenge";
 import { intToTier } from "../../func/tierFunctions";
 
 
-export function getNextLevel(current) {
+export function getNextLevel(current, masterOnly = false) {
+    if (masterOnly === true) {
+        return "MASTER";
+    }
     let ranks = ["NONE", "IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "MASTER", "GRANDMASTER", "CHALLENGER"]
     for (let i = 0; i < ranks.length; i++) {
         if (current === ranks[i]) {
@@ -16,7 +19,7 @@ export function getNextLevel(current) {
 
 
 
-export function removeUnnecessaryChallenges(challenges, filters) {
+export function removeUnnecessaryChallenges(challenges, filters, masterOnly = false) {
 
     return challenges.map(function (challenge) {
 
@@ -102,7 +105,7 @@ export function removeUnnecessaryChallenges(challenges, filters) {
 }
 
 
-export default function orderChallenges(challenges, filter, extraFilter) {
+export default function orderChallenges(challenges, filter, extraFilter, masterOnly) {
 
     challenges = removeUnnecessaryChallenges(challenges, extraFilter)
 
@@ -141,8 +144,9 @@ export default function orderChallenges(challenges, filter, extraFilter) {
                 const tierB = intToTier(b[1])
 
                 let challenge = a[6];
-                if (checkExists(challenge["thresholds"][getNextLevel(tierA)])) {
-                    nextLevelA = challenge["thresholds"][getNextLevel(tierA)]
+
+                if (checkExists(challenge["thresholds"][getNextLevel(tierA, masterOnly)])) {
+                    nextLevelA = challenge["thresholds"][getNextLevel(tierA, masterOnly)]
                 } else {
                     nextLevelA = challenge["thresholds"][tierA] ? challenge["thresholds"][tierA] : 1;
                 }
@@ -154,8 +158,8 @@ export default function orderChallenges(challenges, filter, extraFilter) {
 
                 challenge = b[6];
 
-                if (checkExists(challenge["thresholds"][getNextLevel(tierB)])) {
-                    nextLevelB = challenge["thresholds"][getNextLevel(tierB)]
+                if (checkExists(challenge["thresholds"][getNextLevel(tierB, masterOnly)])) {
+                    nextLevelB = challenge["thresholds"][getNextLevel(tierB, masterOnly)]
                 } else {
                     nextLevelB = challenge["thresholds"][tierB] ? challenge["thresholds"][tierB] : 1;
                 }
