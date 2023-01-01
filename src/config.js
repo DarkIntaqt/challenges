@@ -59,7 +59,7 @@ const config = {
         "CHALLENGER"
     ],
     "startScreenImages": [
-        150, 4, 3, /*winter gnar */
+        34, 4, 17, /* anivia */
         254, 4, 29, /* arcane vi */
         38, 4, 14, /* arcane kassadin */
         43, 4, 7, /* red eye karma */
