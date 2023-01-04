@@ -466,7 +466,12 @@ class Challenges extends Component {
                 </div>
             </div>
             <div className={css.parent + " " + css.flexWidth}>
-                {this.state.challenges}
+                {
+                    this.state.challenges.length > 0
+                        ? this.state.challenges
+                        : <p style={{ color: "white", fontSize: "1rem", margin: "120px 0", textAlign: "center", width: "100%", float: "left" }}><i>Is it a bug? Is it a feature?</i><br /><br />No! There are just no challenges within the current filters.<br />Maybe the challenges aren't released yet?</p>
+                }
+
             </div>
         </Wrapper>
     }
