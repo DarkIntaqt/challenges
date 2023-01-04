@@ -94,7 +94,13 @@ export function removeUnnecessaryChallenges(challenges, filters, masterOnly = fa
         parentName = parentName.toLowerCase().replace(/ /g, "")
 
         if (filters.category.length > 0 && !filters.category.includes(parentName)) {
-            return null
+            if (filters.category.includes("retired")) {
+                if (parentName.toLowerCase().replace(/ /g, "") !== "2022seasonal") {
+                    return null
+                }
+            } else {
+                return null
+            }
         }
 
         challenge.push(parentName)
@@ -265,7 +271,7 @@ export default function orderChallenges(challenges, filter, extraFilter, masterO
             }
             break;
         default:
-            throw new Error("Unknown Filter")
+            throw new Error(`Unknown Filter ${filter}`);
     }
 
     return challenges.sort(sortAlgorithm)

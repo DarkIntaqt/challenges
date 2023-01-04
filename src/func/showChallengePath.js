@@ -18,7 +18,7 @@ export default function showChallengePath(challenges, challenge) {
 
 
     // set category to parent if they are the same or parent is a key-capstone
-    if (category.id === 0 && parent.id !== 0 && (parent.id < 10 || parent.id === 2022000)) {
+    if (category.id === 0 && parent.id !== 0 && (parent.id < 10 || parent.id === 2022000 || parent.id === 2023000)) {
         category = parent
     }
 

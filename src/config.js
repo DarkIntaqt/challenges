@@ -59,7 +59,7 @@ const config = {
         "CHALLENGER"
     ],
     "startScreenImages": [
-        34, 4, 17, /* anivia */
+        131, 6, 47, /* anivia */
         254, 4, 29, /* arcane vi */
         38, 4, 14, /* arcane kassadin */
         43, 4, 7, /* red eye karma */
@@ -81,6 +81,8 @@ const config = {
         "legacy": legacy,
         "crystal": legacy,
         "2022seasonal": "https://cdn.darkintaqt.com/lol/static/challenges/2022seasonal.svg",
+        "seasonal-retired": "https://cdn.darkintaqt.com/lol/static/challenges/retired.svg",
+        "2023seasonal": "https://cdn.darkintaqt.com/lol/static/challenges/2023seasonal.svg",
         "summonersrift": "https://lolcdn.darkintaqt.com/cdn/sr.svg",
         "aram": "https://lolcdn.darkintaqt.com/cdn/ha.svg",
         "bot": "https://lolcdn.darkintaqt.com/cdn/bot.png"

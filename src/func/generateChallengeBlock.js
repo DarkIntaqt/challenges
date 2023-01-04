@@ -24,7 +24,7 @@ export default function generateObject(content, genLine = true, challengeId = -1
     }
 
     let imageurl = "https://lolcdn.darkintaqt.com/cdn/np-token" + content.id
-    if (content.id < 10 || content.id === 2022000) {
+    if (content.id < 10 || content.id === 2022000 || content.id === 2023000) {
         if (content.id !== 0) {
             imageurl = "https://cdn.darkintaqt.com/lol/static/challenges/" + content.translation.name.toLowerCase().replace(" ", "") + ".svg"
         }

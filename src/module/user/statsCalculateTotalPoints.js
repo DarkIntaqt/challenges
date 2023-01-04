@@ -14,7 +14,7 @@ export default function statsCalculateTotalPoints(challenges) {
     for (let i = 0; i < challenges.length; i++) {
         const challenge = challenges[i];
 
-        if (challenge[0] > 10 && challenge[8] !== "legacy" && challenge[8] !== "2022seasonal") {
+        if (challenge[0] > 10 && challenge[8] !== "legacy" && challenge[8] !== "2022seasonal" && challenge[8] !== "2023seasonal") {
 
             tiers[intToTier(challenge[1])] += 1
 

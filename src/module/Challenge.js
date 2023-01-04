@@ -189,7 +189,7 @@ class Challenge extends Component {
 
         let icon = "https://lolcdn.darkintaqt.com/cdn/np-token/" + challenge["icon_2"]
 
-        if (challenge.challenge.id < 10 || challenge.challenge.id === 2022000) {
+        if (challenge.challenge.id < 10 || challenge.challenge.id === 2022000 || challenge.challenge.id === 2023000) {
             if (challenge.challenge.id !== 0) {
                 icon = "https://cdn.darkintaqt.com/lol/static/challenges/" + challenge.challenge.translation.name.toLowerCase().replace(" ", "") + ".svg"
             }

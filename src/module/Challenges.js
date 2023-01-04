@@ -252,9 +252,16 @@ class Challenges extends Component {
                 continue
             }
 
+
             // Skip to next element if filter is on and not on element
             if (this.filter.category.length > 0 && !this.filter.category.includes(parentName.toLowerCase().replace(/ /g, ""))) {
-                continue
+                if (this.filter.category.includes("retiredseasonal")) {
+                    if (parentName.toLowerCase().replace(/ /g, "") !== "2022seasonal") {
+                        continue;
+                    }
+                } else {
+                    continue;
+                }
             }
 
             // getChallenge(parseInt(challenge.parentCategory))
@@ -400,8 +407,12 @@ class Challenges extends Component {
                             Legacy
                         </button>
                         <button onClick={this.changeFilter}>
-                            <img src={config.images['2022seasonal']} alt="2022 seasonal" />
-                            2022 Seasonal
+                            <img src={config.images['2023seasonal']} alt="2023 seasonal" />
+                            2023 Seasonal <span>NEW</span>
+                        </button>
+                        <button onClick={this.changeFilter}>
+                            <img src={config.images['seasonal-retired']} alt="seasonal outdated" />
+                            Retired Seasonal
                         </button>
                     </div>
 
