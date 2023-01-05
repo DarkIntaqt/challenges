@@ -13,6 +13,7 @@ import { checkExists } from "../../func/arrayManipulationFunctions.js";
 
 import { beautifyNum } from "../../func/beautify.js"
 import { withTranslation } from "react-i18next";
+import getChallenge from "../../func/getChallenge";
 
 
 class UserStatistics extends Component {
@@ -103,6 +104,7 @@ class UserStatistics extends Component {
         const t = this.state.translation
         let user = JSON.parse(JSON.stringify(this.props.summoner));
         user.challenges = orderChallenges(user.challenges, "level", { gamemode: [], type: [], category: [] })
+
         if (user.challenges.length === 0) {
 
             return <div style={{ width: "100%", float: "left" }}>
@@ -115,7 +117,7 @@ class UserStatistics extends Component {
         for (let i = 0; i < user.challenges.length; i++) {
             const challenge = user.challenges[i];
             if (challenge[0] < 10) {
-                user.categories[challenge[6].translation.name.replace("Challenge Points Ranking", "TOTAL")] = {
+                user.categories[challenge[6].id] = {
                     current: challenge[2],
                     max: challenge[6]["thresholds"][intToTier(challenge[1] + 1)] ?? challenge[6]["thresholds"][intToTier(challenge[1])],
                     level: intToTier(challenge[1])
@@ -193,72 +195,72 @@ class UserStatistics extends Component {
                     </p>
                     <ProgressBar
                         width={100}
-                        progress={user.categories.TOTAL.current}
-                        max={user.categories.TOTAL.max}
+                        progress={user.categories["0"].current}
+                        max={user.categories["0"].max}
                     />
                 </div>
 
-                <div className={css.category + " " + user.categories.COLLECTION.level}>
+                <div className={css.category + " " + user.categories["5"].level}>
 
                     <p>
-                        <img src={config.images.collection} alt="collection" />
-                        Collection
+                        <img src={config.images["5"]} alt="collection" />
+                        {capitalize(getChallenge(5).translation.name)}
                     </p>
                     <ProgressBar
                         width={100}
-                        progress={user.categories.COLLECTION.current}
-                        max={user.categories.COLLECTION.max}
+                        progress={user.categories["5"].current}
+                        max={user.categories["5"].max}
                     />
                 </div>
 
-                <div className={css.category + " " + user.categories.EXPERTISE.level}>
+                <div className={css.category + " " + user.categories["2"].level}>
                     <p>
-                        <img src={config.images.expertise} alt="expertise" />
-                        Expertise
+                        <img src={config.images["2"]} alt="expertise" />
+                        {capitalize(getChallenge(2).translation.name)}
                     </p>
                     <ProgressBar
                         width={100}
-                        progress={user.categories.EXPERTISE.current}
-                        max={user.categories.EXPERTISE.max}
+                        progress={user.categories["2"].current}
+                        max={user.categories["2"].max}
                     />
                 </div>
 
-                <div className={css.category + " " + user.categories.VETERANCY.level}>
+                <div className={css.category + " " + user.categories["3"].level}>
 
                     <p>
-                        <img src={config.images.veterancy} alt="Veterancy" />
-                        Veterancy
+                        <img src={config.images["3"]} alt="Veterancy" />
+                        {capitalize(getChallenge(3).translation.name)}
                     </p>
                     <ProgressBar
                         width={100}
-                        progress={user.categories.VETERANCY.current}
-                        max={user.categories.VETERANCY.max}
+                        progress={user.categories["3"].current}
+                        max={user.categories["3"].max}
                     />
                 </div>
 
-                <div className={css.category + " " + user.categories.IMAGINATION.level}>
+                <div className={css.category + " " + user.categories["1"].level}>
 
                     <p>
-                        <img src={config.images.imagination} alt="Imagination" />
-                        Imagination
+                        <img src={config.images["1"]} alt="Imagination" />
+                        {capitalize(getChallenge(1).translation.name)}
                     </p>
                     <ProgressBar
                         width={100}
-                        progress={user.categories.IMAGINATION.current}
-                        max={user.categories.IMAGINATION.max}
+                        progress={user.categories["1"].current}
+                        max={user.categories["1"].max}
                     />
                 </div>
 
-                <div className={css.category + " " + user.categories.TEAMWORK.level}>
+                <div className={css.category + " " + user.categories["4"].level}>
 
                     <p>
-                        <img src={config.images.teamwork} alt="Teamwork" />
-                        Teamwork
+                        <img src={config.images["4"]} alt="Teamwork" />
+                        {capitalize(getChallenge(4).translation.name)}
                     </p>
                     <ProgressBar
                         width={100}
-                        progress={user.categories.TEAMWORK.current}
-                        max={user.categories.TEAMWORK.max}
+                        progress={user.categories["4"].current}
+                        max={user.categories["4"].max}
                     />
                 </div>
 
