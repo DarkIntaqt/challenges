@@ -9,7 +9,7 @@ import goTo from "../func/goTo.js";
 import css from "../css/titles.module.css"
 import Wrapper from "./Wrapper";
 import Error from "./Error";
-
+import { capitalize, strtolower } from "../func/stringManipulation";
 
 class Title extends Component {
     constructor(props) {
@@ -60,7 +60,7 @@ class Title extends Component {
             titles.push(<a href={"/challenge/" + element.cid} className={css.title + " " + element.type + " clearfix"} key={element.cid} challengeid={element.cid} onClick={goTo}>
                 <LazyLoadImage height={45} width={45} src={"https://lolcdn.darkintaqt.com/cdn/np-token/" + element.icon + "/" + element.type.toLowerCase()} placeholderSrc={"https://cdn.darkintaqt.com/lol/static/missing/item.png"} alt={element.title + "'s icon"} />
                 <h2>{element.title}<br /><span data-nosnippet>{element.percentile}%</span></h2>
-                <p>{t("Reach {{tier}} tier in \"{{challenge}}\"", { tier: element.type, challenge: element.challenge })}<br></br>{element.description}<br /><br /><i>{t("Need {{p}}", { p: element.threshold })}</i></p>
+                <p>{t("Reach {{tier}} tier in \"{{challenge}}\"", { tier: capitalize(t(strtolower(element.type))), challenge: element.challenge })}<br></br>{element.description}<br /><br /><i>{t("Need {{p}}", { p: element.threshold })}</i></p>
 
             </a>)
         }

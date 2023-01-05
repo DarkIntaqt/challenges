@@ -1,6 +1,7 @@
 .filter {
     width: 250px;
     float: left;
+    overflow: hidden;
 
 }
 
