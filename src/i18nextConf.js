@@ -24,7 +24,6 @@ i18n
          checkWhitelist: true,
       },
 
-      debug: true,
       whitelist: availableLanguages,
 
       interpolation: {
