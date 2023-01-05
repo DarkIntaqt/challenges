@@ -49,7 +49,7 @@
    "Inventory": "Inventar",
    "Ranked": "Rangliste",
    "Profile": "Profil",
-   "%s Title": "%s Title",
+   "{{s}} Title": "{{s}} Titel",
    "{{token}} Token": " {{token}} Marke",
    "Overview": "Übersicht",
    "Statistics": "Statistiken",

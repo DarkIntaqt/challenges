@@ -22,7 +22,9 @@ import VariableProxy from './module/VariableProxy';
 
 import Loader from './module/Loader';
 import Loadable from 'react-loadable';
-import { setCookie } from "./func/cookiefunctions"
+import { getCookie, setCookie } from "./func/cookiefunctions"
+import i18next from "i18next";
+import Settings from "./module/Settings";
 
 function main() {
 
@@ -38,18 +40,26 @@ function main() {
 
 
 
-  if (window.gC) {
+  if (getCookie) {
 
-    if (window.gC("_Cfilter")) {
-      window.compactMode = (window.gC("_Cfilter") === 'true')
+    if (getCookie("_Cfilter")) {
+      window.compactMode = (getCookie("_Cfilter") === 'true')
     } else {
       setCookie("filter", window.compactMode.toString())
     }
-    if (window.gC("_Cregion")) {
-      window.region = window.gC("_Cregion")
+    if (getCookie("_Cregion")) {
+      window.region = getCookie("_Cregion")
     } else {
       setCookie("region", window.region);
     }
+
+    if (getCookie("_Clang")) {
+      window.language = getCookie("_Clang")
+    } else {
+      setCookie("lang", window.language);
+    }
+
+    i18next.changeLanguage(window.language);
 
   }
 
@@ -86,6 +96,8 @@ function main() {
           <Route path="" element={<Start />}></Route>
 
           <Route path="faq" element={<FAQ />}></Route>
+
+          <Route path="settings" element={<Settings />}></Route>
 
           <Route path="community" element={<Community />}></Route>
 

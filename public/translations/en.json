@@ -1,7 +1,7 @@
 {
    "FAQ": "FAQ",
    "League of Legends": "League of Legends",
-   "Challenge Progress Tracker": "Challenge Progress tracker",
+   "Challenge Progress Tracker": "Challenge Progress Tracker",
    "By": "By",
    "Challenge Tracker": "Challenge Tracker",
    "Community": "Community",
@@ -71,7 +71,7 @@
    "Last upgraded": "Last upgraded",
    "Leaderboard Position": "Leaderboard Position",
    "Closest Levelup": "Closest Levelup",
-   "Thanks to {{cdragon}} for serving the assets. ": "Thanks to {{cdragon}} for serving the assets. ",
+   "Thanks to {{cdragon}} for serving the assets": "Thanks to {{cdragon}} for serving the assets. ",
    "Leaderboards might be incorrect due to a missing API-endpoint about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.": "Leaderboards might be incorrect due to a missing API-endpoint about this challenge. We still update rankings in this leaderboard, if you found a player who should be up here, just look them up.",
    "Leaderboards aren't enabled for this challenge": "Leaderboards aren't enabled for this challenge",
    "This leaderboard isn't enabled in this {{region}}": "This leaderboard isn't enabled in this {{region}}",

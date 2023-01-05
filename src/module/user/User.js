@@ -23,6 +23,7 @@ import UserChallenges from "./UserChallenges"
 import VipBadge from "../VipBadge";
 import Wrapper from "../Wrapper";
 import { withTranslation } from "react-i18next";
+import goTo from "../../func/goTo";
 
 
 const Title = Loadable({
@@ -90,7 +91,7 @@ class User extends Component {
         this.server = serverToMachineReadable(props.params.server)
 
 
-        this.getChallengeURL = `https://challenges.darkintaqt.com/api/dynamic-data/${this.server}`
+        this.getChallengeURL = `https://challenges.darkintaqt.com/api/dynamic-data/serve?region=${this.server}&lang=${window.language}`
         this.getSummonerURL = `https://challenges.darkintaqt.com/api/edge/user/${this.server}/${encodeURIComponent(this.user)}`
 
 
@@ -290,13 +291,13 @@ class User extends Component {
                     <span>{titlename}</span>
                     <div>
                         <b>
-                            {capitalize(tier)} Title
+                            {t("{{s}} Title", { s: capitalize(t(strtolower(tier))) })}
                         </b>
                         <br />
                         {challenge.translation.description}
                         <br />
                         <br />
-                        <i>Need {beautifyNum(threshold)}</i>
+                        <i>{t("Need {{p}}", { p: beautifyNum(threshold) })}</i>
                     </div>
                 </h2>
             </Fragment>
@@ -319,7 +320,7 @@ class User extends Component {
                 <img src={`${config.cdnBasePath}/cdn/profileicon/${summonerIcon}`} alt="" />
 
                 <h1>
-                    {summonerName}{this.state.verified === true ? <VipBadge size={"2rem"} /> : null}{typeof summonerName === "object" ? null : <Fragment>
+                    {summonerName}{this.state.verified === true ? <a href="/faq#h8" onClick={goTo}><VipBadge size={"2rem"} /></a> : null}{typeof summonerName === "object" ? null : <Fragment>
                         <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
                     </Fragment>
                     }
@@ -327,10 +328,10 @@ class User extends Component {
 
                 <h2>
                     <span>
-                        {capitalize(strtolower(displayTier))}
+                        {capitalize(t(strtolower(displayTier)))}
                     </span>
                     <div>
-                        <b>{capitalize(strtolower(displayTier))} {t("Tier")}</b>
+                        <b>{capitalize(t(strtolower(displayTier)))} {t("Tier")}</b>
                         <br />
                         This player has {beautifyNum(points)} total points.
                         <br />

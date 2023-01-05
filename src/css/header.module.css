@@ -16,7 +16,8 @@
     color: var(--selected);
 }
 
-.Header .inner>a {
+.Header .inner>a,
+.Header .inner>select {
     transition: 0.2s color;
     color: white;
     text-decoration: none;
@@ -26,6 +27,12 @@
     margin: calc(25px - .5rem) 10px;
     line-height: 1;
     display: block;
+}
+
+.Header .inner>select {
+    appearance: none;
+    border: none;
+    background-color: var(--dark1);
 }
 
 .Header .inner>a:first-child,

@@ -102,7 +102,7 @@ export default class History extends Component {
         }
 
         if (this.state.challengesJSON.length === 0) {
-            get("https://challenges.darkintaqt.com/api/dynamic-data/na1", this.loadChallenges);
+            get(`https://challenges.darkintaqt.com/api/dynamic-data/serve?region=na1&lang=${window.language}`, this.loadChallenges);
             return
         }
 

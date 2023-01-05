@@ -1,6 +1,6 @@
 import css from "../css/challengeObject.module.css"
 import { checkExists } from "../func/arrayManipulationFunctions.js"
-import { capitalize } from "../func/stringManipulation";
+import { capitalize, strtolower } from "../func/stringManipulation";
 import goTo from "../func/goTo";
 import ProgressBar from "./ProgressBar";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -8,8 +8,11 @@ import { Fragment } from "react";
 import { beautifyNum } from "./../func/beautify.js"
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 
+import { useTranslation } from 'react-i18next';
+
 export default function ChallengeObject(params) {
 
+    const { t } = useTranslation();
 
     const variables = [
         ["tier"],
@@ -90,7 +93,7 @@ export default function ChallengeObject(params) {
                 <p>{challenge[4]}</p>
             </div>
             <p className={css.tier}>
-                {capitalize(challenge[0])}
+                {capitalize(t(strtolower(challenge[0])))}
             </p>
             <button><i className="fa-solid fa-chevron-down"></i></button>
             {

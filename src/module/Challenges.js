@@ -18,6 +18,7 @@ import Loadable from "react-loadable";
 import { setCookie } from "../func/cookiefunctions"
 import Error from "./Error"
 import { withTranslation } from "react-i18next"
+import { capitalize } from "../func/stringManipulation"
 
 class Challenges extends Component {
     constructor(props) {
@@ -53,7 +54,7 @@ class Challenges extends Component {
         this.server = server;
 
 
-        get(`https://challenges.darkintaqt.com/api/dynamic-data/${server}`, this.loadChallenges)
+        get(`https://challenges.darkintaqt.com/api/dynamic-data/serve?region=na1&lang=${window.language}`, this.loadChallenges)
 
     }
 
@@ -97,7 +98,7 @@ class Challenges extends Component {
             }
             let highestTier = "NONE",
                 queueIds = [],
-                parentName = "crystal",
+                parentId = 0,
                 obtainable = [];
 
             let ranks = config.tiers
@@ -121,13 +122,13 @@ class Challenges extends Component {
                             c = 10;
                         }
                     }
-                    parentName = getChallenge(parentChallengeId)["translation"]["name"]
+                    parentId = getChallenge(parentChallengeId).id
                 } else if ([600006, 600010, 600011, 600012, 0].includes(challenge.id)) {
-                    parentName = "legacy"
+                    parentId = 600006
                 } else if (checkExists(challenge.tags["isCapstone"])) {
-                    parentName = challenge.translation.name
+                    parentId = challenge.id
                 } else {
-                    parentName = "NO CATEGORY"
+                    parentId = 0
                 }
                 if (challenge.tags["source"] === "CHALLENGES") {
                     if (this.filter.type.length > 0 && !this.filter.type.includes("progress")) {
@@ -252,11 +253,12 @@ class Challenges extends Component {
                 continue
             }
 
+            let parentName = getChallenge(parentId).translation.name;
 
             // Skip to next element if filter is on and not on element
-            if (this.filter.category.length > 0 && !this.filter.category.includes(parentName.toLowerCase().replace(/ /g, ""))) {
-                if (this.filter.category.includes("retiredseasonal")) {
-                    if (parentName.toLowerCase().replace(/ /g, "") !== "2022seasonal") {
+            if (this.filter.category.length > 0 && !this.filter.category.includes(parentId.toString())) {
+                if (this.filter.category.includes("seasonal-retired")) {
+                    if (parentId !== 2022000) {
                         continue;
                     }
                 } else {
@@ -281,7 +283,7 @@ class Challenges extends Component {
                 queueIds={<Fragment>
                     <div>
                         <p>{parentName.charAt(0).toUpperCase() + parentName.slice(1).toLowerCase()} Category</p>
-                        <img src={"https://cdn.darkintaqt.com/lol/static/challenges/" + parentName.toLowerCase().replace(/ /g, "") + ".svg"} alt={parentName.toLowerCase()} />
+                        <img src={config.images[parentId]} alt={parentName.toLowerCase()} />
                     </div>
                     {queueIds}
                     {obtainable}
@@ -304,7 +306,7 @@ class Challenges extends Component {
 
     changeFilter(e) {
         let button = e.currentTarget;
-        let c = button.innerText.toLowerCase().replace(/ /g, "")
+        let c = button.getAttribute("data-id")
 
         let category = this.filter[button.parentNode.getAttribute("category")];
         if (button.classList.length > 0) {
@@ -382,35 +384,35 @@ class Challenges extends Component {
                     <p className={filterCSS.info}>Filter (multiple choices)</p>
                     <div className={filterCSS.category} category="category">
                         <p className={filterCSS.cheading}>{t("Category")}</p>
-                        <button onClick={this.changeFilter}>
-                            <img src={config.images.teamwork} alt="teamwork" />
-                            Teamwork
+                        <button onClick={this.changeFilter} data-id="4">
+                            <img src={config.images["4"]} alt="teamwork" />
+                            {capitalize(getChallenge(4).translation.name)}
                         </button>
-                        <button onClick={this.changeFilter}>
-                            <img src={config.images.imagination} alt="imagination" />
-                            Imagination
+                        <button onClick={this.changeFilter} data-id="1">
+                            <img src={config.images["1"]} alt="imagination" />
+                            {capitalize(getChallenge(1).translation.name)}
                         </button>
-                        <button onClick={this.changeFilter}>
-                            <img src={config.images.veterancy} alt="veterancy" />
-                            Veterancy
+                        <button onClick={this.changeFilter} data-id="3">
+                            <img src={config.images["3"]} alt="veterancy" />
+                            {capitalize(getChallenge(3).translation.name)}
                         </button>
-                        <button onClick={this.changeFilter}>
-                            <img src={config.images.collection} alt="collection" />
-                            Collection
+                        <button onClick={this.changeFilter} data-id="5">
+                            <img src={config.images["5"]} alt="collection" />
+                            {capitalize(getChallenge(5).translation.name)}
                         </button>
-                        <button onClick={this.changeFilter}>
-                            <img src={config.images.expertise} alt="expertise" />
-                            Expertise
+                        <button onClick={this.changeFilter} data-id="2">
+                            <img src={config.images["2"]} alt="expertise" />
+                            {capitalize(getChallenge(2).translation.name)}
                         </button>
-                        <button onClick={this.changeFilter}>
-                            <img src={config.images.legacy} alt="legacy" />
+                        <button onClick={this.changeFilter} data-id="600006">
+                            <img src={config.images["600006"]} alt="legacy" />
                             Legacy
                         </button>
-                        <button onClick={this.changeFilter}>
-                            <img src={config.images['2023seasonal']} alt="2023 seasonal" />
-                            2023 Seasonal <span>NEW</span>
+                        <button onClick={this.changeFilter} data-id="2023000">
+                            <img src={config.images['2023000']} alt="2023 seasonal" />
+                            2023 Seasonal <span>{t("new").toUpperCase()}</span>
                         </button>
-                        <button onClick={this.changeFilter}>
+                        <button onClick={this.changeFilter} data-id="seasonal-retired">
                             <img src={config.images['seasonal-retired']} alt="seasonal outdated" />
                             Retired Seasonal
                         </button>

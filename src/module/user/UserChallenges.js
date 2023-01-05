@@ -21,6 +21,9 @@ import orderChallenges, { getNextLevel } from "./orderChallenges";
 import goTo from "../../func/goTo";
 import Loader from "../Loader"
 import { withTranslation } from "react-i18next";
+import { capitalize } from "../../func/stringManipulation";
+import getChallenge from "../../func/getChallenge";
+
 
 class UserChallenges extends Component {
     constructor(props) {
@@ -313,42 +316,42 @@ class UserChallenges extends Component {
                     <div className={filterCSS.category} category="category">
                         <p className={filterCSS.cheading}>{t("Category")}</p>
 
-                        <button onClick={this.changeExtraFilter} id="expertise" type="category">
-                            <img src={config.images.expertise} alt="" />
-                            Expertise
+                        <button onClick={this.changeExtraFilter} id="2" type="category">
+                            <img src={config.images[2]} alt="" />
+                            {capitalize(getChallenge(2).translation.name)}
                         </button>
 
-                        <button onClick={this.changeExtraFilter} id="teamwork" type="category">
-                            <img src={config.images.teamwork} alt="" />
-                            Teamwork
+                        <button onClick={this.changeExtraFilter} id="4" type="category">
+                            <img src={config.images[4]} alt="" />
+                            {capitalize(getChallenge(4).translation.name)}
                         </button>
 
-                        <button onClick={this.changeExtraFilter} id="imagination" type="category">
-                            <img src={config.images.imagination} alt="" />
-                            Imagination
+                        <button onClick={this.changeExtraFilter} id="1" type="category">
+                            <img src={config.images[1]} alt="" />
+                            {capitalize(getChallenge(1).translation.name)}
                         </button>
 
-                        <button onClick={this.changeExtraFilter} id="veterancy" type="category">
-                            <img src={config.images.veterancy} alt="" />
-                            Veterancy
+                        <button onClick={this.changeExtraFilter} id="3" type="category">
+                            <img src={config.images[3]} alt="" />
+                            {capitalize(getChallenge(3).translation.name)}
                         </button>
 
-                        <button onClick={this.changeExtraFilter} id="collection" type="category">
-                            <img src={config.images.collection} alt="" />
-                            Collection
+                        <button onClick={this.changeExtraFilter} id="5" type="category">
+                            <img src={config.images[5]} alt="" />
+                            {capitalize(getChallenge(5).translation.name)}
                         </button>
 
-                        <button onClick={this.changeExtraFilter} id="legacy" type="category">
-                            <img src={config.images.legacy} alt="" />
+                        <button onClick={this.changeExtraFilter} id="600006" type="category">
+                            <img src={config.images["600006"]} alt="" />
                             Legacy
                         </button>
 
-                        <button onClick={this.changeExtraFilter} id="2023seasonal" type="category">
-                            <img src={config.images['2023seasonal']} alt="2023 seasonal" />
+                        <button onClick={this.changeExtraFilter} id="2023000" type="category">
+                            <img src={config.images['2023000']} alt="2023 seasonal" />
                             2023 Seasonal <span>NEW</span>
                         </button>
 
-                        <button onClick={this.changeExtraFilter} id="retired" type="category">
+                        <button onClick={this.changeExtraFilter} id="retired-seasonal" type="category">
                             <img src={config.images['seasonal-retired']} alt="seasonal outdated" />
                             Retired Seasonal
                         </button>

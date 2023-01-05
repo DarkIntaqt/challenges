@@ -20,6 +20,10 @@ export default function HeaderNFooter() {
                     <i className="fa-solid fa-user-group"></i> {t("Community")}
                 </Link>
 
+                <Link to="/settings">
+                    <i className="fa-solid fa-globe"></i>
+                </Link>
+
                 <Link to="/challenges">
                     <i className="fa-solid fa-compass"></i> {t("Challenges")}
                 </Link>
@@ -66,7 +70,7 @@ export default function HeaderNFooter() {
                 <div className={StyleSheet.rightFooter}>
                     <a href="https://darkintaqt.com/assets/impressum/" rel="noreferrer" target="_blank">Imprint</a>
                     <a href="https://darkintaqt.com/assets/privacypolicy/" rel="noreferrer" target="_blank">Privacy Policy</a>
-                    <Link to={"/faq"}>FAQ</Link>
+                    <Link to={"/faq"}>{t("FAQ")}</Link>
                     <a href="https://github.com/DarkIntaqt/challenges" target="_blank" rel="noreferrer">GitHub</a>
                     <a href="https://twitter.com/darkintaqt" target="_blank" rel="noreferrer">Twitter</a>
                 </div>

@@ -15,10 +15,9 @@ import start from "../css/start.module.css"
 import { checkExists } from "../func/arrayManipulationFunctions.js";
 import config from "../config";
 
-import { capitalize } from "../func/stringManipulation";
+import { capitalize, strtolower, strtoupper } from "../func/stringManipulation";
 import Wrapper from "./Wrapper";
 //import VipBadge from "./VipBadge";
-
 import VipBadge from "./VipBadge"
 import Ad from "./Ad"
 import { withTranslation } from "react-i18next";
@@ -65,7 +64,7 @@ class Challenge extends Component {
         }
 
         const tempChallenge = getCache(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`)
-        const tempChallenges = getCache(`https://challenges.darkintaqt.com/api/dynamic-data/na1`)
+        const tempChallenges = getCache(`https://challenges.darkintaqt.com/api/dynamic-data/serve?region=na1&lang=${window.language}`)
 
         if (tempChallenge !== false && tempChallenges !== false) {
             this.challenges = tempChallenges
@@ -112,7 +111,7 @@ class Challenge extends Component {
     load() {
         document.title = "Loading..."
         get(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`, this.loadChallenge, this.error);
-        get(`https://challenges.darkintaqt.com/api/dynamic-data/na1`, this.loadChallenges, this.error);
+        get(`https://challenges.darkintaqt.com/api/dynamic-data/serve?region=na1&lang=${window.language}`, this.loadChallenges, this.error);
     }
 
     loadChallenge(challenge) {
@@ -304,7 +303,7 @@ class Challenge extends Component {
                                     <p>{player[0]} <span className={css.region}>#{serverToHumanReadable(player[6])}</span></p>
                                 </a>
                             </td>
-                            <td>{capitalize(intToTier(player[2]))}</td>
+                            <td>{capitalize(t(strtolower(intToTier(player[2]))))}</td>
                             <td>{beautifyNum(player[1], false)}</td>
                         </tr>)
                     }
@@ -345,7 +344,7 @@ class Challenge extends Component {
             }
 
             thresholdTable.unshift(<div key={"threshold" + i} className={css.rowParentTableRow}>
-                <p className={intToTier(i)} style={{ color: "var(--type)", textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{intToTier(i)}</p>
+                <p className={intToTier(i)} style={{ color: "var(--type)", textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{strtoupper(t(strtolower(intToTier(i))))}</p>
                 <p style={lineThrough}>{beautifyNum(thresholds[i])}</p>
                 <p style={lineThrough}>{Math.round(percentiles[intToTier(i)] * 1000) / 10}%</p>
             </div>)

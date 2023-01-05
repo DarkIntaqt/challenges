@@ -17,9 +17,24 @@ export default function getChallenge(challengeId = 0) {
             }
 
         }
-        return 0;
+        console.error(`Didn't load challenge ${challengeId}, return fallback`)
+        return {
+            id: "-1",
+            translation: {
+                name: "Loading",
+                description: "Loading",
+                shortDescription: "Loading"
+            }
+        };
     } catch (error) {
         console.error(error);
-        return {};
+        return {
+            id: "-1",
+            translation: {
+                name: "Loading",
+                description: "Loading",
+                shortDescription: "Loading"
+            }
+        };
     }
 }

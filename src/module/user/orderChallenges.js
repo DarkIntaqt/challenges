@@ -67,7 +67,7 @@ export function removeUnnecessaryChallenges(challenges, filters, masterOnly = fa
             }
         }
 
-        let parentName = "crystal"
+        let parentId = 0
 
         if (checkExists(challengeData.tags["parent"])) {
             let iterationCount = 0;
@@ -80,22 +80,21 @@ export function removeUnnecessaryChallenges(challenges, filters, masterOnly = fa
                     iterationCount = 10;
                 }
             }
-            parentName = getChallenge(parentChallengeId)["translation"]["name"]
+            parentId = getChallenge(parentChallengeId).id
         } else if ([600006, 600010, 600011, 600012, 0].includes(challengeData.id)) {
-            parentName = "legacy"
+            parentId = 600006
         } else if (checkExists(challengeData.tags["isCapstone"])) {
-            parentName = challengeData.translation.name
+            parentId = challengeData.id
         } else {
-            parentName = "crystal"
+            parentId = 0
         }
 
         challenge.push(pushLater)
 
-        parentName = parentName.toLowerCase().replace(/ /g, "")
 
-        if (filters.category.length > 0 && !filters.category.includes(parentName)) {
-            if (filters.category.includes("retired")) {
-                if (parentName.toLowerCase().replace(/ /g, "") !== "2022seasonal") {
+        if (filters.category.length > 0 && !filters.category.includes(parentId.toString())) {
+            if (filters.category.includes("retired-seasonal")) {
+                if (parentId !== 2022000) {
                     return null
                 }
             } else {
@@ -103,7 +102,7 @@ export function removeUnnecessaryChallenges(challenges, filters, masterOnly = fa
             }
         }
 
-        challenge.push(parentName)
+        challenge.push(parentId)
 
         return challenge
     })?.filter(x => x !== null)
