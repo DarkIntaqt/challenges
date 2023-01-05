@@ -2,12 +2,20 @@ import i18next from "i18next";
 import { Component } from "react";
 import { setCookie } from "../func/cookiefunctions";
 
+function getFlagEmoji(countryCode) {
+   const codePoints = countryCode
+      .toUpperCase()
+      .split('')
+      .map(char => 127397 + char.charCodeAt());
+   return String.fromCodePoint(...codePoints);
+}
+
 const languages = [
-   ["en", "English", "🇬🇧🇺🇸🇦🇺"],
-   ["de", "Deutsch", "🇩🇪🇦🇹"],
-   ["fr", "Français", "🇫🇷"],
-   ["es", "Español", "🇪🇸"],
-   ["ja", "日本語", "🇯🇵"]
+   ["en", "English"],
+   ["de", "Deutsch"],
+   ["fr", "Français"],
+   ["es", "Español"],
+   ["ja", "日本語"]
 ]
 
 export default class Settings extends Component {
@@ -44,7 +52,7 @@ export default class Settings extends Component {
          }
 
          return <div data-lang={lang[0]} style={style} key={lang[0]} onClick={this.changeLanguage}>
-            {lang[1]} {lang[2]}
+            {lang[1]}
          </div>
       })
 

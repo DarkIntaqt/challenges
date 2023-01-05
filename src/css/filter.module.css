@@ -94,12 +94,14 @@ button.mastertrue {
     box-sizing: border-box;
     padding: 0 10px 10px;
     border-radius: 8px;
+    overflow: hidden;
 }
 
 .filter .selectors .category {
     width: 100%;
     margin-bottom: 20px;
     float: left;
+    overflow: hidden;
 }
 
 .filter .selectors .category .cheading {
