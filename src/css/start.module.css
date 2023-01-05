@@ -92,7 +92,7 @@
     flex-wrap: wrap;
     float: left;
     display: flex;
-    justify-content: space-between
+    justify-content: space-evenly
 }
 
 .filter {
@@ -111,6 +111,10 @@
     border: none;
     font-size: 1rem;
     padding: 5px
+}
+
+.start .serverselector:nth-child(2n+1) {
+    margin: 5px 18% 0;
 }
 
 .start .serverselector .region:hover,

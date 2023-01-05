@@ -33,6 +33,21 @@ function serverToHumanReadable(server) {
         case "tr1":
             return "tr"
 
+        case "ph2":
+            return "ph"
+
+        case "sg2":
+            return "sg"
+
+        case "th2":
+            return "th"
+
+        case "tw2":
+            return "tw"
+
+        case "vn2":
+            return "vn"
+
         default:
             break;
     }
@@ -73,6 +88,21 @@ function serverToMachineReadable(server) {
 
         case "tr":
             return "tr1"
+
+        case "ph":
+            return "ph2"
+
+        case "sg":
+            return "sg2"
+
+        case "th":
+            return "th2"
+
+        case "tw":
+            return "tw2"
+
+        case "vn":
+            return "vn2"
 
         default:
             break;

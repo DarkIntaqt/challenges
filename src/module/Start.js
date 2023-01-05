@@ -189,6 +189,13 @@ class Start extends Component {
           <div className={StyleSheet.region} onClick={changeRegion}>ru</div>
           <div className={StyleSheet.region} onClick={changeRegion}>tr</div>
         </div>
+        <div className={StyleSheet.serverselector}>
+          <div className={StyleSheet.region} onClick={changeRegion}>ph</div>
+          <div className={StyleSheet.region} onClick={changeRegion}>sg</div>
+          <div className={StyleSheet.region} onClick={changeRegion}>th</div>
+          <div className={StyleSheet.region} onClick={changeRegion}>tw</div>
+          <div className={StyleSheet.region} onClick={changeRegion}>vn</div>
+        </div>
         <div style={{ float: "left", margin: "10px 0", width: "100%", display: "flex", justifyContent: "center" }}>
           <Ad></Ad>
         </div>
