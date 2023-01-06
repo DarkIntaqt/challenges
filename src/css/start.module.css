@@ -141,6 +141,11 @@
 .oc>.oc,
 .ru>.ru,
 .tr>.tr,
+.ph>.ph,
+.th>.th,
+.vn>.vn,
+.tw>.tw,
+.sg>.sg,
 .start .serverselector .region.selected {
     background: var(--selected);
     color: #fff;
@@ -242,7 +247,7 @@ a.searchedUser>span {
 }
 
 @media only screen and (max-width:1700px) {
-    .start .serverselector {
+    .start .serverselector:nth-child(2n+1) {
         margin-bottom: 170px !important
     }
 }

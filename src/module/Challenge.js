@@ -438,6 +438,7 @@ class Challenge extends Component {
                 {content}
             </Wrapper>
         } catch (e) {
+            console.warn(e);
             return <p style={{ color: "white" }}>an error occurred</p>
         }
     }
