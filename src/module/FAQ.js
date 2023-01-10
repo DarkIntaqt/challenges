@@ -36,7 +36,9 @@ export default function FAQ() {
         [
             "What are these blue check marks?",
             "These checkmarks shows that the shown profile is a beta tester. Currently, beta testers are selected by hand. "
-        ]
+        ],
+        ["What are all these filter options on a profile page",
+            "Yeah I know... There are a lot of filters<br/><br/><b>Display option</b><br/><img src='https://lolcdn.darkintaqt.com/cdn/faq-filter.png' alt='change display options'><br/>By switching between these two buttons you can change the display options for the challenges. A list mode and a compact mode. <br/><br/><b>Only show challenges which (still) gives points</b><br/><img src='https://lolcdn.darkintaqt.com/cdn/faq-points.png' alt='show challenges with points'><br/>This filter option removes all challenges where you can't gain any new points from. <br/><br/><b>Set thresholds to master</b><br/><img src='https://lolcdn.darkintaqt.com/cdn/faq-master.png' alt='set threshold to master'><br/>By setting the thresholds to master you can easily check how many points you need until you 'maxes' a challenge. "]
     ]
 
     let content = [];

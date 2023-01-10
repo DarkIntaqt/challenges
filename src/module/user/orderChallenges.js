@@ -3,7 +3,7 @@ import getChallenge from "../../func/getChallenge";
 import { intToTier } from "../../func/tierFunctions";
 
 
-export function getNextLevel(current, masterOnly = false) {
+export function getNextLevel(current, masterOnly = false, pointsOnly = false) {
     if (masterOnly === true) {
         return "MASTER";
     }
@@ -19,7 +19,7 @@ export function getNextLevel(current, masterOnly = false) {
 
 
 
-export function removeUnnecessaryChallenges(challenges, filters, masterOnly = false) {
+export function removeUnnecessaryChallenges(challenges, filters, masterOnly = false, pointsOnly = false) {
 
     return challenges.map(function (challenge) {
 
@@ -104,15 +104,24 @@ export function removeUnnecessaryChallenges(challenges, filters, masterOnly = fa
 
         challenge.push(parentId)
 
+        if (pointsOnly === true) {
+            if (challenge[1] >= 7) {
+                return null;
+            }
+            if (challenge[8] === 600006 || challenge[6].parent === "2022000" || challenge[6].parent === "2023000") {
+                return null;
+            }
+        }
+
         return challenge
     })?.filter(x => x !== null)
 
 }
 
 
-export default function orderChallenges(challenges, filter, extraFilter, masterOnly) {
+export default function orderChallenges(challenges, filter, extraFilter, masterOnly, pointsOnly) {
 
-    challenges = removeUnnecessaryChallenges(challenges, extraFilter)
+    challenges = removeUnnecessaryChallenges(challenges, extraFilter, masterOnly, pointsOnly)
 
     let sortAlgorithm = function (a, b) {
 

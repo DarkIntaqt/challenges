@@ -33,6 +33,7 @@ class UserChallenges extends Component {
         this.changeFilter = this.changeFilter.bind(this)
         this.changeExtraFilter = this.changeExtraFilter.bind(this)
         this.toggleMasterTierSorting = this.toggleMasterTierSorting.bind(this)
+        this.togglePointsAvailableSorting = this.togglePointsAvailableSorting.bind(this)
 
         this.changeDisplayMethod = this.changeDisplayMethod.bind(this)
 
@@ -41,6 +42,7 @@ class UserChallenges extends Component {
         this.state = {
             alphabet: "a-z",
             orderByMaster: false,
+            orderByPoints: false,
             placeholder: window.compactMode,
             filter: "level",
             filters: {
@@ -56,6 +58,13 @@ class UserChallenges extends Component {
     toggleMasterTierSorting() {
         this.setState({
             orderByMaster: !this.state.orderByMaster
+        })
+    }
+
+
+    togglePointsAvailableSorting() {
+        this.setState({
+            orderByPoints: !this.state.orderByPoints
         })
     }
 
@@ -159,7 +168,7 @@ class UserChallenges extends Component {
         const filter = this.state.filter
 
 
-        let challengesOrdered = orderChallenges(user.challenges, this.state.filter, this.state.filters, this.state.orderByMaster)
+        let challengesOrdered = orderChallenges(user.challenges, this.state.filter, this.state.filters, this.state.orderByMaster, this.state.orderByPoints)
 
 
         let challenges = challengesOrdered.map((challenge) => {
@@ -277,8 +286,12 @@ class UserChallenges extends Component {
                             <i className="fa-solid fa-list"></i>
                         </button>
 
+                        <button id="points" onClick={this.togglePointsAvailableSorting} className={filterCSS["points" + this.state.orderByPoints]}>
+                            <i class="fa-solid fa-arrow-up-right-dots"></i>
+                        </button>
+
                         <button id="mode" onClick={this.toggleMasterTierSorting} className={filterCSS["master" + this.state.orderByMaster]}>
-                            <img src="https://raw.communitydragon.org/9.12/plugins/rcp-fe-lol-league-tier-names/global/default/assets/images/ranked-mini-regalia/master.png" alt="" />
+                            <img src="https://lolcdn.darkintaqt.com/cdn/m.png" alt="" />
                         </button>
 
                     </div>
@@ -382,7 +395,7 @@ class UserChallenges extends Component {
                 <p className={css.legal}>
                     <span data-nosnippet>
                         The U.GG logo belongs to U.GG. Read more <a href="/faq#h4" onClick={goTo}>here</a>.
-                        <br /><br />Click <a href="/faq" onClick={goTo}>here</a> to get any questions about this page answered.
+                        <br /><br />Click <a href="/faq#h9" onClick={goTo}>here</a> to get any questions about this page answered.
                     </span>
                 </p>
             </div>
