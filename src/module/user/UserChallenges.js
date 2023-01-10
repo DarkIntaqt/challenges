@@ -287,7 +287,7 @@ class UserChallenges extends Component {
                         </button>
 
                         <button id="points" onClick={this.togglePointsAvailableSorting} className={filterCSS["points" + this.state.orderByPoints]}>
-                            <i class="fa-solid fa-arrow-up-right-dots"></i>
+                            <img src="https://lolcdn.darkintaqt.com/cdn/i.png" alt="" />
                         </button>
 
                         <button id="mode" onClick={this.toggleMasterTierSorting} className={filterCSS["master" + this.state.orderByMaster]}>
