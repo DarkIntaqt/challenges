@@ -88,7 +88,7 @@ class Challenges extends Component {
 
         let challengeObject = [];
 
-
+        console.log(this.filter);
         for (let i = 0; i < challenges.length; i++) {
             const challenge = challenges[i];
             if (challenge.id < 10) {
@@ -420,31 +420,31 @@ class Challenges extends Component {
 
                     <div className={filterCSS.category} category="type">
                         <p className={filterCSS.cheading}>{t("Type")}</p>
-                        <button onClick={this.changeFilter}>
+                        <button onClick={this.changeFilter} data-id="progress">
                             <i className="fa-solid fa-angles-up"></i>
                             Progress
                         </button>
-                        <button onClick={this.changeFilter}>
+                        <button onClick={this.changeFilter} data-id="ingame">
                             <i className="fa-solid fa-play"></i>
                             Ingame
                         </button>
-                        <button onClick={this.changeFilter}>
+                        <button onClick={this.changeFilter} data-id="eternals">
                             <img src="https://cdn.darkintaqt.com/lol/static/challenges/eternals.webp" alt="eternals" />
                             Eternals
                         </button>
-                        <button onClick={this.changeFilter}>
+                        <button onClick={this.changeFilter} data-id="clash">
                             <img src="https://cdn.darkintaqt.com/lol/static/challenges/clash.webp" alt="clash" />
                             Clash
                         </button>
-                        <button onClick={this.changeFilter}>
+                        <button onClick={this.changeFilter} data-id="inventory">
                             <i className="fa-solid fa-box-open"></i>
                             Inventory
                         </button>
-                        <button onClick={this.changeFilter}>
+                        <button onClick={this.changeFilter} data-id="ranked">
                             <i className="fa-solid fa-ranking-star"></i>
                             Ranked
                         </button>
-                        <button onClick={this.changeFilter}>
+                        <button onClick={this.changeFilter} data-id="profile">
                             <i className="fa-solid fa-user"></i>
                             Profile
                         </button>
@@ -452,15 +452,15 @@ class Challenges extends Component {
 
                     <div className={filterCSS.category} category="gamemode">
                         <p className={filterCSS.cheading}>{t("Gamemode")}</p>
-                        <button onClick={this.changeFilter}>
+                        <button onClick={this.changeFilter} data-id="summonersrift">
                             <img src={config.images.summonersrift} alt="Summoners Rift" />
                             Summoners Rift
                         </button>
-                        <button onClick={this.changeFilter}>
+                        <button onClick={this.changeFilter} data-id="aram">
                             <img src={config.images.aram} alt="ARAM" />
                             ARAM
                         </button>
-                        <button onClick={this.changeFilter}>
+                        <button onClick={this.changeFilter} data-id="bot">
                             <img src={config.images.bot} alt="Bot Games" />
                             Bot
                         </button>
