@@ -54,7 +54,7 @@ class Challenges extends Component {
         this.server = server;
 
 
-        get(`https://challenges.darkintaqt.com/api/dynamic-data/serve?region=na1&lang=${window.language}`, this.loadChallenges)
+        get(`https://challenges.darkintaqt.com/api/dynamic-data/serve?region=euw1&lang=${window.language}`, this.loadChallenges)
 
     }
 
