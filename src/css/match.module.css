@@ -172,6 +172,7 @@
 
 .match .matchdata .items>span img {
     border-radius: 5px;
+    background-color: rgba(20, 20, 30);
 }
 
 .match .challengedata {

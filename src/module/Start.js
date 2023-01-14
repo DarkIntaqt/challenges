@@ -56,7 +56,9 @@ class Start extends Component {
 
       if (clickEvent.code === "Enter") {
 
-        search(clickEvent.target.value)
+        if (clickEvent.target.value.length > 0) {
+          search(clickEvent.target.value)
+        }
 
       }
 

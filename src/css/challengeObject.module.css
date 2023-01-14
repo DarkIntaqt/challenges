@@ -286,6 +286,12 @@
     border-radius: 0 0 5px 5px;
 }
 
+.compact.challenge .progressBar.bgprogress {
+    height: 4px;
+    margin-left: -8px;
+    margin-top: 46px;
+}
+
 .full.challenge:hover {
     box-shadow: 0 0 15px -2px var(--type);
 }

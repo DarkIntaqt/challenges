@@ -25,7 +25,8 @@ export default function ChallengeObject(params) {
         ["progressCurrent", false, false],
         ["progressNext", false, false],
         ["forceFullMode", false, false],
-        ["forceCompact", false, false]
+        ["forceCompact", false, false],
+        ["progressCurrentSecondary", false, false]
     ];
 
 
@@ -96,6 +97,12 @@ export default function ChallengeObject(params) {
                 {capitalize(t(strtolower(challenge[0])))}
             </p>
             <button><i className="fa-solid fa-chevron-down"></i></button>
+
+            {challenge[11] !== false ?
+                <div className={`${css.progressBar} ${css.bgprogress}`} style={{
+                    width: "calc(calc(100% + 16px) * " + (challenge[11] / challenge[8]) + ")",
+                    backgroundColor: "white"
+                }}></div> : null}
             {
                 challenge[7] !== false ?
                     <div className={css.progressBar} style={{

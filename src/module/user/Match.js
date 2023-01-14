@@ -11,6 +11,7 @@ import ChallengeObject from "./../ChallengeObject"
 import getChallenge from "../../func/getChallenge"
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { strtolower } from "../../func/stringManipulation";
+import { getNextLevel } from "./orderChallenges";
 
 const secondsToMMSS = (seconds) => {
     const MM = `${Math.floor(seconds / 60) % 60}`.padStart(2, '0');
@@ -51,6 +52,7 @@ export default class Match extends Component {
         this.laodedMatchData = this.laodedMatchData.bind(this)
         this.loadData = this.loadData.bind(this)
         this.toggleExpand = this.toggleExpand.bind(this)
+        this.error = this.error.bind(this);
 
         this.loading = false
 
@@ -66,8 +68,13 @@ export default class Match extends Component {
         }
     }
 
+
     laodedMatchData(data) {
         this.setState({ matchData: data })
+    }
+
+    error() {
+        this.setState({ matchData: "error" });
     }
 
     loadData() {
@@ -78,9 +85,11 @@ export default class Match extends Component {
         if (this.loading === false) {
             this.loading = true;
             document.removeEventListener("scroll", this.loadData)
-            get("https://challenges.darkintaqt.com/api/v1/np-match/" + this.state.matchId, this.laodedMatchData)
+            get("https://challenges.darkintaqt.com/api/v1/np-match/" + this.state.matchId, this.laodedMatchData, this.error)
         }
+
     }
+
 
     componentDidMount() {
         // TODO: Load match using get()
@@ -89,6 +98,12 @@ export default class Match extends Component {
         this.loadData()
 
         document.addEventListener("scroll", this.loadData)
+    }
+
+    componentWillUnmount() {
+
+        document.removeEventListener("scroll", this.loadData);
+
     }
 
     toggleExpand() {
@@ -104,6 +119,14 @@ export default class Match extends Component {
             let matchdata = []
             if (this.state.matchData.length === 0) {
                 matchdata = <Loader></Loader>
+            } else if (this.state.matchData === "error") {
+                matchdata = <Fragment>
+                    <div className={css.left + " " + css["remake"]}>
+                    </div>
+                    <div style={{ width: "100%", display: "flex", alignItems: "center", padding: "0", color: "rgb(200,200,200)" }}>
+                        <p style={{ width: "100%", textAlign: "center" }}>Missing match file. <br />Maybe it is malformed?</p>
+                    </div>
+                </Fragment>;
             } else {
                 let match = this.state.matchData
                 let player
@@ -215,13 +238,29 @@ export default class Match extends Component {
                         console.warn(challenge.challengeId);
                         continue
                     }
+
+                    let tier = intToTier(challenge["new"]["tier"]);
+                    let nexttier = getNextLevel(tier);
+
+                    let c = getChallenge(challenge["challengeId"]);
+                    let next = "n";
+
+                    if (checkExists(c["thresholds"][nexttier])) {
+                        next = c["thresholds"][nexttier]
+                    } else {
+                        next = c["thresholds"][tier]
+                    }
+
                     allChallenges.push(<ChallengeObject
                         key={parseInt(challenge["challengeId"])}
-                        tier={intToTier(challenge["new"]["tier"])}
-                        title={getChallenge(challenge["challengeId"])["translation"]["name"]}
+                        tier={tier}
+                        title={c["translation"]["name"]}
                         subtitle={"+" + beautifyNum(challenge["new"]["points"] - challenge["old"]["points"], true, 1000)}
-                        description={getChallenge(challenge["challengeId"])["translation"]["description"]}
+                        description={c["translation"]["description"]}
                         href={"/challenge/" + challenge["challengeId"]}
+                        progressCurrent={challenge["old"]["points"]}
+                        progressNext={next}
+                        progressCurrentSecondary={challenge["new"]["points"]}
                         forceCompact={true}
                     >
 

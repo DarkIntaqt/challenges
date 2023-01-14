@@ -278,12 +278,12 @@ class UserChallenges extends Component {
                 <div className={filterCSS.selectors + " clearfix"}>
                     <div className={filterCSS.displayMode}>
 
-                        <button id="full" onClick={this.changeDisplayMethod} className={filterCSS["cmode" + window.compactMode] + " " + filterCSS.modefalse}>
-                            <i className="fa-solid fa-table-cells"></i>
-                        </button>
-
                         <button id="compact" onClick={this.changeDisplayMethod} className={filterCSS["cmode" + window.compactMode] + " " + filterCSS.modetrue}>
                             <i className="fa-solid fa-list"></i>
+                        </button>
+
+                        <button id="full" onClick={this.changeDisplayMethod} className={filterCSS["cmode" + window.compactMode] + " " + filterCSS.modefalse}>
+                            <i className="fa-solid fa-table-cells"></i>
                         </button>
 
                         <button id="points" onClick={this.togglePointsAvailableSorting} className={filterCSS["points" + this.state.orderByPoints]}>
