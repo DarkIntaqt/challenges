@@ -30,9 +30,20 @@
 
 a.uggarea {
     display: inline-block;
+    text-decoration: none;
+
 }
 
+
 img.ugglogo {
+    border-left: 2px solid var(--light2);
+    padding: 0 0 0 10px;
+    margin: 0 0 0 10px;
+    height: 1.2rem;
+    width: 3.6rem;
+}
+
+img.mclogo {
     border-left: 2px solid var(--light2);
     padding: 0 0 0 10px;
     margin: 0 0 0 10px;
