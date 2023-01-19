@@ -322,7 +322,7 @@ class User extends Component {
                 <h1>
                     {summonerName}{this.state.verified === true ? <a href="/faq#h8" onClick={goTo}><VipBadge size={"2rem"} /></a> : null}{typeof summonerName === "object" ? null : <Fragment>
                         <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
-                        <a href={"https://masterychart.com/profile/" + serverToHumanReadable(this.server) + "/" + decodeURI(strtolower(summonerName))} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.mclogo} src="https://challenges.darkintaqt.com/api/masterychart-full.png" alt={profileText} title={profileText}></img></a>
+                        <a href={"https://masterychart.com/profile/" + serverToHumanReadable(this.server).replace("oc", "oce") + "/" + decodeURI(strtolower(summonerName))} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.mclogo} src="https://challenges.darkintaqt.com/api/masterychart-full.png" alt={profileText} title={profileText}></img></a>
                     </Fragment>
                     }
                 </h1>
