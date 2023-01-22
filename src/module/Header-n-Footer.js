@@ -1,7 +1,7 @@
 import { Outlet, Link } from "react-router-dom";
 import { Fragment } from "react"
 import StyleSheet from "../css/header.module.css";
-import logo from "../img/logo.png";
+import logo from "../img/logo.svg";
 import { useTranslation } from "react-i18next";
 
 export default function HeaderNFooter() {
