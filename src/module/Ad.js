@@ -5,7 +5,6 @@ import { checkExists } from "../func/arrayManipulationFunctions.js"
 export default class Ad extends Component {
     constructor(props) {
         super(props)
-        this.unit = []
         this.style = {}
         if (checkExists(props.style)) {
             this.style = props.style
@@ -15,17 +14,19 @@ export default class Ad extends Component {
 
     componentWillUnmount() {
         try {
-            window.clearAd([this.unit])
+            window.clearAd(this.id)
         } catch (e) {
-            console.warn("ad functions are not loaded (yet)");
+            console.warn("Error clearing ads");
+            console.warn(e)
         }
     }
 
     componentDidMount() {
         try {
-            this.unit = window.renderAd(this.id)
+            window.renderAd(this.id)
         } catch (e) {
-            console.warn("ad functions are not loaded (yet)");
+            console.warn("Error serving ads");
+            console.warn(e)
         }
     }
 
