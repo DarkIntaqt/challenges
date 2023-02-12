@@ -108,7 +108,7 @@ export function removeUnnecessaryChallenges(challenges, filters, masterOnly = fa
             if (challenge[1] >= 7) {
                 return null;
             }
-            if (challenge[8] === 600006 || challenge[8].parent === 2022000 || challenge[0] === 2023000) {
+            if (challenge[8] === 600006 || challenge[8].parent === 2022000 || challenge[8] === 2023000) {
                 return null;
             }
         }
