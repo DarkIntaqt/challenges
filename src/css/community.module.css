@@ -8,7 +8,7 @@
     width: 100%;
     min-height: calc(100vh - 650px);
     float: left;
-    height: 1000px;
+    height: 1200px;
     background-color: var(--dark0);
 }
 
@@ -68,6 +68,11 @@
     left: 350px;
 }
 
+.floatingIsland:nth-of-type(5) {
+    left: 60px;
+    top: 900px
+}
+
 .scrollSection>section>img {
     position: absolute;
     height: 240px;
@@ -96,6 +101,13 @@
     left: 20px;
     top: 650px;
 }
+
+.scrollSection>section>img:nth-of-type(5) {
+    left: 680px;
+    border-radius: 10px;
+    top: 900px
+}
+
 
 .floatingIsland>h2 {
     font-size: 1.5rem;
