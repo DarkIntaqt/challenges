@@ -12,8 +12,11 @@ import Loader from "../Loader";
 import get from "../../func/get";
 import orderChallenges from "./orderChallenges";
 import { capitalize } from "../../func/stringManipulation";
+import filterCSS from "../../css/filter.module.css"
+import { withTranslation } from "react-i18next";
 
-export default class UserTitle extends Component {
+
+class UserTitle extends Component {
     constructor(props) {
         super(props)
 
@@ -21,11 +24,14 @@ export default class UserTitle extends Component {
 
         this.state = {
             titles: {},
-            message: "Loading Titles..."
+            message: "Loading Titles...",
+            translation: props.t,
+            filter: "alphabetic"
         }
 
         this.addTitle = this.addTitle.bind(this)
         this.error = this.error.bind(this)
+        this.changeFilter = this.changeFilter.bind(this)
     }
 
 
@@ -45,9 +51,35 @@ export default class UserTitle extends Component {
 
     }
 
+    changeFilter(e) {
+        const user = JSON.parse(JSON.stringify(this.props.summoner));
+
+
+        if (user.challenges.length !== 0 && Object.entries(this.state.titles).length !== 0) {
+
+            const button = e.currentTarget
+            const filter = this.state.filter
+
+            document.getElementById(filter).classList.remove(filterCSS["selected"])
+
+            if (filter === button.id) {
+                return
+            }
+
+            button.classList.add(filterCSS["selected"])
+
+            let tempFilter = button.id
+
+            this.setState({ filter: tempFilter })
+        }
+    }
+
+
     render() {
+        const t = this.state.translation;
 
         let user = JSON.parse(JSON.stringify(this.props.summoner));
+
         user.challenges = orderChallenges(user.challenges, "level", { gamemode: [], type: [], category: [] })
 
         if (user.challenges.length === 0 || Object.entries(this.state.titles).length === 0) {
@@ -242,12 +274,34 @@ export default class UserTitle extends Component {
                 </div>
             </div>
 
-            <div className={css.parent}>
-                {displayTitles}
-                {notUnlockedTitles}
-            </div>
-            <p style={{ color: "var(--light3)", fontSize: ".8rem", margin: "10px 0 30px", width: "100%", float: "left" }}>Note: The "Apprentice" title does not count towards the "Entitled" challenge. </p>
+            <section>
+                <div className={filterCSS.filter}>
+                    <div className={filterCSS.selectors + " clearfix"}>
+                        <p className={filterCSS.info}>Filter</p>
+                        <div className={filterCSS.category} category="category">
+                            <p className={filterCSS.cheading}>{t("Order by")}</p>
 
+                            <button onClick={this.changeFilter} id="alphabetic" className={filterCSS["selected"]}>
+                                <i className={"fa-solid fa-arrow-down-a-z"}></i>
+                                Alphabetic
+                            </button>
+
+                            <button onClick={this.changeFilter} id="rarity">
+                                <i className="fa-solid fa-ranking-star"></i>
+                                Rarity
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <div className={css.parent + " " + css.flexWidth}>
+                    {displayTitles}
+                    {notUnlockedTitles}
+                </div>
+                <p style={{ color: "var(--light3)", fontSize: ".8rem", margin: "10px 0 30px", width: "100%", float: "left" }}>Note: The "Apprentice" title does not count towards the "Entitled" challenge. </p>
+            </section>
         </div>
     }
 }
+
+export default withTranslation()(UserTitle)
