@@ -341,7 +341,6 @@ class Challenges extends Component {
                     "type": this.filter.type,
                     "gamemode": this.filter.gamemode
                 }
-                setStorage(storageKeys.challengeFilters, this.filter);
 
                 break;
             case "type":
@@ -350,7 +349,6 @@ class Challenges extends Component {
                     "category": this.filter.category,
                     "gamemode": this.filter.gamemode
                 }
-                setStorage(storageKeys.challengeFilters, this.filter);
 
                 break;
             default:
@@ -359,10 +357,10 @@ class Challenges extends Component {
                     "type": this.filter.type,
                     "category": this.filter.category
                 }
-                setStorage(storageKeys.challengeFilters, this.filter);
 
                 break;
         }
+        setStorage(storageKeys.challengeFilters, this.filter);
         this.showChallenges(window.JSONPREQUEST)
     }
 
