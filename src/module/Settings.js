@@ -15,7 +15,8 @@ const languages = [
    ["de", "Deutsch"],
    ["fr", "Français"],
    ["es", "Español"],
-   ["ja", "日本語"]
+   ["ja", "日本語"],
+   ["pt", "Português (Brasil)"]
 ]
 
 export default class Settings extends Component {
