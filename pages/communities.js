@@ -9,7 +9,7 @@ export default function Communities({ images, texts }) {
       <h2>{title}</h2>
       <p>{description} 
         <span>
-          <a href={linkHref} target="_blank" rel="noreferrer" aria>
+          <a href={linkHref} target="_blank" rel="noreferrer">
             <i className={linkCss}>{linkText}</i>
           </a>
         </span>
