@@ -1,7 +1,9 @@
 import { Component, createRef } from "react";
+import { withRouter } from "next/router";
+import Link from "next/link";
+
 import css from "challenges/styles/header.module.scss";
 
-import Link from "next/link";
 import Logo from "challenges/assets/logo.svg";
 
 
@@ -18,21 +20,25 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-export class Header extends Component {
-   constructor() {
-      super();
+class Header extends Component {
+   constructor(props) {
+      super(props);
+
+      this.props = props;
 
       this.header = createRef(null);
       this.headerPlaceholder = createRef(null);
       this.buttonText = createRef(null);
 
-      this.toggleWidth = this.toggleWidth.bind(this);
-
       /**
        * true = expanded
        * false = collapsed
-       */
+      */
       this.width = true;
+
+
+      this.toggleWidth = this.toggleWidth.bind(this);
+      this.highlightActiveLink = this.highlightActiveLink.bind(this);
    }
 
 
@@ -57,20 +63,64 @@ export class Header extends Component {
    }
 
 
+   /**
+    * Highlights the current route by adding a the 
+    * css.active class
+    */
+   highlightActiveLink() {
+
+      const pathname = this.props.router.asPath;
+
+      const results = document.querySelectorAll(`.${css.scrollSection} a[href="${pathname}"]`);
+      const oldRouteElements = document.querySelectorAll(`.${css.scrollSection} a.${css.active}`);
+
+      for (let i = 0; i < oldRouteElements.length; i++) {
+         const old = oldRouteElements[i];
+         old.classList.remove(css.active);
+
+      }
+
+      for (let i = 0; i < results.length; i++) {
+         const result = results[i];
+         result.classList.add(css.active);
+      }
+
+   }
+
+
+   componentDidMount() {
+
+      this.props.router.events.on("routeChangeComplete", this.highlightActiveLink);
+      this.props.router.events.on("routeChangeError", this.highlightActiveLink);
+      this.highlightActiveLink();
+
+   }
+
+
+   componentWillUnmount() {
+
+      this.props.router.events.off("routeChangeComplete", this.highlightActiveLink);
+      this.props.router.events.off("routeChangeError", this.highlightActiveLink);
+
+   }
+
+
    render() {
+
+      const router = this.router;
 
       return <>
          <section className={css.headerPlaceholder} ref={this.headerPlaceholder}>
             <nav className={css.header} id="header" ref={this.header}>
 
-               <Link href="/" >
+               <Link href="/" prefetch={false}>
                   <Logo />
                   <p>Challenge Tracker</p>
                </Link>
 
                <div className={css.scrollSection}>
 
-                  <Link href="/">
+                  <Link href="/" prefetch={false}>
                      <FontAwesomeIcon
                         icon={faHouse}
                      />
@@ -78,35 +128,35 @@ export class Header extends Component {
                      <p>Home</p>
                   </Link>
 
-                  <Link href="/challenges">
+                  <Link href="/challenges" prefetch={false}>
                      <FontAwesomeIcon
                         icon={faCompass}
                      />
                      <p>Challenges</p>
                   </Link>
 
-                  <Link href="/challenges/0">
+                  <Link href="/challenges/0" prefetch={false}>
                      <FontAwesomeIcon
                         icon={faRankingStar}
                      />
                      <p>Leaderboards</p>
                   </Link>
 
-                  <Link href="/titles">
+                  <Link href="/titles" prefetch={false}>
                      <FontAwesomeIcon
                         icon={faAward}
                      />
                      <p>Titles</p>
                   </Link>
 
-                  <Link href="/communities">
+                  <Link href="/communities" prefetch={false}>
                      <FontAwesomeIcon
                         icon={faUserGroup}
                      />
                      <p>Communities</p>
                   </Link>
 
-                  <Link href="/settings">
+                  <Link href="/settings" prefetch={false}>
                      <FontAwesomeIcon
                         icon={faGear}
                      />
@@ -132,3 +182,5 @@ export class Header extends Component {
 
    }
 }
+
+export default withRouter(Header);

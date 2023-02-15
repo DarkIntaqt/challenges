@@ -78,16 +78,25 @@ $width: 230px;
          padding: 20px 10px;
          overflow: hidden;
 
-         color: $light2;
+         color: $light3;
          white-space: nowrap;
 
          transition: .25s color;
+
+         &.active {
+
+            p,
+            svg {
+               color: $light0;
+            }
+         }
+
 
          p {
             padding: 0;
             margin: 0;
             flex: 1;
-            color: $light2;
+            color: $light3;
             font-size: 1rem;
             padding-left: 10px;
 
@@ -95,6 +104,7 @@ $width: 230px;
          }
 
          svg {
+            color: $light3;
             text-align: center;
             width: 2rem;
          }
