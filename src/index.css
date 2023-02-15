@@ -123,7 +123,7 @@ button {
 
 .UNRANKED,
 .NONE {
-  --type: black;
+  --type: var(--light3);
   --url: url('https://lolcdn.darkintaqt.com/s/_-none')
 }
 
