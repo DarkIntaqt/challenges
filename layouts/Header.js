@@ -78,35 +78,35 @@ export class Header extends Component {
                      <p>Home</p>
                   </Link>
 
-                  <Link href="/challe nges">
+                  <Link href="/challenges">
                      <FontAwesomeIcon
                         icon={faCompass}
                      />
                      <p>Challenges</p>
                   </Link>
 
-                  <Link href="/">
+                  <Link href="/challenges/0">
                      <FontAwesomeIcon
                         icon={faRankingStar}
                      />
                      <p>Leaderboards</p>
                   </Link>
 
-                  <Link href="/">
+                  <Link href="/titles">
                      <FontAwesomeIcon
                         icon={faAward}
                      />
                      <p>Titles</p>
                   </Link>
 
-                  <Link href="/">
+                  <Link href="/communities">
                      <FontAwesomeIcon
                         icon={faUserGroup}
                      />
                      <p>Communities</p>
                   </Link>
 
-                  <Link href="/">
+                  <Link href="/settings">
                      <FontAwesomeIcon
                         icon={faGear}
                      />

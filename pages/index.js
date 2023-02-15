@@ -1,3 +1,5 @@
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import css from "challenges/styles/index.module.scss";
 import { Component, createRef } from "react";
 
@@ -76,7 +78,7 @@ export default class Start extends Component {
 
                <div className={css.searchbar}>
 
-                  <input ref={this.searchbarInput} placeholder="Search for a summoner, title, challenge"></input>
+                  <input ref={this.searchbarInput} placeholder="Search for a summoner, challenge, title"></input>
 
                   <select>
                      <option value="br">BR</option>
@@ -92,7 +94,9 @@ export default class Start extends Component {
                      <option value="tr">TR</option>
                   </select>
 
-                  <i className="fa-solid fa-magnifying-glass" />
+                  <FontAwesomeIcon
+                     icon={faMagnifyingGlass}
+                  />
 
                </div>
 
