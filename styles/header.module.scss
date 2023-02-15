@@ -1,17 +1,30 @@
 @import 'variables';
 
+$width: 230px;
+
+.headerPlaceholder {
+   width: $width;
+   transition: .25s width;
+
+   &.collapsed {
+      width: calc(20px + 2rem);
+   }
+}
+
 .header {
    height: 100%;
-   width: 230px;
+   width: $width;
    box-sizing: border-box;
    border-right: 1px solid $dark3;
 
    box-shadow: 0 0 15px -5px #000;
 
-   position: relative;
-   z-index: 5;
+   position: fixed;
+   z-index: 15;
+   overflow-x: hidden;
 
    background-color: $dark1;
+   transition: .25s width;
 
    >a {
 
@@ -19,8 +32,10 @@
       align-items: center;
       justify-content: center;
       height: 80px;
+      width: $width;
 
       padding: 10px;
+
 
       &:hover {
 
@@ -38,6 +53,8 @@
       p {
          margin-left: 10px;
 
+
+         white-space: nowrap;
          color: white;
          font-weight: bold;
          font-size: 1.2rem;
@@ -51,13 +68,14 @@
       width: 100%;
       height: calc(100% - 130px);
       overflow-y: auto;
+      overflow-x: hidden;
 
       a {
          display: flex;
+         width: $width;
          align-items: center;
-         justify-content: flex-start;
 
-         padding: 20px;
+         padding: 20px 10px;
          overflow: hidden;
 
          color: $light2;
@@ -68,8 +86,10 @@
          p {
             padding: 0;
             margin: 0;
+            flex: 1;
             color: $light2;
             font-size: 1rem;
+            padding-left: 10px;
 
             transition: .25s color;
          }
@@ -77,7 +97,6 @@
          svg {
             text-align: center;
             width: 2rem;
-            margin-right: 10px;
          }
 
          &:hover {
@@ -97,12 +116,16 @@
       width: 100%;
       padding: 0 10px;
 
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: flex-end;
 
+      border-top: 1px solid $dark3;
+
       button {
-         background-color: $dark3;
+         width: 100%;
+         background-color: $dark1;
          border: none;
          cursor: pointer;
          outline: none;
@@ -143,15 +166,51 @@
       }
    }
 
+   &.collapsed {
+      width: calc(20px + 2rem);
+
+      .footer {
+         padding: 0;
+
+         button {
+            margin: 0 auto;
+         }
+
+         p {
+            display: none;
+         }
+
+         svg {
+            transform: rotate(180deg);
+         }
+      }
+
+      &:hover {
+         width: $width;
+
+         p,
+         .scrollSection a p,
+         .footer p {
+            display: block;
+         }
+
+         .footer {
+            padding: 0 10px;
+
+
+            button {
+               margin: 0;
+            }
+         }
+      }
+   }
+
    @media only screen and (max-height:500px) {
 
       .scrollSection {
          box-shadow: inset 0px -15px 15px -15px #000;
       }
 
-      .footer {
-         border-top: 1px solid $dark3;
-      }
    }
 
 }

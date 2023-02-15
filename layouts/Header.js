@@ -23,77 +23,112 @@ export class Header extends Component {
       super();
 
       this.header = createRef(null);
+      this.headerPlaceholder = createRef(null);
+      this.buttonText = createRef(null);
+
+      this.toggleWidth = this.toggleWidth.bind(this);
+
+      /**
+       * true = expanded
+       * false = collapsed
+       */
+      this.width = true;
+   }
+
+
+   toggleWidth() {
+
+      if (this.width === true) {
+         this.header.current.classList.add(css.collapsed);
+         this.headerPlaceholder.current.classList.add(css.collapsed);
+
+         this.buttonText.current.innerText = "Ellapse";
+
+         this.width = false;
+      } else {
+         this.header.current.classList.remove(css.collapsed);
+         this.headerPlaceholder.current.classList.remove(css.collapsed);
+
+         this.buttonText.current.innerText = "Collapse";
+
+         this.width = true;
+      }
+
    }
 
 
    render() {
 
-      return <nav className={css.header} id="header" ref={this.header}>
+      return <>
+         <section className={css.headerPlaceholder} ref={this.headerPlaceholder}>
+            <nav className={css.header} id="header" ref={this.header}>
 
-         <Link href="/" >
-            <Logo />
-            <p>Challenge Tracker</p>
-         </Link>
+               <Link href="/" >
+                  <Logo />
+                  <p>Challenge Tracker</p>
+               </Link>
 
-         <div className={css.scrollSection}>
+               <div className={css.scrollSection}>
 
-            <Link href="/">
-               <FontAwesomeIcon
-                  icon={faHouse}
-               />
+                  <Link href="/">
+                     <FontAwesomeIcon
+                        icon={faHouse}
+                     />
 
-               <p>Home</p>
-            </Link>
+                     <p>Home</p>
+                  </Link>
 
-            <Link href="/challe nges">
-               <FontAwesomeIcon
-                  icon={faCompass}
-               />
-               <p>Challenges</p>
-            </Link>
+                  <Link href="/challe nges">
+                     <FontAwesomeIcon
+                        icon={faCompass}
+                     />
+                     <p>Challenges</p>
+                  </Link>
 
-            <Link href="/">
-               <FontAwesomeIcon
-                  icon={faRankingStar}
-               />
-               <p>Leaderboards</p>
-            </Link>
+                  <Link href="/">
+                     <FontAwesomeIcon
+                        icon={faRankingStar}
+                     />
+                     <p>Leaderboards</p>
+                  </Link>
 
-            <Link href="/">
-               <FontAwesomeIcon
-                  icon={faAward}
-               />
-               <p>Titles</p>
-            </Link>
+                  <Link href="/">
+                     <FontAwesomeIcon
+                        icon={faAward}
+                     />
+                     <p>Titles</p>
+                  </Link>
 
-            <Link href="/">
-               <FontAwesomeIcon
-                  icon={faUserGroup}
-               />
-               <p>Communities</p>
-            </Link>
+                  <Link href="/">
+                     <FontAwesomeIcon
+                        icon={faUserGroup}
+                     />
+                     <p>Communities</p>
+                  </Link>
 
-            <Link href="/">
-               <FontAwesomeIcon
-                  icon={faGear}
-               />
-               <p>Settings</p>
-            </Link>
+                  <Link href="/">
+                     <FontAwesomeIcon
+                        icon={faGear}
+                     />
+                     <p>Settings</p>
+                  </Link>
 
-         </div>
+               </div>
 
-         <div className={css.footer}>
+               <div className={css.footer}>
 
-            <button type="button">
-               <FontAwesomeIcon
-                  icon={faChevronLeft}
-               />
-               <p>Collapse</p>
-            </button>
+                  <button type="button" onClick={this.toggleWidth}>
+                     <FontAwesomeIcon
+                        icon={faChevronLeft}
+                     />
+                     <p ref={this.buttonText}>Collapse</p>
+                  </button>
 
-         </div>
+               </div>
 
-      </nav>;
+            </nav>
+         </section>
+      </>;
 
    }
 }
