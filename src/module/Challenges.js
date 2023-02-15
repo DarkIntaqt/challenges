@@ -19,6 +19,7 @@ import { setCookie } from "../func/cookiefunctions"
 import Error from "./Error"
 import { withTranslation } from "react-i18next"
 import { capitalize } from "../func/stringManipulation"
+import { storageKeys, getStorage, setStorage } from "../func/localStorageFunctions"
 
 class Challenges extends Component {
     constructor(props) {
@@ -27,9 +28,10 @@ class Challenges extends Component {
         this.toLoad = { "content": [], "leaderboards": [] };
         this.loadChallenges = this.loadChallenges.bind(this)
         this.changeFilter = this.changeFilter.bind(this)
+        this.applyFilters = this.applyFilterStyles.bind(this)
         this.showChallenges = this.showChallenges.bind(this)
-        this.filter = { "category": [], "type": [], "gamemode": [] }
-        this.searchFor = "";
+        this.filter = getStorage(storageKeys.challengeFilters, { "category": [], "type": [], "gamemode": [] })
+        this.searchFor = getStorage(storageKeys.challengeSearch, "");
 
         const LoadEvent = Loadable({
             loader: (content) => import('./events/Event.js'),
@@ -301,7 +303,22 @@ class Challenges extends Component {
 
     componentDidMount() {
         document.title = "Loading..."
+        this.applyFilterStyles();
         this.load()
+    }
+
+    applyFilterStyles() {
+      const buttons = document.querySelectorAll('button[data-id]');
+      const filters = this.filter;
+      if (filters == null) return;
+
+      const dataFilters = [...filters.category, ...filters.type, ...filters.gamemode ];
+
+      for (const button of buttons) {
+        const dataId = button.getAttribute("data-id");
+        // Apply selected CSS if data id is found in saved filters.
+        if (dataFilters.includes(dataId)) button.classList.add(filterCSS["selected"]);
+      }
     }
 
     changeFilter(e) {
@@ -343,11 +360,14 @@ class Challenges extends Component {
 
                 break;
         }
+        setStorage(storageKeys.challengeFilters, this.filter);
         this.showChallenges(window.JSONPREQUEST)
     }
 
     search(e) {
-        this.searchFor = e.target.value;
+        const value = e.target.value;
+        this.searchFor = value;
+        setStorage(storageKeys.challengeSearch, value)
         this.showChallenges(window.JSONPREQUEST)
     }
 
@@ -369,7 +389,7 @@ class Challenges extends Component {
                 {this.state.event}
             </section>
 
-            <input type="text" placeholder={t("Search for a challenge")} onKeyUp={this.search} className={filterCSS.input} />
+            <input type="text" placeholder={t("Search for a challenge")} onKeyUp={this.search} className={filterCSS.input} defaultValue={this.searchFor} />
             <div className={filterCSS.filter}>
 
                 <div className={filterCSS.selectors + " clearfix"}>
