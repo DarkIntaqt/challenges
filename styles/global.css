@@ -11,6 +11,37 @@ a {
    text-decoration: none;
 }
 
+:root {
+   /* UI colors */
+   /* rgb is minified to hex on build */
+   --dark0: rgb(20, 20, 30);
+   --dark1: rgb(28, 28, 38);
+   --dark2: rgb(34, 34, 44);
+   --dark3: rgb(50, 50, 60);
+   --selected: rgb(13, 189, 255);
+   --light0: #fff;
+   --light1: #fff;
+   --light2: #ced2d6;
+   --light3: rgb(204, 203, 203);
+ 
+   /* color variables */
+   --win: #4287f5;
+   --loss: #eb4034;
+   --good: #2abf52;
+   --perfect: #fcba03;
+ 
+ 
+ 
+   /* cookie banner */
+   --cookie-banner-background: var(--dark1);
+   --cookie-banner-text: var(--light1);
+   --cookie-banner-border: var(--dark3);
+   --cookie-banner-button-border: var(--selected);
+   --cookie-banner-button-text: var(--selected);
+   --cookie-banner-button-background: var(--dark0);
+   --cookie-banner-button-accept-background: var(--selected);
+   --cookie-banner-button-accept-text: var(--light1);
+ }
 
 a,
 p,
@@ -28,3 +59,188 @@ h6 {
 * {
    box-sizing: border-box;
 }
+
+div,
+section,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+nav,
+button {
+  margin: 0;
+  line-height: 1;
+  padding: 0;
+}
+
+.object1000 {
+   width: 1000px;
+   float: left;
+   margin: 0 calc(50% - 500px);
+ }
+ 
+ 
+ 
+ @media only screen and (max-width: 1050px) {
+   .object1000 {
+     margin: 0;
+     width: 100%;
+   }
+ }
+ 
+ /* not used */
+ /* 
+ .loader {
+   -webkit-animation: load8 1.3s cubic-bezier(.35, .72, .54, .9) infinite;
+   animation: load8 1.3s cubic-bezier(.35, .72, .54, .9) infinite;
+   border: 6px solid hsla(0, 0%, 100%, .2);
+   border-radius: 50%;
+   border-top: 6px solid #0b0c0c;
+   border-top-color: #ced2d6;
+   font-size: 10px;
+   height: 30px;
+   margin: 60px auto;
+   position: relative;
+   text-indent: -9999em;
+   -webkit-transform: translateZ(0);
+   transform: translateZ(0);
+   width: 30px
+ }
+ .loader.blue {
+   border: 3px solid hsla(0, 0%, 100%, .2);
+   border-top: 3px solid transparent;
+   border-top-color: #0cbdf7;
+ }
+ @-webkit-keyframes load8 {
+   0% {
+     -webkit-transform: rotate(0deg);
+     transform: rotate(0deg)
+   }
+   to {
+     -webkit-transform: rotate(1turn);
+     transform: rotate(1turn)
+   }
+ }
+ @keyframes load8 {
+   0% {
+     -webkit-transform: rotate(0deg);
+     transform: rotate(0deg)
+   }
+   to {
+     -webkit-transform: rotate(1turn);
+     transform: rotate(1turn)
+   }
+ }*/
+ 
+ .UNRANKED,
+ .NONE {
+   --type: var(--light3);
+   --url: url('https://lolcdn.darkintaqt.com/s/_-none')
+ }
+ 
+ .IRON {
+   --type: #696969;
+   --url: url('https://lolcdn.darkintaqt.com/s/_-iron')
+ }
+ 
+ .BRONZE {
+   --type: #8c5139;
+   --url: url('https://lolcdn.darkintaqt.com/s/_-bronze')
+ }
+ 
+ .SILVER {
+   --type: #81989c;
+   --url: url('https://lolcdn.darkintaqt.com/s/_-silver')
+ }
+ 
+ .GOLD {
+   --type: #ce8639;
+   --url: url('https://lolcdn.darkintaqt.com/s/_-gold')
+ }
+ 
+ .PLATINUM {
+   --type: #4f9896;
+   --url: url('https://lolcdn.darkintaqt.com/s/_-platinum')
+ }
+ 
+ .MASTER {
+   --type: rgb(161, 55, 194);
+   --url: url('https://lolcdn.darkintaqt.com/s/_-master')
+ }
+ 
+ .DIAMOND {
+   --type: #576ace;
+   --url: url('https://lolcdn.darkintaqt.com/s/_-diamond')
+ }
+ 
+ .GRANDMASTER {
+   --type: #e17283;
+   --url: url('https://lolcdn.darkintaqt.com/s/_-grandmaster')
+ }
+ 
+ .CHALLENGER {
+   --type: #f4c873;
+   --url: url('https://lolcdn.darkintaqt.com/s/_-challenger')
+ }
+ 
+ .WHITEMESSAGE {
+   --type: #fff;
+ }
+ 
+ .faq>h1 {
+   color: white;
+   font-size: 2rem;
+   padding: 20px 0;
+ }
+ 
+ .faq>h2 {
+   color: var(--light2);
+   font-size: 1.5rem;
+   padding: 0px 0 25px;
+ }
+ 
+ .faq>div {
+   width: 100%;
+   box-sizing: border-box;
+   padding: 20px 10px;
+   margin: 5px 0;
+   border: 2px solid transparent;
+   border-radius: 10px;
+   color: white;
+   float: left;
+ }
+ 
+ .faq>div:hover {
+   border-color: var(--dark2);
+   background-color: var(--dark1);
+ }
+ 
+ .faq>div>p {
+   margin: 5px 0;
+   color: rgb(203, 200, 200);
+ }
+ 
+ .faq>div>p>a {
+   color: white;
+ }
+ 
+ .clearfix {
+   overflow: auto
+ }
+ 
+ .clearfix::after {
+   content: "";
+   clear: both;
+   display: table
+ }
+ 
+ 
+ @media only screen and (max-width:1050px) {
+   .m-hide {
+     display: none !important;
+   }
+ }
