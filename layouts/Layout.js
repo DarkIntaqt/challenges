@@ -1,4 +1,4 @@
-import { Header } from "./Header";
+import Header from "./Header";
 import css from "challenges/styles/layout.module.scss";
 
 export default function Layout(props) {
