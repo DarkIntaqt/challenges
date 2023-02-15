@@ -1,0 +1,21 @@
+{
+   "extends": "next/core-web-vitals",
+   "rules": {
+      "semi": [
+         "error",
+         "always"
+      ],
+      "quotes": [
+         "error",
+         "double"
+      ],
+      "react/no-unknown-property": [
+         1,
+         {
+            "ignore": [
+               "bar-id"
+            ]
+         }
+      ]
+   }
+}

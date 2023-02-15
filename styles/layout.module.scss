@@ -1,0 +1,24 @@
+@import 'variables';
+
+.wrapper {
+   width: 100vw;
+   height: 100vh;
+   background: $dark1;
+
+   position: relative;
+
+   display: flex;
+   display: flex;
+   position: relative;
+   align-items: stretch;
+
+
+   .contentWrapper {
+
+      flex: 1;
+      background: $dark0;
+      min-height: 100vh;
+
+      position: relative;
+   }
+}

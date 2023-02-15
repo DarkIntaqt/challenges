@@ -7,7 +7,7 @@
 ![File Size](https://img.shields.io/github/languages/code-size/DarkIntaqt/challenges)
 </div>
 
-Check out the deployed version [challenges.darkintaqt.com](https://challenges.darkintaqt.com/)
+Check out the deployed version on [challenges.darkintaqt.com](https://challenges.darkintaqt.com/)
 
 This project contains:
 * Summary of a summoners challenges

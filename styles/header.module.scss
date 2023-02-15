@@ -1,0 +1,155 @@
+@import 'variables';
+
+.header {
+   height: 100%;
+   width: 230px;
+   box-sizing: border-box;
+   border-right: 1px solid $dark3;
+
+   box-shadow: 0 0 15px -5px #000;
+
+   position: relative;
+   z-index: 5;
+
+   background-color: $dark1;
+
+   >a {
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80px;
+
+      padding: 10px;
+
+      &:hover {
+
+         p {
+            color: $selected;
+         }
+      }
+
+
+      svg {
+         height: 2rem;
+         width: 2rem;
+      }
+
+      p {
+         margin-left: 10px;
+
+         color: white;
+         font-weight: bold;
+         font-size: 1.2rem;
+         font-family: var(--Source);
+      }
+   }
+
+
+   .scrollSection {
+
+      width: 100%;
+      height: calc(100% - 130px);
+      overflow-y: auto;
+
+      a {
+         display: flex;
+         align-items: center;
+         justify-content: flex-start;
+
+         padding: 20px;
+         overflow: hidden;
+
+         color: $light2;
+         white-space: nowrap;
+
+         transition: .25s color;
+
+         p {
+            padding: 0;
+            margin: 0;
+            color: $light2;
+            font-size: 1rem;
+
+            transition: .25s color;
+         }
+
+         i {
+            text-align: center;
+            width: 2rem;
+            margin-right: 10px;
+         }
+
+         &:hover {
+            color: $light0;
+
+            p {
+               color: $light0;
+            }
+         }
+
+      }
+
+   }
+
+   .footer {
+      height: 50px;
+      width: 100%;
+      padding: 0 10px;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      button {
+         background-color: $dark3;
+         border: none;
+         cursor: pointer;
+         outline: none;
+
+         display: flex;
+         align-items: center;
+         justify-content: center;
+
+         border-radius: 3px;
+         padding: 8px 10px;
+
+         i {
+            font-size: 1.2rem;
+            color: white;
+         }
+
+         p {
+            color: white;
+            transition: .25s linear margin;
+            font-weight: 300;
+            font-size: .8rem;
+            margin: 0 0 0 10px;
+            padding: 0;
+            font-family: var(--Noto);
+         }
+
+
+         &:hover {
+            background-color: $dark2;
+            transition: .25s linear background-color;
+
+            p {
+               margin-left: 15px;
+            }
+         }
+      }
+   }
+
+   @media only screen and (max-height:500px) {
+
+      .scrollSection {
+         box-shadow: inset 0px -15px 15px -15px #000;
+      }
+
+      .footer {
+         border-top: 1px solid $dark3;
+      }
+   }
+
+}
