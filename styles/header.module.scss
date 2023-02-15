@@ -74,7 +74,7 @@
             transition: .25s color;
          }
 
-         i {
+         svg {
             text-align: center;
             width: 2rem;
             margin-right: 10px;
@@ -114,8 +114,9 @@
          border-radius: 3px;
          padding: 8px 10px;
 
-         i {
-            font-size: 1.2rem;
+         svg {
+            width: 1.2rem;
+            height: 1.2rem;
             color: white;
          }
 
@@ -126,6 +127,7 @@
             font-size: .8rem;
             margin: 0 0 0 10px;
             padding: 0;
+            line-height: .8rem;
             font-family: var(--Noto);
          }
 

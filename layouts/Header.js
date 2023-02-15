@@ -4,6 +4,20 @@ import css from "challenges/styles/header.module.scss";
 import Link from "next/link";
 import Logo from "challenges/assets/logo.svg";
 
+
+// FontAwesome
+import {
+   faHouse,
+   faCompass,
+   faRankingStar,
+   faAward,
+   faUserGroup,
+   faGear,
+   faChevronLeft
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+
 export class Header extends Component {
    constructor() {
       super();
@@ -17,38 +31,52 @@ export class Header extends Component {
       return <nav className={css.header} id="header" ref={this.header}>
 
          <Link href="/" >
+            <Logo />
             <p>Challenge Tracker</p>
          </Link>
 
          <div className={css.scrollSection}>
 
             <Link href="/">
-               <i className="fa-solid fa-house"></i>
+               <FontAwesomeIcon
+                  icon={faHouse}
+               />
+
                <p>Home</p>
             </Link>
 
             <Link href="/challe nges">
-               <i className="fa-solid fa-compass"></i>
+               <FontAwesomeIcon
+                  icon={faCompass}
+               />
                <p>Challenges</p>
             </Link>
 
             <Link href="/">
-               <i className="fa-solid fa-ranking-star"></i>
+               <FontAwesomeIcon
+                  icon={faRankingStar}
+               />
                <p>Leaderboards</p>
             </Link>
 
             <Link href="/">
-               <i className="fa-solid fa-award"></i>
+               <FontAwesomeIcon
+                  icon={faAward}
+               />
                <p>Titles</p>
             </Link>
 
             <Link href="/">
-               <i className="fa-solid fa-user-group"></i>
+               <FontAwesomeIcon
+                  icon={faUserGroup}
+               />
                <p>Communities</p>
             </Link>
 
             <Link href="/">
-               <i className="fa-solid fa-gear"></i>
+               <FontAwesomeIcon
+                  icon={faGear}
+               />
                <p>Settings</p>
             </Link>
 
@@ -57,7 +85,9 @@ export class Header extends Component {
          <div className={css.footer}>
 
             <button type="button">
-               <i className="fa-solid fa-chevron-left"></i>
+               <FontAwesomeIcon
+                  icon={faChevronLeft}
+               />
                <p>Collapse</p>
             </button>
 
