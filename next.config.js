@@ -42,6 +42,17 @@ const nextConfig = {
 
       return config;
    },
+   // Configure permitted hostnames for images
+   // https://nextjs.org/docs/messages/next-image-unconfigured-host
+   images: {
+      remotePatterns: [
+         {
+            protocol: "https",
+            hostname: "**.darkintaqt.com",
+            pathname: "**"
+         },
+      ]
+   }
 }
 
 module.exports = nextConfig
