@@ -3,7 +3,8 @@
  */
 export const storageKeys = {
    challengeFilters: "challenge-filters",
-   challengeSearch: "challenge-search"
+   challengeSearch: "challenge-search",
+   titleSearch: "title-search"
 };
 
 /**
