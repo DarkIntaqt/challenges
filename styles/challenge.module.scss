@@ -1,0 +1,144 @@
+@import "variables";
+
+.bgImage {
+   position: absolute;
+   width: 100%;
+   height: 800px;
+
+   mask-image: linear-gradient(to top, transparent, black);
+
+   img {
+      object-fit: cover;
+   }
+}
+
+.challenge {
+
+   $dark3transparent: rgb(50, 50, 60, 0.4);
+
+   position: relative;
+   overflow: hidden;
+   float: left;
+   min-height: 100%;
+   width: 1000px;
+   margin: 0 calc(50% - 500px);
+
+   z-index: 5;
+
+   display: flex;
+   flex-direction: column;
+
+   .head {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+
+      margin: 50px 0 10px;
+      background-color: $dark3transparent;
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+
+      padding: 20px;
+      display: flex;
+
+      div {
+         margin-left: 10px;
+
+         h1 {
+            font-size: 2rem;
+         }
+
+         p {
+            margin: 5px 0;
+            width: fit-content;
+            max-width: 850px;
+
+            font-size: 1rem;
+            line-height: 1.2rem;
+
+            color: var(--type);
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+         }
+      }
+
+      .regionSelector {
+
+         float: right;
+         display: flex;
+         width: 600px;
+         flex-wrap: wrap;
+
+         .region {
+            flex: 1 0 calc(12.5% - 15px);
+
+            border: none;
+            outline: none;
+
+            text-align: center;
+
+            margin: 5px 0 0 15px;
+            padding: 5px 8px;
+            border-radius: 10px;
+            font-size: .8rem;
+
+
+            cursor: pointer;
+            color: $light3;
+            background-color: rgba(20, 20, 30, .5);
+
+            &:hover {
+               background-color: rgba(28, 28, 38, .8);
+            }
+         }
+
+      }
+   }
+
+   .objects {
+      display: flex;
+      justify-content: space-between;
+
+      .thresholds {
+         width: 360px;
+
+         padding: 20px;
+         background-color: $dark3transparent;
+         backdrop-filter: blur(10px);
+         border-radius: 10px;
+
+         margin: 10px 0;
+
+         >p {
+            color: $light0;
+            font-size: 1rem;
+
+            span {
+               color: $light2;
+               font-size: .8rem;
+            }
+         }
+
+      }
+
+      .leaderboard {
+         width: 600px;
+         padding: 20px;
+         background-color: $dark3transparent;
+         backdrop-filter: blur(10px);
+         border-radius: 10px;
+         margin: 10px 0;
+
+         >p {
+            color: $light0;
+            font-size: 1rem;
+
+            span {
+               color: $light2;
+               font-size: .8rem;
+            }
+         }
+      }
+   }
+}
