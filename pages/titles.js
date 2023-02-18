@@ -7,6 +7,7 @@ import ContentService from "challenges/services/ContentService";
 import css from "styles/titles.module.scss";
 import filterCss from "styles/filter.module.scss";
 import { storageKeys, getStorage, setStorage } from "utils/localStorageFunctions";
+import Link from "next/link";
 
 /**
  * @typedef TitlesProps
@@ -17,9 +18,9 @@ import { storageKeys, getStorage, setStorage } from "utils/localStorageFunctions
 /**
  * @param {TitlesProps} props 
  */
-export default function Titles({titles}) {
-   const [ searchList, setSearchList ] = useState(titles);
-   const [ search, setSearch ] = useState("");
+export default function Titles({ titles }) {
+   const [searchList, setSearchList] = useState(titles);
+   const [search, setSearch] = useState("");
 
    // Local storage can only be called within useEffect which happens client-side.
    useEffect(() => {
@@ -35,28 +36,28 @@ export default function Titles({titles}) {
       <Head>
          <title>All Challenges Titles - Overview</title>
       </Head>
-      
+
       <h1 className={css.heading}>All titles</h1>
       <p className={css.subheading}>A list of all League of Legends Title Challenges and how to achieve them</p>
-      <input 
-      className={filterCss.input}
-      type="search" 
-      list="items" 
-      placeholder="Search for challenge titles" 
-      defaultValue={search}
-      spellCheck={false}
-      // We need these three event handlers to deal with oddities across Chrome and Firefox. ૮(˶╥︿╥)ა
-      onChange={(e) => handleChallengeSearch(e.target.value, titles, setSearchList)}
-      onKeyUp={(e) => handleChallengeSearch(e.target.value, titles, setSearchList)}
-      onInput={(e) => handleChallengeSearch(e.target.value, titles, setSearchList)}/>
-      
+      <input
+         className={filterCss.input}
+         type="search"
+         list="items"
+         placeholder="Search for challenge titles"
+         defaultValue={search}
+         spellCheck={false}
+         // We need these three event handlers to deal with oddities across Chrome and Firefox. ૮(˶╥︿╥)ა
+         onChange={(e) => handleChallengeSearch(e.target.value, titles, setSearchList)}
+         onKeyUp={(e) => handleChallengeSearch(e.target.value, titles, setSearchList)}
+         onInput={(e) => handleChallengeSearch(e.target.value, titles, setSearchList)} />
+
       <datalist id="items">
          {/* Add challenge titles to datalist for native HTML searching options! (*´▽`*)❀ */}
-         {titles.map((title) => <option key={title.cid} value={title.title}/> )}
+         {titles.map((title) => <option key={title.cid} value={title.title} />)}
       </datalist>
 
       <div className={css.titles}>
-         <TitleList titles={searchList}/>
+         <TitleList titles={searchList} />
       </div>
    </div>;
 }
@@ -70,32 +71,32 @@ export default function Titles({titles}) {
 /**
  * @param {TitleListProps} props 
  */
-function TitleList({titles}) {
+function TitleList({ titles }) {
    const contentService = new ContentService();
 
    const challengeTitles = titles.map((title) => {
       const iconLink = contentService.getChallengeTokenIcon(title.icon, title.type);
 
-      return <a 
-      key={title.cid}
-      href={"/challenge/" + title.cid} 
-      className={`${css.title} ${title.type} clearfix`}
-      challengeid={title.cid}>
+      return <Link
+         key={title.cid}
+         href={"/challenges/" + title.cid}
+         className={`${css.title} ${title.type} clearfix`}
+         challengeid={title.cid}>
          <span>
-            <Image 
-            height={45}
-            width={45}
-            src={iconLink}
-            placeholdersrc={"https://cdn.darkintaqt.com/lol/static/missing/item.png"}
-            alt={`${title.title}'s icon`}
-            loading="lazy"
+            <Image
+               height={45}
+               width={45}
+               src={iconLink}
+               placeholdersrc={"https://cdn.darkintaqt.com/lol/static/missing/item.png"}
+               alt={`${title.title}'s icon`}
+               loading="lazy"
             />
          </span>
-         
-         <h2>{title.title}<br/><span data-nosnippet>{title.percentile}%</span></h2>
+
+         <h2>{title.title}<br /><span data-nosnippet>{title.percentile}%</span></h2>
          <p>Reach {title.type} tier in {title.challenge}<br></br>{title.description}<br /><br /><i>Need {title.threshold}</i></p>
 
-      </a>;
+      </Link>;
    });
 
    return challengeTitles;
