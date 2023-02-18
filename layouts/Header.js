@@ -94,6 +94,21 @@ class Header extends Component {
       this.props.router.events.on("routeChangeError", this.highlightActiveLink);
       this.highlightActiveLink();
 
+      if (window) {
+
+         if (window.innerWidth < 1200 && this.width === true) {
+            this.toggleWidth();
+         }
+
+         /**
+          * Add a timeout to add the width-transition after the
+          * page has loaded and the
+          */
+         setTimeout(() => {
+            this.header.current.classList.add(css.mounted);
+            this.headerPlaceholder.current.classList.add(css.mounted);
+         }, 250);
+      }
    }
 
 
@@ -107,11 +122,10 @@ class Header extends Component {
 
    render() {
 
-      const router = this.router;
 
       return <>
-         <section className={css.headerPlaceholder} ref={this.headerPlaceholder}>
-            <nav className={css.header} id="header" ref={this.header}>
+         <section className={`${css.headerPlaceholder}`} ref={this.headerPlaceholder}>
+            <nav className={`${css.header}`} id="header" ref={this.header}>
 
                <Link href="/" prefetch={false}>
                   <Logo />
@@ -171,7 +185,7 @@ class Header extends Component {
                      <FontAwesomeIcon
                         icon={faChevronLeft}
                      />
-                     <p ref={this.buttonText}>Collapse</p>
+                     <p ref={this.buttonText}>Ellapse</p>
                   </button>
 
                </div>

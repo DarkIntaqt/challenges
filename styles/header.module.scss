@@ -4,7 +4,10 @@ $width: 230px;
 
 .headerPlaceholder {
    width: $width;
-   transition: .25s width;
+
+   &.mounted {
+      transition: .25s width;
+   }
 
    &.collapsed {
       width: calc(20px + 2rem);
@@ -24,7 +27,10 @@ $width: 230px;
    overflow-x: hidden;
 
    background-color: $dark1;
-   transition: .25s width;
+
+   &.mounted {
+      transition: .25s width;
+   }
 
    >a {
 
