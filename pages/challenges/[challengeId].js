@@ -86,7 +86,7 @@ export default function Challenge({ challenge }) {
          server={"euw"}
          position={i}
       />;
-   })
+   });
 
    return <>
       <Head>
