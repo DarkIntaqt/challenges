@@ -17,9 +17,7 @@
    $dark3transparent: rgb(50, 50, 60, 0.4);
 
    position: relative;
-   overflow: hidden;
-   float: left;
-   min-height: 100%;
+
    width: 1000px;
    margin: 0 calc(50% - 500px);
 
@@ -125,6 +123,8 @@
       .leaderboard {
          width: 600px;
          padding: 20px;
+         position: relative;
+
          background-color: $dark3transparent;
          backdrop-filter: blur(10px);
          border-radius: 10px;
@@ -137,6 +137,101 @@
             span {
                color: $light2;
                font-size: .8rem;
+            }
+         }
+
+         table.table {
+            width: 100%;
+
+            table-layout: fixed;
+            border-collapse: collapse;
+            box-sizing: border-box;
+            border-radius: 10px;
+            margin: 10px 0 0;
+
+
+            // This does not work
+            // tr.heading th {
+            //    top: 200px;
+            //    z-index: 5;
+            //    position: sticky;
+            // }
+
+            tr {
+               color: white;
+               width: 100%;
+               font-size: 0.8rem;
+
+               &:hover {
+                  background-color: $dark1;
+               }
+
+               &:nth-child(odd):not(:first-of-type) {
+                  background-color: $dark3transparent;
+
+                  &:hover {
+                     background-color: $dark3;
+                  }
+               }
+
+               th {
+                  font-size: .8rem !important;
+                  font-weight: 400 !important;
+                  color: $light2 !important;
+               }
+
+               td,
+               th {
+                  padding: 8px 10px;
+                  position: relative;
+
+                  &.pos {
+                     width: 10%;
+                     color: $light2;
+                     border-radius: 5px 0 0 5px;
+                  }
+
+                  &.name {
+                     width: 42%;
+
+                     img {
+                        float: left;
+                        border-radius: 5px;
+                     }
+
+                     p {
+                        font-weight: 300;
+                        font-size: 1rem;
+                        overflow: hidden;
+                        padding: calc(15px - .5rem);
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+
+                        span {
+                           color: $light2;
+                           font-size: .75rem;
+                        }
+                     }
+
+                     :hover p {
+                        text-decoration: underline;
+                     }
+                  }
+
+                  &.tier {
+                     text-align: center;
+                     color: var(--type);
+                     font-weight: 300;
+                     font-size: .8rem;
+                  }
+
+                  &.pts {
+                     text-align: center;
+                     font-size: 1rem;
+                     font-weight: 300;
+                     border-radius: 0 5px 5px 0;
+                  }
+               }
             }
          }
       }

@@ -5,6 +5,42 @@ import Link from "next/link";
 import Head from "next/head";
 import css from "challenges/styles/challenge.module.scss";
 import Image from "next/image";
+import VipBadge from "challenges/components/VipBadge";
+import { intToTier } from "challenges/utils/intToTier";
+import { beautifyNum } from "challenges/utils/beautify";
+import { capitalize, strtolower } from "challenges/utils/stringManipulation";
+
+
+function nameToURL(name) {
+   if (typeof name !== "string") {
+      return "error";
+   }
+   return name;
+}
+
+function LeaderboardPlayer({ name, icon, tier, server, position, points, vip }) {
+
+   let userlink = "/profile/" + server + "/" + nameToURL(name);
+
+   if (name === "%") {
+      userlink = "/faq#h3";
+   }
+
+   return <tr key={name + server + position} className={intToTier(tier)}>
+      <td className={css.pos}>{position}.</td>
+      <td className={css.name}>
+         <Link href={userlink} >
+            {vip === 1 ? <VipBadge size={"22px"} position={"absolute"} margin={"28px 0 0 30px"} /> : null}
+            <Image height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + icon} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={name + "'s profile image"} />
+            <p>{name} <span className={css.region}>#{server}</span></p>
+         </Link>
+      </td>
+      <td className={css.tier}>{capitalize(strtolower(intToTier(tier)))}</td>
+      <td className={css.pts}>{beautifyNum(points, false)}</td>
+   </tr>;
+}
+
+
 
 export default function Challenge({ challenge }) {
 
@@ -38,6 +74,19 @@ export default function Challenge({ challenge }) {
       return <button type="button" className={css.region} key={region}>{region}</button>;
    });
 
+   let i = 0;
+   const players = challenge.summoner.euw.map((player) => {
+      i++;
+      return <LeaderboardPlayer key={i}
+         name={player[0]}
+         points={player[1]}
+         tier={player[2]}
+         icon={player[3]}
+         vip={player[5]}
+         server={"euw"}
+         position={i}
+      />;
+   })
 
    return <>
       <Head>
@@ -72,17 +121,40 @@ export default function Challenge({ challenge }) {
 
          <div className={css.objects}>
 
-            <div className={css.thresholds}>
-               <p>Thresholds <span>How many players have reached a tier</span></p>
-            </div>
+            <section>
+
+               <div className={css.thresholds}>
+                  <p>Thresholds <span>How many players have reached a tier</span></p>
+               </div>
+
+               <div className={css.thresholds}>
+                  <p>Info <span>All you need to know about this challenge</span></p>
+               </div>
+
+            </section>
 
             <div className={css.leaderboard}>
                <p>Leaderboard <span>Global ranking</span></p>
+
+               <table className={css.table}>
+                  <thead>
+                     <tr className={css.heading}>
+                        <th className={css.pos}>Position</th>
+                        <th className={css.name}>Summoner</th>
+                        <th className={css.tier}>Tier</th>
+                        <th className={css.pts}>Points</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {players}
+                  </tbody>
+               </table>
+
             </div>
 
          </div>
 
-      </section >
+      </section>
 
    </>;
 
