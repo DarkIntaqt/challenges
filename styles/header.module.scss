@@ -10,7 +10,7 @@ $width: 230px;
    }
 
    &.collapsed {
-      width: calc(20px + 2rem);
+      width: calc(21px + 2rem);
    }
 }
 
@@ -36,7 +36,6 @@ $width: 230px;
 
       display: flex;
       align-items: center;
-      justify-content: center;
       height: 80px;
       width: $width;
 
@@ -113,6 +112,7 @@ $width: 230px;
             color: $light3;
             text-align: center;
             width: 2rem;
+            height: 1rem;
          }
 
          &:hover {
@@ -183,7 +183,7 @@ $width: 230px;
    }
 
    &.collapsed {
-      width: calc(20px + 2rem);
+      width: calc(21px + 2rem);
 
       .footer {
          padding: 0;
