@@ -90,7 +90,7 @@ export default function Challenge({ challenge }) {
 
    return <>
       <Head>
-         <title> - Overview</title>
+         <title>{challenge.challenge.translation.name} Challenge Overview</title>
       </Head>
 
       <div className={css.bgImage}>
@@ -109,9 +109,11 @@ export default function Challenge({ challenge }) {
 
                <p className={"SILVER"}>{challenge.challenge.translation.description}</p>
 
-               <div className={css.regionSelector}>
+               <div className={css.tags}>
 
-                  {selectors}
+                  <div className={css.tag}>No Title</div>
+
+                  <div className={css.tag}>Semi-Bugged</div>
 
                </div>
 
@@ -135,6 +137,12 @@ export default function Challenge({ challenge }) {
 
             <div className={css.leaderboard}>
                <p>Leaderboard <span>Global ranking</span></p>
+
+               <div className={css.regionSelector}>
+
+                  {selectors}
+
+               </div>
 
                <table className={css.table}>
                   <thead>

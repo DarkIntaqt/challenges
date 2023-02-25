@@ -39,7 +39,7 @@
       padding: 20px;
       display: flex;
 
-      div {
+      >div {
          margin-left: 10px;
 
          h1 {
@@ -59,39 +59,36 @@
             white-space: nowrap;
             overflow: hidden;
          }
-      }
 
-      .regionSelector {
+         .tags {
 
-         float: right;
-         display: flex;
-         width: 600px;
-         flex-wrap: wrap;
+            display: flex;
+            flex-wrap: wrap;
 
-         .region {
-            flex: 1 0 calc(12.5% - 15px);
+            .tag {
 
-            border: none;
-            outline: none;
+               border: none;
+               outline: none;
 
-            text-align: center;
+               text-align: center;
+               margin-right: 5px;
 
-            margin: 5px 0 0 15px;
-            padding: 5px 8px;
-            border-radius: 10px;
-            font-size: .8rem;
+               padding: 5px 10px;
+               border-radius: 10px;
+               font-size: .8rem;
 
 
-            cursor: pointer;
-            color: $light3;
-            background-color: rgba(20, 20, 30, .5);
+               cursor: pointer;
+               color: $light3;
+               background-color: rgba(20, 20, 30, .5);
 
-            &:hover {
-               background-color: rgba(28, 28, 38, .8);
+               &:hover {
+                  background-color: rgba(28, 28, 38, .8);
+               }
             }
          }
-
       }
+
    }
 
    .objects {
@@ -140,6 +137,37 @@
             }
          }
 
+         .regionSelector {
+            margin: 10px 0;
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+
+            .region {
+               flex: 1 0 calc(12.5% - 14px);
+
+               border: none;
+               outline: none;
+
+               text-align: center;
+
+               margin: 5px 7px 0 7px;
+               padding: 5px 8px;
+               border-radius: 10px;
+               font-size: .8rem;
+
+
+               cursor: pointer;
+               color: $light3;
+               background-color: rgba(20, 20, 30, .5);
+
+               &:hover {
+                  background-color: rgba(28, 28, 38, .8);
+               }
+            }
+
+         }
+
          table.table {
             width: 100%;
 
@@ -166,7 +194,7 @@
                   background-color: $dark1;
                }
 
-               &:nth-child(odd):not(:first-of-type) {
+               &:nth-child(odd):not(.heading) {
                   background-color: $dark3transparent;
 
                   &:hover {
