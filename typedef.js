@@ -28,6 +28,18 @@
    */
 
   /**
+   * @typedef GlobalChallengeDto
+   * @type {Object}
+   * @property {string} icon
+   * @property {number} icon_2
+   * @property {number} timestamp
+   * @property {Array.<string>} title 
+   * @property {ChallengeDto} challenge 
+   * @property {Object} stats 
+   * @property {Object} summoner
+   */
+
+  /**
    * @typedef ChallengeDto
    * @type {Object}
    * @property {number} id

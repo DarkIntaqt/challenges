@@ -39,7 +39,7 @@ export default class ChallengeService {
   /**
    * Get the challenge associated with numerical id.
    * @param {number} id 
-   * @returns {Promise<any>} Challenge
+   * @returns {Promise<GlobalChallengeDto>} Challenge
    */
   async getById(id) {
     const challenge = await this.getJson(`/v5/c/?id=${id}`);
