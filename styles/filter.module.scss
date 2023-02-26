@@ -17,6 +17,19 @@
       float: left;
       overflow: hidden;
 
+      button>span {
+        display: block;
+        float: right;
+        font-size: .7rem;
+        font-weight: bold;
+        color: white !important;
+        padding: .15rem 5px;
+        box-shadow: 0 0 5px var(--selected);
+        background-color: var(--selected);
+        border-radius: 5px;
+        margin-left: 5px;
+      }
+
       >button {
         font-size: 1rem;
         white-space: nowrap;
@@ -110,22 +123,6 @@
     justify-content: center;
   }
 }
-
-// TODO
-// Syntax error: Selector "button > span" is not pure (pure selectors must contain at least one local class or id)
-
-// button>span {
-//   display: block;
-//   float: right;
-//   font-size: .7rem;
-//   font-weight: bold;
-//   color: white !important;
-//   padding: .15rem 5px;
-//   box-shadow: 0 0 5px var(--selected);
-//   background-color: var(--selected);
-//   border-radius: 5px;
-//   margin-left: 5px;
-// }
 
 button.cmodefalse.modefalse,
 button.cmodetrue.modetrue,
