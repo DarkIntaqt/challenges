@@ -1,21 +1,20 @@
 .heading {
   width: 100%;
   float: left;
-}
 
-.heading h1 {
-  padding: 20px 0 5px 10px;
-  font-size: 2rem;
-  color: white;
-}
+  h1 {
+    padding: 20px 0 5px 10px;
+    font-size: 2rem;
+    color: white;
+  }
 
-.heading h2 {
-  font-size: 1.4rem;
-  padding-left: 20px;
-  font-weight: normal;
-  color: rgb(160, 160, 160);
+  h2 {
+    font-size: 1.4rem;
+    padding-left: 20px;
+    font-weight: normal;
+    color: rgb(160, 160, 160);
+  }
 }
-
 
 .crystal {
   width: calc(100% - 30px);
@@ -32,10 +31,10 @@
   box-shadow: 0 0 20px var(--type);
   background-color: var(--dark1);
   /* background-image: url(https://lolcdn.darkintaqt.com/s/ad.webp); */
-}
 
-.crystal:hover {
-  box-shadow: 0 0 30px var(--type);
+  :hover {
+    box-shadow: 0 0 30px var(--type);
+  }
 }
 
 .flexWidth {
@@ -50,5 +49,4 @@
   .flexWidth {
       width: 100%;
   }
-
 }
