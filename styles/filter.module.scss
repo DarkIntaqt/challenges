@@ -74,6 +74,14 @@
     }
   }
 
+  p.info {
+    font-size: 1rem;
+    width: 100%;
+    color: white;
+    margin-bottom: 10px;
+    display: none;
+    text-align: center;
+  }
 }
 
 .displayMode {
@@ -149,15 +157,6 @@ button.pointstrue {
   &:focus {
     border-color: var(--selected);
     box-shadow: 0 0 5px var(--selected);
-  }
-
-  p.info {
-    font-size: 1rem;
-    width: 100%;
-    color: white;
-    margin-bottom: 10px;
-    display: none;
-    text-align: center;
   }
 }
 
