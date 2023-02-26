@@ -127,8 +127,9 @@
 
          svg {
             cursor: pointer;
-            font-size: 1rem;
-            padding: 15px 20px;
+            height: 1rem;
+            width: 1rem;
+            margin: 15px 20px;
             color: $light3;
 
             &:hover {
