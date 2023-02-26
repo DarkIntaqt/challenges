@@ -4,7 +4,8 @@
 export const storageKeys = {
    challengeFilters: "challenge-filters",
    challengeSearch: "challenge-search",
-   titleSearch: "title-search"
+   titleSearch: "title-search",
+   headerPosition: "header-position"
 };
 
 /**
