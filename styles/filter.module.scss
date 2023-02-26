@@ -32,7 +32,7 @@
         text-align: left;
         transition: 0.25s padding-left;
 
-        :hover {
+        &:hover {
           color: white;
           background-color: var(--dark1);
         }
