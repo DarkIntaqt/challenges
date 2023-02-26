@@ -23,27 +23,13 @@ import { faAnglesUp, faBoxOpen, faList, faPlay, faRankingStar, faTableCells, faU
  * @typedef ChallengesProps
  * @type {Object}
  * @property {Array.<ChallengeDto>} challenges
- * @property {CategoriesMap} categories
+ * @property {Object} filters
  */
 
 /**
  * @param {ChallengesProps} props
  */
-export default function Challenges({ challenges, categories }) {
-   const filterImages = {
-      expertise: "https://cdn.darkintaqt.com/lol/static/challenges/expertise.svg",
-      collection: "https://cdn.darkintaqt.com/lol/static/challenges/collection.svg",
-      imagination: "https://cdn.darkintaqt.com/lol/static/challenges/imagination.svg",
-      veterancy: "https://cdn.darkintaqt.com/lol/static/challenges/veterancy.svg",
-      teamwork: "https://cdn.darkintaqt.com/lol/static/challenges/teamwork.svg",
-      legacy: "https://cdn.darkintaqt.com/lol/static/challenges/legacy.svg",
-      seasonal2023: "https://cdn.darkintaqt.com/lol/static/challenges/2023seasonal.svg",
-      seasonalRetired: "https://cdn.darkintaqt.com/lol/static/challenges/retired.svg",
-      summonersrift: "https://lolcdn.darkintaqt.com/cdn/sr.svg",
-      aram: "https://lolcdn.darkintaqt.com/cdn/ha.svg",
-      bot: "https://lolcdn.darkintaqt.com/cdn/bot.png"
-   };
-
+export default function Challenges({ challenges, filters }) {
    // TODO
    // Complete migration of ChallengeObject
    const challengeCards = [];
@@ -90,35 +76,35 @@ export default function Challenges({ challenges, categories }) {
             <p className={filterCss.info}>Filter (multiple choices)</p>
             <FilterButtonList categoryType="category">
                <button onClick={handleChangeFilter} data-id="4">
-                  <Image width={16} height={16} src={filterImages.teamwork} alt="teamwork" />
-                  {capitalize(categories.teamwork.challenge.translation.name)}
+                  <Image width={16} height={16} src={filters.teamwork.src} alt="teamwork" />
+                  {capitalize(filters.teamwork.name)}
                </button>
                <button onClick={handleChangeFilter} data-id="1">
-                  <Image width={16} height={16} src={filterImages.imagination} alt="imagination" />
-                  {capitalize(categories.imagination.challenge.translation.name)}
+                  <Image width={16} height={16} src={filters.imagination.src} alt="imagination" />
+                  {capitalize(filters.imagination.name)}
                </button>
                <button onClick={handleChangeFilter} data-id="3">
-                  <Image width={16} height={16} src={filterImages.veterancy} alt="veterancy" />
-                  {capitalize(categories.veterancy.challenge.translation.name)}
+                  <Image width={16} height={16} src={filters.veterancy.src} alt="veterancy" />
+                  {capitalize(filters.veterancy.name)}
                </button>
                <button onClick={handleChangeFilter} data-id="5">
-                  <Image width={16} height={16} src={filterImages.collection} alt="collection" />
-                  {capitalize(categories.collection.challenge.translation.name)}
+                  <Image width={16} height={16} src={filters.collection.src} alt="collection" />
+                  {capitalize(filters.collection.name)}
                </button>
                <button onClick={handleChangeFilter} data-id="2">
-                  <Image width={16} height={16} src={filterImages.expertise} alt="expertise" />
-                  {capitalize(categories.expertise.challenge.translation.name)}
+                  <Image width={16} height={16} src={filters.expertise.src} alt="expertise" />
+                  {capitalize(filters.expertise.name)}
                </button>
                <button onClick={handleChangeFilter} data-id="600006">
-                  <Image width={16} height={16} src={filterImages.legacy} alt="legacy" />
+                  <Image width={16} height={16} src={filters.legacy.src} alt="legacy" />
                   Legacy
                </button>
                <button onClick={handleChangeFilter} data-id="2023000">
-                  <Image width={16} height={16} src={filterImages.seasonal2023} alt="2023 seasonal" />
+                  <Image width={16} height={16} src={filters.seasonal2023.src} alt="2023 seasonal" />
                   2023 Seasonal <span>NEW</span>
                </button>
                <button onClick={handleChangeFilter} data-id="seasonal-retired">
-                  <Image width={16} height={16} src={filterImages.seasonalRetired} alt="seasonal retired" />
+                  <Image width={16} height={16} src={filters.seasonalRetired.src} alt="seasonal retired" />
                   Retired Seasonal
                </button>
             </FilterButtonList>
@@ -133,11 +119,11 @@ export default function Challenges({ challenges, categories }) {
                   Ingame
                </button>
                <button onClick={handleChangeFilter} data-id="eternals">
-                  <Image width={16} height={16} src="https://cdn.darkintaqt.com/lol/static/challenges/eternals.webp" alt="eternals" />
+                  <Image width={16} height={16} src={filters.eternals.src} alt="eternals" />
                   Eternals
                </button>
                <button onClick={handleChangeFilter} data-id="clash">
-                  <Image width={16} height={16} src="https://cdn.darkintaqt.com/lol/static/challenges/clash.webp" alt="clash" />
+                  <Image width={16} height={16} src={filters.clash.src} alt="clash" />
                   Clash
                </button>
                <button onClick={handleChangeFilter} data-id="inventory">
@@ -156,15 +142,15 @@ export default function Challenges({ challenges, categories }) {
 
             <FilterButtonList categoryType="gamemode">
                <button onClick={handleChangeFilter} data-id="summonersrift">
-                  <Image width={16} height={16} src={filterImages.summonersrift} alt="Summoners Rift" />
+                  <Image width={16} height={16} src={filters.summonersrift.src} alt="Summoners Rift" />
                   Summoners RIft
                </button>
                <button onClick={handleChangeFilter} data-id="aram">
-                  <Image width={16} height={16} src={filterImages.aram} alt="ARAM" />
+                  <Image width={16} height={16} src={filters.aram.src} alt="ARAM" />
                   ARAM
                </button>
                <button onClick={handleChangeFilter} data-id="bot">
-                  <Image width={16} height={16} src={filterImages.bot} alt="Bot Games" />
+                  <Image width={16} height={16} src={filters.bot.src} alt="Bot Games" />
                   Bot
                </button>
             </FilterButtonList>
@@ -226,10 +212,57 @@ export async function getServerSideProps() {
       expertise: await challengeService.getById(2)
    };
 
+   const filters = {
+      expertise: {
+         src: "https://cdn.darkintaqt.com/lol/static/challenges/expertise.svg",
+         name: categories.teamwork.challenge.translation.name
+      },
+      collection: {
+         src: "https://cdn.darkintaqt.com/lol/static/challenges/collection.svg",
+         name: categories.collection.challenge.translation.name
+      },
+      imagination: {
+         src: "https://cdn.darkintaqt.com/lol/static/challenges/imagination.svg",
+         name: categories.imagination.challenge.translation.name
+      },
+      veterancy: {
+         src: "https://cdn.darkintaqt.com/lol/static/challenges/veterancy.svg",
+         name: categories.veterancy.challenge.translation.name
+      },
+      teamwork: {
+         src: "https://cdn.darkintaqt.com/lol/static/challenges/teamwork.svg",
+         name: categories.teamwork.challenge.translation.name
+      },
+      legacy: {
+         src: "https://cdn.darkintaqt.com/lol/static/challenges/legacy.svg",
+      },
+      seasonal2023: {
+         src: "https://cdn.darkintaqt.com/lol/static/challenges/2023seasonal.svg",
+      },
+      seasonalRetired: {
+         src: "https://cdn.darkintaqt.com/lol/static/challenges/retired.svg",
+      },
+      summonersrift: {
+         src: "https://lolcdn.darkintaqt.com/cdn/sr.svg",
+      },
+      aram: {
+         src: "https://lolcdn.darkintaqt.com/cdn/ha.svg",
+      },
+      bot: {
+         src: "https://lolcdn.darkintaqt.com/cdn/bot.png",
+      },
+      eternals: {
+         src: "https://cdn.darkintaqt.com/lol/static/challenges/eternals.webp"
+      },
+      clash: {
+         src: "https://cdn.darkintaqt.com/lol/static/challenges/clash.webp"
+      }
+   };
+
    return {
       props: {
          challenges,
-         categories
+         filters
       }
    };
 }
