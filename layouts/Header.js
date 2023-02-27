@@ -19,6 +19,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+/**
+ * Use the storage handler to store the position of the sidebar
+ */
+import { getStorage, setStorage, storageKeys } from "challenges/utils/localStorageFunctions";
+
 
 class Header extends Component {
    constructor(props) {
@@ -42,7 +47,7 @@ class Header extends Component {
    }
 
 
-   toggleWidth() {
+   toggleWidth(forced = false) {
 
       if (this.width === true) {
          this.header.current.classList.add(css.collapsed);
@@ -60,6 +65,9 @@ class Header extends Component {
          this.width = true;
       }
 
+      if (forced !== true) {
+         setStorage(storageKeys.headerPosition, this.width.toString());
+      }
    }
 
 
@@ -94,9 +102,16 @@ class Header extends Component {
       this.props.router.events.on("routeChangeError", this.highlightActiveLink);
       this.highlightActiveLink();
 
+      /**
+       * Handle the default position of the sidebar
+       * First, check if the sidebar position was already set
+       * If not, check if the window width is smaller than 1200px
+       */
       if (window) {
 
-         if (window.innerWidth < 1200 && this.width === true) {
+         if (getStorage(storageKeys.headerPosition, this.width.toString()) !== this.width.toString()) {
+            this.toggleWidth(true);
+         } else if (window.innerWidth < 1200 && this.width === true) {
             this.toggleWidth();
          }
 

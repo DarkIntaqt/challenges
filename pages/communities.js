@@ -2,15 +2,17 @@ import Image from "next/image";
 import Head from "next/head";
 import css from "styles/communities.module.scss";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export default function Communities({ images, texts }) {
   const islands = texts.map((text) => {
-    const [ title, description, linkHref, linkText, linkCss ] = text;
+    const [title, description, linkHref, linkText, linkCss] = text;
     return <div key={title} className={css.floatingIsland} role="group">
       <h2>{title}</h2>
-      <p>{description} 
+      <p>{description}
         <span>
           <a href={linkHref} target="_blank" rel="noreferrer">
-            <i className={linkCss}>{linkText}</i>
+            <i className={linkCss}></i>{linkText}
           </a>
         </span>
       </p>
@@ -18,13 +20,13 @@ export default function Communities({ images, texts }) {
   });
 
   const communityImages = images.map((image) => {
-    return <Image 
-      alt="Challenge Community image" 
-      key={image} 
-      src={image} 
-      height={240} 
-      width={240} 
-      loading="lazy"/>;
+    return <Image
+      alt="Challenge Community image"
+      key={image}
+      src={image}
+      height={240}
+      width={240}
+      loading="lazy" />;
   });
 
   return <div className={css.bgArea} role="banner">
@@ -34,12 +36,12 @@ export default function Communities({ images, texts }) {
 
     <section className="object1000">
       <div className={css.topArea}>
-        <h1 className={css.heading}>Meet the <br/>Challenge-Community</h1>
+        <h1 className={css.heading}>Meet the <br />Challenge-Community</h1>
       </div>
     </section>
 
     <div className={css.scrollSection}>
-      <section className="object1000" style={{position: "relative"}}>
+      <section className="object1000" style={{ position: "relative" }}>
         {islands}
         {communityImages}
       </section>
@@ -58,10 +60,10 @@ export async function getServerSideProps() {
     texts = data.texts;
   }
 
-  return { 
+  return {
     props: {
       images,
       texts
-     }
+    }
   };
 }

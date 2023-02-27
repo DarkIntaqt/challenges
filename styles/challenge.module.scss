@@ -14,8 +14,6 @@
 
 .challenge {
 
-   $dark3transparent: rgb(50, 50, 60, 0.4);
-
    position: relative;
 
    width: 1000px;
@@ -77,6 +75,9 @@
                border-radius: 10px;
                font-size: .8rem;
 
+               &.title {
+                  color: var(--type);
+               }
 
                cursor: pointer;
                color: $light3;
@@ -95,8 +96,10 @@
       display: flex;
       justify-content: space-between;
 
-      .thresholds {
+      .thresholds,
+      .info {
          width: 360px;
+         position: relative;
 
          padding: 20px;
          background-color: $dark3transparent;
@@ -105,13 +108,93 @@
 
          margin: 10px 0;
 
-         >p {
+         &.info {
+            margin-top: 30px;
+
+            .disclaimer {
+               p {
+                  font-size: .9rem;
+                  color: $light2;
+                  line-height: 1.1rem;
+                  text-align: justify;
+                  padding: 10px 5px 0;
+                  font-weight: 300;
+               }
+
+               .bugDisclaimer {
+                  border-top: 1px solid $dark3;
+                  margin-top: 10px;
+                  padding-top: 10px;
+
+                  h4 {
+                     width: 100%;
+                     color: $light0;
+
+                     font-weight: 300;
+                     font-size: 1rem
+                  }
+
+                  p {
+                     span {
+                        &.semi {
+                           color: #fcba03;
+                        }
+                     }
+                  }
+               }
+            }
+         }
+
+         >h3 {
+            font-weight: 300;
             color: $light0;
             font-size: 1rem;
 
             span {
                color: $light2;
                font-size: .8rem;
+            }
+         }
+
+         .table {
+            margin-top: 10px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            >div {
+               width: 100%;
+               display: flex;
+               align-items: center;
+               padding: 8px 10px;
+               border-radius: 5px;
+
+               &:nth-child(even) {
+                  background-color: $dark3transparent;
+               }
+
+               &.tableHead {
+                  >p {
+                     font-size: .7rem;
+                     color: $light3;
+                  }
+               }
+
+               >p {
+                  flex: 1 0 30%;
+
+                  text-align: center;
+                  font-size: .8rem;
+                  font-weight: 300;
+                  text-transform: capitalize;
+
+                  color: $light1;
+
+                  &:nth-child(1) {
+                     flex: 1 0 40%;
+                  }
+               }
+
             }
          }
 
@@ -127,7 +210,8 @@
          border-radius: 10px;
          margin: 10px 0;
 
-         >p {
+         >h3 {
+            font-weight: 300;
             color: $light0;
             font-size: 1rem;
 
@@ -151,18 +235,29 @@
 
                text-align: center;
 
-               margin: 5px 7px 0 7px;
+               margin: 5px 7px 0;
                padding: 5px 8px;
-               border-radius: 10px;
+               border-radius: 8px;
                font-size: .8rem;
 
+               &.active {
+                  background-color: $selected;
+                  color: $light0;
+                  box-shadow: 0 0 5px $selected;
+
+                  &:hover {
+                     box-shadow: 0 0 8px $selected;
+                     background-color: $selected;
+                  }
+               }
 
                cursor: pointer;
                color: $light3;
                background-color: rgba(20, 20, 30, .5);
+               color: white;
 
                &:hover {
-                  background-color: rgba(28, 28, 38, .8);
+                  background-color: rgba(28, 28, 38, 1);
                }
             }
 
@@ -190,7 +285,7 @@
                width: 100%;
                font-size: 0.8rem;
 
-               &:hover {
+               &:hover:not(.heading) {
                   background-color: $dark1;
                }
 
