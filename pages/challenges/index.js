@@ -24,7 +24,7 @@ import { useEffect, useRef, useState } from "react";
  */
 export default function Challenges({ challenges, filters }) {
    /**
-    * Category enum types
+    * Category enum types.
     */
    const category = {
       category: "category",
@@ -32,7 +32,7 @@ export default function Challenges({ challenges, filters }) {
       gamemode: "gamemode"
    };
    /**
-    * Data filters used as state for searching and CSS highlighting
+    * Data filters used as state for searching and CSS highlighting.
     */
    const [dataFilters, setDataFilters] = useState({
       // Challenge categories
@@ -58,7 +58,7 @@ export default function Challenges({ challenges, filters }) {
       bot: {id: "bot", key: "bot", css: "", category: category.gamemode}
    });
    /**
-    * Filters used for searching challenges
+    * Filters used for searching challenges.
     */
    const [searchFilters, setSearchFilters] = useState({
       category: [],
@@ -66,13 +66,13 @@ export default function Challenges({ challenges, filters }) {
       gamemode: []
    });
    /**
-    * Used for changing the display type of ChallengeObject
+    * Used for changing the display type of challenges.
     */
    const [isCompact, setCompact] = useState(true);
    const [search, setSearch] = useState("");
 
    // TODO
-   // Complete migration of ChallengeObject
+   // Complete migration of challenges.
    const challengeCards = [];
    for (const challenge of challenges) {
       const card = <div key={challenge.id}>
@@ -81,6 +81,10 @@ export default function Challenges({ challenges, filters }) {
       challengeCards.push(card);
    }
 
+   /**
+    * Change the display mode of challenges.
+    * @param {string} displayId `full` or `compact`
+    */
    function handleChangeDisplay(displayId) {
       switch (displayId) {
          case "full":
@@ -94,6 +98,10 @@ export default function Challenges({ challenges, filters }) {
       }
    }
 
+   /**
+    * Change the challenge category filters from data filter key. See also `dataFilters` and `setDataFilters`.
+    * @param {string} dataFilterKey The key of a data filter object from `dataFilters`
+    */
    function handleChangeFilter(dataFilterKey) {
       const dataFilter = dataFilters[dataFilterKey];
       if (dataFilter == null) throw new Error("Unknown data filter key: " + dataFilterKey);
@@ -121,6 +129,10 @@ export default function Challenges({ challenges, filters }) {
       setStorage(storageKeys.challengeDataFilters, updatedDataFilters);
    }
 
+   /**
+    * Search for challenges by name.
+    * @param {string} value 
+    */
    function handleSearch(value) {
       setStorage(storageKeys.challengeSearch, value);
    }
@@ -147,7 +159,8 @@ export default function Challenges({ challenges, filters }) {
       </div>
 
       <section className={userCss.parent}>
-         {/* TODO - Add the '2022 Seasonal Challenges are retired' card */}
+         {/* TODO - Add the '2022 Seasonal Challenges are retired' event card */}
+         <h1>TODO - Event card goes here. {"(⸝⸝⸝╸w╺⸝⸝⸝)"}</h1>
       </section>
 
       <input 
@@ -253,6 +266,7 @@ export default function Challenges({ challenges, filters }) {
          </div>
       </div>
 
+      <h1>TODO - Replace placeholder with challenge objects</h1>
       <div className={userCss.parent + " " + userCss.flexWidth}>
          { challengeCards.length > 0 ? challengeCards : <NoChallengesFound/>}
       </div>
@@ -262,7 +276,7 @@ export default function Challenges({ challenges, filters }) {
 /**
  * @typedef FilterButtonListProps
  * @type {Object}
- * @property {Object} children
+ * @property {Object} children React component children
  * @property {string} categoryType
  */
 
@@ -294,6 +308,8 @@ function NoChallengesFound() {
 export async function getServerSideProps() {
    const challengeService = new ChallengeService();
 
+   // TODO
+   // Use i18n settings when fetching challenges
    let challenges = await challengeService.list("na1", "en");
    challenges = Array
       .from(challenges)
