@@ -69,6 +69,7 @@ export default function Challenges({ challenges, filters }) {
     * Used for changing the display type of ChallengeObject
     */
    const [isCompact, setCompact] = useState(true);
+   const [search, setSearch] = useState("");
 
    // TODO
    // Complete migration of ChallengeObject
@@ -120,11 +121,16 @@ export default function Challenges({ challenges, filters }) {
       setStorage(storageKeys.challengeDataFilters, updatedDataFilters);
    }
 
+   function handleSearch(value) {
+      setStorage(storageKeys.challengeSearch, value);
+   }
+
    const isInitialized = useRef(false);
    useEffect(() => {
       if (!isInitialized.current) {
          setDataFilters(getStorage(storageKeys.challengeDataFilters, dataFilters));
          setSearchFilters(getStorage(storageKeys.challengeFilters, searchFilters));
+         setSearch(getStorage(storageKeys.challengeSearch, search));
          isInitialized.current = true;
       }
       console.log(dataFilters);
@@ -147,7 +153,11 @@ export default function Challenges({ challenges, filters }) {
       <input 
          className={filterCss.input}
          type="search"
-         placeholder="Search for a challenge"/>
+         placeholder="Search for a challenge"
+         defaultValue={search}
+         onKeyUp={(e) => handleSearch(e.target.value)}
+         onInput={(e) => handleSearch(e.target.value)}
+         onChange={(e) => handleSearch(e.target.value)}/>
       <div className={filterCss.filter}>
          <div className={filterCss.selectors + " clearfix"}>
             <div className={filterCss.displayMode}>
