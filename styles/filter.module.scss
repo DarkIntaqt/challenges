@@ -50,6 +50,15 @@
           background-color: var(--dark1);
         }
 
+        &.selected {
+          /* color: var(--selected);
+          box-shadow: 0 0 3px var(--selected);
+          border: 2px solid var(--selected); */
+          background-color: var(--dark2);
+          color: white;
+          padding-left: 20px;
+        }
+
         >i,svg {
           width: 1rem;
           height: 1rem;
@@ -65,15 +74,6 @@
           height: 1rem;
           float: left;
           margin-right: 5px;
-        }
-
-        .selected {
-          /* color: var(--selected);
-          box-shadow: 0 0 3px var(--selected);
-          border: 2px solid var(--selected); */
-          background-color: var(--dark2);
-          color: white;
-          padding-left: 20px;
         }
       }
 
