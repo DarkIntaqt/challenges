@@ -64,6 +64,10 @@ export default function Challenges({ challenges, filters }) {
       type: [],
       gamemode: []
    });
+   /**
+    * Used for changing the display type of ChallengeObject
+    */
+   const [isCompact, setCompact] = useState(false);
 
    // TODO
    // Complete migration of ChallengeObject
@@ -73,6 +77,19 @@ export default function Challenges({ challenges, filters }) {
          <p>{challenge.translation.name}</p>
       </div>;
       challengeCards.push(card);
+   }
+
+   function handleChangeDisplay(displayId) {
+      switch (displayId) {
+         case "full":
+            setCompact(false);
+            break;
+         case "compact":
+            setCompact(true);
+            break;
+         default:
+            throw new Error("Invalid displayId operation");
+      }
    }
 
    function handleChangeFilter(dataFilterKey) {
@@ -125,10 +142,10 @@ export default function Challenges({ challenges, filters }) {
       <div className={filterCss.filter}>
          <div className={filterCss.selectors + " clearfix"}>
             <div className={filterCss.displayMode}>
-               <button id="compact" className={filterCss["cmode" + "true"] + " " + filterCss.modetrue}>
+               <button onClick={() => handleChangeDisplay("compact")} className={filterCss["cmode" + isCompact] + " " + filterCss.modetrue}>
                   <FontAwesomeIcon icon={faList}/>
                </button>
-               <button id="full" className={filterCss["cmode" + "true"] + " " + filterCss.modefalse}>
+               <button onClick={() => handleChangeDisplay("full")} className={filterCss["cmode" + isCompact] + " " + filterCss.modefalse}>
                   <FontAwesomeIcon icon={faTableCells}/>
                </button>
             </div>
