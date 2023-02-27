@@ -3,12 +3,13 @@ import userCss from "../../styles/user.module.scss";
 import filterCss from "../../styles/filter.module.scss";
 import ChallengeService from "challenges/services/ChallengeService";
 import { capitalize } from "challenges/utils/stringManipulation";
+import { storageKeys, getStorage, setStorage } from "challenges/utils/localStorageFunctions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import Image from "next/image";
 import { faAnglesUp, faBoxOpen, faList, faPlay, faRankingStar, faTableCells, faUser } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 /**
@@ -67,7 +68,7 @@ export default function Challenges({ challenges, filters }) {
    /**
     * Used for changing the display type of ChallengeObject
     */
-   const [isCompact, setCompact] = useState(false);
+   const [isCompact, setCompact] = useState(true);
 
    // TODO
    // Complete migration of ChallengeObject
@@ -111,13 +112,21 @@ export default function Challenges({ challenges, filters }) {
       const updatedSearchFilters = { ...searchFilters };
       updatedSearchFilters[category] = filters;
       setSearchFilters(updatedSearchFilters);
+      setStorage(storageKeys.challengeFilters, updatedSearchFilters);
       // Set data filters
       const updatedDataFilters = { ...dataFilters };
       updatedDataFilters[key] = {id, key, css, category};
       setDataFilters(updatedDataFilters);
+      setStorage(storageKeys.challengeDataFilters, updatedDataFilters);
    }
 
+   const isInitialized = useRef(false);
    useEffect(() => {
+      if (!isInitialized.current) {
+         setDataFilters(getStorage(storageKeys.challengeDataFilters, dataFilters));
+         setSearchFilters(getStorage(storageKeys.challengeFilters, searchFilters));
+         isInitialized.current = true;
+      }
       console.log(dataFilters);
       console.log(searchFilters);
    });
