@@ -3,6 +3,98 @@
   float: left;
   overflow: hidden;
 
+  .selectors {
+    width: calc(100% - 20px);
+    margin: 15px 10px 10px;
+    box-sizing: border-box;
+    padding: 0 10px 10px;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .category {
+      width: 100%;
+      margin-bottom: 20px;
+      float: left;
+      overflow: hidden;
+
+      button>span {
+        display: block;
+        float: right;
+        font-size: .7rem;
+        font-weight: bold;
+        color: white !important;
+        padding: .15rem 5px;
+        box-shadow: 0 0 5px var(--selected);
+        background-color: var(--selected);
+        border-radius: 5px;
+        margin-left: 5px;
+      }
+
+      >button {
+        font-size: 1rem;
+        white-space: nowrap;
+        color: rgb(200, 200, 200);
+        background-color: var(--dark0);
+        margin: 5px 0;
+        border-radius: 10px;
+        padding: 5px 10px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        text-align: left;
+        transition: 0.25s padding-left;
+
+        &:hover {
+          color: white;
+          background-color: var(--dark1);
+        }
+
+        &.selected {
+          /* color: var(--selected);
+          box-shadow: 0 0 3px var(--selected);
+          border: 2px solid var(--selected); */
+          background-color: var(--dark2);
+          color: white;
+          padding-left: 20px;
+        }
+
+        >i,svg {
+          width: 1rem;
+          height: 1rem;
+          font-size: 1rem;
+          float: left;
+          color: white !important;
+          text-align: center;
+          margin-right: 5px;
+        }
+
+        >img {
+          width: 1rem;
+          height: 1rem;
+          float: left;
+          margin-right: 5px;
+        }
+      }
+
+      .cheading {
+        font-size: 0.8rem;
+        color: white;
+        width: 100%;
+        text-align: left;
+        font-weight: bold;
+      }
+    }
+  }
+
+  p.info {
+    font-size: 1rem;
+    width: 100%;
+    color: white;
+    margin-bottom: 10px;
+    display: none;
+    text-align: center;
+  }
 }
 
 .displayMode {
@@ -31,22 +123,6 @@
     justify-content: center;
   }
 }
-
-// TODO
-// Syntax error: Selector "button > span" is not pure (pure selectors must contain at least one local class or id)
-
-// button>span {
-//   display: block;
-//   float: right;
-//   font-size: .7rem;
-//   font-weight: bold;
-//   color: white !important;
-//   padding: .15rem 5px;
-//   box-shadow: 0 0 5px var(--selected);
-//   background-color: var(--selected);
-//   border-radius: 5px;
-//   margin-left: 5px;
-// }
 
 button.cmodefalse.modefalse,
 button.cmodetrue.modetrue,
@@ -79,87 +155,9 @@ button.pointstrue {
     border-color: var(--selected);
     box-shadow: 0 0 5px var(--selected);
   }
-
-  p.info {
-    font-size: 1rem;
-    width: 100%;
-    color: white;
-    margin-bottom: 10px;
-    display: none;
-    text-align: center;
-  }
-
-  .selectors {
-    width: calc(100% - 20px);
-    margin: 15px 10px 10px;
-    box-sizing: border-box;
-    padding: 0 10px 10px;
-    border-radius: 8px;
-    overflow: hidden;
-
-    .category {
-      width: 100%;
-      margin-bottom: 20px;
-      float: left;
-      overflow: hidden;
-
-      &>button {
-        font-size: 1rem;
-        white-space: nowrap;
-        color: rgb(200, 200, 200);
-        background-color: var(--dark0);
-        margin: 5px 0;
-        border-radius: 10px;
-        padding: 5px 10px;
-        border: 2px solid transparent;
-        cursor: pointer;
-        display: block;
-        width: 100%;
-        text-align: left;
-        transition: 0.25s padding-left;
-
-        &:hover {
-          color: white;
-          background-color: var(--dark1);
-        }
-
-        &>i {
-          width: 1rem;
-          height: 1rem;
-          font-size: 1rem;
-          float: left;
-          color: white !important;
-          text-align: center;
-          margin-right: 5px;
-        }
-
-        &>img {
-          width: 1rem;
-          height: 1rem;
-          float: left;
-          margin-right: 5px;
-        }
-
-        .selected {
-          /* color: var(--selected);
-          box-shadow: 0 0 3px var(--selected);
-          border: 2px solid var(--selected); */
-          background-color: var(--dark2);
-          color: white;
-          padding-left: 20px;
-        }
-      }
-
-      .cheading {
-        font-size: 0.8rem;
-        color: white;
-        width: 100%;
-        text-align: left;
-        font-weight: bold;
-      }
-    }
-  }
 }
+
+
 
 @media only screen and (max-width:1050px) {
   .filter {

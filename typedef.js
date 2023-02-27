@@ -28,12 +28,24 @@
    */
 
   /**
+   * @typedef GlobalChallengeDto
+   * @type {Object}
+   * @property {string} icon
+   * @property {number} icon_2
+   * @property {number} timestamp
+   * @property {Array.<string>} title 
+   * @property {ChallengeDto} challenge 
+   * @property {Object} stats 
+   * @property {Object} summoner
+   */
+
+  /**
    * @typedef ChallengeDto
    * @type {Object}
    * @property {number} id
    * @property {string} state
    * @property {boolean} leaderboard 
-   * @property {Array.<StatsDto>} thresholds
+   * @property {Array.<string>} thresholds
    * @property {TranslationDto} translation
    * @property {boolean} reversed
    * @property {Array.<number>} queueIds 
