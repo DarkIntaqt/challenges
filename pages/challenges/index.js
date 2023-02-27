@@ -8,16 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import Image from "next/image";
 import { faAnglesUp, faBoxOpen, faList, faPlay, faRankingStar, faTableCells, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 
-/**
- * @typedef CategoriesMap
- * @type {Object}
- * @property {GlobalChallengeDto} teamwork
- * @property {GlobalChallengeDto} imagination
- * @property {GlobalChallengeDto} veterancy 
- * @property {GlobalChallengeDto} expertise 
- * @property {GlobalChallengeDto} collection
- */
 
 /**
  * @typedef ChallengesProps
@@ -30,6 +22,49 @@ import { faAnglesUp, faBoxOpen, faList, faPlay, faRankingStar, faTableCells, faU
  * @param {ChallengesProps} props
  */
 export default function Challenges({ challenges, filters }) {
+   /**
+    * Category enum types
+    */
+   const category = {
+      category: "category",
+      type: "type",
+      gamemode: "gamemode"
+   };
+   /**
+    * Data filters used as state for searching and CSS highlighting
+    */
+   const [dataFilters, setDataFilters] = useState({
+      // Challenge categories
+      teamwork: {id: 4, key: "teamwork", css: "", category: category.category},
+      imagination: {id: 1, key: "imagination", css: "", category: category.category},
+      veterancy: {id: 3, key: "veterancy", css: "", category: category.category},
+      collection: {id: 5, key: "collection", css: "", category: category.category},
+      expertise: {id: 2, key: "expertise", css: "", category: category.category},
+      legacy: {id: 600006, key: "legacy", css: "", category: category.category},
+      seasonal2023: {id: 2023000, key: "seasonal2023", css: "", category: category.category},
+      seasonalRetired: {id: "seasonal-retired", key: "seasonalRetired", css: "", category: category.category},
+      // Challenge types
+      progress: {id: "progress", key: "progress", css: "", category: category.type},
+      ingame: {id: "ingame", key: "ingame", css: "", category: category.type},
+      eternals: {id: "eternals", key: "eternals", css: "", category: category.type},
+      clash: {id: "clash", key: "clash", css: "", category: category.type},
+      inventory: {id: "inventory", key: "inventory", css: "", category: category.type},
+      ranked: {id: "ranked", key: "ranked", css: "", category: category.type},
+      profile: {id: "profile", key: "profile", css: "", category: category.type},
+      // Challenge gamemodes
+      summonersrift: {id: "summonerrift", key: "summonersrift", css: "", category: category.gamemode},
+      aram: {id: "aram", key: "aram", css: "", category: category.gamemode},
+      bot: {id: "bot", key: "bot", css: "", category: category.gamemode}
+   });
+   /**
+    * Filters used for searching challenges
+    */
+   const [searchFilters, setSearchFilters] = useState({
+      category: [],
+      type: [],
+      gamemode: []
+   });
+
    // TODO
    // Complete migration of ChallengeObject
    const challengeCards = [];
@@ -40,10 +75,35 @@ export default function Challenges({ challenges, filters }) {
       challengeCards.push(card);
    }
 
+   function handleChangeFilter(dataFilterKey) {
+      const dataFilter = dataFilters[dataFilterKey];
+      if (dataFilter == null) throw new Error("Unknown data filter key: " + dataFilterKey);
 
-   function handleChangeFilter() {
-
+      let {category, css, id, key} = dataFilter;
+      let filters = searchFilters[category];
+      // Toggle CSS filter for selection
+      if (css !== "") {
+         css = "";
+         filters = filters.filter(x => x !== id);
+      } else {
+         css = filterCss.selected;
+         filters.push(id);
+      }
+   
+      // Set search filters
+      const updatedSearchFilters = { ...searchFilters };
+      updatedSearchFilters[category] = filters;
+      setSearchFilters(updatedSearchFilters);
+      // Set data filters
+      const updatedDataFilters = { ...dataFilters };
+      updatedDataFilters[key] = {id, key, css, category};
+      setDataFilters(updatedDataFilters);
    }
+
+   useEffect(() => {
+      console.log(dataFilters);
+      console.log(searchFilters);
+   });
 
    return <div className={"object1000"}>
       <Head>
@@ -55,7 +115,7 @@ export default function Challenges({ challenges, filters }) {
       </div>
 
       <section className={userCss.parent}>
-
+         {/* TODO - Add the '2022 Seasonal Challenges are retired' card */}
       </section>
 
       <input 
@@ -74,82 +134,82 @@ export default function Challenges({ challenges, filters }) {
             </div>
 
             <p className={filterCss.info}>Filter (multiple choices)</p>
-            <FilterButtonList categoryType="category">
-               <button onClick={handleChangeFilter} data-id="4">
+            <FilterButtonList categoryType={category.category}>
+               <button onClick={() => handleChangeFilter(dataFilters.teamwork.key)} className={dataFilters.teamwork.css}>
                   <Image width={16} height={16} src={filters.teamwork.src} alt="teamwork" />
                   {capitalize(filters.teamwork.name)}
                </button>
-               <button onClick={handleChangeFilter} data-id="1">
+               <button onClick={() => handleChangeFilter(dataFilters.imagination.key)} className={dataFilters.imagination.css}>
                   <Image width={16} height={16} src={filters.imagination.src} alt="imagination" />
                   {capitalize(filters.imagination.name)}
                </button>
-               <button onClick={handleChangeFilter} data-id="3">
+               <button onClick={() => handleChangeFilter(dataFilters.veterancy.key)} className={dataFilters.veterancy.css}>
                   <Image width={16} height={16} src={filters.veterancy.src} alt="veterancy" />
                   {capitalize(filters.veterancy.name)}
                </button>
-               <button onClick={handleChangeFilter} data-id="5">
+               <button onClick={() => handleChangeFilter(dataFilters.collection.key)} className={dataFilters.collection.css}>
                   <Image width={16} height={16} src={filters.collection.src} alt="collection" />
                   {capitalize(filters.collection.name)}
                </button>
-               <button onClick={handleChangeFilter} data-id="2">
+               <button onClick={() => handleChangeFilter(dataFilters.expertise.key)} className={dataFilters.expertise.css}>
                   <Image width={16} height={16} src={filters.expertise.src} alt="expertise" />
                   {capitalize(filters.expertise.name)}
                </button>
-               <button onClick={handleChangeFilter} data-id="600006">
+               <button onClick={() => handleChangeFilter(dataFilters.legacy.key)} className={dataFilters.legacy.css}>
                   <Image width={16} height={16} src={filters.legacy.src} alt="legacy" />
                   Legacy
                </button>
-               <button onClick={handleChangeFilter} data-id="2023000">
+               <button onClick={() => handleChangeFilter(dataFilters.seasonal2023.key)} className={dataFilters.seasonal2023.css}>
                   <Image width={16} height={16} src={filters.seasonal2023.src} alt="2023 seasonal" />
                   2023 Seasonal <span>NEW</span>
                </button>
-               <button onClick={handleChangeFilter} data-id="seasonal-retired">
+               <button onClick={() => handleChangeFilter(dataFilters.seasonalRetired.key)} className={dataFilters.seasonalRetired.css}>
                   <Image width={16} height={16} src={filters.seasonalRetired.src} alt="seasonal retired" />
                   Retired Seasonal
                </button>
             </FilterButtonList>
 
-            <FilterButtonList categoryType="type">
-               <button onClick={handleChangeFilter} data-id="progress">
+            <FilterButtonList categoryType={category.type}>
+               <button onClick={() => handleChangeFilter(dataFilters.progress.key)} className={dataFilters.progress.css}>
                   <FontAwesomeIcon icon={faAnglesUp}/>
                   Progress
                </button>
-               <button onClick={handleChangeFilter} data-id="ingame">
+               <button onClick={() => handleChangeFilter(dataFilters.ingame.key)} className={dataFilters.ingame.css}>
                   <FontAwesomeIcon icon={faPlay}/>
                   Ingame
                </button>
-               <button onClick={handleChangeFilter} data-id="eternals">
+               <button onClick={() => handleChangeFilter(dataFilters.eternals.key)} className={dataFilters.eternals.css}>
                   <Image width={16} height={16} src={filters.eternals.src} alt="eternals" />
                   Eternals
                </button>
-               <button onClick={handleChangeFilter} data-id="clash">
+               <button onClick={() => handleChangeFilter(dataFilters.clash.key)} className={dataFilters.clash.css}>
                   <Image width={16} height={16} src={filters.clash.src} alt="clash" />
                   Clash
                </button>
-               <button onClick={handleChangeFilter} data-id="inventory">
+               <button onClick={() => handleChangeFilter(dataFilters.inventory.key)} className={dataFilters.inventory.css}>
                   <FontAwesomeIcon icon={faBoxOpen} />
                   Inventory
                </button>
-               <button onClick={handleChangeFilter} data-id="ranked">
+               <button onClick={() => handleChangeFilter(dataFilters.ranked.key)} className={dataFilters.ranked.css}>
                   <FontAwesomeIcon icon={faRankingStar} />
                   Ranked
                </button>
-               <button onClick={handleChangeFilter} data-id="profile">
+               <button onClick={() => handleChangeFilter(dataFilters.profile.key)} className={dataFilters.profile.css}>
                   <FontAwesomeIcon icon={faUser} />
                   Profile
                </button>
             </FilterButtonList>
 
-            <FilterButtonList categoryType="gamemode">
-               <button onClick={handleChangeFilter} data-id="summonersrift">
+            <FilterButtonList categoryType={category.gamemode}>
+               <button onClick={() => handleChangeFilter(dataFilters.summonersrift.key)} className={dataFilters.summonersrift.css}>
                   <Image width={16} height={16} src={filters.summonersrift.src} alt="Summoners Rift" />
-                  Summoners RIft
+                  Summoners Rift
                </button>
-               <button onClick={handleChangeFilter} data-id="aram">
+               <button onClick={() => handleChangeFilter(dataFilters.aram.key)} className={dataFilters.aram.css}>
                   <Image width={16} height={16} src={filters.aram.src} alt="ARAM" />
                   ARAM
                </button>
-               <button onClick={handleChangeFilter} data-id="bot">
+               <button onClick={() => handleChangeFilter(dataFilters.bot.key)} className={dataFilters.bot.css}>
                   <Image width={16} height={16} src={filters.bot.src} alt="Bot Games" />
                   Bot
                </button>
@@ -174,7 +234,7 @@ export default function Challenges({ challenges, filters }) {
  * @param {FilterButtonListProps} props
  */
 function FilterButtonList({children, categoryType}) {
-   return <div className={filterCss.category} category={categoryType}>
+   return <div className={filterCss.category}>
       <p className={filterCss.cheading}>{capitalize(categoryType)}</p>
       {children}
    </div>;
