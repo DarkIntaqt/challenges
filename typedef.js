@@ -45,7 +45,7 @@
    * @property {number} id
    * @property {string} state
    * @property {boolean} leaderboard 
-   * @property {Array.<StatsDto>} thresholds
+   * @property {Array.<string>} thresholds
    * @property {TranslationDto} translation
    * @property {boolean} reversed
    * @property {Array.<number>} queueIds 
