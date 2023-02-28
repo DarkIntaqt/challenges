@@ -7,16 +7,22 @@
 ![File Size](https://img.shields.io/github/languages/code-size/DarkIntaqt/challenges)
 </div>
 
-Check out the deployed version [challenges.darkintaqt.com](https://challenges.darkintaqt.com/)
+Check out the deployed version here [challenges.darkintaqt.com](https://challenges.darkintaqt.com/)
 
-This project contains:
-* Summary of a summoners challenges
+This frontend currently contains:
+* Summary of a Summoners challenges
 * Challenge Statistics
 * Challenge Leaderboards
 * Title Overview
+* A list of all Challenges sorted by Capstone, Category etc
 
-Feel free to contribute / share feedback or ideas. 
+## Contributing
+Feel free to contribute / share feedback or ideas. Create an PR whenever you want. If you are unsure or not capable of adding this feature yourself (or don't want to dive into the spaghetti code), feel free to create an issue. 
+Additionally, you can read [master/CONTRIBUTING.md](https://github.com/DarkIntaqt/challenges/blob/master/CONTRIBUTING.md) for furhter contributing tips and on how to run this project. 
 
+Check out this [#121](https://github.com/DarkIntaqt/challenges/issues/121) if you want to help translate this poroject. 
+
+Finally, thanks to to all current (and future) contributors 🎉: 
 <a href="https://github.com/darkintaqt/challenges/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=darkintaqt/challenges" />
 </a>
