@@ -183,6 +183,16 @@ class UserStatistics extends Component {
             <p style={{ fontWeight: "bold" }}>{beautifyNum(totalPoints)} {t("pts")}</p>
         </div>)
 
+        // create placeholder values for not-leveled challenges
+        for (let index = 0; index < 5; index++) {
+            if (typeof user.categories[index.toString()] === "undefined") {
+                user.categories[index.toString()] = {
+                    current: 0,
+                    max: 0,
+                    level: "NONE"
+                }
+            }
+        }
 
         return <section>
             <div className={css.categories}>
