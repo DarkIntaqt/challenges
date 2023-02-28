@@ -2,6 +2,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import css from "challenges/styles/index.module.scss";
 import { Component, createRef } from "react";
+import Head from "next/head";
 
 export default class Start extends Component {
    constructor() {
@@ -58,52 +59,59 @@ export default class Start extends Component {
       const image = images[new Date().getMonth()];
 
 
-      return <div className={css.start}>
+      return <>
 
-         <div className={css.bgwrapper} style={{
-            backgroundImage: `url(https://lolcdn.darkintaqt.com/cdn/champion/${image[0]}/${image[2]}/${image[1]})`
-         }}>
-         </div>
+         <Head>
+            <title>League of Legends Challenge Tracker and Progress Lookup</title>
+         </Head>
 
-         <div className={css.wrapper}>
+         <div className={css.start}>
 
-            <div className={css.heading}>
-
-               <span>League of Legends</span>
-               <h1>Challenge Tracker</h1>
-
+            <div className={css.bgwrapper} style={{
+               backgroundImage: `url(https://lolcdn.darkintaqt.com/cdn/champion/${image[0]}/${image[2]}/${image[1]})`
+            }}>
             </div>
 
-            <div ref={this.searchbarArea} className={css.searchbarWrapper}>
+            <div className={css.wrapper}>
 
-               <div className={css.searchbar}>
+               <div className={css.heading}>
 
-                  <input ref={this.searchbarInput} placeholder="Search for a summoner, challenge, title"></input>
+                  <span>League of Legends</span>
+                  <h1>Challenge Tracker</h1>
 
-                  <select>
-                     <option value="br">BR</option>
-                     <option value="euw">EUW</option>
-                     <option value="eune">EUNE</option>
-                     <option value="jp">JP</option>
-                     <option value="kr">KR</option>
-                     <option value="lan">LAN</option>
-                     <option value="las">LAS</option>
-                     <option value="na">NA</option>
-                     <option value="oc">OC</option>
-                     <option value="ru">RU</option>
-                     <option value="tr">TR</option>
-                  </select>
+               </div>
 
-                  <FontAwesomeIcon
-                     icon={faMagnifyingGlass}
-                  />
+               <div ref={this.searchbarArea} className={css.searchbarWrapper}>
+
+                  <div className={css.searchbar}>
+
+                     <input ref={this.searchbarInput} placeholder="Search for a summoner, challenge, title"></input>
+
+                     <select>
+                        <option value="br">BR</option>
+                        <option value="euw">EUW</option>
+                        <option value="eune">EUNE</option>
+                        <option value="jp">JP</option>
+                        <option value="kr">KR</option>
+                        <option value="lan">LAN</option>
+                        <option value="las">LAS</option>
+                        <option value="na">NA</option>
+                        <option value="oc">OC</option>
+                        <option value="ru">RU</option>
+                        <option value="tr">TR</option>
+                     </select>
+
+                     <FontAwesomeIcon
+                        icon={faMagnifyingGlass}
+                     />
+
+                  </div>
 
                </div>
 
             </div>
 
          </div>
-
-      </div>;
+      </>;
    }
 }

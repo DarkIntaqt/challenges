@@ -197,8 +197,10 @@ export default function Challenge({ challenge }) {
       percentiles[getPlatform(tiers[i])] = 1 - ((i + 1) / 10);
    }
 
+
    thresholds = challenge.stats[getPlatform(tempRegion)];
    percentiles = challenge.stats["percentiles-" + getPlatform(tempRegion)];
+
 
    if (checkThresholds(thresholds)) {
       /**
@@ -229,7 +231,6 @@ export default function Challenge({ challenge }) {
    let i = 0;
    let playerlist = [];
    if (region === "world") {
-
       for (const region in challenge.summoner) {
          if (Object.hasOwnProperty.call(challenge.summoner, region)) {
             const r = challenge.summoner[region];
@@ -241,10 +242,8 @@ export default function Challenge({ challenge }) {
                   region
                ]);
             }
-
          }
       }
-
    } else {
       for (let i = 0; i < region.length; i++) {
          const r = challenge.summoner[region[i]];
@@ -256,10 +255,13 @@ export default function Challenge({ challenge }) {
                region[i]
             ]);
          }
-
       }
    }
 
+
+   /**
+    * Sort the challenges if more than 1 region is involved
+    */
    if (region === "world" || region.length > 1) {
       playerlist.sort((a, b) => {
          // Order by timestamp if same value and position
@@ -273,6 +275,10 @@ export default function Challenge({ challenge }) {
       });
    }
 
+
+   /**
+    * Generate the table for the summoners
+    */
    const players = playerlist.map((player) => {
       i++;
       if (i > 250) {
