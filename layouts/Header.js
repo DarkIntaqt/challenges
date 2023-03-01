@@ -47,6 +47,10 @@ class Header extends Component {
    }
 
 
+   /**
+    * changes the width of the sidebar
+    * @param {boolean} forced if forces: don't change the users preference
+    */
    toggleWidth(forced = false) {
 
       if (this.width === true) {

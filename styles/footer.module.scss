@@ -1,0 +1,94 @@
+@import "variables";
+
+.footer {
+   background-color: $dark0;
+   padding: 20px;
+   width: 100%;
+
+   .top {
+      display: flex;
+      justify-content: space-between;
+
+      padding: 0 calc(50% - 500px);
+
+      .linkgroup {
+         display: flex;
+         flex-direction: column;
+         flex: 1 0 20%;
+         margin: 0 2.5%;
+
+
+         &.special {
+            align-items: center;
+            justify-content: center;
+
+
+            >svg {
+               height: 40px;
+               width: 40px;
+               margin-bottom: 5px;
+            }
+
+            p {
+               text-align: center;
+               font-weight: 300;
+               color: $light2;
+               font-size: .8rem;
+               margin: 5px 0;
+
+               svg {
+
+                  color: #f0295e;
+               }
+
+               &:hover svg {
+                  animation-name: pulse;
+                  animation-duration: 1s;
+                  animation-iteration-count: infinite;
+               }
+
+               a {
+                  font-weight: 300;
+                  color: $light2;
+
+                  &:hover {
+                     text-decoration: underline;
+                  }
+               }
+            }
+
+         }
+
+         p {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: $light0;
+            margin-bottom: 10px;
+         }
+
+         >a {
+            color: $light2;
+            font-size: .8rem;
+            margin: 5px 0;
+         }
+      }
+   }
+
+   .bot {
+      margin: 20px calc(50% - 500px) 0;
+      padding: 20px 0 0;
+      border-top: 1px solid $dark3;
+
+      p {
+         text-align: justify;
+         font-size: .8rem;
+         color: $light3;
+      }
+   }
+}
+
+@keyframes pulse {
+   10% {
+      transform: scale(1.1)
+   }
+}

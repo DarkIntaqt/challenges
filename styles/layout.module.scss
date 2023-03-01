@@ -11,11 +11,21 @@
    align-items: stretch;
 
    .contentWrapper {
+
       flex: 1;
       background: $dark0;
       min-height: 100vh;
 
+      display: flex;
+      flex-direction: column;
+
       position: relative;
+
+      section {
+
+         min-height: 100vh;
+         flex: 1;
+      }
 
    }
 }

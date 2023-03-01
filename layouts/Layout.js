@@ -1,5 +1,6 @@
 import Header from "./Header";
 import css from "challenges/styles/layout.module.scss";
+import Footer from "./Footer";
 
 export default function Layout(props) {
 
@@ -17,11 +18,16 @@ export default function Layout(props) {
 
    return <section {...props} className={css.wrapper}>
 
-      <Header>
-      </Header>
+      <Header />
 
       <section className={css.contentWrapper}>
-         {props.children}
+
+         <section>
+            {props.children}
+         </section>
+
+         <Footer />
+
       </section>
 
    </section>;
