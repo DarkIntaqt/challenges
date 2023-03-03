@@ -23,48 +23,54 @@ const get = async function (
     debug = false
 ) {
 
-    if (checkCache(url)) {
-        callback(window.requestCache[url]["body"]);
-        return true
-    }
-
-    let request = await fetch(url)
-
-    if (debug) {
-        console.log(request);
-    }
-
-    let result = await request.text();
-
     try {
-        result = JSON.parse(result);
+
+        if (checkCache(url)) {
+            callback(window.requestCache[url]["body"]);
+            return true
+        }
+
+        let request = await fetch(url)
+
+        if (debug) {
+            console.log(request);
+        }
+
+        let result = await request.text();
+
+        try {
+            result = JSON.parse(result);
+        } catch (e) {
+            if (debug) {
+                console.warn(e + " in get(" + url + ")");
+            }
+        } finally {
+            if (debug) {
+                console.log(result);
+            }
+
+        }
+
+        let timestamp = Date.now();
+
+        if (request.status !== 200) {
+            timestamp = (timestamp - 1000 * 60 * 13);
+        }
+
+        window.requestCache[url] = {
+            "timestamp": timestamp,
+            "code": request.status,
+            "body": result
+        }
+
+        if (request.status === 200) {
+            callback(result);
+        } else {
+            errorCallback(result, request.status)
+        }
     } catch (e) {
-        if (debug) {
-            console.warn(e + " in get(" + url + ")");
-        }
-    } finally {
-        if (debug) {
-            console.log(result);
-        }
-
-    }
-
-    let timestamp = Date.now();
-
-    if (request.status !== 200) {
-        timestamp = (timestamp - 1000 * 60 * 13);
-    }
-
-    window.requestCache[url] = {
-        "timestamp": timestamp,
-        "code": request.status,
-        "body": result
-    }
-
-    if (request.status === 200) {
-        callback(result);
-    } else {
-        errorCallback(result, request.status)
+        console.warn(e)
+        errorCallback([], 404);
     }
 }
 
