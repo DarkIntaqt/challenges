@@ -24,6 +24,7 @@ import VipBadge from "../VipBadge";
 import Wrapper from "../Wrapper";
 import { withTranslation } from "react-i18next";
 import goTo from "../../func/goTo";
+import { checkExists } from "../../func/arrayManipulationFunctions";
 
 
 const Title = Loadable({
@@ -268,7 +269,7 @@ class User extends Component {
         })
 
         let title = titles.map(function (title) {
-            let tier, challenge, threshold, titlename;
+            let tier, challenge, threshold, titlename, description;
             if (title === 1) {
                 threshold = 0;
                 tier = "IRON";
@@ -281,9 +282,16 @@ class User extends Component {
 
                 tier = intToTier(parseInt(titleTier))
                 challenge = getChallenge(parseInt(title.toString().slice(0, -2)))
-                titlename = challenge.title ?? "Unknown Title"
 
-                threshold = challenge.thresholds[tier]
+                if (!checkExists(challenge.thresholds) || !checkExists(challenge.title) || !checkExists(challenge.translation) || !checkExists(challenge.translation.description)) {
+                    titlename = "Unknown Title";
+                    description = "Id " + title;
+                    threshold = 0;
+                } else {
+                    description = challenge.translation.description;
+                    titlename = challenge.title;
+                    threshold = challenge.thresholds[tier];
+                }
             }
             return <Fragment key={title}>
                 <span className={css.titlePlaceholder}> - </span>
@@ -294,7 +302,7 @@ class User extends Component {
                             {t("{{s}} Title", { s: capitalize(t(strtolower(tier))) })}
                         </b>
                         <br />
-                        {challenge.translation.description}
+                        {description}
                         <br />
                         <br />
                         <i>{t("Need {{p}}", { p: beautifyNum(threshold) })}</i>
