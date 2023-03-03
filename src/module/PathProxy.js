@@ -2,7 +2,7 @@
 import {
     useParams,
     useLocation,
-    useNavigate
+    //useNavigate
 } from "react-router-dom";
 
 import User from "./user/User"
@@ -20,7 +20,7 @@ function useQuery() {
 export default function PathProxy() {
     let params = useParams();
     let thisquery = useQuery();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     const server = config.regions;
     if (!params.server) {

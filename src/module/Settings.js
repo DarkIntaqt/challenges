@@ -2,14 +2,6 @@ import i18next from "i18next";
 import { Component } from "react";
 import { setCookie } from "../func/cookiefunctions";
 
-function getFlagEmoji(countryCode) {
-   const codePoints = countryCode
-      .toUpperCase()
-      .split('')
-      .map(char => 127397 + char.charCodeAt());
-   return String.fromCodePoint(...codePoints);
-}
-
 const languages = [
    ["en", "English"],
    ["de", "Deutsch"],

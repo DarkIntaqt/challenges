@@ -1,4 +1,4 @@
-import { serverToHumanReadable, serverToRegionString } from "../../func/server"
+import { serverToHumanReadable } from "../../func/server"
 import { intToTier } from "../../func/tierFunctions"
 
 export default function generateSummonerObject(summoner) {
