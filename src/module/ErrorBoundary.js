@@ -30,7 +30,7 @@ class ErrorBoundary extends Component {
          // You can render any custom fallback UI
          return <div style={{ padding: "20px" }}>
             <h1>An error occurred</h1>
-            <p><b>Feel free to report the following error on <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">github.com/DarkIntaqt/challenges</a> by creating a screenshot or copying the following text</b></p>
+            <p><b>Feel free to report the following error on <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">github.com/DarkIntaqt/challenges</a> by taking a screenshot or copying the following text</b></p>
             <br />
             <br />
             <code style={{
