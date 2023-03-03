@@ -25,6 +25,7 @@ import Loadable from 'react-loadable';
 import { getCookie, setCookie } from "./func/cookiefunctions"
 import i18next from "i18next";
 import Settings from "./module/Settings";
+import ErrorBoundary from "./module/ErrorBoundary";
 
 function main() {
 
@@ -83,39 +84,43 @@ function main() {
 
   root.render(<BrowserRouter>
 
-    {/* SCROLL TO TOP ON ROUTE CHANGE */}
-    <ScrollToTop>
+    <ErrorBoundary>
 
-      <Routes>
+      {/* SCROLL TO TOP ON ROUTE CHANGE */}
+      <ScrollToTop>
 
-        <Route path="/" element={<Fragment>
-          <HeaderNFooter />
-          <VariableProxy />
-        </Fragment>}>
+        <Routes>
 
-          <Route path="" element={<Start />}></Route>
+          <Route path="/" element={<Fragment>
+            <HeaderNFooter />
+            <VariableProxy />
+          </Fragment>}>
 
-          <Route path="faq" element={<FAQ />}></Route>
+            <Route path="" element={<Start />}></Route>
 
-          <Route path="settings" element={<Settings />}></Route>
+            <Route path="faq" element={<FAQ />}></Route>
 
-          <Route path="community" element={<Community />}></Route>
+            <Route path="settings" element={<Settings />}></Route>
 
-          <Route path="titles" element={<Title />}></Route>
+            <Route path="community" element={<Community />}></Route>
 
-          <Route path="challenges" element={<Challenges />}></Route>
+            <Route path="titles" element={<Title />}></Route>
 
-          <Route path="challenge/:id" element={<PathProxy />}></Route>
+            <Route path="challenges" element={<Challenges />}></Route>
 
-          <Route path=":server/:user/*" element={<PathProxy />}></Route>
+            <Route path="challenge/:id" element={<PathProxy />}></Route>
 
-          <Route path="*" element={<Error />}></Route>
+            <Route path=":server/:user/*" element={<PathProxy />}></Route>
 
-        </Route>
+            <Route path="*" element={<Error />}></Route>
 
-      </Routes>
+          </Route>
 
-    </ScrollToTop>
+        </Routes>
+
+      </ScrollToTop>
+
+    </ErrorBoundary>
 
   </BrowserRouter>)
 
