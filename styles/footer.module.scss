@@ -2,7 +2,7 @@
 
 .footer {
    background-color: $dark0;
-   padding: 20px;
+   padding: 30px 20px;
    width: 100%;
 
    .top {
@@ -70,6 +70,10 @@
             color: $light2;
             font-size: .8rem;
             margin: 5px 0;
+
+            &:hover {
+               text-decoration: underline;
+            }
          }
       }
    }
