@@ -18,13 +18,14 @@
 
       display: flex;
       flex-direction: column;
-
       position: relative;
 
       >section {
 
+         position: relative;
          min-height: 100vh;
          flex: 1;
+
       }
 
    }

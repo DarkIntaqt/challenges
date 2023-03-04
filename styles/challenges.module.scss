@@ -30,11 +30,21 @@
   transition: .25s box-shadow;
   box-shadow: 0 0 20px var(--type);
   background-color: var(--dark1);
-  /* background-image: url(https://lolcdn.darkintaqt.com/s/ad.webp); */
+  /*background-image: url(https://lolcdn.darkintaqt.com/s/ad.webp);*/
 
   :hover {
     box-shadow: 0 0 30px var(--type);
   }
+}
+
+.parent {
+  display: flex;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  float: left;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .flexWidth {
@@ -43,10 +53,10 @@
 
 @media only screen and (max-width:1050px) {
   .crystal {
-      display: none;
+    display: none;
   }
 
   .flexWidth {
-      width: 100%;
+    width: 100%;
   }
 }

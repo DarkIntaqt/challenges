@@ -1,6 +1,5 @@
-import css from "../../styles/challenges.module.scss";
-import userCss from "../../styles/user.module.scss";
-import filterCss from "../../styles/filter.module.scss";
+import css from "challenges/styles/challenges.module.scss";
+import filterCss from "challenges/styles/filter.module.scss";
 import ChallengeService from "challenges/services/ChallengeService";
 import { capitalize } from "challenges/utils/stringManipulation";
 import { storageKeys, getStorage, setStorage } from "challenges/utils/localStorageFunctions";
@@ -36,26 +35,26 @@ export default function Challenges({ challenges, filters }) {
     */
    const [dataFilters, setDataFilters] = useState({
       // Challenge categories
-      teamwork: {id: 4, key: "teamwork", css: "", category: category.category},
-      imagination: {id: 1, key: "imagination", css: "", category: category.category},
-      veterancy: {id: 3, key: "veterancy", css: "", category: category.category},
-      collection: {id: 5, key: "collection", css: "", category: category.category},
-      expertise: {id: 2, key: "expertise", css: "", category: category.category},
-      legacy: {id: 600006, key: "legacy", css: "", category: category.category},
-      seasonal2023: {id: 2023000, key: "seasonal2023", css: "", category: category.category},
-      seasonalRetired: {id: "seasonal-retired", key: "seasonalRetired", css: "", category: category.category},
+      teamwork: { id: 4, key: "teamwork", css: "", category: category.category },
+      imagination: { id: 1, key: "imagination", css: "", category: category.category },
+      veterancy: { id: 3, key: "veterancy", css: "", category: category.category },
+      collection: { id: 5, key: "collection", css: "", category: category.category },
+      expertise: { id: 2, key: "expertise", css: "", category: category.category },
+      legacy: { id: 600006, key: "legacy", css: "", category: category.category },
+      seasonal2023: { id: 2023000, key: "seasonal2023", css: "", category: category.category },
+      seasonalRetired: { id: "seasonal-retired", key: "seasonalRetired", css: "", category: category.category },
       // Challenge types
-      progress: {id: "progress", key: "progress", css: "", category: category.type},
-      ingame: {id: "ingame", key: "ingame", css: "", category: category.type},
-      eternals: {id: "eternals", key: "eternals", css: "", category: category.type},
-      clash: {id: "clash", key: "clash", css: "", category: category.type},
-      inventory: {id: "inventory", key: "inventory", css: "", category: category.type},
-      ranked: {id: "ranked", key: "ranked", css: "", category: category.type},
-      profile: {id: "profile", key: "profile", css: "", category: category.type},
+      progress: { id: "progress", key: "progress", css: "", category: category.type },
+      ingame: { id: "ingame", key: "ingame", css: "", category: category.type },
+      eternals: { id: "eternals", key: "eternals", css: "", category: category.type },
+      clash: { id: "clash", key: "clash", css: "", category: category.type },
+      inventory: { id: "inventory", key: "inventory", css: "", category: category.type },
+      ranked: { id: "ranked", key: "ranked", css: "", category: category.type },
+      profile: { id: "profile", key: "profile", css: "", category: category.type },
       // Challenge gamemodes
-      summonersrift: {id: "summonerrift", key: "summonersrift", css: "", category: category.gamemode},
-      aram: {id: "aram", key: "aram", css: "", category: category.gamemode},
-      bot: {id: "bot", key: "bot", css: "", category: category.gamemode}
+      summonersrift: { id: "summonerrift", key: "summonersrift", css: "", category: category.gamemode },
+      aram: { id: "aram", key: "aram", css: "", category: category.gamemode },
+      bot: { id: "bot", key: "bot", css: "", category: category.gamemode }
    });
    /**
     * Filters used for searching challenges.
@@ -106,7 +105,7 @@ export default function Challenges({ challenges, filters }) {
       const dataFilter = dataFilters[dataFilterKey];
       if (dataFilter == null) throw new Error("Unknown data filter key: " + dataFilterKey);
 
-      let {category, css, id, key} = dataFilter;
+      let { category, css, id, key } = dataFilter;
       let filters = searchFilters[category];
       // Toggle CSS filter for selection
       if (css !== "") {
@@ -116,7 +115,7 @@ export default function Challenges({ challenges, filters }) {
          css = filterCss.selected;
          filters.push(id);
       }
-   
+
       // Set search filters
       const updatedSearchFilters = { ...searchFilters };
       updatedSearchFilters[category] = filters;
@@ -124,7 +123,7 @@ export default function Challenges({ challenges, filters }) {
       setStorage(storageKeys.challengeFilters, updatedSearchFilters);
       // Set data filters
       const updatedDataFilters = { ...dataFilters };
-      updatedDataFilters[key] = {id, key, css, category};
+      updatedDataFilters[key] = { id, key, css, category };
       setDataFilters(updatedDataFilters);
       setStorage(storageKeys.challengeDataFilters, updatedDataFilters);
    }
@@ -147,7 +146,7 @@ export default function Challenges({ challenges, filters }) {
       }
       console.log(dataFilters);
       console.log(searchFilters);
-   });
+   }, [dataFilters, isInitialized, search, searchFilters]);
 
    return <div className={"object1000"}>
       <Head>
@@ -158,27 +157,27 @@ export default function Challenges({ challenges, filters }) {
          <h2>Overview and how to obtain them</h2>
       </div>
 
-      <section className={userCss.parent}>
+      <section className={css.parent}>
          {/* TODO - Add the '2022 Seasonal Challenges are retired' event card */}
          <h1>TODO - Event card goes here. {"(⸝⸝⸝╸w╺⸝⸝⸝)"}</h1>
       </section>
 
-      <input 
+      <input
          className={filterCss.input}
          type="search"
          placeholder="Search for a challenge"
          defaultValue={search}
          onKeyUp={(e) => handleSearch(e.target.value)}
          onInput={(e) => handleSearch(e.target.value)}
-         onChange={(e) => handleSearch(e.target.value)}/>
+         onChange={(e) => handleSearch(e.target.value)} />
       <div className={filterCss.filter}>
          <div className={filterCss.selectors + " clearfix"}>
             <div className={filterCss.displayMode}>
                <button onClick={() => handleChangeDisplay("compact")} className={filterCss["cmode" + isCompact] + " " + filterCss.modetrue}>
-                  <FontAwesomeIcon icon={faList}/>
+                  <FontAwesomeIcon icon={faList} />
                </button>
                <button onClick={() => handleChangeDisplay("full")} className={filterCss["cmode" + isCompact] + " " + filterCss.modefalse}>
-                  <FontAwesomeIcon icon={faTableCells}/>
+                  <FontAwesomeIcon icon={faTableCells} />
                </button>
             </div>
 
@@ -220,11 +219,11 @@ export default function Challenges({ challenges, filters }) {
 
             <FilterButtonList categoryType={category.type}>
                <button onClick={() => handleChangeFilter(dataFilters.progress.key)} className={dataFilters.progress.css}>
-                  <FontAwesomeIcon icon={faAnglesUp}/>
+                  <FontAwesomeIcon icon={faAnglesUp} />
                   Progress
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.ingame.key)} className={dataFilters.ingame.css}>
-                  <FontAwesomeIcon icon={faPlay}/>
+                  <FontAwesomeIcon icon={faPlay} />
                   Ingame
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.eternals.key)} className={dataFilters.eternals.css}>
@@ -267,8 +266,8 @@ export default function Challenges({ challenges, filters }) {
       </div>
 
       <h1>TODO - Replace placeholder with challenge objects</h1>
-      <div className={userCss.parent + " " + userCss.flexWidth}>
-         { challengeCards.length > 0 ? challengeCards : <NoChallengesFound/>}
+      <div className={css.parent + " " + css.flexWidth}>
+         {challengeCards.length > 0 ? challengeCards : <NoChallengesFound />}
       </div>
    </div>;
 }
@@ -283,7 +282,7 @@ export default function Challenges({ challenges, filters }) {
 /**
  * @param {FilterButtonListProps} props
  */
-function FilterButtonList({children, categoryType}) {
+function FilterButtonList({ children, categoryType }) {
    return <div className={filterCss.category}>
       <p className={filterCss.cheading}>{capitalize(categoryType)}</p>
       {children}
@@ -298,10 +297,11 @@ function NoChallengesFound() {
       margin: "120px 0",
       textAlign: "center",
       width: "100%",
-      float: "left"}}>
+      float: "left"
+   }}>
       <i>Is it a bug? Is it a feature?</i>
-      <br/><br/>No! There are just no challenges within the current filters.
-      <br/>Maybe the challenges aren&apos;t released yet? 
+      <br /><br />No! There are just no challenges within the current filters.
+      <br />Maybe the challenges aren&apos;t released yet?
    </p>;
 }
 
@@ -313,7 +313,7 @@ export async function getServerSideProps() {
    let challenges = await challengeService.list("na1", "en");
    challenges = Array
       .from(challenges)
-      .sort((a, b) => a.translation.name < b.translation.name 
+      .sort((a, b) => a.translation.name < b.translation.name
          ? -1 : +(a.translation.name > b.translation.name));
 
    const categories = {
