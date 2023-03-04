@@ -26,7 +26,8 @@ export default function Communities({ images, texts }) {
       src={image}
       height={240}
       width={240}
-      loading="lazy" />;
+      loading="lazy"
+      unoptimized />;
   });
 
   return <div className={css.bgArea} role="banner">

@@ -54,7 +54,7 @@ function LeaderboardPlayer({ name, icon, tier, server, position, points, vip }) 
       <td className={css.name}>
          <Link href={userlink} >
             {vip === 1 ? <VipBadge size={"22px"} position={"absolute"} margin={"28px 0 0 30px"} /> : null}
-            <Image height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + icon} alt={name + "'s profile image"} />
+            <Image height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + icon} alt={name + "'s profile image"} unoptimized />
             <p>{name} <span className={css.region}>#{server}</span></p>
          </Link>
       </td>
@@ -308,14 +308,14 @@ export default function Challenge({ challenge }) {
       </Head>
 
       <div className={css.bgImage}>
-         <Image src="https://cdn.darkintaqt.com/lol/static/challenges/_master-full.webp" fill={true} alt="" />
+         <Image src="https://cdn.darkintaqt.com/lol/static/challenges/_master-full.webp" fill={true} alt="" unoptimized />
       </div>
 
       <section className={css.challenge}>
 
          <div className={css.head}>
 
-            <Image src={iconLink} height={100} width={100} alt="" />
+            <Image src={iconLink} height={100} width={100} alt="" unoptimized />
 
             <div>
 

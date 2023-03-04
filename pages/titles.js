@@ -90,6 +90,7 @@ function TitleList({ titles }) {
                placeholdersrc={"https://cdn.darkintaqt.com/lol/static/missing/item.png"}
                alt={`${title.title}'s icon`}
                loading="lazy"
+               unoptimized
             />
          </span>
 
