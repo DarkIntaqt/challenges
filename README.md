@@ -3,8 +3,9 @@
 
 ![Project Preview](https://lolcdn.darkintaqt.com/cdn/challenge-preview.png "Project Preview")
   
-[![CodeFactor](https://www.codefactor.io/repository/github/darkintaqt/challenges/badge)](https://www.codefactor.io/repository/github/darkintaqt/challenges)
-![File Size](https://img.shields.io/github/languages/code-size/DarkIntaqt/challenges)
+[![CodeFactor](https://www.codefactor.io/repository/github/darkintaqt/challenges/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/darkintaqt/challenges)
+![File Size](https://img.shields.io/github/languages/code-size/DarkIntaqt/challenges?style=for-the-badge)
+![Contributors](https://img.shields.io/github/contributors-anon/darkintaqt/challenges?style=for-the-badge)
 </div>
 
 Check out the deployed version here [challenges.darkintaqt.com](https://challenges.darkintaqt.com/)
