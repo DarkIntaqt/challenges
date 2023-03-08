@@ -1,40 +1,16 @@
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import css from "challenges/styles/index.module.scss";
 import { Component, createRef } from "react";
 import Head from "next/head";
+import Searchbar from "challenges/components/Searchbar";
 
 export default class Start extends Component {
    constructor() {
       super();
-
-
-      // SELECT EFFECT
-      this.searchbarInput = createRef(null);
-      this.searchbarArea = createRef(null);
-
-      this.handleFocus = this.handleFocus.bind(this);
-      this.handleBlur = this.handleBlur.bind(this);
    }
 
-   handleFocus() {
-      this.searchbarArea.current.classList.add(css.active);
-   }
-
-   handleBlur() {
-      this.searchbarArea.current.classList.remove(css.active);
-   }
 
    componentDidMount() {
 
-
-
-      try {
-         this.searchbarInput.current.addEventListener("focus", this.handleFocus);
-         this.searchbarInput.current.addEventListener("blur", this.handleBlur);
-      } catch (e) {
-         console.warn(e);
-      }
 
    }
 
@@ -81,33 +57,7 @@ export default class Start extends Component {
 
                </div>
 
-               <div ref={this.searchbarArea} className={css.searchbarWrapper}>
-
-                  <div className={css.searchbar}>
-
-                     <input ref={this.searchbarInput} placeholder="Search for a summoner, challenge, title"></input>
-
-                     <select>
-                        <option value="br">BR</option>
-                        <option value="euw">EUW</option>
-                        <option value="eune">EUNE</option>
-                        <option value="jp">JP</option>
-                        <option value="kr">KR</option>
-                        <option value="lan">LAN</option>
-                        <option value="las">LAS</option>
-                        <option value="na">NA</option>
-                        <option value="oc">OC</option>
-                        <option value="ru">RU</option>
-                        <option value="tr">TR</option>
-                     </select>
-
-                     <FontAwesomeIcon
-                        icon={faMagnifyingGlass}
-                     />
-
-                  </div>
-
-               </div>
+               <Searchbar />
 
             </div>
 
