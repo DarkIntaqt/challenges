@@ -1,0 +1,30 @@
+@import "variables";
+
+a.challenge {
+
+   box-sizing: border-box;
+   padding: 10px;
+
+   width: 100%;
+   border-radius: 10px;
+
+   background-color: $dark3transparent;
+   margin: 5px 0;
+   display: flex;
+
+   img {
+      height: 40px;
+      width: 40px;
+   }
+
+   .title {
+      margin: 0 0 0 10px;
+
+      p {
+         font-weight: 300;
+         font-size: 1rem;
+      }
+
+   }
+
+}

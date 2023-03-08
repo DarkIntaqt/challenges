@@ -10,6 +10,7 @@ import Image from "next/image";
 import { faAnglesUp, faBoxOpen, faList, faPlay, faRankingStar, faTableCells, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 
+import ChallengeObject from "challenges/components/ChallengeObject";
 
 /**
  * @typedef ChallengesProps
@@ -70,13 +71,15 @@ export default function Challenges({ challenges, filters }) {
    const [isCompact, setCompact] = useState(true);
    const [search, setSearch] = useState("");
 
-   // TODO
-   // Complete migration of challenges.
+
+   /**
+    * Passes all the available data in a ChallengeObject
+    */
    const challengeCards = [];
    for (const challenge of challenges) {
-      const card = <div key={challenge.id}>
-         <p>{challenge.translation.name}</p>
-      </div>;
+      const card = <ChallengeObject key={challenge.id}
+         challenge={challenge}
+      />;
       challengeCards.push(card);
    }
 
@@ -310,7 +313,7 @@ export async function getServerSideProps() {
 
    // TODO
    // Use i18n settings when fetching challenges
-   let challenges = await challengeService.list("na1", "en");
+   let challenges = await challengeService.list("na1", "en_US");
    challenges = Array
       .from(challenges)
       .sort((a, b) => a.translation.name < b.translation.name
