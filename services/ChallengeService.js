@@ -7,7 +7,7 @@ import requests from "challenges/utils/requestFunctions";
 export default class ChallengeService {
   static baseUrl = "https://challenges.darkintaqt.com/api";
 
-  constructor() { 
+  constructor() {
     this.list = this.list.bind(this);
     this.listTitles = this.listTitles.bind(this);
     this.getById = this.getById.bind(this);
@@ -19,21 +19,35 @@ export default class ChallengeService {
   /**
    * Get the current list of challenges by region and language.
    * @param {string} region e.g. "na1", "euw1"...
-   * @param {string} lang e.g. "en", "de"...
+   * @param {string} lang e.g. "en_US", "de_DE"...
    * @returns {Promise<Array.<ChallengeDto>>} Challenges
    */
-  async list(region, lang) {
-    const challenges = await this.getJson(`/dynamic-data/serve?region=${region}&lang=${lang}`);
+  async list(region, lang = "en_US") {
+    const challenges = await this.getJson(`/challenges/${region}/${lang}.json`)["challenges"];
     return challenges;
   }
 
   /**
    * Get the current list of challenge titles.
+   * @param {string} region e.g. "na1", "euw1"...
+   * @param {string} lang e.g. "en_US", "de_DE"...
    * @returns {Promise<Array.<TitleDto>>} Titles
    */
-  async listTitles() {
-    const titles = await this.getJson("/v2/t/");
+  async listTitles(region, lang = "en_US") {
+    const titles = await this.getJson(`/challenges/${region}/${lang}.json`)["titles"];
     return titles;
+  }
+
+  /**
+ * Get the current list of challenges and titles by region and language.
+ * This is more effective as titles OR challenges doesn't need to be called individually
+ * @param {string} region e.g. "na1", "euw1"...
+ * @param {string} lang e.g. "en_US", "de_DE"...
+ * @returns {Promise<ChallengesRawDto>} Challenges and Titles
+ */
+  async listAll(region, lang = "en_US") {
+    const all = await this.getJson(`/challenges/${region}/${lang}.json`);
+    return all;
   }
 
   /**
