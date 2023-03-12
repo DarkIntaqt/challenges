@@ -10,7 +10,8 @@ import UserService from "challenges/services/UserService";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-
+import { getStorage, setStorage, storageKeys } from "challenges/utils/localStorageFunctions";
+import getPlatform from "challenges/utils/platform";
 
 /**
  * @typedef CardProps
@@ -76,11 +77,12 @@ const empty = <div style={{ height: "1px" }}></div>;
 export default class Searchbar extends Component {
    constructor() {
       super();
-      this.defaultRegion = "na1"; // change within componentDidMount to localstorage.default
+      this.defaultRegion = "na"; // change within componentDidMount to localstorage.default
 
 
       this.searchbarInput = createRef(null); // .searchbar
       this.searchbarArea = createRef(null); // .searchbarWrapper
+      this.select = createRef(null); // server selector
 
       this.contentService = new ContentService(); // serving challenge and profile images
       this.userService = new UserService();
@@ -88,13 +90,14 @@ export default class Searchbar extends Component {
       this.handleFocus = this.handleFocus.bind(this);
       this.handleBlur = this.handleBlur.bind(this);
       this.search = this.search.bind(this);
+      this.change = this.change.bind(this);
 
       this.focus = false; // searchbar is focussed
       this.visible = false; // component is rendered
       this.value = "";
 
       this.state = {
-         challenges: {},
+         challenges: [],
          titles: {},
          results: empty
       };
@@ -190,7 +193,7 @@ export default class Searchbar extends Component {
                <div>
                   <Card
                      title={value}
-                     url={`/profile/${this.defaultRegion}/${value}`}
+                     url={`/profile/${getPlatform(this.defaultRegion)}/${value}`}
                      round
                      loader
                      imageAsBackground
@@ -212,7 +215,6 @@ export default class Searchbar extends Component {
       this.setState({ results: state });
 
       const notFound = () => {
-         console.log("not found");
          this.setState({
             results:
                <> <div className={css.category}>
@@ -220,7 +222,7 @@ export default class Searchbar extends Component {
                   <div>
                      <Card
                         title={value}
-                        url={`/profile/${this.defaultRegion}/${value}`}
+                        url={`/profile/${getPlatform(this.defaultRegion)}/${value}`}
                         round
                         imageAsBackground
                         tag={`${this.defaultRegion}`}
@@ -256,7 +258,7 @@ export default class Searchbar extends Component {
                   /**
                    * fetch user and check again if nothing new was searched
                    */
-                  const user = await this.userService.getUser(value, this.defaultRegion);
+                  const user = await this.userService.getUser(value, getPlatform(this.defaultRegion));
 
                   if (value === e.target.value.toLowerCase()) {
                      if (typeof user.name !== "undefined") {
@@ -266,7 +268,7 @@ export default class Searchbar extends Component {
                               <div>
                                  <Card
                                     title={user.name}
-                                    url={`/profile/${this.defaultRegion}/${value}`}
+                                    url={`/profile/${getPlatform(this.defaultRegion)}/${value}`}
                                     round
                                     imageAsBackground
                                     tag={this.defaultRegion}
@@ -301,13 +303,39 @@ export default class Searchbar extends Component {
       }
    }
 
+
+   change(e) {
+      const region = e.currentTarget.options[e.currentTarget.selectedIndex].value;
+
+      this.defaultRegion = region;
+      setStorage(storageKeys.defaultRegion, region);
+      this.value = "";
+
+      this.search({
+         target: this.searchbarInput.current
+      });
+   }
+
    async componentDidMount() {
 
       this.visible = true;
 
+      /**
+       * get default region and set it
+       */
+      this.defaultRegion = getStorage(storageKeys.defaultRegion, this.defaultRegion);
+      for (let i = 0; i < this.select.current.options.length; i++) {
+         const element = this.select.current.options[i];
+         if (element.value === this.defaultRegion) {
+            element.selected = "selected";
+            break;
+         }
+      }
+
       try {
          this.searchbarInput.current.addEventListener("focus", this.handleFocus);
          this.searchbarInput.current.addEventListener("blur", this.handleBlur);
+         this.select.current.addEventListener("change", this.change);
 
          this.searchbarInput.current.addEventListener("keyup", this.search);
       } catch (e) {
@@ -316,7 +344,7 @@ export default class Searchbar extends Component {
 
       const challengeService = new ChallengeService();
 
-      const all = await challengeService.listAll(this.defaultRegion, "en_US");
+      const all = await challengeService.listAll(getPlatform(this.defaultRegion), "en_US");
       // TODO: Error Handling is missing here
 
       this.setState({
@@ -340,7 +368,7 @@ export default class Searchbar extends Component {
 
             <input ref={this.searchbarInput} placeholder="Search for a summoner, challenge, title"></input>
 
-            <select>
+            <select ref={this.select} id={css.select}>
                <option value="br">BR</option>
                <option value="euw">EUW</option>
                <option value="eune">EUNE</option>
@@ -350,8 +378,13 @@ export default class Searchbar extends Component {
                <option value="las">LAS</option>
                <option value="na">NA</option>
                <option value="oc">OC</option>
+               <option value="ph">PH</option>
                <option value="ru">RU</option>
+               <option value="sg">SG</option>
+               <option value="th">TH</option>
                <option value="tr">TR</option>
+               <option value="tw">TW</option>
+               <option value="vn">VN</option>
             </select>
 
             <FontAwesomeIcon
