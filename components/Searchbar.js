@@ -6,6 +6,7 @@ import css from "challenges/styles/index.module.scss";
 
 import ChallengeService from "challenges/services/ChallengeService";
 import ContentService from "challenges/services/ContentService";
+import UserService from "challenges/services/UserService";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -14,9 +15,13 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 /**
  * @typedef CardProps
  * @type {Object}
- * @property {string} url
- * @property {string} title
- * @property {string} image
+ * @property {string} url - required
+ * @property {string} title - required
+ * @property {string} image - required
+ * @property {boolean} round - default : true
+ * @property {string} tag - default: ""
+ * @property {boolean} imageAsBackground - default: false
+ * @property {boolean} loader - default: false
  */
 
 
@@ -25,21 +30,36 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
  * @param {CardProps} props 
  * @returns 
  */
-function Card({ url, title, image }) {
+function Card({ url, title, image, round = false, tag = "", imageAsBackground = false, loader = false }) {
    return <Link href={url} className={css.card} prefetch={false}>
       <div className={css.inner}>
+         {/* set a background */}
+         {imageAsBackground === true ?
+            <div className={css.bg} style={{
+               backgroundImage: `url(${image})`
+            }}></div>
+            : <></>}
          <div className={css.content}>
+            {/* Show a loader around the image */}
+            {loader === true && title.length >= 3 ?
+               <div className={css.loader} />
+               : <></>}
             <Image
                src={image}
                height={60}
                width={60}
                alt=""
                unoptimized
+               className={round === true ? css.round : ""}
             />
          </div>
       </div>
       <p>
          {title}
+         {tag !== "" ?
+            <span>{tag}</span>
+            : <></>
+         }
       </p>
    </Link>;
 }
@@ -63,6 +83,7 @@ export default class Searchbar extends Component {
       this.searchbarArea = createRef(null); // .searchbarWrapper
 
       this.contentService = new ContentService(); // serving challenge and profile images
+      this.userService = new UserService();
 
       this.handleFocus = this.handleFocus.bind(this);
       this.handleBlur = this.handleBlur.bind(this);
@@ -70,6 +91,7 @@ export default class Searchbar extends Component {
 
       this.focus = false; // searchbar is focussed
       this.visible = false; // component is rendered
+      this.value = "";
 
       this.state = {
          challenges: {},
@@ -107,8 +129,17 @@ export default class Searchbar extends Component {
     * @param {Object} e - keyup event
     * @returns null
     */
-   search(e) {
+   async search(e) {
       const value = e.target.value.toLowerCase();
+
+      // nothing changed
+      if (this.value === value) {
+         return;
+      }
+
+      this.value = value;
+
+      let state = empty;
 
       if (value.length === 0) {
          /**
@@ -133,26 +164,141 @@ export default class Searchbar extends Component {
       }).filter(x => !!x);
 
       if (challenges.length === 0) {
-         this.setState({
-            results: empty
-         });
-         return;
-      }
+         state = <div className={css.category}>
+            <p>Summoner</p>
+            <div>
+               <Card
+                  title={value}
+                  url={`/profile/${this.defaultRegion}/${value}`}
+                  round
+                  loader
+                  imageAsBackground
+                  tag={this.defaultRegion}
+                  image={this.contentService.getProfileIcon(29)}
+               />
+            </div>
+         </div>;
+      } else {
 
-      if (challenges.length > 6) {
-         challenges = challenges.slice(0, 6);
-      }
+         if (challenges.length > 6) {
+            challenges = challenges.slice(0, 6);
+         }
 
-
-      this.setState({
-         results:
+         state = <>
+            <div className={css.category}>
+               <p>Summoner</p>
+               <div>
+                  <Card
+                     title={value}
+                     url={`/profile/${this.defaultRegion}/${value}`}
+                     round
+                     loader
+                     imageAsBackground
+                     tag={this.defaultRegion}
+                     image={this.contentService.getProfileIcon(29)}
+                  />
+               </div>
+            </div>
             <div className={css.category}>
                <p>Challenges</p>
                <div>
                   {challenges}
                </div>
             </div>
-      });
+         </>;
+
+      }
+
+      this.setState({ results: state });
+
+      const notFound = () => {
+         console.log("not found");
+         this.setState({
+            results:
+               <> <div className={css.category}>
+                  <p>Summoner</p>
+                  <div>
+                     <Card
+                        title={value}
+                        url={`/profile/${this.defaultRegion}/${value}`}
+                        round
+                        imageAsBackground
+                        tag={`${this.defaultRegion}`}
+                        image={this.contentService.getProfileIcon(29)}
+                     />
+                  </div>
+               </div>
+                  {
+                     challenges.length > 0 ?
+                        <div className={css.category}>
+                           <p>Challenges</p>
+                           <div>
+                              {challenges}
+                           </div>
+                        </div> : <></>
+                  }
+               </>
+         });
+      };
+
+      /**
+       * Lookup (prelaod) the user:
+       * if name entered has at least 3 characters
+       * AND nothing new was entered in 500ms
+       */
+      if (value.length >= 3) {
+         setTimeout(async () => {
+            /**
+             * check if value hasnt changed
+             */
+            if (value === e.target.value.toLowerCase()) {
+               try {
+                  /**
+                   * fetch user and check again if nothing new was searched
+                   */
+                  const user = await this.userService.getUser(value, this.defaultRegion);
+
+                  if (value === e.target.value.toLowerCase()) {
+                     if (typeof user.name !== "undefined") {
+                        this.setState({
+                           results: <><div className={css.category}>
+                              <p>Summoner</p>
+                              <div>
+                                 <Card
+                                    title={user.name}
+                                    url={`/profile/${this.defaultRegion}/${value}`}
+                                    round
+                                    imageAsBackground
+                                    tag={this.defaultRegion}
+                                    image={this.contentService.getProfileIcon(user.icon)}
+                                 />
+                              </div>
+                           </div>
+                              {challenges.length > 0 ?
+                                 <div className={css.category}>
+                                    <p>Challenges</p>
+                                    <div>
+                                       {challenges}
+                                    </div>
+                                 </div> : <></>}
+                           </>
+                        });
+                     } else {
+                        if (value === e.target.value.toLowerCase()) {
+                           notFound();
+                        }
+                     }
+                  }
+               } catch (e) {
+                  /**
+                   * Fetch failed. Most likely only a CORS issue due to local development
+                   */
+                  console.warn(e);
+                  notFound();
+               }
+            }
+         }, 500);
+      }
    }
 
    async componentDidMount() {

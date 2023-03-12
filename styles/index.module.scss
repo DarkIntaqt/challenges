@@ -68,7 +68,7 @@
       width: 550px;
       height: auto;
       margin: 0 25px;
-      backdrop-filter: blur(5px) brightness(0.5);
+      backdrop-filter: blur(5px) brightness(0.5) grayscale(50%);
       border-radius: 0 0 10px 10px;
 
       .category {
@@ -76,21 +76,20 @@
          padding: 10px;
 
          >p {
-            font-size: 1rem;
-            font-weight: 400;
+            font-size: 1.2rem;
+            font-weight: 700;
             color: $light1;
             width: fit-content;
 
             text-align: center;
-            padding: 5px 10px;
-            margin: 5px 0 10px;
+            padding: 0 10px;
+            margin: 2px 0 6px;
             border-radius: 10px;
-            background-color: $dark2;
          }
 
          >div {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             flex-wrap: wrap;
 
             .card {
@@ -114,12 +113,25 @@
                   font-weight: 400;
                   padding: 5px;
                   color: $light1;
+
+                  span {
+                     font-size: .6rem;
+                     line-height: .6rem;
+                     color: $light1;
+                     width: fit-content;
+
+                     text-align: center;
+                     padding: 3px 6px;
+                     margin-left: 5px;
+                     border-radius: 5px;
+                     background-color: $dark3;
+                  }
                }
 
                .inner {
                   width: 160px;
                   position: relative;
-                  height: 90px;
+                  height: 80px;
                   background-color: $dark2;
                   display: flex;
                   outline: 2px solid transparent;
@@ -127,27 +139,62 @@
                   align-items: center;
                   justify-content: center;
                   transition: .2s transform;
+                  overflow: hidden;
 
                   &:hover {
                      transform: scale(1.03);
+
+                     .bg {
+                        filter: brightness(.2) blur(0px);
+                        background-size: 100%;
+                     }
                   }
 
                   .bg {
-                     filter: blur(2px);
+                     filter: blur(2px) brightness(0.2);
                      position: absolute;
                      z-index: 1;
 
-                     background-image: url(https://lolcdn.darkintaqt.com/cdn/np-token/402207/master);
+                     width: 100%;
+                     transition: .2s background-size, .2s filter;
                      height: 100%;
                      background-position: center;
-                     background-size: cover;
+                     background-size: 120%;
                      background-repeat: no-repeat;
-                     width: 100%;
                   }
 
                   .content {
                      position: relative;
                      z-index: 5;
+
+                     .loader {
+                        position: absolute;
+                        width: 70px;
+                        height: 70px;
+                        margin: -5px 0 0 -5px;
+
+                        border-radius: 50%;
+                        border: 2px solid $dark3;
+                        border-left-color: transparent;
+                        border-right-color: transparent;
+                        z-index: 8;
+
+                        animation-name: spin;
+                        animation-duration: 5s;
+                        animation-timing-function: linear;
+                        animation-iteration-count: infinite;
+
+
+                        @keyframes spin {
+                           100% {
+                              transform: rotate(180deg);
+                           }
+                        }
+                     }
+
+                     img.round {
+                        border-radius: 50%;
+                     }
                   }
                }
             }
