@@ -22,4 +22,13 @@ export default class ContentService {
     if (type != null) link = `${link}/${type.toLowerCase()}`;
     return encodeURI(link);
   }
+
+  /**
+   * Get the link of a summoner icon by id
+   * @param {number} id 
+   * @returns {string}
+   */
+  getProfileIcon(id) {
+    return encodeURI(`${ContentService.cdnUrl}/profileicon/${id.toString()}`);
+  }
 }
