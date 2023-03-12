@@ -54,92 +54,196 @@
 
    }
 
-   .searchbarWrapper {
-      margin-top: 20px;
+}
 
-      &.active {
-         .searchbar {
-            background-color: $light0;
 
-            input {
-               color: #000;
-               background-color: $light0;
-            }
+.searchbarWrapper {
+   margin-top: 20px;
+   position: relative;
 
-            svg,
-            select {
-               color: #000;
+
+   .results {
+      visibility: hidden;
+      position: absolute;
+      width: 550px;
+      height: auto;
+      margin: 0 25px;
+      backdrop-filter: blur(5px) brightness(0.5);
+      border-radius: 0 0 10px 10px;
+
+      .category {
+         width: 100%;
+         padding: 10px;
+
+         >p {
+            font-size: 1rem;
+            font-weight: 400;
+            color: $light1;
+            width: fit-content;
+
+            text-align: center;
+            padding: 5px 10px;
+            margin: 5px 0 10px;
+            border-radius: 10px;
+            background-color: $dark2;
+         }
+
+         >div {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+
+            .card {
+               padding: 2px;
+               display: block;
+               width: fit-content;
+               position: relative;
 
                &:hover {
-                  color: $dark3;
+                  .inner {
+                     outline: 2px solid $light3;
+                  }
+               }
+
+               >p {
+                  width: 160px;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  font-size: .8rem;
+                  font-weight: 400;
+                  padding: 5px;
+                  color: $light1;
+               }
+
+               .inner {
+                  width: 160px;
+                  position: relative;
+                  height: 90px;
+                  background-color: $dark2;
+                  display: flex;
+                  outline: 2px solid transparent;
+                  border-radius: 10px;
+                  align-items: center;
+                  justify-content: center;
+                  transition: .2s transform;
+
+                  &:hover {
+                     transform: scale(1.03);
+                  }
+
+                  .bg {
+                     filter: blur(2px);
+                     position: absolute;
+                     z-index: 1;
+
+                     background-image: url(https://lolcdn.darkintaqt.com/cdn/np-token/402207/master);
+                     height: 100%;
+                     background-position: center;
+                     background-size: cover;
+                     background-repeat: no-repeat;
+                     width: 100%;
+                  }
+
+                  .content {
+                     position: relative;
+                     z-index: 5;
+                  }
                }
             }
          }
       }
+   }
+
+   &.active {
+
+      .results {
+         visibility: visible;
+      }
 
       .searchbar {
-         width: 600px;
-         box-shadow: 0 0 5px #000;
-         background-color: $dark2;
-         border-radius: 10px;
-
-         overflow: hidden;
-
-         display: flex;
-         flex-wrap: nowrap;
-         align-items: center;
-         justify-content: center;
-
-         transition: .25s color, .25s background-color;
+         background-color: $light0;
 
          input {
-            flex: 1;
-            background-color: $dark2;
-            outline: none;
-            border: none;
-            font-size: 1rem;
-            font-weight: 300;
-            padding: 15px 20px;
-
-            color: $light3;
-            transition: .25s color, .25s background-color;
-
-
+            color: #000;
+            background-color: $light0;
          }
 
+         svg,
          select {
-            appearance: none;
-            background-color: transparent;
-            border: none;
-            border-radius: 0;
-            color: $light3;
-            cursor: pointer;
-            float: left;
-            font-size: 1rem;
-            outline: 0;
-            width: 40px;
+            color: #000;
 
             &:hover {
-               color: $light0;
+               color: $dark3;
             }
+         }
+      }
+   }
 
+   .searchbar {
+      position: relative;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 600px;
+      box-shadow: 0 0 5px #000;
+      background-color: $dark2;
+      border-radius: 10px;
+
+      overflow: hidden;
+
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+
+      transition: .25s color, .25s background-color;
+
+      input {
+         flex: 1;
+         background-color: $dark2;
+         outline: none;
+         border: none;
+         font-size: 1rem;
+         font-weight: 300;
+         padding: 15px 20px;
+
+         color: $light3;
+         transition: .25s color, .25s background-color;
+
+
+      }
+
+      select {
+         appearance: none;
+         background-color: transparent;
+         border: none;
+         border-radius: 0;
+         color: $light3;
+         cursor: pointer;
+         float: left;
+         font-size: 1rem;
+         outline: 0;
+         width: 40px;
+
+         &:hover {
+            color: $light0;
          }
 
-         svg {
-            cursor: pointer;
-            height: 1rem;
-            width: 1rem;
-            margin: 15px 20px;
-            color: $light3;
+      }
 
-            &:hover {
-               color: $light0;
-            }
+      svg {
+         cursor: pointer;
+         height: 1rem;
+         width: 1rem;
+         padding: 15px 20px;
+         color: $light3;
 
+         &:hover {
+            color: $light0;
          }
 
       }
 
    }
-
 }
