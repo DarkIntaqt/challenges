@@ -10,6 +10,7 @@ export default class ChallengeService {
   constructor() {
     this.list = this.list.bind(this);
     this.listTitles = this.listTitles.bind(this);
+    this.listAll = this.listAll.bind(this);
     this.getById = this.getById.bind(this);
 
     const { getJson } = requests(ChallengeService.baseUrl);

@@ -8,6 +8,7 @@ export default class ContentService {
 
   constructor() {
     this.getChallengeTokenIcon = this.getChallengeTokenIcon.bind(this);
+    this.getProfileIcon = this.getProfileIcon.bind(this);
   }
 
   /**
