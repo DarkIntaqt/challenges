@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { getStorage, setStorage, storageKeys } from "challenges/utils/localStorageFunctions";
 import getPlatform from "challenges/utils/platform";
+import { withRouter } from "next/router";
 
 /**
  * @typedef CardProps
@@ -74,9 +75,11 @@ function Card({ url, title, image, round = false, tag = "", imageAsBackground = 
 const empty = <div style={{ height: "1px" }}></div>;
 
 
-export default class Searchbar extends Component {
-   constructor() {
-      super();
+class Searchbar extends Component {
+   constructor(props) {
+      super(props);
+
+      this.router = props.router;
       this.defaultRegion = "na"; // change within componentDidMount to localstorage.default
 
 
@@ -134,7 +137,13 @@ export default class Searchbar extends Component {
     * @returns null
     */
    async search(e) {
+
       const value = e.target.value.toLowerCase();
+      if (e.key === "Enter") {
+         this.router.push(`/profile/${getPlatform(this.defaultRegion)}/${value}`);
+         return;
+      }
+
 
       // nothing changed
       if (this.value === value) {
@@ -176,7 +185,7 @@ export default class Searchbar extends Component {
             <div>
                <Card
                   title={value}
-                  url={`/profile/${this.defaultRegion}/${value}`}
+                  url={`/profile/${getPlatform(this.defaultRegion)}/${value}`}
                   round
                   loader
                   imageAsBackground
@@ -320,7 +329,8 @@ export default class Searchbar extends Component {
       this.value = "";
 
       this.search({
-         target: this.searchbarInput.current
+         target: this.searchbarInput.current,
+         key: "Space"
       });
    }
 
@@ -422,6 +432,10 @@ export default class Searchbar extends Component {
             </select>
 
             <FontAwesomeIcon
+               onClick={() => this.search({
+                  target: this.searchbarInput.current,
+                  key: "Enter"
+               })}
                icon={faMagnifyingGlass}
             />
 
@@ -435,3 +449,5 @@ export default class Searchbar extends Component {
       </div>;
    }
 }
+
+export default withRouter(Searchbar);
