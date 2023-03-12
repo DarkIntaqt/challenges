@@ -118,7 +118,7 @@ function handleChallengeSearch(value, titles, setSearchList) {
 
 export async function getServerSideProps() {
    const challengeService = new ChallengeService();
-   const titles = await challengeService.listTitles();
+   const titles = await challengeService.listTitles("na1", "en_US");
 
    return {
       props: {
