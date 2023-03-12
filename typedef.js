@@ -45,7 +45,7 @@
 /**
  * @typedef ChallengesRawDto
  * @type {Object}
- * @property {Array.<ChallengeDto>} challenges
+ * @property {Object<number,ChallengeDto>} challenges
  * @property {Array.<TitleDto>} titles
  */
 
