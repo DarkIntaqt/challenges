@@ -88,11 +88,10 @@
          }
 
          >div {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
 
             .card {
+               float: left;
+               margin: 5px 6px;
                padding: 2px;
                display: block;
                width: fit-content;

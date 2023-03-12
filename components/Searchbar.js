@@ -92,6 +92,7 @@ export default class Searchbar extends Component {
       this.search = this.search.bind(this);
       this.change = this.change.bind(this);
 
+      this.recentlySearched = [];
       this.focus = false; // searchbar is focussed
       this.visible = false; // component is rendered
       this.value = "";
@@ -148,6 +149,9 @@ export default class Searchbar extends Component {
          /**
           * set to default state, like last X users searched
           */
+         this.setState({
+            results: this.recentlySearched
+         });
          return;
       }
 
@@ -304,6 +308,10 @@ export default class Searchbar extends Component {
    }
 
 
+   /**
+    * changes the region, simulate a content change
+    * @param {Object} e - onChange event
+    */
    change(e) {
       const region = e.currentTarget.options[e.currentTarget.selectedIndex].value;
 
@@ -332,6 +340,7 @@ export default class Searchbar extends Component {
          }
       }
 
+
       try {
          this.searchbarInput.current.addEventListener("focus", this.handleFocus);
          this.searchbarInput.current.addEventListener("blur", this.handleBlur);
@@ -341,6 +350,31 @@ export default class Searchbar extends Component {
       } catch (e) {
          console.warn(e);
       }
+
+      const recentlySearched = getStorage(storageKeys.recentlySearched, []);
+      let recentCards = [];
+
+      for (let i = 0; i < recentlySearched.length; i++) {
+         const user = recentlySearched[i];
+         recentCards.push(<Card key={i}
+            title={user[1]}
+            url={`/profile/${getPlatform(user[0])}/${user[1]}`}
+            round
+            imageAsBackground
+            tag={user[0]}
+            image={this.contentService.getProfileIcon(user[2])}
+         />);
+      }
+      this.recentlySearched = <div className={css.category}>
+         <p>Recently searched</p>
+         <div>
+            {recentCards}
+         </div>
+      </div>;
+
+      this.setState({
+         results: this.recentlySearched
+      });
 
       const challengeService = new ChallengeService();
 
