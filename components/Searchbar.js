@@ -361,30 +361,37 @@ class Searchbar extends Component {
          console.warn(e);
       }
 
+
+      /**
+       * Parses and generates the "recently searched object"
+       */
       const recentlySearched = getStorage(storageKeys.recentlySearched, []);
-      let recentCards = [];
+      if (recentlySearched.length > 0) {
+         let recentCards = [];
 
-      for (let i = 0; i < recentlySearched.length; i++) {
-         const user = recentlySearched[i];
-         recentCards.push(<Card key={i}
-            title={user[1]}
-            url={`/profile/${getPlatform(user[0])}/${user[1]}`}
-            round
-            imageAsBackground
-            tag={user[0]}
-            image={this.contentService.getProfileIcon(user[2])}
-         />);
+         for (let i = 0; i < recentlySearched.length; i++) {
+            const user = recentlySearched[i];
+            recentCards.push(<Card key={i}
+               title={user[1]}
+               url={`/profile/${getPlatform(user[0])}/${user[1]}`}
+               round
+               imageAsBackground
+               tag={user[0]}
+               image={this.contentService.getProfileIcon(user[2])}
+            />);
+         }
+
+         this.recentlySearched = <div className={css.category}>
+            <p>Recently searched</p>
+            <div>
+               {recentCards}
+            </div>
+         </div>;
+
+         this.setState({
+            results: this.recentlySearched
+         });
       }
-      this.recentlySearched = <div className={css.category}>
-         <p>Recently searched</p>
-         <div>
-            {recentCards}
-         </div>
-      </div>;
-
-      this.setState({
-         results: this.recentlySearched
-      });
 
       const challengeService = new ChallengeService();
 
