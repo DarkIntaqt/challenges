@@ -1,3 +1,23 @@
+import config from "../config.js"
+
+let thresholds = {}
+for (let i = 0; i < config.tiers.length; i++) {
+    thresholds[config.tiers[i]] = 0;
+
+}
+
+const fallback = {
+    id: "-1",
+    translation: {
+        name: "ERROR",
+        description: "ERROR",
+        shortDescription: "ERROR"
+    },
+    queueIds: [],
+    tags: { "parent": 0 },
+    thresholds: thresholds
+}
+
 /**
  * get a challenge by id
  * @param {number} challengeId 
@@ -18,23 +38,9 @@ export default function getChallenge(challengeId = 0) {
 
         }
         console.error(`Didn't load challenge ${challengeId}, return fallback`)
-        return {
-            id: "-1",
-            translation: {
-                name: "Loading",
-                description: "Loading",
-                shortDescription: "Loading"
-            }
-        };
+        return fallback;
     } catch (error) {
         console.error(error);
-        return {
-            id: "-1",
-            translation: {
-                name: "Loading",
-                description: "Loading",
-                shortDescription: "Loading"
-            }
-        };
+        return fallback;
     }
 }

@@ -33,6 +33,10 @@ export function removeUnnecessaryChallenges(challenges, filters, masterOnly = fa
 
         challenge.push(challengeData)
 
+        if (!checkExists(challengeData.queueIds)) {
+            console.log(challengeData)
+        }
+
         if (challengeData.queueIds.length > 0) {
             for (let i = 0; i < challengeData.queueIds.length; i++) {
 
