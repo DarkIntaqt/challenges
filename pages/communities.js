@@ -50,7 +50,7 @@ export default function Communities({ images, texts }) {
   </div>;
 }
 
-export async function getServerSideProps() {
+Communities.getInitialProps = async (ctx) => {
   const res = await fetch("https://challenges.darkintaqt.com/communities.json");
 
   let images = [];
@@ -62,9 +62,7 @@ export async function getServerSideProps() {
   }
 
   return {
-    props: {
-      images,
-      texts
-    }
+    images,
+    texts
   };
-}
+};

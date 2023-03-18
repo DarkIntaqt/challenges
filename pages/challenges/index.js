@@ -11,6 +11,8 @@ import { faAnglesUp, faBoxOpen, faList, faPlay, faRankingStar, faTableCells, faU
 import { useEffect, useRef, useState } from "react";
 
 import ChallengeObject from "challenges/components/ChallengeObject";
+import { toArray } from "challenges/utils/toArray";
+import ContentService from "challenges/services/ContentService";
 
 /**
  * @typedef ChallengesProps
@@ -22,7 +24,7 @@ import ChallengeObject from "challenges/components/ChallengeObject";
 /**
  * @param {ChallengesProps} props
  */
-export default function Challenges({ challenges, filters }) {
+export default function Challenges({ challenges = {}, filters = {} }) {
    /**
     * Category enum types.
     */
@@ -147,8 +149,7 @@ export default function Challenges({ challenges, filters }) {
          setSearch(getStorage(storageKeys.challengeSearch, search));
          isInitialized.current = true;
       }
-      console.log(dataFilters);
-      console.log(searchFilters);
+
    }, [dataFilters, isInitialized, search, searchFilters]);
 
    return <div className={"object1000"}>
@@ -187,35 +188,35 @@ export default function Challenges({ challenges, filters }) {
             <p className={filterCss.info}>Filter (multiple choices)</p>
             <FilterButtonList categoryType={category.category}>
                <button onClick={() => handleChangeFilter(dataFilters.teamwork.key)} className={dataFilters.teamwork.css}>
-                  <Image width={16} height={16} src={filters.teamwork.src} alt="teamwork" />
+                  <Image width={16} height={16} src={filters.teamwork.src} alt="teamwork" unoptimized />
                   {capitalize(filters.teamwork.name)}
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.imagination.key)} className={dataFilters.imagination.css}>
-                  <Image width={16} height={16} src={filters.imagination.src} alt="imagination" />
+                  <Image width={16} height={16} src={filters.imagination.src} alt="imagination" unoptimized />
                   {capitalize(filters.imagination.name)}
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.veterancy.key)} className={dataFilters.veterancy.css}>
-                  <Image width={16} height={16} src={filters.veterancy.src} alt="veterancy" />
+                  <Image width={16} height={16} src={filters.veterancy.src} alt="veterancy" unoptimized />
                   {capitalize(filters.veterancy.name)}
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.collection.key)} className={dataFilters.collection.css}>
-                  <Image width={16} height={16} src={filters.collection.src} alt="collection" />
+                  <Image width={16} height={16} src={filters.collection.src} alt="collection" unoptimized />
                   {capitalize(filters.collection.name)}
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.expertise.key)} className={dataFilters.expertise.css}>
-                  <Image width={16} height={16} src={filters.expertise.src} alt="expertise" />
+                  <Image width={16} height={16} src={filters.expertise.src} alt="expertise" unoptimized />
                   {capitalize(filters.expertise.name)}
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.legacy.key)} className={dataFilters.legacy.css}>
-                  <Image width={16} height={16} src={filters.legacy.src} alt="legacy" />
+                  <Image width={16} height={16} src={filters.legacy.src} alt="legacy" unoptimized />
                   Legacy
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.seasonal2023.key)} className={dataFilters.seasonal2023.css}>
-                  <Image width={16} height={16} src={filters.seasonal2023.src} alt="2023 seasonal" />
+                  <Image width={16} height={16} src={filters.seasonal2023.src} alt="2023 seasonal" unoptimized />
                   2023 Seasonal <span>NEW</span>
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.seasonalRetired.key)} className={dataFilters.seasonalRetired.css}>
-                  <Image width={16} height={16} src={filters.seasonalRetired.src} alt="seasonal retired" />
+                  <Image width={16} height={16} src={filters.seasonalRetired.src} alt="seasonal retired" unoptimized />
                   Retired Seasonal
                </button>
             </FilterButtonList>
@@ -230,11 +231,11 @@ export default function Challenges({ challenges, filters }) {
                   Ingame
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.eternals.key)} className={dataFilters.eternals.css}>
-                  <Image width={16} height={16} src={filters.eternals.src} alt="eternals" />
+                  <Image width={16} height={16} src={filters.eternals.src} alt="eternals" unoptimized />
                   Eternals
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.clash.key)} className={dataFilters.clash.css}>
-                  <Image width={16} height={16} src={filters.clash.src} alt="clash" />
+                  <Image width={16} height={16} src={filters.clash.src} alt="clash" unoptimized />
                   Clash
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.inventory.key)} className={dataFilters.inventory.css}>
@@ -253,15 +254,15 @@ export default function Challenges({ challenges, filters }) {
 
             <FilterButtonList categoryType={category.gamemode}>
                <button onClick={() => handleChangeFilter(dataFilters.summonersrift.key)} className={dataFilters.summonersrift.css}>
-                  <Image width={16} height={16} src={filters.summonersrift.src} alt="Summoners Rift" />
+                  <Image width={16} height={16} src={filters.summonersrift.src} alt="Summoners Rift" unoptimized />
                   Summoners Rift
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.aram.key)} className={dataFilters.aram.css}>
-                  <Image width={16} height={16} src={filters.aram.src} alt="ARAM" />
+                  <Image width={16} height={16} src={filters.aram.src} alt="ARAM" unoptimized />
                   ARAM
                </button>
                <button onClick={() => handleChangeFilter(dataFilters.bot.key)} className={dataFilters.bot.css}>
-                  <Image width={16} height={16} src={filters.bot.src} alt="Bot Games" />
+                  <Image width={16} height={16} src={filters.bot.src} alt="Bot Games" unoptimized />
                   Bot
                </button>
             </FilterButtonList>
@@ -308,45 +309,54 @@ function NoChallengesFound() {
    </p>;
 }
 
-export async function getServerSideProps() {
+
+/**
+ * SSR
+ * @param {Object} ctx 
+ * @returns Props
+ */
+Challenges.getInitialProps = async (ctx) => {
+
+   return await getProps();
+
+};
+
+/**
+ * 
+ * @returns Props
+ */
+async function getProps() {
    const challengeService = new ChallengeService();
+   const contentService = new ContentService();
 
-   // TODO
-   // Use i18n settings when fetching challenges
-   let challenges = await challengeService.list("na1", "en_US");
-   challenges = Array
-      .from(challenges)
-      .sort((a, b) => a.translation.name < b.translation.name
-         ? -1 : +(a.translation.name > b.translation.name));
+   let challengesRaw = await challengeService.list("na1", "en_US");
 
-   const categories = {
-      teamwork: await challengeService.getById(4),
-      imagination: await challengeService.getById(1),
-      veterancy: await challengeService.getById(3),
-      collection: await challengeService.getById(5),
-      expertise: await challengeService.getById(2)
-   };
+
+   let challenges = Array
+      .from(toArray(challengesRaw))
+      .sort((a, b) => a.name < b.name
+         ? -1 : +(a.name > b.name));
 
    const filters = {
-      expertise: {
-         src: "https://cdn.darkintaqt.com/lol/static/challenges/expertise.svg",
-         name: categories.teamwork.challenge.translation.name
-      },
-      collection: {
-         src: "https://cdn.darkintaqt.com/lol/static/challenges/collection.svg",
-         name: categories.collection.challenge.translation.name
-      },
       imagination: {
-         src: "https://cdn.darkintaqt.com/lol/static/challenges/imagination.svg",
-         name: categories.imagination.challenge.translation.name
+         src: contentService.getChallengeTokenIcon(1),
+         name: challengesRaw[1].name
+      },
+      expertise: {
+         src: contentService.getChallengeTokenIcon(2),
+         name: challengesRaw[2].name
       },
       veterancy: {
-         src: "https://cdn.darkintaqt.com/lol/static/challenges/veterancy.svg",
-         name: categories.veterancy.challenge.translation.name
+         src: contentService.getChallengeTokenIcon(3),
+         name: challengesRaw[3].name
       },
       teamwork: {
-         src: "https://cdn.darkintaqt.com/lol/static/challenges/teamwork.svg",
-         name: categories.teamwork.challenge.translation.name
+         src: contentService.getChallengeTokenIcon(4),
+         name: challengesRaw[4].name
+      },
+      collection: {
+         src: contentService.getChallengeTokenIcon(5),
+         name: challengesRaw[5].name
       },
       legacy: {
          src: "https://cdn.darkintaqt.com/lol/static/challenges/legacy.svg",
@@ -375,9 +385,7 @@ export async function getServerSideProps() {
    };
 
    return {
-      props: {
-         challenges,
-         filters
-      }
+      challenges,
+      filters
    };
 }

@@ -24,8 +24,8 @@ export default class ChallengeService {
    * @returns {Promise<Array.<ChallengeDto>>} Challenges
    */
   async list(region, lang = "en_US") {
-    const challenges = await this.getJson(`/challenges/${region}/${lang}.json`)["challenges"];
-    return challenges;
+    const challenges = await this.getJson(`/challenges/${region}/${lang}.json`);
+    return challenges.challenges;
   }
 
   /**
@@ -35,8 +35,8 @@ export default class ChallengeService {
    * @returns {Promise<Array.<TitleDto>>} Titles
    */
   async listTitles(region, lang = "en_US") {
-    const titles = await this.getJson(`/challenges/${region}/${lang}.json`)["titles"];
-    return titles;
+    const titles = await this.getJson(`/challenges/${region}/${lang}.json`);
+    return titles.titles;
   }
 
   /**
