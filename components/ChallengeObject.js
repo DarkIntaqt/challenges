@@ -20,7 +20,7 @@ export default function ChallengeObject({ challenge }) {
 
       <Image
          src={`https://lolcdn.darkintaqt.com/cdn/np-token/${challenge.id}`}
-         alt={challenge.translation.name}
+         alt={challenge.name}
          height={40}
          width={40}
          loading="lazy"
@@ -28,7 +28,7 @@ export default function ChallengeObject({ challenge }) {
       />
 
       <div className={css.title}>
-         <p>{challenge.translation.name}</p>
+         <p>{challenge.name}</p>
       </div>
 
    </Link>;
