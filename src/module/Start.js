@@ -8,6 +8,7 @@ import config from "../config";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import goTo from "../func/goTo";
+import Timestamp from "react-timestamps"
 
 class Start extends Component {
 
@@ -168,7 +169,8 @@ class Start extends Component {
       <div className={StyleSheet.background} style={backgroundImage}></div>
       <div className={StyleSheet.start + " object1000"}>
         <h1>{t("League of Legends")} <br /><span>{t("Challenge Progress Tracker")}</span></h1>
-        <h2>{t("By")} <a href="https://darkintaqt.com/blog/c-en/leagueoflegendsapi/" target="_blank" rel="noreferrer">DarkIntaqt.com</a></h2>
+        {/* <h2>{t("By")} <a href="https://darkintaqt.com/blog/c-en/leagueoflegendsapi/" target="_blank" rel="noreferrer">DarkIntaqt.com</a></h2> */}
+        <h2>Something special will happen <Timestamp date={1682805600000} /></h2>
 
         <div className={StyleSheet.searchbar}>
           <i className={"fa-solid fa-magnifying-glass"} id="search-submit"></i>
