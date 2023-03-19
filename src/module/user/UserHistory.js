@@ -148,6 +148,8 @@ export default class History extends Component {
                         <br />
                         <br />
                         Get challenge progress per match by enabling this feature
+                        <br />
+                        <i style={{ padding: "10px", display: "block", fontSize: "0.8rem", color: "var(--light2)" }}>Please keep in mind that this feature is in beta. <br />Please report all issues on Github</i>
                     </p>
                     <p className={css.advertisement}>
                         <a href="/verify" target="_blank" style={{ color: "white" }}>Verify now</a>
