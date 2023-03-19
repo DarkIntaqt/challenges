@@ -328,7 +328,7 @@ class User extends Component {
                 <img src={`${config.cdnBasePath}/cdn/profileicon/${summonerIcon}`} alt="" />
 
                 <h1>
-                    {summonerName}{this.state.verified === true ? <a href="/faq#h8" onClick={goTo}><VipBadge size={"2rem"} /></a> : null}{typeof summonerName === "object" ? null : <Fragment>
+                    {summonerName}{this.state.verified === true ? <a href="/faq#h8" onClick={goTo}><VipBadge size={"2rem"} /></a> : typeof summonerName === "object" ? null : <a href="/verify" style={{ filter: "grayscale(1)" }} target="_blank"><VipBadge size={"2rem"} /></a>}{typeof summonerName === "object" ? null : <Fragment>
                         <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
                         <a href={"https://masterychart.com/profile/" + serverToHumanReadable(this.server).replace("oc", "oce") + "/" + decodeURI(strtolower(summonerName)) + "?utm_source=Challenge+Tracker&utm_medium=Website&utm_campaign=Profile"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.mclogo} src="https://challenges.darkintaqt.com/api/masterychart-full.png" alt={profileText} title={profileText}></img></a>
                     </Fragment>
@@ -345,7 +345,7 @@ class User extends Component {
                         This player has {beautifyNum(points)} total points.
                         <br />
                         <br />
-                        This player is in the top {percentile * 100}% in {serverToRegionString(server)}.
+                        This player is in the top {Math.round(percentile * 100)}% in {serverToRegionString(server)}.
                     </div>
                 </h2>
 
@@ -367,7 +367,7 @@ class User extends Component {
 
                 <Link to="statistics" className={css["statistics"]}>{t("Statistics")}</Link>
 
-                {this.state.verified === true || currentLocation === "history" ? <Link to="history" className={css["history"]}>{t("History")} <span>{strtoupper(t("beta"))}</span></Link> : null}
+                <Link to="history" className={css["history"]}>{t("History")} <span>{strtoupper(t("Public Beta"))}</span></Link>
 
             </div>
 

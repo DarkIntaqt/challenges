@@ -1,3 +1,4 @@
+import css from "../../css/stats.module.css"
 import { Component } from "react";
 import Loader from "../Loader";
 import get from "../../func/get";
@@ -140,10 +141,19 @@ export default class History extends Component {
 
 
         if (this.state.verified !== true) {
-            window.location.href = `/${user.server}/${user.summonerName}`
-            return <div style={{ width: "100%", float: "left" }}>
-                <p style={{ color: "white", fontSize: "1rem", textAlign: "center" }}>This feature is not enabled for this summoner</p>
-            </div>
+            return <div style={{ width: "100%", float: "left", display: "flex", justifyContent: "center" }}>
+                <div className={css.rowParent}>
+                    <p style={{ color: "white", fontSize: "1rem", textAlign: "center" }}>
+                        This feature is not enabled for this summoner.
+                        <br />
+                        <br />
+                        Get challenge progress per match by enabling this feature
+                    </p>
+                    <p className={css.advertisement}>
+                        <a href="/verify" target="_blank" style={{ color: "white" }}>Verify now</a>
+                    </p>
+                </div>
+            </div>;
         }
 
         if (this.state.queues.length === 0) {
