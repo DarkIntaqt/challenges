@@ -35,7 +35,7 @@ export default function FAQ() {
         ],
         [
             "What are these blue check marks?",
-            "Use these to track your challenge progress per match!"
+            "Use these to track your challenge progress per match! Revoke your verification by messaging @darkintaqt on twitter or write an email to the email address provided in the imprint. "
         ],
         [
             "What are all these filter options on a profile page",
