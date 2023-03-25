@@ -27,7 +27,7 @@ export default function Footer() {
                   icon={faHeart}
                /> by <Link href="https://darkintaqt.com" target="_blank">DarkIntaqt</Link>
                <br />
-               and <Link href="/social/about#thanks">contributors</Link>.
+               and <Link href="/social/about#thanks" prefetch={false}>contributors</Link>.
             </p>
 
          </div>
@@ -35,11 +35,11 @@ export default function Footer() {
          <div className={css.linkgroup}>
             <p>Challenge Tracker</p>
 
-            <Link href="/social/about">About</Link>
-            <Link href="/social/contact">Contact</Link>
-            <Link href="/social/faq">Help & FAQ</Link>
-            <Link href="/social/feedback">Feedback</Link>
-            <Link href="/settings">
+            <Link href="/social/about" prefetch={false}>About</Link>
+            <Link href="/social/contact" prefetch={false}>Contact</Link>
+            <Link href="/social/faq" prefetch={false}>Help & FAQ</Link>
+            <Link href="/social/feedback" prefetch={false}>Feedback</Link>
+            <Link href="/settings" prefetch={false}>
                <FontAwesomeIcon
                   icon={faGlobe}
                /> English
@@ -49,18 +49,18 @@ export default function Footer() {
          <div className={css.linkgroup}>
             <p>Social</p>
 
-            <Link href="/social/contact">Contact</Link>
+            <Link href="/social/contact" prefetch={false}>Contact</Link>
             <Link href="https://twitter.com/darkintaqt" target="_blank">Twitter</Link>
-            <Link href="/community">Community</Link>
+            <Link href="/community" prefetch={false}>Community</Link>
             <Link href="https://github.com/DarkIntaqt/challenges" target="_blank">Contribute on GitHub</Link>
          </div>
 
          <div className={css.linkgroup}>
             <p>Resources</p>
 
-            <Link href="/social/imprint">Imprint</Link>
-            <Link href="/social/tos">Terms of Service</Link>
-            <Link href="/social/privacy">Privacy Policy</Link>
+            <Link href="/social/imprint" prefetch={false}>Imprint</Link>
+            <Link href="/social/tos" prefetch={false}>Terms of Service</Link>
+            <Link href="/social/privacy" prefetch={false}>Privacy Policy</Link>
          </div>
 
       </div>
