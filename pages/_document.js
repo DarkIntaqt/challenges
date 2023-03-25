@@ -14,6 +14,9 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+
+        {/* Cookie Management Script */}
+        <script src="https://cdn.darkintaqt.com/script/cc/bundle.js" async></script>
       </body>
     </Html>
   );
