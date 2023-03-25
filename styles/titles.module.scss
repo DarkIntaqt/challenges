@@ -32,6 +32,11 @@
       border-radius: 5px;
       position: relative;
       overflow: visible;
+      transition: .25s linear background-color;
+
+      &:hover {
+         background-color: $dark3;
+      }
 
       img {
          left: -10px;
