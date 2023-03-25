@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import { Component, createRef } from "react";
 
 import css from "challenges/styles/index.module.scss";
@@ -9,63 +7,13 @@ import ContentService from "challenges/services/ContentService";
 import UserService from "challenges/services/UserService";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { getStorage, setStorage, storageKeys } from "challenges/utils/localStorageFunctions";
-import getPlatform from "challenges/utils/platform";
+
 import { withRouter } from "next/router";
+import getPlatform from "challenges/utils/platform";
 
-/**
- * @typedef CardProps
- * @type {Object}
- * @property {string} url - required
- * @property {string} title - required
- * @property {string} image - required
- * @property {boolean} round - default : true
- * @property {string} tag - default: ""
- * @property {boolean} imageAsBackground - default: false
- * @property {boolean} loader - default: false
- */
-
-
-/**
- * Returns the corresponding card for the searchBar
- * @param {CardProps} props 
- * @returns 
- */
-function Card({ url, title, image, round = false, tag = "", imageAsBackground = false, loader = false }) {
-   return <Link href={url} className={css.card} prefetch={false}>
-      <div className={css.inner}>
-         {/* set a background */}
-         {imageAsBackground === true ?
-            <div className={css.bg} style={{
-               backgroundImage: `url(${image})`
-            }}></div>
-            : <></>}
-         <div className={css.content}>
-            {/* Show a loader around the image */}
-            {loader === true && title.length >= 3 ?
-               <div className={css.loader} />
-               : <></>}
-            <Image
-               src={image}
-               height={60}
-               width={60}
-               alt=""
-               unoptimized
-               className={round === true ? css.round : ""}
-            />
-         </div>
-      </div>
-      <p>
-         {title}
-         {tag !== "" ?
-            <span>{tag}</span>
-            : <></>
-         }
-      </p>
-   </Link>;
-}
-
+import Card from "./SearchBarCard";
 
 /**
  * fix a safari bug where the height of a backdrop-element 
@@ -181,7 +129,7 @@ class Searchbar extends Component {
 
       if (challenges.length === 0) {
          state = <div className={css.category}>
-            <p>Summoner</p>
+            {/* <p>Summoner</p> */}
             <div>
                <Card
                   title={value}
@@ -202,7 +150,7 @@ class Searchbar extends Component {
 
          state = <>
             <div className={css.category}>
-               <p>Summoner</p>
+               {/* <p>Summoner</p> */}
                <div>
                   <Card
                      title={value}
@@ -216,7 +164,7 @@ class Searchbar extends Component {
                </div>
             </div>
             <div className={css.category}>
-               <p>Challenges</p>
+               {/* <p>Challenges</p> */}
                <div>
                   {challenges}
                </div>
@@ -231,7 +179,7 @@ class Searchbar extends Component {
          this.setState({
             results:
                <> <div className={css.category}>
-                  <p>Summoner</p>
+                  {/* <p>Summoner</p> */}
                   <div>
                      <Card
                         title={value}
@@ -246,7 +194,7 @@ class Searchbar extends Component {
                   {
                      challenges.length > 0 ?
                         <div className={css.category}>
-                           <p>Challenges</p>
+                           {/* <p>Challenges</p> */}
                            <div>
                               {challenges}
                            </div>
@@ -277,7 +225,7 @@ class Searchbar extends Component {
                      if (typeof user.name !== "undefined") {
                         this.setState({
                            results: <><div className={css.category}>
-                              <p>Summoner</p>
+                              {/* <p>Summoner</p> */}
                               <div>
                                  <Card
                                     title={user.name}
@@ -291,7 +239,7 @@ class Searchbar extends Component {
                            </div>
                               {challenges.length > 0 ?
                                  <div className={css.category}>
-                                    <p>Challenges</p>
+                                    {/* <p>Challenges</p> */}
                                     <div>
                                        {challenges}
                                     </div>
@@ -376,13 +324,13 @@ class Searchbar extends Component {
                url={`/profile/${getPlatform(user[0])}/${user[1]}`}
                round
                imageAsBackground
+               icon={faClockRotateLeft}
                tag={user[0]}
                image={this.contentService.getProfileIcon(user[2])}
             />);
          }
 
          this.recentlySearched = <div className={css.category}>
-            <p>Recently searched</p>
             <div>
                {recentCards}
             </div>
