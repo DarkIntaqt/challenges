@@ -1,9 +1,18 @@
+/*
+ *
+ * SCSS MODULE FOR
+ * /challenges[challengeId].js
+ *
+ */
 @import "variables";
 
 .bgImage {
    position: absolute;
    width: 100%;
    height: 800px;
+
+   background-position: center;
+   background-size: cover;
 
    mask-image: linear-gradient(to top, transparent, black);
 

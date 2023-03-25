@@ -66,14 +66,21 @@
       visibility: hidden;
       position: absolute;
       width: 550px;
+      display: flex;
+      flex-direction: column;
       height: auto;
       margin: 0 25px;
       backdrop-filter: blur(5px) brightness(0.5) grayscale(50%);
       border-radius: 0 0 10px 10px;
 
+      &:hover {
+         visibility: visible;
+      }
+
       .category {
          width: 100%;
-         padding: 10px;
+         position: relative;
+         padding: 5px;
 
          >p {
             font-size: 1.2rem;
@@ -88,6 +95,7 @@
          }
 
          >div {
+            width: 100%;
 
             .card {
                float: left;
