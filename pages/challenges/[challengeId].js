@@ -49,7 +49,7 @@ function LeaderboardPlayer({ name, icon, tier, server, position, points, vip }) 
       userlink = "/faq#h3";
    }
 
-   return <tr key={name + server + position} className={intToTier(tier)}>
+   return <tr key={name + server + position} className={intToTier(tier - 1)}>
       <td className={css.pos}>{position}.</td>
       <td className={css.name}>
          <Link href={userlink} >
@@ -58,7 +58,7 @@ function LeaderboardPlayer({ name, icon, tier, server, position, points, vip }) 
             <p>{name} <span className={css.region}>#{server}</span></p>
          </Link>
       </td>
-      <td className={css.tier}>{capitalize(strtolower(intToTier(tier)))}</td>
+      <td className={css.tier}>{capitalize(strtolower(intToTier(tier - 1)))}</td>
       <td className={css.pts}>{beautifyNum(points, false)}</td>
    </tr>;
 }
@@ -78,6 +78,7 @@ export default function Challenge({ challenge }) {
 
    const [region, setRegion] = useState(region_);
 
+   console.log(challenge);
 
    if (!challenge) {
       return <p>Error</p>;
@@ -211,15 +212,15 @@ export default function Challenge({ challenge }) {
       for (let i = 1; i < thresholds.length; i++) {
 
          let lineThrough = { textDecoration: "none", fontStyle: "normal", textAlign: "center" };
-         if (thresholds[i] === "-" && percentiles[intToTier(i)] === 0) {
+         if (thresholds[i] === "-" && percentiles[intToTier(i - 1)] === 0) {
             lineThrough.textDecoration = "line-through";
             lineThrough.fontStyle = "italic";
          }
 
          thresholdTable.unshift(<div key={"threshold" + i} className={css.rowParentTableRow}>
-            <p className={intToTier(i)} style={{ color: "var(--type)", textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{strtolower(intToTier(i))}</p>
+            <p className={intToTier(i - 1)} style={{ color: "var(--type)", textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{strtolower(intToTier(i - 1))}</p>
             <p style={lineThrough}>{beautifyNum(thresholds[i])}</p>
-            <p style={lineThrough}>{Math.round(percentiles[intToTier(i)] * 1000) / 10}%</p>
+            <p style={lineThrough}>{Math.round(percentiles[intToTier(i - 1)] * 1000) / 10}%</p>
          </div>);
       }
    }
@@ -307,8 +308,10 @@ export default function Challenge({ challenge }) {
          <title>{challenge.challenge.translation.name} Challenge Overview</title>
       </Head>
 
-      <div className={css.bgImage}>
-         <Image src="https://cdn.darkintaqt.com/lol/static/challenges/_master-full.webp" fill={true} alt="" unoptimized />
+      <div className={css.bgImage} style={{
+         backgroundImage: "url(https://cdn.darkintaqt.com/lol/static/challenges/_master-full.webp)"
+      }}>
+
       </div>
 
       <section className={css.challenge}>
@@ -404,18 +407,17 @@ export default function Challenge({ challenge }) {
 }
 
 
-
-export async function getServerSideProps(ctx) {
+Challenge.getInitialProps = async (ctx) => {
 
    const empty = {
       props: {}
    };
 
-   if (!ctx || !ctx?.params || !ctx.params?.challengeId) {
+   if (!ctx || !ctx?.query || !ctx.query?.challengeId) {
       return empty;
    }
 
-   const challengeId = parseInt(ctx.params.challengeId);
+   const challengeId = parseInt(ctx.query.challengeId);
 
    const challengeService = new ChallengeService();
    const challenge = await challengeService.getById(challengeId);
@@ -424,8 +426,6 @@ export async function getServerSideProps(ctx) {
 
 
    return {
-      props: {
-         challenge
-      }
+      challenge
    };
-}
+};

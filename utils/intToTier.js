@@ -55,23 +55,23 @@ export function intToTier(inttier) {
    switch (inttier) {
       case -1:
          return "UNRANKED";
-      case 1:
+      case 0:
          return "IRON";
-      case 2:
+      case 1:
          return "BRONZE";
-      case 3:
+      case 2:
          return "SILVER";
-      case 4:
+      case 3:
          return "GOLD";
-      case 5:
+      case 4:
          return "PLATINUM";
-      case 6:
+      case 5:
          return "DIAMOND";
-      case 7:
+      case 6:
          return "MASTER";
-      case 8:
+      case 7:
          return "GRANDMASTER";
-      case 9:
+      case 8:
          return "CHALLENGER";
       case 0:
       default:

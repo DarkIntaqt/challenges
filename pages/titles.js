@@ -8,6 +8,7 @@ import css from "styles/titles.module.scss";
 import filterCss from "styles/filter.module.scss";
 import { storageKeys, getStorage, setStorage } from "utils/localStorageFunctions";
 import Link from "next/link";
+import { intToTier } from "challenges/utils/intToTier";
 
 /**
  * @typedef TitlesProps
@@ -75,10 +76,11 @@ function TitleList({ titles }) {
    const contentService = new ContentService();
 
    const challengeTitles = titles.map((title) => {
-      const iconLink = contentService.getChallengeTokenIcon(title.icon, title.type);
+
+      const iconLink = contentService.getChallengeTokenIcon(title.challengeId, intToTier(title.challengeTier));
 
       return <Link
-         key={title.cid}
+         key={title.titleid}
          href={"/challenges/" + title.cid}
          className={`${css.title} ${title.type} clearfix`}
          challengeid={title.cid}>
@@ -87,7 +89,6 @@ function TitleList({ titles }) {
                height={45}
                width={45}
                src={iconLink}
-               placeholdersrc={"https://cdn.darkintaqt.com/lol/static/missing/item.png"}
                alt={`${title.title}'s icon`}
                loading="lazy"
                unoptimized
@@ -116,13 +117,11 @@ function handleChallengeSearch(value, titles, setSearchList) {
    setSearchList([...query]);
 }
 
-export async function getServerSideProps() {
+Titles.getInitialProps = async (ctx) => {
    const challengeService = new ChallengeService();
    const titles = await challengeService.listTitles("na1", "en_US");
 
    return {
-      props: {
-         titles
-      }
+      titles
    };
-}
+};
