@@ -2,6 +2,13 @@ import "typedef";
 import requests from "challenges/utils/requestFunctions";
 
 /**
+ * Error handling if a resources load failed, but the resource was required
+ */
+export function handleResourceError() {
+  throw new Error("Required resource failed to load");
+}
+
+/**
  * Represents a service for providing challenge related data.
  */
 export default class ChallengeService {

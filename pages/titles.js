@@ -85,11 +85,6 @@ function TitleList({ titles, challenges }) {
 
       const challenge = challenges[title.challengeId];
 
-      if (typeof challenge.percentiles[intToTier(title.challengeTier).toUpperCase()] === "undefined") {
-         console.log(title);
-         console.log(challenge);
-      }
-
       const iconLink = contentService.getChallengeTokenIcon(title.challengeId, intToTier(title.challengeTier));
 
       return <Link

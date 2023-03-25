@@ -1,3 +1,5 @@
+import { handleResourceError } from "challenges/services/ChallengeService";
+
 /**
  * Returns curried request functions that uses base url prepended.
  * @param {string} baseUrl 
@@ -14,10 +16,15 @@ export default function requests(baseUrl) {
     const res = await getResponse(url);
 
     let data = undefined;
-    if (res.ok) {
-      data = await res.json();
+    try {
+      if (res.ok) {
+        data = await res.json();
+      }
+    } catch (e) {
+      console.warn(e);
+    } finally {
+      return data;
     }
-    return data;
   };
 
   /**
@@ -26,9 +33,14 @@ export default function requests(baseUrl) {
    * @returns {any}
    */
   const getResponse = async (url) => {
-    const res = await fetch(encodeURI(baseUrl + url));
-    return res;
+    try {
+      const res = await fetch(encodeURI(baseUrl + url));
+      return res;
+    } catch (e) {
+      handleResourceError();
+      return undefined;
+    }
   };
 
-  return { getJson, getResponse };  
+  return { getJson, getResponse };
 }

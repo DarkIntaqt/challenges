@@ -344,7 +344,6 @@ class Searchbar extends Component {
       const challengeService = new ChallengeService();
 
       const all = await challengeService.listAll(getPlatform(this.defaultRegion), "en_US");
-      // TODO: Error Handling is missing here
 
       this.setState({
          challenges: Object.keys(all.challenges).map((k) => all.challenges[k]),

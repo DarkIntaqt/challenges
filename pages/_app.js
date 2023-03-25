@@ -6,6 +6,7 @@ import "challenges/styles/global.css";
 
 import Loader from "challenges/components/Loader";
 import Layout from "challenges/layouts/Layout";
+import ErrorBoundary from "challenges/components/ErrorBoundary";
 
 
 /**
@@ -89,18 +90,22 @@ export default function ChallengeTracker({ Component, pageProps }) {
    * Return the app body in the <Layout/>. 
    * Shows a loader if(loading === true)
    */
-  return <Layout className={`${noto.variable} ${notoJP.variable} ${notoKR.variable} ${source.variable}`}>
+  return <ErrorBoundary>
 
-    {
-      loading
-        ? <Loader style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%,-50%)"
-        }} />
-        : <Component {...pageProps} />
-    }
+    <Layout className={`${noto.variable} ${notoJP.variable} ${notoKR.variable} ${source.variable}`}>
 
-  </Layout>;
+      {
+        loading
+          ? <Loader style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)"
+          }} />
+          : <Component {...pageProps} />
+      }
+
+    </Layout>
+
+  </ErrorBoundary>;
 }

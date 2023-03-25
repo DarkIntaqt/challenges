@@ -78,8 +78,6 @@ export default function Challenge({ challenge }) {
 
    const [region, setRegion] = useState(region_);
 
-   console.log(challenge);
-
    if (!challenge) {
       return <p>Error</p>;
    }
