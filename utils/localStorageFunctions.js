@@ -5,7 +5,6 @@ export const storageKeys = {
    challengeFilters: "challenge-filters",
    challengeDataFilters: "challenge-data-filters",
    challengeSearch: "challenge-search",
-   titleSearch: "title-search",
    headerPosition: "header-position",
    defaultRegion: "default-region",
    recentlySearched: "recently-searched"

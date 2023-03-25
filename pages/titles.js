@@ -1,14 +1,15 @@
 import "typedef";
 import Head from "next/head";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import ChallengeService from "challenges/services/ChallengeService";
 import ContentService from "challenges/services/ContentService";
 import css from "styles/titles.module.scss";
 import filterCss from "styles/filter.module.scss";
-import { storageKeys, getStorage, setStorage } from "utils/localStorageFunctions";
+import { storageKeys, getStorage, setStorage } from "utils/sessionStorageFunctions";
 import Link from "next/link";
 import { intToTier } from "challenges/utils/intToTier";
+import { capitalize } from "challenges/utils/stringManipulation";
 
 /**
  * @typedef TitlesProps
@@ -19,7 +20,7 @@ import { intToTier } from "challenges/utils/intToTier";
 /**
  * @param {TitlesProps} props 
  */
-export default function Titles({ titles }) {
+export default function Titles({ titles, challenges }) {
    const [searchList, setSearchList] = useState(titles);
    const [search, setSearch] = useState("");
 
@@ -54,11 +55,11 @@ export default function Titles({ titles }) {
 
       <datalist id="items">
          {/* Add challenge titles to datalist for native HTML searching options! (*´▽`*)❀ */}
-         {titles.map((title) => <option key={title.cid} value={title.title} />)}
+         {titles.map((title) => <option key={title.titleId} value={title.title} />)}
       </datalist>
 
       <div className={css.titles}>
-         <TitleList titles={searchList} />
+         <TitleList titles={searchList} challenges={challenges} />
       </div>
    </div>;
 }
@@ -72,33 +73,44 @@ export default function Titles({ titles }) {
 /**
  * @param {TitleListProps} props 
  */
-function TitleList({ titles }) {
+function TitleList({ titles, challenges }) {
+
    const contentService = new ContentService();
 
    const challengeTitles = titles.map((title) => {
 
+      if (typeof challenges[title.challengeId] === "undefined" || title.challengeTier === 0) {
+         return <Fragment key={title.titleId} />;
+      }
+
+      const challenge = challenges[title.challengeId];
+
+      if (typeof challenge.percentiles[intToTier(title.challengeTier).toUpperCase()] === "undefined") {
+         console.log(title);
+         console.log(challenge);
+      }
+
       const iconLink = contentService.getChallengeTokenIcon(title.challengeId, intToTier(title.challengeTier));
 
       return <Link
-         key={title.titleid}
-         href={"/challenges/" + title.cid}
+         key={title.titleId}
+         href={"/challenges/" + title.challengeId}
          className={`${css.title} ${title.type} clearfix`}
          challengeid={title.cid}>
-         <span>
-            <Image
-               height={45}
-               width={45}
-               src={iconLink}
-               alt={`${title.title}'s icon`}
-               loading="lazy"
-               unoptimized
-            />
-         </span>
 
-         <h2>{title.title}<br /><span data-nosnippet>{title.percentile}%</span></h2>
-         <p>Reach {title.type} tier in {title.challenge}<br></br>{title.description}<br /><br /><i>Need {title.threshold}</i></p>
+         <Image
+            height={45}
+            width={45}
+            src={iconLink}
+            alt={`${title.title}'s icon`}
+            loading="lazy"
+            unoptimized
+         />
 
-      </Link>;
+         <h2>{title.title}<br /><span data-nosnippet>{Math.round(challenge.percentiles[intToTier(title.challengeTier)] * 1000) / 10}%</span></h2>
+         <p>Reach <span className={intToTier(title.challengeTier)}>{capitalize(intToTier(title.challengeTier))}</span> tier in {challenge.name}. <br />{challenge.descriptionShort}<br /><br /><i>Need {challenge.thresholds[intToTier(title.challengeTier)]} points. </i></p>
+
+      </Link >;
    });
 
    return challengeTitles;
@@ -119,9 +131,13 @@ function handleChallengeSearch(value, titles, setSearchList) {
 
 Titles.getInitialProps = async (ctx) => {
    const challengeService = new ChallengeService();
-   const titles = await challengeService.listTitles("na1", "en_US");
+   const all = await challengeService.listAll("na1", "en_US");
+
+   const titles = all.titles;
+   const challenges = all.challenges;
 
    return {
-      titles
+      titles,
+      challenges
    };
 };
