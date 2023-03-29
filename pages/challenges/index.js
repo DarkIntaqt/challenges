@@ -2,7 +2,7 @@ import css from "challenges/styles/challenges.module.scss";
 import filterCss from "challenges/styles/filter.module.scss";
 import ChallengeService from "challenges/services/ChallengeService";
 import { capitalize } from "challenges/utils/stringManipulation";
-import { storageKeys, getStorage, setStorage } from "challenges/utils/localStorageFunctions";
+import { storageKeys, getStorage, setStorage } from "challenges/utils/sessionStorageFunctions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";

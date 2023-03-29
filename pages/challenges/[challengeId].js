@@ -12,6 +12,10 @@ import { capitalize, strtolower, strtoupper } from "challenges/utils/stringManip
 import getPlatform from "challenges/utils/platform";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbTack } from "@fortawesome/free-solid-svg-icons";
+import { getStorage, storageKeys } from "challenges/utils/localStorageFunctions";
+import { addPinned, checkPinned, removePinned } from "challenges/utils/pinChallenge";
 
 /**
  * Merges non-name users into an parsable user
@@ -77,6 +81,12 @@ export default function Challenge({ challenge }) {
    }
 
    const [region, setRegion] = useState(region_);
+   const [isPinned, setPinned] = useState("notPinned");
+
+   useEffect(() => {
+      setPinned(checkPinned(challenge.challenge.id));
+   }, [challenge]);
+
 
    if (!challenge) {
       return <p>Error</p>;
@@ -200,6 +210,7 @@ export default function Challenge({ challenge }) {
    thresholds = challenge.stats[getPlatform(tempRegion)];
    percentiles = challenge.stats["percentiles-" + getPlatform(tempRegion)];
 
+   let maxtier = 0;
 
    if (checkThresholds(thresholds)) {
       /**
@@ -209,14 +220,24 @@ export default function Challenge({ challenge }) {
 
       for (let i = 1; i < thresholds.length; i++) {
 
-         let lineThrough = { textDecoration: "none", fontStyle: "normal", textAlign: "center" };
+
+         let lineThrough = { color: "#828282", textDecoration: "none", fontStyle: "normal", textAlign: "center" };
          if (thresholds[i] === "-" && percentiles[intToTier(i - 1)] === 0) {
             lineThrough.textDecoration = "line-through";
             lineThrough.fontStyle = "italic";
+         } else {
+
+            lineThrough.color = "var(--type,#fff)";
+
+            if (maxtier < i) {
+
+               maxtier = i;
+
+            }
          }
 
          thresholdTable.unshift(<div key={"threshold" + i} className={css.rowParentTableRow}>
-            <p className={intToTier(i - 1)} style={{ color: "var(--type)", textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{strtolower(intToTier(i - 1))}</p>
+            <p className={intToTier(i - 1)} style={{ color: lineThrough["color"], textAlign: "center", textDecoration: lineThrough["textDecoration"], fontStyle: lineThrough["fontStyle"] }}>{strtolower(intToTier(i - 1))}</p>
             <p style={lineThrough}>{beautifyNum(thresholds[i])}</p>
             <p style={lineThrough}>{Math.round(percentiles[intToTier(i - 1)] * 1000) / 10}%</p>
          </div>);
@@ -300,6 +321,20 @@ export default function Challenge({ challenge }) {
       title = challenge.title[0];
    }
 
+   maxtier = intToTier(maxtier - 1).toLowerCase();
+   function pinChallenge() {
+      if (isPinned === "isPinned") {
+         setPinned("notPinned");
+
+         removePinned(challenge.challenge.id);
+
+      } else {
+         setPinned("isPinned");
+
+         addPinned(challenge.challenge.id);
+      }
+   }
+
 
    return <>
       <Head>
@@ -307,7 +342,7 @@ export default function Challenge({ challenge }) {
       </Head>
 
       <div className={css.bgImage} style={{
-         backgroundImage: "url(https://cdn.darkintaqt.com/lol/static/challenges/_master-full.webp)"
+         backgroundImage: "url(https://cdn.darkintaqt.com/lol/static/challenges/_" + maxtier + "-full.webp)"
       }}>
 
       </div>
@@ -320,7 +355,8 @@ export default function Challenge({ challenge }) {
 
             <div>
 
-               <h1>{challenge.challenge.translation.name}</h1>
+               <h1>{challenge.challenge.translation.name} <div className={`${css.pin} ${css[isPinned]}`} onClick={pinChallenge}><FontAwesomeIcon icon={faThumbTack} /></div></h1>
+
 
                <p className={"SILVER"}>{challenge.challenge.translation.description}</p>
 

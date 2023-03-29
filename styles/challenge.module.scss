@@ -46,11 +46,48 @@
       padding: 20px;
       display: flex;
 
+      &:hover .pin {
+         visibility: visible;
+      }
+
       >div {
          margin-left: 10px;
 
          h1 {
             font-size: 2rem;
+
+
+            .pin {
+               display: inline-block;
+               border-radius: 25%;
+               width: 2rem;
+               height: 2rem;
+               cursor: pointer;
+               visibility: hidden;
+
+               transition: .25s background-color, .25s border-radius, .25s transform;
+
+               &.isPinned {
+                  transform: translateY(-5px) translateX(-10px) rotate(25deg);
+               }
+
+               &:hover {
+
+                  background-color: rgba(20, 20, 30, .5);
+                  border-radius: 50%;
+
+                  &.isPinned svg {
+                     color: red;
+                  }
+
+               }
+
+               svg {
+                  width: 1rem;
+                  height: 1rem;
+                  margin: .5rem;
+               }
+            }
          }
 
          p {

@@ -7,7 +7,8 @@ export const storageKeys = {
    challengeSearch: "challenge-search",
    headerPosition: "header-position",
    defaultRegion: "default-region",
-   recentlySearched: "recently-searched"
+   recentlySearched: "recently-searched",
+   pinnedChallenges: "pinned-challenges"
 };
 
 /**
