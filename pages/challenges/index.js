@@ -329,7 +329,7 @@ async function getProps() {
    const challengeService = new ChallengeService();
    const contentService = new ContentService();
 
-   challengesRaw = await challengeService.list("na1", "en_US");
+   let challengesRaw = await challengeService.list("na1", "en_US");
 
 
    let challenges = Array
