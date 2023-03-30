@@ -13,9 +13,10 @@ import getPlatform from "challenges/utils/platform";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbTack } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faThumbTack } from "@fortawesome/free-solid-svg-icons";
 import { getStorage, storageKeys } from "challenges/utils/localStorageFunctions";
 import { addPinned, checkPinned, removePinned } from "challenges/utils/pinChallenge";
+import CapstoneIcon from "challenges/assets/capstone.svg";
 
 /**
  * Merges non-name users into an parsable user
@@ -224,7 +225,6 @@ export default function Challenge({ challenge }) {
          let lineThrough = { color: "#828282", textDecoration: "none", fontStyle: "normal", textAlign: "center" };
          if (thresholds[i] === "-" && percentiles[intToTier(i - 1)] === 0) {
             lineThrough.textDecoration = "line-through";
-            lineThrough.fontStyle = "italic";
          } else {
 
             lineThrough.color = "var(--type,#fff)";
@@ -335,10 +335,22 @@ export default function Challenge({ challenge }) {
       }
    }
 
+   let capstones = [];
+   for (let i = 0; i < challenge.parents.length; i++) {
+      const parent = challenge.parents[i];
+
+      capstones.push(<span key={parent[0]}>{i > 0 ? <FontAwesomeIcon icon={faChevronRight} style={{ margin: "0 3px", fontSize: ".6rem" }} /> : <></>}<Link href={"/challenges/" + parent[0]}><div className={css.svg}><CapstoneIcon /></div> {parent[1]}</Link></span>);
+
+   }
+
+   if (capstones.length > 0) {
+      capstones = <div className={css.tag}>{capstones}</div>;
+   }
+
 
    return <>
       <Head>
-         <title>{challenge.challenge.translation.name} Challenge Overview</title>
+         <title>{challenge.challenge.name} Challenge Overview</title>
       </Head>
 
       <div className={css.bgImage} style={{
@@ -355,14 +367,16 @@ export default function Challenge({ challenge }) {
 
             <div>
 
-               <h1>{challenge.challenge.translation.name} <div className={`${css.pin} ${css[isPinned]}`} onClick={pinChallenge}><FontAwesomeIcon icon={faThumbTack} /></div></h1>
+               <h1>{challenge.challenge.name} <div className={`${css.pin} ${css[isPinned]}`} onClick={pinChallenge}><FontAwesomeIcon icon={faThumbTack} /></div></h1>
 
 
-               <p className={"SILVER"}>{challenge.challenge.translation.description}</p>
+               <p className={"SILVER"}>{challenge.challenge.description}</p>
 
                <div className={css.tags}>
 
                   <div className={`${css.tag} ${title[0]} ${css.title}`}>{title[1]}</div>
+
+                  {capstones}
 
                </div>
 
@@ -386,12 +400,12 @@ export default function Challenge({ challenge }) {
                   </div>
                </div>
 
-               {challenge.text !== false ?
+               {challenge.info !== false ?
                   <div className={css.info}>
                      <h3>Info <span>All you need to know about this challenge</span></h3>
                      <div className={css.disclaimer}>
 
-                        <p dangerouslySetInnerHTML={{ __html: challenge.text.replace(/\n/g, "<br />") }}></p>
+                        <p dangerouslySetInnerHTML={{ __html: challenge.info.replace(/\n/g, "<br />") }}></p>
                         {challenge.icon === "0" ?
                            <div className={css.bugDisclaimer}>
                               <h4>Known Bugs</h4>

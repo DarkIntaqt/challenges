@@ -64,7 +64,7 @@ export default class ChallengeService {
    * @returns {Promise<GlobalChallengeDto>} Challenge
    */
   async getById(id) {
-    const challenge = await this.getJson(`/v5/c/?id=${id}`);
+    const challenge = await this.getJson(`/v5/showChallenge.php?id=${id}`);
     return challenge;
   }
 }

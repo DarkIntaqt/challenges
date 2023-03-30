@@ -120,6 +120,7 @@
                padding: 5px 10px;
                border-radius: 10px;
                font-size: .8rem;
+               color: $light3;
 
                &.title {
                   color: var(--type);
@@ -131,6 +132,33 @@
 
                &:hover {
                   background-color: rgba(28, 28, 38, .8);
+               }
+
+               a,
+               span,
+               p {
+                  color: $light3;
+               }
+
+               a:hover {
+                  text-decoration: underline;
+                  transition: .25s color;
+                  color: $light1;
+               }
+
+               .svg {
+                  width: .8rem;
+                  height: .8rem;
+                  display: inline-flex;
+                  align-self: center;
+
+                  svg {
+                     fill: $light3;
+                     width: .8rem;
+                     height: .8rem;
+                     position: relative;
+                     top: .125rem;
+                  }
                }
             }
          }

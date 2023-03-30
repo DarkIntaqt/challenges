@@ -14,6 +14,7 @@ import { intToTier, tierToInt } from "challenges/utils/intToTier";
 import ChallengeObject from "challenges/components/ChallengeObject";
 import { toArray } from "challenges/utils/toArray";
 import ContentService from "challenges/services/ContentService";
+import getParent from "challenges/utils/getParentChallenge";
 
 /**
  * @typedef ChallengesProps
@@ -21,39 +22,6 @@ import ContentService from "challenges/services/ContentService";
  * @property {Array.<ChallengeDto>} challenges
  * @property {Object} filters
  */
-
-
-
-function getParent(parentId, challenges) {
-
-   try {
-      let parent = challenges[parentId];
-      if (parent.parent !== parent.id && parent.id > 10) {
-         let result = getParent(parent.parent, challenges);
-         if (result.id === 0) {
-            return {
-               name: "LEGACY"
-            };
-         }
-         return {
-            name: result.name
-         };
-      }
-      if (parent.id === 0) {
-         return {
-            name: "LEGACY"
-         };
-      }
-      return {
-         name: parent.name
-      };
-   } catch (e) {
-      return {
-         name: challenges[parentId]
-      };
-   }
-
-}
 
 
 /**
