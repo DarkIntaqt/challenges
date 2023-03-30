@@ -13,7 +13,7 @@ import getPlatform from "challenges/utils/platform";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faThumbTack } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faCircleQuestion, faQuestion, faThumbTack } from "@fortawesome/free-solid-svg-icons";
 import { getStorage, storageKeys } from "challenges/utils/localStorageFunctions";
 import { addPinned, checkPinned, removePinned } from "challenges/utils/pinChallenge";
 import CapstoneIcon from "challenges/assets/capstone.svg";
@@ -339,7 +339,7 @@ export default function Challenge({ challenge }) {
    for (let i = 0; i < challenge.parents.length; i++) {
       const parent = challenge.parents[i];
 
-      capstones.push(<span key={parent[0]}>{i > 0 ? <FontAwesomeIcon icon={faChevronRight} style={{ margin: "0 3px", fontSize: ".6rem" }} /> : <></>}<Link href={"/challenges/" + parent[0]}><div className={css.svg}><CapstoneIcon /></div> {parent[1]}</Link></span>);
+      capstones.push(<span key={parent[0]}>{i > 0 ? " > " : <></>}<Link href={"/challenges/" + parent[0]}><div className={css.svg}><CapstoneIcon /></div> {parent[1]}</Link></span>);
 
    }
 
@@ -362,6 +362,8 @@ export default function Challenge({ challenge }) {
       <section className={css.challenge}>
 
          <div className={css.head}>
+
+            <Link className={css.getHelp} href="/social/faq/#ChallengePage" prefetch={false} target="_blank" rel="nofollow"> <FontAwesomeIcon icon={faCircleQuestion} /> </Link>
 
             <Image src={iconLink} height={100} width={100} alt="" unoptimized />
 

@@ -29,6 +29,10 @@
       font-size: 4rem;
       color: $light0;
       margin: 450px auto 20px;
+
+      &.notFixed {
+         margin: 30px auto;
+      }
    }
 
    h2 {
@@ -185,6 +189,47 @@
       &:hover {
          transform: scale(1.05);
          border-color: $selected;
+      }
+   }
+}
+
+.accordion {
+   width: 100%;
+
+   .teaser {
+      background-color: $dark3transparent;
+      border-radius: 10px;
+      color: $light2;
+      cursor: pointer;
+
+      h2 {
+         font-size: 1rem;
+         margin: 0;
+         padding: 10px;
+      }
+   }
+
+   &.active {
+      .teaser {
+         border-radius: 10px 10px 0 0;
+      }
+
+      .body {
+         display: block;
+      }
+   }
+
+   .body {
+      background-color: $dark3;
+      border-radius: 0 0 10px 10px;
+      padding: 10px;
+      display: none;
+      overflow: hidden;
+
+      p {
+         color: $light2;
+         font-size: 1rem;
+         line-height: 1.2rem;
       }
    }
 }

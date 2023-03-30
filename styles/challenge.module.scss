@@ -50,6 +50,18 @@
          visibility: visible;
       }
 
+      a.getHelp {
+         position: absolute;
+         right: 10px;
+         top: 10px;
+         color: $light3;
+         font-size: 1rem;
+
+         &:hover {
+            color: $light1;
+         }
+      }
+
       >div {
          margin-left: 10px;
 
@@ -144,6 +156,11 @@
                   text-decoration: underline;
                   transition: .25s color;
                   color: $light1;
+               }
+
+               >span>svg {
+                  font-size: .6rem;
+                  margin: 0 3px;
                }
 
                .svg {

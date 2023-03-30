@@ -8,7 +8,7 @@ export default function ErrorPage({ err }) {
          <title>An error occurred</title>
       </Head>
       <section className={css.wrapper}>
-         <h2>An error occurred</h2>
+         <h1 className={css.notFixed}>An error occurred</h1>
       </section>
    </>;
 
