@@ -51,7 +51,7 @@ export default function Footer() {
 
             <Link href="/social/contact" prefetch={false}>Contact</Link>
             <Link href="https://twitter.com/darkintaqt" target="_blank">Twitter</Link>
-            <Link href="/community" prefetch={false}>Community</Link>
+            <Link href="/communities" prefetch={false}>Community</Link>
             <Link href="https://github.com/DarkIntaqt/challenges" target="_blank">Contribute on GitHub</Link>
          </div>
 
