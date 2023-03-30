@@ -9,6 +9,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { faAnglesUp, faBoxOpen, faList, faPlay, faRankingStar, faTableCells, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
+import { intToTier, tierToInt } from "challenges/utils/intToTier";
 
 import ChallengeObject from "challenges/components/ChallengeObject";
 import { toArray } from "challenges/utils/toArray";
@@ -21,13 +22,55 @@ import ContentService from "challenges/services/ContentService";
  * @property {Object} filters
  */
 
+
+
+function getParent(parentId, challenges) {
+
+   try {
+      let parent = challenges[parentId];
+      if (parent.parent !== parent.id && parent.id > 10) {
+         let result = getParent(parent.parent, challenges);
+         if (result.id === 0) {
+            return {
+               name: "LEGACY"
+            };
+         }
+         return {
+            name: result.name
+         };
+      }
+      if (parent.id === 0) {
+         return {
+            name: "LEGACY"
+         };
+      }
+      return {
+         name: parent.name
+      };
+   } catch (e) {
+      return {
+         name: challenges[parentId]
+      };
+   }
+
+}
+
+
 /**
  * @param {ChallengesProps} props
  */
-export default function Challenges({ challenges = {}, filters = {} }) {
+export default function Challenges({ challengesRaw = {}, filters = {} }) {
+
+   const challenges = Array
+      .from(toArray(challengesRaw))
+      .sort((a, b) => a.name < b.name
+         ? -1 : +(a.name > b.name));
+
+
    /**
     * Category enum types.
     */
+
    const category = {
       category: "category",
       type: "type",
@@ -77,10 +120,29 @@ export default function Challenges({ challenges = {}, filters = {} }) {
    /**
     * Passes all the available data in a ChallengeObject
     */
+   const contentService = new ContentService();
    const challengeCards = [];
    for (const challenge of challenges) {
-      const card = <ChallengeObject key={challenge.id}
-         challenge={challenge}
+      let parent = getParent(challenge.parent, challengesRaw);
+
+      let maxTier = 0;
+      Object.keys(challenge.thresholds).forEach((key) => {
+         const tier = tierToInt(key);
+         if (tier > maxTier) {
+            maxTier = tier;
+         }
+      });
+
+      const type = intToTier(maxTier - 1);
+
+      const card = <ChallengeObject
+         key={challenge.id}
+         id={challenge.id}
+         image={contentService.getChallengeTokenIcon(challenge.id, type)}
+         title={challenge.name}
+         subtitle={parent.name}
+         description={challenge.description}
+         type={type}
       />;
       challengeCards.push(card);
    }
@@ -331,12 +393,6 @@ async function getProps() {
 
    let challengesRaw = await challengeService.list("na1", "en_US");
 
-
-   let challenges = Array
-      .from(toArray(challengesRaw))
-      .sort((a, b) => a.name < b.name
-         ? -1 : +(a.name > b.name));
-
    const filters = {
       imagination: {
          src: contentService.getChallengeTokenIcon(1),
@@ -385,7 +441,7 @@ async function getProps() {
    };
 
    return {
-      challenges,
+      challengesRaw,
       filters
    };
 }

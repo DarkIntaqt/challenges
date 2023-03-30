@@ -5,22 +5,31 @@ import Link from "next/link";
 /**
  * @typedef ChallengeProps
  * @type {Object}
- * @property {ChallengeDto} challenge
+ *
+ * @property {Number} id
+ * @property {String} image
+ * @property {String} title
+ * @property {String} subtitle
+ * @property {String} type
+ * @property {String} description
+ * @property {Boolean} showType - default: false
+ * 
  */
 
 
 /**
  * @param {ChallengeProps} props
  */
-export default function ChallengeObject({ challenge }) {
+export default function ChallengeObject({ id, image, title = "", subtitle = "", type = "", description = "", showType = false }) {
 
    return <Link
-      href={`/challenges/${challenge.id}`}
-      className={css.challenge}>
+      key={id}
+      href={`/challenges/${id}`}
+      className={`${css.challenge} ${type}`}>
 
       <Image
-         src={`https://lolcdn.darkintaqt.com/cdn/np-token/${challenge.id}`}
-         alt={challenge.name}
+         src={image}
+         alt={title}
          height={40}
          width={40}
          loading="lazy"
@@ -28,9 +37,18 @@ export default function ChallengeObject({ challenge }) {
       />
 
       <div className={css.title}>
-         <p>{challenge.name}</p>
+         <p>{title}</p>
+         <span>{subtitle}</span>
       </div>
 
+      <div className={css.description}>
+         <p>{description}</p>
+      </div>
+
+
+      {showType === true ? <div className={css.type}>
+         <p>{type}</p>
+      </div> : <></>}
    </Link>;
 
 }
