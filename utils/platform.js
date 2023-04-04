@@ -57,4 +57,45 @@ function getPlatform(server) {
 }
 
 
+const serversBeautified = [
+   "br",
+   "euw",
+   "eune",
+   "jp",
+   "kr",
+   "lan",
+   "las",
+   "na",
+   "oc",
+   "ph",
+   "ru",
+   "sg",
+   "th",
+   "tr",
+   "tw",
+   "vn"
+];
+
+
+const serversRaw = [
+   "br1",
+   "euw1",
+   "eun1",
+   "jp1",
+   "kr",
+   "la1",
+   "la2",
+   "na1",
+   "oc1",
+   "ph2",
+   "ru",
+   "sg2",
+   "th2",
+   "tr1",
+   "tw2",
+   "vn2"
+];
+
+
 export default getPlatform;
+export { serversBeautified, serversRaw };
