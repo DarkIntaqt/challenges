@@ -105,7 +105,8 @@
                width: fit-content;
                position: relative;
 
-               &:hover {
+               &:hover,
+               &:focus {
                   .inner {
                      outline: 2px solid $light3;
                   }
@@ -209,7 +210,8 @@
       }
    }
 
-   &.active {
+   &.active,
+   &:hover {
 
       .results {
          visibility: visible;
@@ -234,6 +236,15 @@
       }
    }
 
+   &.active {
+
+      .searchbar {
+         border: 2px solid $selected;
+         box-shadow: 0 0 5px $selected;
+      }
+
+   }
+
    .searchbar {
       position: relative;
       z-index: 10;
@@ -243,6 +254,9 @@
       box-shadow: 0 0 5px #000;
       background-color: $dark2;
       border-radius: 10px;
+      border: 2px solid transparent;
+
+      transition: .25s box-shadow, .25s border, .25s color, .25s background-color;
 
       overflow: hidden;
 
@@ -250,8 +264,6 @@
       flex-wrap: nowrap;
       align-items: center;
       justify-content: center;
-
-      transition: .25s color, .25s background-color;
 
       input {
          flex: 1;
@@ -264,8 +276,6 @@
 
          color: $light3;
          transition: .25s color, .25s background-color;
-
-
       }
 
       select {
