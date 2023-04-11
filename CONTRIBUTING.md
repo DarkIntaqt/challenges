@@ -8,7 +8,9 @@ If you encounter a bug or have a feature request, please create an issue in the 
 
 ## Making Changes
 
-If you want to fix an issue or add a new feature, we encourage you to create a pull request (PR). Here are the steps to follow:
+If you want to fix an issue or add a new feature, we encourage you to create a pull request (PR).
+<br>
+However, if you're not sure whether your feature is desired or would like some feedback before starting work, feel free to ask in an issue first. Here are the steps to follow:
 
 1. Fork the repository and clone it to your local machine.
 2. Create a new branch for your changes.
