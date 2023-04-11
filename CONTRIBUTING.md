@@ -4,9 +4,15 @@ To contribute,
 - Create an issue with a bug description or feature request
 - OR fix the issue / add a feature yourself by creating a pull request
 
-# How to run?
+# Getting started?
 Download/clone the repo and run 
+```shell
+cd ./challenges
+npm install
 ```
-cd frontend && npm i && npm start
+to set up the project.
+
+to start the project, run
+```shell
+npm start
 ```
-to set up the project. 
