@@ -22,6 +22,8 @@ We will review your PR and provide feedback as needed.
 
 ## Getting Started
 
+**This version of the frontend shouldn't be edited anymore, as it should be replaced by nextJS (see section below).**
+
 To set up the project on your local machine, follow these steps:
 
 1. Clone the repository to your local machine: 
@@ -39,4 +41,30 @@ npm install
 4. Start the project:
 ```shell
 npm start
+```
+
+## NextJs Migration
+
+Currently, the frontend is rewritten in nextJs [#136](https://github.com/DarkIntaqt/challenges/issues/136). 
+To set up the nextJS branch on your local machine, follow these steps. 
+
+1. Clone the repository to your local machine: 
+```bash
+git clone https://github.com/DarkIntaqt/challenges.git
+```
+2. Navigate to the challenges directory:
+```bash
+cd ./challenges
+```
+3. Change to the nextJS feature branch:
+```shell
+git checkout next
+```
+4. Install the required dependencies:
+```shell
+npm install
+```
+5. Start the project:
+```shell
+npm run dev
 ```
