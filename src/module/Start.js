@@ -24,7 +24,7 @@ class Start extends Component {
 
 
     // Color the selected region
-    let elements = document.querySelectorAll("." + StyleSheet.region);
+    let elements = document.querySelectorAll("." + CSS.escape(StyleSheet.region));
     for (let i = 0; i < elements.length; i++) {
 
       if (elements[i].innerText === window.region) {
@@ -121,11 +121,11 @@ class Start extends Component {
 
       document.cookie = "_Cregion=" + window.region + ";expires=" + expires + ";path=/;Secure"
 
-      let selected = document.querySelectorAll("." + StyleSheet.region + "." + StyleSheet.selected);
+      let selected = document.querySelectorAll("." + CSS.escape(StyleSheet.region) + "." + CSS.escape(StyleSheet.selected));
       for (let i = 0; i < selected.length; i++) {
         selected[i].classList.remove(StyleSheet.selected)
       }
-      let elements = document.querySelectorAll("." + StyleSheet.region);
+      let elements = document.querySelectorAll("." + CSS.escape(StyleSheet.region));
       for (let i = 0; i < elements.length; i++) {
         if (elements[i].innerText === window.region) {
           elements[i].classList.add(StyleSheet.selected)
