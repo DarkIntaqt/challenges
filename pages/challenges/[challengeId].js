@@ -13,7 +13,7 @@ import getPlatform from "challenges/utils/platform";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faCircleQuestion, faQuestion, faThumbTack } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faCircleQuestion, faExclamationTriangle, faQuestion, faThumbTack } from "@fortawesome/free-solid-svg-icons";
 import { getStorage, storageKeys } from "challenges/utils/localStorageFunctions";
 import { addPinned, checkPinned, removePinned } from "challenges/utils/pinChallenge";
 import CapstoneIcon from "challenges/assets/capstone.svg";
@@ -69,8 +69,6 @@ function LeaderboardPlayer({ name, icon, tier, server, position, points, vip }) 
       <td className={css.pts}>{beautifyNum(points, false)}</td>
    </tr>;
 }
-
-
 
 export default function Challenge({ challenge }) {
 
@@ -349,7 +347,6 @@ export default function Challenge({ challenge }) {
       capstones = <div className={css.tag}>{capstones}</div>;
    }
 
-
    return <>
       <Head>
          <title>{challenge.challenge.name} Challenge Overview</title>
@@ -422,33 +419,38 @@ export default function Challenge({ challenge }) {
                   : <></>}
             </section>
 
-            <div className={css.leaderboard}>
-               <h3>Leaderboard <span>{
-                  typeof region === "object" ?
-                     <>Regional ranking</> :
-                     <>Global ranking</>}</span></h3>
+            { challenge.challenge.state === "DISABLED" ? 
+               <div className={css.disabled}>
+                  <span><FontAwesomeIcon icon={faExclamationTriangle}/> Leaderboards are disabled for this challenge.</span>
+               </div> : 
+               <div className={css.leaderboard}>
+                  <h3>Leaderboard <span>{
+                     typeof region === "object" ?
+                        <>Regional ranking</> :
+                        <>Global ranking</>}</span></h3>
 
-               <div className={css.regionSelector}>
+                  <div className={css.regionSelector}>
 
-                  {selectors}
+                     {selectors}
 
-               </div>
+                  </div>
 
-               <table className={css.table}>
-                  <thead>
-                     <tr className={css.heading}>
-                        <th className={css.pos}>Position</th>
-                        <th className={css.name}>Summoner</th>
-                        <th className={css.tier}>Tier</th>
-                        <th className={css.pts}>Points</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     {players}
-                  </tbody>
-               </table>
+                  <table className={css.table}>
+                     <thead>
+                        <tr className={css.heading}>
+                           <th className={css.pos}>Position</th>
+                           <th className={css.name}>Summoner</th>
+                           <th className={css.tier}>Tier</th>
+                           <th className={css.pts}>Points</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {players}
+                     </tbody>
+                  </table>
 
-            </div>
+               </div> 
+            }
 
          </div>
 
@@ -457,7 +459,6 @@ export default function Challenge({ challenge }) {
    </>;
 
 }
-
 
 Challenge.getInitialProps = async (ctx) => {
 
