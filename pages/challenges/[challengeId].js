@@ -13,7 +13,7 @@ import getPlatform from "challenges/utils/platform";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faCircleQuestion, faExclamationTriangle, faQuestion, faThumbTack } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight, faCircleQuestion, faExclamationTriangle, faQuestion, faThumbTack, faRankingStar } from "@fortawesome/free-solid-svg-icons";
 import { getStorage, storageKeys } from "challenges/utils/localStorageFunctions";
 import { addPinned, checkPinned, removePinned } from "challenges/utils/pinChallenge";
 import CapstoneIcon from "challenges/assets/capstone.svg";
@@ -379,6 +379,9 @@ export default function Challenge({ challenge }) {
 
                   {capstones}
 
+                  { challenge.challenge.state === "RETIRED" ? 
+                  <div className={`${css.tag}`} title="This challenge has been retired. Leaderboard progression has been locked!"><FontAwesomeIcon width={16} height={16} icon={faRankingStar} /> Retired</div> : <></> }
+
                </div>
 
             </div>
@@ -421,7 +424,7 @@ export default function Challenge({ challenge }) {
 
             { challenge.challenge.state === "DISABLED" ? 
                <div className={css.disabled}>
-                  <span><FontAwesomeIcon icon={faExclamationTriangle}/> Leaderboards are disabled for this challenge.</span>
+                  <span><FontAwesomeIcon width={16} height={16} icon={faExclamationTriangle}/> Leaderboards are disabled for this challenge.</span>
                </div> : 
                <div className={css.leaderboard}>
                   <h3>Leaderboard <span>{
