@@ -380,7 +380,7 @@ export default function Challenge({ challenge }) {
                   {capstones}
 
                   { challenge.challenge.state === "RETIRED" ? 
-                  <div className={`${css.tag}`} title="This challenge has been retired. Leaderboard progression has been locked!"><FontAwesomeIcon width={16} height={16} icon={faRankingStar} /> Retired</div> : <></> }
+                  <div className={`${css.tag}`} title="This challenge has been retired. Leaderboard progression is locked!"><FontAwesomeIcon width={16} height={16} icon={faRankingStar} /> Retired</div> : <></> }
 
                </div>
 
