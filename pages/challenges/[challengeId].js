@@ -32,6 +32,8 @@ function nameToURL(name) {
 
 
 function checkThresholds(thresholds) {
+   // Guard clause for undefined thresholds
+   if (thresholds === undefined) return true;
    let noThresholds = true;
    for (let index = 0; index < thresholds.length; index++) {
       if (thresholds[index] !== "-") {
