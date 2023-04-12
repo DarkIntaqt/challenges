@@ -11,7 +11,7 @@ import { faMagnifyingGlass, faClockRotateLeft } from "@fortawesome/free-solid-sv
 import { getStorage, setStorage, storageKeys } from "challenges/utils/localStorageFunctions";
 
 import { withRouter } from "next/router";
-import getPlatform from "challenges/utils/platform";
+import getPlatform, { serversBeautified } from "challenges/utils/platform";
 
 import Card from "./SearchBarCard";
 
@@ -359,6 +359,9 @@ class Searchbar extends Component {
 
    render() {
 
+      const servers = serversBeautified.map((server) => {
+         return <option value={server} key={server}>{server.toUpperCase()}</option>;
+      });
 
       return <div ref={this.searchbarArea} className={css.searchbarWrapper}>
 
@@ -367,22 +370,7 @@ class Searchbar extends Component {
             <input ref={this.searchbarInput} placeholder="Search for a summoner, challenge, title"></input>
 
             <select ref={this.select} id={css.select}>
-               <option value="br">BR</option>
-               <option value="euw">EUW</option>
-               <option value="eune">EUNE</option>
-               <option value="jp">JP</option>
-               <option value="kr">KR</option>
-               <option value="lan">LAN</option>
-               <option value="las">LAS</option>
-               <option value="na">NA</option>
-               <option value="oc">OC</option>
-               <option value="ph">PH</option>
-               <option value="ru">RU</option>
-               <option value="sg">SG</option>
-               <option value="th">TH</option>
-               <option value="tr">TR</option>
-               <option value="tw">TW</option>
-               <option value="vn">VN</option>
+               {servers}
             </select>
 
             <FontAwesomeIcon

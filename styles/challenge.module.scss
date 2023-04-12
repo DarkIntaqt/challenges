@@ -134,13 +134,12 @@
                font-size: .8rem;
                color: $light3;
 
+               cursor: pointer;
+               background-color: rgba(20, 20, 30, .5);
+
                &.title {
                   color: var(--type);
                }
-
-               cursor: pointer;
-               color: $light3;
-               background-color: rgba(20, 20, 30, .5);
 
                &:hover {
                   background-color: rgba(28, 28, 38, .8);
