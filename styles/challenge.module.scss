@@ -447,5 +447,25 @@
             }
          }
       }
+
+      .disabled {
+         width: 600px;
+         padding: 20px;
+         position: relative;
+
+         background-color: rgba($loss, 0.175);
+         backdrop-filter: blur(10px);
+         border-radius: 10px;
+         margin: 10px 0;
+         text-align: center;
+
+         span {
+            color: $light2;
+         }
+
+         svg {
+            margin-right: 10px;
+         }
+      }
    }
 }
