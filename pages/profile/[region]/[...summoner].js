@@ -1,3 +1,4 @@
+import Challenges from "challenges/components/Challenges";
 import ErrorPage from "challenges/components/ErrorPage";
 import ChallengeService from "challenges/services/ChallengeService";
 import ContentService from "challenges/services/ContentService";
@@ -11,7 +12,15 @@ export default function Profile({ user = {}, challengesRaw = {}, filters = {}, e
       return <ErrorPage></ErrorPage>;
    }
 
-   return <span>Profile</span>;
+   return <>
+
+      <div className={"object1000"}>
+
+         <Challenges challengesRaw={challengesRaw} filters={filters} apply={user.challenges}></Challenges>
+
+      </div>
+
+   </>;
 }
 
 
@@ -29,11 +38,21 @@ Profile.getInitialProps = async (ctx) => {
       };
    }
 
+   if (ctx.query.summoner.length > 2) {
+      ctx.res.statusCode = 404;
+      return {
+         err: {
+            statusCode: 404,
+            message: "Invalid path"
+         }
+      };
+   }
+
    try {
 
       const userService = new UserService();
 
-      const user = await userService.getUser(ctx.query.summoner, getPlatform(ctx.query.region));
+      const user = await userService.getUser(ctx.query.summoner[0], getPlatform(ctx.query.region));
       const challengeService = new ChallengeService();
       const contentService = new ContentService();
 
@@ -94,6 +113,7 @@ Profile.getInitialProps = async (ctx) => {
 
    } catch (e) {
 
+      ctx.res.statusCode = 404;
       return {
          err: {
             statusCode: 404,

@@ -20,13 +20,22 @@ import getParent from "challenges/utils/getParentChallenge";
  * @type {Object}
  * @property {Array.<ChallengeDto>} challengesRaw
  * @property {Object} filters
+ * @property {Array} apply
  */
 
 
 /**
  * @param {ChallengesProps} props
  */
-export default function Challenges({ challengesRaw, filters }) {
+export default function Challenges({ challengesRaw, filters, apply = [] }) {
+
+   let applyChallenges = {};
+   let isApplying = (apply.length > 0);
+   for (let i = 0; i < apply.length; i++) {
+      const challenge = apply[i];
+
+      applyChallenges[challenge[0]] = challenge;
+   }
 
    const challenges = Array
       .from(toArray(challengesRaw))
@@ -90,6 +99,9 @@ export default function Challenges({ challengesRaw, filters }) {
    const contentService = new ContentService();
    const challengeCards = [];
    for (const challenge of challenges) {
+
+      if (challenge.state === "DISABLED") { continue; }
+
       let parent = getParent(challenge.parent, challengesRaw);
 
       let maxTier = 0;
@@ -100,16 +112,20 @@ export default function Challenges({ challengesRaw, filters }) {
          }
       });
 
-      const type = intToTier(maxTier - 1);
+      let type = maxTier;
+      const apply = applyChallenges[challenge.id] || (!isApplying ? [challenge.id, maxTier] : [challenge.id, 1]);
+
+      const tier = intToTier(apply[1] - 1);
 
       const card = <ChallengeObject
          key={challenge.id}
          id={challenge.id}
-         image={contentService.getChallengeTokenIcon(challenge.id, type)}
+         image={contentService.getChallengeTokenIcon(challenge.id, (tier === "UNRANKED" ? "IRON" : tier))}
          title={challenge.name}
          subtitle={parent.name}
          description={challenge.description}
          type={type}
+         apply={apply}
       />;
       challengeCards.push(card);
    }

@@ -13,6 +13,7 @@ import Link from "next/link";
  * @property {String} type
  * @property {String} description
  * @property {Boolean} showType - default: false
+ * @property {Array} apply
  * 
  */
 
@@ -20,7 +21,7 @@ import Link from "next/link";
 /**
  * @param {ChallengeProps} props
  */
-export default function ChallengeObject({ id, image, title = "", subtitle = "", type = "", description = "", showType = false }) {
+export default function ChallengeObject({ id, image, title = "", subtitle = "", type = "", description = "", showType = false, apply = [0] }) {
 
    return <Link
       key={id}
