@@ -1,6 +1,6 @@
 import ErrorPage from "challenges/components/ErrorPage";
 import UserService from "challenges/services/UserService";
-import { serversRaw } from "challenges/utils/platform";
+import getPlatform, { serversBeautified } from "challenges/utils/platform";
 
 export default function Profile({ user = {}, err }) {
 
@@ -16,7 +16,7 @@ Profile.getInitialProps = async (ctx) => {
 
    const region = ctx.query.region;
 
-   if (!serversRaw.includes(region)) {
+   if (!serversBeautified.includes(region)) {
       ctx.res.statusCode = 404;
       return {
          err: {
@@ -30,7 +30,7 @@ Profile.getInitialProps = async (ctx) => {
 
       const userService = new UserService();
 
-      const user = await userService.getUser(ctx.query.summoner, ctx.query.region);
+      const user = await userService.getUser(ctx.query.summoner, getPlatform(ctx.query.region));
 
       return {
          user

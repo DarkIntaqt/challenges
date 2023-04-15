@@ -88,7 +88,7 @@ class Searchbar extends Component {
 
       const value = e.target.value.toLowerCase();
       if (e.key === "Enter") {
-         this.router.push(`/profile/${getPlatform(this.defaultRegion)}/${value}`);
+         this.router.push(`/profile/${this.defaultRegion}/${value}`);
          return;
       }
 
@@ -133,7 +133,7 @@ class Searchbar extends Component {
             <div>
                <Card
                   title={value}
-                  url={`/profile/${getPlatform(this.defaultRegion)}/${value}`}
+                  url={`/profile/${this.defaultRegion}/${value}`}
                   round
                   loader
                   imageAsBackground
@@ -154,7 +154,7 @@ class Searchbar extends Component {
                <div>
                   <Card
                      title={value}
-                     url={`/profile/${getPlatform(this.defaultRegion)}/${value}`}
+                     url={`/profile/${this.defaultRegion}/${value}`}
                      round
                      loader
                      imageAsBackground
@@ -183,7 +183,7 @@ class Searchbar extends Component {
                   <div>
                      <Card
                         title={value}
-                        url={`/profile/${getPlatform(this.defaultRegion)}/${value}`}
+                        url={`/profile/${this.defaultRegion}/${value}`}
                         round
                         imageAsBackground
                         tag={`${this.defaultRegion}`}
@@ -229,7 +229,7 @@ class Searchbar extends Component {
                               <div>
                                  <Card
                                     title={user.name}
-                                    url={`/profile/${getPlatform(this.defaultRegion)}/${value}`}
+                                    url={`/profile/${this.defaultRegion}/${value}`}
                                     round
                                     imageAsBackground
                                     tag={this.defaultRegion}
@@ -321,7 +321,7 @@ class Searchbar extends Component {
             const user = recentlySearched[i];
             recentCards.push(<Card key={i}
                title={user[1]}
-               url={`/profile/${getPlatform(user[0])}/${user[1]}`}
+               url={`/profile/${user[0]}/${user[1]}`}
                round
                imageAsBackground
                icon={faClockRotateLeft}
