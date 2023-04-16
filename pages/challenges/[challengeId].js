@@ -86,7 +86,19 @@ export default function Challenge({ challenge }) {
 
    useEffect(() => {
       setPinned(checkPinned(challenge.challenge.id));
-   }, [challenge]);
+
+      const buttons = document.querySelectorAll("button." + CSS.escape(css.region));
+
+      for (let i = 0; i < buttons.length; i++) {
+         if (region.includes(buttons[i].innerText)) {
+
+            buttons[i].classList.add(css.active);
+
+         }
+
+      }
+
+   }, [challenge, region]);
 
 
    if (!challenge) {
@@ -379,8 +391,8 @@ export default function Challenge({ challenge }) {
 
                   {capstones}
 
-                  { challenge.challenge.state === "RETIRED" ? 
-                  <div className={`${css.tag}`} title="This challenge has been retired. Leaderboard progression is locked!"><FontAwesomeIcon width={16} height={16} icon={faRankingStar} /> Retired</div> : <></> }
+                  {challenge.challenge.state === "RETIRED" ?
+                     <div className={`${css.tag}`} title="This challenge has been retired. Leaderboard progression is locked!"><FontAwesomeIcon width={16} height={16} icon={faRankingStar} /> Retired</div> : <></>}
 
                </div>
 
@@ -422,10 +434,10 @@ export default function Challenge({ challenge }) {
                   : <></>}
             </section>
 
-            { challenge.challenge.state === "DISABLED" ? 
+            {challenge.challenge.state === "DISABLED" ?
                <div className={css.disabled}>
-                  <span><FontAwesomeIcon width={16} height={16} icon={faExclamationTriangle}/> Leaderboards are disabled for this challenge.</span>
-               </div> : 
+                  <span><FontAwesomeIcon width={16} height={16} icon={faExclamationTriangle} /> Leaderboards are disabled for this challenge.</span>
+               </div> :
                <div className={css.leaderboard}>
                   <h3>Leaderboard <span>{
                      typeof region === "object" ?
@@ -452,7 +464,7 @@ export default function Challenge({ challenge }) {
                      </tbody>
                   </table>
 
-               </div> 
+               </div>
             }
 
          </div>
