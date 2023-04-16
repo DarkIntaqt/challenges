@@ -21,13 +21,14 @@ import getParent from "challenges/utils/getParentChallenge";
  * @property {Array.<ChallengeDto>} challengesRaw
  * @property {Object} filters
  * @property {Array} apply
+ * @property {String} region
  */
 
 
 /**
  * @param {ChallengesProps} props
  */
-export default function Challenges({ challengesRaw, filters, apply = [] }) {
+export default function Challenges({ challengesRaw, filters, apply = [], region = "" }) {
 
    let applyChallenges = {};
    let isApplying = (apply.length > 0);
@@ -120,6 +121,7 @@ export default function Challenges({ challengesRaw, filters, apply = [] }) {
       const card = <ChallengeObject
          key={challenge.id}
          id={challenge.id}
+         region={region}
          image={contentService.getChallengeTokenIcon(challenge.id, (tier === "UNRANKED" ? "IRON" : tier))}
          title={challenge.name}
          subtitle={parent.name}
@@ -253,36 +255,38 @@ export default function Challenges({ challengesRaw, filters, apply = [] }) {
                </button>
             </FilterButtonList>
 
-            <FilterButtonList categoryType={category.type}>
-               <button onClick={() => handleChangeFilter(dataFilters.progress.key)} className={dataFilters.progress.css}>
-                  <FontAwesomeIcon icon={faAnglesUp} />
-                  Progress
-               </button>
-               <button onClick={() => handleChangeFilter(dataFilters.ingame.key)} className={dataFilters.ingame.css}>
-                  <FontAwesomeIcon icon={faPlay} />
-                  Ingame
-               </button>
-               <button onClick={() => handleChangeFilter(dataFilters.eternals.key)} className={dataFilters.eternals.css}>
-                  <Image width={16} height={16} src={filters.eternals.src} alt="eternals" unoptimized />
-                  Eternals
-               </button>
-               <button onClick={() => handleChangeFilter(dataFilters.clash.key)} className={dataFilters.clash.css}>
-                  <Image width={16} height={16} src={filters.clash.src} alt="clash" unoptimized />
-                  Clash
-               </button>
-               <button onClick={() => handleChangeFilter(dataFilters.inventory.key)} className={dataFilters.inventory.css}>
-                  <FontAwesomeIcon icon={faBoxOpen} />
-                  Inventory
-               </button>
-               <button onClick={() => handleChangeFilter(dataFilters.ranked.key)} className={dataFilters.ranked.css}>
-                  <FontAwesomeIcon icon={faRankingStar} />
-                  Ranked
-               </button>
-               <button onClick={() => handleChangeFilter(dataFilters.profile.key)} className={dataFilters.profile.css}>
-                  <FontAwesomeIcon icon={faUser} />
-                  Profile
-               </button>
-            </FilterButtonList>
+            {!isApplying ?
+               <FilterButtonList categoryType={category.type}>
+                  <button onClick={() => handleChangeFilter(dataFilters.progress.key)} className={dataFilters.progress.css}>
+                     <FontAwesomeIcon icon={faAnglesUp} />
+                     Progress
+                  </button>
+                  <button onClick={() => handleChangeFilter(dataFilters.ingame.key)} className={dataFilters.ingame.css}>
+                     <FontAwesomeIcon icon={faPlay} />
+                     Ingame
+                  </button>
+                  <button onClick={() => handleChangeFilter(dataFilters.eternals.key)} className={dataFilters.eternals.css}>
+                     <Image width={16} height={16} src={filters.eternals.src} alt="eternals" unoptimized />
+                     Eternals
+                  </button>
+                  <button onClick={() => handleChangeFilter(dataFilters.clash.key)} className={dataFilters.clash.css}>
+                     <Image width={16} height={16} src={filters.clash.src} alt="clash" unoptimized />
+                     Clash
+                  </button>
+                  <button onClick={() => handleChangeFilter(dataFilters.inventory.key)} className={dataFilters.inventory.css}>
+                     <FontAwesomeIcon icon={faBoxOpen} />
+                     Inventory
+                  </button>
+                  <button onClick={() => handleChangeFilter(dataFilters.ranked.key)} className={dataFilters.ranked.css}>
+                     <FontAwesomeIcon icon={faRankingStar} />
+                     Ranked
+                  </button>
+                  <button onClick={() => handleChangeFilter(dataFilters.profile.key)} className={dataFilters.profile.css}>
+                     <FontAwesomeIcon icon={faUser} />
+                     Profile
+                  </button>
+               </FilterButtonList>
+               : null}
 
             <FilterButtonList categoryType={category.gamemode}>
                <button onClick={() => handleChangeFilter(dataFilters.summonersrift.key)} className={dataFilters.summonersrift.css}>

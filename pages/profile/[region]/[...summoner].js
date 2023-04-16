@@ -5,7 +5,7 @@ import ContentService from "challenges/services/ContentService";
 import UserService from "challenges/services/UserService";
 import getPlatform, { serversBeautified } from "challenges/utils/platform";
 
-export default function Profile({ user = {}, challengesRaw = {}, filters = {}, err }) {
+export default function Profile({ user = {}, challengesRaw = {}, filters = {}, err, region }) {
 
    if (err) {
       console.log(err);
@@ -16,7 +16,7 @@ export default function Profile({ user = {}, challengesRaw = {}, filters = {}, e
 
       <div className={"object1000"}>
 
-         <Challenges challengesRaw={challengesRaw} filters={filters} apply={user.challenges}></Challenges>
+         <Challenges challengesRaw={challengesRaw} filters={filters} apply={user.challenges} region={region}></Challenges>
 
       </div>
 
@@ -108,7 +108,8 @@ Profile.getInitialProps = async (ctx) => {
       return {
          user,
          challengesRaw,
-         filters
+         filters,
+         region: region.toString()
       };
 
    } catch (e) {

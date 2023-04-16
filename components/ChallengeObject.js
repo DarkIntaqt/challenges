@@ -14,6 +14,7 @@ import Link from "next/link";
  * @property {String} description
  * @property {Boolean} showType - default: false
  * @property {Array} apply
+ * @property {String} region
  * 
  */
 
@@ -21,11 +22,13 @@ import Link from "next/link";
 /**
  * @param {ChallengeProps} props
  */
-export default function ChallengeObject({ id, image, title = "", subtitle = "", type = "", description = "", showType = false, apply = [0] }) {
+export default function ChallengeObject({ id, image, title = "", subtitle = "", type = "", description = "", showType = false, apply = [0], region = "" }) {
+
+   const appendRegion = (region.length > 0) ? "?region=" + region : "";
 
    return <Link
       key={id}
-      href={`/challenges/${id}`}
+      href={`/challenges/${id}${appendRegion}`}
       className={`${css.challenge} ${type}`}>
 
       <Image
