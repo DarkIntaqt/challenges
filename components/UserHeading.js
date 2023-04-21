@@ -19,9 +19,11 @@ export default function UserHeading({ user, tier, title = false, selections = {}
 
       <Image src={imageSrc} height={100} width={100} alt="" unoptimized className={tier} />
 
+      <Image src={"https://cdn.darkintaqt.com/lol/static/challenges/card-" + tier + ".webp"} height={140} width={140} unoptimized className={css.edge} alt="" />
+
       <div>
 
-         <h1>{user.name} <Link href={(verified === false) ? "/verify" : "/social/faq"} prefetch={false}><VipBadge size={"2rem"} filter={filter} /></Link></h1>
+         <h1>{user.name} <Link href={(verified === false) ? "/verify" : "/social/faq"} prefetch={false}><VipBadge size={"2rem"} filter={filter} margin="0" /></Link></h1>
 
          <div className={css.tags}>
 

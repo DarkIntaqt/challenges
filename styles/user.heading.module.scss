@@ -12,9 +12,18 @@
    padding: 20px;
    display: flex;
 
-   >img {
+   >img:not(.edge) {
       border: 3px solid var(--type);
       border-radius: 10px;
+      z-index: 5;
+   }
+
+   img.edge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      border-radius: 10px 0 0 10px;
    }
 
    &:hover .pin {
@@ -34,6 +43,7 @@
    }
 
    >div {
+      z-index: 5;
       margin-left: 10px;
       display: flex;
       flex-direction: column;

@@ -54,7 +54,7 @@ export default function Profile({ user = {}, challengesRaw = {}, filters = {}, e
          <p>{challenge.name}</p>
          <span>{capitalize(intToTier(selection[1] - 1))} rank token. <br /><br />{challenge.description}</span>
       </div>}>
-         <Image src={contentService.getChallengeTokenIcon(challenge.id, intToTier(selection[1] - 1))} unoptimized height={30} width={30} alt={challenge.name} />
+         <Image src={contentService.getChallengeTokenIcon(challenge.id, intToTier(selection[1] - 1))} unoptimized height={35} width={35} alt={challenge.name} />
       </HoverObject>;
 
    });
