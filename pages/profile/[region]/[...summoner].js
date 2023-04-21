@@ -16,13 +16,17 @@ import Image from "next/image";
 import HoverObject from "challenges/components/HoverObject";
 import { capitalize } from "challenges/utils/stringManipulation";
 
-export default function Profile({ user = {}, challengesRaw = {}, filters = {}, err, region, titles = {} }) {
+export default function Profile({ user = {}, challengesRaw = {}, filters = {}, err, region, titles = {}, current = "overview" }) {
 
 
    // checks if the user is verified
    const [verified, setVerified] = useState(false);
    const [checkedVerified, setCheckedVerified] = useState(false);
+   const [currentSite, setCurrent] = useState(current);
    useEffect(() => {
+
+      document.getElementById(currentSite).classList.add(css.active);
+
       if (checkedVerified === false) {
          const userService = new UserService();
          async function checkVerification() {
@@ -34,11 +38,20 @@ export default function Profile({ user = {}, challengesRaw = {}, filters = {}, e
          checkVerification();
          setCheckedVerified(true);
       }
-   }, [setCheckedVerified, setVerified, checkedVerified, user, verified]);
+   }, [setCheckedVerified, setVerified, checkedVerified, user, verified, currentSite]);
 
 
    if (err) {
       return <ErrorPage></ErrorPage>;
+   }
+
+   function navigate(e) {
+
+      document.getElementById(currentSite).classList.remove(css.active);
+      setCurrent(e.currentTarget.id);
+
+      history.pushState(null, "", "/profile/" + region + "/" + user.name + ((e.currentTarget.id === "overview") ? "" : ("/" + e.currentTarget.id)));
+
    }
 
 
@@ -69,6 +82,19 @@ export default function Profile({ user = {}, challengesRaw = {}, filters = {}, e
       <div className={css.user}>
 
          <UserHeading user={user} tier={tier} title={title} verified={verified} selections={showCaseChallenges} />
+
+         <div className={css.navigation}>
+
+            <div id="overview" onClick={navigate}>Overview</div>
+
+            <div id="titles" onClick={navigate}>Titles</div>
+
+            <div id="statistics" onClick={navigate}>Statistics</div>
+
+            <div id="history" onClick={navigate}>History</div>
+
+
+         </div>
 
          <Challenges challengesRaw={challengesRaw} filters={filters} apply={user.challenges} region={region}></Challenges>
 
@@ -121,6 +147,8 @@ Profile.getInitialProps = async (ctx) => {
       }
       const challengeService = new ChallengeService();
       const contentService = new ContentService();
+
+      const current = ctx.query.summoner[1] || "overview";
 
       let all = await challengeService.listAll(getPlatform(ctx.query.region), "en_US");
 
@@ -179,7 +207,8 @@ Profile.getInitialProps = async (ctx) => {
          challengesRaw,
          filters,
          region: region.toString(),
-         titles
+         titles,
+         current
       };
 
    } catch (e) {

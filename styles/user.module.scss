@@ -25,6 +25,29 @@
 
    display: flex;
    flex-direction: column;
+
+
+   .navigation {
+
+      display: flex;
+      width: 100%;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background-color: $dark3transparent;
+
+      >div {
+         font-size: 1rem;
+         color: white;
+         margin-right: 20px;
+         cursor: pointer;
+
+         &.active {
+            color: $selected;
+            border-bottom: 2px solid $selected;
+         }
+      }
+
+   }
 }
 
 .hover {
