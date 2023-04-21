@@ -3,7 +3,6 @@
 .head {
    width: 100%;
    position: relative;
-   overflow: hidden;
 
    margin: 50px 0 10px;
    background-color: $dark3transparent;
@@ -36,6 +35,9 @@
 
    >div {
       margin-left: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
       h1 {
          font-size: 2rem;
@@ -74,7 +76,7 @@
          }
       }
 
-      p {
+      >p {
          margin: 5px 0;
          width: fit-content;
          max-width: 850px;
@@ -104,13 +106,14 @@
             padding: 5px 10px;
             border-radius: 10px;
             font-size: .8rem;
+            line-height: .8rem;
             color: $light3;
 
             cursor: pointer;
             background-color: rgba(20, 20, 30, .5);
 
             &.title span a,
-            &.tier {
+            &.tier span a {
                color: var(--type);
             }
 
@@ -136,17 +139,25 @@
                margin-right: .2rem;
                display: inline-flex;
                align-self: center;
+               float: left;
 
                svg {
                   fill: $light3;
                   width: .8rem;
                   height: .8rem;
                   position: relative;
-                  top: .125rem;
                }
             }
          }
       }
+   }
+
+   div.selections {
+
+      >div {
+         margin-right: 10px;
+      }
+
    }
 
 }

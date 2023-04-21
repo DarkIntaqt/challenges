@@ -22,4 +22,16 @@ export default class UserService {
       const user = await this.getJSON(`/edge/user/${region}/${name}`);
       return user;
    }
+
+
+   /**
+    * returns true or false if a user (puuid) is verified
+    * @param {string} puuid puuid of the player
+    * @returns {boolean}
+    */
+   async getVerificationState(puuid) {
+      const verified = await this.getJSON("/v1/c-vip/?id=" + puuid);
+
+      return verified[0];
+   }
 }

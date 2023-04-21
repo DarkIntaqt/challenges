@@ -7,17 +7,57 @@ import UserService from "challenges/services/UserService";
 import getTitle from "challenges/utils/getTitle";
 import { intToTier } from "challenges/utils/intToTier";
 import getPlatform, { serversBeautified } from "challenges/utils/platform";
+import { toArray } from "challenges/utils/toArray";
 
 import css from "challenges/styles/user.module.scss";
+import { useEffect, useState } from "react";
+import getChallenge from "challenges/utils/getChallenge";
+import Image from "next/image";
+import HoverObject from "challenges/components/HoverObject";
+import { capitalize } from "challenges/utils/stringManipulation";
 
 export default function Profile({ user = {}, challengesRaw = {}, filters = {}, err, region, titles = {} }) {
+
+
+   // checks if the user is verified
+   const [verified, setVerified] = useState(false);
+   const [checkedVerified, setCheckedVerified] = useState(false);
+   useEffect(() => {
+      if (checkedVerified === false) {
+         const userService = new UserService();
+         async function checkVerification() {
+            const verification = await userService.getVerificationState(user.id);
+            if (verification !== verified) {
+               setVerified(verification);
+            }
+         };
+         checkVerification();
+         setCheckedVerified(true);
+      }
+   }, [setCheckedVerified, setVerified, checkedVerified, user, verified]);
+
 
    if (err) {
       return <ErrorPage></ErrorPage>;
    }
 
+
    const tier = intToTier(user.challenges[0][1] - 1);
    const title = getTitle(user.title[0], titles);
+   const contentService = new ContentService();
+
+   const showCaseChallenges = user.selections.map((selection) => {
+
+      const challenge = getChallenge(selection[0], challengesRaw);
+
+      return <HoverObject key={challenge.id} hover={<div className={`${css.hover} ${intToTier(selection[1] - 1)}`}>
+         <p>{challenge.name}</p>
+         <span>{capitalize(intToTier(selection[1] - 1))} rank token. <br /><br />{challenge.description}</span>
+      </div>}>
+         <Image src={contentService.getChallengeTokenIcon(challenge.id, intToTier(selection[1] - 1))} unoptimized height={30} width={30} alt={challenge.name} />
+      </HoverObject>;
+
+   });
 
    return <>
 
@@ -28,7 +68,7 @@ export default function Profile({ user = {}, challengesRaw = {}, filters = {}, e
 
       <div className={css.user}>
 
-         <UserHeading user={user} tier={tier} title={title} />
+         <UserHeading user={user} tier={tier} title={title} verified={verified} selections={showCaseChallenges} />
 
          <Challenges challengesRaw={challengesRaw} filters={filters} apply={user.challenges} region={region}></Challenges>
 

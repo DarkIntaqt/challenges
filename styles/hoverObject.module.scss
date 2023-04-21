@@ -1,0 +1,18 @@
+.hoverObject {
+   position: relative;
+   display: inline-block;
+
+   .onHover {
+      position: absolute;
+      top: 100%;
+      visibility: hidden;
+   }
+
+   &:hover {
+
+      .onHover {
+         visibility: visible;
+      }
+   }
+
+}

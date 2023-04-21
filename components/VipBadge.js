@@ -9,6 +9,7 @@ export default function VipBadge(params) {
    const size = params.size ?? defaultSize;
    const position = params.position ?? defaultPosition;
    const margin = params.margin ?? defaultMargin;
+   const filter = params.filter ?? "";
 
    return <Image src="https://cdn.darkintaqt.com/lol/static/challenges/verified.png" height={32} width={32} style={{
       height: `calc(0.7 * ${size})`,
@@ -17,6 +18,7 @@ export default function VipBadge(params) {
       margin: margin,
       top: "0",
       left: "0",
+      filter: filter,
       position: position,
    }} alt="" unoptimized />;
 }

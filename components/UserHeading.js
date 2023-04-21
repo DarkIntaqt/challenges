@@ -4,12 +4,16 @@ import { intToTier } from "challenges/utils/intToTier";
 import { capitalize } from "challenges/utils/stringManipulation";
 import Image from "next/image";
 import Link from "next/link";
+import VipBadge from "./VipBadge";
 
-export default function UserHeading({ user, tier, title = false }) {
+export default function UserHeading({ user, tier, title = false, selections = {}, verified = false }) {
 
    const contentService = new ContentService();
 
    const imageSrc = contentService.getProfileIcon(user.icon);
+
+
+   const filter = (verified === false) ? "grayscale(100%)" : "";
 
    return <div className={css.head}>
 
@@ -17,13 +21,17 @@ export default function UserHeading({ user, tier, title = false }) {
 
       <div>
 
-         <h1>{user.name}</h1>
-
-         <p data-nosnippet></p>
+         <h1>{user.name} <Link href={(verified === false) ? "/verify" : "/social/faq"} prefetch={false}><VipBadge size={"2rem"} filter={filter} /></Link></h1>
 
          <div className={css.tags}>
 
-            <div className={`${css.tag} ${css.tier} ${tier}`}>{capitalize(tier)}</div>
+            <div className={`${css.tag} ${css.tier} ${tier}`}>
+               <span>
+                  <Link href="/challenges/0">
+                     {capitalize(tier)}
+                  </Link>
+               </span>
+            </div>
 
             {title !== false ? <div className={`${css.tag} ${css.title} ${intToTier(title.challengeTier)}`}>
                <div className={css.svg}>
@@ -43,6 +51,10 @@ export default function UserHeading({ user, tier, title = false }) {
                </span>
             </div> : <></>}
 
+         </div>
+
+         <div className={css.selections}>
+            {selections}
          </div>
 
       </div>
