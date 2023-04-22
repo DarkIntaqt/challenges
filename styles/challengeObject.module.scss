@@ -13,7 +13,7 @@ a.challenge {
    margin: 5px 0;
 
    &:hover {
-      background-color: $dark3;
+      background-color: $dark1;
    }
 
    img {
@@ -59,7 +59,7 @@ a.challenge {
       p {
          -webkit-line-clamp: 3;
          -webkit-box-orient: vertical;
-         color: var(--light3);
+         color: $light3;
          display: -webkit-box;
          font-size: 12px;
          margin: auto;

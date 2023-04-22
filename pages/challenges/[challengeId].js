@@ -361,7 +361,7 @@ export default function Challenge({ challenge }) {
 
    return <>
       <Head>
-         <title>{challenge.challenge.name} Challenge Overview</title>
+         <title>{challenge.challenge.name + " Challenge Overview"}</title>
       </Head>
 
       <div className={css.bgImage} style={{

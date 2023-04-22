@@ -199,8 +199,7 @@ export default function Challenges({ challengesRaw, filters, apply = [], region 
 
    }, [dataFilters, isInitialized, search, searchFilters]);
 
-
-   return <><input
+   return <section><input
       className={filterCss.input}
       type="search"
       placeholder="Search for a challenge"
@@ -308,7 +307,7 @@ export default function Challenges({ challengesRaw, filters, apply = [], region 
       <div className={css.parent + " " + css.flexWidth}>
          {challengeCards.length > 0 ? challengeCards : <NoChallengesFound />}
       </div>
-   </>;
+   </section>;
 }
 
 

@@ -1,24 +1,39 @@
 import Challenges from "challenges/components/Challenges";
 import ErrorPage from "challenges/components/ErrorPage";
+import UserHeading from "challenges/components/UserHeading";
 import ChallengeService from "challenges/services/ChallengeService";
 import ContentService from "challenges/services/ContentService";
 import UserService from "challenges/services/UserService";
+import getTitle from "challenges/utils/getTitle";
+import { intToTier } from "challenges/utils/intToTier";
 import getPlatform, { serversBeautified } from "challenges/utils/platform";
 
-export default function Profile({ user = {}, challengesRaw = {}, filters = {}, err, region }) {
+import css from "challenges/styles/user.module.scss";
+
+export default function Profile({ user = {}, challengesRaw = {}, filters = {}, err, region, titles = {} }) {
 
    if (err) {
-      console.log(err);
       return <ErrorPage></ErrorPage>;
    }
 
+   const tier = intToTier(user.challenges[0][1] - 1);
+   const title = getTitle(user.title[0], titles);
+
    return <>
 
-      <div className={"object1000"}>
+
+      <div className={css.bgImage} style={{
+         backgroundImage: "url(https://cdn.darkintaqt.com/lol/static/challenges/_" + tier.toLowerCase() + "-full.webp)"
+      }}></div>
+
+      <div className={css.user}>
+
+         <UserHeading user={user} tier={tier} title={title} />
 
          <Challenges challengesRaw={challengesRaw} filters={filters} apply={user.challenges} region={region}></Challenges>
 
       </div>
+
 
    </>;
 }
@@ -29,7 +44,11 @@ Profile.getInitialProps = async (ctx) => {
    const region = ctx.query.region;
 
    if (!serversBeautified.includes(region)) {
-      ctx.res.statusCode = 404;
+
+      if (ctx.res) {
+         ctx.res.statusCode = 404;
+      }
+
       return {
          err: {
             statusCode: 404,
@@ -39,7 +58,11 @@ Profile.getInitialProps = async (ctx) => {
    }
 
    if (ctx.query.summoner.length > 2) {
-      ctx.res.statusCode = 404;
+
+      if (ctx.res) {
+         ctx.res.statusCode = 404;
+      }
+
       return {
          err: {
             statusCode: 404,
@@ -53,10 +76,16 @@ Profile.getInitialProps = async (ctx) => {
       const userService = new UserService();
 
       const user = await userService.getUser(ctx.query.summoner[0], getPlatform(ctx.query.region));
+      if (typeof user === "undefined" || user === null) {
+         throw new Error("Invalid content");
+      }
       const challengeService = new ChallengeService();
       const contentService = new ContentService();
 
-      let challengesRaw = await challengeService.list(getPlatform(ctx.query.region), "en_US");
+      let all = await challengeService.listAll(getPlatform(ctx.query.region), "en_US");
+
+      let challengesRaw = all.challenges;
+      let titles = all.titles;
 
       const filters = {
          imagination: {
@@ -109,12 +138,16 @@ Profile.getInitialProps = async (ctx) => {
          user,
          challengesRaw,
          filters,
-         region: region.toString()
+         region: region.toString(),
+         titles
       };
 
    } catch (e) {
 
-      ctx.res.statusCode = 404;
+      if (ctx.res) {
+         ctx.res.statusCode = 404;
+      }
+
       return {
          err: {
             statusCode: 404,

@@ -3,6 +3,13 @@
  */
 export const storageKeys = {
    titleSearch: "title-search",
+   challengeFilters: "challenge-filters",
+   challengeDataFilters: "challenge-data-filters",
+   challengeSearch: "challenge-search",
+   headerPosition: "header-position",
+   defaultRegion: "default-region",
+   recentlySearched: "recently-searched",
+   pinnedChallenges: "pinned-challenges"
 };
 
 /**
