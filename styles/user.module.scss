@@ -33,16 +33,20 @@
       width: 100%;
       padding: 10px 20px;
       border-radius: 10px;
-      background-color: $dark3transparent;
 
       >div {
          font-size: 1rem;
+         padding-bottom: 2px;
          color: white;
          margin-right: 20px;
          cursor: pointer;
 
          &.active {
             color: $selected;
+            border-bottom: 2px solid $selected;
+         }
+
+         &:hover {
             border-bottom: 2px solid $selected;
          }
       }
