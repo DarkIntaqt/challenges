@@ -68,7 +68,7 @@ export default function HeaderNFooter() {
 
                 </div>
                 <div className={StyleSheet.rightFooter}>
-                    <a href="https://darkintaqt.com/assets/impressum/" rel="noreferrer" target="_blank">Imprint</a>
+                    <a href="https://darkintaqt.com/imprint" rel="noreferrer" target="_blank">Imprint</a>
                     <a href="/privacy" rel="noreferrer" target="_blank">Privacy Policy</a>
                     <a href="/tos" rel="noreferrer" target="_blank">Terms of Service</a>
                     <Link to={"/faq"}>{t("FAQ")}</Link>
