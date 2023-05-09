@@ -308,17 +308,17 @@ class Challenges extends Component {
     }
 
     applyFilterStyles() {
-      const buttons = document.querySelectorAll('button[data-id]');
-      const filters = this.filter;
-      if (filters == null) return;
+        const buttons = document.querySelectorAll('button[data-id]');
+        const filters = this.filter;
+        if (filters == null) return;
 
-      const dataFilters = [...filters.category, ...filters.type, ...filters.gamemode ];
+        const dataFilters = [...filters.category, ...filters.type, ...filters.gamemode];
 
-      for (const button of buttons) {
-        const dataId = button.getAttribute("data-id");
-        // Apply selected CSS if data id is found in saved filters.
-        if (dataFilters.includes(dataId)) button.classList.add(filterCSS["selected"]);
-      }
+        for (const button of buttons) {
+            const dataId = button.getAttribute("data-id");
+            // Apply selected CSS if data id is found in saved filters.
+            if (dataFilters.includes(dataId)) button.classList.add(filterCSS["selected"]);
+        }
     }
 
     changeFilter(e) {
