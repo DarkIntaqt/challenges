@@ -1,7 +1,11 @@
 import "./globals.scss";
 import { ReactNode } from "react";
 import { Noto_Sans, Noto_Sans_JP, Noto_Sans_KR, Source_Sans_Pro } from "next/font/google";
+
+import css from "challenges/styles/ParentLayout.module.scss";
+
 import Sidebar from "challenges/ui/Sidebar";
+import Footer from "challenges/ui/Footer";
 
 const Noto = Noto_Sans({
   weight: ["300", "400", "700"],
@@ -45,17 +49,19 @@ export default function RootLayout({ children, }: { children: ReactNode }) {
 
       <body className={[Noto.variable, NotoJP.variable, NotoKR.variable, Source.variable].join(" ")}>
 
-        <section style={{
-          width: "100vw",
-          minHeight: "100vh",
-          position: "relative",
-          display: "flex",
-          alignItems: "stretch"
-        }}>
+        <section className={css.section}>
 
-          <Sidebar></Sidebar>
+          <Sidebar />
 
-          {children}
+          <section className={css.contentWrapper}>
+
+            <section>
+              {children}
+            </section>
+
+            <Footer />
+
+          </section>
 
         </section>
 
