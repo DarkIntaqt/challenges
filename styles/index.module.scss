@@ -1,0 +1,317 @@
+@import '/app/variables';
+
+.start {
+   height: 100%;
+   width: 100%;
+   position: relative;
+
+
+   .bgwrapper {
+      height: 100%;
+      width: 100%;
+
+      position: absolute;
+      z-index: 5;
+
+      filter: brightness(0.8);
+      background-position: center;
+      background-size: cover;
+
+   }
+
+   .wrapper {
+
+      height: 100%;
+      z-index: 10;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+
+      .heading {
+
+         text-align: center;
+         text-shadow: 0 0 5px #000;
+
+
+         span {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+         }
+
+         h1 {
+            color: white;
+            font-size: 4rem;
+            margin: 0;
+            padding: 0;
+         }
+
+      }
+
+   }
+
+}
+
+
+.searchbarWrapper {
+   margin-top: 20px;
+   position: relative;
+
+
+   .results {
+      visibility: hidden;
+      position: absolute;
+      width: 550px;
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      margin: 0 25px;
+      backdrop-filter: blur(5px) brightness(0.5) grayscale(50%);
+      border-radius: 0 0 10px 10px;
+
+      &:hover {
+         visibility: visible;
+      }
+
+      .category {
+         width: 100%;
+         position: relative;
+         padding: 5px;
+
+         >p {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: $light1;
+            width: fit-content;
+
+            text-align: center;
+            padding: 0 10px;
+            margin: 2px 0 6px;
+            border-radius: 10px;
+         }
+
+         >div {
+            width: 100%;
+
+            .card {
+               float: left;
+               margin: 5px 6px;
+               padding: 2px;
+               display: block;
+               width: fit-content;
+               position: relative;
+
+               &:hover,
+               &:focus {
+                  .inner {
+                     outline: 2px solid $light3;
+                  }
+               }
+
+               >p {
+                  width: 160px;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  font-size: .8rem;
+                  font-weight: 400;
+                  padding: 5px;
+                  color: $light1;
+
+                  span {
+                     font-size: .6rem;
+                     line-height: .6rem;
+                     color: $light1;
+                     width: fit-content;
+
+                     text-align: center;
+                     padding: 3px 6px;
+                     margin-left: 5px;
+                     border-radius: 5px;
+                     background-color: $dark3;
+                  }
+               }
+
+               .inner {
+                  width: 160px;
+                  position: relative;
+                  height: 80px;
+                  background-color: $dark2;
+                  display: flex;
+                  outline: 2px solid transparent;
+                  border-radius: 10px;
+                  align-items: center;
+                  justify-content: center;
+                  transition: .2s transform;
+                  overflow: hidden;
+
+                  &:hover {
+                     transform: scale(1.03);
+
+                     .bg {
+                        filter: brightness(.2) blur(0px);
+                        background-size: 100%;
+                     }
+                  }
+
+                  .bg {
+                     filter: blur(2px) brightness(0.2);
+                     position: absolute;
+                     z-index: 1;
+
+                     width: 100%;
+                     transition: .2s background-size, .2s filter;
+                     height: 100%;
+                     background-position: center;
+                     background-size: 120%;
+                     background-repeat: no-repeat;
+                  }
+
+                  .content {
+                     position: relative;
+                     z-index: 5;
+
+                     .loader {
+                        position: absolute;
+                        width: 70px;
+                        height: 70px;
+                        margin: -5px 0 0 -5px;
+
+                        border-radius: 50%;
+                        border: 2px solid $dark3;
+                        border-left-color: transparent;
+                        border-right-color: transparent;
+                        z-index: 8;
+
+                        animation-name: spin;
+                        animation-duration: 5s;
+                        animation-timing-function: linear;
+                        animation-iteration-count: infinite;
+
+
+                        @keyframes spin {
+                           100% {
+                              transform: rotate(180deg);
+                           }
+                        }
+                     }
+
+                     img.round {
+                        border-radius: 50%;
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+
+   &.active,
+   &:hover {
+
+      .results {
+         visibility: visible;
+      }
+
+      .searchbar {
+         background-color: $light0;
+
+         input {
+            color: #000;
+            background-color: $light0;
+         }
+
+         svg,
+         select {
+            color: #000;
+
+            &:hover {
+               color: $dark3;
+            }
+         }
+      }
+   }
+
+   &.active {
+
+      .searchbar {
+         border: 2px solid $selected;
+         box-shadow: 0 0 5px $selected;
+      }
+
+   }
+
+   .searchbar {
+      position: relative;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 600px;
+      box-shadow: 0 0 5px #000;
+      background-color: $dark2;
+      border-radius: 10px;
+      border: 2px solid transparent;
+
+      transition: .25s box-shadow, .25s border, .25s color, .25s background-color;
+
+      overflow: hidden;
+
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+
+      input {
+         flex: 1;
+         background-color: $dark2;
+         outline: none;
+         border: none;
+         font-size: 1rem;
+         font-weight: 300;
+         padding: 15px 20px;
+
+         color: $light3;
+         transition: .25s color, .25s background-color;
+      }
+
+      select {
+         appearance: none;
+         background: transparent;
+         border: none;
+         border-radius: 0;
+         color: $light3;
+         cursor: pointer;
+         float: left;
+         font-size: 1rem;
+         outline: 0;
+         width: 40px;
+
+         option {
+            background-color: $dark3;
+         }
+
+         &:hover {
+            color: $light0;
+         }
+
+      }
+
+      svg {
+         cursor: pointer;
+         height: 1rem;
+         width: 1rem;
+         padding: 15px 20px;
+         color: $light3;
+
+         &:hover {
+            color: $light0;
+         }
+
+      }
+
+   }
+}

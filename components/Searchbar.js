@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { getStorage, setStorage, storageKeys } from "challenges/utils/localStorageFunctions";
 
-import { withRouter } from "next/router";
 import getPlatform, { serversBeautified } from "challenges/utils/platform";
 
 import Card from "./SearchBarCard";
@@ -27,7 +26,7 @@ class Searchbar extends Component {
    constructor(props) {
       super(props);
 
-      this.router = props.router;
+      //this.router = props.router;
       this.defaultRegion = "na"; // change within componentDidMount to localstorage.default
 
 
@@ -88,7 +87,7 @@ class Searchbar extends Component {
 
       const value = e.target.value.toLowerCase();
       if (e.key === "Enter") {
-         this.router.push(`/profile/${this.defaultRegion}/${value}`);
+         ///this.router.push(`/profile/${this.defaultRegion}/${value}`);
          return;
       }
 
@@ -392,4 +391,4 @@ class Searchbar extends Component {
    }
 }
 
-export default withRouter(Searchbar);
+export default Searchbar;

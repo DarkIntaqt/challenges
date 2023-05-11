@@ -49,7 +49,7 @@ export default function RootLayout({ children, }: { children: ReactNode }) {
 
       <body className={[Noto.variable, NotoJP.variable, NotoKR.variable, Source.variable].join(" ")}>
 
-        <section className={css.section}>
+        <section className={css.wrapper}>
 
           <Sidebar />
 
