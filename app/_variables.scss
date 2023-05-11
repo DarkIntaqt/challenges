@@ -1,10 +1,10 @@
 $dark0: rgb(20, 20, 30) !default;
-$dark1: rgb(28, 28, 38) !default;
-$dark2: rgb(34, 34, 44) !default;
+$dark1: rgb(30, 30, 40) !default;
+$dark2: rgb(40, 40, 50) !default;
 $dark3: rgb(50, 50, 60) !default;
-$selected: rgb(13, 189, 255) !default;
+$selected: #0dbdff !default;
 $light0: #fff !default;
-$light1: #fff !default;
+$light1: rgb(220, 220, 224) !default;
 $light2: rgb(206, 206, 210) !default;
 $light3: rgb(180, 180, 184) !default;
 
@@ -15,3 +15,8 @@ $good: #2abf52 !default;
 $perfect: #fcba03 !default;
 
 $dark3transparent: rgb(50, 50, 60, 0.4) !default;
+
+$headingSize: 2.5rem;
+$titleSize: 1.5rem;
+$textSize: 1rem;
+$infoSize: .8rem;

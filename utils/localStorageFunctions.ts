@@ -18,9 +18,11 @@ export const storageKeys = {
  * @param {any} defaultValue default value to return if no value was found
  * @returns {any}
  */
-export function getStorage(key, defaultValue) {
-   let value = JSON.parse(localStorage.getItem(key));
-   if (value == null) value = defaultValue ?? undefined;
+export function getStorage(key: string, defaultValue: any) {
+   const item = localStorage.getItem(key);
+   // set the item to the defaultValue (or undefined), if it does not exist
+   let value = item ? JSON.parse(item) : (defaultValue ?? undefined);
+
    return value;
 }
 
@@ -29,7 +31,7 @@ export function getStorage(key, defaultValue) {
  * @param {string} key
  * @param {any} value
  */
-export function setStorage(key, value) {
+export function setStorage(key: string, value: any) {
    localStorage.setItem(key, JSON.stringify(value));
 }
 
@@ -37,7 +39,7 @@ export function setStorage(key, value) {
  * Removes the JSON value associated with key from localStorage.
  * @param {string} key
  */
-export function removeStorage(key) {
+export function removeStorage(key: string) {
    localStorage.removeItem(key);
 }
 
