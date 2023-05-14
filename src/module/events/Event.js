@@ -21,7 +21,7 @@ export default class generateChallengePointElement extends Component {
 
     componentDidMount() {
 
-        get("https://challenges.darkintaqt.com/api/v5/c/?id=2022000", this.updateCompontent)
+        get("https://challenges.darkintaqt.com/api/v5/c/?id=2023000", this.updateCompontent)
 
     }
 
@@ -72,12 +72,12 @@ export default class generateChallengePointElement extends Component {
         }
 
         this.setState({
-            content: <a href="/challenge/2022000" className={css.crystal + " GRANDMASTER " + cCss.crystal} onClick={goTo} key="banner">
+            content: <a href="/challenge/2023000" className={css.crystal + " CHALLENGER " + cCss.crystal} onClick={goTo} key="banner">
                 <div className={css.group}>
-                    <p className={css.crystalHead}>2022 Seasonal Challenges are retired</p>
+                    <p className={css.crystalHead}>Check out the 2023 Seasonal Leaderboard</p>
 
                     <div className={css.text}>
-                        Check the final Leaderboards and or check on your profile page how you performed. <br /><br />Just click <b>here</b> to get to the leaderboards.
+                        Check the final Leaderboards for the 2023 seasonal challenges <br /><br />Just click <b>here</b> to get to the leaderboards.
                     </div>
 
                 </div>
