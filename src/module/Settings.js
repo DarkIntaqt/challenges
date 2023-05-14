@@ -8,7 +8,8 @@ const languages = [
    ["fr", "Français"],
    ["es", "Español"],
    ["ja", "日本語"],
-   ["pt", "Português (Brasil)"]
+   ["pt", "Português (Brasil)"],
+   ["ru", "Русский"]
 ]
 
 export default class Settings extends Component {
