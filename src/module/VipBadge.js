@@ -18,5 +18,5 @@ export default function VipBadge(params) {
         top: "0",
         left: "0",
         position: position,
-    }} alt="" />
+    }} alt="verified" />
 }
