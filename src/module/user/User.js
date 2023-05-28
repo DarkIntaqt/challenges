@@ -238,7 +238,7 @@ class User extends Component {
 
         const { tier, summonerIcon, summonerName, selections, titles, id, points, percentile, server } = this.state.user
 
-        const profileText = "view " + summonerName + "'s profile on u.gg";
+        const profileText = "view " + summonerName + "'s profile on ";
 
         let displayTier = tier;
         if (displayTier === "NONE") {
@@ -329,8 +329,8 @@ class User extends Component {
 
                 <h1>
                     {summonerName}{this.state.verified === true ? <a href="/faq#h8" onClick={goTo}><VipBadge size={"2rem"} /></a> : typeof summonerName === "object" ? null : <a href="/verify" style={{ filter: "grayscale(1)" }} target="_blank"><VipBadge size={"2rem"} /></a>}{typeof summonerName === "object" ? null : <Fragment>
-                        <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText} title={profileText}></img></a>
-                        <a href={"https://masterychart.com/profile/" + serverToHumanReadable(this.server).replace("oc", "oce") + "/" + decodeURI(strtolower(summonerName)) + "?utm_source=Challenge+Tracker&utm_medium=Website&utm_campaign=Profile"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.mclogo} src="https://challenges.darkintaqt.com/api/masterychart-full.png" alt={profileText} title={profileText}></img></a>
+                        <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText+"u.gg"} title={profileText+"u.gg"}></img></a>
+                        <a href={"https://masterychart.com/profile/" + serverToHumanReadable(this.server).replace("oc", "oce") + "/" + decodeURI(strtolower(summonerName)) + "?utm_source=Challenge+Tracker&utm_medium=Website&utm_campaign=Profile"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.mclogo} src="https://challenges.darkintaqt.com/api/masterychart-full.png" alt={profileText+"Masterychart"} title={profileText+"Masterychart"}></img></a>
                     </Fragment>
                     }
                 </h1>
