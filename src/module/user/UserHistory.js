@@ -217,7 +217,7 @@ export default class History extends Component {
                 }
 
             }
-            return <Match matchid={match.matchId} changes={newChanges} id={user.id} key={match.matchId} showMaxedChallenges={this.state.showMaxChallenges} />
+            return <Match matchid={match.matchId} changes={newChanges} id={user.id} region={user.server} key={match.matchId} showMaxedChallenges={this.state.showMaxChallenges} />
         })
 
         const renderMatches = matches.reverse().slice(0, this.state.show);
