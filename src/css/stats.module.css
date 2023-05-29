@@ -168,3 +168,49 @@ button.loadMore {
     font-size: 1rem;
     cursor: pointer;
 }
+
+.matches .heading {
+
+    float: left;
+    width: 100%;
+    margin: 10px;
+
+}
+
+.matches .heading button {
+
+    border: none;
+    background-color: var(--dark0);
+    color: var(--light2);
+    height: 40px;
+    width: 200px;
+    cursor: pointer;
+    border-radius: 5px;
+    float: left;
+    margin-right: 10px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.matches .heading button img {
+    height: 24px;
+    width: 25px;
+    margin-right: 10px;
+}
+
+.inactive {
+    background-color: blue;
+}
+
+.matches .heading button:hover,
+.matches .heading button.active {
+    background-color: var(--dark2);
+}
+
+.matches .heading button.active {
+    border: 1px solid var(--selected);
+    box-shadow: 0 0 5px var(--selected);
+}

@@ -328,9 +328,9 @@ class User extends Component {
                 <img src={`${config.cdnBasePath}/cdn/profileicon/${summonerIcon}`} alt="" />
 
                 <h1>
-                    {summonerName}{this.state.verified === true ? <a href="/faq#h8" onClick={goTo}><VipBadge size={"2rem"} /></a> : typeof summonerName === "object" ? null : <a href="/verify" style={{ filter: "grayscale(1)" }} target="_blank"><VipBadge size={"2rem"} /></a>}{typeof summonerName === "object" ? null : <Fragment>
-                        <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText+"u.gg"} title={profileText+"u.gg"}></img></a>
-                        <a href={"https://masterychart.com/profile/" + serverToHumanReadable(this.server).replace("oc", "oce") + "/" + decodeURI(strtolower(summonerName)) + "?utm_source=Challenge+Tracker&utm_medium=Website&utm_campaign=Profile"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.mclogo} src="https://challenges.darkintaqt.com/api/masterychart-full.png" alt={profileText+"Masterychart"} title={profileText+"Masterychart"}></img></a>
+                    {summonerName}{this.state.verified === true ? <a href="/faq#h8" onClick={goTo}><VipBadge size={"2rem"} /></a> : null}{typeof summonerName === "object" ? null : <Fragment>
+                        <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText + "u.gg"} title={profileText + "u.gg"}></img></a>
+                        <a href={"https://masterychart.com/profile/" + serverToHumanReadable(this.server).replace("oc", "oce") + "/" + decodeURI(strtolower(summonerName)) + "?utm_source=Challenge+Tracker&utm_medium=Website&utm_campaign=Profile"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.mclogo} src="https://challenges.darkintaqt.com/api/masterychart-full.png" alt={profileText + "Masterychart"} title={profileText + "Masterychart"}></img></a>
                     </Fragment>
                     }
                 </h1>
@@ -367,7 +367,7 @@ class User extends Component {
 
                 <Link to="statistics" className={css["statistics"]}>{t("Statistics")}</Link>
 
-                <Link to="history" className={css["history"]}>{t("History")} <span>{strtoupper(t("Public Beta"))}</span></Link>
+                <Link to="history" className={css["history"]}>{t("History")} <span>{strtoupper(t("new"))}</span></Link>
 
             </div>
 

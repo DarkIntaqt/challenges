@@ -76,6 +76,10 @@
     border-radius: 10px 0 0 10px;
 }
 
+.match:hover .matchdata .left {
+    filter: opacity(1);
+}
+
 .match .matchdata .champion {
     padding: 10px 5px 10px 10px;
 }
@@ -128,6 +132,8 @@
     width: 100px;
     padding: 10px 0;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
@@ -138,6 +144,14 @@
     overflow: hidden;
     font-weight: bold;
     color: white;
+    white-space: nowrap;
+}
+
+.match .matchdata .kda>p.cs {
+    margin-top: 5px;
+    font-weight: normal;
+    font-size: .8rem;
+    color: var(--light2);
 }
 
 .match .matchdata .items {

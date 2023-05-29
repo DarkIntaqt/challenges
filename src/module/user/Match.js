@@ -62,6 +62,7 @@ export default class Match extends Component {
         this.state = {
             matchId: params.matchid,
             changes: params.changes,
+            showMax: params.showMaxedChallenges,
             matchData: [],
             id: params.id,
             expand: false
@@ -71,6 +72,12 @@ export default class Match extends Component {
 
     laodedMatchData(data) {
         this.setState({ matchData: data })
+    }
+
+    componentDidUpdate() {
+        if (this.props.showMaxedChallenges !== this.state.showMax) {
+            this.setState({ showMax: this.props.showMaxedChallenges });
+        }
     }
 
     error() {
@@ -182,6 +189,7 @@ export default class Match extends Component {
                     </div>
                     <div className={css.kda}>
                         <p>{player.kda.join(" / ")}</p>
+                        <p className={css.cs}>{player.cs ?? 0} CS</p>
                     </div>
                     <div className={css.items}>
                         {items}
@@ -208,8 +216,12 @@ export default class Match extends Component {
 
                 if (challenge.challengeId < 10) { continue }
 
-                if (challenge["new"]["points"] - challenge["old"]["points"] === 0) {
+                if (challenge["new"]["points"] - challenge["old"]["points"] <= 0) {
                     console.warn(challenge.challengeId);
+                    continue
+                }
+
+                if (this.state.showMax === false && challenge["old"]["tier"] >= 7) {
                     continue
                 }
 
@@ -224,14 +236,19 @@ export default class Match extends Component {
 
             if (data.length === 0) {
                 data = <div style={{ width: "100%", display: "flex", alignItems: "center", padding: "0" }}>
-                    <p>No challenges progressed during this game</p>
+                    <p>No {this.state.showMax === false ? "notable" : null} challenges progressed during this game</p>
                 </div>
             }
 
             let allChallenges = []
             if (this.state.expand === true) {
-                for (let i = 0; i < challenges.length; i++) {
-                    const challenge = challenges[i];
+
+                const workChallenges = JSON.parse(JSON.stringify(challenges)).sort(function (a, b) {
+                    return a["old"]["tier"] - b["old"]["tier"];
+                });
+
+                for (let i = 0; i < workChallenges.length; i++) {
+                    const challenge = workChallenges[i];
                     if (challenge.challengeId < 10) { continue }
 
                     if (challenge["new"]["points"] - challenge["old"]["points"] === 0) {

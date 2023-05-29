@@ -28,7 +28,7 @@ class ErrorBoundary extends Component {
    render() {
       if (this.state.hasError) {
          // You can render any custom fallback UI
-         return <div style={{ padding: "20px" }}>
+         return <div style={{ padding: "20px", backgroundColor: "white" }} >
             <h1>An error occurred</h1>
             <p><b>Feel free to report the following error on <a href="https://github.com/DarkIntaqt/challenges/issues" target="_blank" rel="noreferrer">github.com/DarkIntaqt/challenges</a> by taking a screenshot or copying the following text</b></p>
             <br />

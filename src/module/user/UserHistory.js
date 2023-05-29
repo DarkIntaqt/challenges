@@ -4,6 +4,7 @@ import Loader from "../Loader";
 import get from "../../func/get";
 import { getCache } from "../../func/getCheckCache";
 import Match from "./Match";
+import { getStorage, setStorage, storageKeys } from "../../func/localStorageFunctions";
 
 
 export default class History extends Component {
@@ -34,7 +35,8 @@ export default class History extends Component {
             queues: [],
             error: false,
             challengesJSON: [],
-            show: 100
+            show: 100,
+            showMaxChallenges: getStorage(storageKeys.showMaxChallenges, true)
         }
     }
 
@@ -65,6 +67,11 @@ export default class History extends Component {
 
 
     componentDidMount() {
+
+        if (getStorage(storageKeys.showMaxChallenges, window.location.href) === window.location.href) {
+            setStorage(storageKeys.showMaxChallenges, true);
+        }
+
         this.loadHistory()
 
     }
@@ -150,7 +157,7 @@ export default class History extends Component {
                         <br />
                         Get challenge progress per match by enabling this feature
                         <br />
-                        <i style={{ padding: "10px", display: "block", fontSize: "0.8rem", color: "var(--light2)" }}>Please keep in mind that this feature is in beta. <br />Please report all issues on Github</i>
+                        <i style={{ padding: "10px", display: "block", fontSize: "0.8rem", color: "var(--light2)" }}>Please keep in mind that this feature is in public beta. <br />Feel free to report all issues on Github. </i>
                     </p>
                     <p className={css.advertisement}>
                         <a href="/verify" target="_blank" style={{ color: "white" }}>Verify now</a>
@@ -179,7 +186,7 @@ export default class History extends Component {
 
         const allMatches = JSON.parse(JSON.stringify(this.state.matches))
 
-        let matches = allMatches.map(function (match) {
+        let matches = allMatches.map((match) => {
             let newChanges = []
 
             for (let i = 0; i < match.changes.length; i++) {
@@ -210,16 +217,30 @@ export default class History extends Component {
                 }
 
             }
-            return <Match matchid={match.matchId} changes={newChanges} id={user.id} key={match.matchId} />
+            return <Match matchid={match.matchId} changes={newChanges} id={user.id} key={match.matchId} showMaxedChallenges={this.state.showMaxChallenges} />
         })
 
         const renderMatches = matches.reverse().slice(0, this.state.show);
 
-        return <>
-            {renderMatches}
-            {matches.length <= this.state.show ? null :
-                <button className={css.loadMore} onClick={() => { this.setState({ show: this.state.show + 100 }) }}>Load more</button>}
-        </>;
+        return <div className={css.matches}>
+
+            <div className={css.heading}>
+                <button className={!this.state.showMaxChallenges ? css.active : css.inactive} onClick={() => {
+                    setStorage(storageKeys.showMaxChallenges, !this.state.showMaxChallenges);
+                    this.setState({ showMaxChallenges: !this.state.showMaxChallenges });
+                }}>
+                    <img src="https://lolcdn.darkintaqt.com/cdn/i.png" alt="" />
+                    Hide Master+ Challenges
+                </button>
+            </div>
+            <div className={css.matches}>
+                {renderMatches}
+            </div>
+            {
+                matches.length <= this.state.show ? null :
+                    <button className={css.loadMore} onClick={() => { this.setState({ show: this.state.show + 100 }) }}>Load more</button>
+            }
+        </div >;
 
     }
 }
