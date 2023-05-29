@@ -12,6 +12,7 @@ import getChallenge from "../../func/getChallenge"
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { strtolower } from "../../func/stringManipulation";
 import { getNextLevel } from "./orderChallenges";
+import goTo from "../../func/goTo";
 
 const secondsToMMSS = (seconds) => {
     const MM = `${Math.floor(seconds / 60) % 60}`.padStart(2, '0');
@@ -65,7 +66,8 @@ export default class Match extends Component {
             showMax: params.showMaxedChallenges,
             matchData: [],
             id: params.id,
-            expand: false
+            expand: true,
+            region: params.region
         }
     }
 
@@ -241,6 +243,7 @@ export default class Match extends Component {
             }
 
             let allChallenges = []
+            let allPlayers = []
             if (this.state.expand === true) {
 
                 const workChallenges = JSON.parse(JSON.stringify(challenges)).sort(function (a, b) {
@@ -282,6 +285,16 @@ export default class Match extends Component {
                     >
 
                     </ChallengeObject>)
+
+                    allPlayers = Object.values(this.state.matchData.participants).map((player) => {
+
+                        return <a className={css.player} href={`/${this.state.region}/${player.name}`} onClick={goTo} key={player.name}>
+                            <div className={css.champion}>
+                                <img src={"https://lolcdn.darkintaqt.com/cdn/champion/" + player.champion[0] + "/tile"} alt={player.champion[1]} />
+                            </div>
+                        </a>
+
+                    });
                 }
             }
 
@@ -311,7 +324,12 @@ export default class Match extends Component {
                     </div>
                 </div>
                 {this.state.expand === true ? <div className={css.overview}>
-                    {allChallenges}
+                    <div className={css.matchRecap}>
+                        {allPlayers}
+                    </div>
+                    <div className={css.challenges}>
+                        {allChallenges}
+                    </div>
                 </div> : null}
             </div>
         } catch (e) {
