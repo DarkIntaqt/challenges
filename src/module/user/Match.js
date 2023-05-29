@@ -285,6 +285,10 @@ export default class Match extends Component {
                 }
             }
 
+            if (allChallenges.length === 0) {
+                allChallenges = <p style={{ color: "white", fontSize: ".8rem", padding: "5px", textAlign: "center" }}>Nothing to see here...</p>;
+            }
+
             return <div className={css.match + " " + css["expanded-" + this.state.expand]} id={this.state.matchId}>
                 <div className={css.matchdata} onClick={this.toggleExpand}>
                     {matchdata}
