@@ -99,8 +99,65 @@ class Challenge extends Component {
     componentDidUpdate() {
         if (this.props.params !== this.params) {
             this.params = this.props;
-            window.location.reload()
+            //window.location.reload()
+            const props = this.props;
+
+            this.params = this.props.params
+            this.regions = config.regions
+            this.tiers = config.tiers
+
+            let tempRegion = props.query.toLowerCase();
+            if (!this.regions.includes(tempRegion)) {
+                tempRegion = "world"
+            }
+
+            this.challenge = "null"
+            this.challenges = "null"
+
+            this.load = this.load.bind(this)
+            this.error = this.error.bind(this)
+
+            this.loadChallenge = this.loadChallenge.bind(this)
+            this.loadChallenges = this.loadChallenges.bind(this)
+
+            this.changeFilter = this.changeFilter.bind(this)
+            this.showChallenge = this.showChallenge.bind(this)
+
+            let challengePlaceholder = {
+                text: false,
+                title: [],
+                icon: 1,
+                timestamp: Date.now() / 1000,
+                challenge: {
+                    id: 0,
+                    parent: 0,
+                    translation: {
+                        name: "Loading",
+                        description: "Loading"
+                    }
+                },
+            }
+
+            const tempChallenge = getCache(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`)
+            const tempChallenges = getCache(`https://challenges.darkintaqt.com/api/dynamic-data/serve?region=euw1&lang=${window.language}`)
+
+            if (tempChallenge !== false && tempChallenges !== false) {
+                this.challenges = tempChallenges
+                this.challenge = tempChallenge
+                challengePlaceholder = tempChallenge
+                document.title = "'" + tempChallenge.challenge.translation.name + "' Challenge Overview and Leaderboard"
+            }
+
+
+            this.setState({
+                totalLength: 250,
+                message: -1,
+                filter: tempRegion,
+                challenge: challengePlaceholder,
+                translation: props.t
+            });
         }
+
     }
 
     componentDidMount() {
