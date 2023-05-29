@@ -131,6 +131,72 @@ class User extends Component {
         this.setState({ error: true })
     }
 
+    componentDidUpdate() {
+        if (this.props.params.user !== this.user) {
+
+            const props = this.props;
+
+            this.user = props.params.user
+            this.server = serverToMachineReadable(props.params.server)
+            this.requestCache = [false, false]
+            this.params = props.params
+
+
+            const basicUserConfig = {
+                tier: config.tiers[0],
+                summonerIcon: -1,
+                summonerName: <div className={css.loadinganimation} style={{
+                    width: props.params.user.length * 1.4 + "rem",
+                    height: "2rem", borderRadius: "5px"
+                }}></div>,
+                selections: [],
+                titles: [],
+                challenges: [],
+                availableTitles: {},
+                categories: {},
+                points: [0, 0, 0],
+                id: "",
+                percentile: 1,
+                server: ""
+            }
+
+
+            this.getChallengeURL = `https://challenges.darkintaqt.com/api/dynamic-data/serve?region=${this.server}&lang=${window.language}`
+            this.getSummonerURL = `https://challenges.darkintaqt.com/api/edge/user/${this.server}/${encodeURIComponent(this.user)}`
+
+
+            const tryLoadChallenges = getCache(this.getChallengeURL)
+            const tryLoadSummoner = getCache(this.getSummonerURL)
+
+            let currentUserConfig = basicUserConfig
+
+            if (tryLoadChallenges !== false && tryLoadSummoner !== false) {
+                currentUserConfig = generateSummonerObject(tryLoadSummoner)
+                window.JSONPREQUEST = tryLoadChallenges
+            }
+
+            const verifiedCache = getCache("https://challenges.darkintaqt.com/api/v1/c-vip/?id=" + currentUserConfig.id)
+            let verified = 0
+            if (verifiedCache !== false) {
+                verified = verifiedCache[0]
+            }
+
+
+            this.requestCache = [false, false]
+
+
+            this.setState({
+                error: false,
+                user: currentUserConfig,
+                verified: verified,
+                translation: props.t
+            });
+
+            get(this.getChallengeURL, (e) => { this.addFileToCache(e, 0) }, this.throwError)
+            get(this.getSummonerURL, (e) => { this.addFileToCache(e, 1) }, this.throwError)
+
+        }
+    }
 
 
     addFileToCache(content, id) {
@@ -229,6 +295,9 @@ class User extends Component {
             error = true
         }
 
+        if (this.props.params.user !== this.user) {
+            error = true;
+        }
 
         if (error === true) {
 
