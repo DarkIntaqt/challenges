@@ -19,7 +19,7 @@ import { setCookie } from "../func/cookiefunctions"
 import Error from "./Error"
 import { withTranslation } from "react-i18next"
 import { capitalize } from "../func/stringManipulation"
-import { storageKeys, getStorage, setStorage } from "../func/localStorageFunctions"
+import { storageKeys, getStorage, setStorage } from "../func/sessionStorageFunctions"
 
 class Challenges extends Component {
     constructor(props) {
