@@ -26,7 +26,6 @@ import { getCookie, setCookie } from "./func/cookiefunctions"
 import i18next from "i18next";
 import Settings from "./module/Settings";
 import ErrorBoundary from "./module/ErrorBoundary";
-import Survey from "./module/Survey";
 
 function main() {
 
@@ -93,7 +92,6 @@ function main() {
         <Routes>
 
           <Route path="/" element={<Fragment>
-            <Survey />
             <HeaderNFooter />
             <VariableProxy />
           </Fragment>}>
