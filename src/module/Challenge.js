@@ -156,6 +156,10 @@ class Challenge extends Component {
                 challenge: challengePlaceholder,
                 translation: props.t
             });
+
+            if (this.challenge === "null" || this.challenges === "null") {
+                this.load();
+            }
         }
 
     }

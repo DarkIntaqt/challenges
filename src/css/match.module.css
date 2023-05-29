@@ -29,6 +29,127 @@
     box-sizing: border-box;
 }
 
+.match .overview .matchRecap {
+    width: calc(30% - 20px);
+    float: left;
+    position: relative;
+    margin: 5px 10px;
+    float: left;
+
+}
+
+.match .overview .matchRecap .player {
+    width: 100%;
+    background-color: var(--dark1);
+    box-sizing: border-box;
+    float: left;
+    border-bottom: 1px solid var(--dark2);
+    padding: 5px;
+    display: block;
+}
+
+.match .overview .matchRecap .player:hover {
+    background-color: var(--dark3);
+}
+
+.match .overview .matchRecap .player:nth-child(5) {
+    border-bottom-width: 10px;
+}
+
+.match .overview .matchRecap .player:first-of-type {
+    border-radius: 5px 5px 0 0;
+}
+
+.match .overview p.matchId {
+    margin: 10px 0;
+    float: left;
+    font-size: .8rem;
+    color: var(--light3);
+}
+
+.match .overview .matchRecap .player:last-of-type {
+    border-bottom: none;
+    border-radius: 0 0 5px 5px;
+}
+
+.match .overview .matchRecap .player .champion,
+.match .overview .matchRecap .player .summonerName {
+    float: left;
+}
+
+
+.match .overview .matchRecap .player .summonerName {
+    display: flex;
+    height: 40px;
+    width: 110px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.match .overview .matchRecap .player .summonerName p {
+    color: var(--light0);
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    font-size: 0.8rem;
+}
+
+.match .overview .matchRecap .player .summonerName p.cs {
+    color: var(--light2)
+}
+
+.match .overview .matchRecap .player .summonerName.me p:not(.cs) {
+    color: var(--selected);
+}
+
+.match .overview .matchRecap .player .summonerName p:not(.cs):hover {
+    text-decoration: underline;
+}
+
+.match .overview .matchRecap .player .champion img {
+    width: 40px;
+    border-radius: 5px;
+}
+
+.match .overview .matchRecap .player .summoners {
+    width: 20px;
+    float: left;
+    padding: 0 3px;
+}
+
+.match .overview .matchRecap .player .summoners img {
+    width: 18px;
+    margin: 1px;
+    height: 18px;
+    float: left;
+    border-radius: 5px;
+}
+
+.match .overview .matchRecap .player .items {
+    float: right;
+    width: 80px;
+}
+
+.match .overview .matchRecap .player .items>span {
+    width: 18px;
+    margin: 1px;
+    height: 18px;
+    border-radius: 5px;
+}
+
+.match .overview .matchRecap .player .items>span>img {
+    width: 18px;
+    background-color: var(--dark0);
+    height: 18px;
+    border-radius: 5px;
+}
+
+.match .overview .challenges {
+    width: 70%;
+    float: left;
+}
+
 .match:hover .challengedata {
     background-color: var(--dark3);
     cursor: pointer;

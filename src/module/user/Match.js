@@ -66,7 +66,7 @@ export default class Match extends Component {
             showMax: params.showMaxedChallenges,
             matchData: [],
             id: params.id,
-            expand: true,
+            expand: false,
             region: params.region
         }
     }
@@ -286,11 +286,35 @@ export default class Match extends Component {
 
                     </ChallengeObject>)
 
-                    allPlayers = Object.values(this.state.matchData.participants).map((player) => {
+                    allPlayers = Object.keys(this.state.matchData.participants).map((key) => [key, this.state.matchData.participants[key]]).map((playerData) => {
+
+                        const puuid = playerData[0];
+                        const player = playerData[1];
+
+                        let c = 0;
+                        let items = player.items.map(function (item) {
+                            c++;
+                            return <LazyLoadImage src={"https://cdn.darkintaqt.com/lol/c-assets/items/" + item + ".png.webp"} alt="" key={item + "" + c} effect="opacity" height={18} width={18} />
+
+                        })
+
 
                         return <a className={css.player} href={`/${this.state.region}/${player.name}`} onClick={goTo} key={player.name}>
                             <div className={css.champion}>
                                 <img src={"https://lolcdn.darkintaqt.com/cdn/champion/" + player.champion[0] + "/tile"} alt={player.champion[1]} />
+                            </div>
+
+                            <div className={css.summoners}>
+                                <img src={"https://lolcdn.darkintaqt.com/cdn/spells/" + (player.spells[0] === 0 ? 54 : player.spells[0])} alt={""} />
+                                <img src={"https://lolcdn.darkintaqt.com/cdn/spells/" + (player.spells[1] === 0 ? 54 : player.spells[1])} alt={""} />
+                            </div>
+
+                            <div className={css.summonerName + (this.state.matchData.participants[this.props.id].name === player.name ? " " + css.me : "")}>
+                                <p>{player.name}</p>
+                                <p className={css.cs}>{player.kda.join(" / ")}</p>
+                            </div>
+                            <div className={css.items}>
+                                {items}
                             </div>
                         </a>
 
@@ -326,6 +350,7 @@ export default class Match extends Component {
                 {this.state.expand === true ? <div className={css.overview}>
                     <div className={css.matchRecap}>
                         {allPlayers}
+                        <p className={css.matchId}>{this.state.matchId}</p>
                     </div>
                     <div className={css.challenges}>
                         {allChallenges}
