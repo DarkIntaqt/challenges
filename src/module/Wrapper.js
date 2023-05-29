@@ -20,8 +20,7 @@ export default class Wrapper extends Component {
         let unitsRight = []
 
         for (let i = 0; i < (adUnits / 2); i++) {
-            unitsLeft.push(<Ad key={i + "l"} />)
-            unitsRight.push(<Ad key={i + "r"} />)
+            unitsRight.push(<Ad id={i + 1} key={i} />)
 
         }
 
@@ -91,8 +90,7 @@ export default class Wrapper extends Component {
             let unitsRight = []
 
             for (let i = 0; i < (adUnits / 2); i++) {
-                unitsLeft.push(<Ad key={i + "l"} />)
-                unitsRight.push(<Ad key={i + "r"} />)
+                unitsRight.push(<Ad id={i + 1} key={i} />)
 
             }
 

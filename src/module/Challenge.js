@@ -468,7 +468,7 @@ class Challenge extends Component {
 
                     {challenge.challenge.translation.name !== "Loading" ?
                         <div style={{ float: "left", flexWrap: "wrap", margin: "5px 0", width: "100%", display: "flex", justifyContent: "center" }}>
-                            <Ad style={{ margin: "5px" }}></Ad>
+                            <Ad id={0}></Ad>
                         </div> : null}
                 </section>
 

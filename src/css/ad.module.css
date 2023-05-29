@@ -1,9 +1,3 @@
-.ad {
-    height: 250px;
-    width: 250px;
-    float: left;
-}
-
 .fixed {
     position: fixed;
     margin-top: 20px;
@@ -13,10 +7,38 @@
     align-items: center;
 }
 
-.fixed>div {
-    margin: 20px 0;
-}
-
 .fixed.right {
     margin-left: calc(50% + 500px)
+}
+
+
+.container {
+
+    width: 280px;
+    height: 280px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+
+    background-color: var(--dark1);
+    position: relative;
+
+}
+
+.text {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: calc(50% - .5rem) auto;
+    color: var(--dark3);
+}
+
+.ad {
+    width: 250px;
+    height: 250px;
+    z-index: 5;
+    position: absolute;
+    margin: 15px;
 }

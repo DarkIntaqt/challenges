@@ -201,7 +201,7 @@ class Start extends Component {
           <div className={StyleSheet.region} onClick={changeRegion}>vn</div>
         </div>
         <div style={{ float: "left", margin: "10px 0", width: "100%", display: "flex", justifyContent: "center" }}>
-          <Ad></Ad>
+          <Ad id={1}></Ad>
         </div>
       </div>
     </Fragment>
