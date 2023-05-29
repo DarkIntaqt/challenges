@@ -33,7 +33,8 @@ export default class History extends Component {
             challenges: {},
             queues: [],
             error: false,
-            challengesJSON: []
+            challengesJSON: [],
+            show: 100
         }
     }
 
@@ -212,9 +213,13 @@ export default class History extends Component {
             return <Match matchid={match.matchId} changes={newChanges} id={user.id} key={match.matchId} />
         })
 
-        matches = matches.reverse();
+        const renderMatches = matches.reverse().slice(0, this.state.show);
 
-        return matches
+        return <>
+            {renderMatches}
+            {matches.length <= this.state.show ? null :
+                <button className={css.loadMore} onClick={() => { this.setState({ show: this.state.show + 100 }) }}>Load more</button>}
+        </>;
 
     }
 }
