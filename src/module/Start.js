@@ -192,8 +192,6 @@ class Start extends Component {
           <div className={StyleSheet.region} onClick={changeRegion}>oc</div>
           <div className={StyleSheet.region} onClick={changeRegion}>ru</div>
           <div className={StyleSheet.region} onClick={changeRegion}>tr</div>
-        </div>
-        <div className={StyleSheet.serverselector}>
           <div className={StyleSheet.region} onClick={changeRegion}>ph</div>
           <div className={StyleSheet.region} onClick={changeRegion}>sg</div>
           <div className={StyleSheet.region} onClick={changeRegion}>th</div>
