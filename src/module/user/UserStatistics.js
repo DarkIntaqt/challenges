@@ -14,6 +14,7 @@ import { checkExists } from "../../func/arrayManipulationFunctions.js";
 import { beautifyNum } from "../../func/beautify.js"
 import { withTranslation } from "react-i18next";
 import getChallenge from "../../func/getChallenge";
+import goTo from "../../func/goTo";
 
 
 class UserStatistics extends Component {
@@ -197,7 +198,7 @@ class UserStatistics extends Component {
         return <section>
             <div className={css.categories}>
 
-                <div className={css.category + " " + user.tier}>
+                <a className={css.category + " " + user.tier} href="/challenge/0" onClick={goTo}>
 
                     <p>
                         <img src={"https://cdn.darkintaqt.com/lol/static/challenges/crystal.svg"} alt="crystal" />
@@ -208,9 +209,9 @@ class UserStatistics extends Component {
                         progress={user.categories["0"].current}
                         max={user.categories["0"].max}
                     />
-                </div>
+                </a>
 
-                <div className={css.category + " " + user.categories["5"].level}>
+                <a className={css.category + " " + user.categories["5"].level} href="/challenge/5" onClick={goTo}>
 
                     <p>
                         <img src={config.images["5"]} alt="collection" />
@@ -221,9 +222,9 @@ class UserStatistics extends Component {
                         progress={user.categories["5"].current}
                         max={user.categories["5"].max}
                     />
-                </div>
+                </a>
 
-                <div className={css.category + " " + user.categories["2"].level}>
+                <a className={css.category + " " + user.categories["2"].level} href="/challenge/2" onClick={goTo}>
                     <p>
                         <img src={config.images["2"]} alt="expertise" />
                         {capitalize(getChallenge(2).translation.name)}
@@ -233,9 +234,9 @@ class UserStatistics extends Component {
                         progress={user.categories["2"].current}
                         max={user.categories["2"].max}
                     />
-                </div>
+                </a>
 
-                <div className={css.category + " " + user.categories["3"].level}>
+                <a className={css.category + " " + user.categories["3"].level} href="/challenge/3" onClick={goTo}>
 
                     <p>
                         <img src={config.images["3"]} alt="Veterancy" />
@@ -246,9 +247,9 @@ class UserStatistics extends Component {
                         progress={user.categories["3"].current}
                         max={user.categories["3"].max}
                     />
-                </div>
+                </a>
 
-                <div className={css.category + " " + user.categories["1"].level}>
+                <a className={css.category + " " + user.categories["1"].level} href="/challenge/1" onClick={goTo}>
 
                     <p>
                         <img src={config.images["1"]} alt="Imagination" />
@@ -259,9 +260,9 @@ class UserStatistics extends Component {
                         progress={user.categories["1"].current}
                         max={user.categories["1"].max}
                     />
-                </div>
+                </a>
 
-                <div className={css.category + " " + user.categories["4"].level}>
+                <a className={css.category + " " + user.categories["4"].level} href="/challenge/4" onClick={goTo}>
 
                     <p>
                         <img src={config.images["4"]} alt="Teamwork" />
@@ -272,7 +273,7 @@ class UserStatistics extends Component {
                         progress={user.categories["4"].current}
                         max={user.categories["4"].max}
                     />
-                </div>
+                </a>
 
             </div>
 

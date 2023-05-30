@@ -14,6 +14,13 @@
     padding: 10px;
     border-radius: 10px;
     width: 140px;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.category:hover {
+    background-color: var(--dark2);
 }
 
 .category>p>img {
@@ -30,9 +37,11 @@
 .category>div>p {
     text-align: center;
     width: 100px;
+    text-decoration: none;
 }
 
 .category>p {
+    text-decoration: none;
     font-size: 1rem;
     color: white;
     text-align: center;
