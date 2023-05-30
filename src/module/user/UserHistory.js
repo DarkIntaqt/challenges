@@ -230,7 +230,7 @@ export default class History extends Component {
                     this.setState({ showMaxChallenges: !this.state.showMaxChallenges });
                 }}>
                     <img src="https://lolcdn.darkintaqt.com/cdn/i.png" alt="" />
-                    Hide Master+ Challenges
+                    hide maxed challenges
                 </button>
             </div>
             <div className={css.matches}>
