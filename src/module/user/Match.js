@@ -219,7 +219,7 @@ export default class Match extends Component {
                 if (challenge.challengeId < 10) { continue }
 
                 if (challenge["new"]["points"] - challenge["old"]["points"] <= 0) {
-                    console.warn(challenge.challengeId);
+                    console.info(["Invalid progression", challenge.challengeId, challenge["old"]["points"], "to", challenge["new"]["points"]].join(" "));
                     continue
                 }
 
@@ -268,7 +268,7 @@ export default class Match extends Component {
                     const challenge = workChallenges[i];
                     if (challenge.challengeId < 10) { continue }
 
-                    if (challenge["new"]["points"] - challenge["old"]["points"] === 0) {
+                    if (challenge["new"]["points"] - challenge["old"]["points"] <= 0) {
                         console.warn(challenge.challengeId);
                         continue
                     }
