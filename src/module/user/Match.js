@@ -237,7 +237,7 @@ export default class Match extends Component {
                     }
                 });
 
-                if (challenge["old"]["tier"] === highestThreshold) {
+                if (this.state.showMax === false && challenge["old"]["tier"] === highestThreshold) {
                     continue;
                 }
 
