@@ -698,11 +698,24 @@ span.availableTitle img {
     float: left;
 }
 
-.field>p {
+.field>div {
+    float: left;
+}
+
+.field>div>p {
     font-size: .9rem;
     color: var(--light2);
     padding: 0 10px;
-    line-height: 1.2;
+    line-height: 1.4;
+    text-align: justify;
+}
+
+.field .line {
+    width: 90%;
+    margin: 5px 5%;
+    height: 2px;
+    float: left;
+    background-color: var(--dark3);
 }
 
 @media only screen and (max-width: 1050px) {

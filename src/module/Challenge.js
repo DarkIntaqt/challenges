@@ -462,7 +462,7 @@ class Challenge extends Component {
                             <h2>{t("Info")}</h2>
                             <span> {t("All you need to know about this challenge")} </span>
                         </div>
-                        <p dangerouslySetInnerHTML={{ __html: challenge.text.replace(/\n/g, "<br />") }}></p>
+                        <div dangerouslySetInnerHTML={{ __html: "<p>" + challenge.text.replace(/---\n/ig, "</p><div class='" + css.line + "'></div><p>").replace(/\n/g, "<br />") + "</p>" }}></div>
                     </div> : null
                     }
 
