@@ -3,7 +3,9 @@
  */
 export const storageKeys = {
    challengeFilters: "challenge-filters",
-   challengeSearch: "challenge-search"
+   challengeSearch: "challenge-search",
+   pointsOnly: "points-only",
+   masterOnly: "master-only"
 }
 
 /**

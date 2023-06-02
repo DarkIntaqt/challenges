@@ -23,6 +23,7 @@ import Loader from "../Loader"
 import { withTranslation } from "react-i18next";
 import { capitalize } from "../../func/stringManipulation";
 import getChallenge from "../../func/getChallenge";
+import { getStorage, setStorage, storageKeys } from "../../func/sessionStorageFunctions";
 
 
 class UserChallenges extends Component {
@@ -41,8 +42,8 @@ class UserChallenges extends Component {
 
         this.state = {
             alphabet: "a-z",
-            orderByMaster: false,
-            orderByPoints: false,
+            orderByMaster: getStorage(storageKeys.masterOnly, false),
+            orderByPoints: getStorage(storageKeys.pointsOnly, false),
             placeholder: window.compactMode,
             filter: "level",
             filters: {
@@ -56,6 +57,9 @@ class UserChallenges extends Component {
     }
 
     toggleMasterTierSorting() {
+
+        setStorage(storageKeys.masterOnly, !this.state.orderByMaster);
+
         this.setState({
             orderByMaster: !this.state.orderByMaster
         })
@@ -63,6 +67,9 @@ class UserChallenges extends Component {
 
 
     togglePointsAvailableSorting() {
+
+        setStorage(storageKeys.pointsOnly, !this.state.orderByPoints);
+
         this.setState({
             orderByPoints: !this.state.orderByPoints
         })
