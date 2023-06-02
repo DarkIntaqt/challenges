@@ -1,6 +1,6 @@
 import { checkExists } from "../../func/arrayManipulationFunctions.js"
 import getChallenge from "../../func/getChallenge";
-import { intToTier } from "../../func/tierFunctions";
+import { intToTier, tierToInt } from "../../func/tierFunctions";
 
 
 export function getNextLevel(current, masterOnly = false, pointsOnly = false) {
@@ -115,6 +115,21 @@ export function removeUnnecessaryChallenges(challenges, filters, masterOnly = fa
             if (challenge[8] === 600006 || challenge[8].parent === 2022000 || challenge[8] === 2023000) {
                 return null;
             }
+
+            let challengeData = getChallenge(challenge[0]);
+
+            let highestThreshold = 0;
+            Object.keys(challengeData.thresholds).forEach((threshold) => {
+                const t = tierToInt(threshold);
+                if (t > highestThreshold) {
+                    highestThreshold = t;
+                }
+            });
+
+            if (challenge[1] === highestThreshold) {
+                return null
+            }
+
         }
 
         return challenge
