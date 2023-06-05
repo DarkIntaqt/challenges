@@ -26,7 +26,8 @@ export default function ChallengeObject(params) {
         ["progressNext", false, false],
         ["forceFullMode", false, false],
         ["forceCompact", false, false],
-        ["progressCurrentSecondary", false, false]
+        ["progressCurrentSecondary", false, false],
+        ["from", false, false]
     ];
 
 
@@ -83,7 +84,7 @@ export default function ChallengeObject(params) {
                 <p className={css.heading}>{challenge[2]}</p>
                 <p className={css.type}>{challenge[3]} {
                     challenge[7] !== false ?
-                        <Fragment> | {beautifyNum(challenge[7])} / {beautifyNum(challenge[8])}</Fragment>
+                        <Fragment> | {challenge[12] !== false ? challenge[12] : beautifyNum(challenge[7])} / {beautifyNum(challenge[8])}</Fragment>
                         : null
                 }</p>
             </div>

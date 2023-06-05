@@ -291,6 +291,7 @@ export default class Match extends Component {
                         title={c["translation"]["name"]}
                         subtitle={"+" + beautifyNum(challenge["new"]["points"] - challenge["old"]["points"], true, 1000)}
                         description={c["translation"]["description"]}
+                        from={beautifyNum(challenge["new"]["points"])}
                         href={"/challenge/" + challenge["challengeId"]}
                         progressCurrent={challenge["old"]["points"]}
                         progressNext={next}
