@@ -1,5 +1,5 @@
-import "typedef";
 import requests from "challenges/utils/requestFunctions";
+import { ChallengeDTO, ChallengesFull, TitleDTO } from "challenges/types";
 
 /**
  * Error handling if a resources load failed, but the resource was required
@@ -26,22 +26,16 @@ export default class ChallengeService {
 
   /**
    * Get the current list of challenges by region and language.
-   * @param {string} region e.g. "na1", "euw1"...
-   * @param {string} lang e.g. "en_US", "de_DE"...
-   * @returns {Promise<Array.<ChallengeDto>>} Challenges
    */
-  async list(region, lang = "en_US") {
+  async list(region: string, lang = "en_US"): Promise<Array<ChallengeDTO>> {
     const challenges = await this.getJson(`/challenges/${region}/${lang}.json`);
     return challenges.challenges;
   }
 
   /**
    * Get the current list of challenge titles.
-   * @param {string} region e.g. "na1", "euw1"...
-   * @param {string} lang e.g. "en_US", "de_DE"...
-   * @returns {Promise<Array.<TitleDto>>} Titles
    */
-  async listTitles(region, lang = "en_US") {
+  async listTitles(region: string, lang = "en_US"): Promise<Array<TitleDTO>> {
     const titles = await this.getJson(`/challenges/${region}/${lang}.json`);
     return titles.titles;
   }
@@ -49,21 +43,18 @@ export default class ChallengeService {
   /**
  * Get the current list of challenges and titles by region and language.
  * This is more effective as titles OR challenges doesn't need to be called individually
- * @param {string} region e.g. "na1", "euw1"...
- * @param {string} lang e.g. "en_US", "de_DE"...
  * @returns {Promise<ChallengesRawDto>} Challenges and Titles
  */
-  async listAll(region, lang = "en_US") {
+  async listAll(region: string, lang = "en_US"): Promise<ChallengesFull> {
     const all = await this.getJson(`/challenges/${region}/${lang}.json`);
     return all;
   }
 
   /**
    * Get the challenge associated with numerical id.
-   * @param {number} id 
    * @returns {Promise<GlobalChallengeDto>} Challenge
    */
-  async getById(id) {
+  async getById(id: number) {
     const challenge = await this.getJson(`/v5/showChallenge.php?id=${id}`);
     return challenge;
   }

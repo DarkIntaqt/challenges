@@ -1,4 +1,6 @@
-import { Component, createRef } from "react";
+"use client";
+
+import { Component, FormEvent, ReactNode, RefObject, createRef } from "react";
 
 import css from "challenges/styles/index.module.scss";
 
@@ -7,12 +9,26 @@ import ContentService from "challenges/services/ContentService";
 import UserService from "challenges/services/UserService";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { getStorage, setStorage, storageKeys } from "challenges/utils/localStorageFunctions";
 
 import getPlatform, { serversBeautified } from "challenges/utils/platform";
 
 import Card from "./SearchBarCard";
+import { ChallengeDTO, TitleDTO } from "challenges/types";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+
+
+
+type SearchbarProps = {
+   router: AppRouterInstance
+};
+type SearchbarState = {
+   titles: TitleDTO | {};
+   challenges: Array<ChallengeDTO>;
+   results: ReactNode;
+};
+
 
 /**
  * fix a safari bug where the height of a backdrop-element 
@@ -22,17 +38,32 @@ import Card from "./SearchBarCard";
 const empty = <div style={{ height: "1px" }}></div>;
 
 
-class Searchbar extends Component {
-   constructor(props) {
+class Searchbar extends Component<SearchbarProps, SearchbarState> {
+   defaultRegion: string;
+   searchbarInput: RefObject<HTMLInputElement>;
+   searchbarArea: RefObject<HTMLDivElement>;
+   select: RefObject<HTMLSelectElement>;
+
+   contentService: ContentService;
+   userService: UserService;
+
+   focus: boolean;
+   visible: boolean;
+   value: String;
+   recentlySearched: ReactNode;
+   router: AppRouterInstance;
+
+
+   constructor(props: SearchbarProps) {
       super(props);
 
-      //this.router = props.router;
+      this.router = props.router;
       this.defaultRegion = "na"; // change within componentDidMount to localstorage.default
 
 
-      this.searchbarInput = createRef(null); // .searchbar
-      this.searchbarArea = createRef(null); // .searchbarWrapper
-      this.select = createRef(null); // server selector
+      this.searchbarInput = createRef(); // .searchbar
+      this.searchbarArea = createRef(); // .searchbarWrapper
+      this.select = createRef(); // server selector
 
       this.contentService = new ContentService(); // serving challenge and profile images
       this.userService = new UserService();
@@ -54,13 +85,12 @@ class Searchbar extends Component {
       };
    }
 
-
    /**
     * adds the "active" class if the searchbar is focussed
     */
    handleFocus() {
       this.focus = true;
-      this.searchbarArea.current.classList.add(css.active);
+      this.searchbarArea.current?.classList.add(css.active);
    }
 
 
@@ -72,7 +102,7 @@ class Searchbar extends Component {
 
       setTimeout(() => {
          if (this.focus === false && this.visible === true) {
-            this.searchbarArea.current.classList.remove(css.active);
+            this.searchbarArea.current?.classList.remove(css.active);
          }
       }, 125);
    }
@@ -83,11 +113,17 @@ class Searchbar extends Component {
     * @param {Object} e - keyup event
     * @returns null
     */
-   async search(e) {
+   async search(e: KeyboardEvent) {
 
-      const value = e.target.value.toLowerCase();
+
+      if (!e.target) { return; }
+      const target = e.target as HTMLInputElement;
+      const value = target.value;
       if (e.key === "Enter") {
-         ///this.router.push(`/profile/${this.defaultRegion}/${value}`);
+
+
+         this.router.push(`/profile/${this.defaultRegion}/${value}`);
+
          return;
       }
 
@@ -111,7 +147,7 @@ class Searchbar extends Component {
          return;
       }
 
-      var challenges = this.state.challenges.map((challenge) => {
+      var challenges = this.state.challenges.map((challenge: ChallengeDTO) => {
 
          if (!challenge.name.toLowerCase().startsWith(value)) {
             return null;
@@ -213,14 +249,14 @@ class Searchbar extends Component {
             /**
              * check if value hasnt changed
              */
-            if (value === e.target.value.toLowerCase()) {
+            if (value === target.value.toLowerCase()) {
                try {
                   /**
                    * fetch user and check again if nothing new was searched
                    */
                   const user = await this.userService.getUser(value, getPlatform(this.defaultRegion));
 
-                  if (value === e.target.value.toLowerCase()) {
+                  if (value === target.value.toLowerCase()) {
                      if (typeof user.name !== "undefined") {
                         this.setState({
                            results: <><div className={css.category}>
@@ -246,7 +282,7 @@ class Searchbar extends Component {
                            </>
                         });
                      } else {
-                        if (value === e.target.value.toLowerCase()) {
+                        if (value === value.toLowerCase()) {
                            notFound();
                         }
                      }
@@ -268,17 +304,28 @@ class Searchbar extends Component {
     * changes the region, simulate a content change
     * @param {Object} e - onChange event
     */
-   change(e) {
-      const region = e.currentTarget.options[e.currentTarget.selectedIndex].value;
+   change(e: FormEvent) {
+      const target = e.currentTarget as HTMLSelectElement;
+
+      const region = target.options[target.selectedIndex].value;
 
       this.defaultRegion = region;
       setStorage(storageKeys.defaultRegion, region);
       this.value = "";
 
-      this.search({
-         target: this.searchbarInput.current,
-         key: "Space"
-      });
+      this.fakeSearch("Space");
+   }
+
+
+   fakeSearch(key: string) {
+
+      if (this.searchbarInput.current) {
+
+         const event = new KeyboardEvent("keypress", { key: key });
+         this.searchbarInput.current.dispatchEvent(event);
+
+      }
+
    }
 
    async componentDidMount() {
@@ -289,21 +336,24 @@ class Searchbar extends Component {
        * get default region and set it
        */
       this.defaultRegion = getStorage(storageKeys.defaultRegion, this.defaultRegion);
+      if (!this.select.current) {
+         return;
+      }
+
       for (let i = 0; i < this.select.current.options.length; i++) {
-         const element = this.select.current.options[i];
+         const element = this.select.current?.options[i];
          if (element.value === this.defaultRegion) {
-            element.selected = "selected";
+            element.selected = true;
             break;
          }
       }
 
 
       try {
-         this.searchbarInput.current.addEventListener("focus", this.handleFocus);
-         this.searchbarInput.current.addEventListener("blur", this.handleBlur);
-         this.select.current.addEventListener("change", this.change);
+         this.searchbarInput.current?.addEventListener("focus", this.handleFocus);
+         this.searchbarInput.current?.addEventListener("blur", this.handleBlur);
 
-         this.searchbarInput.current.addEventListener("keyup", this.search);
+         this.searchbarInput.current?.addEventListener("keyup", this.search);
       } catch (e) {
          console.warn(e);
       }
@@ -323,7 +373,6 @@ class Searchbar extends Component {
                url={`/profile/${user[0]}/${user[1]}`}
                round
                imageAsBackground
-               icon={faClockRotateLeft}
                tag={user[0]}
                image={this.contentService.getProfileIcon(user[2])}
             />);
@@ -345,7 +394,7 @@ class Searchbar extends Component {
       const all = await challengeService.listAll(getPlatform(this.defaultRegion), "en_US");
 
       this.setState({
-         challenges: Object.keys(all.challenges).map((k) => all.challenges[k]),
+         challenges: Object.keys(all.challenges).map((k: any) => all.challenges[k]),
          titles: all.titles
       });
 
@@ -368,15 +417,12 @@ class Searchbar extends Component {
 
             <input ref={this.searchbarInput} placeholder="Search for a summoner, challenge, title"></input>
 
-            <select ref={this.select} id={css.select}>
+            <select ref={this.select} id={css.select} onChange={this.change}>
                {servers}
             </select>
 
             <FontAwesomeIcon
-               onClick={() => this.search({
-                  target: this.searchbarInput.current,
-                  key: "Enter"
-               })}
+               onClick={() => { this.fakeSearch("Enter"); }}
                icon={faMagnifyingGlass}
             />
 

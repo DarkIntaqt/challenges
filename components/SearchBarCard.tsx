@@ -3,25 +3,20 @@ import Link from "next/link";
 
 import css from "challenges/styles/index.module.scss";
 
-/**
- * @typedef CardProps
- * @type {Object}
- * @property {string} url - required
- * @property {string} title - required
- * @property {string} image - required
- * @property {boolean} round - default : true
- * @property {string} tag - default: ""
- * @property {boolean} imageAsBackground - default: false
- * @property {boolean} loader - default: false
- */
-
+interface CardProps {
+   url: string;
+   title: string;
+   image: string;
+   round?: boolean;
+   tag?: string;
+   imageAsBackground?: boolean;
+   loader?: boolean;
+}
 
 /**
  * Returns the corresponding card for the searchBar
- * @param {CardProps} props 
- * @returns 
  */
-export default function Card({ url, title, image, round = false, tag = "", imageAsBackground = false, loader = false }) {
+export default function Card({ url, title, image, round = false, tag = "", imageAsBackground = false, loader = false }: CardProps) {
    return <Link href={url} className={css.card} prefetch={false}>
       <div className={css.inner}>
          {/* set a background */}

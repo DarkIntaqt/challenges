@@ -1,5 +1,3 @@
-import "typedef";
-
 /**
  * Represents a service for providing data from CDN.
  */
@@ -14,11 +12,8 @@ export default class ContentService {
   /**
    * Get the link of a challenge token icon by id. Tier type can optionally be 
    * passed for tier token icon (Diamond, Master, etc).
-   * @param {number} id 
-   * @param {string} type e.g. "diamond", "master"... case in-sensitive
-   * @returns {string}
    */
-  getChallengeTokenIcon(id, type) {
+  getChallengeTokenIcon(id: number, type?: string) {
     let link = `${ContentService.cdnUrl}/np-token/${id}`;
     if (type != null) link = `${link}/${type.toLowerCase()}`;
     return encodeURI(link);
@@ -26,10 +21,8 @@ export default class ContentService {
 
   /**
    * Get the link of a summoner icon by id
-   * @param {number} id 
-   * @returns {string}
    */
-  getProfileIcon(id) {
+  getProfileIcon(id: number) {
     return encodeURI(`${ContentService.cdnUrl}/profileicon/${id.toString()}`);
   }
 }
