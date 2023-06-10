@@ -10,6 +10,8 @@ export interface TitleDTO {
    challengeTier: number;
 }
 
+export type Tier = "UNRANKED" | "NONE" | "IRON" | "BRONZE" | "SILVER" | "GOLD" | "PLATINUM" | "EMERALD" | "DIAMOND" | "MASTER" | "GRANDMASTER" | "CHALLENGER";
+
 export interface ChallengeDTO {
    id: number;
    state: "ENABLED" | "RETIRED" | "DISABLED";
