@@ -1,4 +1,6 @@
-export function tierToInt(tier) {
+import { Tier } from "challenges/types";
+
+export function tierToInt(tier: Tier): Number {
    switch (tier) {
       case "UNRANKED":
       case "NONE":
@@ -26,7 +28,7 @@ export function tierToInt(tier) {
    }
 }
 
-export default function tierIdToPoints(tierId) {
+export default function tierIdToPoints(tierId: Number): Number {
    switch (tierId) {
       case 0:
          return 0;
@@ -51,7 +53,7 @@ export default function tierIdToPoints(tierId) {
    }
 }
 
-export function intToTier(inttier) {
+export function intToTier(inttier: Number): Tier {
    switch (inttier) {
       case -1:
          return "UNRANKED";

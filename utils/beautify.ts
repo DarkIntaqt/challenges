@@ -1,4 +1,7 @@
-export function beautifyNum(num, minify = true, threshold = 100000) {
+/**
+ * Minifies a number
+ */
+export function beautifyNum(num: number, minify = true, threshold = 100000) {
    if (typeof num === "undefined") {
       return "0";
    }
