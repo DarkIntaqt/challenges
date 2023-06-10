@@ -1,8 +1,8 @@
 .background {
     height: calc(100vh - 60px);
-    filter: brightness(.85);
+    filter: brightness(.65);
     width: 100%;
-    position: fixed;
+    position: absolute;
     z-index: 0;
 }
 
