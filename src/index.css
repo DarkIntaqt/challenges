@@ -148,7 +148,7 @@ button {
 }
 
 .PLATINUM {
-  --type: #4f9896;
+  --type: rgb(32, 140, 153);
   --url: url('https://lolcdn.darkintaqt.com/s/_-platinum')
 }
 
@@ -160,6 +160,11 @@ button {
 .DIAMOND {
   --type: #576ace;
   --url: url('https://lolcdn.darkintaqt.com/s/_-diamond')
+}
+
+.EMERALD {
+  --type: rgb(70, 181, 132);
+  --url: url('https://lolcdn.darkintaqt.com/s/_-emerald')
 }
 
 .GRANDMASTER {
