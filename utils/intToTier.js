@@ -73,7 +73,6 @@ export function intToTier(inttier) {
          return "GRANDMASTER";
       case 8:
          return "CHALLENGER";
-      case 0:
       default:
          return "NONE";
    }
