@@ -244,8 +244,7 @@ class Challenge extends Component {
             let thresholds = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-"]
             let percentiles = {}
             for (let i = 0; i < this.tiers.length; i++) {
-                percentiles[serverToMachineReadable(this.tiers[i])] = 1 - ((i + 1) / 10)
-
+                percentiles[serverToMachineReadable(this.tiers[i])] = Math.round(11 - (i + 1)) / 10;
             }
 
             let icon = "https://lolcdn.darkintaqt.com/cdn/np-token/" + challenge["icon_2"]
