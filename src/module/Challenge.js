@@ -22,6 +22,8 @@ import VipBadge from "./VipBadge"
 import Ad from "./Ad"
 import { withTranslation } from "react-i18next";
 
+import { Chart } from "chart.js/auto";
+
 //import excss from "../css/aboutChallenge.module.css"
 
 class Challenge extends Component {
@@ -262,14 +264,14 @@ class Challenge extends Component {
             if (challenge.icon === 1) {
                 isLoading = css.loading;
                 let i = 0;
-                while (i < 20) {
+                while (i < 25) {
                     i++;
                     summoner.push(<tr className={css.loading + " IRON"} key={i}>
                         <td>{i}.</td>
                         <td>
                             <a href={"/loading"} onClick={goTo}>
                                 <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/29"} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={""}></LazyLoadImage>
-                                <p>Loading<span className={css.region}>-</span></p>
+                                <p>Loading</p>
                             </a>
                         </td>
                         <td>...</td>
@@ -279,6 +281,70 @@ class Challenge extends Component {
 
                 icon = "https://lolcdn.darkintaqt.com/cdn/profileicon/-1"
             } else if (challenge.challenge.leaderboard === true || checkExists(challenge.challenge.tags["leaderboardManuallyEnabled"])) {
+
+
+                let chartStatus = Chart.getChart("average");
+                if (checkExists(chartStatus)) {
+                    chartStatus.destroy();
+                }
+                const data = {
+                    labels: [
+                        "6 days ago",
+                        "5 days ago",
+                        "4 days ago",
+                        "3 days ago",
+                        "2 days ago",
+                        "yesterday",
+                        "today"
+                    ],
+                    datasets: [{
+                        label: 'Ø points per game',
+                        backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--selected'),
+                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--selected'),
+                        data: challenge.progress
+                    }]
+                };
+
+                const chartConfig = {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        animation: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: true,
+                                    drawBorder: true,
+                                    color: getComputedStyle(document.documentElement).getPropertyValue('--dark3'),
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    drawBorder: false,
+                                    color: getComputedStyle(document.documentElement).getPropertyValue('--dark3'),
+                                },
+                            }
+                        }
+                    }
+                };
+
+                // render chart
+                new Chart(
+                    document.getElementById("average"),
+                    chartConfig
+                );
+
+
+
+
+
+
+
                 thresholds = challenge.stats[serverToMachineReadable(region)]
                 percentiles = challenge.stats["percentiles-" + serverToMachineReadable(region)]
 
@@ -470,6 +536,16 @@ class Challenge extends Component {
                         <div style={{ float: "left", flexWrap: "wrap", margin: "5px 0", width: "100%", display: "flex", justifyContent: "center" }}>
                             <Ad id={0}></Ad>
                         </div> : null}
+
+                    <div className={css.rowParent + " " + css.thresholdTable}>
+                        <div className={css.seoArea}>
+                            <h2>{t("Average Progress")}</h2>
+                            <span> {t("Points per game")}</span>
+                        </div>
+
+                        <canvas id="average" />
+
+                    </div>
                 </section>
 
                 <section className={css.rowParent + " " + css.zebra}>
