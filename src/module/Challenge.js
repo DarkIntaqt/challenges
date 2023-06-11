@@ -287,6 +287,19 @@ class Challenge extends Component {
                 if (checkExists(chartStatus)) {
                     chartStatus.destroy();
                 }
+
+                const label = (tootltipItems) => {
+
+                    if (tootltipItems[0].label === "Today") {
+
+                        return "Todays data might be inaccurate, as it is calculated live. "
+
+                    }
+
+                    return "";
+
+                }
+
                 const data = {
                     labels: [
                         "6 days ago",
@@ -294,8 +307,8 @@ class Challenge extends Component {
                         "4 days ago",
                         "3 days ago",
                         "2 days ago",
-                        "yesterday",
-                        "today"
+                        "Yesterday",
+                        "Today"
                     ],
                     datasets: [{
                         label: 'Ø points per game',
@@ -311,6 +324,11 @@ class Challenge extends Component {
                     options: {
                         animation: false,
                         plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    footer: label,
+                                }
+                            },
                             legend: {
                                 display: false
                             }
