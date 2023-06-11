@@ -40,7 +40,7 @@ export default function getChallenge(challengeId = 0) {
         console.error(`Didn't load challenge ${challengeId}, return fallback`)
         return fallback;
     } catch (error) {
-        console.error(error);
+        console.error(challengeId, error);
         return fallback;
     }
 }
