@@ -162,14 +162,97 @@ class Challenge extends Component {
             if (this.challenge === "null" || this.challenges === "null") {
                 this.load();
             }
+        } else {
+            this.chart()
         }
+    }
+
+    chart() {
+        let chartStatus = Chart.getChart("average");
+        if (checkExists(chartStatus)) {
+            chartStatus.destroy();
+        }
+
+        const label = (tootltipItems) => {
+
+            if (tootltipItems[0].label === "Today") {
+
+                return "Todays data might be inaccurate, as it is calculated live. "
+
+            }
+
+            return "";
+
+        }
+
+        const data = {
+            labels: [
+                "6 days ago",
+                "5 days ago",
+                "4 days ago",
+                "3 days ago",
+                "2 days ago",
+                "Yesterday",
+                "Today"
+            ],
+            datasets: [{
+                label: 'Ø points per game',
+                backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--selected'),
+                borderColor: getComputedStyle(document.documentElement).getPropertyValue('--selected'),
+                data: this.state.challenge.progress
+            }]
+        };
+
+        const chartConfig = {
+            type: 'line',
+            data: data,
+            options: {
+                animation: false,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            footer: label,
+                        }
+                    },
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: true,
+                            drawBorder: true,
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--dark3'),
+                        }
+                    },
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--dark3'),
+                        },
+                    }
+                }
+            }
+        };
+
+        // render chart
+        new Chart(
+            document.getElementById("average"),
+            chartConfig
+        );
+
 
     }
 
     componentDidMount() {
-        if (this.challenge === "null" || this.challenges === "null")
+        if (this.challenge === "null" || this.challenges === "null") {
             this.load();
+        } else {
+            this.chart();
+        }
     }
+
 
     load() {
         document.title = "Loading..."
@@ -281,85 +364,6 @@ class Challenge extends Component {
 
                 icon = "https://lolcdn.darkintaqt.com/cdn/profileicon/-1"
             } else if (challenge.challenge.leaderboard === true || checkExists(challenge.challenge.tags["leaderboardManuallyEnabled"])) {
-
-
-                let chartStatus = Chart.getChart("average");
-                if (checkExists(chartStatus)) {
-                    chartStatus.destroy();
-                }
-
-                const label = (tootltipItems) => {
-
-                    if (tootltipItems[0].label === "Today") {
-
-                        return "Todays data might be inaccurate, as it is calculated live. "
-
-                    }
-
-                    return "";
-
-                }
-
-                const data = {
-                    labels: [
-                        "6 days ago",
-                        "5 days ago",
-                        "4 days ago",
-                        "3 days ago",
-                        "2 days ago",
-                        "Yesterday",
-                        "Today"
-                    ],
-                    datasets: [{
-                        label: 'Ø points per game',
-                        backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--selected'),
-                        borderColor: getComputedStyle(document.documentElement).getPropertyValue('--selected'),
-                        data: challenge.progress
-                    }]
-                };
-
-                const chartConfig = {
-                    type: 'line',
-                    data: data,
-                    options: {
-                        animation: false,
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    footer: label,
-                                }
-                            },
-                            legend: {
-                                display: false
-                            }
-                        },
-                        scales: {
-                            x: {
-                                grid: {
-                                    display: true,
-                                    drawBorder: true,
-                                    color: getComputedStyle(document.documentElement).getPropertyValue('--dark3'),
-                                }
-                            },
-                            y: {
-                                grid: {
-                                    drawBorder: false,
-                                    color: getComputedStyle(document.documentElement).getPropertyValue('--dark3'),
-                                },
-                            }
-                        }
-                    }
-                };
-
-                // render chart
-                new Chart(
-                    document.getElementById("average"),
-                    chartConfig
-                );
-
-
-
-
 
 
 
