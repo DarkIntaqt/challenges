@@ -34,7 +34,7 @@ class Challenge extends Component {
         this.tiers = config.tiers
 
         let tempRegion = props.query.toLowerCase();
-        if (!this.regions.includes(tempRegion)) {
+        if (!tempRegion) {
             tempRegion = "world"
         }
 
@@ -275,14 +275,69 @@ class Challenge extends Component {
     }
 
     changeFilter(e) {
+
+        var isRightMB;
+        e.preventDefault();
+
+        if ("which" in e)  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
+            isRightMB = e.which === 3;
+        else if ("button" in e)  // IE, Opera 
+            isRightMB = e.button === 2;
+
+        let filter = "world";
+
         if (e.target.id === "world") {
             let url = new URL(window.location)
             url.search = "";
             window.history.replaceState({}, "", url)
         } else {
-            window.history.replaceState({}, "", "?region=" + e.target.id)
+
+            filter = e.target.id;
+
+            if (isRightMB) {
+
+                filter = "";
+                for (let i = 0; i < this.regions.length; i++) {
+                    const region = this.regions[i];
+
+                    if (region !== e.target.id) {
+                        filter += region + ";"
+                    }
+
+                }
+
+            }
+
+            else if (e.shiftKey) {
+
+                const tempFilter = this.state.filter.split(";")
+                if (tempFilter.includes(filter)) {
+
+                    if (tempFilter.length > 1) {
+                        var index = tempFilter.indexOf(filter);
+                        if (index !== -1) {
+                            tempFilter.splice(index, 1);
+                        }
+
+                        filter = tempFilter.join(";");
+                    } else {
+                        filter = this.state.filter;
+                    }
+
+                } else {
+
+                    if (!tempFilter[0] === "world") {
+
+                        filter = this.state.filter + ";" + filter
+
+                    }
+
+                }
+            }
+
+            window.history.replaceState({}, "", "?region=" + filter)
         }
-        this.setState({ filter: e.target.id });
+        this.setState({ filter: filter });
     }
 
     render() {
@@ -295,9 +350,9 @@ class Challenge extends Component {
 
             const challenge = JSON.parse(JSON.stringify(this.state.challenge));
             const regions = this.regions
-            const absoluteRegion = this.state.filter
-            let region = absoluteRegion;
-            if (absoluteRegion === "world") {
+            const absoluteRegion = this.state.filter.split(";")
+            let region = absoluteRegion[0];
+            if (absoluteRegion[0] === "world") {
                 region = window.region ?? "na"
             }
 
@@ -318,9 +373,9 @@ class Challenge extends Component {
                 return noThresholds
             }
 
-            let filters = [<button key={"world"} onClick={this.changeFilter} className={start.filterOption + " " + start["world"]} id="world">Global</button>];
+            let filters = [<button key={"world"} onMouseDown={this.changeFilter} onContextMenu={(e) => { e.preventDefault(); return false; }} className={start.filterOption + " " + start["world"]} id="world">Global</button>];
             for (let i = 0; i < regions.length; i++) {
-                filters.push(<button key={i} onClick={this.changeFilter} className={start.filterOption + " " + start[regions[i]]} id={regions[i]}>{regions[i]}</button>)
+                filters.push(<button key={i} onMouseDown={this.changeFilter} onContextMenu={(e) => { e.preventDefault(); return false; }} className={start.filterOption + " " + start[regions[i]]} id={regions[i]}>{regions[i]}</button>)
             }
 
 
@@ -365,8 +420,6 @@ class Challenge extends Component {
                 icon = "https://lolcdn.darkintaqt.com/cdn/profileicon/-1"
             } else if (challenge.challenge.leaderboard === true || checkExists(challenge.challenge.tags["leaderboardManuallyEnabled"])) {
 
-
-
                 thresholds = challenge.stats[serverToMachineReadable(region)]
                 percentiles = challenge.stats["percentiles-" + serverToMachineReadable(region)]
 
@@ -376,51 +429,48 @@ class Challenge extends Component {
 
                     // create list with summoners
                     let summoners = []
-                    if (absoluteRegion === "world") {
-                        let counters = {};
-                        for (let i = 0; i < regions.length; i++) {
-                            for (let ii = 0; ii < challenge.summoner[regions[i]].length; ii++) {
-                                if (!checkExists(counters[regions[i]])) {
-                                    counters[regions[i]] = 1
-                                }
-                                challenge.summoner[regions[i]][ii].push(regions[i])
-                                challenge.summoner[regions[i]][ii].push(counters[regions[i]])
-                                summoners.push(challenge.summoner[regions[i]][ii])
-                                counters[regions[i]]++
+
+
+                    let counters = {};
+                    for (let i = 0; i < regions.length; i++) {
+
+                        if (!absoluteRegion.includes(regions[i]) && absoluteRegion[0] !== "world") { continue; }
+
+                        for (let ii = 0; ii < challenge.summoner[regions[i]].length; ii++) {
+                            if (!checkExists(counters[regions[i]])) {
+                                counters[regions[i]] = 1
                             }
+                            challenge.summoner[regions[i]][ii].push(regions[i])
+                            challenge.summoner[regions[i]][ii].push(counters[regions[i]])
+                            summoners.push(challenge.summoner[regions[i]][ii])
+                            counters[regions[i]]++
+                        }
 
-                        }
-                        if (challenge.challenge.reversed === true) {
-                            summoners.sort((a, b) => {
-                                // Order by name if same value and position
-                                if (a[1] === b[1]) {
-                                    if (b[6] === a[6]) {
-                                        return a[4] - b[4]
-                                    }
-                                    return a[6] - b[6]
-                                }
-                                return a[1] - b[1]
-                            })
-                        } else {
-                            summoners.sort((a, b) => {
-                                // Order by timestamp if same value and position
-                                if (a[1] === b[1]) {
-                                    if (b[6] === a[6]) {
-                                        return a[4] - b[4]
-                                    }
-                                    return a[6] - b[6]
-                                }
-                                return b[1] - a[1]
-                            })
-                        }
-                    } else {
-                        summoners = challenge.summoner[absoluteRegion]
-                        for (let i = 0; i < summoners.length; i++) {
-                            summoners[i].push(absoluteRegion)
-                            summoners[i].push(i + 1)
-
-                        }
                     }
+                    if (challenge.challenge.reversed === true) {
+                        summoners.sort((a, b) => {
+                            // Order by name if same value and position
+                            if (a[1] === b[1]) {
+                                if (b[6] === a[6]) {
+                                    return a[4] - b[4]
+                                }
+                                return a[6] - b[6]
+                            }
+                            return a[1] - b[1]
+                        })
+                    } else {
+                        summoners.sort((a, b) => {
+                            // Order by timestamp if same value and position
+                            if (a[1] === b[1]) {
+                                if (b[6] === a[6]) {
+                                    return a[4] - b[4]
+                                }
+                                return a[6] - b[6]
+                            }
+                            return b[1] - a[1]
+                        })
+                    }
+
                     if (summoners.length === 0) {
                         summoner = []
                     } else {
@@ -520,7 +570,7 @@ class Challenge extends Component {
 
                 </section>
 
-                <section className={start.filter + " " + start[this.state.filter]}>
+                <section className={start.filter + " " + this.state.filter.split(";").map(filter => start[filter]).join(" ")}>
                     {filters}
                 </section>
 
