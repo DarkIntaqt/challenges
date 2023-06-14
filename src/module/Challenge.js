@@ -310,6 +310,8 @@ class Challenge extends Component {
 
             else if (e.shiftKey) {
 
+                console.log("SHIFT")
+
                 const tempFilter = this.state.filter.split(";")
                 if (tempFilter.includes(filter)) {
 
@@ -326,7 +328,9 @@ class Challenge extends Component {
 
                 } else {
 
-                    if (!tempFilter[0] === "world") {
+                    console.log(tempFilter)
+
+                    if (tempFilter[0] !== "world") {
 
                         filter = this.state.filter + ";" + filter
 
