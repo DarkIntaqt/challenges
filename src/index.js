@@ -12,7 +12,6 @@ import Start from './module/Start';
 import HeaderNFooter from './module/Header-n-Footer'
 import Error from './module/Error'
 import PathProxy from './module/PathProxy'
-import FAQ from './module/FAQ'
 import Title from './module/Title'
 import Challenges from "./module/Challenges"
 import get from "./func/get";
@@ -97,8 +96,6 @@ function main() {
           </Fragment>}>
 
             <Route path="" element={<Start />}></Route>
-
-            <Route path="faq" element={<FAQ />}></Route>
 
             <Route path="settings" element={<Settings />}></Route>
 

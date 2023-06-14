@@ -494,7 +494,7 @@ class Challenge extends Component {
                             let userlink = "/" + player[6] + "/" + nameToURL(player[0])
 
                             if (player[0] === "%") {
-                                userlink = "/faq#h3"
+                                userlink = "/faq"
                             }
 
                             summoner.push(<tr key={player[0] + player[7] + i} className={intToTier(player[2])}>
