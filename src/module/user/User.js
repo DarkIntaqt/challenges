@@ -222,11 +222,12 @@ class User extends Component {
 
                 } finally {
 
-                    let skip = false
-
+                    let skip = false;
                     for (let i = 0; i < parsedList.length; i++) {
 
-                        if (parsedList[i][1] === summonerObject.summonerName && parsedList[i][0] === this.params.server) { skip = true }
+                        if (parsedList[i][1] === summonerObject.summonerName && parsedList[i][0] === this.params.server) {
+                            skip = true
+                        }
 
                     }
 

@@ -19,11 +19,22 @@ export function getNextLevel(current, masterOnly = false, pointsOnly = false) {
 
 
 
-export function removeUnnecessaryChallenges(challenges, filters, masterOnly = false, pointsOnly = false) {
+export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly = false, pointsOnly = false) {
 
-    return challenges.map(function (challenge) {
+    let challenges = {};
+    challengesArray.forEach(challenge => {
+        challenges[challenge[0]] = challenge;
+    })
 
-        let challengeData = getChallenge(challenge[0])
+    const challengesDetailed = window.JSONPREQUEST;
+
+    return challengesDetailed.map(function (challengeData) {
+
+        let challenge = [challengeData.id, 0, 0, 0, 0, [0]];
+
+        if (challenges[challengeData.id]) {
+            challenge = challenges[challengeData.id]
+        }
 
         if (challengeData === 0) {
             return null
