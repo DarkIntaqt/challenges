@@ -23,12 +23,11 @@ import UserChallenges from "./UserChallenges"
 import VipBadge from "../VipBadge";
 import Wrapper from "../Wrapper";
 import { withTranslation } from "react-i18next";
-import goTo from "../../func/goTo";
 import { checkExists } from "../../func/arrayManipulationFunctions";
 
 
 const Title = Loadable({
-    loader: (content) => import('./UserTitle'),
+    loader: () => import('./UserTitle'),
     loading: function () {
         return <div style={{ width: "100%", float: "left" }}>
             <Loader />
@@ -39,7 +38,7 @@ const Title = Loadable({
 
 
 const Statistics = Loadable({
-    loader: (content) => import('./UserStatistics'),
+    loader: () => import('./UserStatistics'),
     loading: function () {
         return <div style={{ width: "100%", float: "left" }}>
             <Loader />
@@ -50,7 +49,7 @@ const Statistics = Loadable({
 
 
 const History = Loadable({
-    loader: (content) => import('./UserHistory'),
+    loader: () => import('./UserHistory'),
     loading: function () {
         return <div style={{ width: "100%", float: "left" }}>
             <Loader />
