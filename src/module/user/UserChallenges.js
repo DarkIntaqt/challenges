@@ -219,8 +219,26 @@ class UserChallenges extends Component {
                 nexttier = "MASTER"
             }
 
+            next = 1
             if (checkExists(c["thresholds"][nexttier])) {
                 next = c["thresholds"][nexttier]
+            } else if (!checkExists(c["thresholds"][tier])) {
+
+                let stop = false;
+                let i = 0;
+
+                while (stop === false && i < 10) {
+                    i++;
+                    nexttier = getNextLevel(nexttier);
+                    if (checkExists(c["thresholds"][nexttier])) {
+                        next = c["thresholds"][nexttier]
+                        stop = true;
+                    }
+
+                    if (nexttier === "CHALLENGER") {
+                        stop = true;
+                    }
+                }
             } else {
                 next = c["thresholds"][tier]
             }
