@@ -349,7 +349,7 @@ class User extends Component {
 
 
 
-                tier = intToTier(parseInt(titleTier))
+                tier = intToTier(parseInt(titleTier) + 1)
                 challenge = getChallenge(parseInt(title.toString().slice(0, -2)))
 
                 if (!checkExists(challenge.thresholds) || !checkExists(challenge.title) || !checkExists(challenge.translation) || !checkExists(challenge.translation.description)) {
