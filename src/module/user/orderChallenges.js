@@ -30,7 +30,7 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
 
     return challengesDetailed.map(function (challengeData) {
 
-        let challenge = [challengeData.id, 0, 0, 0, 0, [0]];
+        let challenge = [challengeData.id, 0, 0, 0, 0, [1]];
 
         if (challenges[challengeData.id]) {
             challenge = challenges[challengeData.id]
