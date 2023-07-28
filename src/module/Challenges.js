@@ -90,7 +90,6 @@ class Challenges extends Component {
 
         let challengeObject = [];
 
-        console.log(this.filter);
         for (let i = 0; i < challenges.length; i++) {
             const challenge = challenges[i];
             if (challenge.id < 10) {
@@ -389,7 +388,6 @@ class Challenges extends Component {
                 {this.state.event}
             </section>
 
-            <input type="text" placeholder={t("Search for a challenge")} onKeyUp={this.search} className={filterCSS.input} defaultValue={this.searchFor} />
             <div className={filterCSS.filter}>
 
                 <div className={filterCSS.selectors + " clearfix"}>
@@ -430,7 +428,7 @@ class Challenges extends Component {
                         </button>
                         <button onClick={this.changeFilter} data-id="2023000">
                             <img src={config.images['2023000']} alt="2023 seasonal" />
-                            2023 Seasonal <span>{t("new").toUpperCase()}</span>
+                            2023 Seasonal
                         </button>
                         <button onClick={this.changeFilter} data-id="seasonal-retired">
                             <img src={config.images['seasonal-retired']} alt="seasonal outdated" />
@@ -488,6 +486,7 @@ class Challenges extends Component {
                 </div>
             </div>
             <div className={css.parent + " " + css.flexWidth}>
+                <input type="text" placeholder={t("Search for a challenge")} onKeyUp={this.search} className={filterCSS.input} defaultValue={this.searchFor} />
                 {
                     this.state.challenges.length > 0
                         ? this.state.challenges

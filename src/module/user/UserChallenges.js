@@ -18,7 +18,6 @@ import Timestamp from "react-timestamps"
 import css from "../../css/user.module.css"
 
 import orderChallenges, { getNextLevel } from "./orderChallenges";
-import goTo from "../../func/goTo";
 import Loader from "../Loader"
 import { withTranslation } from "react-i18next";
 import { capitalize } from "../../func/stringManipulation";
@@ -37,8 +36,9 @@ class UserChallenges extends Component {
         this.togglePointsAvailableSorting = this.togglePointsAvailableSorting.bind(this)
 
         this.changeDisplayMethod = this.changeDisplayMethod.bind(this)
+        this.search = this.search.bind(this);
 
-        this.props = props
+        this.props = props;
 
         this.state = {
             alphabet: "a-z",
@@ -51,7 +51,8 @@ class UserChallenges extends Component {
                 "type": [],
                 "gamemode": []
             },
-            translation: props.t
+            translation: props.t,
+            search: ""
         }
 
     }
@@ -154,6 +155,10 @@ class UserChallenges extends Component {
         }
     }
 
+    search(e) {
+        this.setState({ search: e.currentTarget.value })
+    }
+
 
     render() {
 
@@ -175,7 +180,7 @@ class UserChallenges extends Component {
         const filter = this.state.filter
 
 
-        let challengesOrdered = orderChallenges(user.challenges, this.state.filter, this.state.filters, this.state.orderByMaster, this.state.orderByPoints)
+        let challengesOrdered = orderChallenges(user.challenges, this.state.filter, this.state.filters, this.state.orderByMaster, this.state.orderByPoints, this.state.search)
 
 
         let challenges = challengesOrdered.map((challenge) => {
@@ -427,6 +432,7 @@ class UserChallenges extends Component {
 
 
             <div className={css.parent + " " + css.flexWidth} style={this.state.extraStyleNormal}>
+                <input type="text" placeholder={t("Search for a challenge")} onKeyUp={this.search} className={filterCSS.input} defaultValue={this.state.search} />
                 {challenges}
             </div>
 

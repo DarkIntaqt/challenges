@@ -19,7 +19,7 @@ export function getNextLevel(current, masterOnly = false, pointsOnly = false) {
 
 
 
-export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly = false, pointsOnly = false) {
+export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly = false, pointsOnly = false, search = "") {
 
     let challenges = {};
     challengesArray.forEach(challenge => {
@@ -143,15 +143,19 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
 
         }
 
+        if (search !== "" && (challenge[6].translation.name.toLowerCase().search(search.toLowerCase()) === -1 && challenge[6].translation.description.toLowerCase().search(search.toLowerCase()) === -1)) {
+            return null
+        }
+
         return challenge
     })?.filter(x => x !== null)
 
 }
 
 
-export default function orderChallenges(challenges, filter, extraFilter, masterOnly, pointsOnly) {
+export default function orderChallenges(challenges, filter, extraFilter, masterOnly, pointsOnly, search) {
 
-    challenges = removeUnnecessaryChallenges(challenges, extraFilter, masterOnly, pointsOnly)
+    challenges = removeUnnecessaryChallenges(challenges, extraFilter, masterOnly, pointsOnly, search)
 
     let sortAlgorithm = function (a, b) {
 
