@@ -208,6 +208,7 @@ class Challenge extends Component {
             data: data,
             options: {
                 animation: false,
+                radius: 7,
                 plugins: {
                     tooltip: {
                         callbacks: {
@@ -220,14 +221,21 @@ class Challenge extends Component {
                 },
                 scales: {
                     x: {
+                        ticks: {
+                            display: false,
+                        },
                         grid: {
-                            display: true,
-                            drawBorder: true,
+                            display: false,
+                            drawBorder: false,
                             color: getComputedStyle(document.documentElement).getPropertyValue('--dark3'),
                         }
                     },
                     y: {
+                        ticks: {
+                            display: false,
+                        },
                         grid: {
+                            display: false,
                             drawBorder: false,
                             color: getComputedStyle(document.documentElement).getPropertyValue('--dark3'),
                         },
@@ -619,7 +627,7 @@ class Challenge extends Component {
                             <span> {t("Points per game")}</span>
                         </div>
 
-                        <canvas id="average" />
+                        <canvas id="average" style={{ padding: "10px" }} />
 
                     </div>
                 </section>
