@@ -13,23 +13,13 @@ export default class History extends Component {
 
         this.props = props
 
-        let verified = 0
-        if (this.props.summoner.challenges.length !== 0) {
-            const verifiedCache = getCache("https://challenges.darkintaqt.com/api/v1/c-vip/?id=" + this.props.summoner.id)
-
-            if (verifiedCache !== false) {
-                verified = verifiedCache[0]
-            }
-        }
-
-        this.validateVerified = this.validateVerified.bind(this)
         this.loadHistory = this.loadHistory.bind(this)
         this.loadChallenges = this.loadChallenges.bind(this)
         this.addHistory = this.addHistory.bind(this)
         this.addQueues = this.addQueues.bind(this)
 
         this.state = {
-            verified: verified,
+            verified: props.verified,
             matches: [],
             challenges: {},
             queues: [],
@@ -57,14 +47,6 @@ export default class History extends Component {
         }
     }
 
-    validateVerified(e) {
-        if (e[0] === true) {
-            this.setState({ verified: true })
-            return
-        }
-        this.setState({ verified: false })
-    }
-
 
     componentDidMount() {
 
@@ -77,7 +59,12 @@ export default class History extends Component {
     }
 
     componentDidUpdate() {
-        this.loadHistory()
+
+        if (this.props.verified !== this.state.verified) {
+            this.setState({ verified: true });
+        }
+
+        this.loadHistory();
     }
 
     addHistory(content) {
@@ -93,14 +80,11 @@ export default class History extends Component {
     }
 
     loadHistory() {
+        console.log(this.state)
         if (this.state.error !== false) { return }
         const user = JSON.parse(JSON.stringify(this.props.summoner));
 
         if (user.challenges.length === 0) { return }
-        if (this.state.verified === 0) {
-            get("https://challenges.darkintaqt.com/api/v1/c-vip/?id=" + user.id, this.validateVerified);
-            return
-        }
         if (this.state.verified !== true) { return }
 
         if (this.state.queues.length === 0) {
