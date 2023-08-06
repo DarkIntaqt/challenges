@@ -80,7 +80,6 @@ export default class History extends Component {
     }
 
     loadHistory() {
-        console.log(this.state)
         if (this.state.error !== false) { return }
         const user = JSON.parse(JSON.stringify(this.props.summoner));
 
