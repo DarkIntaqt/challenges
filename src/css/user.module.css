@@ -252,7 +252,8 @@ img.mclogo {
 .selectedFilteroverview>.overview,
 .selectedFiltertitles>.titles,
 .selectedFilterstatistics>.statistics,
-.selectedFilterhistory>.history {
+.selectedFilterhistory>.history,
+.selectedFiltercalendar>.calendar {
     color: var(--selected);
     border-bottom: 2px solid var(--selected)
 }

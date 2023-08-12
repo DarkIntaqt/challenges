@@ -18,6 +18,7 @@
     "react-loadable": "^5.5.0",
     "react-router-dom": "^6.8.0",
     "react-timestamps": "github:DarkIntaqt/react-timestamps",
+    "react-tooltip": "^5.20.0",
     "web-vitals": "^3.1.0"
   },
   "devDependencies": {
