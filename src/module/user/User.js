@@ -60,6 +60,17 @@ const History = Loadable({
 });
 
 
+const Calendar = Loadable({
+    loader: () => import('./UserCalendar'),
+    loading: function () {
+        return <div style={{ width: "100%", float: "left" }}>
+            <Loader />
+            <p style={{ color: "white", fontSize: "1rem", textAlign: "center" }}>Loading Calendar...</p>
+        </div>
+    },
+});
+
+
 class User extends Component {
     constructor(props) {
         super(props)
@@ -279,7 +290,7 @@ class User extends Component {
 
         const currentLocation = window.location.pathname.split("/")[3] ?? "overview"
 
-        const allowedLocations = ["overview", "titles", "statistics", "history"]
+        const allowedLocations = ["overview", "titles", "statistics", "history", "calendar"]
 
         if (!allowedLocations.includes(currentLocation)) {
 
@@ -398,8 +409,8 @@ class User extends Component {
 
                 <h1>
                     {summonerName}{this.state.verified === true ? <a href="https://darkintaqt.com/blog/about-challenge-tracker#what-are-these-blue-checkmarks" target="_blank" rel="noreferrer" ><VipBadge size={"2rem"} /></a> : null}{typeof summonerName === "object" ? null : <Fragment>
-                        <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText + "u.gg"} title={profileText + "u.gg"}></img></a>
-                        <a href={"https://masterychart.com/profile/" + serverToHumanReadable(this.server).replace("oc", "oce") + "/" + decodeURI(strtolower(summonerName)) + "?utm_source=Challenge+Tracker&utm_medium=Website&utm_campaign=Profile"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.mclogo} src="https://challenges.darkintaqt.com/api/masterychart-full.png" alt={profileText + "Masterychart"} title={profileText + "Masterychart"}></img></a>
+                        {/* <a href={"https://u.gg/lol/profile/" + this.server + "/" + decodeURI(strtolower(summonerName)) + "/overview"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.ugglogo} src="https://cdn.darkintaqt.com/lol/static/challenges/ugg.svg" alt={profileText + "u.gg"} title={profileText + "u.gg"}></img></a>
+                        <a href={"https://masterychart.com/profile/" + serverToHumanReadable(this.server).replace("oc", "oce") + "/" + decodeURI(strtolower(summonerName)) + "?utm_source=Challenge+Tracker&utm_medium=Website&utm_campaign=Profile"} target="_blank" rel="noreferrer nofollow" className={css.uggarea}><img className={css.mclogo} src="https://challenges.darkintaqt.com/api/masterychart-full.png" alt={profileText + "Masterychart"} title={profileText + "Masterychart"}></img></a> */}
                     </Fragment>
                     }
                 </h1>
@@ -436,7 +447,11 @@ class User extends Component {
 
                 <Link to="statistics" className={css["statistics"]}>{t("Statistics")}</Link>
 
-                <Link to="history" className={css["history"]}>{t("History")} <span>{strtoupper(t("new"))}</span></Link>
+                <Link to="history" className={css["history"]}>{t("History")}</Link>
+
+                {this.state.verified ?
+                    <Link to="calendar" className={css["calendar"]}>{t("Calendar")} <span>{strtoupper(t("new"))}</span></Link>
+                    : null}
 
             </div>
 
@@ -449,7 +464,9 @@ class User extends Component {
 
                 <Route path="statistics" element={<Statistics summoner={this.state.user} />}></Route>
 
-                <Route path="history" element={<History summoner={this.state.user} />}></Route>
+                <Route path="history" element={<History summoner={this.state.user} verified={this.state.verified} />}></Route>
+
+                <Route path="calendar" element={<Calendar user={this.state.user} verified={this.state.verified} />}></Route>
 
             </Routes>
 

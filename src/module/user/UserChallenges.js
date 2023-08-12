@@ -424,8 +424,7 @@ class UserChallenges extends Component {
                 </div>
                 <p className={css.legal}>
                     <span data-nosnippet>
-                        The U.GG logo belongs to U.GG. Read more <a href="https://darkintaqt.com/blog/about-challenge-tracker#what-about-the-u.gg-logo-on-a-users-profile-page?" target="_blank" rel="noreferrer" >here</a>.
-                        <br /><br />Click <a href="https://darkintaqt.com/blog/about-challenge-tracker#what-are-all-these-filter-options-on-a-profile-page?" target="_blank" rel="noreferrer" >here</a> to get any questions about this page answered.
+                        Click <a href="https://darkintaqt.com/blog/about-challenge-tracker#what-are-all-these-filter-options-on-a-profile-page?" target="_blank" rel="noreferrer" >here</a> to get any questions about this page answered.
                     </span>
                 </p>
             </div>
