@@ -2,7 +2,6 @@ import css from "../../css/stats.module.css"
 import { Component } from "react";
 import Loader from "../Loader";
 import get from "../../func/get";
-import { getCache } from "../../func/getCheckCache";
 import Match from "./Match";
 import { getStorage, setStorage, storageKeys } from "../../func/localStorageFunctions";
 
@@ -99,7 +98,7 @@ export default class History extends Component {
         }
 
         if (this.state.matches.length === 0) {
-            get("https://challenges.darkintaqt.com/api/v1/history/?id=" + user.id, this.addHistory)
+            get("https://challenges.darkintaqt.com/api/v1/history/?id=" + user.id, this.addHistory, () => { this.setState({ error: "Failed to load match history." }) })
         }
     }
 
