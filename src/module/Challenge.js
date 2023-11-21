@@ -372,7 +372,7 @@ class Challenge extends Component {
                 if (typeof name !== "string") {
                     return "error"
                 }
-                return name
+                return name.replace(/#/g, "-");
             }
 
             function checkThresholds(thresholds) {
@@ -511,7 +511,7 @@ class Challenge extends Component {
                                     <a href={userlink} onClick={goTo}>
                                         {player[5] === 1 ? <VipBadge size={"22px"} position={"absolute"} margin={"20px 0 0 20px"} /> : null}
                                         <LazyLoadImage height={30} width={30} src={"https://lolcdn.darkintaqt.com/cdn/profileicon/" + player[3]} placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"} alt={player[0] + "'s profile image"}></LazyLoadImage>
-                                        <p>{player[0]} <span className={css.region}>#{serverToHumanReadable(player[6])}</span></p>
+                                        <p>{player[0]} <span className={css.region}>{serverToHumanReadable(player[6])}</span></p>
                                     </a>
                                 </td>
                                 <td>{capitalize(t(strtolower(intToTier(player[2]))))}</td>

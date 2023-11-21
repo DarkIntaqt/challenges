@@ -38,7 +38,7 @@ class Start extends Component {
 
     function search(name) {
 
-      window.reactNavigate("/" + window.region + "/" + name)
+      window.reactNavigate("/" + window.region + "/" + name.replace(/#/g, "-"))
 
     }
 
