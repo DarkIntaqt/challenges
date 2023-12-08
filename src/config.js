@@ -86,12 +86,14 @@ const config = {
         "4": "https://cdn.darkintaqt.com/lol/static/challenges/teamwork.svg",
         "600006": legacy,
         "0": legacy,
+        "601000": "https://lolcdn.darkintaqt.com/cdn/arena.png",
         "2022000": "https://cdn.darkintaqt.com/lol/static/challenges/2022seasonal.svg",
         "seasonal-retired": "https://cdn.darkintaqt.com/lol/static/challenges/retired.svg",
         "2023000": "https://cdn.darkintaqt.com/lol/static/challenges/2023seasonal.svg",
         "summonersrift": "https://lolcdn.darkintaqt.com/cdn/sr.svg",
         "aram": "https://lolcdn.darkintaqt.com/cdn/ha.svg",
-        "bot": "https://lolcdn.darkintaqt.com/cdn/bot.png"
+        "bot": "https://lolcdn.darkintaqt.com/cdn/bot.png",
+        "arena": "https://lolcdn.darkintaqt.com/cdn/arena.png"
     }
 }
 

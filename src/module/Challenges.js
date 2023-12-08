@@ -202,7 +202,8 @@ class Challenges extends Component {
                 let enabled = {
                     isAram: false,
                     isSR: false,
-                    isBot: false
+                    isBot: false,
+                    isArena: false
                 }
 
                 for (let i = 0; i < challenge.queueIds.length; i++) {
@@ -218,14 +219,17 @@ class Challenges extends Component {
                     if ([830, 840, 850].includes(queue)) {
                         enabled["isBot"] = true;
                     }
+                    if ([1700, 1701, 1704].includes(queue)) {
+                        enabled["isArena"] = true;
+                    }
                 }
 
-                if (enabled["isAram"] && enabled["isSR"]) {
+                if (enabled["isAram"] && enabled["isSR"] && enabled["isAram"]) {
                     queueIds.push(<div key={"all " + i}>
                         <p>All modes</p>
                         <img key={0} src="https://cdn.darkintaqt.com/lol/static/lanes/FILL.png" alt="All modes" />
                     </div>)
-                } else if (enabled["isAram"] && !enabled["isSR"]) {
+                } else if (enabled["isAram"] && !enabled["isSR"] && !enabled["isArena"]) {
                     if (this.filter.gamemode.length > 0 && !this.filter.gamemode.includes("aram")) {
                         continue
                     }
@@ -233,13 +237,21 @@ class Challenges extends Component {
                         <p>ARAM games only</p>
                         <img key={1} src={config.images.aram} alt="Aram games only" />
                     </div>)
-                } else if (!enabled["isAram"] && enabled["isSR"]) {
+                } else if (!enabled["isAram"] && enabled["isSR"] && !enabled["isArena"]) {
                     if (this.filter.gamemode.length > 0 && !this.filter.gamemode.includes("summonersrift")) {
                         continue
                     }
                     queueIds.push(<div key={"sr " + i}>
                         <p>Summoners Rift only</p>
                         <img key={2} src={config.images.summonersrift} alt="Summoners Rift games only" />
+                    </div>)
+                } else if (enabled["isArena"] && !enabled["isSR"] && !enabled["isAram"]) {
+                    if (this.filter.gamemode.length > 0 && !this.filter.gamemode.includes("arena")) {
+                        continue
+                    }
+                    queueIds.push(<div key={"arena " + i}>
+                        <p>Arena only</p>
+                        <img key={2} src={config.images.arena} alt="Arena games only" />
                     </div>)
                 } else {
                     if (this.filter.gamemode.length > 0 && !this.filter.gamemode.includes("bot")) {
@@ -477,6 +489,10 @@ class Challenges extends Component {
                         <button onClick={this.changeFilter} data-id="aram">
                             <img src={config.images.aram} alt="ARAM" />
                             ARAM
+                        </button>
+                        <button onClick={this.changeFilter} data-id="arena">
+                            <img src={config.images.arena} alt="Arena Games" />
+                            Arena
                         </button>
                         <button onClick={this.changeFilter} data-id="bot">
                             <img src={config.images.bot} alt="Bot Games" />
