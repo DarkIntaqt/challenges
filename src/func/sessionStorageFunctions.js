@@ -1,7 +1,9 @@
 /**
- * Keys used for localStorage.
+ * Keys used for sessionStorage.
  */
 export const storageKeys = {
+   userFilter: "user-filter",
+   userFilters: "user-filters",
    challengeFilters: "challenge-filters",
    challengeSearch: "challenge-search",
    pointsOnly: "points-only",

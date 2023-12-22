@@ -47,12 +47,12 @@ class UserChallenges extends Component {
             orderByPoints: getStorage(storageKeys.pointsOnly, false),
             capstones: getStorage(storageKeys.capstones, false),
             placeholder: window.compactMode,
-            filter: "level",
-            filters: {
+            filter: getStorage(storageKeys.userFilter, "level"),
+            filters: getStorage(storageKeys.userFilters, {
                 "category": [],
                 "type": [],
-                "gamemode": []
-            },
+                "gamemode": [],
+            }),
             translation: props.t,
             search: ""
         }
@@ -122,6 +122,7 @@ class UserChallenges extends Component {
             }
 
             this.setState({ filter: tempFilter, alphabet: alphabetVar })
+            setStorage(storageKeys.userFilter, tempFilter);
 
         }
     }
@@ -149,6 +150,7 @@ class UserChallenges extends Component {
             }
 
             this.setState({ filters: filters })
+            setStorage(storageKeys.userFilters, filters);
 
         }
     }
@@ -161,6 +163,16 @@ class UserChallenges extends Component {
 
     search(e) {
         this.setState({ search: e.currentTarget.value })
+    }
+
+    componentDidUpdate() {
+        const filters = [this.state.filter, ...Object.values(this.state.filters).flat()];
+
+        for (const id of filters) {
+            if (document.getElementById(id)) {
+                document.getElementById(id).classList.add(filterCSS["selected"]);
+            }
+        }
     }
 
 
@@ -333,7 +345,7 @@ class UserChallenges extends Component {
                     <div className={filterCSS.category} category="category">
                         <p className={filterCSS.cheading}>{t("Order by")}</p>
 
-                        <button onClick={this.changeFilter} id="level" className={filterCSS["selected"]}>
+                        <button onClick={this.changeFilter} id="level">
                             <i className="fa-solid fa-ranking-star"></i>
                             {t("Rank")}
                         </button>
