@@ -419,6 +419,11 @@ class UserChallenges extends Component {
                             Coop vs. AI
                         </button>
 
+                        <button onClick={this.changeExtraFilter} id="arena" type="gamemode">
+                            <img src={config.images.arena} alt="" />
+                            Arena
+                        </button>
+
                     </div>
 
                 </div>
