@@ -391,7 +391,7 @@ class UserChallenges extends Component {
 
                         <button onClick={this.changeExtraFilter} id="2023000" type="category">
                             <img src={config.images['2023000']} alt="2023 seasonal" />
-                            2023 Seasonal <span>NEW</span>
+                            2023 Seasonal
                         </button>
 
                         <button onClick={this.changeExtraFilter} id="retired-seasonal" type="category">
