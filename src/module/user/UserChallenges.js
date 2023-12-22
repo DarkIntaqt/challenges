@@ -317,15 +317,15 @@ class UserChallenges extends Component {
                         </button>
 
                         <button id="capstones" onClick={this.toggleCapstones} className={filterCSS["points" + this.state.capstones]}>
-                            <img src="https://lolcdn.darkintaqt.com/cdn/c.png" alt="" />
+                            <img src="https://lolcdn.darkintaqt.com/cdn/c.png" alt="" title="Toggle capstone challenges" />
                         </button>
 
                         <button id="points" onClick={this.togglePointsAvailableSorting} className={filterCSS["points" + this.state.orderByPoints]}>
-                            <img src="https://lolcdn.darkintaqt.com/cdn/i.png" alt="" />
+                            <img src="https://lolcdn.darkintaqt.com/cdn/i.png" alt="" title="Toggle non-maxed challenges" />
                         </button>
 
                         <button id="mode" onClick={this.toggleMasterTierSorting} className={filterCSS["master" + this.state.orderByMaster]}>
-                            <img src="https://lolcdn.darkintaqt.com/cdn/m.png" alt="" />
+                            <img src="https://lolcdn.darkintaqt.com/cdn/m.png" alt="" title="Set thresholds to master" />
                         </button>
 
                     </div>
