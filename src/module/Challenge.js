@@ -168,89 +168,91 @@ class Challenge extends Component {
     }
 
     chart() {
-        let chartStatus = Chart.getChart("average");
-        if (checkExists(chartStatus)) {
-            chartStatus.destroy();
-        }
+        try {
+            let chartStatus = Chart.getChart("average");
+            if (checkExists(chartStatus)) {
+                chartStatus.destroy();
+            }
 
-        const label = (tootltipItems) => {
+            const label = (tootltipItems) => {
 
-            if (tootltipItems[0].label === "Today") {
+                if (tootltipItems[0].label === "Today") {
 
-                return "Todays data might be inaccurate, as it is calculated live. "
+                    return "Todays data might be inaccurate, as it is calculated live. "
+
+                }
+
+                return "";
 
             }
 
-            return "";
+            const data = {
+                labels: [
+                    "6 days ago",
+                    "5 days ago",
+                    "4 days ago",
+                    "3 days ago",
+                    "2 days ago",
+                    "Yesterday",
+                    "Today"
+                ],
+                datasets: [{
+                    label: 'Ø points per game',
+                    backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--selected'),
+                    borderColor: getComputedStyle(document.documentElement).getPropertyValue('--selected'),
+                    data: this.state.challenge.progress
+                }]
+            };
 
-        }
-
-        const data = {
-            labels: [
-                "6 days ago",
-                "5 days ago",
-                "4 days ago",
-                "3 days ago",
-                "2 days ago",
-                "Yesterday",
-                "Today"
-            ],
-            datasets: [{
-                label: 'Ø points per game',
-                backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--selected'),
-                borderColor: getComputedStyle(document.documentElement).getPropertyValue('--selected'),
-                data: this.state.challenge.progress
-            }]
-        };
-
-        const chartConfig = {
-            type: 'line',
-            data: data,
-            options: {
-                animation: false,
-                radius: 7,
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            footer: label,
+            const chartConfig = {
+                type: 'line',
+                data: data,
+                options: {
+                    animation: false,
+                    radius: 7,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                footer: label,
+                            }
+                        },
+                        legend: {
+                            display: false
                         }
                     },
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            display: false,
+                    scales: {
+                        x: {
+                            ticks: {
+                                display: false,
+                            },
+                            grid: {
+                                display: false,
+                                drawBorder: false,
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--dark3'),
+                            }
                         },
-                        grid: {
-                            display: false,
-                            drawBorder: false,
-                            color: getComputedStyle(document.documentElement).getPropertyValue('--dark3'),
+                        y: {
+                            ticks: {
+                                display: false,
+                            },
+                            grid: {
+                                display: false,
+                                drawBorder: false,
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--dark3'),
+                            },
                         }
-                    },
-                    y: {
-                        ticks: {
-                            display: false,
-                        },
-                        grid: {
-                            display: false,
-                            drawBorder: false,
-                            color: getComputedStyle(document.documentElement).getPropertyValue('--dark3'),
-                        },
                     }
                 }
-            }
-        };
+            };
 
-        // render chart
-        new Chart(
-            document.getElementById("average"),
-            chartConfig
-        );
-
-
+            // render chart
+            new Chart(
+                document.getElementById("average"),
+                chartConfig
+            );
+        } catch (e) {
+            console.warn(e);
+        }
     }
 
     componentDidMount() {
