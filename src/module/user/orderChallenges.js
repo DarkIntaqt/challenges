@@ -19,12 +19,13 @@ export function getNextLevel(current, masterOnly = false, pointsOnly = false) {
 
 
 
-export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly = false, pointsOnly = false, search = "") {
+export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly = false, pointsOnly = false, search = "", capstones = true) {
 
     let challenges = {};
     challengesArray.forEach(challenge => {
         challenges[challenge[0]] = challenge;
     })
+
 
     const challengesDetailed = window.JSONPREQUEST;
 
@@ -34,6 +35,12 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
 
         if (challenges[challengeData.id]) {
             challenge = challenges[challengeData.id]
+        }
+
+        if (capstones === false) {
+            if (challengeData.tags.isCapstone === "Y") {
+                return null;
+            }
         }
 
         if (challengeData === 0) {
@@ -157,9 +164,9 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
 }
 
 
-export default function orderChallenges(challenges, filter, extraFilter, masterOnly, pointsOnly, search) {
+export default function orderChallenges(challenges, filter, extraFilter, masterOnly, pointsOnly, search, capstones) {
 
-    challenges = removeUnnecessaryChallenges(challenges, extraFilter, masterOnly, pointsOnly, search)
+    challenges = removeUnnecessaryChallenges(challenges, extraFilter, masterOnly, pointsOnly, search, !capstones)
 
     let sortAlgorithm = function (a, b) {
 

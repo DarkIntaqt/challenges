@@ -34,6 +34,7 @@ class UserChallenges extends Component {
         this.changeExtraFilter = this.changeExtraFilter.bind(this)
         this.toggleMasterTierSorting = this.toggleMasterTierSorting.bind(this)
         this.togglePointsAvailableSorting = this.togglePointsAvailableSorting.bind(this)
+        this.toggleCapstones = this.toggleCapstones.bind(this);
 
         this.changeDisplayMethod = this.changeDisplayMethod.bind(this)
         this.search = this.search.bind(this);
@@ -44,6 +45,7 @@ class UserChallenges extends Component {
             alphabet: "a-z",
             orderByMaster: getStorage(storageKeys.masterOnly, false),
             orderByPoints: getStorage(storageKeys.pointsOnly, false),
+            capstones: getStorage(storageKeys.capstones, false),
             placeholder: window.compactMode,
             filter: "level",
             filters: {
@@ -66,6 +68,15 @@ class UserChallenges extends Component {
         })
     }
 
+    toggleCapstones() {
+
+        setStorage(storageKeys.capstones, !this.state.capstones);
+
+        this.setState({
+            capstones: !this.state.capstones
+        })
+
+    }
 
     togglePointsAvailableSorting() {
 
@@ -173,7 +184,7 @@ class UserChallenges extends Component {
         const filter = this.state.filter
 
 
-        let challengesOrdered = orderChallenges(user.challenges, this.state.filter, this.state.filters, this.state.orderByMaster, this.state.orderByPoints, this.state.search)
+        let challengesOrdered = orderChallenges(user.challenges, this.state.filter, this.state.filters, this.state.orderByMaster, this.state.orderByPoints, this.state.search, this.state.capstones)
 
 
         let challenges = challengesOrdered.map((challenge) => {
@@ -303,6 +314,10 @@ class UserChallenges extends Component {
 
                         <button onClick={this.changeDisplayMethod} className={filterCSS.modetrue}>
                             {this.state.placeholder === true ? <i className="fa-solid fa-list"></i> : <i className="fa-solid fa-table-cells"></i>}
+                        </button>
+
+                        <button id="capstones" onClick={this.toggleCapstones} className={filterCSS["points" + this.state.capstones]}>
+                            <img src="https://lolcdn.darkintaqt.com/cdn/c.png" alt="" />
                         </button>
 
                         <button id="points" onClick={this.togglePointsAvailableSorting} className={filterCSS["points" + this.state.orderByPoints]}>
