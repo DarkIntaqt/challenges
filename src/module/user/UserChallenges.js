@@ -41,13 +41,16 @@ class UserChallenges extends Component {
 
         this.props = props;
 
+        const filter = getStorage(storageKeys.userFilter, "level");
+        const alphabet = filter === "alphabetic-a-z" ? "z-a" : "a-z";
+
         this.state = {
-            alphabet: "a-z",
+            alphabet,
             orderByMaster: getStorage(storageKeys.masterOnly, false),
             orderByPoints: getStorage(storageKeys.pointsOnly, false),
             capstones: getStorage(storageKeys.capstones, false),
             placeholder: window.compactMode,
-            filter: getStorage(storageKeys.userFilter, "level"),
+            filter,
             filters: getStorage(storageKeys.userFilters, {
                 "category": [],
                 "type": [],
