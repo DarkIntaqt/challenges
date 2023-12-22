@@ -106,7 +106,6 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
 
         challenge.push(pushLater)
 
-        console.log(filters);
         if (filters.category.length > 0 && !filters.category.includes(parentId.toString())) {
             if (filters.category.includes("retired-seasonal")) {
                 if (parentId !== 2022000) {
