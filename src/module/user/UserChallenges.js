@@ -142,17 +142,10 @@ class UserChallenges extends Component {
         }
     }
 
-    changeDisplayMethod(e) {
-        if (e.currentTarget.id === "full" && window.compactMode === true) {
-            window.compactMode = false
-            this.setState({ placeholder: false })
-            setCookie("filter", "false");
-        }
-        if (e.currentTarget.id === "compact" && window.compactMode === false) {
-            window.compactMode = true
-            this.setState({ placeholder: true })
-            setCookie("filter", "true");
-        }
+    changeDisplayMethod() {
+        setCookie("filter", JSON.stringify(!this.state.placeholder));
+        window.compactMode = !this.state.placeholder
+        this.setState({ placeholder: !this.state.placeholder });
     }
 
     search(e) {
@@ -308,12 +301,8 @@ class UserChallenges extends Component {
                 <div className={filterCSS.selectors + " clearfix"}>
                     <div className={filterCSS.displayMode}>
 
-                        <button id="compact" onClick={this.changeDisplayMethod} className={filterCSS["cmode" + window.compactMode] + " " + filterCSS.modetrue}>
-                            <i className="fa-solid fa-list"></i>
-                        </button>
-
-                        <button id="full" onClick={this.changeDisplayMethod} className={filterCSS["cmode" + window.compactMode] + " " + filterCSS.modefalse}>
-                            <i className="fa-solid fa-table-cells"></i>
+                        <button onClick={this.changeDisplayMethod} className={filterCSS.modetrue}>
+                            {this.state.placeholder === true ? <i className="fa-solid fa-list"></i> : <i className="fa-solid fa-table-cells"></i>}
                         </button>
 
                         <button id="points" onClick={this.togglePointsAvailableSorting} className={filterCSS["points" + this.state.orderByPoints]}>
