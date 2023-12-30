@@ -543,6 +543,10 @@ class Challenge extends Component {
                 warnings.push(<div className={css.disabledMessage + " WHITEMESSAGE"} key={"reverse"}>{t("This challenge is reversed. The less your points the better your placement")}</div>)
             }
 
+            if (challenge.icon_2 === 0) {
+                warnings.push(<div className={css.disabledMessage} key={"c0"} style={{ lineHeight: "1rem" }}>This leaderboard is "technically" wrong, as the ranking still includes points from the seasonal 2023 challenges for some players, which should not be counted towards the total points. <br /><a href="https://www.reddit.com/r/leagueoflegends/comments/11csos4/challenges_problem/" target="_blank">See Reddit post</a></div>);
+            }
+
             // if (summoner.length === 0) {
             //     warnings.push(<div className={css.disabledMessage + " GRANDMASTER"}>No high-ranked summoners yet<br /><br /><span className={css.details}>Due to API limitations we can only show players ranked MASTER+</span></div>)
             // }
