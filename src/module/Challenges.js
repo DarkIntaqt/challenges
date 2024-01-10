@@ -271,10 +271,7 @@ class Challenges extends Component {
             // Skip to next element if filter is on and not on element
             if (this.filter.category.length > 0 && !this.filter.category.includes(parentId.toString())) {
                 if (this.filter.category.includes("seasonal-retired")) {
-                    if (parentId !== 2022000) {
-                        continue;
-                    }
-                    if (parentId !== 2023000) {
+                    if (parentId !== 2022000 && parentId !== 2023000) {
                         continue;
                     }
                 } else {
