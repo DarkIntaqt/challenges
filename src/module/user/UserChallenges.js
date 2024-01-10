@@ -408,9 +408,9 @@ class UserChallenges extends Component {
                             Legacy
                         </button>
 
-                        <button onClick={this.changeExtraFilter} id="2023000" type="category">
-                            <img src={config.images['2023000']} alt="2023 seasonal" />
-                            2023 Seasonal
+                        <button onClick={this.changeExtraFilter} id="2024100" type="category">
+                            <img src={config.images['2024100']} alt="2024 seasonal split 1" />
+                            2024 Seasonal
                         </button>
 
                         <button onClick={this.changeExtraFilter} id="retired-seasonal" type="category">

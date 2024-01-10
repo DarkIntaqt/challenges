@@ -274,6 +274,9 @@ class Challenges extends Component {
                     if (parentId !== 2022000) {
                         continue;
                     }
+                    if (parentId !== 2023000) {
+                        continue;
+                    }
                 } else {
                     continue;
                 }
@@ -438,9 +441,9 @@ class Challenges extends Component {
                             <img src={config.images["600006"]} alt="legacy" />
                             Legacy
                         </button>
-                        <button onClick={this.changeFilter} data-id="2023000">
-                            <img src={config.images['2023000']} alt="2023 seasonal" />
-                            2023 Seasonal
+                        <button onClick={this.changeFilter} data-id="2024100">
+                            <img src={config.images['2024100']} alt="2024 seasonal split1" />
+                            2024 Seasonal
                         </button>
                         <button onClick={this.changeFilter} data-id="seasonal-retired">
                             <img src={config.images['seasonal-retired']} alt="seasonal outdated" />

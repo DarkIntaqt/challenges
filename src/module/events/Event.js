@@ -21,7 +21,7 @@ export default class generateChallengePointElement extends Component {
 
     componentDidMount() {
 
-        get("https://challenges.darkintaqt.com/api/v5/c/?id=2023000", this.updateCompontent)
+        get("https://challenges.darkintaqt.com/api/v5/c/?id=2024100", this.updateCompontent)
 
     }
 
@@ -72,12 +72,12 @@ export default class generateChallengePointElement extends Component {
         }
 
         this.setState({
-            content: <a href="/challenge/2023000" className={css.crystal + " CHALLENGER " + cCss.crystal} onClick={goTo} key="banner">
+            content: <a href="/challenge/2024100" className={css.crystal + " CHALLENGER " + cCss.crystal} onClick={goTo} key="banner">
                 <div className={css.group}>
-                    <p className={css.crystalHead}>Check out the 2023 Seasonal Leaderboard</p>
+                    <p className={css.crystalHead}>Check out the 2024 Seasonal Leaderboard</p>
 
                     <div className={css.text}>
-                        Check the final Leaderboards for the 2023 seasonal challenges <br /><br />Just click <b>here</b> to get to the leaderboards.
+                        Check the final Leaderboards for the 2024 seasonal challenges <br /><br />Just click <b>here</b> to get to the leaderboards.
                     </div>
 
                 </div>

@@ -118,12 +118,18 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
                 if (parentId !== 2022000) {
                     return null
                 }
+                if (parentId !== 2023000) {
+                    return null
+                }
             } else {
                 return null
             }
         }
         if (filters.category.length === 0) {
             if (parentId === 2022000) {
+                return null
+            }
+            if (parentId !== 2023000) {
                 return null
             }
         }
@@ -134,7 +140,7 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
             if (challenge[1] >= 7) {
                 return null;
             }
-            if (challenge[8] === 600006 || challenge[8].parent === 2022000 || challenge[8] === 2023000) {
+            if (challenge[8] === 600006 || challenge[8].parent === 2022000 || challenge[8] === 2023000 || challenge[8] === 2024100) {
                 return null;
             }
 
