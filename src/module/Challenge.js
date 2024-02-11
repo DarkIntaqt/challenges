@@ -544,7 +544,7 @@ class Challenge extends Component {
             }
 
             if (challenge.icon_2 === 0) {
-                warnings.push(<div className={css.disabledMessage} key={"c0"} style={{ lineHeight: "1rem" }}>This leaderboard is "technically" wrong, as the ranking still includes points from the seasonal 2023 challenges for some players, which should not be counted towards the total points. <br /><a href="https://www.reddit.com/r/leagueoflegends/comments/18xmgpv/challenges_hunter_leaderboard/" target="_blank">See Reddit post</a></div>);
+                warnings.push(<div className={css.disabledMessage} key={"c0"} style={{ lineHeight: "1rem" }}>This leaderboard is "technically" wrong, as the ranking still includes points from the seasonal 2023 challenges for some players, which should not be counted towards the total points. </div>);
             }
 
             // if (summoner.length === 0) {

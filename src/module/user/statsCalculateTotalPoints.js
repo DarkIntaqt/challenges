@@ -28,7 +28,7 @@ export default function statsCalculateTotalPoints(challenges) {
             tiers[intToTier(challenge[1])] += 1
 
         } else {
-            console.log(challenge[6].translation.name, challenge[6].translation.description)
+            // console.log(challenge[0], challenge[6].state, challenge[6].translation.name, challenge[6].translation.description)
         }
     }
     return tiers
