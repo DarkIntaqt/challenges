@@ -27,7 +27,7 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
     })
 
 
-    const challengesDetailed = window.JSONPREQUEST;
+    const challengesDetailed = window.JSONPREQUEST || [];
 
     return challengesDetailed.map(function (challengeData) {
 

@@ -11,21 +11,24 @@ export default function statsCalculateTotalPoints(challenges) {
         tiers[config.tiers[i]] = 0
     }
 
+    console.log("-----");
+
     for (let i = 0; i < challenges.length; i++) {
         const challenge = challenges[i];
 
         if (challenge[0] > 10
-            && challenge[8] !== 600006
-            && challenge[8] !== 2022000
-            && challenge[8] !== 2023000
-            && challenge[8] !== 601000
-            && challenge[8] !== 2024100
-            && challenge[8] !== 301104
-            && challenge[8] !== 402406
+            && challenge[6].parent !== "0" // summoner level challenge
+            && challenge[8] !== 2022000 // 2022 capstone
+            && challenge[8] !== 2023000 // 2023 capstone
+            && challenge[8] !== 601000  // arena capstone
+            && challenge[8] !== 2024100 // seasonal 2024 capstone
+            && challenge[6].state === "ENABLED"
         ) {
             //console.log(challenge[8]);
             tiers[intToTier(challenge[1])] += 1
 
+        } else {
+            console.log(challenge[6].translation.name, challenge[6].translation.description)
         }
     }
     return tiers
