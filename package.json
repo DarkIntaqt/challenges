@@ -3,9 +3,6 @@
   "version": "1.0.1",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^14.4.3",
     "async": "^3.2.4",
     "chart.js": "^4.4.1",
     "i18next": "^23.7.13",
