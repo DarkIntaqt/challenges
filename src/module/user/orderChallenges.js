@@ -80,6 +80,13 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
                         return null
                     }
                 }
+
+                if ([1700, 1701, 1704].includes(queue)) {
+                    pushLater = "arena"
+                    if (filters.gamemode.length > 0 && !filters.gamemode.includes("arena")) {
+                        return null
+                    }
+                }
             }
         } else if (filters.gamemode.length > 0) {
             if (filters.gamemode.includes("aram") && [101000, 101300, 101200, 101100].includes(challengeData.id)) {
