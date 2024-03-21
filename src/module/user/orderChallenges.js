@@ -79,7 +79,7 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
                     }
                 }
 
-                if ([830, 840, 850].includes(queue)) {
+                if ([830, 840, 850, 870, 880, 890].includes(queue)) {
                     pushLater = "bot"
                     if (filters.gamemode.length > 0 && !filters.gamemode.includes("bot")) {
                         return null

@@ -216,7 +216,7 @@ class Challenges extends Component {
                         enabled["isSR"] = true;
                     }
 
-                    if ([830, 840, 850].includes(queue)) {
+                    if ([830, 840, 850, 870, 880, 890].includes(queue)) {
                         enabled["isBot"] = true;
                     }
                     if ([1700, 1701, 1704].includes(queue)) {
