@@ -1,7 +1,9 @@
 import { checkExists } from "../../func/arrayManipulationFunctions.js"
 import getChallenge from "../../func/getChallenge";
 import { intToTier, tierToInt } from "../../func/tierFunctions";
-
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
 
 export function getNextLevel(current, masterOnly = false, pointsOnly = false) {
     if (masterOnly === true) {
@@ -26,6 +28,9 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
         challenges[challenge[0]] = challenge;
     })
 
+    if (search.length > 0) {
+        search = escapeRegExp((' ' + search).slice(1));
+    }
 
     const challengesDetailed = window.JSONPREQUEST || [];
 
