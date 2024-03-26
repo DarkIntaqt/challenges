@@ -97,7 +97,7 @@ export default function ChallengeObject(params) {
             <p className={css.tier}>
                 {capitalize(t(strtolower(challenge[0])))}
             </p>
-            <button><i className="fa-solid fa-chevron-down"></i></button>
+            {/* <button><i className="fa-solid fa-chevron-down"></i></button> */}
 
             {challenge[11] !== false ?
                 <div className={`${css.progressBar} ${css.bgprogress}`} style={{

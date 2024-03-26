@@ -1,64 +1,65 @@
 .compact.challenge {
-    width: 100%;
+    width: calc(100% - 10px);
     box-sizing: border-box;
     padding: 10px;
     text-decoration: none;
-    display: block;
+    display: grid;
+    grid-template-columns: 40px calc(50% - 90px) 20px calc(50% - 90px) 120px;
+    grid-gap: 5px;
+
     position: relative;
     color: var(--light0);
     border-radius: 10px;
     background-color: var(--dark1);
-    margin: 5px 0;
+    margin: 5px;
     height: 60px;
-    transition: .2s linear background-color;
+    transition: 0.2s linear background-color;
+
+    overflow: hidden;
 }
 
 .compact.challenge:hover {
     background-color: var(--dark2);
 }
 
-.compact.challenge:hover>button {
+.compact.challenge:hover > button {
     background-color: var(--dark3);
 }
 
-.compact.challenge.unranked>span {
-    filter: brightness(.5)
-}
-
-.compact.challenge>span {
-    float: left;
+.compact.challenge.unranked > span {
+    filter: brightness(0.5);
 }
 
 .group {
-    width: 35%;
-    float: left;
     height: 40px;
 }
 
-.compact.challenge>.group>p.heading {
+.compact.challenge > .group > p.heading {
     font-size: 1rem;
-    float: left;
-    width: calc(100% - 10px);
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
     margin: 5px 5px 0;
 }
 
-.compact.challenge>.group>p.type {
-    float: left;
+.compact.challenge > .group > p.type {
     margin: 0px 5px 0;
     color: var(--light3);
     text-transform: capitalize;
-    font-size: .8rem;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.8rem;
 }
 
-.compact.challenge>.description {
-    float: left;
-    width: 30%;
+.compact.challenge > .description {
     display: flex;
     height: 40px;
 }
 
-.compact.challenge>.description>p {
+.compact.challenge > .description > p {
     color: var(--light3);
     font-size: 12px;
     line-height: 13px;
@@ -67,25 +68,21 @@
     -webkit-line-clamp: 3;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    margin: auto;
     width: 100%;
     overflow: hidden;
 }
 
-.compact.challenge>p.tier {
-    font-size: .8rem;
-    float: left;
+.compact.challenge > p.tier {
+    font-size: 0.8rem;
     color: var(--type);
     text-align: center;
-    width: calc(35% - 140px);
     white-space: nowrap;
-    margin: calc(20px - .4rem) 10px;
+    margin: auto;
 }
 
-.compact.challenge>.modes {
+.compact.challenge > .modes {
     width: 20px;
     float: left;
-    margin: 0 10px;
     display: flex;
     height: 40px;
     overflow: hidden;
@@ -93,21 +90,21 @@
     flex-direction: column;
 }
 
-.compact.challenge>.modes>div>p {
+.compact.challenge > .modes > div > p {
     display: none;
 }
 
-.compact.challenge>.modes>img,
-.compact.challenge>.modes>div>img,
-.compact.challenge>.modes>div>i {
+.compact.challenge > .modes > img,
+.compact.challenge > .modes > div > img,
+.compact.challenge > .modes > div > i {
     width: 20px;
     height: 20px;
     font-size: 14px;
     text-align: center;
-    filter: brightness(.6);
+    filter: brightness(0.6);
 }
 
-.compact.challenge>button {
+/* .compact.challenge>button {
     width: 30px;
     margin: 5px;
     height: 30px;
@@ -119,7 +116,7 @@
     transform: rotate(-90deg);
     cursor: pointer;
     transition: .2s linear background-color;
-}
+} */
 
 .challenge:hover .hideOnHover {
     display: none;
@@ -153,11 +150,11 @@
 }
 
 .full.challenge img:hover,
-.full.challenge.overview .tags>div:hover i {
+.full.challenge.overview .tags > div:hover i {
     filter: brightness(1);
 }
 
-.full.challenge.overview .title>span {
+.full.challenge.overview .title > span {
     text-transform: capitalize;
 }
 
@@ -166,14 +163,14 @@
     margin-top: 5px;
 }
 
-.full.challenge .tags>div>img {
+.full.challenge .tags > div > img {
     width: 25px;
     height: 25px;
     margin: 0;
     position: relative;
 }
 
-.full.challenge.overview .tags>div>i {
+.full.challenge.overview .tags > div > i {
     width: 25px;
     height: 25px;
     margin: 0;
@@ -183,18 +180,17 @@
     position: relative;
     color: white;
     filter: brightness(0.6);
-    transition: .25s linear filter;
+    transition: 0.25s linear filter;
 }
 
-.full.challenge.overview .tags>div {
+.full.challenge.overview .tags > div {
     float: left;
     width: 25px;
     height: 25px;
     margin: 0 5px;
 }
 
-
-.full.challenge.overview .tags>div>p {
+.full.challenge.overview .tags > div > p {
     width: 160px;
     text-align: center;
     background-color: var(--dark1);
@@ -212,17 +208,15 @@
     border-radius: 5px;
 }
 
-.full.challenge.overview .tags>div:hover>p {
+.full.challenge.overview .tags > div:hover > p {
     visibility: visible;
 }
-
 
 @keyframes shine {
     to {
         background-position-x: -200%;
     }
 }
-
 
 .full .title {
     color: white;
@@ -233,7 +227,7 @@
     font-size: 1rem;
 }
 
-.full .title>span {
+.full .title > span {
     color: rgb(157, 156, 156);
     font-weight: normal;
     display: block;
@@ -241,15 +235,14 @@
     font-size: 0.8rem;
 }
 
-
 .full.challenge img {
     width: 20px;
     height: 20px;
     filter: brightness(0.6);
-    transition: .25s linear filter;
+    transition: 0.25s linear filter;
 }
 
-.full.challenge .tags>img {
+.full.challenge .tags > img {
     margin: 8px 5px;
     float: left;
 }
@@ -264,7 +257,6 @@
     overflow: hidden;
 }
 
-
 .full .FIRST,
 .full .pos1 {
     box-shadow: 0 0 20px 0 var(--type);
@@ -272,7 +264,7 @@
 
 .full .CROWN,
 .full .MAXED {
-    box-shadow: 0 0 15px -2px var(--type)
+    box-shadow: 0 0 15px -2px var(--type);
 }
 
 .compact.challenge .progressBar {
