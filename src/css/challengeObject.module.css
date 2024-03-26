@@ -57,6 +57,7 @@
 .compact.challenge > .description {
     display: flex;
     height: 40px;
+    align-items: center;
 }
 
 .compact.challenge > .description > p {
