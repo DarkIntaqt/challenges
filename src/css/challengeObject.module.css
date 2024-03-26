@@ -267,9 +267,9 @@
     background-color: var(--type);
     height: 5px;
     position: absolute;
-    margin-left: -10px;
+    left: 0;
     max-width: 100%;
-    margin-top: 45px;
+    bottom: 0;
     border-radius: 0 0 5px 5px;
 }
 
