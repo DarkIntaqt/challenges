@@ -275,8 +275,8 @@
 
 .compact.challenge .progressBar.bgprogress {
     height: 4px;
-    margin-left: -8px;
-    margin-top: 46px;
+    left: 0;
+    bottom: 1px;
 }
 
 .full.challenge:hover {
