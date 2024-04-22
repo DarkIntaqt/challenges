@@ -12,56 +12,56 @@
     margin: 0 auto;
 }
 
-.Header .inner>a:hover {
+.Header .inner > a:hover {
     color: var(--selected);
 }
 
-.Header .inner>a,
-.Header .inner>select {
+.Header .inner > a,
+.Header .inner > select {
     transition: 0.2s color;
     color: white;
     text-decoration: none;
     font-size: 1rem;
     float: right;
     padding: 5px;
-    margin: calc(25px - .5rem) 10px;
+    margin: calc(25px - 0.5rem) 10px;
     line-height: 1;
     display: block;
 }
 
-.Header .inner>select {
+.Header .inner > select {
     appearance: none;
     border: none;
     background-color: var(--dark1);
 }
 
-.Header .inner>a:first-child,
-.Header .inner>a:nth-of-type(2) {
+.Header .inner > a:first-child,
+.Header .inner > a:nth-of-type(2) {
     font-weight: bold;
     float: left;
 }
 
-.Header .inner>a:nth-of-type(2) {
+.Header .inner > a:nth-of-type(2) {
     font-weight: normal;
 }
 
-.Header .inner>a>span {
+.Header .inner > a > span {
     display: block;
     float: right;
-    font-size: .7rem;
+    font-size: 0.7rem;
     font-weight: bold;
     color: white !important;
-    padding: .15rem 5px;
+    padding: 0.15rem 5px;
     box-shadow: 0 0 5px var(--selected);
     background-color: var(--selected);
     border-radius: 5px;
     margin-left: 5px;
 }
 
-.Header .inner>a img {
+.Header .inner > a img {
     height: 2rem;
     width: 2rem;
-    margin: -.5rem 5px 0 0;
+    margin: -0.5rem 5px 0 0;
     float: left;
 }
 
@@ -78,78 +78,14 @@
     background-color: var(--dark0);
 }
 
-.footer {
-    position: relative;
-    z-index: 25;
-    width: 100%;
-    min-height: 100px;
-    float: left;
-    background-color: var(--dark1);
-}
-
-.footer .leftFooter {
-    float: left;
-    color: white;
-    font-size: 0.8rem;
-    width: 20%;
-    margin: 20px 0;
-}
-
-.footer .leftFooter>a,
-.footer .rightFooter>a {
-    text-decoration: none;
-    color: white;
-}
-
-.footer .leftFooter img {
-    width: 50px;
-    margin-left: calc(50% - 25px);
-}
-
-.footer .leftFooter p {
-    text-align: center;
-}
-
-.footer .rightFooter {
-    width: 20%;
-    margin: 20px 0;
-    float: left;
-}
-
-.footer .rightFooter>a {
-    width: 100%;
-    font-size: .8rem;
-    margin: 0 0 10px;
-    float: left;
-}
-
-.footer .rightFooter>a:last-of-type {
-    margin: 0;
-}
-
-.footer .centerFooter {
-    width: 50%;
-    margin: 20px 10% 20px 0;
-    float: left;
-    color: white;
-    font-size: 0.8rem;
-    text-align: justify;
-}
-
-.footer .centerFooter a {
-    color: white;
-}
-
-@media only screen and (max-width:1050px) {
+@media only screen and (max-width: 1050px) {
     .Header .inner {
         width: 100%;
     }
-
-
 }
 
-@media only screen and (max-width:900px) {
-    .Header .inner>a>i {
+@media only screen and (max-width: 900px) {
+    .Header .inner > a > i {
         display: none;
     }
 

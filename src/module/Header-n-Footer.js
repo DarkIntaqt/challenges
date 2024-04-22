@@ -3,6 +3,7 @@ import { Fragment } from "react"
 import StyleSheet from "../css/header.module.css";
 import logo from "../img/logo.svg";
 import { useTranslation } from "react-i18next";
+import css from "../css/footer.module.scss"
 
 export default function HeaderNFooter() {
 
@@ -45,38 +46,61 @@ export default function HeaderNFooter() {
         </div>
 
 
-        <footer className={StyleSheet.footer}>
-            <div className={"object1000"}>
-                <div className={StyleSheet.leftFooter}>
-                    <Link to={"/"}>
-                        <img src={logo} alt="Logo" width={50} height={50}></img>
-                        <p>LoL Challenge Tracker</p>
-                    </Link>
-                </div>
-                <div className={StyleSheet.centerFooter} data-nosnippet>
-                    <p>
-                        'Challenges.DarkIntaqt.Com' isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
+        <div className={css.footer} data-nosnippet>
+
+            <div className={css.top}>
+
+                <div className={`${css.linkgroup} ${css.special}`}>
+
+                    <img src={logo} alt="Challenges Tracker logo" width={128} height={128}></img>
+                    <p>&copy;2022 - {new Date().getFullYear()}</p>
+                    <p>Challenge Tracker</p>
+
+                    <p>Made with <i className="fa-solid fa-heart"
+                    /> by <a href="https://darkintaqt.com" target="_blank" rel="noreferrer">DarkIntaqt</a>
                         <br />
-                        <br />
-                        &copy; 2022 - 2024 challenges.darkintaqt.com
+                        and <a href="https://github.com/DarkIntaqt/challenges/graphs/contributors" target="_blank" rel="noreferrer">contributors</a>.
                     </p>
-                    <p dangerouslySetInnerHTML={
-                        {
-                            __html: t("Thanks to {{cdragon}} for serving the assets", { cdragon: '<a href="https://www.communitydragon.org" target="_blank" rel="noreferrer">CommunityDragon</a>' })
-                        }
-                    }></p>
 
                 </div>
-                <div className={StyleSheet.rightFooter}>
-                    <a href="https://darkintaqt.com/imprint" rel="noreferrer" target="_blank">Imprint</a>
-                    <a href="/privacy" rel="noreferrer" target="_blank">Privacy Policy</a>
-                    <a href="/tos" rel="noreferrer" target="_blank">Terms of Service</a>
-                    <a href={"https://darkintaqt.com/blog/about-challenge-tracker#faq"} target="_blank" rel="noreferrer">{t("FAQ")}</a>
-                    <a href="https://github.com/DarkIntaqt/challenges" target="_blank" rel="noreferrer">GitHub</a>
-                    <a href="https://twitter.com/darkintaqt" target="_blank" rel="noreferrer">Twitter</a>
+
+                <div className={css.linkgroup}>
+                    <p>Challenge Tracker</p>
+
+                    <Link to="/titles">Titles</Link>
+                    <Link to="/challenges">Challenges</Link>
+                    <Link to="/challenge/0">Challenge Leaderboard</Link>
+                    <a href="https://darkintaqt.com/blog/about-challenge-tracker" target="_blank" rel="noreferrer">About</a>
+                    <a href="https://darkintaqt.com/blog/about-challenge-tracker#faq" target="_blank" rel="noreferrer">Help & FAQ</a>
                 </div>
+
+                <div className={css.linkgroup}>
+                    <p>Social</p>
+
+                    <a href="https://twitter.com/darkintaqt" target="_blank" rel="noreferrer">Twitter</a>
+                    <Link to="/community">Community</Link>
+                    <a href="https://github.com/DarkIntaqt/challenges" target="_blank" rel="noreferrer">Contribute on GitHub</a>
+                </div>
+
+                <div className={css.linkgroup}>
+                    <p>Resources</p>
+
+                    <a href="https://darkintaqt.com/imprint" target="_blank" rel="noreferrer">Imprint</a>
+                    <a href="https://challenges.darkintaqt.com/tos" target="_blank" rel="noreferrer">Terms of Service</a>
+                    <a href="https://challenges.darkintaqt.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a>
+                </div>
+
             </div>
-        </footer>
+
+            <div className={css.bot}>
+
+                <p>
+                    &apos;Challenges.DarkIntaqt.Com&apos; isn&apos;t endorsed by Riot Games and doesn&apos;t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
+                </p>
+
+            </div>
+
+        </div>
 
     </Fragment >
 }

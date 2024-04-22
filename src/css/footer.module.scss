@@ -1,0 +1,121 @@
+.footer {
+   background-color: var(--dark0);
+   box-sizing: border-box;
+   padding: 30px 20px;
+   width: 100%;
+   float: left;
+
+   .top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      padding: 0 calc(50% - 500px);
+
+      @media only screen and (max-width: 1050px) {
+         padding: 0;
+      }
+
+      .linkgroup {
+         display: flex;
+         flex-direction: column;
+         flex: 1 0 20%;
+         margin: 0 2.5%;
+
+         @media only screen and (max-width: 1050px) {
+            flex: 1 0 45%;
+            margin-top: 20px;
+         }
+         @media only screen and (max-width: 750px) {
+            flex: 1 0 95%;
+            margin-top: 20px;
+
+            align-items: center;
+         }
+
+         &.special {
+            align-items: center;
+            justify-content: center;
+
+            > img {
+               height: 40px;
+               width: 40px;
+               margin-bottom: 5px;
+            }
+
+            p {
+               text-align: center;
+               color: var(--light2);
+
+               font-size: 0.8rem;
+               line-height: 1.4 * 0.8rem;
+
+               margin: 2px 0;
+
+               font-weight: normal;
+
+               i {
+                  color: #f0295e;
+               }
+
+               &:hover i {
+                  animation-name: pulse;
+                  animation-duration: 1s;
+                  animation-iteration-count: infinite;
+               }
+
+               a {
+                  text-decoration: none;
+                  color: var(--light2);
+
+                  &:hover {
+                     text-decoration: underline;
+                  }
+               }
+            }
+         }
+
+         p {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--light0);
+            margin-bottom: 10px;
+         }
+
+         > a {
+            width: fit-content;
+            text-decoration: none;
+            color: var(--light2);
+
+            font-size: 0.8rem;
+            margin: 5px 0;
+
+            &:hover {
+               text-decoration: underline;
+            }
+         }
+      }
+   }
+
+   .bot {
+      margin: 20px calc(50% - 500px) 0;
+      padding: 20px 0 0;
+      border-top: 1px solid var(--dark0);
+
+      @media only screen and (max-width: 1050px) {
+         margin: 20px 0;
+      }
+
+      p {
+         text-align: justify;
+         font-size: 0.8rem;
+         color: var(--light3);
+      }
+   }
+}
+
+@keyframes pulse {
+   10% {
+      transform: scale(1.1);
+   }
+}
