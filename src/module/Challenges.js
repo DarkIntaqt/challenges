@@ -32,6 +32,7 @@ class Challenges extends Component {
         this.showChallenges = this.showChallenges.bind(this)
         this.filter = getStorage(storageKeys.challengeFilters, { "category": [], "type": [], "gamemode": [] })
         this.searchFor = getStorage(storageKeys.challengeSearch, "");
+        const showEvent = getStorage(storageKeys.event, true);
 
         const LoadEvent = Loadable({
             loader: (content) => import('./events/Event.js'),
@@ -47,7 +48,8 @@ class Challenges extends Component {
         this.state = {
             challenges: window.loadingUI,
             event: <LoadEvent content="" />,
-            translation: props.t
+            translation: props.t,
+            showEvent: showEvent
         }
     }
 
@@ -396,9 +398,12 @@ class Challenges extends Component {
                 <h2>{t("Overview and how to obtain them")}</h2>
             </div>
 
-            <section className={css.parent}>
-                {this.state.event}
-            </section>
+            {this.state.showEvent ?
+                <section className={css.parent} style={{ position: "relative" }}>
+                    <button className={challengeCSS.closeEvent} onClick={() => { this.setState({ showEvent: false }); setStorage(storageKeys.event, false) }}><i class="fa-solid fa-times" /></button>
+                    {this.state.event}
+                </section>
+                : null}
 
             <div className={filterCSS.filter}>
 
@@ -508,7 +513,7 @@ class Challenges extends Component {
                         ? this.state.challenges
                         : <p style={{ color: "white", fontSize: "1rem", margin: "120px 0", textAlign: "center", width: "100%", float: "left" }}><i>Is it a bug? Is it a feature?</i><br /><br />No! There are just no challenges within the current filters.<br />Maybe the challenges aren't released yet?</p>
                 }
-
+                {this.state.showEvent ? null : <button className={challengeCSS.showAgain} onClick={() => { this.setState({ showEvent: true }); setStorage(storageKeys.event, true) }}>Show banner again</button>}
             </div>
         </Wrapper>
     }

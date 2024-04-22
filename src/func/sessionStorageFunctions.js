@@ -8,7 +8,8 @@ export const storageKeys = {
    challengeSearch: "challenge-search",
    pointsOnly: "points-only",
    masterOnly: "master-only",
-   capstones: "capstones"
+   capstones: "capstones",
+   event: "events-2024"
 }
 
 /**
