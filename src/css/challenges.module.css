@@ -16,7 +16,6 @@
     color: rgb(160, 160, 160);
 }
 
-
 .crystal {
     width: calc(100% - 30px);
     margin: 8px 15px;
@@ -28,8 +27,8 @@
     text-decoration: none;
     overflow: hidden;
     min-height: 100px;
-    transition: .25s box-shadow;
-    box-shadow: 0 0 20px var(--type);
+    transition: 0.25s box-shadow;
+    box-shadow: 0 0 10px var(--type);
     background-color: var(--dark1);
     /* background-image: url(https://lolcdn.darkintaqt.com/s/ad.webp); */
 }
@@ -39,10 +38,10 @@
 }
 
 .flexWidth {
-    width: 750px
+    width: 750px;
 }
 
-@media only screen and (max-width:1050px) {
+@media only screen and (max-width: 1050px) {
     .crystal {
         display: none;
     }
@@ -50,5 +49,4 @@
     .flexWidth {
         width: 100%;
     }
-
 }
