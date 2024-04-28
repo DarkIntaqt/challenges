@@ -13,6 +13,7 @@ import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { strtolower } from "../../func/stringManipulation";
 import { getNextLevel } from "./orderChallenges";
 import goTo from "../../func/goTo";
+import { Tooltip } from "react-tooltip";
 
 const secondsToMMSS = (seconds) => {
     const MM = `${Math.floor(seconds / 60) % 60}`.padStart(2, '0');
@@ -245,10 +246,10 @@ export default class Match extends Component {
                     continue
                 }
 
-                data.push(<div key={"challenge" + i} className={css["levelUp" + isNew]}>
+
+                data.push(<div key={"challenge" + i} className={css["levelUp" + isNew]} data-tooltip-id={"tooltip-" + this.state.matchId} data-tooltip-content={challengeData.translation.name}>
                     <LazyLoadImage src={"https://lolcdn.darkintaqt.com/cdn/np-token/" + challenge["challengeId"] + "/" + strtolower(intToTier(challenge["new"]["tier"]))} alt="" effect="opacity" height={30} width={30} />
                     <p>+{beautifyNum(challenge["new"]["points"] - challenge["old"]["points"], true, 1000)}</p>
-
                 </div >)
             }
 
@@ -350,6 +351,7 @@ export default class Match extends Component {
             }
 
             return <div className={css.match + " " + css["expanded-" + this.state.expand]} id={this.state.matchId}>
+                <Tooltip id={"tooltip-" + this.state.matchId} />
                 <div className={css.matchdata} onClick={this.toggleExpand}>
                     {matchdata}
                 </div>
