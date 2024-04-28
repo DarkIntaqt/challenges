@@ -241,6 +241,10 @@ export default class Match extends Component {
                     continue;
                 }
 
+                if (isNaN(challenge["new"]["points"] - challenge["old"]["points"])) {
+                    continue
+                }
+
                 data.push(<div key={"challenge" + i} className={css["levelUp" + isNew]}>
                     <LazyLoadImage src={"https://lolcdn.darkintaqt.com/cdn/np-token/" + challenge["challengeId"] + "/" + strtolower(intToTier(challenge["new"]["tier"]))} alt="" effect="opacity" height={30} width={30} />
                     <p>+{beautifyNum(challenge["new"]["points"] - challenge["old"]["points"], true, 1000)}</p>
@@ -284,6 +288,8 @@ export default class Match extends Component {
                     } else {
                         next = c["thresholds"][tier]
                     }
+
+                    if (isNaN(challenge["new"]["points"] - challenge["old"]["points"])) continue;
 
                     allChallenges.push(<ChallengeObject
                         key={parseInt(challenge["challengeId"])}
@@ -340,7 +346,7 @@ export default class Match extends Component {
             }
 
             if (allChallenges.length === 0) {
-                allChallenges = <p style={{ color: "white", fontSize: ".8rem", padding: "5px", textAlign: "center" }}>Nothing to see here...</p>;
+                allChallenges = <p style={{ color: "white", fontSize: ".8rem", padding: "5px", textAlign: "center" }}>Nothing progressed :/</p>;
             }
 
             return <div className={css.match + " " + css["expanded-" + this.state.expand]} id={this.state.matchId}>
