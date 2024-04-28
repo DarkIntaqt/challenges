@@ -3,11 +3,10 @@
     height: 80px;
     background-color: var(--dark2);
     float: left;
-    border-radius: 10px;
+    border-radius: 6px;
     box-sizing: border-box;
     margin: 5px 10px;
     overflow: hidden;
-
 }
 
 .match:hover .matchdata {
@@ -19,7 +18,6 @@
     min-height: 80px;
     height: auto;
 }
-
 
 .match .overview {
     width: 100%;
@@ -35,7 +33,6 @@
     position: relative;
     margin: 5px 10px;
     float: left;
-
 }
 
 .match .overview .matchRecap .player {
@@ -63,7 +60,7 @@
 .match .overview p.matchId {
     margin: 10px 0;
     float: left;
-    font-size: .8rem;
+    font-size: 0.8rem;
     color: var(--light3);
 }
 
@@ -76,7 +73,6 @@
 .match .overview .matchRecap .player .summonerName {
     float: left;
 }
-
 
 .match .overview .matchRecap .player .summonerName {
     display: flex;
@@ -96,7 +92,7 @@
 }
 
 .match .overview .matchRecap .player .summonerName p.cs {
-    color: var(--light2)
+    color: var(--light2);
 }
 
 .match .overview .matchRecap .player .summonerName.me p:not(.cs) {
@@ -131,14 +127,14 @@
     width: 80px;
 }
 
-.match .overview .matchRecap .player .items>span {
+.match .overview .matchRecap .player .items > span {
     width: 18px;
     margin: 1px;
     height: 18px;
     border-radius: 5px;
 }
 
-.match .overview .matchRecap .player .items>span>img {
+.match .overview .matchRecap .player .items > span > img {
     width: 18px;
     background-color: var(--dark0);
     height: 18px;
@@ -160,7 +156,7 @@
 }
 
 .match .challengedata .button:hover i {
-    color: white
+    color: white;
 }
 
 .match .matchdata {
@@ -173,28 +169,28 @@
     background-color: var(--dark1);
 }
 
-.match .matchdata>div[isloader] {
+.match .matchdata > div[isloader] {
     margin: 25px auto;
 }
 
 .win {
-    --wintype: var(--win)
+    --wintype: var(--win);
 }
 
 .loss {
-    --wintype: var(--loss)
+    --wintype: var(--loss);
 }
 
 .remake {
-    --wintype: rgb(90, 90, 90)
+    --wintype: rgb(90, 90, 90);
 }
 
 .match .matchdata .left {
-    width: 8px;
+    width: 6px;
     background: var(--wintype);
     height: 80px;
-    filter: brightness(.8);
-    border-radius: 10px 0 0 10px;
+    filter: brightness(0.8);
+    border-radius: 6px 0 0 6px;
 }
 
 .match:hover .matchdata .left {
@@ -233,8 +229,8 @@
     text-transform: capitalize;
 }
 
-.match .matchdata .text p.wintext>span {
-    font-size: .8rem;
+.match .matchdata .text p.wintext > span {
+    font-size: 0.8rem;
     color: var(--light3);
     font-weight: normal;
 }
@@ -246,7 +242,7 @@
 
 .match .matchdata .text p.date {
     color: var(--light3);
-    font-size: .8rem;
+    font-size: 0.8rem;
 }
 
 .match .matchdata .kda {
@@ -258,7 +254,7 @@
     align-items: center;
 }
 
-.match .matchdata .kda>p {
+.match .matchdata .kda > p {
     width: 100%;
     text-align: center;
     font-size: 1rem;
@@ -268,10 +264,10 @@
     white-space: nowrap;
 }
 
-.match .matchdata .kda>p.cs {
+.match .matchdata .kda > p.cs {
     margin-top: 5px;
     font-weight: normal;
-    font-size: .8rem;
+    font-size: 0.8rem;
     color: var(--light2);
 }
 
@@ -280,10 +276,9 @@
     padding: 10px 0;
 }
 
-
 .match .matchdata .summoners {
     width: 30px;
-    padding: 10px 5px 10px 0
+    padding: 10px 5px 10px 0;
 }
 
 .match .matchdata .summoners img {
@@ -295,17 +290,17 @@
 }
 
 .match .matchdata .summoners img:nth-last-child() {
-    margin: 3px 2px 2px
+    margin: 3px 2px 2px;
 }
 
-.match .matchdata .items>span {
+.match .matchdata .items > span {
     width: 25px;
     margin: 2px;
     height: 25px;
     float: left;
 }
 
-.match .matchdata .items>span img {
+.match .matchdata .items > span img {
     border-radius: 5px;
     background-color: rgba(20, 20, 30);
 }
@@ -329,24 +324,21 @@
     border-radius: 5px;
 }
 
-.match .challengedata .progress>p {
+.match .challengedata .progress > p {
     color: var(--light2);
-    font-size: .7rem;
+    font-size: 0.7rem;
     width: 100%;
 
     padding: 5px;
     box-sizing: border-box;
-
 }
 
-
-
-.match .challengedata .progress>p>span {
+.match .challengedata .progress > p > span {
     width: 100%;
     float: left;
     color: white;
     font-weight: bold;
-    font-size: .9rem;
+    font-size: 0.9rem;
     display: block;
 }
 
@@ -378,21 +370,20 @@
 }
 
 .match.expanded-true .challengedata .button {
-    border-radius: 0 10px
+    border-radius: 0 10px;
 }
 
 .match.expanded-true .challengedata .button i {
     transform: rotate(0);
 }
 
-.match .challengedata .progressed>div {
-
+.match .challengedata .progressed > div {
     height: 80px;
     width: 50px;
     padding: 15px 5px;
 }
 
-.match .challengedata .progressed>div.levelUptrue {
+.match .challengedata .progressed > div.levelUptrue {
     height: 50px;
     margin: 10px 5px;
     padding: 5px 0;
@@ -401,8 +392,8 @@
     position: relative;
 }
 
-.match .challengedata .progressed>div.levelUptrue::before {
-    content: '+';
+.match .challengedata .progressed > div.levelUptrue::before {
+    content: "+";
     position: absolute;
     font-weight: bold;
     font-size: 1.2rem;
@@ -416,13 +407,13 @@
 
 .match .challengedata .progressed p {
     width: 100%;
-    font-size: .8rem;
+    font-size: 0.8rem;
     color: white;
     text-align: center;
     padding-top: 5px;
 }
 
-.match .challengedata .progressed>div>span {
+.match .challengedata .progressed > div > span {
     height: 30px;
     margin: 0 10px;
     width: 30px;
