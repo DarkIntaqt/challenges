@@ -4,7 +4,8 @@
 export const storageKeys = {
   challengeFilters: "challenge-filters",
   challengeSearch: "challenge-search",
-  showMaxChallenges: "showMaxChallenges"
+  showMaxChallenges: "showMaxChallenges",
+  showRecap: "showRecap"
 }
 
 /**

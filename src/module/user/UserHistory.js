@@ -26,7 +26,9 @@ export default class History extends Component {
             error: false,
             challengesJSON: [],
             show: 100,
-            showMaxChallenges: getStorage(storageKeys.showMaxChallenges, true)
+            showMaxChallenges: getStorage(storageKeys.showMaxChallenges, true),
+            showRecap: getStorage(storageKeys.showRecap, true),
+
         }
     }
 
@@ -206,7 +208,6 @@ export default class History extends Component {
         const renderMatches = matches.reverse().slice(0, this.state.show);
 
         return <div className={css.matches}>
-
             <Tooltip id="hide-tip" />
             <div className={css.heading}>
                 <button className={!this.state.showMaxChallenges ? css.active : css.inactive} onClick={() => {
@@ -215,6 +216,14 @@ export default class History extends Component {
                 }} data-tooltip-id="hide-tip" data-tooltip-content={"Don't show challenges that are either maxed or Master+"}>
                     <img src="https://lolcdn.darkintaqt.com/cdn/i.png" alt="" />
                     Hide maxed challenges
+                </button>
+
+                <button className={!this.state.showRecap ? css.active : css.inactive} onClick={() => {
+                    setStorage(storageKeys.showRecap, !this.state.showRecap);
+                    this.setState({ showRecap: !this.state.showRecap });
+                }}>
+                    <img src="https://cdn.darkintaqt.com/lol/static/challenges/clock.svg" alt="" />
+                    Progress summary
                 </button>
             </div>
             <div className={css.matches}>
