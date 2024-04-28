@@ -4,6 +4,7 @@ import Loader from "../Loader";
 import get from "../../func/get";
 import Match from "./Match";
 import { getStorage, setStorage, storageKeys } from "../../func/localStorageFunctions";
+import { Tooltip } from "react-tooltip";
 
 
 export default class History extends Component {
@@ -206,13 +207,14 @@ export default class History extends Component {
 
         return <div className={css.matches}>
 
+            <Tooltip id="hide-tip" />
             <div className={css.heading}>
                 <button className={!this.state.showMaxChallenges ? css.active : css.inactive} onClick={() => {
                     setStorage(storageKeys.showMaxChallenges, !this.state.showMaxChallenges);
                     this.setState({ showMaxChallenges: !this.state.showMaxChallenges });
-                }}>
+                }} data-tooltip-id="hide-tip" data-tooltip-content={"Don't show challenges that are either maxed or Master+"}>
                     <img src="https://lolcdn.darkintaqt.com/cdn/i.png" alt="" />
-                    hide maxed challenges
+                    Hide maxed challenges
                 </button>
             </div>
             <div className={css.matches}>
