@@ -363,6 +363,8 @@
     transform: rotate(-90deg);
     width: 100%;
     margin: calc(75px - 1rem) 0 0;
+
+    transition: 0.25s transform;
 }
 
 .match.expanded-true .matchdata {
