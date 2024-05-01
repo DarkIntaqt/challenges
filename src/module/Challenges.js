@@ -84,7 +84,7 @@ class Challenges extends Component {
     showChallenges(challengeData) {
         window.JSONPREQUEST = challengeData
 
-        let challenges = challengeData;
+        let challenges = challengeData.challenges;
 
         challenges.sort(function (a, b) {
             return a["translation"]["name"] < b["translation"]["name"] ? -1 : +(a["translation"]["name"] > b["translation"]["name"])

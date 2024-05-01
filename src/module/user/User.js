@@ -364,7 +364,13 @@ class User extends Component {
                 challenge = getChallenge(parseInt(title.toString().slice(0, -2)))
 
                 if (!checkExists(challenge.thresholds) || !checkExists(challenge.title) || !checkExists(challenge.translation) || !checkExists(challenge.translation.description)) {
+
                     titlename = "Unknown Title";
+                    const getTitle = window.JSONPREQUEST.titles[title];
+                    if (getTitle !== undefined) {
+                        titlename = getTitle
+                    }
+
                     description = "Id " + title;
                     threshold = 0;
                 } else {
