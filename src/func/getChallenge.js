@@ -29,7 +29,7 @@ export default function getChallenge(challengeId = 0) {
             challengeId = parseInt(challengeId)
             console.warn("getChallenge expects number, string '" + challengeId + "' given. ");
         }
-        let challenges = window.JSONPREQUEST;
+        let challenges = window.JSONPREQUEST.challenges;
         for (let i = 0; i < challenges.length; i++) {
             const challenge = challenges[i];
             if (challenge.id === challengeId) {

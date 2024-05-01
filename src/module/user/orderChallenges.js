@@ -32,7 +32,7 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
         search = escapeRegExp((' ' + search).slice(1));
     }
 
-    const challengesDetailed = window.JSONPREQUEST || [];
+    const challengesDetailed = (window.JSONPREQUEST || { challenges: [] }).challenges;
 
     return challengesDetailed.map(function (challengeData) {
 
