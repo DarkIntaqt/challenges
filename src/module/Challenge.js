@@ -39,13 +39,11 @@ class Challenge extends Component {
         }
 
         this.challenge = "null"
-        this.challenges = "null"
 
         this.load = this.load.bind(this)
         this.error = this.error.bind(this)
 
         this.loadChallenge = this.loadChallenge.bind(this)
-        this.loadChallenges = this.loadChallenges.bind(this)
 
         this.changeFilter = this.changeFilter.bind(this)
         this.showChallenge = this.showChallenge.bind(this)
@@ -66,10 +64,8 @@ class Challenge extends Component {
         }
 
         const tempChallenge = getCache(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`)
-        const tempChallenges = getCache(`https://challenges.darkintaqt.com/api/dynamic-data/serve?region=euw1&lang=${window.language}`)
 
-        if (tempChallenge !== false && tempChallenges !== false) {
-            this.challenges = tempChallenges
+        if (tempChallenge !== false) {
             this.challenge = tempChallenge
             challengePlaceholder = tempChallenge
             document.title = "'" + tempChallenge.challenge.translation.name + "' Challenge Overview and Leaderboard"
@@ -114,13 +110,11 @@ class Challenge extends Component {
             }
 
             this.challenge = "null"
-            this.challenges = "null"
 
             this.load = this.load.bind(this)
             this.error = this.error.bind(this)
 
             this.loadChallenge = this.loadChallenge.bind(this)
-            this.loadChallenges = this.loadChallenges.bind(this)
 
             this.changeFilter = this.changeFilter.bind(this)
             this.showChallenge = this.showChallenge.bind(this)
@@ -141,10 +135,8 @@ class Challenge extends Component {
             }
 
             const tempChallenge = getCache(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`)
-            const tempChallenges = getCache(`https://challenges.darkintaqt.com/api/dynamic-data/serve?region=euw1&lang=${window.language}`)
 
-            if (tempChallenge !== false && tempChallenges !== false) {
-                this.challenges = tempChallenges
+            if (tempChallenge !== false) {
                 this.challenge = tempChallenge
                 challengePlaceholder = tempChallenge
                 document.title = "'" + tempChallenge.challenge.translation.name + "' Challenge Overview and Leaderboard"
@@ -159,7 +151,7 @@ class Challenge extends Component {
                 translation: props.t
             });
 
-            if (this.challenge === "null" || this.challenges === "null") {
+            if (this.challenge === "null") {
                 this.load();
             }
         } else {
@@ -256,7 +248,7 @@ class Challenge extends Component {
     }
 
     componentDidMount() {
-        if (this.challenge === "null" || this.challenges === "null") {
+        if (this.challenge === "null") {
             this.load();
         } else {
             this.chart();
@@ -267,22 +259,15 @@ class Challenge extends Component {
     load() {
         document.title = "Loading..."
         get(`https://challenges.darkintaqt.com/api/v5/c/?id=${this.params.id}`, this.loadChallenge, this.error);
-        get(`https://challenges.darkintaqt.com/api/dynamic-data/serve?region=euw1&lang=${window.language}`, this.loadChallenges, this.error);
     }
 
     loadChallenge(challenge) {
         this.challenge = challenge;
-        if (this.challenge !== "null" && this.challenges !== "null") {
+        if (this.challenge !== "null") {
             this.showChallenge(this.challenge)
         }
     }
 
-    loadChallenges(challenges) {
-        this.challenges = challenges;
-        if (this.challenge !== "null" && this.challenges !== "null") {
-            this.showChallenge(this.challenge)
-        }
-    }
 
     changeFilter(e) {
 
