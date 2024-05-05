@@ -86,6 +86,8 @@ export default function UserCard({ input, userRegion }: Readonly<{ input: string
          setLoaded(true);
       }
 
+      // disabling eslint check here as userService will not change
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [name, lookupName, lookup, region, userRegion, input]);
 
    function search() {
