@@ -1,3 +1,4 @@
+import React from "react";
 import { Roboto } from "@next/font/google";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -7,6 +8,7 @@ import "challenges/styles/global.css";
 import Loader from "challenges/components/Loader";
 import Layout from "challenges/layouts/Layout";
 import ErrorBoundary from "challenges/components/ErrorBoundary";
+import { AppProps } from "next/app";
 
 
 /**
@@ -20,11 +22,12 @@ import ErrorBoundary from "challenges/components/ErrorBoundary";
  */
 const roboto = Roboto({
   weight: ["300", "400", "700"],
-  subsets: ["latin"]
+  subsets: ["latin"],
+  variable: "--roboto"
 });
 
 
-export default function ChallengeTracker({ Component, pageProps }) {
+export default function ChallengeTracker({ Component, pageProps }: AppProps) {
 
   /**
    * Handler to show a loading animation instead of a
@@ -76,7 +79,7 @@ export default function ChallengeTracker({ Component, pageProps }) {
    */
   return <ErrorBoundary>
 
-    <Layout className={`${roboto.variable}`}>
+    <Layout classes={`${roboto.variable}`}>
 
       {
         loading
@@ -85,7 +88,8 @@ export default function ChallengeTracker({ Component, pageProps }) {
             top: "50%",
             left: "50%",
             transform: "translate(-50%,-50%)"
-          }} />
+          }
+          } />
           : <Component {...pageProps} />
       }
 
