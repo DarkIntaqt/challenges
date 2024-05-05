@@ -1,0 +1,143 @@
+@import "challenges/styles/variables";
+
+$ellapsed-width: 4 * $header-width;
+
+.sidebar {
+   width: $header-width;
+   transition: 0.25s width;
+
+   &.ellapsed {
+      width: $ellapsed-width;
+
+      .content {
+         width: $ellapsed-width;
+      }
+   }
+
+   &:hover {
+      .content {
+         width: $ellapsed-width;
+      }
+   }
+
+   z-index: 5;
+
+   .content {
+      width: $header-width;
+      transition: 0.25s width;
+
+      position: fixed;
+      background: $accent;
+      height: 100vh;
+      border-right: 1px solid $border;
+      box-shadow: 0 0 5px black;
+
+      overflow: hidden;
+
+      display: flex;
+      flex-direction: column;
+
+      padding-top: 15px;
+
+      button.toggle {
+         display: flex;
+         align-items: center;
+         width: $ellapsed-width;
+         padding: 10px 15px;
+         margin: 0;
+         border-radius: 0;
+
+         background: none;
+         border: none;
+         outline: none;
+         border-top: 1px solid $border;
+
+         cursor: pointer;
+         margin-top: auto;
+
+         svg {
+            width: 19px;
+            height: 19px;
+            margin: 10px;
+            color: $text-secondary;
+         }
+
+         p {
+            margin-left: 15px;
+
+            color: $text-secondary;
+            font-size: $font-default;
+         }
+
+         &:hover {
+            p {
+               color: $primary;
+            }
+
+            svg {
+               color: $text;
+            }
+
+            background-color: $background;
+         }
+      }
+
+      a {
+         display: flex;
+         align-items: center;
+         width: $ellapsed-width - 11px;
+         padding: 10px;
+         margin: 5px;
+         border-radius: $border-radius;
+
+         &.active {
+            background-color: color-mix(in srgb, $background 75%, transparent);
+
+            p,
+            svg {
+               color: $text;
+            }
+         }
+
+         &:first-child {
+            svg {
+               width: 39px;
+               height: 39px;
+               margin: 0;
+            }
+         }
+
+         svg {
+            width: 19px;
+            height: 19px;
+            margin: 10px;
+            color: $text-secondary;
+         }
+
+         p {
+            margin-left: 15px;
+
+            color: $text-secondary;
+            font-size: $font-default;
+
+            &.title {
+               font-size: $font-large;
+               font-weight: bold;
+               color: $text;
+            }
+         }
+
+         &:hover {
+            p {
+               color: $primary;
+            }
+
+            svg {
+               color: $text;
+            }
+
+            background-color: $background;
+         }
+      }
+   }
+}

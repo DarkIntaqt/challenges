@@ -1,26 +1,30 @@
-import React from "react";
-import Header from "./Header";
-import css from "challenges/styles/layout.module.scss";
+import React, { useState } from "react";
+import css from "./layout.module.scss";
 import Footer from "./Footer";
+import Sidebar, { SidebarConfig } from "challenges/components/Navigation/Sidebar";
+import { setCookie } from "nookies";
 
-export default function Layout({ classes, children }: Readonly<{ classes: string, children: React.ReactNode }>) {
+export default function Layout({ classes, children, sidebarConfig }: Readonly<{ classes: string, children: React.ReactNode, sidebarConfig: SidebarConfig }>) {
 
+   const [sidebarState, setSidebar] = useState<SidebarConfig>(sidebarConfig);
+   let classNames = [css.content, classes];
 
-   let classNames = [css.wrapper, classes];
+   function toggleSidebar() {
+      let setTo: SidebarConfig = "HIDDEN";
+      if (sidebarState === "HIDDEN") {
+         setTo = "VISIBLE";
+      }
+      setSidebar(setTo);
+      setCookie(null, "sidebar", setTo);
+   }
 
    return <section className={classNames.join(" ")} >
-
-      <Header />
-
-      < section className={css.contentWrapper} >
-
-         <section>
+      <Sidebar view={sidebarState} toggleSidebar={toggleSidebar} />
+      <div className={css.wrapper}>
+         <main className={css.main}>
             {children}
-         </section>
-
-         < Footer />
-
-      </section>
-
+         </main>
+         <Footer />
+      </div>
    </section>;
 }

@@ -9,6 +9,9 @@ import Loader from "challenges/components/Loader";
 import Layout from "challenges/layouts/Layout";
 import ErrorBoundary from "challenges/components/ErrorBoundary";
 import { AppProps } from "next/app";
+import { parseCookies } from "nookies";
+import { SidebarConfig } from "challenges/components/Navigation/Sidebar";
+import { NextPageContext } from "next";
 
 
 /**
@@ -26,8 +29,10 @@ const roboto = Roboto({
   variable: "--roboto"
 });
 
-
-export default function ChallengeTracker({ Component, pageProps }: AppProps) {
+interface CustomProps extends AppProps {
+  sidebar: SidebarConfig
+}
+export default function ChallengeTracker({ Component, pageProps, sidebar }: CustomProps) {
 
   /**
    * Handler to show a loading animation instead of a
@@ -37,7 +42,6 @@ export default function ChallengeTracker({ Component, pageProps }: AppProps) {
   const [lastKnownUrl, setLastKnownUrl] = useState(router.asPath);
   const [loading, setLoading] = useState(false);
 
-
   /**
    * Handle the loading animation
    * 
@@ -46,7 +50,7 @@ export default function ChallengeTracker({ Component, pageProps }: AppProps) {
    * componen instead. 
    */
   useEffect(() => {
-    const handleStart = (url) => {
+    const handleStart = (url: string) => {
       if (url === lastKnownUrl) {
         return;
       }
@@ -79,7 +83,7 @@ export default function ChallengeTracker({ Component, pageProps }: AppProps) {
    */
   return <ErrorBoundary>
 
-    <Layout classes={`${roboto.variable}`}>
+    <Layout classes={`${roboto.variable}`} sidebarConfig={sidebar}>
 
       {
         loading
@@ -97,3 +101,31 @@ export default function ChallengeTracker({ Component, pageProps }: AppProps) {
 
   </ErrorBoundary>;
 }
+
+interface CustomNextPageContext extends NextPageContext {
+  Component: Function;
+}
+
+ChallengeTracker.getInitialProps = async (ctx: CustomNextPageContext) => {
+  const cookies = parseCookies(ctx);
+  let pageProps = {};
+
+  // @ts-ignore
+  if (ctx.Component.getInitialProps) {
+    // @ts-ignore
+    pageProps = await ctx.Component.getInitialProps(ctx);
+  }
+
+  let sidebar: SidebarConfig = "VISIBLE";
+  if (cookies["sidebar"]) {
+    const sidebarCookie = cookies["sidebar"] as SidebarConfig;
+    if (sidebarCookie === "VISIBLE" || sidebarCookie === "HIDDEN") {
+      sidebar = sidebarCookie;
+    }
+  }
+
+  return {
+    pageProps,
+    sidebar,
+  };
+};
