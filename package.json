@@ -1,28 +1,33 @@
 {
-   "name": "challenges",
-   "version": "2.0.0",
-   "private": true,
-   "scripts": {
-      "dev": "next dev",
-      "build": "next build",
-      "start": "next start",
-      "lint": "next lint"
-   },
-   "dependencies": {
-      "@fortawesome/fontawesome-svg-core": "^6.3.0",
-      "@fortawesome/free-solid-svg-icons": "^6.3.0",
-      "@fortawesome/react-fontawesome": "^0.2.0",
-      "@next/font": "13.1.6",
-      "eslint": "8.34.0",
-      "eslint-config-next": "13.1.6",
-      "loader-utils": "^3.2.1",
-      "next": "13.1.6",
-      "react": "18.2.0",
-      "react-dom": "18.2.0",
-      "sass": "^1.58.0"
-   },
-   "devDependencies": {
-      "@types/node": "20.12.8",
-      "@types/react": "18.3.1"
-   }
+  "name": "challenges",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-parallax-tilt": "^1.7.212"
+  },
+  "devDependencies": {
+    "@types/cookie": "^0.6.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "sass": "^1.70.0",
+    "typescript": "^5"
+  }
 }
