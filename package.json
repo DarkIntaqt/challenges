@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "private": true,
   "dependencies": {
-    "async": "^3.2.4",
+    "async": "^3.2.5",
     "chart.js": "^4.4.2",
     "i18next": "^23.10.1",
     "i18next-browser-languagedetector": "^7.2.1",
