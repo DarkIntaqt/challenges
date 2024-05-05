@@ -1,5 +1,3 @@
-import "typedef";
-
 /**
  * Represents a service for providing data from CDN.
  */

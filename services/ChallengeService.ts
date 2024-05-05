@@ -1,4 +1,4 @@
-import "typedef";
+import { ChallengeDTO, ChallengesFullDTO } from "challenges/types/challenges.types";
 import requests from "challenges/utils/requestFunctions";
 
 /**
@@ -13,6 +13,7 @@ export function handleResourceError() {
  */
 export default class ChallengeService {
   static baseUrl = "https://challenges.darkintaqt.com/api";
+  getJson: (url: string) => Promise<any>;
 
   constructor() {
     this.list = this.list.bind(this);
@@ -26,12 +27,9 @@ export default class ChallengeService {
 
   /**
    * Get the current list of challenges by region and language.
-   * @param {string} region e.g. "na1", "euw1"...
-   * @param {string} lang e.g. "en_US", "de_DE"...
-   * @returns {Promise<Array.<ChallengeDto>>} Challenges
    */
-  async list(region, lang = "en_US") {
-    const challenges = await this.getJson(`/challenges/${region}/${lang}.json`);
+  async list(region: string, lang = "en_US"): Promise<Record<string, ChallengeDTO> | undefined> {
+    const challenges = await this.listAll(region, lang);
     return challenges.challenges;
   }
 
@@ -41,8 +39,8 @@ export default class ChallengeService {
    * @param {string} lang e.g. "en_US", "de_DE"...
    * @returns {Promise<Array.<TitleDto>>} Titles
    */
-  async listTitles(region, lang = "en_US") {
-    const titles = await this.getJson(`/challenges/${region}/${lang}.json`);
+  async listTitles(region: string, lang = "en_US") {
+    const titles = await this.listAll(region, lang);
     return titles.titles;
   }
 
@@ -53,8 +51,8 @@ export default class ChallengeService {
  * @param {string} lang e.g. "en_US", "de_DE"...
  * @returns {Promise<ChallengesRawDto>} Challenges and Titles
  */
-  async listAll(region, lang = "en_US") {
-    const all = await this.getJson(`/challenges/${region}/${lang}.json`);
+  async listAll(region: string, lang: string): Promise<ChallengesFullDTO | undefined> {
+    const all = await this.getJson("/test.php") as ChallengesFullDTO;
     return all;
   }
 

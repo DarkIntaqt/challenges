@@ -1,10 +1,9 @@
-@import 'variables';
+@import "variables";
 
 .start {
    height: 100%;
    width: 100%;
    position: relative;
-
 
    .bgwrapper {
       height: 100%;
@@ -16,11 +15,9 @@
       filter: brightness(0.8);
       background-position: center;
       background-size: cover;
-
    }
 
    .wrapper {
-
       height: 100%;
       z-index: 10;
       position: relative;
@@ -29,12 +26,9 @@
       justify-content: center;
       flex-direction: column;
 
-
       .heading {
-
          text-align: center;
          text-shadow: 0 0 5px #000;
-
 
          span {
             color: white;
@@ -49,18 +43,13 @@
             margin: 0;
             padding: 0;
          }
-
       }
-
    }
-
 }
-
 
 .searchbarWrapper {
    margin-top: 20px;
    position: relative;
-
 
    .results {
       visibility: hidden;
@@ -70,7 +59,7 @@
       flex-direction: column;
       height: auto;
       margin: 0 25px;
-      backdrop-filter: blur(5px) brightness(0.5) grayscale(50%);
+      background-color: rgb(0, 0, 0, 0.7);
       border-radius: 0 0 10px 10px;
 
       &:hover {
@@ -82,7 +71,7 @@
          position: relative;
          padding: 5px;
 
-         >p {
+         > p {
             font-size: 1.2rem;
             font-weight: 700;
             color: $light1;
@@ -94,7 +83,7 @@
             border-radius: 10px;
          }
 
-         >div {
+         > div {
             width: 100%;
 
             .card {
@@ -112,19 +101,19 @@
                   }
                }
 
-               >p {
+               > p {
                   width: 160px;
                   overflow: hidden;
                   white-space: nowrap;
                   text-overflow: ellipsis;
-                  font-size: .8rem;
+                  font-size: 0.8rem;
                   font-weight: 400;
                   padding: 5px;
                   color: $light1;
 
                   span {
-                     font-size: .6rem;
-                     line-height: .6rem;
+                     font-size: 0.6rem;
+                     line-height: 0.6rem;
                      color: $light1;
                      width: fit-content;
 
@@ -146,14 +135,14 @@
                   border-radius: 10px;
                   align-items: center;
                   justify-content: center;
-                  transition: .2s transform;
+                  transition: 0.2s transform;
                   overflow: hidden;
 
                   &:hover {
                      transform: scale(1.03);
 
                      .bg {
-                        filter: brightness(.2) blur(0px);
+                        filter: brightness(0.2) blur(0px);
                         background-size: 100%;
                      }
                   }
@@ -164,7 +153,9 @@
                      z-index: 1;
 
                      width: 100%;
-                     transition: .2s background-size, .2s filter;
+                     transition:
+                        0.2s background-size,
+                        0.2s filter;
                      height: 100%;
                      background-position: center;
                      background-size: 120%;
@@ -192,7 +183,6 @@
                         animation-timing-function: linear;
                         animation-iteration-count: infinite;
 
-
                         @keyframes spin {
                            100% {
                               transform: rotate(180deg);
@@ -212,7 +202,6 @@
 
    &.active,
    &:hover {
-
       .results {
          visibility: visible;
       }
@@ -237,12 +226,10 @@
    }
 
    &.active {
-
       .searchbar {
          border: 2px solid $selected;
          box-shadow: 0 0 5px $selected;
       }
-
    }
 
    .searchbar {
@@ -256,7 +243,11 @@
       border-radius: 10px;
       border: 2px solid transparent;
 
-      transition: .25s box-shadow, .25s border, .25s color, .25s background-color;
+      transition:
+         0.25s box-shadow,
+         0.25s border,
+         0.25s color,
+         0.25s background-color;
 
       overflow: hidden;
 
@@ -275,7 +266,9 @@
          padding: 15px 20px;
 
          color: $light3;
-         transition: .25s color, .25s background-color;
+         transition:
+            0.25s color,
+            0.25s background-color;
       }
 
       select {
@@ -297,7 +290,6 @@
          &:hover {
             color: $light0;
          }
-
       }
 
       svg {
@@ -310,8 +302,6 @@
          &:hover {
             color: $light0;
          }
-
       }
-
    }
 }

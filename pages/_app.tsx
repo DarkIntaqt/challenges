@@ -1,5 +1,5 @@
 import React from "react";
-import { Roboto } from "@next/font/google";
+import { Roboto } from "next/font/google";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 

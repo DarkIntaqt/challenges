@@ -1,4 +1,3 @@
-import "typedef";
 import Head from "next/head";
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";

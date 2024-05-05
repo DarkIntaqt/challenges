@@ -1,4 +1,3 @@
-import "typedef";
 import requests from "challenges/utils/requestFunctions";
 
 /**
