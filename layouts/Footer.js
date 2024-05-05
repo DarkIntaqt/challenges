@@ -17,7 +17,7 @@ export default function Footer() {
          <div className={`${css.linkgroup} ${css.special}`}>
 
             <Logo />
-            <p>&copy;2022 - 2023</p>
+            <p>&copy;2022 - {new Date().getFullYear()}</p>
             <p>Challenge Tracker</p>
 
             <p style={{
