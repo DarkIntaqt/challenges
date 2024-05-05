@@ -1,4 +1,4 @@
-import { Noto_Sans, Noto_Sans_JP, Noto_Sans_KR, Source_Sans_Pro } from "@next/font/google";
+import { Roboto } from "@next/font/google";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -18,25 +18,9 @@ import ErrorBoundary from "challenges/components/ErrorBoundary";
  * 
  * Source Sans Pro is currently only used for the logo
  */
-const noto = Noto_Sans({
+const roboto = Roboto({
   weight: ["300", "400", "700"],
-  subsets: ["latin", "greek"],
-  variable: "--Noto"
-});
-const notoJP = Noto_Sans_JP({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--NotoJP"
-});
-const notoKR = Noto_Sans_KR({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--NotoKR"
-});
-const source = Source_Sans_Pro({
-  weight: ["700"],
-  subsets: ["latin"],
-  variable: "--Source"
+  subsets: ["latin"]
 });
 
 
@@ -92,7 +76,7 @@ export default function ChallengeTracker({ Component, pageProps }) {
    */
   return <ErrorBoundary>
 
-    <Layout className={`${noto.variable} ${notoJP.variable} ${notoKR.variable} ${source.variable}`}>
+    <Layout className={`${roboto.variable}`}>
 
       {
         loading
