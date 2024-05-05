@@ -56,7 +56,7 @@
       position: absolute;
       width: 550px;
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       height: auto;
       margin: 0 25px;
       background-color: rgb(0, 0, 0, 0.7);
@@ -64,139 +64,6 @@
 
       &:hover {
          visibility: visible;
-      }
-
-      .category {
-         width: 100%;
-         position: relative;
-         padding: 5px;
-
-         > p {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: $light1;
-            width: fit-content;
-
-            text-align: center;
-            padding: 0 10px;
-            margin: 2px 0 6px;
-            border-radius: 10px;
-         }
-
-         > div {
-            width: 100%;
-
-            .card {
-               float: left;
-               margin: 5px 6px;
-               padding: 2px;
-               display: block;
-               width: fit-content;
-               position: relative;
-
-               &:hover,
-               &:focus {
-                  .inner {
-                     outline: 2px solid $light3;
-                  }
-               }
-
-               > p {
-                  width: 160px;
-                  overflow: hidden;
-                  white-space: nowrap;
-                  text-overflow: ellipsis;
-                  font-size: 0.8rem;
-                  font-weight: 400;
-                  padding: 5px;
-                  color: $light1;
-
-                  span {
-                     font-size: 0.6rem;
-                     line-height: 0.6rem;
-                     color: $light1;
-                     width: fit-content;
-
-                     text-align: center;
-                     padding: 3px 6px;
-                     margin-left: 5px;
-                     border-radius: 5px;
-                     background-color: $dark3;
-                  }
-               }
-
-               .inner {
-                  width: 160px;
-                  position: relative;
-                  height: 80px;
-                  background-color: $dark2;
-                  display: flex;
-                  outline: 2px solid transparent;
-                  border-radius: 10px;
-                  align-items: center;
-                  justify-content: center;
-                  transition: 0.2s transform;
-                  overflow: hidden;
-
-                  &:hover {
-                     transform: scale(1.03);
-
-                     .bg {
-                        filter: brightness(0.2) blur(0px);
-                        background-size: 100%;
-                     }
-                  }
-
-                  .bg {
-                     filter: blur(2px) brightness(0.2);
-                     position: absolute;
-                     z-index: 1;
-
-                     width: 100%;
-                     transition:
-                        0.2s background-size,
-                        0.2s filter;
-                     height: 100%;
-                     background-position: center;
-                     background-size: 120%;
-                     background-repeat: no-repeat;
-                  }
-
-                  .content {
-                     position: relative;
-                     z-index: 5;
-
-                     .loader {
-                        position: absolute;
-                        width: 70px;
-                        height: 70px;
-                        margin: -5px 0 0 -5px;
-
-                        border-radius: 50%;
-                        border: 2px solid $dark3;
-                        border-left-color: transparent;
-                        border-right-color: transparent;
-                        z-index: 8;
-
-                        animation-name: spin;
-                        animation-duration: 5s;
-                        animation-timing-function: linear;
-                        animation-iteration-count: infinite;
-
-                        @keyframes spin {
-                           100% {
-                              transform: rotate(180deg);
-                           }
-                        }
-                     }
-
-                     img.round {
-                        border-radius: 50%;
-                     }
-                  }
-               }
-            }
-         }
       }
    }
 

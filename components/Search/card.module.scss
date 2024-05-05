@@ -1,0 +1,160 @@
+@import "challenges/styles/variables";
+
+.result {
+   width: calc(50% - 20px);
+
+   margin: 10px;
+
+   .content {
+      background-color: $accent;
+      width: 100%;
+
+      position: relative;
+
+      height: 120px;
+      border-radius: 8px;
+      border: 2px solid $border;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      overflow: hidden;
+
+      cursor: pointer;
+
+      &.error {
+         border-color: rgb(199, 17, 17);
+         box-shadow: 0 0 15px 10px rgb(120, 27, 27) inset;
+      }
+
+      &:hover {
+         cursor: pointer;
+         .bg {
+            filter: blur(1px);
+            opacity: 0.35;
+
+            img {
+               scale: 1;
+            }
+         }
+
+         .loader img {
+            border-color: $text-tertiary;
+         }
+      }
+
+      .bg {
+         position: absolute;
+         width: 100%;
+         height: 120px;
+         z-index: 0;
+
+         filter: blur(10px);
+         opacity: 0.5;
+         transition:
+            0.25s filter,
+            0.25s opacity;
+
+         img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            scale: 1.2;
+
+            transition: 0.25s scale;
+         }
+      }
+
+      .loader {
+         width: 64px;
+         height: 64px;
+         z-index: 1;
+         position: relative;
+
+         img {
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+
+            border: 2px solid $border;
+
+            transition: 0.25s border-color;
+
+            z-index: 1;
+         }
+      }
+      .loader.loading {
+         &::before {
+            width: 70px;
+            height: 70px;
+            content: "";
+            position: absolute;
+
+            z-index: 1;
+            top: -3px;
+            left: -3px;
+
+            transition: 0.25s border-color;
+            box-sizing: border-box;
+            border-radius: 50%;
+
+            border: 3px solid $text-secondary;
+
+            border-bottom-color: transparent;
+            border-top-color: transparent;
+
+            animation: 1s rotate infinite;
+         }
+      }
+
+      .loader.loaded {
+         &::before {
+            width: 70px;
+            height: 70px;
+            content: "";
+            position: absolute;
+
+            z-index: 1;
+            top: -3px;
+            left: -3px;
+
+            transition: 0.25s border-color;
+            box-sizing: border-box;
+            border-radius: 50%;
+
+            border: 3px solid $text-secondary;
+
+            border-bottom-color: transparent;
+            border-top-color: transparent;
+
+            border-color: transparent;
+
+            animation: 1s rotate infinite;
+         }
+      }
+
+      p {
+         margin-top: 10px;
+         font-size: $font-small;
+         color: $text-secondary;
+
+         z-index: 1;
+
+         span {
+            background-color: $border;
+            padding: 5px;
+            border-radius: 4px;
+            color: $text-tertiary;
+         }
+      }
+   }
+}
+
+@keyframes rotate {
+   to {
+      rotate: 1turn;
+   }
+}

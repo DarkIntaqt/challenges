@@ -17,7 +17,7 @@ export default function requests(baseUrl: string) {
 
     let data = undefined;
     try {
-      if (res.ok) {
+      if (res?.ok) {
         data = await res.json();
       }
     } catch (e) {

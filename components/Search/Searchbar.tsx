@@ -7,8 +7,9 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { getStorage, setStorage, storageKeys } from "challenges/utils/localStorageFunctions";
 import ChallengeService from "challenges/services/ChallengeService";
 import { ChallengeDTO, ChallengesFullDTO } from "challenges/types/challenges.types";
-import Card from "./SearchBarCard";
+import ChallengeCard from "./ChallengeCard";
 import ContentService from "challenges/services/ContentService";
+import UserCard from "./UserCard";
 
 
 export default function Searchbar() {
@@ -84,37 +85,28 @@ export default function Searchbar() {
       {/* Position absolute, does not interfere the initial layout*/}
       <div className={css.results}>
          {searchValue.length > 0 ?
-            <div className={css.category}>
-               <div>
-                  <Card
-                     title={searchValue}
-                     url={`/profile/${region}/${searchValue}`}
-                     round
-                     loader
-                     imageAsBackground
-                     tag={region}
-                     image={contentService.getProfileIcon(29)}
-                  />
-               </div>
-            </div>
+            <>
+               <UserCard
+                  input={searchValue}
+                  userRegion={region}
+               />
+            </>
             : null}
          {challenges && searchValue.length > 0 ?
-            <div className={css.category}>
-               <div>
-                  {challenges.map((challenge) => {
-                     if (!challenge.name.toLowerCase().startsWith(searchValue)) {
-                        return null;
-                     }
+            <>
+               {challenges.map((challenge) => {
+                  if (!challenge.name.toLowerCase().startsWith(searchValue)) {
+                     return null;
+                  }
 
-                     return <Card
-                        key={challenge.id}
-                        title={challenge.name}
-                        url={"/challenges/" + challenge.id}
-                        image={contentService.getChallengeTokenIcon(parseInt(challenge.id), "MASTER")} // TODO
-                     />;
-                  }).filter(x => !!x).slice(0, 6)}
-               </div>
-            </div>
+                  return <ChallengeCard
+                     key={challenge.id}
+                     title={challenge.name}
+                     url={"/challenges/" + challenge.id}
+                     image={contentService.getChallengeTokenIcon(parseInt(challenge.id), "MASTER")} // TODO
+                  />;
+               }).filter(x => !!x).slice(0, 5)}
+            </>
             : null}
       </div>
 

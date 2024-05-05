@@ -1,7 +1,7 @@
 import React from "react";
 import css from "challenges/styles/index.module.scss";
 import Head from "next/head";
-import Searchbar from "challenges/components/Searchbar";
+import Searchbar from "challenges/components/Search/Searchbar";
 
 export default function Start() {
    const images = [

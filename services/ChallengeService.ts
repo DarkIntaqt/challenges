@@ -30,7 +30,7 @@ export default class ChallengeService {
    */
   async list(region: string, lang = "en_US"): Promise<Record<string, ChallengeDTO> | undefined> {
     const challenges = await this.listAll(region, lang);
-    return challenges.challenges;
+    return challenges?.challenges;
   }
 
   /**
@@ -41,7 +41,7 @@ export default class ChallengeService {
    */
   async listTitles(region: string, lang = "en_US") {
     const titles = await this.listAll(region, lang);
-    return titles.titles;
+    return titles?.titles;
   }
 
   /**
@@ -52,7 +52,7 @@ export default class ChallengeService {
  * @returns {Promise<ChallengesRawDto>} Challenges and Titles
  */
   async listAll(region: string, lang: string): Promise<ChallengesFullDTO | undefined> {
-    const all = await this.getJson("/test.php") as ChallengesFullDTO;
+    const all = await this.getJson("/test.php") as ChallengesFullDTO | undefined;
     return all;
   }
 
@@ -61,7 +61,7 @@ export default class ChallengeService {
    * @param {number} id 
    * @returns {Promise<GlobalChallengeDto>} Challenge
    */
-  async getById(id) {
+  async getById(id: string) {
     const challenge = await this.getJson(`/v5/showChallenge.php?id=${id}`);
     return challenge;
   }
