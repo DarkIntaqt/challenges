@@ -9,7 +9,6 @@
     min-height: 100vh;
     background-color: var(--dark0);
     float: left;
-
 }
 
 .userwrapperfull .wrapperbg {
@@ -31,9 +30,7 @@
 a.uggarea {
     display: inline-block;
     text-decoration: none;
-
 }
-
 
 img.ugglogo {
     border-left: 2px solid var(--light2);
@@ -58,9 +55,8 @@ img.mclogo {
     z-index: 1;
 }
 
-
 .legal {
-    font-size: .75rem;
+    font-size: 0.75rem;
     color: var(--light2);
     width: calc(100% - 30px);
     text-align: justify;
@@ -72,7 +68,7 @@ img.mclogo {
     color: white;
 }
 
-.profile>img.edge {
+.profile > img.edge {
     position: absolute;
     left: 0;
     top: 0;
@@ -81,7 +77,7 @@ img.mclogo {
     pointer-events: none;
 }
 
-.profile>img:not(.edge) {
+.profile > img:not(.edge) {
     height: 94px;
     border: 3px solid var(--type, white);
     width: 94px;
@@ -94,7 +90,7 @@ img.mclogo {
     animation: 1s shine linear infinite;
 }
 
-.profile>h1 {
+.profile > h1 {
     color: white;
     font-size: 2rem;
     text-shadow: 0 0 5px black;
@@ -103,17 +99,16 @@ img.mclogo {
     width: calc(100% - 140px);
 }
 
-.profile>h1>span {
+.profile > h1 > span {
     font-size: 0.8rem;
     color: rgb(157, 156, 156);
     font-weight: normal;
 }
 
-
-.profile>span.titlePlaceholder,
-.profile>h2,
-.profile>p.challengeDescription,
-.profile>h2>span {
+.profile > span.titlePlaceholder,
+.profile > h2,
+.profile > p.challengeDescription,
+.profile > h2 > span {
     display: block;
     color: var(--type);
     font-size: 1rem;
@@ -123,28 +118,28 @@ img.mclogo {
     margin: 0px 5px 5px;
 }
 
-.profile>span.titlePlaceholder {
+.profile > span.titlePlaceholder {
     cursor: auto;
     color: white;
     margin: 0 0 5px;
     display: inline-block;
 }
 
-.c.profile>h2,
-.profile>p.challengeDescription {
+.c.profile > h2,
+.profile > p.challengeDescription {
     max-width: calc(100% - 150px);
 }
 
-.profile>h2:hover>div,
-.profile>div>div:hover>div {
+.profile > h2:hover > div,
+.profile > div > div:hover > div {
     visibility: visible;
 }
 
-.profile>div {
+.profile > div {
     float: left;
 }
 
-.profile>div:not(.thresholds)>div {
+.profile > div:not(.thresholds) > div {
     height: 38px;
     width: 38px;
     margin: 0 5px;
@@ -155,26 +150,26 @@ img.mclogo {
     cursor: help;
 }
 
-.profile>h2>div>b,
-.profile>div>div>div>b {
+.profile > h2 > div > b,
+.profile > div > div > div > b {
     font-size: 1rem;
     font-weight: bold;
     display: inline-block;
     padding-bottom: 5px;
-    color: var(--light0)
+    color: var(--light0);
 }
 
-.profile>h2>div>i,
-.profile>div>div>div>i {
+.profile > h2 > div > i,
+.profile > div > div > div > i {
     font-size: 0.8rem;
 }
 
-.profile>h2>div,
-.profile>div>div>div {
+.profile > h2 > div,
+.profile > div > div > div {
     cursor: AUTO;
     border-radius: 5px;
     color: var(--light2);
-    font-size: .8rem;
+    font-size: 0.8rem;
     z-index: 5;
     border: 2px solid var(--type);
     background-color: var(--dark1);
@@ -187,11 +182,10 @@ img.mclogo {
     position: absolute;
 }
 
-.profile>div>div>div {
+.profile > div > div > div {
     margin-top: 42px !important;
     margin-left: 25px;
 }
-
 
 .selections {
     width: calc(100% - 130px);
@@ -236,28 +230,27 @@ img.mclogo {
     border-bottom: 2px solid var(--selected);
 }
 
-.topLevelFilter a>span {
+.topLevelFilter a > span {
     display: block;
     float: right;
-    font-size: .7rem;
+    font-size: 0.7rem;
     font-weight: bold;
     color: white !important;
-    padding: .15rem 5px;
+    padding: 0.15rem 5px;
     box-shadow: 0 0 5px var(--selected);
     background-color: var(--selected);
     border-radius: 5px;
     margin-left: 5px;
 }
 
-.selectedFilteroverview>.overview,
-.selectedFiltertitles>.titles,
-.selectedFilterstatistics>.statistics,
-.selectedFilterhistory>.history,
-.selectedFiltercalendar>.calendar {
+.selectedFilteroverview > .overview,
+.selectedFiltertitles > .titles,
+.selectedFilterstatistics > .statistics,
+.selectedFilterhistory > .history,
+.selectedFiltercalendar > .calendar {
     color: var(--selected);
-    border-bottom: 2px solid var(--selected)
+    border-bottom: 2px solid var(--selected);
 }
-
 
 .newLine {
     float: left;
@@ -265,7 +258,7 @@ img.mclogo {
 }
 
 /* CHALLENGE OVERVIEW */
-.profile.c>img {
+.profile.c > img {
     border-radius: 50%;
     box-shadow: 0 0 0 transparent;
     position: relative;
@@ -277,11 +270,13 @@ img.mclogo {
     position: relative;
 }
 
-.profile.c:not(.cid0):not(.cid1):not(.cid2):not(.cid3):not(.cid4):not(.cid5):not(.cid2022000):not(.cid2023000):not(.cid2024100)::before {
+.profile.c:not(.cid0):not(.cid1):not(.cid2):not(.cid3):not(.cid4):not(.cid5):not(.cid2022000):not(.cid2023000):not(
+        .cid2024100
+    ):not(.cid2024200)::before {
     height: 80px;
     width: 80px;
     margin: 30px;
-    content: '';
+    content: "";
     z-index: 0;
     left: 0;
     top: 0;
@@ -290,13 +285,13 @@ img.mclogo {
     border-radius: 50%;
 }
 
-.profile>.thresholds {
+.profile > .thresholds {
     width: calc(100% - 140px);
     margin-left: 3px;
     margin-top: 5px;
 }
 
-.profile>.thresholds>div {
+.profile > .thresholds > div {
     float: left;
     min-width: 10px;
     color: white;
@@ -304,25 +299,25 @@ img.mclogo {
     font-size: 0.7rem;
 }
 
-.profile>.thresholds>div>i {
+.profile > .thresholds > div > i {
     color: var(--type);
     margin: 0 3px 0 7px;
 }
 
-.profile.c>div>div>div {
-    margin-top: 10px !important
+.profile.c > div > div > div {
+    margin-top: 10px !important;
 }
 
-@media only screen and (max-width:1050px) {
-    .profile.c>div>div>div {
-        margin-left: -180px
+@media only screen and (max-width: 1050px) {
+    .profile.c > div > div > div {
+        margin-left: -180px;
     }
 
-    .profile:not(.c)>div>div>div {
+    .profile:not(.c) > div > div > div {
         display: none;
     }
 
-    .profile:not(.c)>div>div {
+    .profile:not(.c) > div > div {
         cursor: auto;
     }
 }
@@ -333,7 +328,7 @@ img.mclogo {
     margin: 20px 10%;
     text-align: center;
     color: var(--light2);
-    font-size: .8rem;
+    font-size: 0.8rem;
     background: var(--dark1);
     border: 2px solid var(--type, #d9463c);
     border-radius: 10px;
@@ -341,12 +336,11 @@ img.mclogo {
     float: left;
 }
 
-
 .disabledMessage .details {
     font-size: 0.8rem;
 }
 
-.parent>a.challenge>p.values {
+.parent > a.challenge > p.values {
     text-align: center;
     margin-top: 36px;
     font-weight: bold;
@@ -354,7 +348,7 @@ img.mclogo {
     font-size: 1.2rem;
 }
 
-.parent>a.challenge>.position {
+.parent > a.challenge > .position {
     font-size: 0.7rem;
     color: white;
     z-index: 0;
@@ -370,12 +364,12 @@ img.mclogo {
     padding: 8px 0;
 }
 
-.parent>a.challenge.top10>.position,
-.parent>a.challenge.pos1>.position {
+.parent > a.challenge.top10 > .position,
+.parent > a.challenge.pos1 > .position {
     font-size: 1rem;
 }
 
-.parent>a.challenge.top100>.position {
+.parent > a.challenge.top100 > .position {
     font-size: 0.85rem;
 }
 
@@ -426,12 +420,12 @@ img.mclogo {
     visibility: visible;
 }
 
-.challengePercentile .percentileHover>div {
+.challengePercentile .percentileHover > div {
     float: left;
     margin: 10px;
 }
 
-.challengePercentile .percentileHover>div>i {
+.challengePercentile .percentileHover > div > i {
     color: var(--type);
     margin-right: 10px;
 }
@@ -452,13 +446,12 @@ img.mclogo {
     margin: 10px;
 }
 
-
 .rowParentTableRow p {
-    width: 40%
+    width: 40%;
 }
 
 .rowParentTableRow p:nth-child(3) {
-    width: 20%
+    width: 20%;
 }
 
 .rowParent table {
@@ -491,7 +484,7 @@ img.mclogo {
 .rowParentTableRow p {
     float: left;
     color: white;
-    font-size: .8rem;
+    font-size: 0.8rem;
     text-align: center;
     display: block;
 }
@@ -505,7 +498,7 @@ img.mclogo {
     font-weight: bold;
     font-size: 0.7rem;
     color: var(--light3);
-    padding: 5px 0
+    padding: 5px 0;
 }
 
 .rowParent table td {
@@ -534,7 +527,6 @@ img.mclogo {
     border-radius: 0 5px 5px 0;
 }
 
-
 .rowParent table tr th:nth-child(5) {
     text-align: left;
     padding-left: 10px;
@@ -559,14 +551,12 @@ img.mclogo {
     background-color: var(--dark2);
 }
 
-
 .rowParent:not(.zebra) table tr:not(:first-child) {
     border-top: 1px solid var(--dark3);
 }
 
 .rowParent table tr td:nth-child(1) {
-
-    color: var(--light2)
+    color: var(--light2);
 }
 
 .rowParent table tr td:nth-child(2) {
@@ -575,41 +565,40 @@ img.mclogo {
     overflow: hidden;
 }
 
-
-.rowParent table tr td:nth-child(2)>a {
+.rowParent table tr td:nth-child(2) > a {
     text-decoration: none;
     position: relative;
     display: block;
     color: white;
 }
 
-.rowParent table tr td:nth-child(2)>a:hover>p {
+.rowParent table tr td:nth-child(2) > a:hover > p {
     text-decoration: underline;
 }
 
-.rowParent table tr td:nth-child(2)>a>span {
+.rowParent table tr td:nth-child(2) > a > span {
     float: left;
     overflow: hidden;
     border-radius: 5px;
 }
 
-.rowParent table tr td:nth-child(2)>a>p {
+.rowParent table tr td:nth-child(2) > a > p {
     white-space: nowrap;
     overflow: hidden;
     font-size: 1rem;
     text-overflow: ellipsis;
-    padding: calc(calc(30px - 1rem) * 0.5)
+    padding: calc(calc(30px - 1rem) * 0.5);
 }
 
-.rowParent table tr td:nth-child(2)>a>p>span {
+.rowParent table tr td:nth-child(2) > a > p > span {
     color: var(--light2);
     font-size: 0.8rem;
 }
 
 .rowParent table tr td:nth-child(3) {
     text-align: center;
-    font-size: .8rem;
-    color: var(--type)
+    font-size: 0.8rem;
+    color: var(--type);
 }
 
 .rowParent table tr td:nth-child(4) {
@@ -620,10 +609,7 @@ img.mclogo {
 .rowParent table tr td:nth-child(5) {
     font-size: 0.8rem;
     color: var(--light2);
-
 }
-
-
 
 .loadinganimation,
 .rowParent table.loading {
@@ -656,9 +642,9 @@ img.mclogo {
 .rowParent .seoArea span {
     display: block;
     float: left;
-    margin: .2rem 0 0 10px;
+    margin: 0.2rem 0 0 10px;
     font-size: 0.8rem;
-    color: var(--light2)
+    color: var(--light2);
 }
 
 .placeholder {
@@ -689,7 +675,6 @@ span.availableTitle img {
     height: 1rem;
 }
 
-
 .rowParent.field {
     width: 360px;
 }
@@ -699,12 +684,12 @@ span.availableTitle img {
     float: left;
 }
 
-.field>div {
+.field > div {
     float: left;
 }
 
-.field>div>p {
-    font-size: .9rem;
+.field > div > p {
+    font-size: 0.9rem;
     color: var(--light2);
     padding: 0 10px;
     line-height: 1.4;
@@ -747,7 +732,7 @@ span.availableTitle img {
     }
 }
 
-@media only screen and (max-width:970px) {
+@media only screen and (max-width: 970px) {
     .miniFlex {
         height: 320px;
         width: 100%;
@@ -757,12 +742,11 @@ span.availableTitle img {
     }
 }
 
-
 .flexWidth {
     width: 750px;
 }
 
-@media only screen and (max-width:1050px) {
+@media only screen and (max-width: 1050px) {
     .flexWidth {
         width: 100%;
     }
@@ -773,12 +757,12 @@ p.thresholdWarning {
     float: left;
     box-sizing: border-box;
     width: 100%;
-    font-size: .7rem;
-    color: var(--light3)
+    font-size: 0.7rem;
+    color: var(--light3);
 }
 
 span.updated {
-    font-size: .8rem;
+    font-size: 0.8rem;
     color: #9d9c9c;
     box-sizing: border-box;
 }

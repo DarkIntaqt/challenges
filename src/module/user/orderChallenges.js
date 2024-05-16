@@ -127,7 +127,7 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
 
         if (filters.category.length > 0 && !filters.category.includes(parentId.toString())) {
             if (filters.category.includes("retired-seasonal")) {
-                if (parentId !== 2022000 && parentId !== 2023000) {
+                if (parentId !== 2022000 && parentId !== 2023000 && parentId !== 2024100) {
                     return null
                 }
             } else {
@@ -146,7 +146,7 @@ export function removeUnnecessaryChallenges(challengesArray, filters, masterOnly
             if (challenge[1] >= 7) {
                 return null;
             }
-            if (challenge[8] === 600006 || challenge[8].parent === 2022000 || challenge[8] === 2023000 || challenge[8] === 2024100) {
+            if (challenge[8] === 600006 || challenge[8].parent === 2022000 || challenge[8] === 2023000 || challenge[8] === 2024100 || challenge[8] === 2024200) {
                 return null;
             }
 

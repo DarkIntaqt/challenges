@@ -22,6 +22,7 @@ export default function statsCalculateTotalPoints(challenges) {
             && challenge[8] !== 2023000 // 2023 capstone
             && challenge[8] !== 601000  // arena capstone
             && challenge[8] !== 2024100 // seasonal 2024 capstone
+            && challenge[8] !== 2024200 // seasonal 2024 capstone
             && challenge[6].state === "ENABLED"
         ) {
             //console.log(challenge[8]);

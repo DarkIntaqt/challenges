@@ -443,9 +443,9 @@ class Challenges extends Component {
                             <img src={config.images["600006"]} alt="legacy" />
                             Legacy
                         </button>
-                        <button onClick={this.changeFilter} data-id="2024100">
-                            <img src={config.images['2024100']} alt="2024 seasonal split1" />
-                            2024 Seasonal
+                        <button onClick={this.changeFilter} data-id="2024200">
+                            <img src={config.images['2024200']} alt="2024 seasonal split2" />
+                            2024.2 Seasonal
                         </button>
                         <button onClick={this.changeFilter} data-id="seasonal-retired">
                             <img src={config.images['seasonal-retired']} alt="seasonal outdated" />
