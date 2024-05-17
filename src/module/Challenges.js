@@ -226,7 +226,7 @@ class Challenges extends Component {
                     }
                 }
 
-                if (enabled["isAram"] && enabled["isSR"] && enabled["isAram"]) {
+                if (enabled["isAram"] && enabled["isSR"] && enabled["isArena"]) {
                     queueIds.push(<div key={"all " + i}>
                         <p>All modes</p>
                         <img key={0} src="https://cdn.darkintaqt.com/lol/static/lanes/FILL.png" alt="All modes" />
