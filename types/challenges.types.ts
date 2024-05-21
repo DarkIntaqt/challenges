@@ -39,3 +39,33 @@ export interface TitleDTO {
    name: string;
    type: "DEFAULT" | "EVENT" | "CHALLENGE";
 }
+
+export interface LeaderboardDTO {
+   id: number;
+   timestamp: number;
+   title: string[];
+   text: string;
+   challenge: ChallengeOldDTO;
+   parents: ParentDTO[];
+   stats: Record<string, string | Record<string, string>>;
+   summoner: Record<string, (string | number)[]>
+}
+
+interface ChallengeOldDTO {
+   id: number;
+   state: string;
+   leaderboard: boolean;
+   name: string;
+   description: string;
+   descriptionShort: string;
+   source: string;
+   queueIds: number[];
+   capstone: boolean;
+   reversed: boolean;
+   thresholds: Record<ThresholdType, number>;
+}
+
+export interface ParentDTO {
+   id: number;
+   name: string;
+}

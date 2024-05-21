@@ -1,0 +1,178 @@
+/*
+ *
+ * SCSS MODULE FOR
+ * /challenges[challengeId].js
+ *
+ */
+@import "variables";
+
+.bgImage {
+   position: absolute;
+   width: 100%;
+   height: 800px;
+
+   background-position: center;
+   background-size: cover;
+
+   mask-image: linear-gradient(to top, transparent, black);
+
+   img {
+      object-fit: cover;
+   }
+}
+
+.leaderboard {
+   position: relative;
+
+   width: 1000px;
+   margin: 0 calc(50% - 500px);
+
+   z-index: 5;
+
+   display: flex;
+   flex-direction: column;
+
+   .head {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+
+      margin: 50px 0 10px;
+      background-color: $dark3transparent;
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+
+      padding: 20px;
+      display: flex;
+
+      &:hover .pin {
+         visibility: visible;
+      }
+
+      a.getHelp {
+         position: absolute;
+         right: 10px;
+         top: 10px;
+         color: $light3;
+         font-size: 1rem;
+
+         &:hover {
+            color: $light1;
+         }
+      }
+
+      .text {
+         margin-left: 10px;
+
+         h1 {
+            font-size: 2rem;
+
+            .pin {
+               display: inline-block;
+               border-radius: 25%;
+               width: 2rem;
+               height: 2rem;
+               cursor: pointer;
+               visibility: hidden;
+
+               transition:
+                  0.25s background-color,
+                  0.25s border-radius,
+                  0.25s transform;
+
+               &.isPinned {
+                  transform: translateY(-5px) translateX(-10px) rotate(25deg);
+               }
+
+               &:hover {
+                  background-color: rgba(20, 20, 30, 0.5);
+                  border-radius: 50%;
+
+                  &.isPinned svg {
+                     color: red;
+                  }
+               }
+
+               svg {
+                  width: 1rem;
+                  height: 1rem;
+                  margin: 0.5rem;
+               }
+            }
+         }
+
+         p.description {
+            margin: 5px 0;
+            width: fit-content;
+            max-width: 850px;
+
+            font-size: 1rem;
+            line-height: 1.2rem;
+
+            color: $light2;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+         }
+         .tags {
+            display: flex;
+            flex-wrap: wrap;
+
+            .tag {
+               border: none;
+               outline: none;
+
+               text-align: center;
+               margin-right: 5px;
+
+               padding: 5px 10px;
+               border-radius: 10px;
+               font-size: 0.8rem;
+               color: $light3;
+
+               cursor: pointer;
+               background-color: rgba(20, 20, 30, 0.5);
+
+               &.title {
+                  color: var(--type);
+               }
+
+               &:hover {
+                  background-color: rgba(28, 28, 38, 0.8);
+               }
+
+               a,
+               span,
+               p {
+                  color: $light3;
+               }
+
+               a:hover {
+                  text-decoration: underline;
+                  transition: 0.25s color;
+               }
+
+               > span > svg {
+                  font-size: 0.6rem;
+                  margin: 0 0.1rem;
+               }
+
+               .svg {
+                  width: 0.8rem;
+                  height: 0.8rem;
+                  display: inline-flex;
+                  align-self: center;
+
+                  svg {
+                     fill: $light3;
+                     width: 0.8rem;
+                     height: 0.8rem;
+                     position: relative;
+                     top: 0.125rem;
+                  }
+               }
+            }
+         }
+      }
+   }
+}
