@@ -322,7 +322,7 @@ export default class Match extends Component {
                             })
 
 
-                            return <a className={css.player} href={`/${this.state.region}/${player.name}`} onClick={goTo} key={player.name}>
+                            return <a className={css.player} href={`/${this.state.region}/${player.name.replace("#", "-")}`} onClick={goTo} key={player.name}>
                                 <div className={css.champion}>
                                     <img src={"https://lolcdn.darkintaqt.com/cdn/champion/" + player.champion[0] + "/tile"} alt={player.champion[1]} />
                                 </div>
