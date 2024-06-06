@@ -36,7 +36,7 @@ export default function Titles({ titles }: Readonly<{titles ? : Record<string, T
    }, [titles, search]);
 
    if (titles === undefined) {
-      return <p>titles undefined</p>
+      return <p>titles undefined</p>;
    }
    return <div className={"object1000"}>
       <Head>
@@ -50,9 +50,9 @@ export default function Titles({ titles }: Readonly<{titles ? : Record<string, T
          if (title.challengeId === undefined) {
             return null;
          }
-         return <div>
+         return <>
             <Link href={"/challenges/" + title.challengeId}>{title.name}</Link><br/>
-         </div>
+            </>;
       })}
 
       
@@ -153,5 +153,5 @@ Titles.getInitialProps = async () => {
 
    return {
       titles: all.titles
-   }
+   };
 };
