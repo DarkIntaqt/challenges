@@ -38,6 +38,8 @@ declare interface RewardDTO {
 export interface TitleDTO {
    name: string;
    type: "DEFAULT" | "EVENT" | "CHALLENGE";
+   id: string;
+   challengeId? : string;
 }
 
 export interface LeaderboardDTO {

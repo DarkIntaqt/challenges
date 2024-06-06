@@ -3,12 +3,14 @@ import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
 import ChallengeService from "challenges/services/ChallengeService";
 import ContentService from "challenges/services/ContentService";
-import css from "styles/titles.module.scss";
-import filterCss from "styles/filter.module.scss";
-import { storageKeys, getStorage, setStorage } from "utils/sessionStorageFunctions";
+import css from "challenges/styles/titles.module.scss";
+import filterCss from "challenges/styles/filter.module.scss";
+import { storageKeys, getStorage, setStorage } from "challenges/utils/sessionStorageFunctions.js";
 import Link from "next/link";
 import { intToTier } from "challenges/utils/intToTier";
 import { capitalize } from "challenges/utils/stringManipulation";
+import { TitleDTO } from "challenges/types/challenges.types";
+import { title } from "process";
 
 /**
  * @typedef TitlesProps
@@ -19,7 +21,7 @@ import { capitalize } from "challenges/utils/stringManipulation";
 /**
  * @param {TitlesProps} props 
  */
-export default function Titles({ titles, challenges }) {
+export default function Titles({ titles }: Readonly<{titles ? : Record<string, TitleDTO>}>) {
    const [searchList, setSearchList] = useState(titles);
    const [search, setSearch] = useState("");
 
@@ -33,6 +35,9 @@ export default function Titles({ titles, challenges }) {
       }
    }, [titles, search]);
 
+   if (titles === undefined) {
+      return <p>titles undefined</p>
+   }
    return <div className={"object1000"}>
       <Head>
          <title>All Challenges Titles - Overview</title>
@@ -40,7 +45,18 @@ export default function Titles({ titles, challenges }) {
 
       <h1 className={css.heading}>All titles</h1>
       <p className={css.subheading}>A list of all League of Legends Title Challenges and how to achieve them</p>
-      <input
+
+      {Object.values(titles).map((title) => {
+         if (title.challengeId === undefined) {
+            return null;
+         }
+         return <div>
+            <Link href={"/challenges/" + title.challengeId}>{title.name}</Link><br/>
+         </div>
+      })}
+
+      
+      {/* <input
          className={filterCss.input}
          type="search"
          list="items"
@@ -48,18 +64,22 @@ export default function Titles({ titles, challenges }) {
          defaultValue={search}
          spellCheck={false}
          // We need these three event handlers to deal with oddities across Chrome and Firefox. ૮(˶╥︿╥)ა
-         onChange={(e) => handleChallengeSearch(e.target.value, titles, setSearchList)}
-         onKeyUp={(e) => handleChallengeSearch(e.target.value, titles, setSearchList)}
-         onInput={(e) => handleChallengeSearch(e.target.value, titles, setSearchList)} />
+         //onChange={(e) => handleChallengeSearch(e.target.value, titles, setSearchList)}
+         //onKeyUp={(e) => handleChallengeSearch(e.target.value, titles, setSearchList)}
+         //onInput={(e) => handleChallengeSearch(e.target.value, titles, setSearchList)}
+         /> */}
 
-      <datalist id="items">
-         {/* Add challenge titles to datalist for native HTML searching options! (*´▽`*)❀ */}
-         {titles.map((title) => <option key={title.titleId} value={title.title} />)}
-      </datalist>
+      {/* <datalist id="items">
+         {// Add challenge titles to datalist for native HTML searching options! (*´▽`*)❀
+         }
+         {Object.keys(titles).map((title) => <option key={title} value={title} />)}
+      </datalist> */}
 
-      <div className={css.titles}>
+      {/* <div className={css.titles}>
          <TitleList titles={searchList} challenges={challenges} />
-      </div>
+      </div> */}
+      
+      
    </div>;
 }
 
@@ -123,15 +143,15 @@ function handleChallengeSearch(value, titles, setSearchList) {
    setSearchList([...query]);
 }
 
-Titles.getInitialProps = async (ctx) => {
+Titles.getInitialProps = async () => {
    const challengeService = new ChallengeService();
    const all = await challengeService.listAll("na1", "en_US");
 
-   const titles = all.titles;
-   const challenges = all.challenges;
+   if (all === undefined) {
+      return {};
+   }
 
    return {
-      titles,
-      challenges
-   };
+      titles: all.titles
+   }
 };
