@@ -4,7 +4,7 @@ import { MouseEventHandler } from "react";
 import css from "./sidebar.module.scss";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAnglesLeft, faAnglesRight, faHome, faList, faRankingStar } from "@fortawesome/free-solid-svg-icons";
+import { faAnglesLeft, faAnglesRight, faHome, faList, faRankingStar, faAward } from "@fortawesome/free-solid-svg-icons";
 import NavLink from "./NavLink";
 import Logo from "challenges/assets/logo.svg";
 
@@ -40,6 +40,13 @@ export default function Sidebar({
                icon={faRankingStar}
             />
             <p>Leaderboard</p>
+         </NavLink>
+
+         <NavLink href="/titles">
+            <FontAwesomeIcon
+               icon={faAward}
+            />
+            <p>Titles</p>
          </NavLink>
 
          <button className={css.toggle} onClick={toggleSidebar as MouseEventHandler}>
