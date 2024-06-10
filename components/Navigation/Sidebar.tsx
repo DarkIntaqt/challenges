@@ -39,7 +39,7 @@ export default function Sidebar({
             <FontAwesomeIcon
                icon={faRankingStar}
             />
-            <p>Challenges</p>
+            <p>Leaderboard</p>
          </NavLink>
 
          <button className={css.toggle} onClick={toggleSidebar as MouseEventHandler}>
