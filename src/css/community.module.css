@@ -8,7 +8,6 @@
     width: 100%;
     min-height: calc(100vh - 650px);
     float: left;
-    height: 1200px;
     background-color: var(--dark0);
 }
 
@@ -19,7 +18,7 @@
     background-position: bottom;
     background-size: cover;
     background-attachment: fixed;
-    background-image: url(https://lolcdn.darkintaqt.com/s/community-g2cb.webp)
+    background-image: url(https://lolcdn.darkintaqt.com/s/community-g2cb.webp);
 }
 
 @media only screen and (max-height: 800px) {
@@ -37,102 +36,51 @@
     text-align: center;
 }
 
-.floatingIsland {
-    min-height: 50px;
-    width: 600px;
-    background-color: var(--dark1);
+.community {
+    min-height: 150px;
+    width: 100%;
     float: left;
+    background-color: var(--dark1);
     margin: 20px 0;
-    position: absolute;
     border-radius: 10px;
     box-shadow: 0 0 5px var(--dark3);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
 }
 
-.floatingIsland:first-of-type {
-    top: -50px;
-}
-
-.floatingIsland:nth-of-type(2) {
-    top: 200px;
-    left: 400px;
-}
-
-
-.floatingIsland:nth-of-type(3) {
-    top: 400px;
-    left: 50px;
-}
-
-.floatingIsland:nth-of-type(4) {
-    top: 650px;
-    left: 350px;
-}
-
-.floatingIsland:nth-of-type(5) {
-    left: 60px;
-    top: 900px
-}
-
-.scrollSection>section>img {
-    position: absolute;
-    height: 240px;
-    z-index: 5;
-    width: 240px;
-    filter: brightness(80%);
-}
-
-.scrollSection>section>img:nth-of-type(1) {
-    left: 700px;
-    top: -100px;
-}
-
-
-.scrollSection>section>img:nth-of-type(2) {
-    left: 100px;
-    top: 180px;
-}
-
-.scrollSection>section>img:nth-of-type(3) {
-    left: 700px;
-    top: 350px;
-}
-
-.scrollSection>section>img:nth-of-type(4) {
-    left: 20px;
-    top: 650px;
-}
-
-.scrollSection>section>img:nth-of-type(5) {
-    left: 680px;
-    border-radius: 10px;
-    top: 900px
-}
-
-
-.floatingIsland>h2 {
+.community > div > h2 {
     font-size: 1.5rem;
     padding: 12px;
     width: 100%;
     box-sizing: border-box;
-    color: var(--light0)
+    color: var(--light0);
 }
 
-.floatingIsland>p {
+.community img {
+    margin: 15px 0;
+    border-radius: 8px;
+}
+
+.community > div > p {
     font-size: 1rem;
     line-height: 1.2rem;
     color: var(--light2);
     padding: 0 20px 20px;
 }
 
-.floatingIsland>p>span {
+.community > div > p > span {
     width: 100%;
+    margin-top: 10px;
     float: left;
     display: flex;
     text-align: center;
     justify-content: center;
 }
 
-.floatingIsland>p>span>a {
+.community > div > p > span > a {
     display: block;
     width: 200px;
     border-radius: 10px;
@@ -142,19 +90,19 @@
     padding: 10px;
     text-decoration: none;
     background-color: var(--selected);
-    transition: .25s;
+    transition: 0.25s;
 }
 
-.floatingIsland>p>span>a:hover {
+.community > div > p > span > a:hover {
     box-shadow: 0 0 5px var(--selected);
 }
 
-@media only screen and (max-width:1050px) {
+@media only screen and (max-width: 1050px) {
     .topArea {
         margin-top: 100px;
     }
 
-    .floatingIsland {
+    .community {
         top: 0 !important;
         position: relative;
         left: 0 !important;
@@ -163,11 +111,7 @@
         float: left;
     }
 
-    .scrollSection>section>img {
-        display: none;
-    }
-
     .scrollSection {
-        min-height: calc(100vh - 450px)
+        min-height: calc(100vh - 450px);
     }
 }

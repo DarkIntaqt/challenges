@@ -8,23 +8,25 @@ import Loader from "./Loader";
 
 import css from "../css/community.module.css"
 
+const endpoint = "https://challenges.darkintaqt.com/community.json";
+const defaultLang = "en";
+
+const langs = navigator.languages || ["en"];
+
 export default class Community extends Component {
     constructor(props) {
         super(props)
 
-        let images = []
-        let texts = []
+        let communities = [];
 
-        const request = getCache("https://challenges.darkintaqt.com/communities.json")
+        const request = getCache(endpoint)
 
         if (request !== false) {
-            images = request.images
-            texts = request.texts
+            communities = request
         }
 
         this.state = {
-            images: images,
-            texts: texts
+            communities
         }
 
         this.loadedStats = this.loadedStats.bind(this)
@@ -33,14 +35,14 @@ export default class Community extends Component {
 
 
     loadedStats(data) {
-        this.setState({ images: data.images, texts: data.texts })
+        this.setState({ communities: data })
     }
 
 
     componentDidMount() {
 
-        if (this.state.images.length === 0 || this.state.texts.length === 0) {
-            get("https://challenges.darkintaqt.com/communities.json", this.loadedStats)
+        if (this.state.communities.length === 0) {
+            get(endpoint, this.loadedStats)
         }
 
     }
@@ -48,31 +50,12 @@ export default class Community extends Component {
 
     render() {
 
-
-        if (this.state.images.length === 0 || this.state.texts.length === 0) {
-
+        if (this.state.communities.length === 0) {
             return <div style={{ width: "100%", float: "left" }}>
                 <Loader />
                 <p style={{ color: "white", fontSize: "1rem", textAlign: "center" }}>Loading Communities...</p>
             </div>
-
         }
-
-
-        let islands = this.state.texts.map(function (data) {
-            return <div key={data[0]} className={css.floatingIsland}>
-                <h2>{data[0]}</h2>
-                <p>{data[1]}
-
-                    <span><a href={data[2]} target="_blank" rel="noreferrer"><i className={data[4]} /> {data[3]}</a></span>
-                </p>
-            </div>
-        })
-        let images = this.state.images.map(function (data) {
-            return <LazyLoadImage key={data} src={data} height={240} width={240}></LazyLoadImage>
-        })
-
-
 
         document.title = "League of Legends Challenge Community"
 
@@ -89,9 +72,35 @@ export default class Community extends Component {
             <div className={css.scrollSection}>
                 <section className={`object1000`} style={{ position: 'relative' }}>
 
-                    {islands}
+                    {this.state.communities.map((community, i) => {
 
-                    {images}
+                        let uselang = defaultLang;
+                        for (let i = 0; i < langs.length; i++) {
+                            if (community.langs.includes(langs[i])) {
+                                uselang = langs[i];
+                                break;
+                            }
+                        }
+
+                        // in case a community isnt available in default lang and other langs are not available
+                        if (!community[uselang]) {
+                            return <></>;
+                        }
+
+                        const translated = community[uselang];
+
+                        return <div className={css.community} key={i}>
+                            <div>
+                                <h2>{translated.title}</h2>
+                                <p>{translated.description}
+                                    <span>
+                                        <a href={translated.link}><i className={community.icon} /> {translated.cta}</a>
+                                    </span>
+                                </p>
+                            </div>
+                            <LazyLoadImage alt={translated.title} src={community.image} width={210} height={210} />
+                        </div>;
+                    })}
 
                 </section>
 
