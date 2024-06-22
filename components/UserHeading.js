@@ -6,12 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import VipBadge from "./VipBadge";
 
-export default function UserHeading({ user, tier, title = false, selections = {}, verified = false }) {
+export default function UserHeading({ user, tier, title, selections, verified }) {
 
    const contentService = new ContentService();
 
    const imageSrc = contentService.getProfileIcon(user.icon);
-
 
    const filter = (verified === false) ? "grayscale(100%)" : "";
 
@@ -61,6 +60,6 @@ export default function UserHeading({ user, tier, title = false, selections = {}
 
       </div>
 
-   </div >;
+   </div>;
 
 }

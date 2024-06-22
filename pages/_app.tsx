@@ -11,7 +11,7 @@ import ErrorBoundary from "challenges/components/ErrorBoundary";
 import { AppProps } from "next/app";
 import { parseCookies } from "nookies";
 import { SidebarConfig } from "challenges/components/Navigation/Sidebar";
-import { NextPageContext } from "next";
+import { AppContextType } from "next/dist/shared/lib/utils";
 
 
 /**
@@ -102,18 +102,12 @@ export default function ChallengeTracker({ Component, pageProps, sidebar }: Cust
   </ErrorBoundary>;
 }
 
-interface CustomNextPageContext extends NextPageContext {
-  Component: Function;
-}
-
-ChallengeTracker.getInitialProps = async (ctx: CustomNextPageContext) => {
-  const cookies = parseCookies(ctx);
+ChallengeTracker.getInitialProps = async (ctx: AppContextType) => {
+  const cookies = parseCookies(ctx.ctx);
   let pageProps = {};
 
-  // @ts-ignore
   if (ctx.Component.getInitialProps) {
-    // @ts-ignore
-    pageProps = await ctx.Component.getInitialProps(ctx);
+    pageProps = await ctx.Component.getInitialProps(ctx.ctx);
   }
 
   let sidebar: SidebarConfig = "VISIBLE";

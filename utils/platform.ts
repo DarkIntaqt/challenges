@@ -4,7 +4,7 @@ function getPlatform(server: string) {
          return "br1";
 
       case "euw":
-         return "euw1";
+         break; // return "euw1"; // "euw1" returns a 400 response
 
       case "eune":
          return "eun1";
