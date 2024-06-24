@@ -20,7 +20,7 @@ import getParent from "challenges/utils/getParentChallenge";
  * @type {Object}
  * @property {Array.<ChallengeDto>} challengesRaw
  * @property {Object} filters
- * @property {Array} apply
+ * @property {Array.<UserChallengeDto>} apply
  * @property {String} region
  */
 
@@ -28,14 +28,13 @@ import getParent from "challenges/utils/getParentChallenge";
 /**
  * @param {ChallengesProps} props
  */
-export default function Challenges({ challengesRaw, filters, apply = [], region = "" }) {
+export default function Challenges({ challengesRaw, filters, apply = [], region }) {
 
    let applyChallenges = {};
    let isApplying = (apply.length > 0);
    for (let i = 0; i < apply.length; i++) {
       const challenge = apply[i];
-
-      applyChallenges[challenge[0]] = challenge;
+      applyChallenges[challenge.id] = challenge;
    }
 
    const challenges = Array

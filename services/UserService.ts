@@ -15,11 +15,8 @@ export default class UserService {
 
 
    async getUser(name: string, region: string): Promise<UserInfo | undefined> {
-      const user = await this.getJSON(`/lookup/${region}/${name.replace(/[#-]/, "/")}`);
-      // todo: temp, this endpoint doesn't have the required attributes
-      return user
-          ? {...user, challenges: [[2024207, 3, 34, 0, 1718984756917, [0.008]]], title: [20310203], selections: [[2024208, 6]]} as UserInfo
-          : undefined;
+      const user = await this.getJSON(`/challenges/by-riot-id/${region}/${name.replace(/[#-]/, "/")}`);
+      return user;
    }
 
    async checkUser(name: string, region: string): Promise<CheckResponse | undefined> {

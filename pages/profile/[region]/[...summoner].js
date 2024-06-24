@@ -5,12 +5,10 @@ import ChallengeService from "challenges/services/ChallengeService";
 import ContentService from "challenges/services/ContentService";
 import UserService from "challenges/services/UserService";
 import getTitle from "challenges/utils/getTitle";
-import { intToTier } from "challenges/utils/intToTier";
 import getPlatform, { serversBeautified } from "challenges/utils/platform";
 
 import css from "challenges/styles/user.module.scss";
 import { useEffect, useState } from "react";
-import getChallenge from "challenges/utils/getChallenge";
 import Image from "next/image";
 import HoverObject from "challenges/components/HoverObject";
 import { capitalize } from "challenges/utils/stringManipulation";
@@ -38,20 +36,30 @@ export default function Profile({ user, verified, challengesRaw, filters, err, r
 
    }
 
-   const tier = intToTier(user.challenges[0][1] - 1);
-   const title = getTitle(user.title[0], titles);
+   const title = getTitle(user.preferences.title, titles);
    const contentService = new ContentService();
 
-   const showCaseChallenges = user.selections.map((selection) => {
+   const showCaseChallenges = user.preferences.displayed.map((challengeId) => {
 
-      const challenge = getChallenge(selection[0], challengesRaw);
+      const challengeInfo = challengesRaw[challengeId];
+      const challengeUser = user.challenges.find(c => c.id === challengeId);
 
-      return <HoverObject key={challenge.id} hover={<div className={`${css.hover} ${intToTier(selection[1] - 1)}`}>
-         <p>{challenge.name}</p>
-         <span>{capitalize(intToTier(selection[1] - 1))} rank token. <br /><br />{challenge.description}</span>
-      </div>}>
-         <Image src={contentService.getChallengeTokenIcon(challenge.id, intToTier(selection[1] - 1))} unoptimized height={35} width={35} alt={challenge.name} />
-      </HoverObject>;
+      if (!challengeInfo || !challengeUser) {
+         return <></>;
+      }
+
+      return (
+          <HoverObject key={challengeInfo.id} hover={(
+              <div className={`${css.hover} ${challengeUser.tier}`}>
+                 <p>{challengeInfo.name}</p>
+                 <span><b>{capitalize(challengeUser.tier)}</b> rank token</span>
+                 <br />
+                 <span><i>{challengeInfo.description}</i></span>
+              </div>
+          )}>
+             <Image src={contentService.getChallengeTokenIcon(challengeInfo.id, challengeUser.tier)} unoptimized height={35} width={35} alt={challengeInfo.name} />
+          </HoverObject>
+      );
 
    });
 
@@ -59,12 +67,12 @@ export default function Profile({ user, verified, challengesRaw, filters, err, r
 
 
       <div className={css.bgImage} style={{
-         backgroundImage: "url(https://cdn.darkintaqt.com/lol/static/challenges/_" + tier.toLowerCase() + "-full.webp)"
+         backgroundImage: "url(https://cdn.darkintaqt.com/lol/static/challenges/_" + user.points.tier.toLowerCase() + "-full.webp)"
       }}></div>
 
       <div className={css.user}>
 
-         <UserHeading user={user} tier={tier} title={title} verified={verified} selections={showCaseChallenges} />
+         <UserHeading user={user} title={title} verified={verified} selections={showCaseChallenges} />
 
          <div className={css.navigation}>
 
