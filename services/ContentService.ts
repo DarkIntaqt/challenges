@@ -20,7 +20,22 @@ export default class ContentService {
    */
   getChallengeTokenIcon(id: number, type?: ThresholdType): string {
     let link = `${ContentService.cdnUrl}/np-token/${id}`;
-    if (type != null) link = `${link}/${type.toLowerCase()}`;
+    if (id <= 5) {
+      let mainCatLink = "https://cdn.darkintaqt.com/lol/static/challenges/";
+      if (id === 1) {
+        link = 	`${mainCatLink}imagination.svg`;
+      } else if (id === 2) {
+        link = `${mainCatLink}expertise.svg`;
+      } else if (id === 3) {
+        link = `${mainCatLink}veterancy.svg`;
+      } else if (id === 4) {
+        link = `${mainCatLink}teamwork.svg`;
+      } else if (id === 5) {
+        link = `${mainCatLink}collection.svg`;
+      }
+    } else {
+      if (type != null) link = `${link}/${type.toLowerCase()}`;
+    }
     return encodeURI(link);
   }
 

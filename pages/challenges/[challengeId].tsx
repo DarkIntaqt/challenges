@@ -31,6 +31,14 @@ export default function Leaderboard({ leaderboard }: Readonly<{ leaderboard: Lea
       name: "Uwu"
    };
 
+   let challengeName = leaderboard.challenge.name;
+   if (leaderboard.id === 0) {
+      challengeName = "Challenge Points Leaderboard";
+   }
+   let challendeDescription = leaderboard.challenge.description;
+   if (leaderboard.id === 0) {
+      challendeDescription = "Total challenge points gained by leveling up challenges";
+   }
    return (<>
 
       <div className={css.bgImage} style={{
@@ -47,24 +55,29 @@ export default function Leaderboard({ leaderboard }: Readonly<{ leaderboard: Lea
 
             <div className={css.text}>
 
-               <h1>{leaderboard.challenge.name} {/* TODO PIN */}</h1>
+               <h1>{challengeName} {/* TODO PIN */}</h1>
 
-               <p className={css.description}>{leaderboard.challenge.description}</p>
+               <p className={css.description}>{challendeDescription}</p>
 
                <div className={css.tags}>
 
                   {titleAvailable ? <div className={`${css.tag} ${title.tier} ${css.title}`}>{title.name}</div> : null}
 
-                  <div className={css.tag}>{leaderboard.parents.map((c, i) => {
-                     return <span key={c.id}>{i > 0 ? " > " : <></>}
-                        <Link href={"/challenges/" + c.id}>
-                           <div className={css.svg}>
-                              <CapstoneIcon />
-                           </div>
-                           {/* REQUIRED WHITESPACE */} {c.name}
-                        </Link>
-                     </span>;
-                  })}</div>
+                  {leaderboard.parents.length === 0 ? null :
+                     <div className={css.tag}>{leaderboard.parents.map((c, i) => {
+                        let name = c.name;
+                        if (c.id === 0) {
+                           name = "Challenge Points Leaderboard";
+                        }
+                        return <span key={c.id}>{i > 0 ? " > " : <></>}
+                           <Link href={"/challenges/" + c.id}>
+                              <div className={css.svg}>
+                                 <CapstoneIcon />
+                              </div>
+                              {/* REQUIRED WHITESPACE */} {name}
+                           </Link>
+                        </span>;
+                     })}</div>}
 
                </div>
 
