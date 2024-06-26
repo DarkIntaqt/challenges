@@ -48,6 +48,9 @@ function serverToHumanReadable(server) {
         case "vn2":
             return "vn"
 
+        case "me1":
+            return "me";
+
         default:
             break;
     }
@@ -104,6 +107,9 @@ function serverToMachineReadable(server) {
         case "vn":
             return "vn2"
 
+        case "me":
+            return "me1";
+
         default:
             break;
     }
@@ -155,9 +161,8 @@ function serverToRegionString(server) {
             return "Turkey"
 
         default:
-            break;
+            return server
     }
-    return server
 }
 
 

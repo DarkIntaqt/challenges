@@ -1,6 +1,6 @@
 .background {
     height: calc(100vh - 60px);
-    filter: brightness(.65);
+    filter: brightness(0.65);
     width: 100%;
     position: absolute;
     z-index: 0;
@@ -21,16 +21,16 @@
     float: left;
     text-align: center;
     text-shadow: 0 0 5px black;
-    padding-top: calc(50vh - 150px)
+    padding-top: calc(50vh - 150px);
 }
 
 .start h2 a:hover {
-    text-decoration: underline
+    text-decoration: underline;
 }
 
 .start h2 a {
     text-decoration: none;
-    color: #fff
+    color: #fff;
 }
 
 .start h2 {
@@ -43,10 +43,8 @@
 }
 
 .start h1 span {
-    font-size: 3.3rem
+    font-size: 3.3rem;
 }
-
-
 
 .start .searchbar {
     width: 100%;
@@ -64,7 +62,7 @@
     cursor: pointer;
     padding: 10px;
     border-radius: 50%;
-    position: absolute
+    position: absolute;
 }
 
 .start .searchbar input {
@@ -82,7 +80,7 @@
 .start .searchbar input:focus {
     border: 2px solid #0cbdf7;
     padding: 10px 18px;
-    box-shadow: 0 0 8px 2px #0cbdf7
+    box-shadow: 0 0 8px 2px #0cbdf7;
 }
 
 .start .serverselector,
@@ -92,7 +90,7 @@
     flex-wrap: wrap;
     float: left;
     display: flex;
-    justify-content: space-evenly
+    justify-content: space-evenly;
 }
 
 .filter {
@@ -126,29 +124,29 @@
     background: var(--dark1);
 }
 
-.world>.world,
-.br>.br,
-.euw>.euw,
-.eune>.eune,
-.jp>.jp,
-.kr>.kr,
-.lan>.lan,
-.las>.las,
-.na>.na,
-.oc>.oc,
-.ru>.ru,
-.tr>.tr,
-.ph>.ph,
-.th>.th,
-.vn>.vn,
-.tw>.tw,
-.sg>.sg,
+.world > .world,
+.br > .br,
+.euw > .euw,
+.eune > .eune,
+.jp > .jp,
+.kr > .kr,
+.lan > .lan,
+.las > .las,
+.na > .na,
+.oc > .oc,
+.ru > .ru,
+.tr > .tr,
+.ph > .ph,
+.th > .th,
+.vn > .vn,
+.tw > .tw,
+.sg > .sg,
+.me > .me,
 .start .serverselector .region.selected {
     background: var(--selected);
     color: #fff;
-    box-shadow: 0 0 8px 2px var(--selected)
+    box-shadow: 0 0 8px 2px var(--selected);
 }
-
 
 .recentlySearched {
     width: 460px;
@@ -182,7 +180,7 @@ a.searchedUser:hover {
 }
 
 a.searchedUser span.userRegion {
-    font-size: .6rem;
+    font-size: 0.6rem;
     color: var(--dark2);
     margin-left: 2px;
 }
@@ -198,7 +196,7 @@ a.searchedUser:last-child {
 
 a.searchedUser p {
     padding-left: 30px;
-    font-size: .8rem;
+    font-size: 0.8rem;
 }
 
 a.searchedUser img {
@@ -208,13 +206,12 @@ a.searchedUser img {
     width: 26px;
 }
 
-a.searchedUser>span {
-    margin-top: calc(.4rem - 13px);
+a.searchedUser > span {
+    margin-top: calc(0.4rem - 13px);
     position: absolute;
 }
 
-
-@media only screen and (max-width:1100px) {
+@media only screen and (max-width: 1100px) {
     .start .searchbar input {
         width: calc(90% - 40px);
         margin: 0 5%;
@@ -226,25 +223,25 @@ a.searchedUser>span {
     }
 
     .start .searchbar i {
-        margin-left: calc(100% - 5% - 50px)
+        margin-left: calc(100% - 5% - 50px);
     }
 }
 
 @media only screen and (max-width: 900px) {
     .start .serverselector {
         width: 90%;
-        margin: 20px 5% 0
+        margin: 20px 5% 0;
     }
 }
 
-@media only screen and (max-width:600px) {
+@media only screen and (max-width: 600px) {
     .recentlySearched {
         display: none !important;
     }
 }
 
-@media only screen and (max-width:1700px) {
-    .start .serverselector:nth-child(2n+1) {
-        margin-bottom: 170px !important
+@media only screen and (max-width: 1700px) {
+    .start .serverselector:nth-child(2n + 1) {
+        margin-bottom: 170px !important;
     }
 }
