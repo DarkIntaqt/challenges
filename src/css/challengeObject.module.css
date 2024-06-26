@@ -65,6 +65,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     width: 100%;
+    padding: 4px 0;
     overflow: hidden;
 }
 
