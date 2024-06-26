@@ -273,13 +273,14 @@ class Challenge extends Component {
 
     changeFilter(e) {
 
-        var isRightMB;
+        var isRightMB = false;
+        var isMB2 = false;
         e.preventDefault();
 
         if ("which" in e)  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
             isRightMB = e.which === 3;
-        else if ("button" in e)  // IE, Opera 
-            isRightMB = e.button === 2;
+        isMB2 = e.which === 2;
+
 
         let filter = "world";
 
@@ -291,7 +292,7 @@ class Challenge extends Component {
 
             filter = e.target.id;
 
-            if (isRightMB) {
+            if (isRightMB || e.ctrlKey || e.altKey) {
 
                 filter = "";
                 for (let i = 0; i < this.regions.length; i++) {
@@ -305,9 +306,7 @@ class Challenge extends Component {
 
             }
 
-            else if (e.shiftKey) {
-
-                console.log("SHIFT")
+            else if (e.shiftKey || isMB2) {
 
                 const tempFilter = this.state.filter.split(";")
                 if (tempFilter.includes(filter)) {
