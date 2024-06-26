@@ -20,7 +20,8 @@ export default function statsCalculateTotalPoints(challenges) {
             && challenge[6].parent !== "0" // all legacy
             && challenge[8] !== 2022000 // 2022 capstone
             && challenge[8] !== 2023000 // 2023 capstone
-            && challenge[8] !== 601000  // arena capstone
+            && challenge[8] !== 601000  // arena brawler capstone
+            && challenge[8] !== 602000 // arena champion capstone
             && challenge[8] !== 2024100 // seasonal 2024 capstone
             && challenge[8] !== 2024200 // seasonal 2024 capstone
             && challenge[6].state === "ENABLED"
@@ -32,6 +33,7 @@ export default function statsCalculateTotalPoints(challenges) {
             // console.log(challenge[0], challenge[6].state, challenge[6].translation.name, challenge[6].translation.description)
         }
     }
+    console.log("")
     return tiers
 
 }
