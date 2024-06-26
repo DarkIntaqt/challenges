@@ -33,7 +33,6 @@ export default function statsCalculateTotalPoints(challenges) {
             // console.log(challenge[0], challenge[6].state, challenge[6].translation.name, challenge[6].translation.description)
         }
     }
-    console.log("")
     return tiers
 
 }
