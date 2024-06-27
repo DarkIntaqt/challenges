@@ -1,4 +1,4 @@
-function getPlatform(server) {
+function getPlatform(server: string) {
    switch (server) {
       case "br":
          return "br1";
@@ -42,6 +42,9 @@ function getPlatform(server) {
       case "vn":
          return "vn2";
 
+      case "me":
+         return "me1";
+
       /**
        * RU and KR does not have different platformIds
        */
@@ -65,6 +68,7 @@ const serversBeautified = [
    "kr",
    "lan",
    "las",
+   "me",
    "na",
    "oc",
    "ph",
@@ -85,6 +89,7 @@ const serversRaw = [
    "kr",
    "la1",
    "la2",
+   "me1",
    "na1",
    "oc1",
    "ph2",
