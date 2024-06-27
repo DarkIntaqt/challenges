@@ -1,4 +1,4 @@
-export default function Logo(props) {
+export default function Logo(props: any) {
    return <svg version="1.0" {...props}
       xmlns="http://www.w3.org/2000/svg" width="512pt" height="512pt" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
       <g>

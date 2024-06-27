@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import ContentService from "challenges/services/ContentService";
 import CapstoneIcon from "challenges/assets/capstone.svg";
+import TitleIcon from "challenges/assets/title.svg";
 
 const contentService = new ContentService();
 
@@ -25,12 +26,16 @@ export default function Leaderboard({ leaderboard }: Readonly<{ leaderboard: Lea
    const highestTier: ThresholdType = "MASTER";
    const challengeToken = contentService.getChallengeTokenIcon(leaderboard.id, highestTier);
 
-   const titleAvailable = false;
-   const title = {
-      tier: "BRONZE",
-      name: "Uwu"
-   };
+   const titleAvailable = leaderboard.title !== null;
 
+   let challengeName = leaderboard.challenge.name;
+   if (leaderboard.id === 0) {
+      challengeName = "Challenge Points Leaderboard";
+   }
+   let challendeDescription = leaderboard.challenge.description;
+   if (leaderboard.id === 0) {
+      challendeDescription = "Total challenge points gained by leveling up challenges";
+   }
    return (<>
 
       <div className={css.bgImage} style={{
@@ -47,24 +52,36 @@ export default function Leaderboard({ leaderboard }: Readonly<{ leaderboard: Lea
 
             <div className={css.text}>
 
-               <h1>{leaderboard.challenge.name} {/* TODO PIN */}</h1>
+               <h1>{challengeName} {/* TODO PIN */}</h1>
 
-               <p className={css.description}>{leaderboard.challenge.description}</p>
+               <p className={css.description}>{challendeDescription}</p>
 
                <div className={css.tags}>
 
-                  {titleAvailable ? <div className={`${css.tag} ${title.tier} ${css.title}`}>{title.name}</div> : null}
-
-                  <div className={css.tag}>{leaderboard.parents.map((c, i) => {
-                     return <span key={c.id}>{i > 0 ? " > " : <></>}
-                        <Link href={"/challenges/" + c.id}>
+                  {titleAvailable ? <div className={`${css.tag} ${leaderboard.title?.tier} ${css.title}`}>
+                        <span>
                            <div className={css.svg}>
-                              <CapstoneIcon />
+                              <TitleIcon />
                            </div>
-                           {/* REQUIRED WHITESPACE */} {c.name}
-                        </Link>
-                     </span>;
-                  })}</div>
+                           {` ${leaderboard.title?.title}`}
+                        </span>
+                     </div> : null}
+
+                  {leaderboard.parents.length === 0 ? null :
+                     <div className={css.tag}>{leaderboard.parents.map((c, i) => {
+                        let name = c.name;
+                        if (c.id === 0) {
+                           name = "Challenge Points Leaderboard";
+                        }
+                        return <span key={c.id}>{i > 0 ? " > " : <></>}
+                           <Link href={"/challenges/" + c.id}>
+                              <div className={css.svg}>
+                                 <CapstoneIcon />
+                              </div>
+                              {` ${name}`}
+                           </Link>
+                        </span>;
+                     })}</div>}
 
                </div>
 
