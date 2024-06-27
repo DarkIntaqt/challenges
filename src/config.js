@@ -41,6 +41,7 @@ const config = {
         "kr",
         "lan",
         "las",
+        "me",
         "na",
         "oc",
         "ru",
@@ -50,7 +51,6 @@ const config = {
         "th",
         "tw",
         "vn",
-        "me"
     ],
     "cdnBasePath": "https://lolcdn.darkintaqt.com",
     "tiers": [

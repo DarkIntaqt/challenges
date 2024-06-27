@@ -85,23 +85,23 @@
 
 .start .serverselector,
 .filter {
-    width: 50%;
-    margin: 20px 25% 0;
+    width: 54%;
+    margin: 20px 23% 0;
     flex-wrap: wrap;
     float: left;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 
 .filter {
-    margin: 5px 20%;
+    margin: 5px 23%;
 }
 
 .start .serverselector .region,
 .filterOption {
     background: var(--dark0);
-    width: 40px;
-    margin: 0 calc(6.25% - 25px) 5px;
+    width: 50px;
+    margin: 0 calc(calc(100% / 18) - 25px) 5px;
     box-shadow: 0 0 5px black;
     color: #bbb;
     border-radius: 4px;
@@ -109,6 +109,7 @@
     text-align: center;
     border: none;
     font-size: 1rem;
+    box-sizing: border-box;
     padding: 5px;
 }
 

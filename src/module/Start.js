@@ -181,23 +181,10 @@ class Start extends Component {
         </div>
 
         <div className={StyleSheet.serverselector}>
-          <div className={StyleSheet.region} onClick={changeRegion}>br</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>euw</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>eune</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>jp</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>kr</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>lan</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>las</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>na</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>oc</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>ru</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>tr</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>ph</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>sg</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>th</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>tw</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>vn</div>
-          <div className={StyleSheet.region} onClick={changeRegion}>me</div>
+          {config.regions.map((region) => {
+            return <div key={region} className={StyleSheet.region} onClick={changeRegion}>{region}</div>
+          })}
+          <a className={StyleSheet.region} href="https://darkintaqt.com/blog/about-challenge-tracker#faq" target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>Help</a>
         </div>
         <div style={{ float: "left", margin: "10px 0", width: "100%", display: "flex", justifyContent: "center" }}>
           <Ad id={1}></Ad>
