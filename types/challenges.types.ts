@@ -45,7 +45,7 @@ export interface TitleDTO {
 export interface LeaderboardDTO {
    id: number;
    timestamp: number;
-   title: string[];
+   title: LeaderboardTitleDTO | null;
    text: string;
    challenge: ChallengeOldDTO;
    parents: ParentDTO[];
@@ -65,6 +65,12 @@ interface ChallengeOldDTO {
    capstone: boolean;
    reversed: boolean;
    thresholds: Record<ThresholdType, number>;
+}
+
+interface LeaderboardTitleDTO {
+   title: string;
+   id: number;
+   tier: ThresholdType;
 }
 
 export interface ParentDTO {

@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import ContentService from "challenges/services/ContentService";
 import CapstoneIcon from "challenges/assets/capstone.svg";
+import TitleIcon from "challenges/assets/title.svg";
 
 const contentService = new ContentService();
 
@@ -25,11 +26,7 @@ export default function Leaderboard({ leaderboard }: Readonly<{ leaderboard: Lea
    const highestTier: ThresholdType = "MASTER";
    const challengeToken = contentService.getChallengeTokenIcon(leaderboard.id, highestTier);
 
-   const titleAvailable = false;
-   const title = {
-      tier: "BRONZE",
-      name: "Uwu"
-   };
+   const titleAvailable = leaderboard.title !== null;
 
    let challengeName = leaderboard.challenge.name;
    if (leaderboard.id === 0) {
@@ -61,7 +58,14 @@ export default function Leaderboard({ leaderboard }: Readonly<{ leaderboard: Lea
 
                <div className={css.tags}>
 
-                  {titleAvailable ? <div className={`${css.tag} ${title.tier} ${css.title}`}>{title.name}</div> : null}
+                  {titleAvailable ? <div className={`${css.tag} ${leaderboard.title?.tier} ${css.title}`}>
+                        <span>
+                           <div className={css.svg}>
+                              <TitleIcon />
+                           </div>
+                           {` ${leaderboard.title?.title}`}
+                        </span>
+                     </div> : null}
 
                   {leaderboard.parents.length === 0 ? null :
                      <div className={css.tag}>{leaderboard.parents.map((c, i) => {
@@ -74,7 +78,7 @@ export default function Leaderboard({ leaderboard }: Readonly<{ leaderboard: Lea
                               <div className={css.svg}>
                                  <CapstoneIcon />
                               </div>
-                              {/* REQUIRED WHITESPACE */} {name}
+                              {` ${name}`}
                            </Link>
                         </span>;
                      })}</div>}
