@@ -1,35 +1,46 @@
 {
-  "name": "challenges",
-  "version": "2.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/free-brands-svg-icons": "^6.5.1",
-    "@fortawesome/free-regular-svg-icons": "^6.5.1",
-    "@fortawesome/free-solid-svg-icons": "^6.5.1",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "loader-utils": "^3.2.1",
-    "next": "14.1.1",
-    "nookies": "^2.5.2",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-parallax-tilt": "^1.7.212"
-  },
-  "devDependencies": {
-    "@types/cookie": "^0.6.0",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.1",
-    "eslint-plugin-unused-imports": "^3.0.0",
-    "sass": "^1.70.0",
-    "typescript": "^5"
-  }
+   "name": "challenges",
+   "version": "2.0.0",
+   "private": true,
+   "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint",
+      "prelint": "npm run check:prettier ||npm run check:eslint",
+      "check:eslint": "eslint --color \"pages/**/**.tsx\" \"components/**/**.tsx\" \"utils/**/**.ts\" \"assets/**/**.tsx\" \"app/**/**.tsx\" \"layouts/**/**.tsx\"",
+      "check:prettier": "prettier -c \"pages/**/**.tsx\" \"components/**/**.tsx\" \"utils/**/**.ts\" \"assets/**/**.tsx\" \"app/**/**.tsx\" \"layouts/**/**.tsx\"",
+      "fix:eslint": "eslint --color --fix \"pages/**/**.tsx\" \"components/**/**.tsx\" \"utils/**/**.ts\" \"assets/**/**.tsx\" \"app/**/**.tsx\" \"layouts/**/**.tsx\"",
+      "fix:prettier": "prettier --write \"pages/**/**.tsx\" \"components/**/**.tsx\" \"utils/**/**.ts\" \"assets/**/**.tsx\" \"app/**/**.tsx\" \"layouts/**/**.tsx\"",
+      "fix": "npm run fix:eslint && npm run fix:prettier"
+   },
+   "dependencies": {
+      "@fortawesome/fontawesome-svg-core": "^6.5.1",
+      "@fortawesome/free-brands-svg-icons": "^6.5.1",
+      "@fortawesome/free-regular-svg-icons": "^6.5.1",
+      "@fortawesome/free-solid-svg-icons": "^6.5.1",
+      "@fortawesome/react-fontawesome": "^0.2.0",
+      "loader-utils": "^3.2.1",
+      "next": "14.1.1",
+      "nookies": "^2.5.2",
+      "react": "^18",
+      "react-dom": "^18",
+      "react-parallax-tilt": "^1.7.212"
+   },
+   "devDependencies": {
+      "@eslint/js": "^9.5.0",
+      "@types/cookie": "^0.6.0",
+      "@types/eslint__js": "^8.42.3",
+      "@types/node": "^20",
+      "@types/react": "^18",
+      "@types/react-dom": "^18",
+      "eslint-config-next": "14.1.1",
+      "eslint-config-prettier": "^9.1.0",
+      "eslint-plugin-prettier": "^5.1.3",
+      "eslint-plugin-unused-imports": "^3.0.0",
+      "prettier": "^3.3.2",
+      "sass": "^1.70.0",
+      "typescript": "^5",
+      "typescript-eslint": "^7.14.1"
+   }
 }

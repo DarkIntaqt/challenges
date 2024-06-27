@@ -1,21 +1,16 @@
 {
    "extends": "next/core-web-vitals",
    "rules": {
-      "semi": [
-         "error",
-         "always"
-      ],
-      "quotes": [
-         "error",
-         "double"
-      ],
+      "semi": ["error", "always"],
+      "quotes": ["error", "double"],
+      "no-unused-vars": "warn",
+      "unused-imports/no-unused-imports": "error",
       "react/no-unknown-property": [
          1,
          {
-            "ignore": [
-               "bar-id"
-            ]
+            "ignore": ["bar-id"]
          }
       ]
-   }
+   },
+   "plugins": ["unused-imports"]
 }
