@@ -1,7 +1,7 @@
 import { ChallengeDTO } from "./challenges.types";
 import { TierType, UserChallengeDto } from "./user.types";
 
-export type FilterCategory = "category" | "gamemode";
+export type FilterCategory = "category" | "type" | "gamemode";
 export type SortBy = "level" | "timestamp" | "percentile" | "levelup" | "az" | "za";
 
 export interface FilterItem {
@@ -36,7 +36,6 @@ export interface ChallengeEntry {
 
 export interface ChallengeHydrated extends ChallengeDTO {
    _parentId: string;
-   _type?: string;
    _gameMode: string;
    _canProgress: boolean;
 }

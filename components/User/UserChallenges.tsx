@@ -34,7 +34,7 @@ export default function UserChallenges({
    seasonPrevious,
    seasonsRetired,
 }: UserChallengesProps): ReactNode {
-   const [filtersApplied, setFiltersApplied] = useState<FiltersApplied>({ category: [], gamemode: [] });
+   const [filtersApplied, setFiltersApplied] = useState<FiltersApplied>({ category: [], type: [], gamemode: [] });
    const [sortingApplied, setSortingApplied] = useState<SortBy>("level");
    const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -139,6 +139,21 @@ export default function UserChallenges({
                      </button>
                   ))}
                </div>
+               {/*
+               <div className={filterCss.category}>
+                  <p className={filterCss.cheading}>{capitalize("type")}</p>
+                  {filters.type.map((filter) => (
+                     <button
+                        key={`${filter.category}_${filter.id}`}
+                        onClick={() => toggleFilter(filter)}
+                        className={filtersApplied[filter.category].includes(filter.id) ? filterCss.selected : ""}
+                     >
+                        <Image width={16} height={16} src={filter.image} alt={filter.name} />
+                        {capitalize(filter.name)}
+                     </button>
+                  ))}
+               </div>
+                */}
                <div className={filterCss.category}>
                   <p className={filterCss.cheading}>{capitalize("game mode")}</p>
                   {filters.gamemode.map((filter) => (
@@ -148,7 +163,7 @@ export default function UserChallenges({
                         className={filtersApplied[filter.category].includes(filter.id) ? filterCss.selected : ""}
                      >
                         <Image width={16} height={16} src={filter.image} alt={filter.name} />
-                        {capitalize(filter.name)}
+                        {filter.name}
                      </button>
                   ))}
                </div>
