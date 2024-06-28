@@ -5,41 +5,23 @@ import ChallengeService from "challenges/services/ChallengeService";
 import ContentService from "challenges/services/ContentService";
 import UserService from "challenges/services/UserService";
 import getTitle from "challenges/utils/getTitle";
-import { intToTier } from "challenges/utils/intToTier";
 import getPlatform, { serversBeautified } from "challenges/utils/platform";
-import { toArray } from "challenges/utils/toArray";
 
 import css from "challenges/styles/user.module.scss";
 import { useEffect, useState } from "react";
-import getChallenge from "challenges/utils/getChallenge";
 import Image from "next/image";
 import HoverObject from "challenges/components/HoverObject";
 import { capitalize } from "challenges/utils/stringManipulation";
 
-export default function Profile({ user = {}, challengesRaw = {}, filters = {}, err, region, titles = {}, current = "overview" }) {
+export default function Profile({ user, verified, challengesRaw, filters, err, region, titles, current }) {
 
-
-   // checks if the user is verified
-   const [verified, setVerified] = useState(false);
-   const [checkedVerified, setCheckedVerified] = useState(false);
    const [currentSite, setCurrent] = useState(current);
+
    useEffect(() => {
 
-      document.getElementById(currentSite).classList.add(css.active);
+      document.getElementById(currentSite)?.classList.add(css.active);
 
-      if (checkedVerified === false) {
-         const userService = new UserService();
-         async function checkVerification() {
-            const verification = await userService.getVerificationState(user.id);
-            if (verification !== verified) {
-               setVerified(verification);
-            }
-         };
-         checkVerification();
-         setCheckedVerified(true);
-      }
-   }, [setCheckedVerified, setVerified, checkedVerified, user, verified, currentSite]);
-
+   }, [currentSite]);
 
    if (err) {
       return <ErrorPage></ErrorPage>;
@@ -50,25 +32,34 @@ export default function Profile({ user = {}, challengesRaw = {}, filters = {}, e
       document.getElementById(currentSite).classList.remove(css.active);
       setCurrent(e.currentTarget.id);
 
-      history.pushState(null, "", "/profile/" + region + "/" + user.name + ((e.currentTarget.id === "overview") ? "" : ("/" + e.currentTarget.id)));
+      history.pushState(null, "", "/profile/" + region + "/" + user.name + "-" + user.tag + ((e.currentTarget.id === "overview") ? "" : ("/" + e.currentTarget.id)));
 
    }
 
-
-   const tier = intToTier(user.challenges[0][1] - 1);
-   const title = getTitle(user.title[0], titles);
+   const title = getTitle(user.preferences.title, titles);
    const contentService = new ContentService();
 
-   const showCaseChallenges = user.selections.map((selection) => {
+   const showCaseChallenges = user.preferences.displayed.map((challengeId) => {
 
-      const challenge = getChallenge(selection[0], challengesRaw);
+      const challengeInfo = challengesRaw[challengeId];
+      const challengeUser = user.challenges.find(c => c.id === challengeId);
 
-      return <HoverObject key={challenge.id} hover={<div className={`${css.hover} ${intToTier(selection[1] - 1)}`}>
-         <p>{challenge.name}</p>
-         <span>{capitalize(intToTier(selection[1] - 1))} rank token. <br /><br />{challenge.description}</span>
-      </div>}>
-         <Image src={contentService.getChallengeTokenIcon(challenge.id, intToTier(selection[1] - 1))} unoptimized height={35} width={35} alt={challenge.name} />
-      </HoverObject>;
+      if (!challengeInfo || !challengeUser) {
+         return <></>;
+      }
+
+      return (
+          <HoverObject key={challengeInfo.id} hover={(
+              <div className={`${css.hover} ${challengeUser.tier}`}>
+                 <p>{challengeInfo.name}</p>
+                 <span><b>{capitalize(challengeUser.tier)}</b> rank token</span>
+                 <br />
+                 <span><i>{challengeInfo.description}</i></span>
+              </div>
+          )}>
+             <Image src={contentService.getChallengeTokenIcon(challengeInfo.id, challengeUser.tier)} unoptimized height={35} width={35} alt={challengeInfo.name} />
+          </HoverObject>
+      );
 
    });
 
@@ -76,12 +67,12 @@ export default function Profile({ user = {}, challengesRaw = {}, filters = {}, e
 
 
       <div className={css.bgImage} style={{
-         backgroundImage: "url(https://cdn.darkintaqt.com/lol/static/challenges/_" + tier.toLowerCase() + "-full.webp)"
+         backgroundImage: "url(https://cdn.darkintaqt.com/lol/static/challenges/_" + user.points.tier.toLowerCase() + "-full.webp)"
       }}></div>
 
       <div className={css.user}>
 
-         <UserHeading user={user} tier={tier} title={title} verified={verified} selections={showCaseChallenges} />
+         <UserHeading user={user} title={title} verified={verified} selections={showCaseChallenges} />
 
          <div className={css.navigation}>
 
@@ -93,13 +84,11 @@ export default function Profile({ user = {}, challengesRaw = {}, filters = {}, e
 
             <div id="history" onClick={navigate}>History</div>
 
-
          </div>
 
          <Challenges challengesRaw={challengesRaw} filters={filters} apply={user.challenges} region={region}></Challenges>
 
       </div>
-
 
    </>;
 }
@@ -107,53 +96,40 @@ export default function Profile({ user = {}, challengesRaw = {}, filters = {}, e
 
 Profile.getInitialProps = async (ctx) => {
 
-   const region = ctx.query.region;
+   const {region, summoner} = ctx.query;
 
    if (!serversBeautified.includes(region)) {
-
-      if (ctx.res) {
-         ctx.res.statusCode = 404;
-      }
-
-      return {
-         err: {
-            statusCode: 404,
-            message: "Invalid region"
-         }
-      };
+      return makeErr("Invalid region");
    }
 
-   if (ctx.query.summoner.length > 2) {
-
-      if (ctx.res) {
-         ctx.res.statusCode = 404;
-      }
-
-      return {
-         err: {
-            statusCode: 404,
-            message: "Invalid path"
-         }
-      };
+   if (!Array.isArray(summoner) || summoner.length === 0 || summoner.length > 2) {
+      return makeErr("Invalid path");
    }
+
+   const [name, current = "overview"] = summoner;
 
    try {
 
       const userService = new UserService();
 
-      const user = await userService.getUser(ctx.query.summoner[0], getPlatform(ctx.query.region));
+      const user = await userService.getUser(name, getPlatform(region));
       if (typeof user === "undefined" || user === null) {
-         throw new Error("Invalid content");
+         return makeErr("Invalid content");
       }
+
+      const verified = await userService.getVerificationState(user.playerId);
+
       const challengeService = new ChallengeService();
+
+      const all = await challengeService.listAll(getPlatform(region), "en_US");
+      if (typeof all === "undefined" || all === null) {
+         return makeErr("Invalid content");
+      }
+
+      const challengesRaw = all.challenges;
+      const titles = all.titles;
+
       const contentService = new ContentService();
-
-      const current = ctx.query.summoner[1] || "overview";
-
-      let all = await challengeService.listAll(getPlatform(ctx.query.region), "en_US");
-
-      let challengesRaw = all.challenges;
-      let titles = all.titles;
 
       const filters = {
          imagination: {
@@ -204,26 +180,30 @@ Profile.getInitialProps = async (ctx) => {
 
       return {
          user,
+         verified,
          challengesRaw,
          filters,
-         region: region.toString(),
+         region,
          titles,
          current
       };
 
    } catch (e) {
+      return makeErr(e);
+   }
+
+   function makeErr(e, code = 404) {
 
       if (ctx.res) {
-         ctx.res.statusCode = 404;
+         ctx.res.statusCode = code;
       }
 
       return {
          err: {
-            statusCode: 404,
+            statusCode: code,
             message: e
          }
       };
-
    }
 
 };

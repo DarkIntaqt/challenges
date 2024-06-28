@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Head from "next/head";
-import css from "styles/communities.module.scss";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import css from "challenges/styles/communities.module.scss";
 
 export default function Communities({ images, texts }) {
   const islands = texts.map((text) => {

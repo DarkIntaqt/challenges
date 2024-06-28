@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import css from "./layout.module.scss";
 import Footer from "./Footer";
-import Sidebar, { SidebarConfig } from "challenges/components/Navigation/Sidebar";
+import Sidebar from "challenges/components/Navigation/Sidebar";
+import { SidebarConfig } from "challenges/types/general.types";
 import { setCookie } from "nookies";
 
 export default function Layout({ classes, children, sidebarConfig }: Readonly<{ classes: string, children: React.ReactNode, sidebarConfig: SidebarConfig }>) {

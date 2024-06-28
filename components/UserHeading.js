@@ -6,20 +6,19 @@ import Image from "next/image";
 import Link from "next/link";
 import VipBadge from "./VipBadge";
 
-export default function UserHeading({ user, tier, title = false, selections = {}, verified = false }) {
+export default function UserHeading({ user, title, selections, verified }) {
 
    const contentService = new ContentService();
 
    const imageSrc = contentService.getProfileIcon(user.icon);
 
-
    const filter = (verified === false) ? "grayscale(100%)" : "";
 
    return <div className={css.head}>
 
-      <Image src={imageSrc} height={100} width={100} alt="" unoptimized className={tier} />
+      <Image src={imageSrc} height={100} width={100} alt="" unoptimized className={user.points.tier} />
 
-      <Image src={"https://cdn.darkintaqt.com/lol/static/challenges/card-" + tier + ".webp"} height={140} width={140} unoptimized className={css.edge} alt="" />
+      <Image src={"https://cdn.darkintaqt.com/lol/static/challenges/card-" + user.points.tier + ".webp"} height={140} width={140} unoptimized className={css.edge} alt="" />
 
       <div>
 
@@ -27,10 +26,10 @@ export default function UserHeading({ user, tier, title = false, selections = {}
 
          <div className={css.tags}>
 
-            <div className={`${css.tag} ${css.tier} ${tier}`}>
+            <div className={`${css.tag} ${css.tier} ${user.points.tier}`}>
                <span>
                   <Link href="/challenges/0">
-                     {capitalize(tier)}
+                     {capitalize(user.points.tier)}
                   </Link>
                </span>
             </div>
@@ -61,6 +60,6 @@ export default function UserHeading({ user, tier, title = false, selections = {}
 
       </div>
 
-   </div >;
+   </div>;
 
 }

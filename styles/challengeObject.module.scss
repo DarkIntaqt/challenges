@@ -1,68 +1,87 @@
 @import "variables";
 
 a.challenge {
-
-   box-sizing: border-box;
-   padding: 10px;
-
-   width: 100%;
+   grid-gap: 5px;
+   align-items: center;
+   background-color: var(--dark1);
    border-radius: 10px;
-
-   transition: .25s linear background-color;
-   background-color: $dark3transparent;
-   margin: 5px 0;
+   box-sizing: border-box;
+   color: var(--light0);
+   display: grid;
+   grid-template-columns: 40px calc(50% - 90px) 20px calc(50% - 90px) 120px;
+   height: 60px;
+   margin: 5px;
+   overflow: hidden;
+   padding: 10px;
+   position: relative;
+   text-decoration: none;
+   transition: background-color .2s linear;
+   width: calc(100% - 10px);
 
    &:hover {
-      background-color: $dark1;
+      background-color: var(--dark2);
    }
 
    img {
+      color: transparent;
+      display: inline-block;
       height: 40px;
       width: 40px;
-      float: left;
+
+      &.unranked {
+         opacity: 0.3;
+      }
    }
 
-   .title {
-      float: left;
-      margin: 0 10px;
-      width: calc(100% - 60px - 60%);
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-
-      p {
-         -webkit-line-clamp: 1;
-         width: 100%;
-         -webkit-box-orient: vertical;
-         font-weight: 400;
+   .group {
+      .title {
          font-size: 1rem;
+         max-width: 100%;
          overflow: hidden;
-         line-height: 1.5rem;
-         white-space: nowrap;
-
+         padding: 0 5px 5px;
          text-overflow: ellipsis;
+         white-space: nowrap;
       }
 
-      span {
-         margin-top: 2px;
-         font-weight: 300;
+      .subtitle {
+         color: var(--light3);
          font-size: .8rem;
-         color: $light2;
+         max-width: 100%;
+         overflow: hidden;
+         padding: 0 5px;
+         text-overflow: ellipsis;
+         text-transform: capitalize;
+         white-space: nowrap;
       }
+   }
 
+   .modes {
+      display: flex;
+      flex-direction: column;
+      float: left;
+      height: 40px;
+      justify-content: center;
+      overflow: hidden;
+      width: 20px;
+
+      img {
+         filter: brightness(.6);
+         font-size: 14px;
+         height: 20px;
+         text-align: center;
+         width: 20px;
+      }
    }
 
    .description {
-      float: left;
-      width: 60%;
+      display: flex;
 
       p {
          -webkit-line-clamp: 3;
          -webkit-box-orient: vertical;
-         color: $light3;
+         color: var(--light3);
          display: -webkit-box;
          font-size: 12px;
-         margin: auto;
          line-height: 13px;
          max-height: 40px;
          overflow: hidden;
@@ -71,4 +90,21 @@ a.challenge {
       }
    }
 
+   .tier {
+      color: var(--type);
+      font-size: .8rem;
+      text-align: center;
+      white-space: nowrap;
+   }
+
+   .progress {
+      background-color: var(--type);
+      border-radius: 0 0 5px 5px;
+      bottom: 0;
+      height: 5px;
+      left: 0;
+      max-width: 100%;
+      position: absolute;
+      width: 0;
+   }
 }

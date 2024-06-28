@@ -16,7 +16,6 @@ const hashOnlyIdent = (context, _, exportName) =>
       .replace(/[^a-zA-Z0-9-_]/g, "_")
       .replace(/^(-?\d|--)/, "_$1");
 
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
    reactStrictMode: true,
@@ -29,10 +28,12 @@ const nextConfig = {
          rules.forEach((rule) => {
             rule.use.forEach((moduleLoader) => {
                if (
+                  moduleLoader.options?.modules &&
                   moduleLoader.loader?.includes("css-loader") &&
                   !moduleLoader.loader?.includes("postcss-loader")
-               )
+               ) {
                   moduleLoader.options.modules.getLocalIdent = hashOnlyIdent;
+               }
 
                // earlier below statements were sufficient:
                // delete moduleLoader.options.modules.getLocalIdent;
@@ -49,10 +50,11 @@ const nextConfig = {
          {
             protocol: "https",
             hostname: "**.darkintaqt.com",
-            pathname: "**"
+            pathname: "**",
          },
-      ]
-   }
+      ],
+      unoptimized: true,
+   },
 };
 
 module.exports = nextConfig;

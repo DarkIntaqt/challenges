@@ -123,7 +123,9 @@
             background-color: rgba(20, 20, 30, .5);
 
             &.title span a,
-            &.tier span a {
+            &.tier span a,
+            &.title a,
+            &.tier a {
                color: var(--type);
             }
 
@@ -138,7 +140,8 @@
                color: $light1;
             }
 
-            >span>svg {
+            > span > svg,
+            > svg {
                font-size: .6rem;
                margin: 0 3px;
             }

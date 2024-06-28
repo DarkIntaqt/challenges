@@ -91,7 +91,7 @@ export default function UserCard({ input, userRegion }: Readonly<{ input: string
    }, [name, lookupName, lookup, region, userRegion, input]);
 
    function search() {
-      router.push(`/profile/${region.toLowerCase()}/${lookupName.replace("#", "-")}/overview`);
+      router.push(`/profile/${region.toLowerCase()}/${lookupName.replace("#", "-")}`);
    }
 
    return <Tilt

@@ -10,8 +10,8 @@ import Layout from "challenges/layouts/Layout";
 import ErrorBoundary from "challenges/components/ErrorBoundary";
 import { AppProps } from "next/app";
 import { parseCookies } from "nookies";
-import { SidebarConfig } from "challenges/components/Navigation/Sidebar";
-import { NextPageContext } from "next";
+import { SidebarConfig } from "challenges/types/general.types";
+import { AppContextType } from "next/dist/shared/lib/utils";
 
 
 /**
@@ -81,39 +81,21 @@ export default function ChallengeTracker({ Component, pageProps, sidebar }: Cust
    * Return the app body in the <Layout/>. 
    * Shows a loader if(loading === true)
    */
-  return <ErrorBoundary>
-
-    <Layout classes={`${roboto.variable}`} sidebarConfig={sidebar}>
-
-      {
-        loading
-          ? <Loader style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%,-50%)"
-          }
-          } />
-          : <Component {...pageProps} />
-      }
-
-    </Layout>
-
-  </ErrorBoundary>;
+  return (
+      <ErrorBoundary>
+        <Layout classes={`${roboto.variable}`} sidebarConfig={sidebar}>
+          { loading ? <Loader/> : <Component { ...pageProps } /> }
+        </Layout>
+      </ErrorBoundary>
+  );
 }
 
-interface CustomNextPageContext extends NextPageContext {
-  Component: Function;
-}
-
-ChallengeTracker.getInitialProps = async (ctx: CustomNextPageContext) => {
-  const cookies = parseCookies(ctx);
+ChallengeTracker.getInitialProps = async (ctx: AppContextType) => {
+  const cookies = parseCookies(ctx.ctx);
   let pageProps = {};
 
-  // @ts-ignore
   if (ctx.Component.getInitialProps) {
-    // @ts-ignore
-    pageProps = await ctx.Component.getInitialProps(ctx);
+    pageProps = await ctx.Component.getInitialProps(ctx.ctx);
   }
 
   let sidebar: SidebarConfig = "VISIBLE";
