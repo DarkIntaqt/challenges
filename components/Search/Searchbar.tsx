@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { getStorage, setStorage, storageKeys } from "challenges/utils/localStorageFunctions";
 import ChallengeService from "challenges/services/ChallengeService";
-import { ChallengeDTO, ChallengesFullDTO } from "challenges/types/challenges.types";
+import { ChallengeDTO } from "challenges/types/challenges.types";
 import ChallengeCard from "./ChallengeCard";
 import ContentService from "challenges/services/ContentService";
 import UserCard from "./UserCard";

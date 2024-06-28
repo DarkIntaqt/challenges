@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import css from "./sidebar.module.scss";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 export default function NavLink({
    children,

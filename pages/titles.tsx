@@ -1,27 +1,12 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
 import ChallengeService from "challenges/services/ChallengeService";
-import ContentService from "challenges/services/ContentService";
 import css from "challenges/styles/titles.module.scss";
-import filterCss from "challenges/styles/filter.module.scss";
 import { storageKeys, getStorage, setStorage } from "challenges/utils/sessionStorageFunctions.js";
 import Link from "next/link";
-import { intToTier } from "challenges/utils/intToTier";
-import { capitalize } from "challenges/utils/stringManipulation";
 import { TitleDTO } from "challenges/types/challenges.types";
-import { title } from "process";
 
-/**
- * @typedef TitlesProps
- * @type {Object}
- * @property {Array.<TitleDto>} titles
- */
-
-/**
- * @param {TitlesProps} props 
- */
-export default function Titles({ titles }: Readonly<{titles ? : Record<string, TitleDTO>}>) {
+export default function Titles({ titles = [] }: Readonly<{ titles: TitleDTO[] }>) {
    const [searchList, setSearchList] = useState(titles);
    const [search, setSearch] = useState("");
 
@@ -35,9 +20,6 @@ export default function Titles({ titles }: Readonly<{titles ? : Record<string, T
       }
    }, [titles, search]);
 
-   if (titles === undefined) {
-      return <p>titles undefined</p>;
-   }
    return <div className={"object1000"}>
       <Head>
          <title>All Challenges Titles - Overview</title>
@@ -46,7 +28,7 @@ export default function Titles({ titles }: Readonly<{titles ? : Record<string, T
       <h1 className={css.heading}>All titles</h1>
       <p className={css.subheading}>A list of all League of Legends Title Challenges and how to achieve them</p>
 
-      {Object.values(titles).map((title) => {
+      {titles.map((title) => {
          if (title.challengeId === undefined) {
             return null;
          }
@@ -55,7 +37,7 @@ export default function Titles({ titles }: Readonly<{titles ? : Record<string, T
             </>;
       })}
 
-      
+
       {/* <input
          className={filterCss.input}
          type="search"
@@ -78,8 +60,8 @@ export default function Titles({ titles }: Readonly<{titles ? : Record<string, T
       {/* <div className={css.titles}>
          <TitleList titles={searchList} challenges={challenges} />
       </div> */}
-      
-      
+
+
    </div>;
 }
 
@@ -90,55 +72,49 @@ export default function Titles({ titles }: Readonly<{titles ? : Record<string, T
  */
 
 /**
- * @param {TitleListProps} props 
+ * @param {TitleListProps} props
  */
-function TitleList({ titles, challenges }) {
+// function TitleList({ titles, challenges }) {
+//
+//    const contentService = new ContentService();
+//
+//    const challengeTitles = titles.map((title) => {
+//
+//       if (typeof challenges[title.challengeId] === "undefined" || title.challengeTier === 0) {
+//          return <Fragment key={title.titleId} />;
+//       }
+//
+//       const challenge = challenges[title.challengeId];
+//
+//       const iconLink = contentService.getChallengeTokenIcon(title.challengeId, intToTier(title.challengeTier));
+//
+//       return <Link
+//          key={title.titleId}
+//          href={"/challenges/" + title.challengeId}
+//          className={`${css.title} ${title.type} clearfix`}
+//          challengeid={title.cid}>
+//
+//          <Image
+//             height={45}
+//             width={45}
+//             src={iconLink}
+//             alt={`${title.title}'s icon`}
+//             loading="lazy"
+//             unoptimized
+//          />
+//
+//          <h2>{title.title}<br /><span data-nosnippet>{Math.round(challenge.percentiles[intToTier(title.challengeTier)] * 1000) / 10}%</span></h2>
+//          <p>Reach <span className={intToTier(title.challengeTier)}>{capitalize(intToTier(title.challengeTier))}</span> tier in {challenge.name}. <br />{challenge.descriptionShort}<br /><br /><i>Need {challenge.thresholds[intToTier(title.challengeTier)]} points. </i></p>
+//
+//       </Link >;
+//    });
+//
+//    return challengeTitles;
+// }
 
-   const contentService = new ContentService();
-
-   const challengeTitles = titles.map((title) => {
-
-      if (typeof challenges[title.challengeId] === "undefined" || title.challengeTier === 0) {
-         return <Fragment key={title.titleId} />;
-      }
-
-      const challenge = challenges[title.challengeId];
-
-      const iconLink = contentService.getChallengeTokenIcon(title.challengeId, intToTier(title.challengeTier));
-
-      return <Link
-         key={title.titleId}
-         href={"/challenges/" + title.challengeId}
-         className={`${css.title} ${title.type} clearfix`}
-         challengeid={title.cid}>
-
-         <Image
-            height={45}
-            width={45}
-            src={iconLink}
-            alt={`${title.title}'s icon`}
-            loading="lazy"
-            unoptimized
-         />
-
-         <h2>{title.title}<br /><span data-nosnippet>{Math.round(challenge.percentiles[intToTier(title.challengeTier)] * 1000) / 10}%</span></h2>
-         <p>Reach <span className={intToTier(title.challengeTier)}>{capitalize(intToTier(title.challengeTier))}</span> tier in {challenge.name}. <br />{challenge.descriptionShort}<br /><br /><i>Need {challenge.thresholds[intToTier(title.challengeTier)]} points. </i></p>
-
-      </Link >;
-   });
-
-   return challengeTitles;
-}
-
-/**
- * Search challenge titles and filter if title includes query. Case in-sensitive.
- * @param {string} value 
- * @param {Array.<TitleDto>} titles 
- * @param {Function} setSearchList 
- */
-function handleChallengeSearch(value, titles, setSearchList) {
+function handleChallengeSearch(value: string, titles: TitleDTO[], setSearchList: (_: TitleDTO[]) => void) {
    // Filter challenge titles that include the search value (case-insensitive)
-   const query = titles.filter((title) => title.title.toLowerCase().includes(value.toLowerCase()));
+   const query = titles.filter((title) => title.name.toLowerCase().includes(value.toLowerCase()));
    setStorage(storageKeys.titleSearch, value);
    setSearchList([...query]);
 }
@@ -152,6 +128,6 @@ Titles.getInitialProps = async () => {
    }
 
    return {
-      titles: all.titles
+      titles: Object.values(all.titles || {})
    };
 };

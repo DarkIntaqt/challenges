@@ -1,6 +1,5 @@
 import { Component } from "react";
 
-import Link from "next/link";
 import Head from "next/head";
 import css from "challenges/styles/social.module.scss";
 import Image from "next/image";

@@ -27,8 +27,13 @@ const nextConfig = {
       if (!dev)
          rules.forEach((rule) => {
             rule.use.forEach((moduleLoader) => {
-               if (moduleLoader.loader?.includes("css-loader") && !moduleLoader.loader?.includes("postcss-loader"))
+               if (
+                  moduleLoader.options?.modules &&
+                  moduleLoader.loader?.includes("css-loader") &&
+                  !moduleLoader.loader?.includes("postcss-loader")
+               ) {
                   moduleLoader.options.modules.getLocalIdent = hashOnlyIdent;
+               }
 
                // earlier below statements were sufficient:
                // delete moduleLoader.options.modules.getLocalIdent;

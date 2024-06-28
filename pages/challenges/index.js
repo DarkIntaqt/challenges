@@ -1,20 +1,9 @@
 import css from "challenges/styles/challenges.module.scss";
-import filterCss from "challenges/styles/filter.module.scss";
 import ChallengeService from "challenges/services/ChallengeService";
-import { capitalize } from "challenges/utils/stringManipulation";
-import { storageKeys, getStorage, setStorage } from "challenges/utils/sessionStorageFunctions";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
-import Image from "next/image";
-import { faAnglesUp, faBoxOpen, faList, faPlay, faRankingStar, faTableCells, faUser } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useRef, useState } from "react";
-import { intToTier, tierToInt } from "challenges/utils/intToTier";
 
-import ChallengeObject from "challenges/components/ChallengeObject";
-import { toArray } from "challenges/utils/toArray";
 import ContentService from "challenges/services/ContentService";
-import getParent from "challenges/utils/getParentChallenge";
 
 import ChallengeHandler from "challenges/components/Challenges";
 
@@ -54,7 +43,7 @@ export default function Challenges({ challengesRaw = {}, filters = {} }) {
 
 /**
  * SSR
- * @param {Object} ctx 
+ * @param {Object} ctx
  * @returns Props
  */
 Challenges.getInitialProps = async (ctx) => {
@@ -64,7 +53,7 @@ Challenges.getInitialProps = async (ctx) => {
 };
 
 /**
- * 
+ *
  * @returns Props
  */
 async function getProps() {
