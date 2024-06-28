@@ -26,6 +26,11 @@ export function challengeFilter(
       return filtersApplied.category.includes(challenge._parentId);
    }
 
+   function passType(challenge: ChallengeHydrated): boolean {
+      if (filtersApplied.type.length === 0) return true;
+      return filtersApplied.type.includes(challenge.source);
+   }
+
    function passGameMode(challenge: ChallengeHydrated): boolean {
       if (filtersApplied.gamemode.length === 0) return true;
       return filtersApplied.gamemode.includes(challenge._gameMode);
@@ -35,6 +40,7 @@ export function challengeFilter(
       .filter(
          (challenge) =>
             passCategory(challenge) &&
+            passType(challenge) &&
             passGameMode(challenge) &&
             (!query || challenge.name.toLowerCase().includes(query)),
       )

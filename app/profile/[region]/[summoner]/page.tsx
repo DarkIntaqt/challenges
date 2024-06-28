@@ -53,6 +53,7 @@ async function getData({ region, summoner }: ProfileRouteParams): Promise<Profil
 }
 
 function createFilters(season: CurrentSeason): FiltersMap {
+   const tempIcon = "https://static.wikia.nocookie.net/leagueoflegends/images/a/a1/Challenge_Token_Iron.png";
    return {
       category: [
          { category: "category", name: "teamwork", id: "4", image: challengeTokenIcon(4) },
@@ -69,19 +70,20 @@ function createFilters(season: CurrentSeason): FiltersMap {
          },
          { category: "category", name: "seasonal retired", id: "retired", image: filterCategoryIcon("retired.svg") },
       ],
-      // type: [
-      //     { category: "type", name: "progress", id: "progress" },
-      //     { category: "type", name: "in-game", id: "ingame" },
-      //     { category: "type", name: "eternals", id: "eternals" },
-      //     { category: "type", name: "clash", id: "clash" },
-      //     { category: "type", name: "inventory", id: "inventory" },
-      //     { category: "type", name: "ranked", id: "ranked" },
-      //     { category: "type", name: "profile", id: "profile" },
-      // ],
+      type: [
+         { category: "type", name: "progress", id: "CHALLENGES", image: tempIcon },
+         { category: "type", name: "in-game", id: "EOGD", image: tempIcon },
+         { category: "type", name: "eternals", id: "ETERNALS", image: filterCategoryIcon("eternals.webp") },
+         { category: "type", name: "clash", id: "CLASH", image: filterCategoryIcon("clash.webp") },
+         { category: "type", name: "inventory", id: "CAP_INVENTORY", image: tempIcon },
+         { category: "type", name: "ranked", id: "RANKED", image: tempIcon },
+         { category: "type", name: "profile", id: "SUMMONER", image: tempIcon },
+      ],
       gamemode: [
-         { category: "gamemode", name: "summoners rift", id: "rift", image: filterGameModeIcon("sr.svg") },
-         { category: "gamemode", name: "aram", id: "aram", image: filterGameModeIcon("ha.svg") },
-         { category: "gamemode", name: "bot", id: "bot", image: filterGameModeIcon("bot.png") },
+         { category: "gamemode", name: "Summoner's Rift", id: "rift", image: filterGameModeIcon("sr.svg") },
+         { category: "gamemode", name: "ARAM", id: "aram", image: filterGameModeIcon("ha.svg") },
+         { category: "gamemode", name: "Co-op vs AI", id: "bot", image: filterGameModeIcon("bot.png") },
+         { category: "gamemode", name: "Arena", id: "arena", image: filterGameModeIcon("arena.png") },
       ],
    };
 }
