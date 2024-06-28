@@ -25,3 +25,5 @@ yarn-error.log*
 *.cargo-ok
 
 *.next
+
+/.idea/*

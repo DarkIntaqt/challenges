@@ -1,12 +1,11 @@
-export type SidebarConfig = "HIDDEN" | "VISIBLE";
 import { MouseEventHandler } from "react";
 
 import css from "./sidebar.module.scss";
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesLeft, faAnglesRight, faHome, faList, faRankingStar, faAward } from "@fortawesome/free-solid-svg-icons";
 import NavLink from "./NavLink";
 import Logo from "challenges/assets/logo.svg";
+import { SidebarConfig } from "challenges/types/general.types";
 
 export default function Sidebar({
    toggleSidebar,
