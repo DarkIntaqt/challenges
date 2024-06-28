@@ -1,4 +1,13 @@
-export type ThresholdType = "IRON" | "BRONZE" | "SILVER" | "GOLD" | "PLATINUM" | "DIAMOND" | "MASTER" | "GRANDMASTER" | "CHALLENGER";
+export type ThresholdType =
+   | "IRON"
+   | "BRONZE"
+   | "SILVER"
+   | "GOLD"
+   | "PLATINUM"
+   | "DIAMOND"
+   | "MASTER"
+   | "GRANDMASTER"
+   | "CHALLENGER";
 
 export interface ChallengesFullDTO {
    challenges: Record<string, ChallengeDTO>;
@@ -10,7 +19,7 @@ export interface ChallengeDTO {
    name: string;
    description: string;
    descriptionShort: string;
-   source: string;
+   source: "CAP_INVENTORY" | "CHALLENGES" | "CLASH" | "EOGD" | "ETERNALS" | "RANKED" | "SUMMONER";
    tags: {
       isCapstone?: string;
       isCategory?: string;
@@ -30,16 +39,16 @@ declare interface RewardDTO {
    level: ThresholdType;
    rewardGroupId: string;
    rewardId: string;
-   category: string;
+   category: string | "TITLE";
    title?: string;
    quantity?: number;
 }
 
 export interface TitleDTO {
    name: string;
-   type: "DEFAULT" | "EVENT" | "CHALLENGE";
+   type: "DEFAULT" | "EVENT" | "CHALLENGE" | "CHAMPION_MASTERY";
    id: string;
-   challengeId? : string;
+   challengeId?: string;
 }
 
 export interface LeaderboardDTO {
@@ -50,7 +59,7 @@ export interface LeaderboardDTO {
    challenge: ChallengeOldDTO;
    parents: ParentDTO[];
    stats: Record<string, string | Record<string, string>>;
-   summoner: Record<string, (string | number)[]>
+   summoner: Record<string, (string | number)[]>;
 }
 
 interface ChallengeOldDTO {
