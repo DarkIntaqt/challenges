@@ -80,7 +80,11 @@ export function challengeFilter(
             case "za":
                return b.name.localeCompare(a.name);
             default:
-               return 0;
+               return a.tier === b.tier
+                  ? a.percentile === b.percentile
+                     ? a.name.localeCompare(b.name)
+                     : a.percentile - b.percentile
+                  : tierTypes.indexOf(b.tier) - tierTypes.indexOf(a.tier);
          }
       });
 }
