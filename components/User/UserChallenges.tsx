@@ -44,7 +44,7 @@ export default function UserChallenges({
       category: [],
       type: [],
       gamemode: [],
-      sortBy: "level",
+      sortBy: "default",
       hideCapstones: false,
       hideMaxedOut: false,
       masterThresholds: false,
@@ -70,8 +70,8 @@ export default function UserChallenges({
    const toggleSorting = (sorting: SortBy): void => {
       if (sorting === "az") {
          setFiltersApplied({ ...filtersApplied, sortBy: filtersApplied.sortBy === "az" ? "za" : "az" });
-      } else if (sorting !== filtersApplied.sortBy) {
-         setFiltersApplied({ ...filtersApplied, sortBy: sorting });
+      } else {
+         setFiltersApplied({ ...filtersApplied, sortBy: sorting === filtersApplied.sortBy ? "default" : sorting });
       }
    };
 

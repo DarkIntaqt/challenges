@@ -2,7 +2,7 @@ import { ChallengeDTO } from "./challenges.types";
 import { TierType, UserChallengeDto } from "./user.types";
 
 export type FilterCategory = "category" | "type" | "gamemode";
-export type SortBy = "level" | "timestamp" | "percentile" | "levelup" | "az" | "za";
+export type SortBy = "default" | "level" | "timestamp" | "percentile" | "levelup" | "az" | "za";
 export type DisplayAs = "list" | "grid";
 
 export interface FilterItem {
