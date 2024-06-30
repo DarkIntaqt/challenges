@@ -21,6 +21,8 @@ import {
    SortBy,
    UserChallengesMap,
 } from "challenges/types/draft.types";
+import { KeysOfType } from "challenges/types/general.types";
+import { filterGameModeIcon } from "challenges/utils/cdnHelpers";
 import { challengeFilter } from "challenges/utils/challengeFilter";
 import { capitalize } from "challenges/utils/stringManipulation";
 
@@ -34,7 +36,14 @@ export default function UserChallenges({
    seasonPrevious,
    seasonsRetired,
 }: UserChallengesProps): ReactNode {
-   const [filtersApplied, setFiltersApplied] = useState<FiltersApplied>({ category: [], type: [], gamemode: [] });
+   const [filtersApplied, setFiltersApplied] = useState<FiltersApplied>({
+      category: [],
+      type: [],
+      gamemode: [],
+      hideCapstones: false,
+      hideMaxedOut: false,
+      masterThresholds: false,
+   });
    const [sortingApplied, setSortingApplied] = useState<SortBy>("level");
    const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -56,6 +65,10 @@ export default function UserChallenges({
       } else if (sorting !== sortingApplied) {
          setSortingApplied(sorting);
       }
+   };
+
+   const switchBool = (prop: KeysOfType<FiltersApplied, boolean>): void => {
+      setFiltersApplied({ ...filtersApplied, [prop]: !filtersApplied[prop] });
    };
 
    const debounce = (func: Function, delay: number) => {
@@ -84,7 +97,29 @@ export default function UserChallenges({
 
          <div className={filterCss.filter}>
             <div className={filterCss.selectors + " clearfix"}>
-               <div className={filterCss.displayMode}>display_mode</div>
+               <div className={filterCss.category}>
+                  <button
+                     onClick={() => switchBool("hideCapstones")}
+                     className={filtersApplied.hideCapstones ? filterCss.selected : ""}
+                  >
+                     <Image width={16} height={16} src={filterGameModeIcon("c.png")} alt={"Hide Capstones"} />
+                     {"Hide Capstones"}
+                  </button>
+                  <button
+                     onClick={() => switchBool("hideMaxedOut")}
+                     className={filtersApplied.hideMaxedOut ? filterCss.selected : ""}
+                  >
+                     <Image width={16} height={16} src={filterGameModeIcon("i.png")} alt={"Hide Maxed out"} />
+                     {"Hide Maxed out"}
+                  </button>
+                  <button
+                     onClick={() => switchBool("masterThresholds")}
+                     className={filtersApplied.masterThresholds ? filterCss.selected : ""}
+                  >
+                     <Image width={16} height={16} src={filterGameModeIcon("m.png")} alt={"Set Master thresholds"} />
+                     {"Set Master thresholds"}
+                  </button>
+               </div>
 
                <div className={filterCss.category}>
                   <p className={filterCss.cheading}>{capitalize("sort by")}</p>
@@ -180,7 +215,11 @@ export default function UserChallenges({
                sortingApplied,
                searchQuery,
             ).map((challenge) => (
-               <ChallengeObject key={challenge.id} {...challenge} setToMaster={false}></ChallengeObject>
+               <ChallengeObject
+                  key={challenge.id}
+                  {...challenge}
+                  setToMaster={filtersApplied.masterThresholds}
+               ></ChallengeObject>
             ))}
          </div>
       </section>

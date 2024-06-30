@@ -43,6 +43,7 @@ export function challengeFilter(
             passCategory(challenge) &&
             passType(challenge) &&
             passGameMode(challenge) &&
+            (!filtersApplied.hideCapstones || challenge.tags.isCapstone !== "Y") &&
             (!query || challenge.name.toLowerCase().includes(query)),
       )
       .map((challenge) => {
@@ -67,8 +68,10 @@ export function challengeFilter(
                threshold:
                   challenge.thresholds.MASTER ?? (currentTier === "NONE" ? 1 : challenge.thresholds[currentTier] ?? 1),
             },
+            _canProgress: challenge._canProgress && currentTier !== nextTier,
          } satisfies ChallengeEntry;
       })
+      .filter((challenge: ChallengeEntry) => !filtersApplied.hideMaxedOut || challenge._canProgress)
       .sort((a: ChallengeEntry, b: ChallengeEntry) => {
          switch (sortingApplied) {
             case "level":
