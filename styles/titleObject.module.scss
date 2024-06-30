@@ -1,0 +1,78 @@
+@import "variables";
+
+$grid-gap: 5px;
+$fixed-columns-total: 0;
+
+a.title {
+   align-items: center;
+   background-color: var(--dark1);
+   border-radius: 10px;
+   box-sizing: border-box;
+   color: var(--light0);
+   display: grid;
+   grid-gap: $grid-gap;
+   grid-template-columns:
+           calc(50% - #{($fixed-columns-total + ($grid-gap * 1)) / 2})
+           calc(50% - #{($fixed-columns-total + ($grid-gap * 1)) / 2});
+   height: 60px;
+   margin: 5px;
+   overflow: hidden;
+   padding: 10px;
+   position: relative;
+   text-decoration: none;
+   transition: background-color .2s linear;
+   width: calc(100% - 10px);
+
+   &:hover {
+      background-color: var(--dark2);
+   }
+
+   .group {
+      .title {
+         font-size: 1rem;
+         max-width: 100%;
+         overflow: hidden;
+         padding: 0 5px 5px;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+      }
+
+      .subtitle {
+         color: var(--light3);
+         font-size: .8rem;
+         max-width: 100%;
+         overflow: hidden;
+         padding: 0 5px;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+      }
+   }
+
+   .description {
+      display: flex;
+
+      p {
+         -webkit-line-clamp: 3;
+         -webkit-box-orient: vertical;
+         color: var(--light3);
+         display: -webkit-box;
+         font-size: 12px;
+         line-height: 13px;
+         max-height: 40px;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         width: 100%;
+      }
+   }
+
+   .progress {
+      background-color: var(--type);
+      border-radius: 0 0 5px 5px;
+      bottom: 0;
+      height: 5px;
+      left: 0;
+      max-width: 100%;
+      position: absolute;
+      width: 0;
+   }
+}

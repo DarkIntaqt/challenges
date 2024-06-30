@@ -19,9 +19,9 @@ import {
    ChallengeHydrated,
    DisplayAs,
    FilterItem,
-   FiltersApplied,
-   FiltersMap,
-   SortBy,
+   ChallengesFiltersApplied,
+   ChallengesFiltersMap,
+   ChallengesSortBy,
    UserChallengesMap,
 } from "challenges/types/draft.types";
 import { KeysOfType } from "challenges/types/general.types";
@@ -40,7 +40,7 @@ export default function UserChallenges({
    seasonsRetired,
 }: UserChallengesProps): ReactNode {
    const [displayAs, setDisplayAs] = useState<DisplayAs>("list");
-   const [filtersApplied, setFiltersApplied] = useState<FiltersApplied>({
+   const [filtersApplied, setFiltersApplied] = useState<ChallengesFiltersApplied>({
       category: [],
       type: [],
       gamemode: [],
@@ -67,7 +67,7 @@ export default function UserChallenges({
       setFiltersApplied({ ...filtersApplied, [toggle.category]: newGroup });
    };
 
-   const toggleSorting = (sorting: SortBy): void => {
+   const toggleSorting = (sorting: ChallengesSortBy): void => {
       if (sorting === "az") {
          setFiltersApplied({ ...filtersApplied, sortBy: filtersApplied.sortBy === "az" ? "za" : "az" });
       } else {
@@ -75,7 +75,7 @@ export default function UserChallenges({
       }
    };
 
-   const toggleBool = (prop: KeysOfType<FiltersApplied, boolean>): void => {
+   const toggleBool = (prop: KeysOfType<ChallengesFiltersApplied, boolean>): void => {
       setFiltersApplied({ ...filtersApplied, [prop]: !filtersApplied[prop] });
    };
 
@@ -242,7 +242,7 @@ export default function UserChallenges({
 interface UserChallengesProps {
    challenges: ChallengeHydrated[];
    userChallenges: UserChallengesMap;
-   filters: FiltersMap;
+   filters: ChallengesFiltersMap;
    seasonPrevious: string;
    seasonsRetired: string[];
 }

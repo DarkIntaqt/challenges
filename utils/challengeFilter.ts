@@ -1,5 +1,10 @@
 import { ThresholdType } from "challenges/types/challenges.types";
-import { ChallengeEntry, ChallengeHydrated, FiltersApplied, UserChallengesMap } from "challenges/types/draft.types";
+import {
+   ChallengeEntry,
+   ChallengeHydrated,
+   ChallengesFiltersApplied,
+   UserChallengesMap,
+} from "challenges/types/draft.types";
 import { TierType } from "challenges/types/user.types";
 
 export function challengeFilter(
@@ -7,7 +12,7 @@ export function challengeFilter(
    seasonPrevious: string,
    seasonsRetired: string[],
    userChallenges: UserChallengesMap,
-   filtersApplied: FiltersApplied,
+   filtersApplied: ChallengesFiltersApplied,
    searchQuery: string,
 ): ChallengeEntry[] {
    const retiredHidden = seasonsRetired.filter((sid) => sid !== seasonPrevious);

@@ -5,7 +5,12 @@ import UserChallenges from "challenges/components/User/UserChallenges";
 import ChallengeService from "challenges/services/ChallengeService";
 import UserService from "challenges/services/UserService";
 import { ChallengeDTO, ChallengesFullDTO } from "challenges/types/challenges.types";
-import { ChallengeHydrated, CurrentSeason, FiltersMap, UserChallengesMap } from "challenges/types/draft.types";
+import {
+   ChallengeHydrated,
+   CurrentSeason,
+   ChallengesFiltersMap,
+   UserChallengesMap,
+} from "challenges/types/draft.types";
 import { ProfileRouteParams } from "challenges/types/profile-navigation.types";
 import { challengeTokenIcon, filterCategoryIcon, filterGameModeIcon } from "challenges/utils/cdnHelpers";
 import getPlatform from "challenges/utils/platform";
@@ -73,7 +78,7 @@ async function getData({ region, summoner }: ProfileRouteParams): Promise<Profil
    };
 }
 
-function createFilters(season: CurrentSeason): FiltersMap {
+function createFilters(season: CurrentSeason): ChallengesFiltersMap {
    const tempIcon = "https://static.wikia.nocookie.net/leagueoflegends/images/a/a1/Challenge_Token_Iron.png";
    return {
       category: [
