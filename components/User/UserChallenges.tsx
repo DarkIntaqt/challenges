@@ -7,7 +7,9 @@ import {
    faArrowDownZA,
    faArrowUpRightDots,
    faClock,
+   faGrip,
    faHashtag,
+   faList,
    faRankingStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ChallengeObject from "challenges/components/User/ChallengeObject";
 import {
    ChallengeHydrated,
+   DisplayAs,
    FilterItem,
    FiltersApplied,
    FiltersMap,
@@ -45,6 +48,7 @@ export default function UserChallenges({
       masterThresholds: false,
    });
    const [sortingApplied, setSortingApplied] = useState<SortBy>("level");
+   const [displayAs, setDisplayAs] = useState<DisplayAs>("list");
    const [searchQuery, setSearchQuery] = useState<string>("");
 
    const toggleFilter = (toggle: FilterItem): void => {
@@ -65,6 +69,10 @@ export default function UserChallenges({
       } else if (sorting !== sortingApplied) {
          setSortingApplied(sorting);
       }
+   };
+
+   const switchDisplayAs = (): void => {
+      setDisplayAs(displayAs === "list" ? "grid" : "list");
    };
 
    const switchBool = (prop: KeysOfType<FiltersApplied, boolean>): void => {
@@ -98,6 +106,10 @@ export default function UserChallenges({
          <div className={filterCss.filter}>
             <div className={filterCss.selectors + " clearfix"}>
                <div className={filterCss.category}>
+                  <button onClick={() => switchDisplayAs()}>
+                     <FontAwesomeIcon icon={displayAs === "list" ? faList : faGrip} />
+                     {displayAs === "list" ? "List view" : "Grid view"}
+                  </button>
                   <button
                      onClick={() => switchBool("hideCapstones")}
                      className={filtersApplied.hideCapstones ? filterCss.selected : ""}
