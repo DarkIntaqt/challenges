@@ -23,6 +23,7 @@ export function challengeFilter(
    function passCategory(challenge: ChallengeHydrated): boolean {
       if (challenge.tags.isCategory === "true") return false;
       if (filtersApplied.category.length === 0) return !retiredHidden.includes(challenge._parentId);
+      if (filtersApplied.category.includes("retired") && seasonsRetired.includes(challenge._parentId)) return true;
       return filtersApplied.category.includes(challenge._parentId);
    }
 
