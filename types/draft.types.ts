@@ -18,7 +18,11 @@ export interface CurrentSeason {
 }
 
 export type FiltersMap = Record<FilterCategory, FilterItem[]>;
-export type FiltersApplied = Record<FilterCategory, string[]>;
+export interface FiltersApplied extends Record<FilterCategory, string[]> {
+   hideCapstones: boolean;
+   hideMaxedOut: boolean;
+   masterThresholds: boolean;
+}
 
 export type UserChallengesMap = Record<string, UserChallengeDto>;
 
@@ -32,6 +36,7 @@ export interface ChallengeEntry {
    achievedAt: number;
    tierNext: { threshold: number; tier: TierType };
    tierMaster: { threshold: number };
+   _canProgress: boolean;
 }
 
 export interface ChallengeHydrated extends ChallengeDTO {
