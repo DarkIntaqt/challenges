@@ -56,8 +56,8 @@ export default function UserHeading({ user, verified, challenges, titles }: User
          <div>
             <h1>
                {user.name}
-               <Link href={verified ? "/social/faq" : "/verify"} prefetch={false}>
-                  <VipBadge size={"2rem"} verified={verified} margin="0" />
+               <Link href={verified ? "/social/faq" : "/verify"} prefetch={false} className={css.vipBadge}>
+                  <VipBadge size={"1.8rem"} verified={verified} />
                </Link>
             </h1>
 
