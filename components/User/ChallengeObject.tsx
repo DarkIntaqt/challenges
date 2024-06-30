@@ -40,7 +40,7 @@ export default function ChallengeObject(props: ChallengeObjProps): ReactNode {
             <p>{props.description}</p>
          </div>
 
-         <span className={css.tier}>{capitalize(props.tier)}</span>
+         <span className={css.tier}>{props.tier === "NONE" ? "Unranked" : capitalize(props.tier)}</span>
 
          <div
             className={css.progress}
@@ -50,8 +50,8 @@ export default function ChallengeObject(props: ChallengeObjProps): ReactNode {
                      ? "100%"
                      : `calc(${props.progress} / ${props.tierMaster.threshold} * 100%)`
                   : props.progress >= props.tierNext.threshold
-                    ? "100%"
-                    : `calc(${props.progress} / ${props.tierNext.threshold} * 100%)`,
+                     ? "100%"
+                     : `calc(${props.progress} / ${props.tierNext.threshold} * 100%)`,
             }}
          ></div>
       </Link>
