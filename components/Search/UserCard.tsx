@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import ContentService from "challenges/services/ContentService";
 import UserService from "challenges/services/UserService";
+import Link from "next/link";
 
 export type LookupResponse = {
    playerId: string;
@@ -90,10 +91,6 @@ export default function UserCard({ input, userRegion }: Readonly<{ input: string
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [name, lookupName, lookup, region, userRegion, input]);
 
-   function search() {
-      router.push(`/profile/${region.toLowerCase()}/${lookupName.replace("#", "-")}`);
-   }
-
    return <Tilt
       tiltReverse={true}
       tiltMaxAngleX={5}
@@ -104,7 +101,7 @@ export default function UserCard({ input, userRegion }: Readonly<{ input: string
       glareBorderRadius={"8px"}
       scale={1.02}
       className={css.result}>
-      <div onClick={search} className={`${css.content} ${error ? css.error : null}`}>
+      <Link href={`/profile/${region.toLowerCase()}/${lookupName.replace("#", "-")}`} prefetch={false} className={`${css.content} ${error ? css.error : null}`}>
 
          <div className={css.bg}>
             <Image
@@ -126,6 +123,6 @@ export default function UserCard({ input, userRegion }: Readonly<{ input: string
 
          <p>{name} <span>{userRegion}</span></p>
 
-      </div>
+      </Link>
    </Tilt>;
 }

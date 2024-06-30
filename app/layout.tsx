@@ -3,11 +3,14 @@ import { Roboto } from "next/font/google";
 import Script from "next/script";
 import { ReactNode } from "react";
 
-import SidebarApp from "challenges/components/Navigation/SidebarApp";
+import Sidebar from "challenges/components/Navigation/Sidebar";
 import Footer from "challenges/layouts/Footer";
 import css from "challenges/layouts/layout.module.scss";
 
 import "challenges/styles/global.css";
+import { cookies } from "next/headers";
+import { SidebarConfig } from "challenges/types/general.types";
+import ErrorBoundary from "challenges/components/ErrorBoundary";
 
 export const metadata: Metadata = {
    icons: {
@@ -38,18 +41,24 @@ const roboto = Roboto({
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+
+   const cookieStore = cookies();
+   const sidebarCookie = (cookieStore.get("sidebar")?.value || "VISIBLE") as SidebarConfig;
+
    return (
       <html lang="en">
          <body>
-            <section className={[css.content, roboto.variable].join(" ")}>
-               <SidebarApp />
-               <div className={css.wrapper}>
-                  <main className={css.main}>{children}</main>
-                  <Footer />
-               </div>
-            </section>
+            <ErrorBoundary>
+               <section className={[css.content, roboto.variable].join(" ")}>
+                  <Sidebar sidebarConfigCookie={sidebarCookie} />
+                  <div className={css.wrapper}>
+                     <main className={css.main}>{children}</main>
+                     <Footer />
+                  </div>
+               </section>
+            </ErrorBoundary>
          </body>
          <Script src="https://cdn.darkintaqt.com/script/cc/bundle.js" />
-      </html>
+      </html >
    );
 }

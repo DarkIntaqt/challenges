@@ -1,21 +1,22 @@
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
 
 import css from "./sidebar.module.scss";
-import { useRouter } from "next/router";
 
-export default function NavLink({
-   children,
-   href,
-   ignore = false
-}: Readonly<{
-   children: React.ReactNode;
+export default function NavLinkApp({ children, href, ignore = false }: NavLinkProps) {
+   const router = usePathname();
+   return (
+      <Link
+         href={href}
+         className={!ignore && router === href ? css.active : ""}>
+         {children}
+      </Link>
+   );
+}
+
+interface NavLinkProps {
+   children: ReactNode;
    href: string;
    ignore?: boolean;
-}>) {
-   const router = useRouter();
-
-   return <Link href={href} className={(!ignore && router.pathname === href) ? css.active : ""}>
-      {children}
-   </Link>;
-
 }
