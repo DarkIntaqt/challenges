@@ -34,7 +34,7 @@ export default function requests(baseUrl: string) {
    */
   const getResponse = async (url: string) => {
     try {
-      const res = await fetch(encodeURI(baseUrl + url));
+      const res = await fetch(encodeURI(baseUrl + decodeURI(url)));
       return res;
     } catch (e) {
       handleResourceError();
