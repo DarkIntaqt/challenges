@@ -70,7 +70,7 @@ export default function UserHeading({ user, verified, challenges, titles }: User
                      <div className={css.svg}>
                         <TitleIcon />
                      </div>
-                     <Link href={`/challenges/${user.preferences.title}`}>{titleInfo.name}</Link>
+                     <Link href={`/challenges/${titleInfo.challengeId}`}>{titleInfo.name}</Link>
                   </div>
                ) : (
                   <></>
