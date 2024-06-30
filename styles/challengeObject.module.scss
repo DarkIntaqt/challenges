@@ -1,14 +1,25 @@
 @import "variables";
 
+$grid-gap: 5px;
+$image-width: 40px;
+$modes-width: 20px;
+$tier-width: 120px;
+$fixed-columns-total: $image-width + $modes-width + $tier-width;
+
 a.challenge {
-   grid-gap: 5px;
    align-items: center;
    background-color: var(--dark1);
    border-radius: 10px;
    box-sizing: border-box;
    color: var(--light0);
    display: grid;
-   grid-template-columns: 40px calc(50% - 90px) 20px calc(50% - 90px) 120px;
+   grid-gap: $grid-gap;
+   grid-template-columns:
+           $image-width
+           calc(50% - #{($fixed-columns-total + ($grid-gap * 4)) / 2})
+           $modes-width
+           calc(50% - #{($fixed-columns-total + ($grid-gap * 4)) / 2})
+           $tier-width;
    height: 60px;
    margin: 5px;
    overflow: hidden;
@@ -50,7 +61,6 @@ a.challenge {
          overflow: hidden;
          padding: 0 5px;
          text-overflow: ellipsis;
-         text-transform: capitalize;
          white-space: nowrap;
       }
    }
