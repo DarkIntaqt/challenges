@@ -1,4 +1,7 @@
-import { MouseEventHandler } from "react";
+"use client";
+
+import { MouseEventHandler, useState } from "react";
+import { setCookie } from "nookies";
 
 import css from "./sidebar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,15 +10,17 @@ import NavLink from "./NavLink";
 import Logo from "challenges/assets/logo.svg";
 import { SidebarConfig } from "challenges/types/general.types";
 
-export default function Sidebar({
-   toggleSidebar,
-   view
-}: Readonly<{
-   toggleSidebar: Function,
-   view: SidebarConfig
-}>) {
+export default function Sidebar({ sidebarConfigCookie }: Readonly<{ sidebarConfigCookie: SidebarConfig | undefined }>) {
 
-   return <div className={`${css.sidebar} ${view === "HIDDEN" ? null : css.ellapsed}`}>
+   const [sidebarState, setSidebar] = useState<SidebarConfig>((sidebarConfigCookie) || "VISIBLE");
+
+   function toggleSidebar() {
+      const setTo = sidebarState === "HIDDEN" ? "VISIBLE" : "HIDDEN";
+      setSidebar(setTo);
+      setCookie(null, "sidebar", setTo, { path: "/" });
+   }
+
+   return <div className={`${css.sidebar} ${sidebarState === "HIDDEN" ? null : css.ellapsed}`}>
 
       <div className={css.content}>
 
@@ -50,7 +55,7 @@ export default function Sidebar({
 
          <button className={css.toggle} onClick={toggleSidebar as MouseEventHandler}>
             {
-               view === "HIDDEN" ? <>
+               sidebarState === "HIDDEN" ? <>
                   <FontAwesomeIcon icon={faAnglesRight} />
                   <p>Ellapse</p>
                </> : <>
