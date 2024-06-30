@@ -42,8 +42,9 @@ export interface ChallengeEntry {
    percentile: number;
    progress: number;
    achievedAt: number;
-   tierNext: { threshold: number; tier: TierType };
+   tierNext: { threshold: number; gap: number; tier: TierType };
    tierMaster: { threshold: number };
+   _tierInt: number;
    _canProgress: boolean;
 }
 
