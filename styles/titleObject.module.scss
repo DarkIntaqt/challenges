@@ -1,12 +1,9 @@
 @import "variables";
 
 $grid-gap: 5px;
-$image-width: 40px;
-$modes-width: 20px;
-$tier-width: 120px;
-$fixed-columns-total: $image-width + $modes-width + $tier-width;
+$fixed-columns-total: 0;
 
-a.challenge {
+a.title {
    align-items: center;
    background-color: var(--dark1);
    border-radius: 10px;
@@ -15,11 +12,8 @@ a.challenge {
    display: grid;
    grid-gap: $grid-gap;
    grid-template-columns:
-           $image-width
-           calc(50% - #{($fixed-columns-total + ($grid-gap * 4)) / 2})
-           $modes-width
-           calc(50% - #{($fixed-columns-total + ($grid-gap * 4)) / 2})
-           $tier-width;
+           calc(50% - #{($fixed-columns-total + ($grid-gap * 1)) / 2})
+           calc(50% - #{($fixed-columns-total + ($grid-gap * 1)) / 2});
    height: 60px;
    margin: 5px;
    overflow: hidden;
@@ -31,17 +25,6 @@ a.challenge {
 
    &:hover {
       background-color: var(--dark2);
-   }
-
-   img {
-      color: transparent;
-      display: inline-block;
-      height: 40px;
-      width: 40px;
-
-      &.unranked {
-         opacity: 0.3;
-      }
    }
 
    .group {
@@ -65,24 +48,6 @@ a.challenge {
       }
    }
 
-   .modes {
-      display: flex;
-      flex-direction: column;
-      float: left;
-      height: 40px;
-      justify-content: center;
-      overflow: hidden;
-      width: 20px;
-
-      img {
-         filter: brightness(.6);
-         font-size: 14px;
-         height: 20px;
-         text-align: center;
-         width: 20px;
-      }
-   }
-
    .description {
       display: flex;
 
@@ -98,13 +63,6 @@ a.challenge {
          text-overflow: ellipsis;
          width: 100%;
       }
-   }
-
-   .tier {
-      color: var(--type);
-      font-size: .8rem;
-      text-align: center;
-      white-space: nowrap;
    }
 
    .progress {

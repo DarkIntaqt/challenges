@@ -1,10 +1,16 @@
+import { Metadata } from "next";
 import { ReactNode } from "react";
 
 import UserChallenges from "challenges/components/User/UserChallenges";
 import ChallengeService from "challenges/services/ChallengeService";
 import UserService from "challenges/services/UserService";
 import { ChallengeDTO, ChallengesFullDTO } from "challenges/types/challenges.types";
-import { ChallengeHydrated, CurrentSeason, FiltersMap, UserChallengesMap } from "challenges/types/draft.types";
+import {
+   ChallengeHydrated,
+   CurrentSeason,
+   ChallengesFiltersMap,
+   UserChallengesMap,
+} from "challenges/types/draft.types";
 import { ProfileRouteParams } from "challenges/types/profile-navigation.types";
 import { challengeTokenIcon, filterCategoryIcon, filterGameModeIcon } from "challenges/utils/cdnHelpers";
 import getPlatform from "challenges/utils/platform";
@@ -21,6 +27,26 @@ export default async function ProfileTabOverview({ params }: { params: ProfileRo
          seasonsRetired={seasonsRetired}
       ></UserChallenges>
    );
+}
+
+export async function generateMetadata({ params }: { params: ProfileRouteParams }): Promise<Metadata> {
+   const userService = new UserService();
+   const user = await userService.getUser(params.summoner, getPlatform(params.region));
+   if (!user) {
+      throw new Error("Error loading user");
+   }
+
+   return {
+      title: `${user.name}#${user.tag}'s Challenge Progress Overview`,
+      description: `${user.name}#${user.tag}'s LoL Full challenge progress, titles and statistics | League of Legends Challenge Tracker`,
+      keywords: [`league of legends challenges for ${user.name}#${user.tag}`, "lol challenges"],
+      openGraph: {
+         type: "website",
+         title: `${user.name}#${user.tag}'s Challenge Progress Overview`,
+         description: `${user.name}#${user.tag}'s LoL Full challenge progress, titles and statistics | League of Legends Challenge Tracker`,
+         siteName: "Challenge Tracker",
+      },
+   };
 }
 
 async function getData({ region, summoner }: ProfileRouteParams): Promise<ProfileTabOverviewData> {
@@ -52,7 +78,8 @@ async function getData({ region, summoner }: ProfileRouteParams): Promise<Profil
    };
 }
 
-function createFilters(season: CurrentSeason): FiltersMap {
+function createFilters(season: CurrentSeason): ChallengesFiltersMap {
+   const tempIcon = "https://static.wikia.nocookie.net/leagueoflegends/images/a/a1/Challenge_Token_Iron.png";
    return {
       category: [
          { category: "category", name: "teamwork", id: "4", image: challengeTokenIcon(4) },
@@ -69,19 +96,20 @@ function createFilters(season: CurrentSeason): FiltersMap {
          },
          { category: "category", name: "seasonal retired", id: "retired", image: filterCategoryIcon("retired.svg") },
       ],
-      // type: [
-      //     { category: "type", name: "progress", id: "progress" },
-      //     { category: "type", name: "in-game", id: "ingame" },
-      //     { category: "type", name: "eternals", id: "eternals" },
-      //     { category: "type", name: "clash", id: "clash" },
-      //     { category: "type", name: "inventory", id: "inventory" },
-      //     { category: "type", name: "ranked", id: "ranked" },
-      //     { category: "type", name: "profile", id: "profile" },
-      // ],
+      type: [
+         { category: "type", name: "progress", id: "CHALLENGES", image: tempIcon },
+         { category: "type", name: "in-game", id: "EOGD", image: tempIcon },
+         { category: "type", name: "eternals", id: "ETERNALS", image: filterCategoryIcon("eternals.webp") },
+         { category: "type", name: "clash", id: "CLASH", image: filterCategoryIcon("clash.webp") },
+         { category: "type", name: "inventory", id: "CAP_INVENTORY", image: tempIcon },
+         { category: "type", name: "ranked", id: "RANKED", image: tempIcon },
+         { category: "type", name: "profile", id: "SUMMONER", image: tempIcon },
+      ],
       gamemode: [
-         { category: "gamemode", name: "summoners rift", id: "rift", image: filterGameModeIcon("sr.svg") },
-         { category: "gamemode", name: "aram", id: "aram", image: filterGameModeIcon("ha.svg") },
-         { category: "gamemode", name: "bot", id: "bot", image: filterGameModeIcon("bot.png") },
+         { category: "gamemode", name: "Summoner's Rift", id: "rift", image: filterGameModeIcon("sr.svg") },
+         { category: "gamemode", name: "ARAM", id: "aram", image: filterGameModeIcon("ha.svg") },
+         { category: "gamemode", name: "Co-op vs AI", id: "bot", image: filterGameModeIcon("bot.png") },
+         { category: "gamemode", name: "Arena", id: "arena", image: filterGameModeIcon("arena.png") },
       ],
    };
 }
