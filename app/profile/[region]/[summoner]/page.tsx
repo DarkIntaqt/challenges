@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { ReactNode } from "react";
 
 import UserChallenges from "challenges/components/User/UserChallenges";
@@ -21,6 +22,26 @@ export default async function ProfileTabOverview({ params }: { params: ProfileRo
          seasonsRetired={seasonsRetired}
       ></UserChallenges>
    );
+}
+
+export async function generateMetadata({ params }: { params: ProfileRouteParams }): Promise<Metadata> {
+   const userService = new UserService();
+   const user = await userService.getUser(params.summoner, getPlatform(params.region));
+   if (!user) {
+      throw new Error("Error loading user");
+   }
+
+   return {
+      title: `${user.name}#${user.tag}'s Challenge Progress Overview`,
+      description: `${user.name}#${user.tag}'s LoL Full challenge progress, titles and statistics | League of Legends Challenge Tracker`,
+      keywords: [`league of legends challenges for ${user.name}#${user.tag}`, "lol challenges"],
+      openGraph: {
+         type: "website",
+         title: `${user.name}#${user.tag}'s Challenge Progress Overview`,
+         description: `${user.name}#${user.tag}'s LoL Full challenge progress, titles and statistics | League of Legends Challenge Tracker`,
+         siteName: "Challenge Tracker",
+      },
+   };
 }
 
 async function getData({ region, summoner }: ProfileRouteParams): Promise<ProfileTabOverviewData> {
