@@ -20,6 +20,7 @@ export interface CurrentSeason {
 
 export type FiltersMap = Record<FilterCategory, FilterItem[]>;
 export interface FiltersApplied extends Record<FilterCategory, string[]> {
+   sortBy: SortBy;
    hideCapstones: boolean;
    hideMaxedOut: boolean;
    masterThresholds: boolean;

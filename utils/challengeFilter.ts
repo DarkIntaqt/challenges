@@ -1,11 +1,5 @@
 import { ThresholdType } from "challenges/types/challenges.types";
-import {
-   ChallengeEntry,
-   ChallengeHydrated,
-   FiltersApplied,
-   SortBy,
-   UserChallengesMap,
-} from "challenges/types/draft.types";
+import { ChallengeEntry, ChallengeHydrated, FiltersApplied, UserChallengesMap } from "challenges/types/draft.types";
 import { TierType } from "challenges/types/user.types";
 
 export function challengeFilter(
@@ -14,7 +8,6 @@ export function challengeFilter(
    seasonsRetired: string[],
    userChallenges: UserChallengesMap,
    filtersApplied: FiltersApplied,
-   sortingApplied: SortBy,
    searchQuery: string,
 ): ChallengeEntry[] {
    const retiredHidden = seasonsRetired.filter((sid) => sid !== seasonPrevious);
@@ -73,7 +66,7 @@ export function challengeFilter(
       })
       .filter((challenge: ChallengeEntry) => !filtersApplied.hideMaxedOut || challenge._canProgress)
       .sort((a: ChallengeEntry, b: ChallengeEntry) => {
-         switch (sortingApplied) {
+         switch (filtersApplied.sortBy) {
             case "level":
                return 0;
             case "timestamp":
