@@ -1,3 +1,5 @@
+"use client";
+
 import css from "challenges/styles/challenges.module.scss";
 import filterCss from "challenges/styles/filter.module.scss";
 import { capitalize } from "challenges/utils/stringManipulation";

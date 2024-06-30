@@ -1,6 +1,8 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import css from "challenges/styles/index.module.scss";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import getPlatform, { serversBeautified } from "challenges/utils/platform";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -45,7 +47,7 @@ export default function Searchbar() {
    function search(e: React.KeyboardEvent<HTMLInputElement>) {
       const value = (e.target as HTMLInputElement).value.toLowerCase();
       if (e.key === "Enter") {
-         // TODO: search
+         router.push(`/profile/${region}/${value.replace("#", "-")}`);
          return;
       }
 
