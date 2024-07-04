@@ -11,14 +11,14 @@ function getPinned() {
  * @param {number} id challenge id
  * @returns {string} whether the challenge is pinned or not
  */
-export function checkPinned(id) {
+export function checkPinned(id: number): string {
    let pinned = getPinned();
 
    return pinned.includes(id) ? "isPinned" : "notPinned";
 }
 
 
-export function addPinned(id) {
+export function addPinned(id: number) {
    let pinned = getPinned();
 
    if (!pinned.includes(id)) {
@@ -30,7 +30,7 @@ export function addPinned(id) {
 
 }
 
-export function removePinned(id) {
+export function removePinned(id: number) {
    let pinned = getPinned();
 
    const index = pinned.indexOf(id);
