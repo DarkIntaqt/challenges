@@ -26,11 +26,7 @@ export default function statsCalculateTotalPoints(challenges) {
             && challenge[8] !== 2024200 // seasonal 2024 capstone
             && challenge[6].state === "ENABLED"
         ) {
-            //console.log(challenge[8]);
             tiers[intToTier(challenge[1])] += 1
-
-        } else {
-            // console.log(challenge[0], challenge[6].state, challenge[6].translation.name, challenge[6].translation.description)
         }
     }
     return tiers
