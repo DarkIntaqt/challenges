@@ -1,4 +1,5 @@
-import { ChallengeDTO, ThresholdType } from "challenges/types/challenges.types";
+import { ChallengeDTO } from "challenges/types/challenges.types";
+import { ThresholdType } from "challenges/types/general.types";
 import { ChallengeEntry, ChallengesFiltersApplied, UserChallengesMap } from "challenges/types/draft.types";
 import { TierType } from "challenges/types/user.types";
 
@@ -95,7 +96,7 @@ export function challengeFilter(
       });
 }
 
-const tierTypes: TierType[] = [
+export const tierTypes: TierType[] = [
    "NONE",
    "IRON",
    "BRONZE",

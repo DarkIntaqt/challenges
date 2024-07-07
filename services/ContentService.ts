@@ -1,4 +1,4 @@
-import { ThresholdType } from "challenges/types/challenges.types";
+import { ThresholdType } from "challenges/types/general.types";
 
 /**
  * Represents a service for providing data from CDN.

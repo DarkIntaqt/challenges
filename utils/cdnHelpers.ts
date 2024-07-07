@@ -1,4 +1,4 @@
-import { ThresholdType } from "challenges/types/challenges.types";
+import { ThresholdType } from "challenges/types/general.types";
 
 const cdnUri1 = "https://cdn.darkintaqt.com/lol";
 const cdnUri2 = "https://lolcdn.darkintaqt.com/cdn";

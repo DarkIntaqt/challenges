@@ -1,3 +1,14 @@
+export type ThresholdType =
+   | "IRON"
+   | "BRONZE"
+   | "SILVER"
+   | "GOLD"
+   | "PLATINUM"
+   | "DIAMOND"
+   | "MASTER"
+   | "GRANDMASTER"
+   | "CHALLENGER";
+
 export type SidebarConfig = "HIDDEN" | "VISIBLE";
 
 export interface ErrorProps {

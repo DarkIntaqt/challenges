@@ -1,13 +1,4 @@
-export type ThresholdType =
-   | "IRON"
-   | "BRONZE"
-   | "SILVER"
-   | "GOLD"
-   | "PLATINUM"
-   | "DIAMOND"
-   | "MASTER"
-   | "GRANDMASTER"
-   | "CHALLENGER";
+import { ThresholdType } from "./general.types";
 
 export interface ChallengesFullDTO {
    challenges: Record<string, ChallengeDTO>;
