@@ -33,6 +33,9 @@ export interface ChallengeDTO {
    leaderboard: boolean;
    reverseDirection?: boolean;
    rewards?: (RewardDTO | undefined)[];
+   capstoneId: string;
+   gameMode: "aram" | "arena" | "bot" | "none" | "rift";
+   canProgress: boolean;
 }
 
 declare interface RewardDTO {

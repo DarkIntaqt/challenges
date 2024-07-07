@@ -1,4 +1,3 @@
-import { ChallengeDTO } from "./challenges.types";
 import { TierType, UserChallengeDto } from "./user.types";
 
 export type FilterCategory = "category" | "type" | "gamemode";
@@ -45,12 +44,6 @@ export interface ChallengeEntry {
    tierNext: { threshold: number; gap: number; tier: TierType };
    tierMaster: { threshold: number };
    _tierInt: number;
-   _canProgress: boolean;
-}
-
-export interface ChallengeHydrated extends ChallengeDTO {
-   _parentId: string;
-   _gameMode: string;
    _canProgress: boolean;
 }
 

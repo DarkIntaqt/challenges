@@ -15,8 +15,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ChallengeObject from "challenges/components/User/ChallengeObject";
+import { ChallengeDTO } from "challenges/types/challenges.types";
 import {
-   ChallengeHydrated,
    DisplayAs,
    FilterItem,
    ChallengesFiltersApplied,
@@ -240,7 +240,7 @@ export default function UserChallenges({
 }
 
 interface UserChallengesProps {
-   challenges: ChallengeHydrated[];
+   challenges: ChallengeDTO[];
    userChallenges: UserChallengesMap;
    filters: ChallengesFiltersMap;
    seasonPrevious: string;
