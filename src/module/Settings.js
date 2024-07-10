@@ -9,7 +9,8 @@ const languages = [
    ["es", "Español"],
    ["ja", "日本語"],
    ["pt", "Português (Brasil)"],
-   ["ru", "Русский"]
+   ["ru", "Русский"],
+   ["kr", "한국어"]
 ]
 
 export default class Settings extends Component {

@@ -7,7 +7,7 @@ import { initReactI18next } from 'react-i18next';
 // import translationJA from './translations/ja.json'
 
 const fallbackLng = ['en'];
-const availableLanguages = ['en', 'es', 'de', 'ja', 'fr', 'pt'];
+const availableLanguages = ['en', 'es', 'de', 'ja', 'fr', 'pt', 'kr'];
 
 
 i18n
