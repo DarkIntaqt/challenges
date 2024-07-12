@@ -5,7 +5,7 @@
   "dependencies": {
     "async": "^3.2.5",
     "chart.js": "^4.4.2",
-    "i18next": "^23.10.1",
+    "i18next": "^23.11.5",
     "i18next-browser-languagedetector": "^7.2.1",
     "i18next-http-backend": "^2.5.2",
     "react": "^18.2.0",
