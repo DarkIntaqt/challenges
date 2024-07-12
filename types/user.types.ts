@@ -1,4 +1,4 @@
-import { ThresholdType } from "./challenges.types";
+import { ThresholdType } from "./general.types";
 
 export type TierType = ThresholdType | "NONE";
 

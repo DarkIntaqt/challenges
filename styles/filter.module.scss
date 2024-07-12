@@ -7,7 +7,7 @@
 
   .selectors {
     width: calc(100% - 20px);
-    margin: 15px 10px 10px;
+    margin: 5px 10px 10px;
     box-sizing: border-box;
     padding: 0 10px 10px;
     border-radius: 8px;
@@ -139,7 +139,7 @@ button.pointstrue {
 @media only screen and (min-height:800px) {
   .filter {
     position: sticky;
-    top: 60px;
+    top: 0;
   }
 }
 
