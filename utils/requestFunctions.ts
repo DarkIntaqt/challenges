@@ -34,7 +34,7 @@ export default function requests(baseUrl: string) {
    */
   const getResponse = async (url: string) => {
     try {
-      const res = await fetch(encodeURI(baseUrl + decodeURI(url)));
+      const res = await fetch(encodeURI(baseUrl + decodeURI(url)), { next: { revalidate: 120 } });
       return res;
     } catch (e) {
       handleResourceError();

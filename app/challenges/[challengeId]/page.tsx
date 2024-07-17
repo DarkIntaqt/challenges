@@ -79,7 +79,7 @@ async function getData({ challengeId }: ChallengeRouteParams): Promise<Leaderboa
             riotId: summoner[0],
             profileIcon: summoner[3],
             points: summoner[1],
-            tier: tierTypes[tierTypes.indexOf(summoner[2]) - 1],
+            tier: summoner[2],
             achievedTimestamp: summoner[4],
             isVerified: summoner[5],
             region: region,
