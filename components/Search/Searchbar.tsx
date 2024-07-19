@@ -138,17 +138,7 @@ export default function Searchbar() {
                      return null;
                   }
 
-                  if (title.challengeId === undefined) { // TODO titles with no challenge
-                     return;
-                     return <TitleCard
-                     key={title.id}
-                     title={title.name}
-                     url={"/challenges/" + title.challengeId} // TODO think of a link
-                     image={contentService.getChallengeTokenIcon(parseInt("1"), "MASTER")} // TODO think of a icon
-                  />;
-                  }
-
-                  if (title.type === "DEFAULT" || title.type === "CHALLENGE") {
+                  if ((title.type === "DEFAULT" || title.type === "CHALLENGE") && title.challengeId !== undefined) {
                      return <TitleCard
                      key={title.id}
                      title={title.name}
