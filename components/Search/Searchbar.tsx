@@ -138,7 +138,7 @@ export default function Searchbar() {
                      return null;
                   }
 
-                  if (title.challengeId === undefined) { // TODO titles with no challange
+                  if (title.challengeId === undefined) { // TODO titles with no challenge
                      return;
                      return <TitleCard
                      key={title.id}
@@ -148,12 +148,12 @@ export default function Searchbar() {
                   />;
                   }
 
-                  if (title.type === "CHALLENGE") {
+                  if (title.type === "DEFAULT" || title.type === "CHALLENGE") {
                      return <TitleCard
                      key={title.id}
                      title={title.name}
                      url={"/challenges/" + title.challengeId}
-                      // TODO add TitleIcon image or image of challange with required type
+                      // TODO add TitleIcon image or image of challenge with required type
                      image={contentService.getChallengeTokenIcon(parseInt(title.challengeId), "MASTER")}
                      />;
                   }
