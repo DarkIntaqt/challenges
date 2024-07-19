@@ -81,7 +81,7 @@ export interface ParentDTO {
    name: string;
 }
 
-export interface GlobalChallengeDTo {
+export interface GlobalChallengeDTO {
    icon: string;
    icon_2: number;
    timestamp: number;
