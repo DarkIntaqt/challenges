@@ -13,6 +13,7 @@ import { SidebarConfig } from "challenges/types/general.types";
 import ErrorBoundary from "challenges/components/ErrorBoundary";
 
 export const metadata: Metadata = {
+   robots: { index: false, follow: true },
    icons: {
       icon: [
          { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
@@ -22,6 +23,15 @@ export const metadata: Metadata = {
       other: [{ url: "/safari-pinned-tab.svg", color: "#0dbdff", rel: "mask-icon" }],
    },
    manifest: "/site.webmanifest",
+   openGraph: {
+      type: "website",
+      siteName: "Challenge Tracker",
+   },
+   twitter: {
+      card: "summary",
+      site: "@darkintaqt",
+      creator: "@darkintaqt",
+   },
    other: { "msapplication-TileColor": "#0dbdff" },
 };
 

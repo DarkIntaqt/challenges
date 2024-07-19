@@ -1,4 +1,5 @@
-import { ChallengeDTO, ChallengesFullDTO, LeaderboardDTO } from "challenges/types/challenges.types";
+import { ChallengeDTO, ChallengesFullDTO } from "challenges/types/challenges.types";
+import { LeaderboardChallenge } from "challenges/types/leaderboard.types";
 import requests from "challenges/utils/requestFunctions";
 
 /**
@@ -62,7 +63,7 @@ export default class ChallengeService {
    * @returns {Promise<GlobalChallengeDto>} Challenge
    */
   async getById(id: number) {
-    const challenge = await this.getJson(`/v5/showChallenge.php?id=${id}`) as LeaderboardDTO | undefined;
+    const challenge = (await this.getJson(`/v5/showChallenge.php?id=${id}`)) as LeaderboardChallenge | undefined;
     return challenge;
   }
 }

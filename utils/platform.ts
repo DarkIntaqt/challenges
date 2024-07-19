@@ -1,66 +1,25 @@
-function getPlatform(server: string) {
-   switch (server) {
-      case "br":
-         return "br1";
+export const serversRaw = [
+   "br1",
+   "euw", // "euw1", // "euw1" returns a 400 response
+   "eun1",
+   "jp1",
+   "kr",
+   "la1", // LatAm-North
+   "la2", // LatAm-South
+   "me1",
+   "na1",
+   "oc1",
+   "ph2",
+   "ru",
+   "sg2",
+   "th2",
+   "tr1",
+   "tw2",
+   "vn2",
+] as const;
+export type ServerRaw = (typeof serversRaw)[number];
 
-      case "euw":
-         break; // return "euw1"; // "euw1" returns a 400 response
-
-      case "eune":
-         return "eun1";
-
-      case "jp":
-         return "jp1";
-
-      case "lan":
-         return "la1";
-
-      case "las":
-         return "la2";
-
-      case "na":
-         return "na1";
-
-      case "oc":
-         return "oc1";
-
-      case "tr":
-         return "tr1";
-
-      case "ph":
-         return "ph2";
-
-      case "sg":
-         return "sg2";
-
-      case "th":
-         return "th2";
-
-      case "tw":
-         return "tw2";
-
-      case "vn":
-         return "vn2";
-
-      case "me":
-         return "me1";
-
-      /**
-       * RU and KR does not have different platformIds
-       */
-      case "ru":
-      case "kr":
-         break;
-
-
-      default:
-         break;
-   }
-   return server;
-}
-
-
-const serversBeautified = [
+export const serversBeautified = [
    "br",
    "euw",
    "eune",
@@ -77,30 +36,16 @@ const serversBeautified = [
    "th",
    "tr",
    "tw",
-   "vn"
-];
+   "vn",
+] as const;
+export type ServerBeautified = (typeof serversBeautified)[number];
 
+export default function getPlatform(server: ServerBeautified): string {
+   const ix = serversBeautified.indexOf(server);
+   return ix === -1 ? server : serversRaw[ix];
+}
 
-const serversRaw = [
-   "br1",
-   "euw1",
-   "eun1",
-   "jp1",
-   "kr",
-   "la1",
-   "la2",
-   "me1",
-   "na1",
-   "oc1",
-   "ph2",
-   "ru",
-   "sg2",
-   "th2",
-   "tr1",
-   "tw2",
-   "vn2"
-];
-
-
-export default getPlatform;
-export { serversBeautified, serversRaw };
+export function beautifyServer(server: ServerRaw): string {
+   const ix = serversRaw.indexOf(server);
+   return ix === -1 ? server : serversBeautified[ix];
+}

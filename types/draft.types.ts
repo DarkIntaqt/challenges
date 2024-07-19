@@ -1,8 +1,10 @@
-import { ChallengeDTO } from "./challenges.types";
 import { TierType, UserChallengeDto } from "./user.types";
 
-export type FilterCategory = "category" | "gamemode";
-export type SortBy = "level" | "timestamp" | "percentile" | "levelup" | "az" | "za";
+export type FilterCategory = "category" | "type" | "gamemode";
+export type DisplayAs = "list" | "grid";
+
+export type ChallengesSortBy = "default" | "level" | "timestamp" | "percentile" | "levelup" | "az" | "za";
+export type TitlesSortBy = "default" | "levelup" | "az" | "za";
 
 export interface FilterItem {
    category: FilterCategory;
@@ -17,8 +19,17 @@ export interface CurrentSeason {
    image: string;
 }
 
-export type FiltersMap = Record<FilterCategory, FilterItem[]>;
-export type FiltersApplied = Record<FilterCategory, string[]>;
+export type ChallengesFiltersMap = Record<FilterCategory, FilterItem[]>;
+export interface ChallengesFiltersApplied extends Record<FilterCategory, string[]> {
+   sortBy: ChallengesSortBy;
+   hideCapstones: boolean;
+   hideMaxedOut: boolean;
+   masterThresholds: boolean;
+}
+
+export interface TitlesFiltersApplied {
+   sortBy: TitlesSortBy;
+}
 
 export type UserChallengesMap = Record<string, UserChallengeDto>;
 
@@ -30,13 +41,18 @@ export interface ChallengeEntry {
    percentile: number;
    progress: number;
    achievedAt: number;
-   tierNext: { threshold: number; tier: TierType };
+   tierNext: { threshold: number; gap: number; tier: TierType };
    tierMaster: { threshold: number };
+   _tierInt: number;
+   _canProgress: boolean;
 }
 
-export interface ChallengeHydrated extends ChallengeDTO {
-   _parentId: string;
-   _type?: string;
-   _gameMode: string;
-   _canProgress: boolean;
+export interface TitleEntry {
+   id: string;
+   challengeId: string;
+   name: string;
+   description: string;
+   progress: number;
+   milestone: { threshold: number; gap: number; tier: TierType };
+   _isUnlocked: boolean;
 }

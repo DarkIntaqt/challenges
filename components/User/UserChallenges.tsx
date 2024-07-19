@@ -7,20 +7,25 @@ import {
    faArrowDownZA,
    faArrowUpRightDots,
    faClock,
+   faGrip,
    faHashtag,
+   faList,
    faRankingStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ChallengeObject from "challenges/components/User/ChallengeObject";
+import { ChallengeDTO } from "challenges/types/challenges.types";
 import {
-   ChallengeHydrated,
+   DisplayAs,
    FilterItem,
-   FiltersApplied,
-   FiltersMap,
-   SortBy,
+   ChallengesFiltersApplied,
+   ChallengesFiltersMap,
+   ChallengesSortBy,
    UserChallengesMap,
 } from "challenges/types/draft.types";
+import { KeysOfType } from "challenges/types/general.types";
+import { filterGameModeIcon } from "challenges/utils/cdnHelpers";
 import { challengeFilter } from "challenges/utils/challengeFilter";
 import { capitalize } from "challenges/utils/stringManipulation";
 
@@ -34,9 +39,21 @@ export default function UserChallenges({
    seasonPrevious,
    seasonsRetired,
 }: UserChallengesProps): ReactNode {
-   const [filtersApplied, setFiltersApplied] = useState<FiltersApplied>({ category: [], gamemode: [] });
-   const [sortingApplied, setSortingApplied] = useState<SortBy>("level");
+   const [displayAs, setDisplayAs] = useState<DisplayAs>("list");
+   const [filtersApplied, setFiltersApplied] = useState<ChallengesFiltersApplied>({
+      category: [],
+      type: [],
+      gamemode: [],
+      sortBy: "default",
+      hideCapstones: false,
+      hideMaxedOut: false,
+      masterThresholds: false,
+   });
    const [searchQuery, setSearchQuery] = useState<string>("");
+
+   const toggleDisplayAs = (): void => {
+      setDisplayAs(displayAs === "list" ? "grid" : "list");
+   };
 
    const toggleFilter = (toggle: FilterItem): void => {
       const isApplied = filtersApplied[toggle.category].find((aid) => aid === toggle.id);
@@ -50,12 +67,16 @@ export default function UserChallenges({
       setFiltersApplied({ ...filtersApplied, [toggle.category]: newGroup });
    };
 
-   const switchSorting = (sorting: SortBy): void => {
+   const toggleSorting = (sorting: ChallengesSortBy): void => {
       if (sorting === "az") {
-         setSortingApplied(sortingApplied === "az" ? "za" : "az");
-      } else if (sorting !== sortingApplied) {
-         setSortingApplied(sorting);
+         setFiltersApplied({ ...filtersApplied, sortBy: filtersApplied.sortBy === "az" ? "za" : "az" });
+      } else {
+         setFiltersApplied({ ...filtersApplied, sortBy: sorting === filtersApplied.sortBy ? "default" : sorting });
       }
+   };
+
+   const toggleBool = (prop: KeysOfType<ChallengesFiltersApplied, boolean>): void => {
+      setFiltersApplied({ ...filtersApplied, [prop]: !filtersApplied[prop] });
    };
 
    const debounce = (func: Function, delay: number) => {
@@ -84,44 +105,72 @@ export default function UserChallenges({
 
          <div className={filterCss.filter}>
             <div className={filterCss.selectors + " clearfix"}>
-               <div className={filterCss.displayMode}>display_mode</div>
+               <div className={filterCss.category}>
+                  <button onClick={() => toggleDisplayAs()}>
+                     <FontAwesomeIcon icon={displayAs === "list" ? faList : faGrip} />
+                     {displayAs === "list" ? "List view" : "Grid view"}
+                  </button>
+                  <button
+                     onClick={() => toggleBool("hideCapstones")}
+                     className={filtersApplied.hideCapstones ? filterCss.selected : ""}
+                  >
+                     <Image width={16} height={16} src={filterGameModeIcon("c.png")} alt={"Hide Capstones"} />
+                     {"Hide Capstones"}
+                  </button>
+                  <button
+                     onClick={() => toggleBool("hideMaxedOut")}
+                     className={filtersApplied.hideMaxedOut ? filterCss.selected : ""}
+                  >
+                     <Image width={16} height={16} src={filterGameModeIcon("i.png")} alt={"Hide Maxed out"} />
+                     {"Hide Maxed out"}
+                  </button>
+                  <button
+                     onClick={() => toggleBool("masterThresholds")}
+                     className={filtersApplied.masterThresholds ? filterCss.selected : ""}
+                  >
+                     <Image width={16} height={16} src={filterGameModeIcon("m.png")} alt={"Set Master thresholds"} />
+                     {"Set Master thresholds"}
+                  </button>
+               </div>
 
                <div className={filterCss.category}>
                   <p className={filterCss.cheading}>{capitalize("sort by")}</p>
                   <button
-                     onClick={() => switchSorting("level")}
-                     className={sortingApplied === "level" ? filterCss.selected : ""}
+                     onClick={() => toggleSorting("level")}
+                     className={filtersApplied.sortBy === "level" ? filterCss.selected : ""}
                   >
                      <FontAwesomeIcon icon={faRankingStar} />
                      {"Rank"}
                   </button>
                   <button
-                     onClick={() => switchSorting("timestamp")}
-                     className={sortingApplied === "timestamp" ? filterCss.selected : ""}
+                     onClick={() => toggleSorting("timestamp")}
+                     className={filtersApplied.sortBy === "timestamp" ? filterCss.selected : ""}
                   >
                      <FontAwesomeIcon icon={faClock} />
                      {"Last upgraded"}
                   </button>
                   <button
-                     onClick={() => switchSorting("percentile")}
-                     className={sortingApplied === "percentile" ? filterCss.selected : ""}
+                     onClick={() => toggleSorting("percentile")}
+                     className={filtersApplied.sortBy === "percentile" ? filterCss.selected : ""}
                   >
                      <FontAwesomeIcon icon={faHashtag} />
                      {"Leaderboard Position"}
                   </button>
                   <button
-                     onClick={() => switchSorting("levelup")}
-                     className={sortingApplied === "levelup" ? filterCss.selected : ""}
+                     onClick={() => toggleSorting("levelup")}
+                     className={filtersApplied.sortBy === "levelup" ? filterCss.selected : ""}
                   >
                      <FontAwesomeIcon icon={faArrowUpRightDots} />
                      {"Closest Level-up"}
                   </button>
                   <button
-                     onClick={() => switchSorting("az")}
-                     className={sortingApplied === "az" || sortingApplied === "za" ? filterCss.selected : ""}
+                     onClick={() => toggleSorting("az")}
+                     className={
+                        filtersApplied.sortBy === "az" || filtersApplied.sortBy === "za" ? filterCss.selected : ""
+                     }
                   >
-                     <FontAwesomeIcon icon={sortingApplied === "za" ? faArrowDownZA : faArrowDownAZ} />
-                     {sortingApplied === "za" ? "Z-A" : "A-Z"}
+                     <FontAwesomeIcon icon={filtersApplied.sortBy === "za" ? faArrowDownZA : faArrowDownAZ} />
+                     {filtersApplied.sortBy === "za" ? "Z-A" : "A-Z"}
                   </button>
                </div>
 
@@ -139,6 +188,21 @@ export default function UserChallenges({
                      </button>
                   ))}
                </div>
+               {/*
+               <div className={filterCss.category}>
+                  <p className={filterCss.cheading}>{capitalize("type")}</p>
+                  {filters.type.map((filter) => (
+                     <button
+                        key={`${filter.category}_${filter.id}`}
+                        onClick={() => toggleFilter(filter)}
+                        className={filtersApplied[filter.category].includes(filter.id) ? filterCss.selected : ""}
+                     >
+                        <Image width={16} height={16} src={filter.image} alt={filter.name} />
+                        {capitalize(filter.name)}
+                     </button>
+                  ))}
+               </div>
+                */}
                <div className={filterCss.category}>
                   <p className={filterCss.cheading}>{capitalize("game mode")}</p>
                   {filters.gamemode.map((filter) => (
@@ -148,7 +212,7 @@ export default function UserChallenges({
                         className={filtersApplied[filter.category].includes(filter.id) ? filterCss.selected : ""}
                      >
                         <Image width={16} height={16} src={filter.image} alt={filter.name} />
-                        {capitalize(filter.name)}
+                        {filter.name}
                      </button>
                   ))}
                </div>
@@ -162,10 +226,13 @@ export default function UserChallenges({
                seasonsRetired,
                userChallenges,
                filtersApplied,
-               sortingApplied,
                searchQuery,
             ).map((challenge) => (
-               <ChallengeObject key={challenge.id} {...challenge} setToMaster={false}></ChallengeObject>
+               <ChallengeObject
+                  key={challenge.id}
+                  {...challenge}
+                  setToMaster={filtersApplied.masterThresholds}
+               ></ChallengeObject>
             ))}
          </div>
       </section>
@@ -173,9 +240,9 @@ export default function UserChallenges({
 }
 
 interface UserChallengesProps {
-   challenges: ChallengeHydrated[];
+   challenges: ChallengeDTO[];
    userChallenges: UserChallengesMap;
-   filters: FiltersMap;
+   filters: ChallengesFiltersMap;
    seasonPrevious: string;
    seasonsRetired: string[];
 }
