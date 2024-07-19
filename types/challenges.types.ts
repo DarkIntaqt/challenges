@@ -80,3 +80,13 @@ export interface ParentDTO {
    id: number;
    name: string;
 }
+
+export interface GlobalChallengeDTo {
+   icon: string;
+   icon_2: number;
+   timestamp: number;
+   title: string[];
+   challenge: ChallengeDTO;
+   stats: Record<string, any>; // TODO
+   summoner: Record<string, any>; // TODO
+}
