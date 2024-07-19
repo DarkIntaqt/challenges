@@ -1,4 +1,4 @@
-export function beautifyNum(num, minify = true, threshold = 100000) {
+export function beautifyNum(num: number | string | undefined, minify: boolean = true, threshold: number = 100000): string {
    if (typeof num === "undefined") {
       return "0";
    }

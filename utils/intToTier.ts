@@ -1,4 +1,4 @@
-export function tierToInt(tier) {
+export function tierToInt(tier: string): number {
    switch (tier) {
       case "UNRANKED":
       case "NONE":
@@ -26,7 +26,7 @@ export function tierToInt(tier) {
    }
 }
 
-export default function tierIdToPoints(tierId) {
+export default function tierIdToPoints(tierId: number): number {
    switch (tierId) {
       case 0:
          return 0;
@@ -51,7 +51,7 @@ export default function tierIdToPoints(tierId) {
    }
 }
 
-export function intToTier(inttier) {
+export function intToTier(inttier: number): string {
    switch (inttier) {
       case -1:
          return "UNRANKED";

@@ -8,8 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { getStorage, setStorage, storageKeys } from "challenges/utils/localStorageFunctions";
 import ChallengeService from "challenges/services/ChallengeService";
-import { ChallengeDTO } from "challenges/types/challenges.types";
+import { ChallengeDTO, TitleDTO } from "challenges/types/challenges.types";
 import ChallengeCard from "./ChallengeCard";
+import TitleCard from "./TitleCard";
 import ContentService from "challenges/services/ContentService";
 import UserCard from "./UserCard";
 
@@ -20,6 +21,7 @@ export default function Searchbar() {
    const [region, setRegion] = useState("na");
    const [focus, setFocus] = useState(false);
    const [challenges, setChallenges] = useState<ChallengeDTO[] | null>();
+   const [titles, setTitles] = useState<TitleDTO[] | null>();
    const [searchValue, setSearchValue] = useState("");
 
    const contentService = new ContentService();
@@ -40,6 +42,25 @@ export default function Searchbar() {
       }
 
       fetchChallenges();
+
+      /**
+       * Fetch titles in order to search stuff properly
+       */
+      async function fetchTitles() {
+         const challengeService = new ChallengeService();
+         const all = await challengeService.listAll("na1", "en_US");
+         if (all === undefined) {
+            throw new Error("Error loading titles");
+         }
+
+         setTitles(Object.values(all.titles));
+
+         return {
+            //titles: Object.values(all.titles || {})
+         };
+      }
+
+      fetchTitles();
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
@@ -110,6 +131,26 @@ export default function Searchbar() {
                }).filter(x => !!x).slice(0, 5)}
             </>
             : null}
+         {titles && searchValue.length > 0 ?
+            <>
+               {titles.map((title) => {
+                  if (!title.name.toLowerCase().startsWith(searchValue)) {
+                     return null;
+                  }
+
+                  if ((title.type === "DEFAULT" || title.type === "CHALLENGE") && title.challengeId !== undefined) {
+                     return <TitleCard
+                     key={title.id}
+                     title={title.name}
+                     url={"/challenges/" + title.challengeId}
+                      // TODO add TitleIcon image or image of challenge with required type
+                     image={contentService.getChallengeTokenIcon(parseInt(title.challengeId), "MASTER")}
+                     />;
+                  }
+                  
+               }).filter(x => !!x).slice(0, 5)}
+            </>
+            : null}   
       </div>
 
    </div>;
