@@ -97,7 +97,8 @@ const config = {
         "summonersrift": "https://lolcdn.darkintaqt.com/cdn/sr.svg",
         "aram": "https://lolcdn.darkintaqt.com/cdn/ha.svg",
         "bot": "https://lolcdn.darkintaqt.com/cdn/bot.png",
-        "arena": "https://lolcdn.darkintaqt.com/cdn/arena.png"
+        "arena": "https://lolcdn.darkintaqt.com/cdn/arena.png",
+        "603000": "https://lolcdn.darkintaqt.com/cdn/swarm.png"
     }
 }
 

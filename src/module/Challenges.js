@@ -298,7 +298,7 @@ class Challenges extends Component {
                 queueIds={<Fragment>
                     <div>
                         <p>{parentName.charAt(0).toUpperCase() + parentName.slice(1).toLowerCase()} Category</p>
-                        <img src={config.images[parentId]} alt={parentName.toLowerCase()} />
+                        {config.images[parentId] ? <img src={config.images[parentId]} alt={parentName.toLowerCase()} /> : null}
                     </div>
                     {queueIds}
                     {obtainable}
