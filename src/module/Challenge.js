@@ -393,6 +393,8 @@ class Challenge extends Component {
                 if (challenge.challenge.id !== 0) {
                     if (challenge.challenge.id === 2024100) {
                         icon = "https://cdn.darkintaqt.com/lol/static/challenges/2024-1seasonal.svg"
+                    } else if (challenge.challenge.id === 2024200) {
+                        icon = "https://cdn.darkintaqt.com/lol/static/challenges/2024-2seasonal.svg"
                     } else {
                         icon = "https://cdn.darkintaqt.com/lol/static/challenges/" + challenge.challenge.translation.name.toLowerCase().replace(" ", "") + ".svg"
                     }
