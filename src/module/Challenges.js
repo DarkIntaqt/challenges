@@ -384,10 +384,21 @@ class Challenges extends Component {
       // getChallenge(parseInt(challenge.parentCategory))
 
       const search = this.searchFor;
+
+      let purelyExclude = true;
+      let breakAll = false;
       let found = search === "";
       const searchSplit = search.split(",");
       for (let i = 0; i < searchSplit.length; i++) {
-        const key = searchSplit[i].trim();
+        let exclude = false;
+        let key = searchSplit[i].trim();
+
+        if (Array.from(key)[0] === "-") {
+          exclude = true;
+          key = key.substring(1);
+        }
+        if (!exclude && key !== "") purelyExclude = false;
+
         if (
           key !== "" &&
           (challenge.translation.name.toLowerCase().search(key.toLowerCase()) >
@@ -396,10 +407,14 @@ class Challenges extends Component {
               .toLowerCase()
               .search(key.toLowerCase()) > -1)
         ) {
+          if (exclude) {
+            breakAll = true;
+          }
           found = true;
         }
       }
-      if (!found) continue;
+      // console.log(purelyExclude);
+      if ((!found && !purelyExclude) || breakAll) continue;
 
       challengeObject.push(
         <ChallengeObject

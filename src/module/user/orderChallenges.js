@@ -217,9 +217,17 @@ export function removeUnnecessaryChallenges(
       }
 
       let found = search === "";
+      let purelyExclude = true;
       const searchSplit = search.split(",");
       for (let i = 0; i < searchSplit.length; i++) {
-        const key = searchSplit[i].trim();
+        let exclude = false;
+        let key = searchSplit[i].trim();
+
+        if (Array.from(key)[0] === "-") {
+          exclude = true;
+          key = key.substring(1);
+        }
+        if (!exclude && key !== "") purelyExclude = false;
         if (
           key !== "" &&
           (challenge[6].translation.name
@@ -229,10 +237,13 @@ export function removeUnnecessaryChallenges(
               .toLowerCase()
               .search(key.toLowerCase()) > -1)
         ) {
+          if (exclude) {
+            return null;
+          }
           found = true;
         }
       }
-      if (!found) return null;
+      if (!found && !purelyExclude) return null;
 
       return challenge;
     })
