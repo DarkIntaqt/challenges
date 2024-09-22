@@ -13,8 +13,8 @@ export default class Wrapper extends Component {
             adUnits = 2
         }
 
-        if (window.innerHeight < 950) {
-            adUnits = 3
+        if (window.innerHeight > 950) {
+            adUnits = 6
         }
         if (window.innerWidth < 1600) {
             adUnits = 0
