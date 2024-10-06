@@ -83,11 +83,13 @@ export default class generateChallengePointElement extends Component {
           key="banner"
         >
           <div className={css.group}>
-            <p className={css.crystalHead}>Seasonal 2024 Split Leaderboards</p>
+            <p className={css.crystalHead}>
+              Seasonal 2024 Split 3 Leaderboards
+            </p>
 
             <div className={css.text}>
-              Check the final Leaderboards for the 2024 seasonal challenges
-              split 2. <br />
+              Check the leaderboards for the 2024 seasonal challenges split 3.{" "}
+              <br />
               <br />
               Just click <b>here</b> to get to the leaderboards.
             </div>
