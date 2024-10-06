@@ -372,7 +372,8 @@ class Challenges extends Component {
           if (
             parentId !== 2022000 &&
             parentId !== 2023000 &&
-            parentId !== 2024100
+            parentId !== 2024100 &&
+            parentId !== 2024200
           ) {
             continue;
           }
@@ -612,12 +613,12 @@ class Challenges extends Component {
                 <img src={config.images["600006"]} alt="legacy" />
                 Legacy
               </button>
-              <button onClick={this.changeFilter} data-id="2024200">
+              <button onClick={this.changeFilter} data-id="2024300">
                 <img
-                  src={config.images["2024200"]}
-                  alt="2024 seasonal split2"
+                  src={config.images["2024300"]}
+                  alt="2024 seasonal split3"
                 />
-                2024.2 Seasonal
+                2024.3 Seasonal
               </button>
               <button onClick={this.changeFilter} data-id="seasonal-retired">
                 <img

@@ -272,7 +272,7 @@ img.mclogo {
 
 .profile.c:not(.cid0):not(.cid1):not(.cid2):not(.cid3):not(.cid4):not(.cid5):not(.cid2022000):not(.cid2023000):not(
         .cid2024100
-    ):not(.cid2024200)::before {
+    ):not(.cid2024200):not(.cid2024300)::before {
     height: 80px;
     width: 80px;
     margin: 30px;
