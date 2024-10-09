@@ -28,7 +28,7 @@ export default function statsCalculateTotalPoints(challenges) {
       challenge[8] !== 602000 && // arena champion capstone
       challenge[8] !== 2024100 && // seasonal 2024 capstone
       challenge[8] !== 2024200 && // seasonal 2024 capstone
-      challenge[8] !== 2023200 && // seasonal 2024 capstone
+      challenge[8] !== 2024300 && // seasonal 2024 capstone
       challenge[8] !== 603000 && // swarm
       challenge[6].state === "ENABLED"
     ) {
