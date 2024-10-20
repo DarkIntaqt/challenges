@@ -231,9 +231,10 @@ class UserChallenges extends Component {
               previousPositions = 1;
               break;
           }
+
           position =
             "#" + beautifyNum(previousPositions - 1 + challenge[5][1], false);
-
+          if (previousPositions - 1 + challenge[5][1] < 0) position = "#%";
           if (challenge[5][1] <= 100 && challenge[5].length === 4) {
             position = position + " (#" + challenge[5][3] + " World)";
           }
