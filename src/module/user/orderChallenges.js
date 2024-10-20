@@ -385,51 +385,47 @@ export default function orderChallenges(
 
     case "percentile":
       sortAlgorithm = function (a, b) {
-        if (a[5][0] === b[5][0]) {
-          // I DON'T LIKE THE SOLUTION, BUT IT WORKS
-          const cA = a[6];
+        const cA = a[6];
 
-          let positionA = 1e100,
-            previousPositionA;
+        let positionA = 1e100;
+        let previousPositionA;
 
-          if (cA.leaderboard === true && a[5].length > 1) {
-            switch (intToTier(a[1])) {
-              case "GRANDMASTER":
-                previousPositionA = cA["leaderboardThresholds"][3] ?? 1;
-                break;
-              case "MASTER":
-                previousPositionA = cA["leaderboardThresholds"][5] ?? 1;
-                break;
-              default:
-                previousPositionA = 1;
-                break;
-            }
-            positionA = previousPositionA - 1 + a[5][1];
+        if (cA.leaderboard === true && a[5].length > 1) {
+          switch (intToTier(a[1])) {
+            case "GRANDMASTER":
+              previousPositionA = cA["leaderboardThresholds"][3] ?? 1;
+              break;
+            case "MASTER":
+              previousPositionA = cA["leaderboardThresholds"][5] ?? 1;
+              break;
+            default:
+              previousPositionA = 1;
+              break;
           }
-
-          const cB = b[6];
-
-          let positionB = 1e100,
-            previousPositionB;
-
-          if (cB.leaderboard === true && b[5].length > 1) {
-            switch (intToTier(b[1])) {
-              case "GRANDMASTER":
-                previousPositionB = cB["leaderboardThresholds"][3] ?? 1;
-                break;
-              case "MASTER":
-                previousPositionB = cB["leaderboardThresholds"][5] ?? 1;
-                break;
-              default:
-                previousPositionB = 1;
-                break;
-            }
-            positionB = previousPositionB - 1 + b[5][1];
-          }
-
-          return positionA < positionB ? -1 : 1;
+          positionA = Math.abs(previousPositionA - 1 + a[5][1]);
         }
-        return a[5][0] < b[5][0] ? -1 : 1;
+
+        const cB = b[6];
+
+        let positionB = 1e100;
+        let previousPositionB;
+
+        if (cB.leaderboard === true && b[5].length > 1) {
+          switch (intToTier(b[1])) {
+            case "GRANDMASTER":
+              previousPositionB = cB["leaderboardThresholds"][3] ?? 1;
+              break;
+            case "MASTER":
+              previousPositionB = cB["leaderboardThresholds"][5] ?? 1;
+              break;
+            default:
+              previousPositionB = 1;
+              break;
+          }
+          positionB = Math.abs(previousPositionB - 1 + b[5][1]);
+        }
+
+        return positionA - positionB;
       };
       break;
 
