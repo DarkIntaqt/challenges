@@ -373,7 +373,8 @@ class Challenges extends Component {
             parentId !== 2022000 &&
             parentId !== 2023000 &&
             parentId !== 2024100 &&
-            parentId !== 2024200
+            parentId !== 2024200 &&
+            parentId !== 2024300
           ) {
             continue;
           }
@@ -545,7 +546,7 @@ class Challenges extends Component {
           <h2>{t("Overview and how to obtain them")}</h2>
         </div>
 
-        {this.state.showEvent ? (
+        {/* {this.state.showEvent ? (
           <section className={css.parent} style={{ position: "relative" }}>
             <button
               className={challengeCSS.closeEvent}
@@ -558,7 +559,7 @@ class Challenges extends Component {
             </button>
             {this.state.event}
           </section>
-        ) : null}
+        ) : null} */}
 
         <div className={filterCSS.filter}>
           <div className={filterCSS.selectors + " clearfix"}>

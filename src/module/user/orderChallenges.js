@@ -172,7 +172,8 @@ export function removeUnnecessaryChallenges(
             parentId !== 2022000 &&
             parentId !== 2023000 &&
             parentId !== 2024100 &&
-            parentId !== 2024200
+            parentId !== 2024200 &&
+            parentId !== 2024300
           ) {
             return null;
           }
