@@ -483,7 +483,7 @@ class UserChallenges extends Component {
                 Legacy
               </button>
 
-              <button
+              {/* <button
                 onClick={this.changeExtraFilter}
                 id="2024300"
                 type="category"
@@ -493,7 +493,7 @@ class UserChallenges extends Component {
                   alt="2024 seasonal split 3"
                 />
                 2024.3 Seasonal
-              </button>
+              </button> */}
 
               <button
                 onClick={this.changeExtraFilter}

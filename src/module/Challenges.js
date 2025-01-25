@@ -614,13 +614,13 @@ class Challenges extends Component {
                 <img src={config.images["600006"]} alt="legacy" />
                 Legacy
               </button>
-              <button onClick={this.changeFilter} data-id="2024300">
+              {/* <button onClick={this.changeFilter} data-id="2024300">
                 <img
                   src={config.images["2024300"]}
                   alt="2024 seasonal split3"
                 />
                 2024.3 Seasonal
-              </button>
+              </button> */}
               <button onClick={this.changeFilter} data-id="seasonal-retired">
                 <img
                   src={config.images["seasonal-retired"]}
