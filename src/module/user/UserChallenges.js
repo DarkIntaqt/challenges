@@ -354,7 +354,7 @@ class UserChallenges extends Component {
           <i>Is it a bug? Is it a feature?</i>
           <br />
           <br />
-          No! There are just no challenges within the current filters.
+          No! There are just no challenges with the currently selected filters.
         </p>
       );
     }

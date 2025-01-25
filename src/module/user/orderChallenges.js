@@ -201,7 +201,11 @@ export function removeUnnecessaryChallenges(
           challenge[8] === 2024200 ||
           challenge[8] === 2024300 ||
           challenge[6].parent === "0" ||
-          challenge[6].parentCategory === "0"
+          challenge[6].parentCategory === "0" ||
+          /* MASTERY CHALLENGES */
+          [401201, 401202, 401203, 401204, 401205, 401206, 401105].includes(
+            challenge[0]
+          )
         ) {
           return null;
         }
