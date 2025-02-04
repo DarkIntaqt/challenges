@@ -77,7 +77,7 @@ class Challenge extends Component {
     }
 
     this.state = {
-      totalLength: 250,
+      totalLength: this.params.id === "0" ? 500 : 250,
       message: -1,
       filter: tempRegion,
       challenge: challengePlaceholder,
@@ -153,7 +153,7 @@ class Challenge extends Component {
       }
 
       this.setState({
-        totalLength: 250,
+        totalLength: this.params.id === "0" ? 500 : 250,
         message: -1,
         filter: tempRegion,
         challenge: challengePlaceholder,
