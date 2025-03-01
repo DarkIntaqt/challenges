@@ -9,7 +9,7 @@
     "i18next-browser-languagedetector": "^8.0.4",
     "i18next-http-backend": "^2.5.2",
     "react": "^18.2.0",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.0.0",
     "react-i18next": "^15.4.1",
     "react-lazy-load-image-component": "^1.6.3",
     "react-loadable": "^5.5.0",
