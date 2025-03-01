@@ -6,7 +6,7 @@
     "async": "^3.2.6",
     "chart.js": "^4.4.7",
     "i18next": "^24.2.2",
-    "i18next-browser-languagedetector": "^8.0.0",
+    "i18next-browser-languagedetector": "^8.0.4",
     "i18next-http-backend": "^2.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.3.1",
