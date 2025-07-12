@@ -193,6 +193,15 @@ export function removeUnnecessaryChallenges(
         if (challenge[1] >= 7) {
           return null;
         }
+
+        // Disables "multi-weapon-master" and "two shells are better than one"
+        if (
+          challenge[0] === 402406 || 
+          challenge[0] === 301104
+        ) {
+          return null;
+        }
+
         if (
           challenge[8] === 600006 ||
           challenge[8].parent === 2022000 ||

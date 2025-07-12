@@ -197,10 +197,10 @@ class UserChallenges extends Component {
       user.challenges,
       this.state.filter,
       this.state.filters,
-      this.state.orderByMaster,
-      this.state.orderByPoints,
+      this.state.orderByMaster, // filter that sets all points to master
+      this.state.orderByPoints, // filter that only outputs challenges where the user can still progress
       this.state.search,
-      this.state.capstones
+      this.state.capstones // filter that removes capstones
     );
 
     let challenges = challengesOrdered
@@ -389,13 +389,13 @@ class UserChallenges extends Component {
 
               <button
                 id="points"
-                onClick={this.togglePointsAvailableSorting}
+                onClick={this.PointsAvailableSorting}
                 className={filterCSS["points" + this.state.orderByPoints]}
               >
                 <img
                   src="https://lolcdn.darkintaqt.com/cdn/i.png"
                   alt=""
-                  title="Toggle non-maxed challenges"
+                  title="Only show challenges that still gives points"
                 />
               </button>
 
