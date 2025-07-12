@@ -389,7 +389,7 @@ class UserChallenges extends Component {
 
               <button
                 id="points"
-                onClick={this.PointsAvailableSorting}
+                onClick={this.togglePointsAvailableSorting}
                 className={filterCSS["points" + this.state.orderByPoints]}
               >
                 <img
