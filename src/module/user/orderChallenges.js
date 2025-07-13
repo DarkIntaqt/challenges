@@ -190,15 +190,13 @@ export function removeUnnecessaryChallenges(
       challenge.push(parentId);
 
       if (pointsOnly === true) {
+        // Tier is master or higher
         if (challenge[1] >= 7) {
           return null;
         }
 
         // Disables "multi-weapon-master" and "two shells are better than one"
-        if (
-          challenge[0] === 402406 || 
-          challenge[0] === 301104
-        ) {
+        if (challenge[0] === 402406 || challenge[0] === 301104) {
           return null;
         }
 
@@ -209,12 +207,7 @@ export function removeUnnecessaryChallenges(
           challenge[8] === 2024100 ||
           challenge[8] === 2024200 ||
           challenge[8] === 2024300 ||
-          challenge[6].parent === "0" ||
-          challenge[6].parentCategory === "0" ||
-          /* MASTERY CHALLENGES */
-          [401201, 401202, 401203, 401204, 401205, 401206, 401105].includes(
-            challenge[0]
-          )
+          challenge[6].parent === "0"
         ) {
           return null;
         }
