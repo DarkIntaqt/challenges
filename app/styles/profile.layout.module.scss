@@ -1,0 +1,11 @@
+.bg {
+   width: 100%;
+   position: absolute;
+   z-index: 0;
+
+   opacity: 0.5;
+}
+
+.layout {
+   padding: config.$header-height + 20px 0 0;
+}

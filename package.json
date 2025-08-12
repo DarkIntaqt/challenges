@@ -1,48 +1,46 @@
 {
-  "name": "challenges",
-  "version": "1.0.1",
-  "private": true,
-  "dependencies": {
-    "async": "^3.2.6",
-    "chart.js": "^4.4.7",
-    "i18next": "^24.2.2",
-    "i18next-browser-languagedetector": "^8.0.0",
-    "i18next-http-backend": "^2.5.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.3.1",
-    "react-i18next": "^15.4.1",
-    "react-lazy-load-image-component": "^1.6.2",
-    "react-loadable": "^5.5.0",
-    "react-router-dom": "^7.2.0",
-    "react-timestamps": "github:DarkIntaqt/react-timestamps",
-    "react-tooltip": "^5.28.0",
-    "sass": "^1.77.8"
-  },
-  "devDependencies": {
-    "react-scripts": "^5.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+   "name": "challenges",
+   "private": true,
+   "type": "module",
+   "license": "MIT",
+   "scripts": {
+      "build": "react-router build",
+      "dev": "react-router dev",
+      "start": "react-router-serve ./build/server/index.js",
+      "typecheck": "react-router typegen && tsc",
+      "format": "prettier --write --ignore-unknown ./app ",
+      "test": "vitest run"
+   },
+   "dependencies": {
+      "@fontsource/roboto": "^5.2.6",
+      "@react-router/fs-routes": "^7.7.1",
+      "@react-router/node": "^7.7.1",
+      "@react-router/serve": "^7.7.1",
+      "clsx": "^2.1.1",
+      "cookie": "^1.0.2",
+      "isbot": "^5.1.27",
+      "nanoid": "^5.1.5",
+      "react": "^19.1.0",
+      "react-dom": "^19.1.0",
+      "react-icons": "^5.5.0",
+      "react-router": "^7.7.1"
+   },
+   "devDependencies": {
+      "@react-router/dev": "^7.7.1",
+      "@testing-library/dom": "^10.4.0",
+      "@testing-library/jest-dom": "^6.6.3",
+      "@testing-library/react": "^16.3.0",
+      "@testing-library/user-event": "^14.6.1",
+      "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+      "@types/node": "^20",
+      "@types/react": "^19.1.8",
+      "@types/react-dom": "^19.1.6",
+      "jsdom": "^26.1.0",
+      "prettier": "^3.5.3",
+      "sass-embedded": "^1.89.2",
+      "typescript": "^5.8.3",
+      "vite": "^6.3.3",
+      "vite-tsconfig-paths": "^5.1.4",
+      "vitest": "^3.2.4"
+   }
 }

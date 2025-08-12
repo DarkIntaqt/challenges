@@ -1,0 +1,46 @@
+.UNRANKED,
+.NONE,
+.NONCHALLENGE {
+   --tier: color.$secondary;
+}
+
+.IRON {
+   --tier: #696969;
+}
+
+.BRONZE {
+   --tier: #8c5139;
+}
+
+.SILVER {
+   --tier: #81989c;
+}
+
+.GOLD {
+   --tier: #ce8639;
+}
+
+.PLATINUM {
+   --tier: rgb(32, 153, 135);
+}
+
+.DIAMOND {
+   --tier: #576ace;
+}
+
+// Discontinued
+.EMERALD {
+   --tier: rgb(70, 181, 132);
+}
+
+.MASTER {
+   --tier: rgb(165, 64, 196);
+}
+
+.GRANDMASTER {
+   --tier: #e17283;
+}
+
+.CHALLENGER {
+   --tier: #f4c873;
+}

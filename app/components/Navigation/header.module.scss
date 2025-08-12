@@ -1,0 +1,72 @@
+.header {
+   top: 0;
+   position: fixed;
+   width: 100%;
+   height: config.$header-height;
+
+   z-index: 99;
+   border-bottom: 1px solid transparent;
+
+   &:not(.transparent) {
+      background-color: color.$background;
+
+      border-bottom-color: color.$border;
+      box-shadow: 0 0 5px #000;
+   }
+
+   transition:
+      0.25s background-color,
+      0.25s border-bottom-color,
+      0.25s box-shadow;
+
+   .content {
+      height: 100%;
+      align-items: center;
+      gap: 1rem;
+
+      a.link {
+         padding: 0.5rem 0.4rem;
+         gap: 0.5rem;
+         display: flex;
+         align-items: center;
+
+         svg {
+            color: color.$heading;
+            font-size: config.$font-large;
+         }
+
+         span {
+            color: color.$heading;
+            font-size: config.$font-default;
+         }
+
+         &.logo {
+            margin-right: auto;
+
+            img {
+               width: 40px;
+            }
+
+            span {
+               font-weight: bold;
+               font-size: config.$font-large;
+
+               transition: 0.25s color;
+            }
+
+            &:hover {
+               span {
+                  color: color.$primary;
+               }
+            }
+         }
+         &:not(.logo) {
+            border-bottom: 2px solid transparent;
+
+            &:hover {
+               border-bottom: 2px solid white;
+            }
+         }
+      }
+   }
+}

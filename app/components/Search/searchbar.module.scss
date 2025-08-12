@@ -1,0 +1,78 @@
+.searchbar {
+   width: 75%;
+   background-color: color.$border;
+
+   display: grid;
+   grid-template-columns: auto 50px;
+   align-items: center;
+   justify-content: stretch;
+
+   border-radius: config.$borderRadius;
+   border: 1px solid color.$border;
+   box-shadow: 0 0 5px #000;
+
+   position: relative;
+
+   transition:
+      0.25s border,
+      0.25s box-shadow;
+
+   &.focus {
+      box-shadow: 0 0 15px color.$primary;
+      border: 1px solid color.$primary;
+   }
+
+   .input {
+      // Reset styles
+      outline: none;
+      background: color.$heading;
+      border: none;
+
+      padding: config.$font-default 1.5 * config.$font-default;
+
+      font-size: config.$font-default;
+      line-height: config.$font-default;
+      color: color.$accent;
+      border-radius: config.$borderRadius - 1 0 0 config.$borderRadius - 1;
+
+      position: relative;
+      z-index: 5;
+   }
+
+   .submit {
+      // Reset styles
+      outline: none;
+      background: color.$heading;
+      border: none;
+
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+
+      color: color.$accent;
+      font-size: config.$font-default;
+      border-radius: 0 config.$borderRadius - 1 config.$borderRadius - 1 0;
+
+      position: relative;
+      z-index: 5;
+
+      transition:
+         0.25s color,
+         0.25s background-color,
+         0.25s box-shadow;
+
+      &:hover {
+         background-color: color.$accent;
+         color: color.$heading;
+         box-shadow: 0 0 5px #000;
+      }
+   }
+
+   &.focus .submit:hover {
+      background-color: color.$primary;
+      box-shadow: 0 0 5px color.$primary;
+   }
+}

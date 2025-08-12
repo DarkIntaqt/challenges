@@ -1,0 +1,55 @@
+.container {
+   position: relative;
+   width: config.$default-container;
+
+   &.center {
+      margin: 0 auto;
+   }
+
+   &:not(.small):not(.large) {
+      @media only screen and (max-width: config.$default-container) {
+         width: 100%;
+      }
+   }
+
+   &.small {
+      width: config.$small-container;
+      @media only screen and (max-width: config.$small-container) {
+         width: 100%;
+      }
+   }
+
+   &.large {
+      width: config.$large-container;
+      @media only screen and (max-width: config.$large-container) {
+         width: 100%;
+      }
+   }
+
+   &.flex {
+      display: flex;
+   }
+
+   &.flex.justify {
+      align-items: center;
+      justify-content: center;
+   }
+
+   &.flex.column {
+      flex-direction: column;
+   }
+
+   &.fullHeight {
+      min-height: 100%;
+      min-height: 100mvh;
+      min-height: 100vh;
+   }
+
+   &.fullWidth {
+      min-width: 100%;
+   }
+
+   &.headerPadding {
+      padding-top: config.$header-height;
+   }
+}

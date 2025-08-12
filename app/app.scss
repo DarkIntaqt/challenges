@@ -1,0 +1,25 @@
+@use "@fontsource/roboto/400.css" as c1;
+@use "@fontsource/roboto/700.css" as c2;
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+a {
+   text-decoration: none;
+   color: inherit;
+}
+
+html {
+   font-size: 14px;
+}
+
+body {
+   background-color: color.$background;
+
+   font-family: "Roboto", sans-serif;
+   font-size: config.$font-default;
+   color: color.$text;
+}

@@ -1,0 +1,69 @@
+name: Deployment
+
+on:
+   push:
+      # branches:
+      #    - main
+      tags:
+         - "*"
+
+concurrency:
+   group: ${{ (github.ref_type == 'tag' && 'Production') || (github.ref_type == 'branch' && github.ref_name == 'main' && 'Staging') || ''}}
+   cancel-in-progress: true
+
+jobs:
+   testing:
+      runs-on: ubuntu-latest
+
+      strategy:
+         matrix:
+            node-version: [22.x]
+
+      steps:
+         - uses: actions/checkout@v4
+         - name: Run test with Node.js ${{ matrix.node-version }}
+           uses: actions/setup-node@v4
+           with:
+              node-version: ${{ matrix.node-version }}
+              cache: "npm"
+         - run: npm ci
+         - run: npm run typecheck
+         - run: npm run build --if-present
+         - run: npm test
+
+   deployment:
+      needs:
+         - testing
+      runs-on: ubuntu-latest
+      environment: ${{ (github.ref_type == 'tag' && 'Production') || (github.ref_type == 'branch' && github.ref_name == 'main' && 'Staging') || ''}}
+      steps:
+         - name: Checkout
+           uses: actions/checkout@v4
+         - name: Docker meta
+           id: meta
+           uses: docker/metadata-action@v5
+           with:
+              images: |
+                 darkintaqt/challenges
+              tags: |
+                 type=raw,value=latest,enable=${{ github.ref_type == 'tag' }}
+                 type=raw,value=${{ github.ref_name }}
+                 type=raw,value=${{ github.sha }},enable=${{ github.ref_type == 'branch' }}
+              flavor: |
+                 latest=false
+         - name: Set up Docker Buildx
+           uses: docker/setup-buildx-action@v3
+         - name: Login to DockerHub
+           uses: docker/login-action@v3
+           with:
+              username: ${{ secrets.DOCKER_USERNAME }}
+              password: ${{ secrets.DOCKER_SECRET }}
+         - name: Build and push
+           uses: docker/build-push-action@v5
+           with:
+              context: .
+              file: ./Dockerfile
+              platforms: linux/amd64,linux/arm64
+              push: true
+              tags: ${{ steps.meta.outputs.tags }}
+              labels: ${{ steps.meta.outputs.labels }}

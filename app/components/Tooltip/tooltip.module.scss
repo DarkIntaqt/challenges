@@ -1,0 +1,47 @@
+.wrapper {
+   position: relative;
+   display: inline-block;
+
+   .tooltip {
+      pointer-events: none;
+      position: absolute;
+      display: block;
+
+      opacity: 0;
+      transition: 0.25s opacity;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+
+      .tooltipInner {
+         display: block;
+         padding: 0.5rem 0.8rem;
+         border-radius: config.$borderRadius;
+
+         background-color: color.$light-gray;
+         border: 2px solid color.$border;
+
+         white-space: nowrap;
+
+         .arrow {
+            position: absolute;
+            display: block;
+
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            border-style: solid;
+            border-color: transparent;
+            border-width: 4px;
+            border-top-color: color.$border;
+         }
+      }
+   }
+
+   &:hover {
+      .tooltip {
+         opacity: 1;
+      }
+   }
+}

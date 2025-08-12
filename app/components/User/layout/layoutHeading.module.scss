@@ -1,0 +1,98 @@
+$iconWidth: 110px;
+
+.head {
+   display: grid;
+   grid-template-columns: $iconWidth auto;
+   gap: 1.5rem;
+
+   background-color: color.$box;
+   border-radius: config.$borderRadius;
+   box-shadow: 0 0 5px color.$box;
+   padding: 1.5rem;
+
+   .icon {
+      width: $iconWidth;
+      height: $iconWidth;
+
+      position: relative;
+
+      img {
+         width: $iconWidth;
+         height: $iconWidth;
+         box-shadow: 0 0 10px var(--tier);
+
+         border: 3px solid var(--tier);
+         border-radius: config.$borderRadius;
+      }
+
+      .level {
+         position: absolute;
+         display: inline-block;
+
+         width: fit-content;
+         padding: 5px 8px;
+         left: 50%;
+         bottom: 2px; // this is slightly overflowing into the icon, idk why
+
+         transform: translate(-50%, 50%);
+
+         background-color: color.$accent;
+         color: color.$text;
+         font-size: config.$font-small;
+
+         border: 2px solid var(--tier);
+         border-radius: config.$borderRadius * 0.8;
+         box-shadow: 0 0 10px var(--tier);
+      }
+   }
+
+   .right {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      justify-content: space-between;
+
+      h1 {
+         font-size: config.$font-heading;
+         line-height: unset;
+
+         .tagLine {
+            font-size: config.$font-large;
+            color: color.$text;
+         }
+
+         .region {
+            font-size: config.$font-default;
+            color: color.$text;
+            font-weight: normal;
+         }
+      }
+
+      .achievements,
+      .displayed {
+         display: flex;
+         gap: 0.5rem;
+
+         .tier {
+            display: flex;
+            gap: 0.2rem;
+            color: var(--tier);
+            cursor: help;
+
+            svg {
+               display: inline-flex;
+            }
+         }
+
+         h2 {
+            font-size: config.$font-large;
+         }
+
+         img.display {
+            aspect-ratio: 1/1;
+            width: 35px;
+            height: 35px;
+         }
+      }
+   }
+}

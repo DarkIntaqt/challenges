@@ -1,0 +1,25 @@
+.links {
+   width: 100%;
+   display: flex;
+   gap: 1rem;
+
+   padding: 1rem;
+
+   .link {
+      font-size: config.$font-default;
+      color: color.$heading;
+
+      padding: 0 0.25rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid transparent;
+
+      &:hover:not(.active) {
+         border-bottom-color: color.$heading;
+      }
+
+      &.active {
+         color: color.$primary;
+         border-bottom-color: color.$primary;
+      }
+   }
+}
