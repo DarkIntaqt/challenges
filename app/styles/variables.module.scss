@@ -1,7 +1,9 @@
+@use "@cgg/styles/colors" as color;
+
 .UNRANKED,
 .NONE,
 .NONCHALLENGE {
-   --tier: color.$secondary;
+   --tier: #{color.$secondary};
 }
 
 .IRON {

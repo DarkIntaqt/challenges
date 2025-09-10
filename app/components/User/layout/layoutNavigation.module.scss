@@ -1,3 +1,6 @@
+@use "@cgg/styles/config" as config;
+@use "@cgg/styles/colors" as color;
+
 .links {
    width: 100%;
    display: flex;

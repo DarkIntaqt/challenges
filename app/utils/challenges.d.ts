@@ -1,12 +1,13 @@
 import type { Tier } from "./tier";
 
-type IChallengesFullDTO = {
+interface IChallengesFullDTO {
    challenges: Record<string, IChallengeDTO>;
    titles: Record<string, ITitleDTO>;
-};
+}
 
-type IChallengeDTO = {
+interface IChallengeDTO {
    id: number;
+   iconId: number;
    name: string;
    description: string;
    descriptionShort: string;
@@ -27,24 +28,25 @@ type IChallengeDTO = {
    capstoneId: number;
    gameMode: string;
    retired: boolean;
-};
+}
 
-type ITitleRewardDTO = {
+interface ITitleRewardDTO {
    level: Tier;
    titleId: number;
    category: string;
    quantity?: number;
-};
+}
 
-type ITitleDTO = {
+interface ITitleDTO {
    name: string;
    id: number;
    challengeId?: number;
-   titleAcquisitionType: string;
-   requirements?: {
+   type: string;
+   requirement?: {
       name: string;
       description: string;
    };
-};
+   icon?: string;
+}
 
 export type { IChallengesFullDTO, IChallengeDTO, ITitleRewardDTO, ITitleDTO };

@@ -1,0 +1,25 @@
+@use "@cgg/styles/colors" as color;
+@use "@cgg/styles/config" as config;
+
+.buttons {
+   display: flex;
+   gap: 0.5rem;
+
+   .button {
+      border: 2px solid color.$border;
+      background: color.$box;
+      border-radius: config.$borderRadius;
+      padding: 0.5rem 1rem;
+
+      color: color.$text;
+      cursor: pointer;
+      font-size: config.$font-default;
+
+      &.enabled {
+         background-color: color.$primary;
+         color: color.$heading;
+         border-color: color.$primary;
+         box-shadow: 0 0 5px color.$primary;
+      }
+   }
+}

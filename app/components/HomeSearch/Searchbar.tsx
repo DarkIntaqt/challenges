@@ -15,6 +15,7 @@ import css from "./searchbar.module.scss";
 
 type ChallengeIndex = {
    id: number;
+   iconId: number;
    name: string;
 }[];
 
@@ -29,12 +30,17 @@ export default function Searchbar() {
 
    const staticData = useStaticData();
    const challengeIndex: ChallengeIndex = useMemo(() => {
-      return Object.values(staticData.challenges).map((challenge) => {
-         return {
-            id: challenge.id,
-            name: challenge.name,
-         };
-      });
+      return Object.values(staticData.challenges)
+         .map((challenge) => {
+            if (challenge.retired) return;
+
+            return {
+               id: challenge.id,
+               iconId: challenge.iconId,
+               name: challenge.name,
+            };
+         })
+         .filter((x) => x !== undefined);
    }, [staticData.challenges]);
 
    const debounceInput = useMemo(() => {
@@ -216,6 +222,7 @@ function getChallenges(challenges: ChallengeIndex, input: string): RecentChallen
       .map(({ challenge }) => ({
          type: "challenge",
          id: challenge.id,
+         iconId: challenge.iconId,
          name: challenge.name,
          description: "",
       }));

@@ -11,6 +11,7 @@ export interface RecentSummoner {
 export interface RecentChallenge {
    type: "challenge";
    id: number;
+   iconId: number;
    name: string;
    description: string;
 }
@@ -37,6 +38,7 @@ export function getRecentSearches(noEmptyResults = true): Recent[] {
          {
             type: "challenge",
             id: 0,
+            iconId: 0,
             name: "Challenge Leaderboard",
             description: "",
          },

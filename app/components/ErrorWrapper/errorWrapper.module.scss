@@ -1,9 +1,11 @@
+@use "@cgg/styles/config" as config;
+@use "@cgg/styles/colors" as color;
+
 .wrapper {
    display: flex;
    flex-direction: column;
    justify-content: center;
 
-   min-height: 100mvh;
    min-height: 100vh;
 
    .intro {

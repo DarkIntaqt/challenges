@@ -1,0 +1,74 @@
+@use "@cgg/styles/colors" as color;
+@use "@cgg/styles/config" as config;
+
+.title {
+   padding: 1.5rem;
+
+   background-color: color.$box;
+   border-radius: config.$borderRadius;
+
+   border: 2px solid var(--tier);
+   box-shadow: 0 0 5px color.$box;
+   transition: 0.25s box-shadow;
+
+   position: relative;
+   overflow: hidden;
+
+   z-index: 1;
+
+   &.link {
+      &:hover {
+         box-shadow: 0 0 5px var(--tier);
+      }
+   }
+
+   &.CHAMPION,
+   &.EVENT {
+      img.icon {
+         position: absolute;
+         width: 40%;
+         aspect-ratio: 1/1;
+         object-fit: cover;
+         object-position: center;
+
+         top: 0;
+         right: 0;
+
+         z-index: 0;
+         mask-image: linear-gradient(70deg, transparent 25%, rgba(255, 255, 255, 1) 100%);
+      }
+   }
+
+   &.CHALLENGE {
+      img.icon {
+         position: absolute;
+         height: 110%;
+         top: -15px;
+         right: -15px;
+
+         z-index: 0;
+         mask-image: linear-gradient(
+            70deg,
+            transparent 15%,
+            rgba(255, 255, 255, 0.75) 100%
+         );
+      }
+   }
+
+   > p,
+   span,
+   h2 {
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 0 5px #000;
+   }
+
+   span.titleType {
+      font-size: config.$font-small;
+      color: color.$secondary;
+   }
+
+   p {
+      margin-top: 1rem;
+   }
+}

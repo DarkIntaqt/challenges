@@ -1,9 +1,12 @@
+@use "@cgg/styles/config" as config;
+@use "@cgg/styles/colors" as color;
+
 .results {
    position: absolute;
    display: none;
    z-index: 1;
 
-   top: calc(2px + 3 * config.$font-default);
+   top: calc(2px + 3 * #{config.$font-default});
 
    left: 5%;
    width: 90%;

@@ -89,25 +89,22 @@ export function LayoutHeading({
                   .map((challenge) => {
                      const challengeData = getChallenge(challenge, data);
 
+                     if (!challengeData) return;
+
                      return (
                         <Tooltip
                            key={challenge}
                            tooltip={
                               <>
-                                 <Heading level={3}>
-                                    {challengeData?.name || "Displayed challenge title"}
-                                 </Heading>
-                                 <p>
-                                    {challengeData?.description ||
-                                       "TODO: displayed Challenge description"}
-                                 </p>
+                                 <Heading level={3}>{challengeData.name}</Heading>
+                                 <p>{challengeData.description}</p>
                               </>
                            }
                         >
                            <img
                               className={css.display}
                               src={getChallengeIcon(
-                                 challenge,
+                                 challengeData.iconId,
                                  getUserChallenge(challenge, playerData, data)?.tier,
                               )}
                               alt={String(challenge)}

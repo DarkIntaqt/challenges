@@ -1,3 +1,5 @@
+@use "@cgg/styles/config" as config;
+
 .container {
    position: relative;
    width: config.$default-container;
@@ -40,8 +42,6 @@
    }
 
    &.fullHeight {
-      min-height: 100%;
-      min-height: 100mvh;
       min-height: 100vh;
    }
 

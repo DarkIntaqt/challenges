@@ -1,98 +1,98 @@
 [
-   {
-      "key": "na1",
-      "name": "North America",
-      "abbreviation": "NA",
-      "platform": "americas"
-   },
-   {
-      "key": "euw1",
-      "name": "Europe West",
-      "abbreviation": "EUW",
-      "platform": "europe"
-   },
-   {
-      "key": "eun1",
-      "name": "Europe Nordic & East",
-      "abbreviation": "EUNE",
-      "platform": "europe"
-   },
-   {
-      "key": "kr",
-      "name": "Korea",
-      "abbreviation": "KR",
-      "platform": "asia"
-   },
-   {
-      "key": "jp1",
-      "name": "Japan",
-      "abbreviation": "JP",
-      "platform": "asia"
-   },
-   {
-      "key": "br1",
-      "name": "Brazil",
-      "abbreviation": "BR",
-      "platform": "americas"
-   },
-   {
-      "key": "la1",
-      "name": "Latin America North",
-      "abbreviation": "LAN",
-      "platform": "americas"
-   },
-   {
-      "key": "la2",
-      "name": "Latin America South",
-      "abbreviation": "LAS",
-      "platform": "americas"
-   },
-   {
-      "key": "oc1",
-      "name": "Oceania",
-      "abbreviation": "OCE",
-      "platform": "americas"
-   },
-   {
-      "key": "tr1",
-      "name": "Turkey",
-      "abbreviation": "TR",
-      "platform": "europe"
-   },
-   {
-      "key": "ru",
-      "name": "Russia",
-      "abbreviation": "RU",
-      "platform": "europe"
-   },
-   {
-      "key": "ph2",
-      "name": "Philippines",
-      "abbreviation": "PH",
-      "platform": "asia"
-   },
-   {
-      "key": "sg2",
-      "name": "Singapore",
-      "abbreviation": "SG",
-      "platform": "asia"
-   },
-   {
-      "key": "th2",
-      "name": "Thailand",
-      "abbreviation": "TH",
-      "platform": "asia"
-   },
-   {
-      "key": "vn2",
-      "name": "Vietnam",
-      "abbreviation": "VN",
-      "platform": "asia"
-   },
-   {
-      "key": "tw2",
-      "name": "Taiwan",
-      "abbreviation": "TW",
-      "platform": "asia"
-   }
+  {
+    "key": "na1",
+    "name": "North America",
+    "abbreviation": "NA",
+    "platform": "americas"
+  },
+  {
+    "key": "euw1",
+    "name": "Europe West",
+    "abbreviation": "EUW",
+    "platform": "europe"
+  },
+  {
+    "key": "eun1",
+    "name": "Europe Nordic & East",
+    "abbreviation": "EUNE",
+    "platform": "europe"
+  },
+  {
+    "key": "kr",
+    "name": "Korea",
+    "abbreviation": "KR",
+    "platform": "asia"
+  },
+  {
+    "key": "jp1",
+    "name": "Japan",
+    "abbreviation": "JP",
+    "platform": "asia"
+  },
+  {
+    "key": "br1",
+    "name": "Brazil",
+    "abbreviation": "BR",
+    "platform": "americas"
+  },
+  {
+    "key": "la1",
+    "name": "Latin America North",
+    "abbreviation": "LAN",
+    "platform": "americas"
+  },
+  {
+    "key": "la2",
+    "name": "Latin America South",
+    "abbreviation": "LAS",
+    "platform": "americas"
+  },
+  {
+    "key": "oc1",
+    "name": "Oceania",
+    "abbreviation": "OCE",
+    "platform": "americas"
+  },
+  {
+    "key": "tr1",
+    "name": "Turkey",
+    "abbreviation": "TR",
+    "platform": "europe"
+  },
+  {
+    "key": "ru",
+    "name": "Russia",
+    "abbreviation": "RU",
+    "platform": "europe"
+  },
+  {
+    "key": "ph2",
+    "name": "Philippines",
+    "abbreviation": "PH",
+    "platform": "asia"
+  },
+  {
+    "key": "sg2",
+    "name": "Singapore",
+    "abbreviation": "SG",
+    "platform": "asia"
+  },
+  {
+    "key": "th2",
+    "name": "Thailand",
+    "abbreviation": "TH",
+    "platform": "asia"
+  },
+  {
+    "key": "vn2",
+    "name": "Vietnam",
+    "abbreviation": "VN",
+    "platform": "asia"
+  },
+  {
+    "key": "tw2",
+    "name": "Taiwan",
+    "abbreviation": "TW",
+    "platform": "asia"
+  }
 ]

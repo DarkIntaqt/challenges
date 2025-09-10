@@ -42,6 +42,8 @@ export function cdnAssets(file: string, isImage = true): string {
 }
 
 export function getChallengeIcon(icon: number, tier: Tier = "MASTER"): string {
+   if (tier === "NONCHALLENGE") tier = "MASTER";
+
    if (icon > 99) {
       return cdn(`challenges/tokens/${icon}-${tier.toLowerCase()}`);
    }

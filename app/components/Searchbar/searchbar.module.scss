@@ -1,0 +1,53 @@
+@use "@cgg/styles/colors" as color;
+@use "@cgg/styles/config" as config;
+
+.searchbar {
+   border-bottom: 2px solid color.$border;
+   width: 100%;
+
+   position: relative;
+   padding-bottom: 0.25rem;
+
+   display: flex;
+   align-items: center;
+
+   label {
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      svg {
+         color: color.$text;
+         font-size: config.$font-default;
+      }
+   }
+
+   input {
+      padding: 0.5rem;
+      width: 100%;
+
+      background: none;
+      border: none;
+      outline: none;
+      color: color.$text;
+
+      font-size: config.$font-default;
+   }
+
+   &::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: color.$primary;
+      bottom: -2px;
+
+      transition: 0.25s width;
+   }
+
+   &.focus {
+      &::after {
+         width: 100%;
+      }
+   }
+}

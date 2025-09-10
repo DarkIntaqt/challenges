@@ -1,7 +1,7 @@
 import type { Route } from "./+types/profile.$profile";
 import { useEffect } from "react";
-import { Outlet } from "react-router";
 import type { ShouldRevalidateFunctionArgs } from "react-router";
+import { Outlet } from "react-router";
 import Container from "@cgg/components/Container/Container";
 import { LayoutHeading, LayoutNavigation } from "@cgg/components/User/layout";
 import LayoutLoader from "@cgg/components/User/layout/LayoutLoader";
@@ -38,6 +38,7 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
             src={cdnAssets(`challenges/rows/${tier.toLowerCase()}`)}
             className={css.bg}
             draggable={false}
+            alt={""}
          />
          <Container center className={css.layout} headerPadding>
             <LayoutHeading playerData={loaderData} />

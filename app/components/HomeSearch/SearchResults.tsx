@@ -149,11 +149,11 @@ function Result({ result, active }: { result: SearchResult; active: boolean }) {
 
    const icon = isSummoner
       ? getProfileIcon(result.icon)
-      : getChallengeIcon(result.id, "MASTER");
+      : getChallengeIcon(result.iconId, "MASTER");
 
    const link = isSummoner
       ? `/profile/${result.name}-${result.tagLine}`
-      : `/challenge/${result.id}`;
+      : `/challenges/${result.id}`;
 
    return (
       <Link className={clsx(css.result, active && css.active)} to={link}>

@@ -1,6 +1,31 @@
+@use "@cgg/styles/config" as config;
+@use "@cgg/styles/colors" as color;
+
 .titlesContainer {
    margin-top: 20px !important;
 
    .head {
+   }
+
+   .filters {
+      background: color.$accent;
+      top: config.$header-height;
+      position: sticky;
+      z-index: 25;
+      padding: 1rem 0;
+      display: flex;
+      gap: 1rem;
+
+      border-bottom: 1px solid color.$border;
+      box-shadow: 0 0 15px color.$accent;
+      align-items: stretch;
+   }
+
+   .titles {
+      display: grid;
+
+      gap: 0.5rem;
+      grid-template-columns: 1fr 1fr;
+      padding: 1rem 1rem 2rem;
    }
 }

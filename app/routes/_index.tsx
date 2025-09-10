@@ -1,11 +1,10 @@
 import type { Route } from "./+types/_index";
 import Container from "@cgg/components/Container/Container";
 import Heading from "@cgg/components/Heading/Heading";
-import Searchbar from "@cgg/components/Search/Searchbar";
+import Searchbar from "@cgg/components/HomeSearch/Searchbar";
 import { brandName } from "@cgg/config/config";
 import { indexLoader } from "@cgg/loader/_index";
 import css from "@cgg/styles/home.module.scss";
-import { getChampionImage } from "@cgg/utils/cdn";
 
 export function meta({}: Route.MetaArgs) {
    return [
@@ -19,11 +18,11 @@ export const handle = {
 };
 
 export async function loader(data: Route.LoaderArgs) {
-   return indexLoader(data);
+   return indexLoader();
 }
 
 export async function clientLoader(data: Route.LoaderArgs) {
-   return indexLoader(data);
+   return indexLoader();
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {

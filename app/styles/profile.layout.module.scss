@@ -1,3 +1,5 @@
+@use "@cgg/styles/config" as config;
+
 .bg {
    width: 100%;
    position: absolute;
@@ -7,5 +9,6 @@
 }
 
 .layout {
-   padding: config.$header-height + 20px 0 0;
+   // Important flag is required here
+   padding: config.$header-height + 20px 0 0 !important;
 }

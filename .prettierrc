@@ -1,19 +1,21 @@
 {
-   "semi": true,
-   "singleQuote": false,
-   "tabWidth": 3,
-   "bracketSpacing": true,
-   "printWidth": 90,
-   "endOfLine": "lf",
-   "importOrder": [
-      "^./+types/(.*)$",
-      "<THIRD_PARTY_MODULES>",
-      "^(@cgg)/(.*)$",
-      "^(utils)/(.*)$",
-      "^components/(.*)$",
-      "^[./]([^\\+]*)$"
-   ],
-   "importOrderSeparation": false,
-   "importOrderSortSpecifiers": true,
-   "plugins": ["@trivago/prettier-plugin-sort-imports"]
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 3,
+  "bracketSpacing": true,
+  "printWidth": 90,
+  "endOfLine": "lf",
+  "importOrder": [
+    "^./+types/(.*)$",
+    "<THIRD_PARTY_MODULES>",
+    "^(@cgg)/(.*)$",
+    "^(utils)/(.*)$",
+    "^components/(.*)$",
+    "^[./]([^\\+]*)$"
+  ],
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": true,
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports"
+  ]
 }

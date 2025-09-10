@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { type ReactNode, useEffect, useState } from "react";
-import { FaAward, FaCompass } from "react-icons/fa6";
 import { Link, useMatch, useMatches } from "react-router";
 import logo from "@cgg/assets/logo.svg?no-inline";
 import { brandName } from "@cgg/config/config";
