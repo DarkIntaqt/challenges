@@ -395,7 +395,7 @@ class UserChallenges extends Component {
                 <img
                   src="https://lolcdn.darkintaqt.com/cdn/i.png"
                   alt=""
-                  title="Only show challenges that still gives points"
+                  title="Only show challenges that still give points"
                 />
               </button>
 
