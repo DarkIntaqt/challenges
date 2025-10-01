@@ -1,0 +1,57 @@
+[
+  {
+    "langs": ["en"],
+    "icon": "fa-brands fa-discord",
+    "image": "https://lolcdn.darkintaqt.com/s/legend.png",
+    "en": {
+      "title": "Challenge Discord - Achievement Hunting",
+      "description": "The Discord server is for League of Legends and is dedicated to challenges. We are specifically here to enable players to connect together and to complete challenges. The first 100 active players have reached the top 200 globally in terms of challenge points and this feat was achieved together as a group.",
+      "link": "https://discord.gg/mZEMbBRqHE",
+      "cta": "Join Discord"
+    }
+  },
+  {
+    "langs": ["en"],
+    "icon": "fa-solid fa-arrow-up-right-from-square",
+    "image": "https://lolcdn.darkintaqt.com/s/tahmkench.png",
+    "en": {
+      "title": "Tahm-Ken.ch - Optimal Teamwork Compositions",
+      "description": "Find optimal composition for teamwork challenges in League with the open source tool tahm-ken.ch. ",
+      "link": "https://tahm-ken.ch/team_builder?utm_medium=website&utm_source=darkintaqt_challenge_tracker&utm_campaign=community_page",
+      "cta": "Visit tahm-ken.ch"
+    }
+  },
+  {
+    "langs": ["en"],
+    "icon": "fa-solid fa-arrow-up-right-from-square",
+    "image": "https://challenges.darkintaqt.com/api/masterychartlogo.png",
+    "en": {
+      "title": "MasteryChart - Mastery progress viewer",
+      "description": "See your mastery displayed as graph. Using the many given filter methods, you can easily see on which champions you have the most points shown as a bubble chart. ",
+      "link": "https://masterychart.com?utm_source=Challenge+Tracker&utm_medium=Website&utm_campaign=Community",
+      "cta": "Visit masterychart.com"
+    }
+  },
+  {
+    "langs": ["en"],
+    "icon": "fa-brands fa-discord",
+    "image": "https://lolcdn.darkintaqt.com/s/up.png",
+    "en": {
+      "title": "EUNE Challenge Hunting Discord",
+      "description": "A Discord server arranging Challenge groups in the EUNE region for team Challenges, like \"Globetrotter\". ",
+      "link": "https://discord.gg/7RJhwK5tM7",
+      "cta": "Join Discord"
+    }
+  },
+  {
+    "langs": ["en"],
+    "icon": "fa-solid fa-arrow-up-right-from-square",
+    "image": "https://challenges.darkintaqt.com/api/aramzone.webp",
+    "en": {
+      "title": "ARAM Zone - Everything related to ARAM",
+      "description": "Analyze your own performance on ARAM with each champion, check out the ARAM champion Tierlist  and find the best and alternative builds for every champion, including runes, items, skill order and summoner spells.",
+      "link": "https://aram.zone",
+      "cta": "Visit aram.zone"
+    }
+  }
+]

@@ -51,6 +51,24 @@
     justify-items: center;
 }
 
+.community.disclaimer {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 20px 0 0;
+    border: 2px solid var(--type);
+}
+
+.community.disclaimer > div > p {
+    padding: 0;
+    color: var(--light3);
+}
+
+.community.disclaimer > div > p > a {
+    color: var(--light3);
+}
+
 .community > div > h2 {
     font-size: 1.5rem;
     padding: 12px;
