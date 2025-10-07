@@ -1,23 +1,56 @@
+import logoSlogan from "@cgg/assets/logo-slogan.svg?no-inline";
+import { type MediaEntry, type QualityProfiles, homeSplashes } from "@cgg/config/home";
 import { fetchApi } from "@cgg/utils/api";
 import { cdnData, getChampionImage } from "@cgg/utils/cdn";
 
-interface SplashEntry {
-   championKey: string;
-   type: "centered" | "splash";
-   skinId: number;
+export interface ResponseProfiles {
+   isVideo: boolean;
+   normal: string;
+   // lq?: string;
+   hq?: string;
+}
+
+interface LogoReq {
+   logo: "default" | string;
+}
+
+function getSplashMedia(entry?: MediaEntry): string | undefined {
+   if (!entry) return undefined;
+
+   if (entry.url) {
+      return entry.url;
+   } else if (entry.championKey) {
+      return getChampionImage(entry.championKey, entry.skinId, entry.type);
+   }
+
+   // this shouldnt happen
+   return undefined;
 }
 
 export async function indexLoader() {
-   const req = await fetchApi<Record<"months", SplashEntry[]>>(cdnData("home.json"));
+   const date = new Date();
+   const today = date.getDate();
 
-   if (req === null) {
-      throw new Response("Failed to load home data", { status: 500 });
+   const month = homeSplashes.months[date.getMonth()];
+   let media = month.default;
+   if (month.special && month.special[today]) {
+      media = month.special[today];
    }
 
-   const homeData = req;
+   const isVideo = media.isVideo ?? false;
 
-   const image = homeData.months[new Date().getMonth()];
-   const splash = getChampionImage(image.championKey, image.skinId, image.type);
+   const splashResponse: ResponseProfiles = {
+      isVideo,
+      normal: getSplashMedia(media.normal)!,
+      hq: getSplashMedia(media.hq),
+      // lq: getSplashMedia(media.lq),
+   };
 
-   return { splash };
+   const getLogo = await fetchApi<LogoReq>(cdnData("/home/config.json"));
+   if (getLogo === null) {
+      throw new Error("Failed to fetch logo config");
+   }
+   const logo = getLogo.logo === "default" ? logoSlogan : cdnData(`home/${getLogo.logo}`);
+
+   return { splash: splashResponse, logo };
 }

@@ -38,6 +38,10 @@
 
             svg {
                color: rgb(231, 63, 63);
+
+               &:hover {
+                  animation: pulse 1s;
+               }
             }
 
             a:hover {
@@ -81,7 +85,11 @@
                   color: color.$heading;
                   font-weight: bold;
 
+                  font-family: "Istok Web";
+                  line-height: 1.2;
+
                   > span {
+                     font-family: "Roboto";
                      font-size: config.$font-default;
                      font-weight: normal;
                      color: color.$text;
@@ -90,5 +98,19 @@
             }
          }
       }
+   }
+}
+
+@keyframes pulse {
+   0% {
+      transform: scale(1.1);
+   }
+
+   70% {
+      transform: scale(1);
+   }
+
+   100% {
+      transform: scale(1.1);
    }
 }

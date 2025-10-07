@@ -86,7 +86,13 @@ export default function Title({
             </p>
          )}
          {type === "CHALLENGE" && <p>{description}.</p>}
-         <img draggable={false} src={icon} alt={name} className={css.icon} />
+         <img
+            loading="lazy"
+            draggable={false}
+            src={icon}
+            alt={name}
+            className={css.icon}
+         />
       </>
    );
 

@@ -22,4 +22,18 @@
          box-shadow: 0 0 5px color.$primary;
       }
    }
+
+   &.column {
+      flex-direction: column;
+
+      .button {
+         text-align: left;
+         transition: 0.25s padding-left;
+
+         &.enabled {
+            background-color: color.$accent;
+            padding-left: 1.5rem;
+         }
+      }
+   }
 }

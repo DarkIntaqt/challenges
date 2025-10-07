@@ -23,7 +23,7 @@ export function getChallenge(
 interface IChallengeUserResponse extends IChallengeDTO {
    percentile?: number;
    tier: Tier;
-   points: number;
+   value: number;
    achievedTime?: number;
    position?: number;
    playersInLevel?: number;

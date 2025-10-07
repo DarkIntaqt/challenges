@@ -5,6 +5,7 @@ import { Outlet } from "react-router";
 import Container from "@cgg/components/Container/Container";
 import { LayoutHeading, LayoutNavigation } from "@cgg/components/User/layout";
 import LayoutLoader from "@cgg/components/User/layout/LayoutLoader";
+import { brandName } from "@cgg/config/config";
 import { profileLayoutLoader } from "@cgg/loader/profile.layout";
 import css from "@cgg/styles/profile.layout.module.scss";
 import { cdnAssets } from "@cgg/utils/cdn";
@@ -19,21 +20,26 @@ export const shouldRevalidate = ({
 };
 
 export default function Layout({ loaderData }: Route.ComponentProps) {
-   const { summoner } = loaderData;
+   const { summoner, gameName, tagLine } = loaderData;
    const tier = summoner.tier;
 
    useEffect(() => {
       addRecentSearch({
          type: "summoner",
          id: loaderData.id,
-         name: loaderData.gameName,
-         tagLine: loaderData.tagLine,
+         name: gameName,
+         tagLine: tagLine,
          icon: summoner.profileIcon,
       } as Recent);
    }, []);
 
    return (
       <>
+         {/* <title>{`${gameName}#${tagLine} - Profile | ${brandName}`}</title> */}
+         <meta
+            name="description"
+            content={`View and track the Challenge progress, titles and statistics of ${gameName}#${tagLine} on ${brandName}.`}
+         />
          <img
             src={cdnAssets(`challenges/rows/${tier.toLowerCase()}`)}
             className={css.bg}

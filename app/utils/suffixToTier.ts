@@ -1,6 +1,6 @@
 import type { Tier } from "./tier";
 
-const list: Tier[] = [
+const tierList: Tier[] = [
    "IRON",
    "BRONZE",
    "SILVER",
@@ -21,9 +21,11 @@ export function suffixToTier(suffix: string | number): Tier {
       return "NONCHALLENGE";
    }
 
-   const index = list[suffix];
+   const index = tierList[suffix];
    if (index) {
       return index;
    }
    return "NONCHALLENGE";
 }
+
+export { tierList };

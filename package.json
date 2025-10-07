@@ -3,6 +3,9 @@
    "private": true,
    "type": "module",
    "license": "MIT",
+   "engines": {
+      "node": ">=22"
+   },
    "scripts": {
       "build": "react-router build",
       "dev": "react-router dev",
@@ -12,34 +15,36 @@
       "test": "vitest run"
    },
    "dependencies": {
+      "@fontsource/istok-web": "^5.2.8",
       "@fontsource/roboto": "^5.2.6",
-      "@react-router/fs-routes": "^7.7.1",
-      "@react-router/node": "^7.7.1",
-      "@react-router/serve": "^7.7.1",
+      "@react-router/fs-routes": "7.9.3",
+      "@react-router/node": "7.9.3",
+      "@react-router/serve": "7.9.3",
       "clsx": "^2.1.1",
       "cookie": "^1.0.2",
-      "isbot": "^5.1.27",
-      "nanoid": "^5.1.5",
-      "react": "^19.1.0",
-      "react-dom": "^19.1.0",
+      "isbot": "^5.1.31",
+      "nanoid": "^5.1.6",
+      "react": "19.2.0",
+      "react-dom": "19.2.0",
       "react-icons": "^5.5.0",
-      "react-router": "^7.7.1"
+      "react-router": "7.9.3",
+      "simplebar-react": "^3.3.2"
    },
    "devDependencies": {
-      "@react-router/dev": "^7.7.1",
+      "@react-router/dev": "7.9.3",
       "@testing-library/dom": "^10.4.0",
       "@testing-library/jest-dom": "^6.6.3",
       "@testing-library/react": "^16.3.0",
       "@testing-library/user-event": "^14.6.1",
       "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-      "@types/node": "^20",
-      "@types/react": "^19.1.8",
-      "@types/react-dom": "^19.1.6",
-      "jsdom": "^26.1.0",
+      "@types/node": "20",
+      "@types/react": "19.2.0",
+      "@types/react-dom": "19.2.0",
+      "jsdom": "27.0.0",
       "prettier": "^3.5.3",
-      "sass-embedded": "^1.89.2",
+      "sass-embedded": "1.93.2",
       "typescript": "^5.8.3",
-      "vite": "^6.3.3",
+      "vite": "7.1.9",
       "vite-tsconfig-paths": "^5.1.4",
       "vitest": "^3.2.4"
    }

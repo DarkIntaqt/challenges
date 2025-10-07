@@ -1,11 +1,12 @@
 import type { Route } from "./+types/titles";
-import { useState } from "react";
+import { serialize } from "cookie";
+import { useEffect, useState } from "react";
 import Buttons from "@cgg/components/Buttons/Buttons";
 import Container from "@cgg/components/Container/Container";
 import Heading from "@cgg/components/Heading/Heading";
 import Searchbar from "@cgg/components/Searchbar/Searchbar";
 import Title from "@cgg/components/Title/Title";
-import { brandName } from "@cgg/config/config";
+import { brandName, cookieNames } from "@cgg/config/config";
 import { useStaticData } from "@cgg/hooks/useStaticData";
 import { titleLoader } from "@cgg/loader/titles";
 import css from "@cgg/styles/titles.module.scss";
@@ -20,15 +21,15 @@ export function meta({}: Route.MetaArgs) {
    ];
 }
 
-export async function loader({}: Route.LoaderArgs) {
-   return await titleLoader();
+export async function loader({ request }: Route.LoaderArgs) {
+   return await titleLoader(request, false);
 }
 
-export async function clientLoader({}: Route.LoaderArgs) {
-   return await titleLoader();
+export async function clientLoader({ request }: Route.LoaderArgs) {
+   return await titleLoader(request, true);
 }
 
-type filter = "CHALLENGE" | "EVENT" | "CHAMPION";
+export type titleFilter = "CHALLENGE" | "EVENT" | "CHAMPION";
 
 export default function Titles({ loaderData }: Route.ComponentProps) {
    const data = useStaticData();
@@ -36,8 +37,18 @@ export default function Titles({ loaderData }: Route.ComponentProps) {
    const champions = Object.values(championData.data);
    const titles = data.titles;
 
-   const [filters, setFilter] = useState<filter[]>([]);
-   const [search, setSearch] = useState("");
+   const [filters, setFilter] = useState<titleFilter[]>(loaderData.filter);
+   const [search, setSearch] = useState(loaderData.search);
+
+   useEffect(() => {
+      document.cookie = serialize(
+         cookieNames.titleFilter,
+         btoa(JSON.stringify({ filters, search })),
+         {
+            path: "/",
+         },
+      );
+   }, [filters, search]);
 
    return (
       <Container center headerPadding className={css.titlesContainer}>
@@ -49,8 +60,13 @@ export default function Titles({ loaderData }: Route.ComponentProps) {
          </div>
 
          <div className={css.filters}>
-            <Searchbar placeholder={"Search titles"} onChange={setSearch} />
-            <Buttons<filter>
+            <Searchbar
+               value={search} // this doesn't feel right
+               placeholder={"Search titles"}
+               onChange={setSearch}
+               id={css.titlesContainer}
+            />
+            <Buttons<titleFilter>
                buttons={[
                   { name: "Challenges", id: "CHALLENGE" },
                   { name: "Champions", id: "CHAMPION" },
@@ -64,7 +80,7 @@ export default function Titles({ loaderData }: Route.ComponentProps) {
          <div className={css.titles}>
             {Object.values(titles)
                .filter((title) => {
-                  let type: filter = "EVENT";
+                  let type: titleFilter = "EVENT";
                   if (title.challengeId !== undefined) type = "CHALLENGE";
                   if (title.type === "CHAMPION_MASTERY" && title.requirement)
                      type = "CHAMPION";

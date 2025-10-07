@@ -1,0 +1,154 @@
+@use "@cgg/styles/config" as config;
+@use "@cgg/styles/colors" as color;
+
+.challenge {
+   // $darkTier is used for e.g. the borders
+   $darkTier: color-mix(in hsl, var(--tier), black 35%);
+
+   width: 100%;
+   height: 60px;
+   overflow: hidden;
+   position: relative;
+
+   background-color: color.$background;
+   padding: 5px 10px;
+
+   border: 1px solid $darkTier;
+   border-radius: config.$borderRadius;
+
+   transition: 0.25s background-color;
+
+   &:hover {
+      background-color: color.$accent;
+   }
+
+   display: grid;
+   grid-template-columns: 40px 2fr 20px 3fr;
+   gap: 1rem;
+   align-items: center;
+
+   img.icon {
+      width: 40px;
+      height: 40px;
+
+      aspect-ratio: 1/1;
+      object-fit: contain;
+      object-position: center;
+   }
+
+   .text {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+
+      h3.title {
+         width: 100%;
+         font-size: config.$font-default;
+         font-weight: normal;
+
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+      }
+
+      p {
+         width: 100%;
+         font-size: config.$font-small;
+
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+      }
+   }
+
+   .icons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+
+      filter: brightness(0.75);
+
+      img {
+         width: 100%;
+      }
+
+      span {
+         color: white;
+         font-size: config.$font-small;
+      }
+
+      > :nth-child(n + 3) {
+         display: none;
+      }
+   }
+
+   p.description {
+      font-size: config.$font-small;
+      line-height: config.$font-small * 1.25;
+      $line-clamp: 3;
+
+      line-clamp: $line-clamp;
+      -webkit-line-clamp: $line-clamp;
+      -webkit-box-orient: vertical;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
+
+      display: -webkit-box;
+   }
+
+   p.tier {
+      text-align: center;
+      color: var(--tier);
+      font-size: config.$font-small;
+   }
+
+   .progress {
+      position: absolute;
+      height: 4px;
+      background-color: $darkTier;
+      width: 100%;
+
+      bottom: 0;
+      left: 0;
+
+      .indicator {
+         height: 100%;
+         background-color: var(--tier);
+      }
+   }
+
+   &.retired {
+      border-color: color.$border;
+
+      img.icon {
+         filter: grayscale(0.75) brightness(0.75);
+      }
+
+      .text {
+         h3.title,
+         p {
+            color: color.$secondary;
+         }
+      }
+
+      .icons {
+         filter: brightness(0.5);
+      }
+
+      p.description {
+         color: color.$secondary;
+      }
+
+      .progress {
+         filter: brightness(0.75);
+      }
+   }
+
+   &.user {
+      grid-template-columns: 40px 2fr 20px 3fr 1fr;
+   }
+}

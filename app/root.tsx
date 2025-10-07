@@ -16,7 +16,7 @@ import { usePageTransition } from "@cgg/hooks/usePageTransition";
 import { rootLoader } from "@cgg/loader/root";
 import { cdnDomain, cupcakeDomain } from "@cgg/utils/cdn";
 import "./app.scss";
-import { storageNames } from "./config/config";
+import { brandName, storageNames } from "./config/config";
 
 export const links: Route.LinksFunction = () => [
    {
@@ -37,10 +37,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <Meta />
             <Links />
-            {/* Simplebar is currently not used */}
-            {/* <noscript>
+            <noscript>
                <link rel="stylesheet" href="/no-js.css" />
-            </noscript> */}
+            </noscript>
          </head>
          <body>
             {children}

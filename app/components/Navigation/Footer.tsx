@@ -20,7 +20,7 @@ export default function Footer() {
                   </p>
                </div>
                <p>
-                  Made with <FaHeart /> by{" "}
+                  Made with <FaHeart className={css.heart} /> by{" "}
                   <Link to="https://darkintaqt.com" target="_blank">
                      DarkIntaqt
                   </Link>

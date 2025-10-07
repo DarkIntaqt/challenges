@@ -1,48 +1,48 @@
 @use "@cgg/styles/colors" as color;
 
-.UNRANKED,
 .NONE,
 .NONCHALLENGE {
    --tier: #{color.$secondary};
 }
 
-.IRON {
-   --tier: #696969;
+.IRON,
+.UNRANKED {
+   --tier: hsl(0, 0%, 41%);
 }
 
 .BRONZE {
-   --tier: #8c5139;
+   --tier: hsl(17, 42%, 39%);
 }
 
 .SILVER {
-   --tier: #81989c;
+   --tier: hsl(189, 12%, 56%);
 }
 
 .GOLD {
-   --tier: #ce8639;
+   --tier: hsl(31, 60%, 52%);
 }
 
 .PLATINUM {
-   --tier: rgb(32, 153, 135);
+   --tier: hsl(171, 65%, 36%);
 }
 
 .DIAMOND {
-   --tier: #576ace;
+   --tier: hsl(230, 55%, 57%);
 }
 
 // Discontinued
 .EMERALD {
-   --tier: rgb(70, 181, 132);
+   --tier: hsl(154, 44%, 49%);
 }
 
 .MASTER {
-   --tier: rgb(165, 64, 196);
+   --tier: hsl(286, 53%, 51%);
 }
 
 .GRANDMASTER {
-   --tier: #e17283;
+   --tier: hsl(351, 65%, 66%);
 }
 
 .CHALLENGER {
-   --tier: #f4c873;
+   --tier: hsl(40, 85%, 70%);
 }

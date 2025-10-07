@@ -28,7 +28,7 @@ interface IApiChallenge {
    challengeId: number;
    percentile?: number;
    tier: Tier;
-   points: number;
+   value: number;
    achievedTime?: number;
    position?: number;
    playersInLevel?: number;

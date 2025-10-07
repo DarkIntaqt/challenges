@@ -1,4 +1,5 @@
 type Tier =
+   | "NONE"
    | "UNRANKED"
    | "IRON"
    | "BRONZE"

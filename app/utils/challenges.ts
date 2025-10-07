@@ -1,5 +1,22 @@
 import type { Tier } from "./tier";
 
+export const gameModes = ["rift", "aram", "arena", "bot", "swarm", "none"] as const;
+export type GameMode = (typeof gameModes)[number];
+
+export const sources = [
+   "CHALLENGES",
+   "EOGD",
+   "CLASH",
+   "ETERNALS",
+   "CAP_INVENTORY",
+   "SUMMONER",
+   "RANKED",
+] as const;
+export type Source = (typeof sources)[number];
+
+export const categories = [1, 2, 3, 4, 5, -1] as const;
+export type Category = (typeof categories)[number];
+
 interface IChallengesFullDTO {
    challenges: Record<string, IChallengeDTO>;
    titles: Record<string, ITitleDTO>;
@@ -11,23 +28,28 @@ interface IChallengeDTO {
    name: string;
    description: string;
    descriptionShort: string;
-   source: string;
+   source: Source;
    tags: {
       isCapstone?: string;
       isCategory?: string;
-      parent?: number;
+      parent?: number | string;
    };
    queueIds: number[];
    seasons: number[];
    endTimestamp?: number;
-   thresholds: Record<Tier, number>;
+   thresholds: Record<Tier | "CROWN", IThresholdDTO>;
    percentiles?: Record<Tier, number>;
    leaderboard: boolean;
    reverseDirection?: boolean;
    titles?: ITitleRewardDTO[];
-   capstoneId: number;
-   gameMode: string;
+   categoryId: number;
+   gameMode: GameMode;
    retired: boolean;
+}
+
+interface IThresholdDTO {
+   points: number;
+   playersInLevel?: number;
 }
 
 interface ITitleRewardDTO {

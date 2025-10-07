@@ -8,13 +8,13 @@ export default function Searchbar({
    placeholder,
    value,
    onChange,
+   id = nanoid(),
 }: {
    placeholder?: string;
    value?: string;
+   id?: string;
    onChange: Dispatch<SetStateAction<string>>;
 }) {
-   const id = useMemo(() => nanoid(), []);
-
    const [focus, setFocus] = useState(false);
 
    return (

@@ -1,0 +1,104 @@
+@use "@cgg/styles/config" as config;
+@use "@cgg/styles/colors" as color;
+
+.grid {
+   padding: 1rem 0;
+   display: grid;
+
+   grid-template-columns: 2fr 7fr;
+
+   gap: 1rem;
+
+   .filters {
+      position: sticky;
+      top: config.$header-height + 10px;
+
+      height: calc(100vh - (config.$header-height + 10px));
+      overflow-x: scroll;
+      padding-bottom: 15px;
+      width: 100%;
+
+      .innerScrollbar {
+         display: flex;
+         flex-direction: column;
+         gap: 5px;
+
+         .options {
+            width: 100%;
+            height: 53px;
+         }
+
+         .group {
+            // background-color: color.$box;
+            padding: 8px;
+            border-radius: config.$borderRadius;
+
+            .heading {
+               color: color.$heading;
+               padding-bottom: 5px;
+            }
+
+            div.buttonText {
+               display: grid;
+               grid-template-columns: 18px auto;
+               font-size: config.$font-default;
+               align-items: center;
+
+               gap: 5px;
+
+               img,
+               svg {
+                  width: 100%;
+                  aspect-ratio: 1/1;
+                  object-fit: contain;
+               }
+            }
+         }
+
+         p.disclaimer {
+            padding: 5px;
+            font-size: config.$font-small;
+            color: color.$secondary;
+
+            a {
+               text-decoration: underline;
+            }
+         }
+      }
+   }
+
+   .challenges {
+      .searchbar {
+         width: 100%;
+         background-color: color.$accent;
+         position: sticky;
+         padding-top: 10px;
+         top: config.$header-height;
+
+         z-index: 5;
+      }
+
+      .challengeList {
+         padding: 10px;
+         display: flex;
+         flex-direction: column;
+         gap: 5px;
+
+         .noResults {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            margin: 120px auto;
+            width: 50%;
+            text-align: center;
+
+            img {
+               width: 50%;
+               aspect-ratio: 1/1;
+            }
+         }
+      }
+   }
+}

@@ -1,3 +1,4 @@
+import type { GameMode } from "./challenges";
 import type { Tier } from "./tier";
 
 export const cdnDomain = "https://cdn.yearin.lol";
@@ -42,7 +43,7 @@ export function cdnAssets(file: string, isImage = true): string {
 }
 
 export function getChallengeIcon(icon: number, tier: Tier = "MASTER"): string {
-   if (tier === "NONCHALLENGE") tier = "MASTER";
+   if (tier === "NONCHALLENGE" || tier === "UNRANKED" || tier === "NONE") tier = "IRON";
 
    if (icon > 99) {
       return cdn(`challenges/tokens/${icon}-${tier.toLowerCase()}`);
@@ -65,4 +66,14 @@ export function getChampionImage(
    type: "centered" | "splash" = "splash",
 ): string {
    return cdn(`champions/${type}/${championKey}_${skinId}`);
+}
+
+export function getGamemodeIcon(gamemode: GameMode): string {
+   let fileType = "svg";
+
+   if (gamemode === "bot") {
+      fileType = "png";
+   }
+
+   return cdnData(`icons/gamemodes/${gamemode}.${fileType}`);
 }
