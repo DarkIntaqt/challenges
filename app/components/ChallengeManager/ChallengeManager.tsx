@@ -20,7 +20,7 @@ import {
    getChallengeSourceName,
 } from "@cgg/utils/challengeSource";
 import type { Category, GameMode, Source } from "@cgg/utils/challenges";
-import { categories, gameModes, sources } from "@cgg/utils/challenges";
+import { categories, gameModeToString, gameModes, sources } from "@cgg/utils/challenges";
 import type { IApiChallengeResponse } from "@cgg/utils/endpoints/types";
 import { getChallenge } from "@cgg/utils/getChallenge";
 import Radio from "../Buttons/Radio";
@@ -168,53 +168,54 @@ export default function ChallengeManager({
                         ></Buttons>
                      </div>
 
-                     <div className={css.group}>
-                        <p className={css.heading}>Type</p>
-                        <Buttons<Source>
-                           buttons={sources.map((source) => {
-                              return {
-                                 name: (
-                                    <div className={css.buttonText}>
-                                       {getChallengeSourceIcon(source)}
-                                       {getChallengeSourceName(source)}
-                                    </div>
-                                 ),
-                                 id: source,
-                              };
-                           })}
-                           state={sourceFilter}
-                           setState={setSourceFilter}
-                           column
-                        ></Buttons>
-                     </div>
-
                      {!isUserInterface && (
                         <div className={css.group}>
-                           <p className={css.heading}>Gamemode</p>
-                           <Buttons<GameMode>
-                              buttons={gameModes.map((gameMode) => {
-                                 if (gameMode === "none") return null;
-
+                           <p className={css.heading}>Type</p>
+                           <Buttons<Source>
+                              buttons={sources.map((source) => {
                                  return {
                                     name: (
                                        <div className={css.buttonText}>
-                                          <img
-                                             src={getGamemodeIcon(gameMode)}
-                                             alt=""
-                                             loading="lazy"
-                                          />
-                                          {gameMode}
+                                          {getChallengeSourceIcon(source)}
+                                          {getChallengeSourceName(source)}
                                        </div>
                                     ),
-                                    id: gameMode,
+                                    id: source,
                                  };
                               })}
-                              state={gamemodeFilter}
-                              setState={setGamemodeFilter}
+                              state={sourceFilter}
+                              setState={setSourceFilter}
                               column
                            ></Buttons>
                         </div>
                      )}
+
+                     <div className={css.group}>
+                        <p className={css.heading}>Gamemode</p>
+                        <Buttons<GameMode>
+                           buttons={gameModes.map((gameMode) => {
+                              if (gameMode === "none") return null;
+
+                              return {
+                                 name: (
+                                    <div className={css.buttonText}>
+                                       <img
+                                          src={getGamemodeIcon(gameMode)}
+                                          alt=""
+                                          loading="lazy"
+                                       />
+                                       {gameModeToString(gameMode)}
+                                    </div>
+                                 ),
+                                 id: gameMode,
+                              };
+                           })}
+                           state={gamemodeFilter}
+                           setState={setGamemodeFilter}
+                           column
+                        ></Buttons>
+                     </div>
+
                      <p className={css.disclaimer}>
                         Read the <Link to="/about/faq">FAQ</Link> to learn more about
                         filtering, searching and sorting.
