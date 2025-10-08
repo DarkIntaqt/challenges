@@ -1,0 +1,21 @@
+@use "@cgg/styles/config" as config;
+@use "@cgg/styles/colors" as color;
+
+.progress {
+   $darkTier: color-mix(in hsl, var(--tier, color.$secondary), black 35%);
+
+   height: 4px;
+   background-color: $darkTier;
+   width: 100%;
+
+   &.pinned {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+   }
+
+   .indicator {
+      height: 100%;
+      background-color: var(--tier);
+   }
+}

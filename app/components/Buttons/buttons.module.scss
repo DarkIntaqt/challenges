@@ -6,7 +6,7 @@
    gap: 0.5rem;
 
    .button {
-      border: 2px solid color.$border;
+      border: 1px solid color.$border;
       background: color.$box;
       border-radius: config.$borderRadius;
       padding: 0.5rem 1rem;
@@ -19,7 +19,8 @@
          background-color: color.$primary;
          color: color.$heading;
          border-color: color.$primary;
-         box-shadow: 0 0 5px color.$primary;
+         // it seems to look better without box-shadow
+         // box-shadow: 0 0 5px color.$primary;
       }
    }
 
