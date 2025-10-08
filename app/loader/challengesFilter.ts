@@ -31,7 +31,7 @@ export async function challengesLoader(
          try {
             const parsed = JSON.parse(atob(values[cookiename] ?? "{}"));
             filter = {
-               search: parsed.search ?? "",
+               search: parsed.search.trim() ?? "",
                category: parsed.category ?? [],
                source: parsed.source ?? [],
                gameMode: parsed.gameMode ?? [],

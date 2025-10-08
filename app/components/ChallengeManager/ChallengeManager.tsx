@@ -1,10 +1,17 @@
 import { serialize } from "cookie";
 import { useEffect, useMemo, useState } from "react";
+import { FaSortAlphaDown } from "react-icons/fa";
+import {
+   FaArrowUpRightDots,
+   FaHashtag,
+   FaRankingStar,
+   FaRegClock,
+} from "react-icons/fa6";
 import { Link } from "react-router";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import Buttons from "@cgg/components/Buttons/Buttons";
-import { brandName, cookieNames } from "@cgg/config/config";
+import { cookieNames } from "@cgg/config/config";
 import { useStaticData } from "@cgg/hooks/useStaticData";
 import type { ChallengesLoaderLocation } from "@cgg/loader/challengesFilter";
 import { cdnAssets, getChallengeIcon, getGamemodeIcon } from "@cgg/utils/cdn";
@@ -16,6 +23,7 @@ import type { Category, GameMode, Source } from "@cgg/utils/challenges";
 import { categories, gameModes, sources } from "@cgg/utils/challenges";
 import type { IApiChallengeResponse } from "@cgg/utils/endpoints/types";
 import { getChallenge } from "@cgg/utils/getChallenge";
+import Radio from "../Buttons/Radio";
 import Searchbar from "../Searchbar/Searchbar";
 import Challenge from "./Challenge";
 import css from "./challengeManager.module.scss";
@@ -47,7 +55,9 @@ export default function ChallengeManager({
       defaultFilter.gameMode,
    );
 
-   const sortMode: SortMode = "Name-ASC";
+   const [sortMode, setSortMode] = useState<SortMode>(
+      isUserInterface ? "Rank" : "Name-ASC",
+   );
 
    const filter: IChallengeFilter = {
       search,
@@ -67,7 +77,11 @@ export default function ChallengeManager({
       });
    }, [filter]);
 
-   const results = sortChallenges(filterChallenges(challenges, filter), sortMode);
+   const results = sortChallenges(
+      filterChallenges(challenges, filter),
+      sortMode,
+      userData?.challenges,
+   );
 
    return (
       <>
@@ -76,6 +90,60 @@ export default function ChallengeManager({
                <SimpleBar style={{ height: "100%" }}>
                   <div className={css.innerScrollbar}>
                      <div className={css.options}>Options...</div>
+
+                     {isUserInterface && (
+                        <div className={css.group}>
+                           <p className={css.heading}>Order By</p>
+                           <Radio<SortMode>
+                              values={[
+                                 {
+                                    name: (
+                                       <div className={css.buttonText}>
+                                          <FaRankingStar /> Rank
+                                       </div>
+                                    ),
+                                    id: "Rank",
+                                 },
+                                 {
+                                    name: (
+                                       <div className={css.buttonText}>
+                                          <FaRegClock /> Last Updated
+                                       </div>
+                                    ),
+                                    id: "Last Updated",
+                                 },
+                                 {
+                                    name: (
+                                       <div className={css.buttonText}>
+                                          <FaHashtag /> Position
+                                       </div>
+                                    ),
+                                    id: "Position",
+                                 },
+                                 {
+                                    name: (
+                                       <div className={css.buttonText}>
+                                          <FaArrowUpRightDots /> Closest Levelup
+                                       </div>
+                                    ),
+                                    id: "Levelup",
+                                 },
+                                 {
+                                    name: (
+                                       <div className={css.buttonText}>
+                                          <FaSortAlphaDown /> Name
+                                       </div>
+                                    ),
+                                    id: "Name-ASC",
+                                 },
+                              ]}
+                              setState={setSortMode}
+                              state={sortMode}
+                              column
+                           />
+                        </div>
+                     )}
+
                      <div className={css.group}>
                         <p className={css.heading}>Category</p>
                         <Buttons<Category>
@@ -176,6 +244,7 @@ export default function ChallengeManager({
                            challengeId: challenge.id,
                            tier: "UNRANKED",
                            value: 0,
+                           percentile: 100,
                         };
                      }
 

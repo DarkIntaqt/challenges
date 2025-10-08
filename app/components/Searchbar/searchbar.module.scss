@@ -32,6 +32,10 @@
       color: color.$text;
 
       font-size: config.$font-default;
+
+      &::placeholder {
+         color: color.$secondary;
+      }
    }
 
    &::after {

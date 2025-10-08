@@ -48,10 +48,6 @@ export function getPosition(user: IApiChallenge, challenge: IChallengeDTO): numb
    if (!challenge.leaderboard) return 0;
    if (!user.position) return 0;
 
-   if (user.challengeId === 302404) {
-      console.log(user.position);
-   }
-
    let position = user.position;
 
    let currentTier: Tier | "CROWN" = user.tier;
@@ -64,12 +60,14 @@ export function getPosition(user: IApiChallenge, challenge: IChallengeDTO): numb
          position += challenge.thresholds[currentTier].playersInLevel!;
       }
 
-      if (user.challengeId === 302404) {
-         console.log(user.position);
-      }
-
       currentTier = nextTier;
    }
 
    return position;
+}
+
+export function getTierIndex(tier: Tier | "CROWN" | undefined): number {
+   if (!tier) return -2;
+   if (tier === "CROWN") return tierList.length;
+   return tierList.indexOf(tier) || -1;
 }

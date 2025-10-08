@@ -74,7 +74,7 @@ export default function Challenge({
                {isUser && (
                   <>
                      {/* Position is disabled until further notice */}
-                     {/* {position > 0 && `#${user.position} - `} */}
+                     {position > 0 && `#${formatNumber(position)} - `}
                      {user.percentile !== undefined &&
                         `Top ${(user.percentile * 100).toFixed(1)}% - `}
                      {user.percentile === undefined &&

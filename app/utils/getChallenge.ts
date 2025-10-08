@@ -21,7 +21,7 @@ export function getChallenge(
 }
 
 interface IChallengeUserResponse extends IChallengeDTO {
-   percentile?: number;
+   percentile: number;
    tier: Tier;
    value: number;
    achievedTime?: number;

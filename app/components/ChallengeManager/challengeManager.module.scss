@@ -70,7 +70,7 @@
    .challenges {
       .searchbar {
          width: 100%;
-         background-color: color.$accent;
+         backdrop-filter: blur(5px);
          position: sticky;
          padding-top: 10px;
          top: config.$header-height;

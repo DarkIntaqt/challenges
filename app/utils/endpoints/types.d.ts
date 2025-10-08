@@ -26,7 +26,7 @@ interface IApiChallengeSummoner extends IApiProfileSummoner {
 
 interface IApiChallenge {
    challengeId: number;
-   percentile?: number;
+   percentile: number;
    tier: Tier;
    value: number;
    achievedTime?: number;

@@ -2,7 +2,7 @@ import clsx from "clsx";
 import type { Dispatch, ReactNode, SetStateAction } from "react";
 import css from "./buttons.module.scss";
 
-interface IButtons<T> {
+export interface IButtons<T> {
    name: string | ReactNode;
    id: T;
 }
