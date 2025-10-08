@@ -50,14 +50,14 @@ $iconWidth: 110px;
    }
 
    .right {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-rows: auto 1fr 35px;
       gap: 0.3rem;
-      justify-content: space-between;
 
       h1 {
          font-size: config.$font-heading;
          line-height: unset;
+         margin-bottom: -5px;
 
          .tagLine {
             font-size: config.$font-large;
