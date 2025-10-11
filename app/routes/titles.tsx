@@ -106,3 +106,5 @@ export default function Titles({ loaderData }: Route.ComponentProps) {
       </Container>
    );
 }
+
+export const shouldRevalidate = () => false;

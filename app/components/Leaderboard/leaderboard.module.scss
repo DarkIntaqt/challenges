@@ -1,0 +1,145 @@
+@use "@cgg/styles/config" as config;
+@use "@cgg/styles/colors" as color;
+
+.leaderboard {
+   width: 70%;
+   background-color: color.$background;
+
+   padding: 1rem;
+   border-radius: config.$borderRadius;
+   border: 1px solid color.$border;
+
+   .line {
+      width: 90%;
+      margin: 10px 5%;
+      height: 2px;
+      background-color: color.$border;
+   }
+
+   .table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+
+      .head {
+         top: config.$header-height;
+         background-color: color.$background;
+
+         position: sticky;
+         border-bottom: 1px solid color.$border;
+         z-index: 5;
+
+         > tr {
+            > th {
+               padding: 10px;
+               color: color.$text;
+            }
+
+            .position {
+               text-align: left;
+               width: 10%;
+            }
+
+            .player {
+               width: 45%;
+            }
+
+            .tier {
+               width: 20%;
+            }
+
+            .points {
+               width: 25%;
+            }
+         }
+      }
+
+      .body {
+         > tr {
+            &.zebra {
+               background-color: color.$accent;
+            }
+
+            > th,
+            > td {
+               font-weight: normal;
+               padding: 10px;
+            }
+
+            .position {
+               border-radius: config.$borderRadius 0 0 config.$borderRadius;
+            }
+
+            .player {
+               position: relative;
+               $imgWidth: 40px;
+               text-align: left;
+
+               > a {
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+
+                  .icon {
+                     width: 40px;
+                     aspect-ratio: 1/1;
+                     background-color: color.$accent;
+                     border-radius: 8px;
+                  }
+
+                  .verifiedBadge {
+                     display: block;
+                     position: absolute;
+                     left: $imgWidth - 5px;
+                     top: $imgWidth - 5px;
+                     color: color.$primary;
+                     font-size: 1.5rem;
+                  }
+
+                  p {
+                     color: color.$heading;
+                     white-space: nowrap;
+                     overflow: hidden;
+                     text-overflow: ellipsis;
+
+                     span {
+                        color: color.$secondary;
+                        font-style: italic;
+                        font-size: config.$font-small;
+                     }
+                  }
+               }
+
+               &:hover {
+                  p {
+                     text-decoration: underline;
+                  }
+               }
+            }
+
+            .tier {
+               text-align: center;
+               color: var(--tier);
+               font-size: config.$font-small;
+            }
+
+            .points {
+               text-align: center;
+               color: color.$heading;
+               border-radius: 0 config.$borderRadius config.$borderRadius 0;
+            }
+         }
+      }
+   }
+
+   .loader {
+      width: 100%;
+      padding: 25vh 0 75vh;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+   }
+}

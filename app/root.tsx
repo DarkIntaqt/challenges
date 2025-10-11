@@ -80,10 +80,10 @@ export const shouldRevalidate = ({}: ShouldRevalidateFunctionArgs) => {
 };
 
 export default function App() {
-   const { transition, profileNavigation } = usePageTransition();
+   const { transition, customLoader } = usePageTransition();
    return (
       <Navigation>
-         {transition && !profileNavigation ? (
+         {transition && !customLoader ? (
             <Container center flex justify fullHeight>
                <Loader />
             </Container>

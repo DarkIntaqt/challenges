@@ -37,6 +37,8 @@ export async function clientLoader(data: Route.LoaderArgs) {
    return indexLoader();
 }
 
+export const shouldRevalidate = () => false;
+
 export default function Home({ loaderData }: Route.ComponentProps) {
    const { splash, logo } = loaderData;
 

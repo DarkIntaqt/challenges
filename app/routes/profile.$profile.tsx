@@ -6,6 +6,7 @@ import Container from "@cgg/components/Container/Container";
 import { LayoutHeading, LayoutNavigation } from "@cgg/components/User/layout";
 import LayoutLoader from "@cgg/components/User/layout/LayoutLoader";
 import { brandName } from "@cgg/config/config";
+import { usePageTransition } from "@cgg/hooks/usePageTransition";
 import { profileLayoutLoader } from "@cgg/loader/profile.layout";
 import css from "@cgg/styles/profile.layout.module.scss";
 import { cdnAssets } from "@cgg/utils/cdn";
@@ -22,6 +23,7 @@ export const shouldRevalidate = ({
 export default function Layout({ loaderData }: Route.ComponentProps) {
    const { summoner, gameName, tagLine } = loaderData;
    const tier = summoner.tier;
+   const { transition } = usePageTransition();
 
    useEffect(() => {
       addRecentSearch({
@@ -55,7 +57,7 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
                Outlet is not hidden on transition, Loader is pos absolute
                */}
             <LayoutLoader />
-            <Outlet />
+            {!transition && <Outlet />}
          </Container>
       </>
    );

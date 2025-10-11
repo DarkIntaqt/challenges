@@ -106,7 +106,7 @@ export default function SearchResults({
       <div className={clsx(css.results, visible && showResults && css.visible)}>
          {results.recent.length > 0 && (
             <div className={css.group}>
-               <span className={css.namespace}>Recent Searches</span>
+               <span className={css.namespace}>Recent Pages</span>
                {results.recent.map((result, i) => (
                   <Result key={i} result={result} active={pointer === i + 1} />
                ))}
