@@ -24,7 +24,7 @@
   {
     "langs": ["en"],
     "icon": "fa-solid fa-arrow-up-right-from-square",
-    "image": "https://lolcdn.darkintaqt.com/s/loldb.svg",
+    "image": "https://challenges.darkintaqt.com/api/masterychartlogo.png",
     "en": {
       "title": "MasteryChart - Mastery progress viewer",
       "description": "See your mastery displayed as graph. Using the many given filter methods, you can easily see on which champions you have the most points shown as a bubble chart. ",
@@ -35,7 +35,8 @@
   {
     "langs": ["en"],
     "icon": "fa-solid fa-arrow-up-right-from-square",
-     "en": {
+    "image": "https://lolcdn.darkintaqt.com/s/loldb.svg",
+    "en": {
       "title": "LoLDB - Your Ultimate League Database",
       "description": "Discover champions, explore skins, track the shop, and stay updated with everything League of Legends. ",
       "link": "https://loldb.info",
