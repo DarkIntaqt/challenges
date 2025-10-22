@@ -15,8 +15,12 @@
       "test": "vitest run"
    },
    "dependencies": {
+      "@emotion/react": "^11.14.0",
+      "@emotion/styled": "^11.14.1",
       "@fontsource/istok-web": "^5.2.8",
       "@fontsource/roboto": "^5.2.6",
+      "@mui/material": "^7.3.4",
+      "@mui/x-charts": "^8.13.1",
       "@react-router/fs-routes": "7.9.3",
       "@react-router/node": "7.9.3",
       "@react-router/serve": "7.9.3",

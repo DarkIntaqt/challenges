@@ -2,18 +2,26 @@
 @use "@cgg/styles/colors" as color;
 
 .wrapper {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-
+   display: grid;
+   grid-template-columns: 1fr 200px;
    min-height: 100vh;
+   align-items: center;
 
-   .intro {
-      padding-bottom: 1rem;
+   .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .intro {
+         padding-bottom: 1rem;
+      }
+
+      .details {
+         color: color.$heading;
+         font-size: config.$font-large;
+      }
    }
-
-   .details {
-      color: color.$heading;
-      font-size: config.$font-large;
+   img {
+      width: 200px;
    }
 }

@@ -40,3 +40,14 @@ export interface IApiChallengeResponse extends IApiProfileResponse {
 }
 
 export interface IApiVerifiedResponse {}
+
+export interface IApiLeaderboardEntry {
+   puuid: string;
+   gameName: string;
+   tagLine: string;
+   region: string;
+   iconId: number;
+   tier: Tier;
+   verified?: boolean;
+   points: number;
+}

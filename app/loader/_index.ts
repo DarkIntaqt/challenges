@@ -1,5 +1,5 @@
 import logoSlogan from "@cgg/assets/logo-slogan.svg?no-inline";
-import { type MediaEntry, type QualityProfiles, homeSplashes } from "@cgg/config/home";
+import { type MediaEntry, homeSplashes } from "@cgg/config/home";
 import { fetchApi } from "@cgg/utils/api";
 import { cdnData, getChampionImage } from "@cgg/utils/cdn";
 

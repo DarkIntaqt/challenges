@@ -1,0 +1,73 @@
+@use "@cgg/styles/config" as config;
+@use "@cgg/styles/colors" as color;
+
+.wrapper {
+   padding: 1rem 0;
+
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: repeat(2, auto);
+   gap: 1rem;
+
+   .section {
+      background-color: color.$box;
+      padding: 1rem;
+      border-radius: config.$borderRadius;
+      border: 1px solid color.$border;
+
+      h2 {
+         margin-bottom: 0.5rem;
+      }
+   }
+}
+
+.categories {
+   display: grid;
+   grid-template-columns: repeat(6, 1fr);
+   justify-items: center;
+   gap: 0.5rem;
+
+   .category {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+
+      width: 100%;
+      padding: 1rem;
+
+      background-color: color.$accent;
+      border: 1px solid color.$border;
+      border-radius: config.$borderRadius;
+      overflow: hidden;
+
+      transition: 0.25s background-color;
+
+      .head {
+         display: flex;
+         gap: 5px;
+         align-items: center;
+
+         .title {
+            color: color.$heading;
+            font-size: config.$font-default;
+         }
+
+         img {
+            height: config.$font-default * 1.25;
+            aspect-ratio: 1/1;
+            object-fit: contain;
+         }
+      }
+
+      .progress {
+         span {
+            font-size: config.$font-small;
+         }
+      }
+
+      &:hover {
+         background-color: color.$background;
+      }
+   }
+}

@@ -15,9 +15,15 @@ export function usePageTransition() {
       navigation.state === "loading" &&
       navigation.location.pathname.startsWith("/profile/");
 
+   const isChallengeTransition =
+      location.pathname.startsWith("/challenges/") &&
+      navigation.state === "loading" &&
+      navigation.location.pathname.startsWith("/challenges/") &&
+      location.pathname === navigation.location.pathname;
+
    return {
       transition: isPageTransition,
-      profileNavigation: isProfileTransition,
+      customLoader: isProfileTransition || isChallengeTransition,
       from: location,
       to: navigation.location,
    };

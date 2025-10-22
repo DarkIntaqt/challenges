@@ -14,7 +14,8 @@
       top: config.$header-height + 10px;
 
       height: calc(100vh - (config.$header-height + 10px));
-      overflow-x: scroll;
+      // overflow-x: scroll;
+      overflow-y: hidden;
       padding-bottom: 15px;
       width: 100%;
 

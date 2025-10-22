@@ -14,7 +14,7 @@ $gray: rgb(34, 34, 44) !default; // used to highlight elements
 $light-gray: rgb(50, 50, 60) !default; // hover highlighted elements
 $border: rgb(60, 60, 70) !default; // hover highlighted elements
 
-$box: color-mix(in srgb, $gray 70%, transparent 30%) !default;
+$box: color-mix(in srgb, $gray 60%, transparent 40%) !default;
 
 /*
  * Text colors

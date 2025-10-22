@@ -13,6 +13,7 @@ import { getChallenge } from "@cgg/utils/getChallenge";
 import { getParents } from "@cgg/utils/getParent";
 import { getNextTier, getPosition, getTier } from "@cgg/utils/getTier";
 import Heading from "../Heading/Heading";
+import ProgressBar from "../ProgressBar/ProgressBar";
 import css from "./challenge.module.scss";
 
 export default function Challenge({
@@ -113,14 +114,12 @@ export default function Challenge({
          {isUser && <p className={css.tier}>{capitalize(tier)}</p>}
 
          {isUser && (
-            <div className={css.progress}>
-               <div
-                  className={css.indicator}
-                  style={{
-                     width: `${Math.min(100, ((currentValue ?? 0) / (nextValue ?? 1)) * 100)}%`,
-                  }}
-               ></div>
-            </div>
+            <ProgressBar
+               current={currentValue}
+               next={nextValue}
+               pinned
+               className={css.progress}
+            />
          )}
       </Link>
    );

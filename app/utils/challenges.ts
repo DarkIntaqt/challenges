@@ -3,6 +3,25 @@ import type { Tier } from "./tier";
 export const gameModes = ["rift", "aram", "arena", "bot", "swarm", "none"] as const;
 export type GameMode = (typeof gameModes)[number];
 
+export function gameModeToString(gamemode: GameMode): string {
+   switch (gamemode) {
+      case "rift":
+         return "Summoner's Rift";
+      case "aram":
+         return "ARAM";
+      case "arena":
+         return "Arena";
+      case "bot":
+         return "Co-op vs. AI";
+      case "swarm":
+         return "Swarm";
+      case "none":
+         return "None";
+      default:
+         return gamemode;
+   }
+}
+
 export const sources = [
    "CHALLENGES",
    "EOGD",

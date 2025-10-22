@@ -16,6 +16,8 @@ export function meta({}: Route.MetaArgs) {
    ];
 }
 
+export const shouldRevalidate = () => false;
+
 export async function loader({ request }: Route.LoaderArgs) {
    return await challengesLoader(request, "overview", false);
 }

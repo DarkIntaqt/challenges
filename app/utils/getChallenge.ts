@@ -6,7 +6,7 @@ export function getChallenge(
    challengeId: string | number | null,
    data: IChallengesFullDTO,
 ): IChallengeDTO | null {
-   if (!challengeId) {
+   if (challengeId === null || typeof challengeId === "undefined") {
       return null;
    }
 
