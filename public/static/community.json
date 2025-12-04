@@ -34,6 +34,17 @@
   },
   {
     "langs": ["en"],
+    "icon": "fa-solid fa-arrow-up-right-from-square",
+    "image": "https://lolcdn.darkintaqt.com/s/loldb.svg",
+    "en": {
+      "title": "LoLDB - Your Ultimate League Database",
+      "description": "Discover champions, explore skins, track the shop, and stay updated with everything League of Legends. ",
+      "link": "https://loldb.info",
+      "cta": "Visit LoLDB"
+    }
+  },
+  {
+    "langs": ["en"],
     "icon": "fa-brands fa-discord",
     "image": "https://lolcdn.darkintaqt.com/s/up.png",
     "en": {
