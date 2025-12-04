@@ -207,7 +207,9 @@ export function removeUnnecessaryChallenges(
           challenge[8] === 2024100 ||
           challenge[8] === 2024200 ||
           challenge[8] === 2024300 ||
-          challenge[6].parent === "0"
+          challenge[6].parent === "0" ||
+          challenge[8] === 601000 ||
+          challenge[8] === 602000
         ) {
           return null;
         }
