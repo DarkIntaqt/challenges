@@ -583,7 +583,11 @@ class Challenge extends Component {
                         placeholderSrc={"https://lolcdn.darkintaqt.com/s/p-cb"}
                         alt={player[0] + "'s profile image"}
                       ></LazyLoadImage>
-                      <p>
+                      <p
+                        style={
+                          player[0] === "Chiko#001" ? { color: "pink" } : {}
+                        }
+                      >
                         {player[0]}{" "}
                         <span className={css.region}>
                           {serverToHumanReadable(player[6])}
