@@ -37,7 +37,7 @@ export function removeUnnecessaryChallenges(
   masterOnly = false,
   pointsOnly = false,
   search = "",
-  capstones = true
+  capstones = true,
 ) {
   let challenges = {};
   challengesArray.forEach((challenge) => {
@@ -144,7 +144,7 @@ export function removeUnnecessaryChallenges(
             currentChallenge.id > 10
           ) {
             parentChallengeId = parseInt(
-              getChallenge(parentChallengeId)["tags"]["parent"]
+              getChallenge(parentChallengeId)["tags"]["parent"],
             );
           } else {
             iterationCount = 10;
@@ -209,7 +209,8 @@ export function removeUnnecessaryChallenges(
           challenge[8] === 2024300 ||
           challenge[6].parent === "0" ||
           challenge[8] === 601000 ||
-          challenge[8] === 602000
+          challenge[8] === 602000 ||
+          challenge[8] === 603000
         ) {
           return null;
         }
@@ -270,7 +271,7 @@ export default function orderChallenges(
   masterOnly,
   pointsOnly,
   search,
-  capstones
+  capstones,
 ) {
   challenges = removeUnnecessaryChallenges(
     challenges,
@@ -278,7 +279,7 @@ export default function orderChallenges(
     masterOnly,
     pointsOnly,
     search,
-    !capstones
+    !capstones,
   );
 
   let sortAlgorithm = function (a, b) {
