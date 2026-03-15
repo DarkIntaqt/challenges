@@ -14,6 +14,7 @@ export async function challengesLoader(
       category: [],
       source: [],
       gameMode: [],
+      modifications: [],
    };
    let cookie = null;
    if (!client) {
@@ -35,6 +36,7 @@ export async function challengesLoader(
                category: parsed.category ?? [],
                source: parsed.source ?? [],
                gameMode: parsed.gameMode ?? [],
+               modifications: parsed.modifications ?? [],
             };
          } catch (e) {
             // ignore invalid cookie

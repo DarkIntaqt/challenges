@@ -1,11 +1,18 @@
 import cloneDeep from "clone-deep";
 import type { Category, GameMode, IChallengeDTO, Source } from "@cgg/utils/challenges";
 
+export type Modifications =
+   | "points-only"
+   | "master-thresholds"
+   | "no-capstones"
+   | "show-retired";
+
 export interface IChallengeFilter {
    search: string;
    category: Category[];
    source: Source[];
    gameMode: GameMode[];
+   modifications: Modifications[];
 }
 
 // Returns a copy of the given challenges, filtered by the given filter. The original array is not modified.
@@ -15,7 +22,19 @@ export function filterChallenges(
 ): IChallengeDTO[] {
    return cloneDeep(
       challenges.filter((challenge) => {
-         const { search, category, source, gameMode } = filter;
+         const { search, category, source, gameMode, modifications } = filter;
+
+         // remove retired first
+         if (!modifications.includes("show-retired") && challenge.retired) {
+            return false;
+         }
+
+         if (
+            modifications.includes("no-capstones") &&
+            challenge.tags.isCapstone === "Y"
+         ) {
+            return false;
+         }
 
          if (search.length > 0) {
             let found = false;

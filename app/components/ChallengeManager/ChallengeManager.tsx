@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { serialize } from "cookie";
 import { useEffect, useMemo, useState } from "react";
 import { FaSortAlphaDown } from "react-icons/fa";
@@ -14,7 +15,7 @@ import Buttons from "@cgg/components/Buttons/Buttons";
 import { cookieNames } from "@cgg/config/config";
 import { useStaticData } from "@cgg/hooks/useStaticData";
 import type { ChallengesLoaderLocation } from "@cgg/loader/challengesFilter";
-import { cdnAssets, getChallengeIcon, getGamemodeIcon } from "@cgg/utils/cdn";
+import { cdnAssets, cdnData, getChallengeIcon, getGamemodeIcon } from "@cgg/utils/cdn";
 import {
    getChallengeSourceIcon,
    getChallengeSourceName,
@@ -27,13 +28,23 @@ import Radio from "../Buttons/Radio";
 import Searchbar from "../Searchbar/Searchbar";
 import Challenge from "./Challenge";
 import css from "./challengeManager.module.scss";
-import { type IChallengeFilter, filterChallenges } from "./filterChallenges";
+import {
+   type IChallengeFilter,
+   type Modifications,
+   filterChallenges,
+} from "./filterChallenges";
 import { type SortMode, sortChallenges } from "./sortChallenges";
 
 export default function ChallengeManager({
    userData,
    location = "overview",
-   defaultFilter = { search: "", category: [], source: [], gameMode: [] },
+   defaultFilter = {
+      search: "",
+      category: [],
+      source: [],
+      gameMode: [],
+      modifications: [],
+   },
 }: {
    userData?: IApiChallengeResponse;
    location?: ChallengesLoaderLocation;
@@ -55,6 +66,10 @@ export default function ChallengeManager({
       defaultFilter.gameMode,
    );
 
+   const [modifications, setModifications] = useState<Modifications[]>(
+      defaultFilter.modifications,
+   );
+
    const [sortMode, setSortMode] = useState<SortMode>(
       isUserInterface ? "Rank" : "Name-ASC",
    );
@@ -64,7 +79,16 @@ export default function ChallengeManager({
       category: categoryFilter,
       source: sourceFilter,
       gameMode: gamemodeFilter,
+      modifications: modifications,
    };
+
+   function toggleModification(modification: Modifications) {
+      setModifications((prev) =>
+         prev.includes(modification)
+            ? prev.filter((m) => m !== modification)
+            : [...prev, modification],
+      );
+   }
 
    useEffect(() => {
       const cookiename =
@@ -89,7 +113,34 @@ export default function ChallengeManager({
             <div className={css.filters}>
                <SimpleBar style={{ height: "100%" }}>
                   <div className={css.innerScrollbar}>
-                     <div className={css.options}>Options...</div>
+                     <div className={css.options}>
+                        <OptionButton
+                           url={cdnData("icons/filter/points-only.png")}
+                           title="Points Only"
+                           callback={() => toggleModification("points-only")}
+                           active={modifications.includes("points-only")}
+                        />
+                        {isUserInterface && (
+                           <OptionButton
+                              url={cdnData("icons/filter/master-thresholds.png")}
+                              title="Master Thresholds"
+                              callback={() => toggleModification("master-thresholds")}
+                              active={modifications.includes("master-thresholds")}
+                           />
+                        )}
+                        <OptionButton
+                           url={cdnData("icons/filter/no-capstones.png")}
+                           title="No Capstones"
+                           callback={() => toggleModification("no-capstones")}
+                           active={modifications.includes("no-capstones")}
+                        />
+                        <OptionButton
+                           url={cdnData("icons/filter/show-retired.png")}
+                           title="Show retired challenges"
+                           callback={() => toggleModification("show-retired")}
+                           active={modifications.includes("show-retired")}
+                        />
+                     </div>
 
                      {isUserInterface && (
                         <div className={css.group}>
@@ -260,12 +311,34 @@ export default function ChallengeManager({
                   {results.length === 0 && (
                      <div className={css.noResults}>
                         <img src={cdnAssets("art/no-pk")} alt="" />
-                        <p>Looks like here is... nothing.</p>
+                        <p>Looks like here is... nothing!?</p>
                      </div>
                   )}
                </div>
             </div>
          </div>
       </>
+   );
+}
+
+function OptionButton({
+   url,
+   title,
+   active = false,
+   callback,
+}: {
+   url: string;
+   title: string;
+   active?: boolean;
+   callback: () => void;
+}) {
+   return (
+      <button
+         className={clsx(css.optionButton, active && css.active)}
+         onClick={callback}
+         title={title}
+      >
+         <img src={url} alt={title} />
+      </button>
    );
 }
