@@ -19,7 +19,7 @@ $iconWidth: 110px;
 
       position: relative;
 
-      img {
+      img.profileIcon {
          width: $iconWidth;
          height: $iconWidth;
          box-shadow: 0 0 10px var(--tier);
@@ -61,7 +61,6 @@ $iconWidth: 110px;
 
          .tagLine {
             font-size: config.$font-large;
-            color: color.$text;
          }
 
          .region {
@@ -69,6 +68,12 @@ $iconWidth: 110px;
             color: color.$text;
             font-weight: normal;
          }
+      }
+
+      img.verified {
+         width: config.$font-large;
+         height: config.$font-large;
+         margin-left: 0.25rem;
       }
 
       .achievements,

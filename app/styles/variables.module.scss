@@ -5,9 +5,12 @@
    --tier: #{color.$secondary};
 }
 
-.IRON,
 .UNRANKED {
    --tier: hsl(0, 0%, 41%);
+}
+
+.IRON {
+   --tier: #{color.$secondary};
 }
 
 .BRONZE {
@@ -36,7 +39,7 @@
 }
 
 .MASTER {
-   --tier: hsl(286, 53%, 51%);
+   --tier: hsl(286, 64%, 55%);
 }
 
 .GRANDMASTER {

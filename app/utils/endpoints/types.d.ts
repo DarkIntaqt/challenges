@@ -1,4 +1,5 @@
 import type { Tier } from "../tier";
+import { IApiVerifiedResponse } from "./types.d";
 
 export interface IApiAccountResponse {
    id: string;
@@ -39,7 +40,16 @@ export interface IApiChallengeResponse extends IApiProfileResponse {
    challenges: IApiChallenge[];
 }
 
-export interface IApiVerifiedResponse {}
+export interface IApiVerifiedResponse {
+   id: string;
+   verified: boolean;
+   beta?: boolean;
+}
+
+export interface IApiVerified {
+   verified: boolean;
+   beta: boolean;
+}
 
 export interface IApiLeaderboardEntry {
    puuid: string;

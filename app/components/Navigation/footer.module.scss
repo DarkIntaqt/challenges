@@ -36,10 +36,11 @@
             font-size: config.$font-default;
             color: color.$secondary;
 
-            svg {
-               color: rgb(231, 63, 63);
+            svg.heart {
+               transition: 0.25s color;
 
                &:hover {
+                  color: rgb(231, 63, 63);
                   animation: pulse 1s;
                }
             }

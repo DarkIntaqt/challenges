@@ -1,8 +1,13 @@
 import { fetchApiPath } from "../api";
-import type { IApiVerifiedResponse } from "./types";
+import type { IApiVerified, IApiVerifiedResponse } from "./types";
 
 export async function getVerifiedProfile(puuid: string) {
-   const response = await fetchApiPath<IApiVerifiedResponse>(`/verified/${puuid}`);
+   const response = await fetchApiPath<IApiVerifiedResponse>(`/v1/verified/${puuid}`);
 
-   return response;
+   const result = {
+      verified: response?.verified ?? false,
+      beta: response?.beta ?? false,
+   } as IApiVerified;
+
+   return result;
 }

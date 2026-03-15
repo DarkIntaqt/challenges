@@ -1,4 +1,5 @@
 import { getChallenges } from "@cgg/utils/endpoints/getChallenges";
+import { getVerifiedProfile } from "@cgg/utils/endpoints/getVerified";
 
 export async function profileLayoutLoader({ params }: { params: { profile: string } }) {
    const { profile } = params;
@@ -21,5 +22,7 @@ export async function profileLayoutLoader({ params }: { params: { profile: strin
       });
    }
 
-   return await challengeData;
+   const verified = await getVerifiedProfile(challengeData.id);
+
+   return { profile: challengeData, verified: verified };
 }

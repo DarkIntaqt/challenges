@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { nanoid } from "nanoid";
-import { type Dispatch, type SetStateAction, useMemo, useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import css from "./searchbar.module.scss";
 

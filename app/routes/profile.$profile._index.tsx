@@ -12,7 +12,7 @@ export async function clientLoader({ request }: Route.LoaderArgs) {
 }
 
 export default function Profile({ matches, loaderData }: Route.ComponentProps) {
-   const playerData = matches[1].loaderData;
+   const playerData = matches[1].loaderData.profile;
    const { gameName, tagLine } = playerData;
 
    return (

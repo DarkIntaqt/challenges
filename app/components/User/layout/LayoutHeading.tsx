@@ -6,7 +6,7 @@ import { useStaticData } from "@cgg/hooks/useStaticData";
 import cssVariables from "@cgg/styles/variables.module.scss";
 import { capitalize } from "@cgg/utils/capitalize";
 import { getChallengeIcon, getProfileIcon } from "@cgg/utils/cdn";
-import type { IApiChallengeResponse } from "@cgg/utils/endpoints/types";
+import type { IApiChallengeResponse, IApiVerified } from "@cgg/utils/endpoints/types";
 import { formatNumber } from "@cgg/utils/formatNumber";
 import { getChallenge, getUserChallenge } from "@cgg/utils/getChallenge";
 import getTitle from "@cgg/utils/getTitle";
@@ -15,7 +15,8 @@ import css from "./layoutHeading.module.scss";
 
 export function LayoutHeading({
    playerData,
-}: Readonly<{ playerData: IApiChallengeResponse }>) {
+   verified,
+}: Readonly<{ playerData: IApiChallengeResponse; verified: IApiVerified }>) {
    const { summoner, gameName, tagLine, region } = playerData;
    const tier = summoner.tier;
    const data = useStaticData();
@@ -27,6 +28,7 @@ export function LayoutHeading({
       <div className={css.head}>
          <div className={clsx(css.icon, cssVariables[tier])}>
             <img
+               className={css.profileIcon}
                src={getProfileIcon(summoner.profileIcon)}
                alt={`${fullName}'s profile icon'`}
             />
@@ -37,6 +39,12 @@ export function LayoutHeading({
             <Heading>
                {gameName}
                <span className={css.tagLine}>#{tagLine}</span>
+               {verified.verified && (
+                  <img
+                     className={css.verified}
+                     src={"https://cdn.darkintaqt.com/lol/static/challenges/verified.png"}
+                  />
+               )}
                <span className={css.region}> in {regionToString(region).name}</span>
             </Heading>
             <div className={css.achievements}>
@@ -86,14 +94,14 @@ export function LayoutHeading({
             <div className={css.displayed}>
                {summoner.displayedChallenges
                   ?.filter((challenge) => challenge >= 0)
-                  .map((challenge) => {
+                  .map((challenge, i) => {
                      const challengeData = getChallenge(challenge, data);
 
                      if (!challengeData) return;
 
                      return (
                         <Tooltip
-                           key={challenge}
+                           key={`head-${i}-${challenge}`}
                            tooltip={
                               <>
                                  <Heading level={3}>{challengeData.name}</Heading>

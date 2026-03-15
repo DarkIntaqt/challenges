@@ -161,7 +161,9 @@ function Result({ result, active }: { result: SearchResult; active: boolean }) {
          <img src={icon} alt={result.name} className={clsx(isSummoner && css.summoner)} />
          <p className={css.name}>
             {result.name}
-            {isSummoner && <span className={css.tagLine}>{`#${result.tagLine}`}</span>}
+            <span className={css.tagLine}>
+               {isSummoner ? `#${result.tagLine}` : " Challenge"}
+            </span>
          </p>
       </Link>
    );

@@ -21,14 +21,14 @@ export const shouldRevalidate = ({
 };
 
 export default function Layout({ loaderData }: Route.ComponentProps) {
-   const { summoner, gameName, tagLine } = loaderData;
+   const { summoner, gameName, tagLine } = loaderData.profile;
    const tier = summoner.tier;
    const { transition } = usePageTransition();
 
    useEffect(() => {
       addRecentSearch({
          type: "summoner",
-         id: loaderData.id,
+         id: loaderData.profile.id,
          name: gameName,
          tagLine: tagLine,
          icon: summoner.profileIcon,
@@ -37,7 +37,6 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
 
    return (
       <>
-         {/* <title>{`${gameName}#${tagLine} - Profile | ${brandName}`}</title> */}
          <meta
             name="description"
             content={`View and track the Challenge progress, titles and statistics of ${gameName}#${tagLine} on ${brandName}.`}
@@ -49,7 +48,10 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
             alt={""}
          />
          <Container center className={css.layout} headerPadding>
-            <LayoutHeading playerData={loaderData} />
+            <LayoutHeading
+               playerData={loaderData.profile}
+               verified={loaderData.verified}
+            />
             <LayoutNavigation />
 
             {/* 
