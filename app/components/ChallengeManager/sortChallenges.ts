@@ -10,147 +10,207 @@ export type SortMode =
    | "Position"
    | "Levelup";
 
-// TODO: Maps would probably be more efficient here
+const index = new Map<number, IApiChallenge>();
+
 export function sortChallenges(
    challenges: IChallengeDTO[],
    mode: SortMode,
    userChallenges?: IApiChallenge[],
 ): IChallengeDTO[] {
+   userChallenges?.forEach((challenge) => {
+      index.set(challenge.challengeId, challenge);
+   });
+
    switch (mode) {
-      case "Name-ASC":
-         challenges = challenges.sort((a, b) => {
-            if (a.retired && !b.retired) return 1;
-            if (!a.retired && b.retired) return -1;
-
-            return a.name.localeCompare(b.name);
-         });
-         break;
-      case "Name-DESC":
-         challenges = challenges.sort((a, b) => {
-            if (a.retired && !b.retired) return 1;
-            if (!a.retired && b.retired) return -1;
-
-            return b.name.localeCompare(a.name);
-         });
-         break;
-
+      // Fallthrough is intentional to sort by name if userChallenges is not available
       case "Rank":
-         // When this filter - for whatever reason - gets selected on a non-user page
-         if (!userChallenges) {
-            return sortChallenges(challenges, "Name-ASC");
+         if (userChallenges) {
+            challenges.sort(sortByRank);
+            break;
          }
-         challenges = challenges.sort((a, b) => {
-            if (a.retired && !b.retired) return 1;
-            if (!a.retired && b.retired) return -1;
-
-            const userChallengeA = userChallenges.find((uc) => uc.challengeId === a.id);
-            const userChallengeB = userChallenges.find((uc) => uc.challengeId === b.id);
-            const tierA = getTierIndex(userChallengeA?.tier);
-            const tierB = getTierIndex(userChallengeB?.tier);
-
-            // sort by tier first, then by percentile
-            if (tierA !== tierB) return tierB - tierA;
-
-            return (userChallengeA?.percentile || 0) - (userChallengeB?.percentile || 0);
-         });
-         break;
 
       case "Last Updated":
-         // When this filter - for whatever reason - gets selected on a non-user page
-         if (!userChallenges) {
-            return sortChallenges(challenges, "Name-ASC");
+         if (userChallenges) {
+            challenges.sort(sortByLastUpdated);
+            break;
          }
-         challenges = challenges.sort((a, b) => {
-            if (a.retired && !b.retired) return 1;
-            if (!a.retired && b.retired) return -1;
-
-            const userChallengeA = userChallenges.find((uc) => uc.challengeId === a.id);
-            const userChallengeB = userChallenges.find((uc) => uc.challengeId === b.id);
-
-            if (userChallengeA && userChallengeB) {
-               return (
-                  new Date(userChallengeB.achievedTime || 0).getTime() -
-                  new Date(userChallengeA.achievedTime || 0).getTime()
-               );
-            }
-
-            if (userChallengeA && !userChallengeB) return -1;
-            if (!userChallengeA && userChallengeB) return 1;
-            return 0;
-         });
-         break;
 
       case "Position":
-         // When this filter - for whatever reason - gets selected on a non-user page
-         if (!userChallenges) {
-            return sortChallenges(challenges, "Name-ASC");
+         if (userChallenges) {
+            challenges.sort(sortByPosition);
+            break;
          }
-         challenges = challenges.sort((a, b) => {
-            if (a.retired && !b.retired) return 1;
-            if (!a.retired && b.retired) return -1;
-
-            const userChallengeA = userChallenges.find((uc) => uc.challengeId === a.id);
-            const userChallengeB = userChallenges.find((uc) => uc.challengeId === b.id);
-
-            if (userChallengeA && userChallengeB) {
-               const positionA = userChallengeA.position || 0;
-               const positionB = userChallengeB.position || 0;
-
-               // A validation check with <= 0 is necessary, as it is not uncommon for the API to return negative positions
-               if (positionA > 0 && positionB <= 0) return -1;
-               if (positionA <= 0 && positionB > 0) return 1;
-               if (positionA <= 0 && positionB <= 0) return 0;
-               return (positionA as number) - (positionB as number);
-            }
-
-            if (userChallengeA && !userChallengeB) return -1;
-            if (!userChallengeA && userChallengeB) return 1;
-            return 0;
-         });
-
-         break;
 
       case "Levelup":
-         // When this filter - for whatever reason - gets selected on a non-user page
-         if (!userChallenges) {
-            return sortChallenges(challenges, "Name-ASC");
+         if (userChallenges) {
+            challenges = challenges.sort(sortByLevelup);
+            break;
          }
-         challenges = challenges.sort((a, b) => {
-            if (a.retired && !b.retired) return 1;
-            if (!a.retired && b.retired) return -1;
 
-            const userChallengeA = userChallenges.find((uc) => uc.challengeId === a.id);
-            const userChallengeB = userChallenges.find((uc) => uc.challengeId === b.id);
-            if (userChallengeA && !userChallengeB) return -1;
-            if (!userChallengeA && userChallengeB) return 1;
-            if (!userChallengeA && !userChallengeB) return 0;
-
-            const currentValueA = userChallengeA!.value;
-            const nextValueA =
-               a.thresholds[getNextTier(userChallengeA!.tier, a, false)].points;
-            const currentValueB = userChallengeB!.value;
-            const nextValueB =
-               b.thresholds[getNextTier(userChallengeB!.tier, b, false)].points;
-
-            if (nextValueA === 0 && nextValueB === 0) return 0;
-            if (nextValueA === 0) return -1;
-            if (nextValueB === 0) return 1;
-
-            const progressA = Math.min(currentValueA / nextValueA, 1);
-            const progressB = Math.min(currentValueB / nextValueB, 1);
-
-            // Already "maxed challenges" (progress >= 1) can be put at the back of the list
-            if (progressA >= 1 && progressA === progressB) return 0;
-            if (progressA >= 1 && progressB < 1) return 1;
-            if (progressA < 1 && progressB >= 1) return -1;
-
-            return progressB - progressA;
-         });
-
+      case "Name-ASC":
+         challenges.sort(sortByNameAsc);
          break;
+      case "Name-DESC":
+         challenges.sort(sortByNameDesc);
+         break;
+
       default:
+         console.warn(`Unknown sort mode: ${mode}`);
          break;
    }
 
+   index.clear();
    return challenges;
+}
+
+function sortRetiredHelper(a: IChallengeDTO, b: IChallengeDTO): number | null {
+   if (a.retired && !b.retired) return 1;
+   if (!a.retired && b.retired) return -1;
+   return null;
+}
+
+function sortByExistenceHelper(a: IChallengeDTO, b: IChallengeDTO): number | null {
+   const userChallengeA = index.get(a.id);
+   const userChallengeB = index.get(b.id);
+
+   if (userChallengeA && !userChallengeB) return -1;
+   if (!userChallengeA && userChallengeB) return 1;
+   if (!userChallengeA && !userChallengeB) return 0;
+   return null;
+}
+
+function sortByPercentileHelper(a: IChallengeDTO, b: IChallengeDTO) {
+   const userChallengeA = index.get(a.id);
+   const userChallengeB = index.get(b.id);
+
+   const exists = sortByExistenceHelper(a, b);
+   if (exists !== null) return exists;
+
+   const percentileA = userChallengeA!.percentile || -1;
+   const percentileB = userChallengeB!.percentile || -1;
+
+   if (percentileA >= 0 && percentileB < 0) return -1;
+   if (percentileA < 0 && percentileB >= 0) return 1;
+   if (percentileA >= 0 && percentileB >= 0) {
+      if (percentileA !== percentileB) {
+         return percentileB - percentileA;
+      }
+      const res = sortByRankHelper(a, b);
+      if (res !== 0) return res;
+      return sortByPositionHelper(a, b);
+   }
+
+   return 0;
+}
+
+function sortByPositionHelper(a: IChallengeDTO, b: IChallengeDTO) {
+   const userChallengeA = index.get(a.id);
+   const userChallengeB = index.get(b.id);
+
+   const exists = sortByExistenceHelper(a, b);
+   if (exists !== null) return exists;
+
+   const positionA: number = userChallengeA!.position || 0;
+   const positionB: number = userChallengeB!.position || 0;
+
+   // A validation check with <= 0 is necessary, as it is not uncommon for the API to return negative positions
+   if (positionA > 0 && positionB <= 0) return -1;
+   if (positionA <= 0 && positionB > 0) return 1;
+   if (positionA > 0 && positionB > 0) {
+      if (positionA !== positionB) {
+         return positionA - positionB;
+      }
+   }
+   return 0;
+}
+
+function sortByRankHelper(a: IChallengeDTO, b: IChallengeDTO) {
+   const userChallengeA = index.get(a.id);
+   const userChallengeB = index.get(b.id);
+   const tierA = getTierIndex(userChallengeA?.tier);
+   const tierB = getTierIndex(userChallengeB?.tier);
+
+   // sort by tier first
+   if (tierA !== tierB) return tierB - tierA;
+
+   return 0;
+}
+
+function sortByNameAsc(a: IChallengeDTO, b: IChallengeDTO) {
+   const retiredSort = sortRetiredHelper(a, b);
+   if (retiredSort !== null) return retiredSort;
+
+   return a.name.localeCompare(b.name);
+}
+
+function sortByNameDesc(a: IChallengeDTO, b: IChallengeDTO) {
+   const retiredSort = sortRetiredHelper(a, b);
+   if (retiredSort !== null) return retiredSort;
+
+   return b.name.localeCompare(a.name);
+}
+
+function sortByRank(a: IChallengeDTO, b: IChallengeDTO) {
+   const retiredSort = sortRetiredHelper(a, b);
+   if (retiredSort !== null) return retiredSort;
+
+   const res = sortByRankHelper(a, b);
+   if (res !== 0) return res;
+   return sortByPercentileHelper(a, b);
+}
+
+function sortByLastUpdated(a: IChallengeDTO, b: IChallengeDTO) {
+   const retiredSort = sortRetiredHelper(a, b);
+   if (retiredSort !== null) return retiredSort;
+
+   const userChallengeA = index.get(a.id);
+   const userChallengeB = index.get(b.id);
+
+   const exists = sortByExistenceHelper(a, b);
+   if (exists !== null) return exists;
+
+   return (
+      new Date(userChallengeB!.achievedTime || 0).getTime() -
+      new Date(userChallengeA!.achievedTime || 0).getTime()
+   );
+}
+
+function sortByPosition(a: IChallengeDTO, b: IChallengeDTO) {
+   const retiredSort = sortRetiredHelper(a, b);
+   if (retiredSort !== null) return retiredSort;
+
+   const res = sortByPositionHelper(a, b);
+   if (res !== 0) return res;
+
+   return sortByPercentileHelper(a, b);
+}
+
+function sortByLevelup(a: IChallengeDTO, b: IChallengeDTO) {
+   const retiredSort = sortRetiredHelper(a, b);
+   if (retiredSort !== null) return retiredSort;
+
+   const userChallengeA = index.get(a.id);
+   const userChallengeB = index.get(b.id);
+
+   const exists = sortByExistenceHelper(a, b);
+   if (exists !== null) return exists;
+
+   const currentValueA = userChallengeA!.value;
+   const nextValueA = a.thresholds[getNextTier(userChallengeA!.tier, a, false)].points;
+   const currentValueB = userChallengeB!.value;
+   const nextValueB = b.thresholds[getNextTier(userChallengeB!.tier, b, false)].points;
+
+   if (nextValueA === 0 && nextValueB === 0) return 0;
+   if (nextValueA === 0) return -1;
+   if (nextValueB === 0) return 1;
+
+   const progressA = Math.min(currentValueA / nextValueA, 1);
+   const progressB = Math.min(currentValueB / nextValueB, 1);
+
+   // Already "maxed challenges" (progress >= 1) can be put at the back of the list
+   if (progressA >= 1 && progressB >= 1) return sortByNameAsc(a, b);
+   if (progressA >= 1 && progressB < 1) return 1;
+   if (progressA < 1 && progressB >= 1) return -1;
+
+   return progressB - progressA;
 }
