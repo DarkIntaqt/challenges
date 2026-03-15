@@ -37,7 +37,7 @@ export default function Buttons<T>({
                         css.button,
                         state.includes(button.id) && css.enabled,
                      )}
-                     key={i}
+                     key={`${css.buttons}-${i}`}
                      onClick={() => toggle(button.id)}
                   >
                      {button.name}

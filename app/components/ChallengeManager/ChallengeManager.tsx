@@ -252,7 +252,7 @@ export default function ChallengeManager({
                      return (
                         <Challenge
                            user={userChallenge}
-                           key={challenge.id}
+                           key={`challenge-${challenge.id}`}
                            challenge={challenge}
                         />
                      );
