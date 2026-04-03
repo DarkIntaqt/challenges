@@ -46,7 +46,7 @@ export default function Distribution({
 
                   return amount;
                }),
-               label: "challenges in tier",
+               label: "Challenges in tier",
                color: "#0dbdff",
             },
          ]}

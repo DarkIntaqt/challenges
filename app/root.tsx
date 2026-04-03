@@ -27,6 +27,17 @@ export const links: Route.LinksFunction = () => [
       rel: "preconnect",
       href: cupcakeDomain,
    },
+   {
+      rel: "icon",
+      type: "image/x-icon",
+      href: "/favicon.ico",
+   },
+   {
+      rel: "icon",
+      type: "image/png",
+      sizes: "96x96",
+      href: "/favicon.png",
+   },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
