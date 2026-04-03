@@ -3,7 +3,7 @@ import { useStaticData } from "@cgg/hooks/useStaticData";
 import { capitalize } from "@cgg/utils/capitalize";
 import type { IApiChallengeResponse } from "@cgg/utils/endpoints/types";
 import { getChallenge } from "@cgg/utils/getChallenge";
-import { tierList } from "@cgg/utils/suffixToTier";
+import { tierList } from "@cgg/utils/getTier";
 import type { Tier } from "@cgg/utils/tier";
 
 const tiers = ["UNRANKED" as Tier, ...tierList];

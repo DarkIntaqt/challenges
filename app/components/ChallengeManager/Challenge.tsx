@@ -12,6 +12,7 @@ import { formatNumber } from "@cgg/utils/formatNumber";
 import { getChallenge } from "@cgg/utils/getChallenge";
 import { getParents } from "@cgg/utils/getParent";
 import { getNextTier, getPosition, getTier } from "@cgg/utils/getTier";
+import type { Tier } from "@cgg/utils/tier";
 import Heading from "../Heading/Heading";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import css from "./challenge.module.scss";
@@ -19,17 +20,19 @@ import css from "./challenge.module.scss";
 export default function Challenge({
    challenge,
    user,
+   nextTier,
 }: {
    challenge: IChallengeDTO;
    user?: IApiChallenge;
+   nextTier?: Tier | "CROWN";
 }) {
    const data = useStaticData();
    const tier = getTier(challenge, user);
    const parents = getParents(challenge, data.challenges);
 
    const isUser = typeof user !== "undefined";
-   const nextTier = getNextTier(tier, challenge, true);
-   let nextValue = challenge.thresholds[nextTier].points;
+   const nextPointTier = getNextTier(tier, challenge, true, nextTier);
+   let nextValue = challenge.thresholds[nextPointTier].points;
    let currentValue = user?.value ?? 0;
 
    // Get the category of the challenge

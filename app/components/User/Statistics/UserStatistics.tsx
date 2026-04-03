@@ -1,10 +1,6 @@
 import { ThemeProvider } from "@mui/material/styles";
-import { LineChart } from "@mui/x-charts";
-import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import Heading from "@cgg/components/Heading/Heading";
-import { capitalize } from "@cgg/utils/capitalize";
 import type { IApiChallengeResponse } from "@cgg/utils/endpoints/types";
-import { tierList } from "@cgg/utils/suffixToTier";
 import Categories from "./Categories";
 import Distribution from "./Distribution";
 import darkTheme from "./theme";

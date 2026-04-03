@@ -14,6 +14,7 @@ test("Container renders with default props", () => {
    expect(container).not.toHaveClass(css.large);
    expect(container).not.toHaveClass(css.small);
    expect(container).not.toHaveClass(css.center);
+   expect(container).not.toHaveClass(css.gap);
 
    expect(container).toHaveTextContent(text);
 });

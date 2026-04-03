@@ -1,5 +1,7 @@
 import cloneDeep from "clone-deep";
 import type { Category, GameMode, IChallengeDTO, Source } from "@cgg/utils/challenges";
+import type { IApiChallenge } from "@cgg/utils/endpoints/types";
+import { getNextTier, getTierIndex } from "@cgg/utils/getTier";
 
 export type Modifications =
    | "points-only"
@@ -15,39 +17,73 @@ export interface IChallengeFilter {
    modifications: Modifications[];
 }
 
-// Returns a copy of the given challenges, filtered by the given filter. The original array is not modified.
+const MASTER_TIER_INDEX = getTierIndex("MASTER");
+
+/**
+ * Filters a list of challenges based on the given filter criteria and user challenges.
+ * The array gets cloned before filtering to prevent mutating the original array.
+ * @param challenges List of challenges to filter
+ * @param filter List of filters to apply to these challenges
+ * @param userChallenges Optional list of user challenges for further filtering
+ * @returns List of all filtered challenges
+ */
 export function filterChallenges(
    challenges: IChallengeDTO[],
    filter: IChallengeFilter,
+   userChallenges?: IApiChallenge[],
 ): IChallengeDTO[] {
+   const { search, category, source, gameMode, modifications } = filter;
+   const showRetired: boolean = modifications.includes("show-retired");
+   const pointsOnly: boolean = modifications.includes("points-only");
+   const noCapstones: boolean = modifications.includes("no-capstones");
+   const masterThresholds: boolean = modifications.includes("master-thresholds");
+   const searchTerms: string[] = search
+      .split(",")
+      .map((term) => term.trim().toLowerCase())
+      .filter((term) => term.length > 0);
+
    return cloneDeep(
       challenges.filter((challenge) => {
-         const { search, category, source, gameMode, modifications } = filter;
-
-         // remove retired first
-         if (!modifications.includes("show-retired") && challenge.retired) {
+         // remove retired first, either if requested or when points-only is enabled
+         if ((!showRetired || pointsOnly) && challenge.retired) {
             return false;
          }
 
-         if (
-            modifications.includes("no-capstones") &&
-            challenge.tags.isCapstone === "Y"
-         ) {
+         if (noCapstones && challenge.tags.isCapstone === "Y") {
             return false;
          }
 
-         if (search.length > 0) {
+         if (pointsOnly) {
+            // Remove legaccy
+            if (challenge.categoryId === -1) return false;
+
+            if (userChallenges) {
+               const userChallenge = userChallenges.find(
+                  (c) => c.challengeId === challenge.id,
+               );
+               if (userChallenge !== undefined) {
+                  const tierId = getTierIndex(userChallenge.tier);
+                  if (tierId >= MASTER_TIER_INDEX) {
+                     return false;
+                  }
+
+                  if (getNextTier(userChallenge.tier, challenge) === userChallenge.tier) {
+                     return false;
+                  }
+               }
+            }
+         }
+
+         if (searchTerms.length > 0) {
             let found = false;
             // checks whether all results are excluded by default
             let purelyExclude = true;
             // checks whether a result was excluded, it can not be included again
             let breakAll = false;
 
-            const split = search.split(",");
-            for (let i = 0; i < split.length; i++) {
+            for (let term of searchTerms) {
                // whether to include or exclude search results
                let mode: "include" | "exclude" = "include";
-               let term = split[i].trim().toLowerCase();
 
                if (term.startsWith("-")) {
                   mode = "exclude";
@@ -76,36 +112,15 @@ export function filterChallenges(
          }
 
          if (category.length > 0) {
-            let found = false;
-            for (let i = 0; i < category.length; i++) {
-               if (challenge.categoryId === category[i]) {
-                  found = true;
-                  break;
-               }
-            }
-            if (!found) return false;
+            if (!category.includes(challenge.categoryId)) return;
          }
 
          if (gameMode.length > 0) {
-            let found = false;
-            for (let i = 0; i < gameMode.length; i++) {
-               if (challenge.gameMode === gameMode[i]) {
-                  found = true;
-                  break;
-               }
-            }
-            if (!found) return false;
+            if (!gameMode.includes(challenge.gameMode)) return false;
          }
 
          if (source.length > 0) {
-            let found = false;
-            for (let i = 0; i < source.length; i++) {
-               if (challenge.source === source[i]) {
-                  found = true;
-                  break;
-               }
-            }
-            if (!found) return false;
+            if (!source.includes(challenge.source)) return false;
          }
 
          return true;

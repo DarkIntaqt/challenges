@@ -102,10 +102,13 @@ export default function ChallengeManager({
    }, [filter]);
 
    const results = sortChallenges(
-      filterChallenges(challenges, filter),
+      filterChallenges(challenges, filter, userData?.challenges),
       sortMode,
       userData?.challenges,
    );
+
+   // Cache master threshold to prevent .include checking for every challenge
+   const masterThresholdsActive = modifications.includes("master-thresholds");
 
    return (
       <>
@@ -296,7 +299,7 @@ export default function ChallengeManager({
                            challengeId: challenge.id,
                            tier: "UNRANKED",
                            value: 0,
-                           percentile: 100,
+                           percentile: 1,
                         };
                      }
 
@@ -305,6 +308,7 @@ export default function ChallengeManager({
                            user={userChallenge}
                            key={`challenge-${challenge.id}`}
                            challenge={challenge}
+                           nextTier={masterThresholdsActive ? "MASTER" : undefined}
                         />
                      );
                   })}

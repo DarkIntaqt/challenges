@@ -45,6 +45,10 @@
       min-height: 100vh;
    }
 
+   &.flex.gap {
+      gap: 1rem;
+   }
+
    &.fullWidth {
       min-width: 100%;
    }

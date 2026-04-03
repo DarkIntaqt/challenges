@@ -1,9 +1,4 @@
-import type {
-   IChallengeDTO,
-   IChallengesFullDTO,
-   ITitleDTO,
-} from "./challenges";
-import { suffixToTier } from "./suffixToTier";
+import type { IChallengeDTO, IChallengesFullDTO, ITitleDTO } from "./challenges";
 import type { Tier } from "./tier";
 
 interface ITitleResponse extends ITitleDTO {

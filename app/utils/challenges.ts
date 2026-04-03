@@ -33,7 +33,14 @@ export const sources = [
 ] as const;
 export type Source = (typeof sources)[number];
 
-export const categories = [1, 2, 3, 4, 5, -1] as const;
+export const categories = [
+   1, // Imagination
+   2, // Expertise
+   3, // Veterancy
+   4, // Teamwork
+   5, // Collection
+   -1, // Legacy
+] as const;
 export type Category = (typeof categories)[number];
 
 interface IChallengesFullDTO {
@@ -61,7 +68,7 @@ interface IChallengeDTO {
    leaderboard: boolean;
    reverseDirection?: boolean;
    titles?: ITitleRewardDTO[];
-   categoryId: number;
+   categoryId: Category;
    gameMode: GameMode;
    retired: boolean;
 }

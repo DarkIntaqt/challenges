@@ -13,6 +13,7 @@ export default function Container({
    fullWidth = false,
    column = false,
    headerPadding = false,
+   gap = false,
 }: {
    className?: string;
    children?: React.ReactNode;
@@ -25,6 +26,7 @@ export default function Container({
    fullWidth?: boolean;
    column?: boolean;
    headerPadding?: boolean;
+   gap?: boolean;
 }) {
    if (large && small) {
       throw new Error("Container cannot be both large and small at the same time.");
@@ -44,6 +46,7 @@ export default function Container({
             fullWidth && css.fullWidth,
             column && css.column,
             headerPadding && css.headerPadding,
+            gap && css.gap,
          )}
       >
          {children}
