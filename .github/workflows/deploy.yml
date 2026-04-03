@@ -20,9 +20,9 @@ jobs:
             node-version: [22.x]
 
       steps:
-         - uses: actions/checkout@v4
+         - uses: actions/checkout@v5
          - name: Run test with Node.js ${{ matrix.node-version }}
-           uses: actions/setup-node@v4
+           uses: actions/setup-node@v5
            with:
               node-version: ${{ matrix.node-version }}
               cache: "npm"
@@ -38,7 +38,7 @@ jobs:
       environment: ${{ (github.ref_type == 'tag' && 'Production') || (github.ref_type == 'branch' && github.ref_name == 'main' && 'Staging') || ''}}
       steps:
          - name: Checkout
-           uses: actions/checkout@v4
+           uses: actions/checkout@v5
          - name: Docker meta
            id: meta
            uses: docker/metadata-action@v5
