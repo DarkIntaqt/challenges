@@ -30,7 +30,7 @@ export default function Challenge({
    const isUser = typeof user !== "undefined";
    const nextTier = getNextTier(tier, challenge, true);
    let nextValue = challenge.thresholds[nextTier].points;
-   let currentValue = user?.value;
+   let currentValue = user?.value ?? 0;
 
    // Get the category of the challenge
    const category = parents[parents.length - 1];
@@ -115,8 +115,8 @@ export default function Challenge({
 
          {isUser && (
             <ProgressBar
-               current={currentValue}
-               next={nextValue}
+               current={!challenge.reverseDirection ? currentValue : nextValue}
+               next={!challenge.reverseDirection ? nextValue : currentValue}
                pinned
                className={css.progress}
             />
