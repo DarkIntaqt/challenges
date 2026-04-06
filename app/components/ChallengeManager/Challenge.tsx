@@ -101,6 +101,7 @@ export default function Challenge({
                   src={getChallengeIcon(category)}
                   draggable={false}
                   title={getChallenge(category, data)?.name || "Legacy"}
+                  loading="lazy"
                />
             )}
             {gameMode !== "none" && (
@@ -108,6 +109,7 @@ export default function Challenge({
                   src={getGamemodeIcon(gameMode)}
                   draggable={false}
                   title={capitalize(gameMode)}
+                  loading="lazy"
                />
             )}
             {source !== "EOGD" && getChallengeSourceIcon(source)}

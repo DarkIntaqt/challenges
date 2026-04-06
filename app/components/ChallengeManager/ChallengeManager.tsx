@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { serialize } from "cookie";
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { FaSortAlphaDown } from "react-icons/fa";
 import {
    FaArrowUpRightDots,
@@ -20,9 +20,9 @@ import {
    getChallengeSourceIcon,
    getChallengeSourceName,
 } from "@cgg/utils/challengeSource";
-import type { Category, GameMode, Source } from "@cgg/utils/challenges";
+import type { Category, GameMode, IChallengeDTO, Source } from "@cgg/utils/challenges";
 import { categories, gameModeToString, gameModes, sources } from "@cgg/utils/challenges";
-import type { IApiChallengeResponse } from "@cgg/utils/endpoints/types";
+import type { IApiChallenge, IApiChallengeResponse } from "@cgg/utils/endpoints/types";
 import { getChallenge } from "@cgg/utils/getChallenge";
 import Radio from "../Buttons/Radio";
 import Searchbar from "../Searchbar/Searchbar";
@@ -34,6 +34,15 @@ import {
    filterChallenges,
 } from "./filterChallenges";
 import { type SortMode, sortChallenges } from "./sortChallenges";
+
+const DEFAULT_CHALLENGE: IApiChallenge = {
+   challengeId: -1,
+   tier: "UNRANKED",
+   value: 0,
+   percentile: 1,
+};
+
+const MemoChallenge = memo(Challenge);
 
 export default function ChallengeManager({
    userData,
@@ -82,6 +91,14 @@ export default function ChallengeManager({
       modifications: modifications,
    };
 
+   const userChallengeMap = useMemo(() => {
+      const map = new Map<number, IApiChallenge>();
+      userData?.challenges.forEach((challenge) => {
+         map.set(challenge.challengeId, challenge);
+      });
+      return map;
+   }, [userData]);
+
    function toggleModification(modification: Modifications) {
       setModifications((prev) =>
          prev.includes(modification)
@@ -101,18 +118,22 @@ export default function ChallengeManager({
       });
    }, [filter]);
 
-   const results = sortChallenges(
-      filterChallenges(challenges, filter, userData?.challenges),
-      sortMode,
-      userData?.challenges,
+   // Cache master threshold to prevent .include checking for every challenge
+   const masterThresholdsActive = useMemo(
+      () => modifications.includes("master-thresholds"),
+      [modifications],
    );
 
-   // Cache master threshold to prevent .include checking for every challenge
-   const masterThresholdsActive = modifications.includes("master-thresholds");
+   const results = sortChallenges(
+      filterChallenges(challenges, filter, userChallengeMap),
+      sortMode,
+      masterThresholdsActive,
+      userChallengeMap,
+   );
 
    return (
       <>
-         <div className={css.grid}>
+         <div className={clsx(css.grid, userData?.challenges && css.user)}>
             <div className={css.filters}>
                <SimpleBar style={{ height: "100%" }}>
                   <div className={css.innerScrollbar}>
@@ -290,21 +311,17 @@ export default function ChallengeManager({
                </div>
                <div className={css.challengeList}>
                   {results.map((challenge) => {
-                     let userChallenge = userData?.challenges.find(
-                        (c) => c.challengeId === challenge.id,
-                     );
+                     let userChallenge = userChallengeMap.get(challenge.id);
 
-                     if (isUserInterface && !userChallenge) {
+                     if (isUserInterface && userChallenge === undefined) {
                         userChallenge = {
+                           ...DEFAULT_CHALLENGE,
                            challengeId: challenge.id,
-                           tier: "UNRANKED",
-                           value: 0,
-                           percentile: 1,
                         };
                      }
 
                      return (
-                        <Challenge
+                        <MemoChallenge
                            user={userChallenge}
                            key={`challenge-${challenge.id}`}
                            challenge={challenge}

@@ -1,6 +1,7 @@
 import type { IChallengeDTO } from "@cgg/utils/challenges";
 import type { IApiChallenge } from "@cgg/utils/endpoints/types";
 import { getNextTier, getTierIndex } from "@cgg/utils/getTier";
+import type { Tier } from "@cgg/utils/tier";
 
 export type SortMode =
    | "Name-ASC"
@@ -10,39 +11,40 @@ export type SortMode =
    | "Position"
    | "Levelup";
 
-const index = new Map<number, IApiChallenge>();
+let index: Map<number, IApiChallenge>;
+let targetTier: Tier | undefined = undefined;
 
 export function sortChallenges(
    challenges: IChallengeDTO[],
    mode: SortMode,
-   userChallenges?: IApiChallenge[],
+   masterThresholdsActive: boolean,
+   userChallenges: Map<number, IApiChallenge>,
 ): IChallengeDTO[] {
-   userChallenges?.forEach((challenge) => {
-      index.set(challenge.challengeId, challenge);
-   });
+   index = new Map(userChallenges);
+   targetTier = masterThresholdsActive ? "MASTER" : undefined;
 
    switch (mode) {
       // Fallthrough is intentional to sort by name if userChallenges is not available
       case "Rank":
-         if (userChallenges) {
+         if (userChallenges.size > 0) {
             challenges.sort(sortByRank);
             break;
          }
 
       case "Last Updated":
-         if (userChallenges) {
+         if (userChallenges.size > 0) {
             challenges.sort(sortByLastUpdated);
             break;
          }
 
       case "Position":
-         if (userChallenges) {
+         if (userChallenges.size > 0) {
             challenges.sort(sortByPosition);
             break;
          }
 
       case "Levelup":
-         if (userChallenges) {
+         if (userChallenges.size > 0) {
             challenges = challenges.sort(sortByLevelup);
             break;
          }
@@ -196,9 +198,11 @@ function sortByLevelup(a: IChallengeDTO, b: IChallengeDTO) {
    if (exists !== null) return exists;
 
    const currentValueA = userChallengeA!.value;
-   const nextValueA = a.thresholds[getNextTier(userChallengeA!.tier, a, false)].points;
+   const nextValueA =
+      a.thresholds[getNextTier(userChallengeA!.tier, a, false, targetTier)].points;
    const currentValueB = userChallengeB!.value;
-   const nextValueB = b.thresholds[getNextTier(userChallengeB!.tier, b, false)].points;
+   const nextValueB =
+      b.thresholds[getNextTier(userChallengeB!.tier, b, false, targetTier)].points;
 
    if (nextValueA === 0 && nextValueB === 0) return 0;
    if (nextValueA === 0) return -1;

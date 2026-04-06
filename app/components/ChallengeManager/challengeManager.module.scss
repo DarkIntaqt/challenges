@@ -6,8 +6,11 @@
    display: grid;
 
    grid-template-columns: 2fr 7fr;
-
    gap: 1rem;
+
+   &.user .filters .options {
+      justify-content: space-between;
+   }
 
    .filters {
       position: sticky;
@@ -30,7 +33,6 @@
             height: 53px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             gap: 5px;
 
             .optionButton {

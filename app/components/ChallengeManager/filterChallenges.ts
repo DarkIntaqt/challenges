@@ -1,4 +1,5 @@
 import cloneDeep from "clone-deep";
+import type { M } from "vitest/dist/chunks/environment.d.cL3nLXbE.js";
 import type { Category, GameMode, IChallengeDTO, Source } from "@cgg/utils/challenges";
 import type { IApiChallenge } from "@cgg/utils/endpoints/types";
 import { getNextTier, getTierIndex } from "@cgg/utils/getTier";
@@ -24,19 +25,18 @@ const MASTER_TIER_INDEX = getTierIndex("MASTER");
  * The array gets cloned before filtering to prevent mutating the original array.
  * @param challenges List of challenges to filter
  * @param filter List of filters to apply to these challenges
- * @param userChallenges Optional list of user challenges for further filtering
+ * @param userChallenges Map of user challenges for further filtering
  * @returns List of all filtered challenges
  */
 export function filterChallenges(
    challenges: IChallengeDTO[],
    filter: IChallengeFilter,
-   userChallenges?: IApiChallenge[],
+   userChallenges: Map<number, IApiChallenge>,
 ): IChallengeDTO[] {
    const { search, category, source, gameMode, modifications } = filter;
    const showRetired: boolean = modifications.includes("show-retired");
    const pointsOnly: boolean = modifications.includes("points-only");
    const noCapstones: boolean = modifications.includes("no-capstones");
-   const masterThresholds: boolean = modifications.includes("master-thresholds");
    const searchTerms: string[] = search
       .split(",")
       .map((term) => term.trim().toLowerCase())
@@ -57,10 +57,8 @@ export function filterChallenges(
             // Remove legaccy
             if (challenge.categoryId === -1) return false;
 
-            if (userChallenges) {
-               const userChallenge = userChallenges.find(
-                  (c) => c.challengeId === challenge.id,
-               );
+            if (userChallenges.size > 0) {
+               const userChallenge = userChallenges.get(challenge.id);
                if (userChallenge !== undefined) {
                   const tierId = getTierIndex(userChallenge.tier);
                   if (tierId >= MASTER_TIER_INDEX) {
