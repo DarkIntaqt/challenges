@@ -22,6 +22,10 @@ export function meta({}: Route.MetaArgs) {
          content:
             "league of legends challenges lookup, challenges overview, league of legends, challenge stats, league of legends challenge tracker, lol challenges, challenge progress checker, challenge stats checker, lol challenge tracker, darkintaqt challenges",
       },
+      {
+         rel: "canonical",
+         href: "https://challenges.gg/",
+      },
    ];
 }
 
