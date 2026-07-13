@@ -47,7 +47,7 @@ const config = {
     "ru",
     "tr",
     // "ph",
-    "sg",
+    "sea",
     // "th",
     "tw",
     "vn",

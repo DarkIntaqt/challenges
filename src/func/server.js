@@ -37,7 +37,7 @@ function serverToHumanReadable(server) {
         //     return "ph"
 
         case "sg2":
-            return "sg"
+            return "sea"
 
         // case "th2":
         //     return "th"
@@ -95,7 +95,7 @@ function serverToMachineReadable(server) {
         // case "ph":
         //     return "ph2"
 
-        case "sg":
+        case "sea":
             return "sg2"
 
         // case "th":
