@@ -11,7 +11,7 @@ function fillLoadingUI() {
         description="-"
         key={i}
         href={"#//401306"}
-      />
+      />,
     );
   }
   return loadingUIObject;
@@ -46,9 +46,9 @@ const config = {
     "oc",
     "ru",
     "tr",
-    "ph",
+    // "ph",
     "sg",
-    "th",
+    // "th",
     "tw",
     "vn",
   ],

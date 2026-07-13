@@ -169,7 +169,7 @@ class Start extends Component {
       <div className={StyleSheet.background} style={backgroundImage}></div>
       <div className={StyleSheet.start + " object1000"}>
         <h1>{t("League of Legends")} <br /><span>{t("Challenge Progress Tracker")}</span></h1>
-        <h2>{t("By")} <a href="https://darkintaqt.com/blog" target="_blank" rel="noreferrer">DarkIntaqt.com</a></h2>
+        <h2>{t("By")} <a href="https://darkintaqt.com/blog" target="_blank" rel="noreferrer">darkintaqt.com</a></h2>
         { /*<h2>Something special will happen <Timestamp date={1683487800000} /></h2>*/}
 
         <div className={StyleSheet.searchbar}>
