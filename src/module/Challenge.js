@@ -585,7 +585,13 @@ class Challenge extends Component {
                       ></LazyLoadImage>
                       <p
                         style={
-                          player[0] === "Chiko#001" ? { color: "rgb(245, 126, 178)" } : {}
+                          player[0] === "Chiko#001" ? { color: "rgb(245, 126, 178)" } : 
+                          player[0] === "Forever With Him#0210" ? {color: "#ff7f7f"} : 
+                          player[0] === "BlackStarR#9794" ? {color: "#F4BC59"} :
+                          player[0] === "Killerzwq#XELP" ? {color: "#ff8a3d"} :
+                          player[0] === "Kyoki Koniro#UWU" ? {color: "#eea8ff"} :
+                          player[0] === "King Pengu#Joloo" ? {color: "#F4BC59"} :
+                          {}
                         }
                       >
                         {player[0]}{" "}
