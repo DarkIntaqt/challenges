@@ -586,11 +586,17 @@ class Challenge extends Component {
                       <p
                         style={
                           player[0] === "Chiko#001" ? { color: "rgb(245, 126, 178)" } : 
-                          player[0] === "Forever With Him#0210" ? {color: "#ff7f7f"} : 
-                          player[0] === "BlackStarR#9794" ? {color: "#F4BC59"} :
-                          player[0] === "Killerzwq#XELP" ? {color: "#ff8a3d"} :
-                          player[0] === "Kyoki Koniro#UWU" ? {color: "#eea8ff"} :
-                          player[0] === "King Pengu#Joloo" ? {color: "#F4BC59"} :
+                          player[0] === "Forever With Him#0210" ? { color: "#ff7f7f" } : 
+                          player[0] === "BlackStarR#9794" ? { color: "#F4BC59" } :
+                          player[0] === "Killerzwq#XELP" ? { color: "#ff8a3d" } :
+                          player[0] === "Kyoki Koniro#UWU" ? { color: "#eea8ff" } :
+                          player[0] === "King Pengu#Joloo" ? { color: "#ffeb3b" } :
+                          player[0] === "Kasugunai#EUW" ? { color: "#ccccff" } :
+                          player[0] === "Arzmataz#1712" ? { color: "#7cff69" } :
+                          player[0] === "RATIRL#Blood" ? { color: "#7cff69" } :
+                          player[0] === "TheWhaleWisperer#66666" ? { color: "#6d24d4" } :
+                          player[0] === "uwu Shibaai#GOD" ? { color: "#ffff00" } :
+                          player[0] === "Oliś#EUΝE" ? { color: "#e5a8ff" } :
                           {}
                         }
                       >
