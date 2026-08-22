@@ -597,6 +597,9 @@ class Challenge extends Component {
                           player[0] === "TheWhaleWisperer#66666" ? { color: "#6d24d4" } :
                           player[0] === "uwu Shibaai#GOD" ? { color: "#ffff00" } :
                           player[0] === "Oliś#EUΝE" ? { color: "#e5a8ff" } :
+                          player[0] === "Onyx#8292" ? { color: "#3CC4F4" } :
+                          player[0] === "Panna wampir#zuzi" ? { color: "#9400D3" } :
+                          player[0] === "VeN234#GoD" ? { color: "#ccc234" } :
                           {}
                         }
                       >
