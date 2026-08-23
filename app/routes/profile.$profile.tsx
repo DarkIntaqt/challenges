@@ -21,7 +21,7 @@ export const shouldRevalidate = ({
 };
 
 export default function Layout({ loaderData }: Route.ComponentProps) {
-   const { summoner, gameName, tagLine } = loaderData.profile;
+   const { summoner, gameName, tagLine, summonerIconId } = loaderData.profile;
    const tier = summoner.tier;
    const { transition } = usePageTransition();
 
@@ -31,7 +31,7 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
          id: loaderData.profile.id,
          name: gameName,
          tagLine: tagLine,
-         icon: summoner.profileIcon,
+         icon: summonerIconId,
       } as Recent);
    }, []);
 

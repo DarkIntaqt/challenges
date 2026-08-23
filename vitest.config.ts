@@ -9,7 +9,7 @@ export default defineConfig({
    },
    resolve: {
       alias: {
-         "@cgg": path.resolve(__dirname, "app"),
+         "@cgg": path.resolve(import.meta.dirname, "app"),
       },
    },
 });

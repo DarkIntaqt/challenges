@@ -1,23 +1,16 @@
 import type { Tier } from "../tier";
 import { IApiVerifiedResponse } from "./types.d";
 
-export interface IApiAccountResponse {
+export interface IApiProfileResponse {
    id: string;
    gameName: string;
    tagLine: string;
    region: string;
+   summonerIconId: number;
+   summonerLevel: number;
 }
 
-interface IApiProfileSummoner {
-   profileIcon: number;
-   level: number;
-}
-
-export interface IApiProfileResponse extends IApiAccountResponse {
-   summoner: IApiProfileSummoner;
-}
-
-interface IApiChallengeSummoner extends IApiProfileSummoner {
+interface IApiChallengeSummoner {
    tier: Tier;
    totalPoints: number;
    percentile: number;

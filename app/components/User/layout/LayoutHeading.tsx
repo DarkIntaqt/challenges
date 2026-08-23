@@ -17,7 +17,8 @@ export function LayoutHeading({
    playerData,
    verified,
 }: Readonly<{ playerData: IApiChallengeResponse; verified: IApiVerified }>) {
-   const { summoner, gameName, tagLine, region } = playerData;
+   const { summoner, gameName, tagLine, region, summonerIconId, summonerLevel } =
+      playerData;
    const tier = summoner.tier;
    const data = useStaticData();
 
@@ -29,10 +30,10 @@ export function LayoutHeading({
          <div className={clsx(css.icon, cssVariables[tier])}>
             <img
                className={css.profileIcon}
-               src={getProfileIcon(summoner.profileIcon)}
+               src={getProfileIcon(summonerIconId)}
                alt={`${fullName}'s profile icon'`}
             />
-            <span className={css.level}>{summoner.level}</span>
+            <span className={css.level}>{summonerLevel}</span>
          </div>
 
          <div className={css.right}>

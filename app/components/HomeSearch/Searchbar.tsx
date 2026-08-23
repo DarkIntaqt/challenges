@@ -94,7 +94,7 @@ export default function Searchbar() {
                      id: id,
                      name: profile.gameName,
                      tagLine: profile.tagLine,
-                     icon: profile.summoner.profileIcon,
+                     icon: profile.summonerIconId,
                      draft: true,
                   } as SearchResultSummoner;
 
