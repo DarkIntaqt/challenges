@@ -2,14 +2,11 @@ import { reactRouter } from "@react-router/dev/vite";
 import * as path from "node:path";
 import { defineConfig } from "vite";
 import babel from "vite-plugin-babel";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
    plugins: [
-      !process.env.VITEST && reactRouter(),
-      tsconfigPaths(),
       babel({
-         filter: /\.[jt]sx?$/,
+         include: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
          babelConfig: {
             presets: ["@babel/preset-typescript"],
             plugins: ["babel-plugin-react-compiler"],
@@ -18,15 +15,12 @@ export default defineConfig({
             },
          },
       }),
+      !process.env.VITEST && reactRouter(),
    ],
-   test: {
-      environment: "jsdom",
-      globals: true,
-      setupFiles: ["./tests/setup.ts"],
-   },
    resolve: {
+      tsconfigPaths: true,
       alias: {
-         "@cgg": path.resolve(__dirname, "app"),
+         "@cgg": path.resolve(import.meta.dirname, "app"),
       },
    },
    css: {
