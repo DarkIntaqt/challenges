@@ -1,14 +1,10 @@
 import cloneDeep from "clone-deep";
-import type { M } from "vitest/dist/chunks/environment.d.cL3nLXbE.js";
 import type { Category, GameMode, IChallengeDTO, Source } from "@cgg/utils/challenges";
 import type { IApiChallenge } from "@cgg/utils/endpoints/types";
 import { getNextTier, getTierIndex } from "@cgg/utils/getTier";
 
 export type Modifications =
-   | "points-only"
-   | "master-thresholds"
-   | "no-capstones"
-   | "show-retired";
+   "points-only" | "master-thresholds" | "no-capstones" | "show-retired";
 
 export interface IChallengeFilter {
    search: string;
