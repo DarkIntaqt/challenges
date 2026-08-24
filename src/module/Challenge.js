@@ -600,6 +600,9 @@ class Challenge extends Component {
                           player[0] === "Onyx#8292" ? { color: "#3CC4F4" } :
                           player[0] === "Panna wampir#zuzi" ? { color: "#9400D3" } :
                           player[0] === "VeN234#GoD" ? { color: "#ccc234" } :
+                          player[0] === "Alune#001" ? { color: "#d83850" } :
+                          // TEMP
+                          player[0] === "Wayn#USA" ? { background:"linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)", backgroundClip:"text", color:"transparent", webkitBackgroundClip:"text", webkitTextFillColor:"transparent" } :
                           {}
                         }
                       >
