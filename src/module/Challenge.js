@@ -602,6 +602,12 @@ class Challenge extends Component {
                           player[0] === "VeN234#GoD" ? { color: "#ccc234" } :
                           player[0] === "Alune#001" ? { color: "#ff0000" } :
                           player[0] === "Social phobia#001" ? { color: "#f47fff" } :
+                          player[0] === "Fus#9999" ? { color: "#f47fff" } :
+                          player[0] === "Quìn Quìn TFT#1524" ? { color: "#6dea00" } :
+                          player[0] === "Lúc hay lúc dở#812" ? { color: "#FF00FF" } :
+                          player[0] === "Mirividual#ily" ? { color: "#B77DE3" } :
+                          player[0] === "Titan Ultimatum#NA1" ? { color: "#0fce48" } :
+                          player[0] === "Huracanine#NA1" ? { color: "#ffb20c" } :
                           // TEMP
                           player[0] === "Wayn#USA" ? { background:"linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)", backgroundClip:"text", color:"transparent", webkitBackgroundClip:"text", webkitTextFillColor:"transparent" } :
                           {}
