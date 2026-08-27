@@ -607,7 +607,11 @@ class Challenge extends Component {
                           player[0] === "Lúc hay lúc dở#812" ? { color: "#FF00FF" } :
                           player[0] === "Mirividual#ily" ? { color: "#B77DE3" } :
                           player[0] === "Titan Ultimatum#NA1" ? { color: "#0fce48" } :
-                          player[0] === "Huracanine#NA1" ? { color: "#ffb20c" } :
+                          player[0] === "Huracanine#NA1" ? { color: "#F56600" } :
+                          player[0] === "Diệu Nguyệt Lan#DNL" ? { color: "#2065e6" } :
+                          player[0] === "Helghans templar#NA1" ? { color: "#780606" } :
+                          player[0] === "Lord Valentine#RITOo" ? { color: "#c21717" } :
+                          player[0] === "ｓｈｉｒａｙｏｋｉｉ白雪#Jam" ? { color: "#8E24F2" } :
                           // TEMP
                           player[0] === "Wayn#USA" ? { background:"linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)", backgroundClip:"text", color:"transparent", webkitBackgroundClip:"text", webkitTextFillColor:"transparent" } :
                           {}
