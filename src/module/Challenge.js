@@ -593,13 +593,13 @@ class Challenge extends Component {
                           player[0] === "King Pengu#Joloo" ? { color: "#ffeb3b" } :
                           player[0] === "Kasugunai#EUW" ? { color: "#ccccff" } :
                           player[0] === "Arzmataz#1712" ? { color: "#7cff69" } :
-                          player[0] === "RATIRL#Blood" ? { color: "#7cff69" } :
+                          player[0] === "RATIRL#Blood" ? { color: "#7CFF69" } :
                           player[0] === "TheWhaleWisperer#66666" ? { color: "#6d24d4" } :
-                          player[0] === "uwu Shibaai#GOD" ? { color: "#ffff00" } :
-                          player[0] === "Oliś#EUΝE" ? { color: "#e5a8ff" } :
+                          player[0] === "uwu Shibaai#GOD" ? { color: "#FFFF00" } :
+                          player[0] === "Oliś#EUΝE" ? { color: "#E5A8FF" } :
                           player[0] === "Onyx#8292" ? { color: "#3CC4F4" } :
                           player[0] === "Panna wampir#zuzi" ? { color: "#9400D3" } :
-                          player[0] === "VeN234#GoD" ? { color: "#ccc234" } :
+                          player[0] === "VeN234#GoD" ? { color: "#CCC234" } :
                           player[0] === "Alune#001" ? { color: "#ff0000" } :
                           player[0] === "Social phobia#001" ? { color: "#f47fff" } :
                           player[0] === "Fus#9999" ? { color: "#f47fff" } :
@@ -610,8 +610,13 @@ class Challenge extends Component {
                           player[0] === "Huracanine#NA1" ? { color: "#F56600" } :
                           player[0] === "Diệu Nguyệt Lan#DNL" ? { color: "#2065e6" } :
                           player[0] === "Helghans templar#NA1" ? { color: "#780606" } :
-                          player[0] === "Lord Valentine#RITOo" ? { color: "#c21717" } :
+                          player[0] === "Lord Valentine#RITOo" ? { color: "#C21717" } :
                           player[0] === "ｓｈｉｒａｙｏｋｉｉ白雪#Jam" ? { color: "#8E24F2" } :
+                          player[0] === "thetallguyy#NA1" ? { color: "#CFC493" } :
+                          player[0] === "Synicle#Nancy" ? { color: "#28b1f2" } :
+                          player[0] === "E Z#999" ? { color: "#3CC4F4" } :
+                          player[0] === "Mr Peid#Peid" ? { color: "#FFFF00" } :
+                          player[0] === "cyan#pink" ? { color: "#00ffff" } :
                           // TEMP
                           player[0] === "Wayn#USA" ? { background:"linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)", backgroundClip:"text", color:"transparent", webkitBackgroundClip:"text", webkitTextFillColor:"transparent" } :
                           {}
