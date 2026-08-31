@@ -19,6 +19,8 @@ export interface SearchResultSummoner extends RecentSummoner {
 
 export type SearchResult = SearchResultChallenge | SearchResultSummoner;
 
+const MAX_VISIBLE_RESULTS = 5;
+
 export default function SearchResults({
    results,
    visible,
@@ -41,8 +43,7 @@ export default function SearchResults({
       function handleSubmit() {
          if (pointer !== 0) {
             const result = document.querySelectorAll(`.${css.result}`)[pointer - 1] as
-               | HTMLAnchorElement
-               | undefined;
+               HTMLAnchorElement | undefined;
             if (!result) return;
 
             result.click();
@@ -107,21 +108,27 @@ export default function SearchResults({
          {results.recent.length > 0 && (
             <div className={css.group}>
                <span className={css.namespace}>Recent Pages</span>
-               {results.recent.map((result, i) => (
-                  <Result key={i} result={result} active={pointer === i + 1} />
-               ))}
+               {results.recent.map(
+                  (result, i) =>
+                     i < MAX_VISIBLE_RESULTS && (
+                        <Result key={i} result={result} active={pointer === i + 1} />
+                     ),
+               )}
             </div>
          )}
          {results.challenges.length > 0 && (
             <div className={css.group}>
                <span className={css.namespace}>Challenges</span>
-               {results.challenges.map((result, i) => (
-                  <Result
-                     key={i}
-                     result={result}
-                     active={pointer === i + 1 + results.recent.length}
-                  />
-               ))}
+               {results.challenges.map(
+                  (result, i) =>
+                     i < MAX_VISIBLE_RESULTS && (
+                        <Result
+                           key={i}
+                           result={result}
+                           active={pointer === i + 1 + results.recent.length}
+                        />
+                     ),
+               )}
             </div>
          )}
          {results.summoner.length > 0 && (

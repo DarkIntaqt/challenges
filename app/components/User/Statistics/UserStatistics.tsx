@@ -15,11 +15,11 @@ export default function UserStatistics({
       <ThemeProvider theme={darkTheme}>
          <div className={css.wrapper}>
             <div className={css.section} style={{ gridArea: "1 / 1 / 2 / 3" }}>
-               <Heading level={2}>Categories</Heading>
+               <Heading level={2}>categories</Heading>
                <Categories playerData={playerData} />
             </div>
             <div className={css.section} style={{ gridArea: "2 / 2 / 3 / 3" }}>
-               <Heading level={2}>Distribution</Heading>
+               <Heading level={2}>tier distribution</Heading>
                <Distribution playerData={playerData} />
             </div>
          </div>

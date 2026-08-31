@@ -54,6 +54,8 @@ export function getRecentSearches(noEmptyResults = true): Recent[] {
    }
 }
 
+const MAX_RECENTS = 25;
+
 export function addRecentSearch(recent: Recent) {
    if (serverSide) return;
    const recents = getRecentSearches(false);
@@ -64,8 +66,8 @@ export function addRecentSearch(recent: Recent) {
    // add new recent to the front
    filteredRecents.unshift(recent);
 
-   if (filteredRecents.length > 5) {
-      filteredRecents.length = 5;
+   if (filteredRecents.length > 25) {
+      filteredRecents.length = 25;
    }
    localStorage.setItem(storageNames.recents, JSON.stringify(filteredRecents));
 }
