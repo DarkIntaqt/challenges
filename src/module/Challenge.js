@@ -617,8 +617,8 @@ class Challenge extends Component {
                           player[0] === "E Z#999" ? { color: "#3CC4F4" } :
                           player[0] === "Mr Peid#Peid" ? { color: "#FFFF00" } :
                           player[0] === "cyan#pink" ? { color: "#00ffff" } :
-                          // TEMP
-                          player[0] === "Wayn#USA" ? { background:"linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)", backgroundClip:"text", color:"transparent", webkitBackgroundClip:"text", webkitTextFillColor:"transparent" } :
+                          player[0] === "Fel#TN1" ? { color: "#016efd" } :
+                          player[0] === "Thành Šiêu Tạ#JINX" ? { color: "#a70ba7" } :
                           {}
                         }
                       >
