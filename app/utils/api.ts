@@ -1,3 +1,5 @@
+import { cdnDomain } from "./cdn";
+
 const apiBase = "https://challenges.gg/api";
 
 export async function fetchApiPath<T>(
@@ -5,6 +7,13 @@ export async function fetchApiPath<T>(
    method: "GET" | "POST" = "GET",
 ): Promise<T | null> {
    return fetchApi(`${apiBase}${path}`, method);
+}
+
+export async function fetchCdnPath<T>(
+   path: string,
+   method: "GET" | "POST" = "GET",
+): Promise<T | null> {
+   return fetchApi(`${cdnDomain}/${path}`, method);
 }
 
 export async function fetchApi<T>(

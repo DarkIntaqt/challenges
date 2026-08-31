@@ -14,7 +14,7 @@ import Loader from "@cgg/components/Loader/Loader";
 import Navigation from "@cgg/components/Navigation/Navigation";
 import { usePageTransition } from "@cgg/hooks/usePageTransition";
 import { rootLoader } from "@cgg/loader/root";
-import { cdnDomain, cupcakeDomain } from "@cgg/utils/cdn";
+import { cdnDomain } from "@cgg/utils/cdn";
 import "./app.scss";
 import { brandName, storageNames } from "./config/config";
 
@@ -22,10 +22,6 @@ export const links: Route.LinksFunction = () => [
    {
       rel: "preconnect",
       href: cdnDomain,
-   },
-   {
-      rel: "preconnect",
-      href: cupcakeDomain,
    },
    {
       rel: "icon",

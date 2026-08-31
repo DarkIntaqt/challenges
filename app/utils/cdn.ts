@@ -2,15 +2,13 @@ import type { GameMode } from "./challenges";
 import type { Tier } from "./tier";
 
 export const cdnDomain = "https://cdn.yearin.lol";
-export const cupcakeDomain = "https://cupcake.yearin.lol";
 const cdnPath = cdnDomain + "/cupcake/";
-const cupcakePath = cupcakeDomain + "/cupcake/";
 
 const dataPath = cdnDomain + "/cgg-data/";
 
 // Get a CDN dynamic asset path (latest images update once per patch)
 export function cdn(file: string, isImage = true): string {
-   let path = `${cupcakePath}latest/`;
+   let path = `${cdnPath}latest/`;
    path += file;
 
    if (isImage) {

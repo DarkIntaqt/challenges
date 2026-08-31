@@ -1,13 +1,10 @@
-import { fetchApiPath } from "../api";
+import { fetchCdnPath } from "../api";
 import type { IApiLeaderboardEntry } from "./types";
 
-export async function getLeaderboard(challengeId: string, region?: string) {
-   let path = `/leaderboard/${challengeId}`;
-   if (region) {
-      path += `?region=${region}`;
-   }
+export async function getLeaderboard(challengeId: string, region: string = "global") {
+   let path = `cgg-data/leaderboards/${region}/${challengeId}.json`;
 
-   const response = await fetchApiPath<IApiLeaderboardEntry[]>(path);
+   const response = await fetchCdnPath<IApiLeaderboardEntry[]>(path);
 
    return response;
 }

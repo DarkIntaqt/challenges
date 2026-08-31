@@ -53,7 +53,7 @@ export default function Leaderboard({
                               prefetch="none"
                            >
                               <img
-                                 src={getProfileIcon(entry.iconId)}
+                                 src={getProfileIcon(entry.profileIcon)}
                                  alt=""
                                  loading="lazy"
                                  className={css.icon}
@@ -76,9 +76,7 @@ export default function Leaderboard({
                         <td className={clsx(css.tier, variables[entry.tier])}>
                            {capitalize(entry.tier)}
                         </td>
-                        <td className={css.points}>
-                           {formatNumber(entry.points, false)}
-                        </td>
+                        <td className={css.points}>{formatNumber(entry.value, false)}</td>
                      </tr>
                   ))}
                {transition && (

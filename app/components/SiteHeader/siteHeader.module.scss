@@ -19,13 +19,15 @@ $iconWidth: 110px;
 
       position: relative;
 
-      img.profileIcon {
+      img.icon {
          width: $iconWidth;
          height: $iconWidth;
-         box-shadow: 0 0 10px var(--tier);
-
-         border: 3px solid var(--tier);
          border-radius: config.$borderRadius;
+
+         &:not(.noTier) {
+            border: 3px solid var(--tier);
+            box-shadow: 0 0 10px var(--tier);
+         }
       }
 
       .level {

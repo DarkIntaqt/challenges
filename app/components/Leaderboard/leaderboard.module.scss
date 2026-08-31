@@ -2,7 +2,6 @@
 @use "@cgg/styles/colors" as color;
 
 .leaderboard {
-   width: 70%;
    background-color: color.$background;
 
    padding: 1rem;
@@ -82,7 +81,7 @@
                   gap: 8px;
 
                   .icon {
-                     width: 40px;
+                     width: 35px;
                      aspect-ratio: 1/1;
                      background-color: color.$accent;
                      border-radius: 8px;

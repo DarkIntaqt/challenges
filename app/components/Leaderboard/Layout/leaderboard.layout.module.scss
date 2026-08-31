@@ -2,5 +2,45 @@
 @use "@cgg/styles/colors" as color;
 
 .container {
-   padding-bottom: 10px;
+   padding: 20px 0 10px;
+
+   .grid {
+      margin-top: 20px;
+      width: 100%;
+      position: relative;
+      display: grid;
+      grid-template-columns: 3fr 7fr;
+   }
+
+   .challengeInfo,
+   .leaderboard {
+      position: relative;
+   }
+
+   .regionLinks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      justify-content: space-between;
+      margin-bottom: 10px;
+
+      .regionLink {
+         flex: 1 0 10%;
+         padding: 5px 8px;
+         cursor: pointer;
+         text-align: center;
+         color: color.$text;
+
+         border: 1px solid color.$border;
+         border-radius: config.$borderRadius;
+         min-width: 50px;
+         background-color: color.$background;
+
+         &.active {
+            background-color: color.$accent;
+            border-color: color.$primary;
+            box-shadow: 0 0 5px color.$primary;
+         }
+      }
+   }
 }

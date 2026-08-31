@@ -45,12 +45,12 @@ export interface IApiVerified {
 }
 
 export interface IApiLeaderboardEntry {
-   puuid: string;
+   // puuid: string;
    gameName: string;
    tagLine: string;
    region: string;
-   iconId: number;
+   profileIcon: number;
    tier: Tier;
    verified?: boolean;
-   points: number;
+   value: number;
 }

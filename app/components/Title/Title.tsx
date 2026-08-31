@@ -82,7 +82,13 @@ export default function Title({
          )}
          {type === "EVENT" && title.id !== 1 && (
             <p>
-               Requirements: {name}, {description}.
+               {name !== "" && description !== "" ? (
+                  <>
+                     Requirements: {name}, {description}.
+                  </>
+               ) : (
+                  "No Requirements."
+               )}
             </p>
          )}
          {type === "CHALLENGE" && <p>{description}.</p>}

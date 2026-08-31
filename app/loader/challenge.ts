@@ -1,3 +1,4 @@
+import regions from "@cgg/config/json/regions.json";
 import { getLeaderboard } from "@cgg/utils/endpoints/getLeaderboard";
 
 export async function challengeLoader({
@@ -10,6 +11,13 @@ export async function challengeLoader({
    const { challengeId } = params;
    const searchParams = new URL(url).searchParams;
    const region = searchParams.get("region") || undefined;
+
+   if (region !== undefined && !regions.some((r) => r.key === region)) {
+      throw new Response("Bad Request", {
+         status: 400,
+         statusText: "Invalid region",
+      });
+   }
 
    const leaderboard = await getLeaderboard(challengeId, region);
    if (leaderboard === null) {

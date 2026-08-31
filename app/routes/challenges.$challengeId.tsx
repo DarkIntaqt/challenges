@@ -1,6 +1,7 @@
 import type { Route } from "./+types/challenges.$challengeId";
 import { useEffect } from "react";
 import { Outlet, type ShouldRevalidateFunctionArgs } from "react-router";
+import Container from "@cgg/components/Container/Container";
 import LeaderboardLayout from "@cgg/components/Leaderboard/Layout/LeaderboardLayout";
 import { brandName } from "@cgg/config/config";
 import { useStaticData } from "@cgg/hooks/useStaticData";
@@ -25,10 +26,12 @@ export default function Challenge({ params }: Route.ComponentProps) {
    }, []);
 
    return (
-      <LeaderboardLayout>
-         <title>{`${challenge.name} Leaderboard | ${brandName}`}</title>
-         <Outlet />
-      </LeaderboardLayout>
+      <Container center headerPadding>
+         <LeaderboardLayout challenge={challenge}>
+            <title>{`${challenge.name} Leaderboard | ${brandName}`}</title>
+            <Outlet />
+         </LeaderboardLayout>
+      </Container>
    );
 }
 
