@@ -4,6 +4,15 @@ import LeaderboardComponent from "@cgg/components/Leaderboard/Leaderboard";
 import { useStaticData } from "@cgg/hooks/useStaticData";
 import { challengeLoader } from "@cgg/loader/challenge";
 
+export const meta: Route.MetaFunction = ({ loaderData }) => {
+   return [
+      {
+         rel: "canonical",
+         href: `https://https://challenges.gg/${loaderData.challengeId}`,
+      },
+   ];
+};
+
 export default function Leaderboard({ loaderData, params }: Route.ComponentProps) {
    const challenge = useStaticData().challenges[params.challengeId];
    return <LeaderboardComponent entries={loaderData.leaderboard} challenge={challenge} />;

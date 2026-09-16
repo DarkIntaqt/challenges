@@ -27,5 +27,5 @@ export async function challengeLoader({
       });
    }
 
-   return { leaderboard };
+   return { leaderboard, challengeId };
 }
