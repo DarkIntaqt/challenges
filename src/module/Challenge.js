@@ -621,6 +621,7 @@ class Challenge extends Component {
                           player[0] === "Thành Šiêu Tạ#JINX" ? { color: "#a70ba7" } :
                           player[0] === "Linh Phương#999" ? { color: "#ff0000" } :
                           player[0] === "đừng để 9 nóng#DOFPK" ? { color: "#c24502" } :
+                          player[0] === "Cửu Vỹ Hồ Lys#22702" ? { color: "#00FFCC" } :
                           {}
                         }
                       >
