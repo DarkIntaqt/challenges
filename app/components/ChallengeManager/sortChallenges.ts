@@ -9,7 +9,8 @@ export type SortMode =
    | "Rank"
    | "Last Updated"
    | "Position"
-   | "Levelup";
+   | "Levelup"
+   | "Levelup Abs";
 
 let index: Map<number, IApiChallenge>;
 let targetTier: Tier | undefined = undefined;
@@ -45,7 +46,13 @@ export function sortChallenges(
 
       case "Levelup":
          if (userChallenges.size > 0) {
-            challenges = challenges.sort(sortByLevelup);
+            challenges = challenges.sort(sortByRelativeLevelup);
+            break;
+         }
+
+      case "Levelup Abs":
+         if (userChallenges.size > 0) {
+            challenges = challenges.sort(sortByAbsoluteLevelup);
             break;
          }
 
@@ -187,7 +194,7 @@ function sortByPosition(a: IChallengeDTO, b: IChallengeDTO) {
    return sortByPercentileHelper(a, b);
 }
 
-function sortByLevelup(a: IChallengeDTO, b: IChallengeDTO) {
+function sortByRelativeLevelup(a: IChallengeDTO, b: IChallengeDTO) {
    const retiredSort = sortRetiredHelper(a, b);
    if (retiredSort !== null) return retiredSort;
 
@@ -217,4 +224,37 @@ function sortByLevelup(a: IChallengeDTO, b: IChallengeDTO) {
    if (progressA < 1 && progressB >= 1) return -1;
 
    return progressB - progressA;
+}
+
+function sortByAbsoluteLevelup(a: IChallengeDTO, b: IChallengeDTO) {
+   const retiredSort = sortRetiredHelper(a, b);
+   if (retiredSort !== null) return retiredSort;
+
+   const userChallengeA = index.get(a.id);
+   const userChallengeB = index.get(b.id);
+
+   const exists = sortByExistenceHelper(a, b);
+   if (exists !== null) return exists;
+
+   const currentValueA = userChallengeA!.value;
+   const nextValueA =
+      a.thresholds[getNextTier(userChallengeA!.tier, a, false, targetTier)].points;
+   const currentValueB = userChallengeB!.value;
+   const nextValueB =
+      b.thresholds[getNextTier(userChallengeB!.tier, b, false, targetTier)].points;
+
+   if (nextValueA === 0 && nextValueB === 0) return 0;
+   if (nextValueA === 0) return -1;
+   if (nextValueB === 0) return 1;
+
+   const remainingA = nextValueA - currentValueA;
+   const remainingB = nextValueB - currentValueB;
+
+   // Already "maxed challenges" (remaining <= 0) can be put at the back of the list
+   if (remainingA <= 0 && remainingB <= 0) return sortByNameAsc(a, b);
+   if (remainingA <= 0 && remainingB > 0) return 1;
+   if (remainingA > 0 && remainingB <= 0) return -1;
+   if (remainingA === remainingB) return sortByRelativeLevelup(a, b);
+
+   return remainingA - remainingB;
 }

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { serialize } from "cookie";
 import { memo, useEffect, useMemo, useState } from "react";
-import { FaSortAlphaDown } from "react-icons/fa";
+import { FaPercent, FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
 import {
    FaArrowUpRightDots,
    FaHashtag,
@@ -20,7 +20,7 @@ import {
    getChallengeSourceIcon,
    getChallengeSourceName,
 } from "@cgg/utils/challengeSource";
-import type { Category, GameMode, IChallengeDTO, Source } from "@cgg/utils/challenges";
+import type { Category, GameMode, Source } from "@cgg/utils/challenges";
 import { categories, gameModeToString, gameModes, sources } from "@cgg/utils/challenges";
 import type { IApiChallenge, IApiChallengeResponse } from "@cgg/utils/endpoints/types";
 import { getChallenge } from "@cgg/utils/getChallenge";
@@ -195,22 +195,42 @@ export default function ChallengeManager({
                                     ),
                                     id: "Position",
                                  },
-                                 {
-                                    name: (
-                                       <div className={css.buttonText}>
-                                          <FaArrowUpRightDots /> Closest Levelup
-                                       </div>
-                                    ),
-                                    id: "Levelup",
-                                 },
-                                 {
-                                    name: (
-                                       <div className={css.buttonText}>
-                                          <FaSortAlphaDown /> Name
-                                       </div>
-                                    ),
-                                    id: "Name-ASC",
-                                 },
+                                 [
+                                    {
+                                       name: (
+                                          <div className={css.buttonText}>
+                                             <FaPercent /> Progress
+                                          </div>
+                                       ),
+                                       id: "Levelup",
+                                    },
+                                    {
+                                       name: (
+                                          <div className={css.buttonText}>
+                                             <FaArrowUpRightDots /> Points remaining
+                                          </div>
+                                       ),
+                                       id: "Levelup Abs",
+                                    },
+                                 ],
+                                 [
+                                    {
+                                       name: (
+                                          <div className={css.buttonText}>
+                                             <FaSortAlphaDown /> Name
+                                          </div>
+                                       ),
+                                       id: "Name-ASC",
+                                    },
+                                    {
+                                       name: (
+                                          <div className={css.buttonText}>
+                                             <FaSortAlphaUp /> Name (Desc)
+                                          </div>
+                                       ),
+                                       id: "Name-DESC",
+                                    },
+                                 ],
                               ]}
                               setState={setSortMode}
                               state={sortMode}
