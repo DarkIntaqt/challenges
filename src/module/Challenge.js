@@ -623,6 +623,9 @@ class Challenge extends Component {
                           player[0] === "đừng để 9 nóng#DOFPK" ? { color: "#c24502" } :
                           player[0] === "Cửu Vỹ Hồ Lys#22702" ? { color: "#00FFCC" } :
                           player[0] === "Tuong#gnout" ? { color: "#0090FE" } :
+                          player[0] === "Kurdapyo#NA1" ? { color: "#CEA2FD" } :
+                          player[0] === "FNC KappeX#LoLko" ? { color: "#9D00FF" } :
+                          player[0] === "Art Of BAJNOK#Art" ? { color: "#FF0000" } :
                           {}
                         }
                       >
