@@ -611,7 +611,7 @@ class Challenge extends Component {
                           player[0] === "Diệu Nguyệt Lan#DNL" ? { color: "#2065e6" } :
                           player[0] === "Helghans templar#NA1" ? { color: "#780606" } :
                           player[0] === "Lord Valentine#RITOo" ? { color: "#C21717" } :
-                          player[0] === "ｓｈｉｒａｙｏｋｉｉ白雪#Jam" ? { color: "#8E24F2" } :
+                          player[0] === "Ｓｈｉｒａｙｏｋｉｉ#Jam" ? { color: "#8E24F2" } :
                           player[0] === "thetallguyy#NA1" ? { color: "#CFC493" } :
                           player[0] === "Synicle#Nancy" ? { color: "#28b1f2" } :
                           player[0] === "E Z#999" ? { color: "#3CC4F4" } :
