@@ -627,6 +627,7 @@ class Challenge extends Component {
                           player[0] === "FNC KappeX#LoLko" ? { color: "#9D00FF" } :
                           player[0] === "Art Of BAJNOK#Art" ? { color: "#FF0000" } :
                           player[0] === "惡人寧教我負天下人莫教天下人負我#欲速则不达" ? { color: "#fc3468" } :
+                          player[0] === "iFancyName#NA1" ? { color: "#FFFF00" } :
                           {}
                         }
                       >
